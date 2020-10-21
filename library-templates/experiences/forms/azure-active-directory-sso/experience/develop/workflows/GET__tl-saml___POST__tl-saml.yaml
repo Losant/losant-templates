@@ -182,7 +182,7 @@ resources:
           x: 280
           'y': 1040
         outputIds:
-          - - SJ65Z4OZgg
+          - - FBOBTvdQY-
           - - yvyfWukS_r
         type: ConditionalNode
       - config:
@@ -209,7 +209,7 @@ resources:
           firstNameTemplate: ''
           groupIdTemplates: []
           lastNameTemplate: ''
-          passwordTemplate: '{{working.samlUser.nameID}}'
+          passwordTemplate: '{{working.uuid}}'
           resultPath: ''
           userTags: []
         id: SJ65Z4OZgg
@@ -219,8 +219,8 @@ resources:
           id: jUodx9JrJr
           label: 'User: Create'
           name: create-experience-user
-          x: 200
-          'y': 1160
+          x: 180
+          'y': 1200
         outputIds:
           - - yvyfWukS_r
         type: CreateExperienceUserNode
@@ -249,7 +249,7 @@ resources:
           label: Debug
           name: debug
           x: 540
-          'y': 1540
+          'y': 1620
         outputIds: []
         type: DebugNode
       - config:
@@ -276,7 +276,7 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 540
-          'y': 1400
+          'y': 1480
         outputIds:
           - - rRc41DUwYT
         type: EndpointReplyNode
@@ -346,6 +346,34 @@ resources:
           width: 260
           x: 560
           'y': 1040
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          destinationPath: working.uuid
+          idTypeTemplate: uuidv4
+        id: FBOBTvdQY-
+        meta:
+          category: logic
+          description: ''
+          id: FaORS4tqik
+          label: Generate ID
+          name: generate-id
+          x: 180
+          'y': 1120
+        outputIds:
+          - - SJ65Z4OZgg
+        type: GenerateIdNode
+      - config: {}
+        id: PBuIDxxtea
+        meta:
+          annotationText: Generate password for user.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 160
+          x: 0
+          'y': 1100
         outputIds: []
         type: AnnotationNode
     triggers:

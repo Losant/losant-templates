@@ -1,7 +1,8 @@
 resourceType: Application
 resources:
   - blobUrlTTL: 86400
-    description: ""
+    description: This template demonstrates how to authenticate to an Experience
+      using Single Sign-On (SSO) with Azure Active Directory.
     filesPath: ./files
     globals:
       - cloudOnly: true
