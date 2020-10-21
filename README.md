@@ -18,7 +18,7 @@ Application templates can be found in the Losant user interface whenever you cre
 
 Library Templates provide out-of-the-box functionality that can be imported into any existing Losant application. Each template is self-contained and provides functionality common to many different types of applications (e.g. [Log In Form](https://github.com/Losant/losant-templates/tree/master/library-templates/experiences/forms/log-in) or [QR Code Reader](https://github.com/Losant/losant-templates/tree/master/library-templates/experiences/components/qr-code-reader)).
 
-Library Templates can be found using the `Template Library` navigation link within any existing Losant application.
+Library Templates can be found using the [Template Library](https://app.losant.com/applications/recent/template-library) navigation link within any existing Losant application.
 
 ## How to Import a Template from this Repository
 If you're using a dedicated Losant installation or a white-label environment, these templates will not appear in the Losant user interface. If you'd like to use any of these templates, you can import them from this repository:
