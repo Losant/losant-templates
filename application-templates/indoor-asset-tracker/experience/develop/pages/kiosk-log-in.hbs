@@ -1,0 +1,16 @@
+<body id="login-page">
+   <div class="panel-container">
+      <div class="panel-content">
+         <div id="login-page-logo">
+            <img src="{{file '/kanarra-logo-stacked.png'}}" width="171">
+         </div>
+         {{#if pageData.loginFailure}}
+            {{component "errorAlert" "Incorrect pin."}}
+         {{/if}}
+         {{component "pinLogin"}}
+         <div id="login-page-copyright">
+            Copyright © {{formatDate time 'YYYY'}}, Kanarra Inc, All Rights Reserved
+         </div>
+      </div>
+   </div>
+</body>

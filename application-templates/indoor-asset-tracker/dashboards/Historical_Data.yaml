@@ -1,0 +1,362 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: position-chart
+        config:
+          additionalAttributes:
+            - room
+          coordinateA: '0,0'
+          coordinateB: '100,25'
+          defaultCenter: '1017.48538,509.66522'
+          defaultZoom: -0.6667
+          deviceIds:
+            - '{{ctx.deviceId-0}}'
+          deviceTags: []
+          duration: 86400000
+          endColor: '#8db319'
+          iconTemplate: >
+            {{#if isLastPoint}}
+
+            {{#eq deviceTags.type.[0] 'resident'}}
+
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/residents/{{deviceTags.uniqueId.[0]}}@2x.png
+
+            {{else}}
+
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
+
+            {{/eq}}
+
+            {{/if}}
+          imageUrl: >-
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+          includeArrows: true
+          includeLines: true
+          pinMode: advanced
+          pixelA: '89,190'
+          pixelB: '1894,822'
+          popupTemplate: >-
+            ##### **{{deviceName}}** {{#if isLastPoint}} ({{data.room}}){{else
+            if isFirstPoint}} (Starting Location){{/if}}
+
+
+            {{format time}}
+
+            (x, y) = ({{format x}}, {{format y}})
+          resizedPins: true
+          resolution: 10800000
+          startColor: '#ff261b'
+          xAttribute: x
+          yAttribute: 'y'
+        height: 4
+        id: 7pc1xKoN-N
+        startX: 0
+        startY: 0
+        title: 24-Hour Historical View
+        width: 4
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: open-event-indicator
+        config:
+          allowUpdates: true
+          query: |-
+            {
+              "$and": [
+                {
+                  "deviceId": {
+                    "$eq": "{{ctx.deviceId-0}}"
+                  }
+                },
+                {
+                  "level": {
+                    "$eq": "warning"
+                  }
+                }
+              ]
+            }
+        height: 1
+        id: F8itfC6HCR
+        startX: 3
+        startY: 4
+        title: Warning Events
+        width: 1
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: event-list
+        config:
+          allowUpdates: true
+          columns:
+            - id: defaultLevelColumn
+              type: level
+            - id: defaultSubjectColumn
+              type: subject
+            - id: defaultStateColumn
+              type: state
+            - id: defaultCreationDateColumn
+              type: creationDateWithSource
+          query: |-
+            {
+              "$and": [
+                {
+                  "state": {
+                    "$eq": "new"
+                  }
+                },
+                {
+                  "deviceId": {
+                    "$eq": "{{ctx.deviceId-0}}"
+                  }
+                }
+              ]
+            }
+          sortDirection: desc
+          sortField: creationDate
+        height: 2
+        id: p7wDxyx171
+        startX: 1
+        startY: 4
+        title: 'New {{ctx.deviceId-0.name}} Events'
+        width: 2
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: >-
+                {{value-0}}===("Manager's Office"||"Utility Closet"||"Off
+                Campus")
+              id: W9p7sSbXA0
+              label: |-
+                Name: {{ctx.deviceId-0.name}}
+
+                Current Location: {{value-0}}
+          defaultCondition:
+            color: '#8db319'
+            label: |-
+              Name: {{ctx.deviceId-0.name}}
+
+              Location: {{value-0}}
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 2
+        id: lXvf_wGhfT
+        startX: 0
+        startY: 4
+        title: Current Data
+        width: 1
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: open-event-indicator
+        config:
+          allowUpdates: true
+          query: |-
+            {
+              "$and": [
+                {
+                  "deviceId": {
+                    "$eq": "{{ctx.deviceId-0}}"
+                  }
+                },
+                {
+                  "level": {
+                    "$eq": "critical"
+                  }
+                }
+              ]
+            }
+        height: 1
+        id: GVMxeMswdp
+        startX: 3
+        startY: 5
+        title: Critical Events
+        width: 1
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: section-header
+        config: {}
+        description: >-
+          The sum of time spent by the resident in community rooms over the last
+          24 hours. This data will provide insight to the most popular and
+          utilized spaces within the facility.
+
+          Label colors are used to denote information:
+
+
+          Green: These rooms are intended to be accessible by all device types.
+
+
+          Blue: These rooms are accessible exclusively by managers and equipment
+          devices.
+        height: 1
+        id: YAabjPvBI1
+        startX: 0
+        startY: 6
+        title: 24-Hour Cumulative Usage
+        width: 4
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: image-overlay
+        config:
+          backgroundColor: transparent
+          defaultZoom: -0.6667
+          imageUrl: >-
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+          overlays:
+            - conditions: []
+              defaultCondition:
+                color: '#8db319'
+                label: '{{format (divide gauge-0.value 60000) ''d''}} minutes'
+              popupTemplate: '{{format (divide gauge-0.value 60000) ''d''}} minutes'
+              position: '1798,702'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: '#8db319'
+                label: '{{format (divide gauge-2.value 60000) ''d''}} minutes'
+              popupTemplate: ''
+              position: '1798,263'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: '#8db319'
+                label: '{{format (divide gauge-3.value 60000) ''d''}} minutes'
+              popupTemplate: '{{format (divide gauge-3.value 60000) ''d''}} minutes'
+              position: '1496,574'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: '#8db319'
+                label: '{{format (divide gauge-4.value 60000) ''d''}} minutes'
+              popupTemplate: '{{format (divide gauge-4.value 60000) ''d''}} minutes'
+              position: '1128,738'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: 'rgba(5, 113, 128, 1)'
+                label: '{{format (divide gauge-5.value 60000) ''d''}} minutes'
+              popupTemplate: '{{format (divide gauge-5.value 60000) ''d''}} minutes'
+              position: '1356,447'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: 'rgba(5, 113, 128, 1)'
+                label: '{{format (divide gauge-6.value 60000) ''d''}} minutes'
+              popupTemplate: '{{format (divide gauge-6.value 60000) ''d''}} minutes'
+              position: '1356,334'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: '#8db319'
+                label: '{{format (divide gauge-7.value 60000) ''d''}} minutes'
+              popupTemplate: '{{format (divide gauge-7.value 60000) ''d''}} minutes'
+              position: '1436,226'
+              size: medium
+              type: label
+          segments:
+            - aggregation:
+                options:
+                  value: Pantry
+                type: TIMEATVALUE
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: gauge-0
+              queryType: gauge
+            - aggregation:
+                options:
+                  value: Dining Room
+                type: TIMEATVALUE
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: gauge-2
+              queryType: gauge
+            - aggregation:
+                options:
+                  value: Entry / Gathering Area
+                type: TIMEATVALUE
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: gauge-3
+              queryType: gauge
+            - aggregation:
+                options:
+                  value: Library
+                type: TIMEATVALUE
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: gauge-4
+              queryType: gauge
+            - aggregation:
+                options:
+                  value: Manager's Office
+                type: TIMEATVALUE
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: gauge-5
+              queryType: gauge
+            - aggregation:
+                options:
+                  value: Utility Closet
+                type: TIMEATVALUE
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: gauge-6
+              queryType: gauge
+            - aggregation:
+                options:
+                  value: Mail
+                type: TIMEATVALUE
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: gauge-7
+              queryType: gauge
+        height: 3
+        id: 8Tnf3qeTSj
+        startX: 0
+        startY: 7
+        title: '24-Hour {{ctx.deviceId-0.name}} Occupancy'
+        width: 4
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        defaultValue: ~losant-device-janeSmith-1~
+        name: deviceId-0
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-historicalData-3~
+    name: Historical Data
+    public: false
+    refreshRate: 60
+version: 1

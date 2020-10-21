@@ -1,0 +1,67 @@
+{{! Default variable values }}
+{{#*inline 'id'}}{{#if @args.id}}{{@args.id}}{{else}}tl-google-map{{/if}}{{/inline}}
+{{#*inline 'height'}}{{#if @args.height}}{{@args.height}}{{else}}640px{{/if}}{{/inline}}
+{{#*inline 'defaultZoom'}}{{#if @args.defaultZoom}}{{@args.defaultZoom}}{{else}}8{{/if}}{{/inline}}
+{{#*inline 'defaultCenter'}}{{#if @args.defaultCenter}}{{@args.defaultCenter}}{{else}}39.108,-84.511{{/if}}{{/inline}}
+
+{{#with this as | devices |}}
+{{#with @args as | args |}}
+
+<div style="height: {{> height}};">
+  <div id="{{> id}}" style="height: 100%"></div>
+</div>
+<script>
+(function() {
+  // Only write the script tag to the head if one has not already been written
+  // this id is purposefully non-unique, as we only want to load the Google Maps API one time
+  const scriptSrc = 'https://maps.googleapis.com/maps/api/js';
+  if (!document.getElementById(scriptSrc)) {
+    // Create the script tag, set the appropriate attributes
+    const script = document.createElement('script');
+    script.id = scriptSrc;
+    script.src = `${scriptSrc}?key={{args.apiKey}}`;
+    script.defer = true;
+    // Append the 'script' element to 'head'
+    document.head.appendChild(script);
+  }
+  window.addEventListener('load', () => {
+    const map = new google.maps.Map(
+      document.getElementById('{{> id}}'),
+      {
+        zoom: {{> defaultZoom}},
+        center: new google.maps.LatLng({{> defaultCenter}})
+      }
+    );
+    const mappedDevices = [
+      {{#each devices}}
+        {{#if (template args.markerLatLngTemplate this)}}
+          {
+            coordinate: [{{template args.markerLatLngTemplate this}}],
+            infoWindowContent: `{{#if args.infoWindowComponentName}}{{component args.infoWindowComponentName this}}{{else}}{{{template args.infoWindowTemplate this}}}{{/if}}`,
+            icon: '{{{template args.markerIconTemplate this}}}',
+            label: '{{template args.markerLabelTemplate this}}'
+          },
+        {{/if}}
+      {{/each}}
+    ];
+    const infoWindow = new google.maps.InfoWindow(); 
+    mappedDevices.forEach(({ icon, label, coordinate, infoWindowContent }) => {
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng(...coordinate),
+        label,
+        icon,
+        map
+      });
+      marker.addListener('click', () => {
+        infoWindow.close(); // only allow one window open at a time
+        if (infoWindowContent) {
+          infoWindow.setContent(infoWindowContent);
+          infoWindow.open(map, marker);
+        }
+      });
+    });
+  });
+})();
+</script>
+{{/with}}
+{{/with}}

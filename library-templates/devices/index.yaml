@@ -1,0 +1,5 @@
+name: Devices
+description: This category contains templates related to device creation and
+  management. Device recipes can be used to quickly create devices with
+  pre-defined attributes and tags. The provisioning templates provide dynamic
+  registration and onboarding functionality.

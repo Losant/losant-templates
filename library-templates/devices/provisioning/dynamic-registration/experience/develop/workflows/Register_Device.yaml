@@ -1,0 +1,381 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Workflow that handles the JWT verification and device registration.
+    enabled: true
+    flowId: ~losant-flow-registerDevice-1~
+    globals: []
+    id: ~losant-flowVersion-registerDevice-0~
+    name: Register Device
+    nodes:
+      - config:
+          bodyTemplate: "{\n\t\"deviceId\": \"{{working.device.id}}\",\n\t\"accessKey\": \"{{working.accessKey.result.key}}\",\n\t\"accessSecret\": \"{{working.accessKey.result.secret}}\"\n}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: Uzvt9Nuu8i
+        meta:
+          category: output
+          description: ''
+          id: Uzvt9Nuu8i
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 700
+          'y': 1020
+        outputIds:
+          - - f2-lELVbYz
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: f2-lELVbYz
+        meta:
+          category: output
+          description: ''
+          id: f2-lELVbYz
+          label: Debug
+          name: debug
+          x: 700
+          'y': 1120
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorPath: working.error
+          issuerTemplate: '{{globals.tl-jwt-register-issuer}}'
+          secretTemplate: '{{globals.tl-jwt-register-secret}}'
+          tokenTemplate: '{{data.body.token}}'
+        id: mFNwOMbgjD
+        meta:
+          category: logic
+          description: ''
+          id: mFNwOMbgjD
+          label: 'JWT: Verify'
+          name: jwt-verify
+          x: 500
+          'y': 380
+        outputIds:
+          - - 2ywkIPvw1_
+          - - GZQ_2nkm4s
+        type: JWTVerifyNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "Invalid registration token"
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: 2ywkIPvw1_
+        meta:
+          category: output
+          description: ''
+          id: 2ywkIPvw1_
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 400
+          'y': 520
+        outputIds:
+          - - qPP5CGB7HS
+        type: EndpointReplyNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: ''
+          deviceTags:
+            - keyTemplate: manufacturerId
+              valueTemplate: '{{data.body.manufacturerId}}'
+          nameTemplate: 'Generator - {{data.body.manufacturerId}}'
+          parentIdTemplate: ''
+          recipeIdTemplate: ~losant-deviceRecipe-tlGenerator-0~
+          resultPath: working.device
+          tagsAsObject: false
+        id: Rnojw97OVa
+        meta:
+          category: data
+          description: ''
+          id: Rnojw97OVa
+          label: 'Device: Create'
+          name: create-device
+          x: 700
+          'y': 760
+        outputIds:
+          - - 3QjT7d9Uz1
+        type: CreateDeviceNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: false
+          includeState: false
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: manufacturerId
+              valueTemplate: '{{data.body.manufacturerId}}'
+          tagsAsObject: false
+        id: GZQ_2nkm4s
+        meta:
+          category: data
+          description: ''
+          id: GZQ_2nkm4s
+          label: 'Device: Get'
+          name: get-device
+          x: 600
+          'y': 520
+        outputIds:
+          - - 0ndV4u2s_W
+        type: GetDeviceNode
+      - config:
+          expression: '{{working.device}} === null'
+        id: 0ndV4u2s_W
+        meta:
+          category: logic
+          description: ''
+          id: 0ndV4u2s_W
+          label: Conditional
+          name: conditional
+          x: 600
+          'y': 620
+        outputIds:
+          - - g5fyaImI-Y
+          - - Rnojw97OVa
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "Device already registered."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: g5fyaImI-Y
+        meta:
+          category: output
+          description: ''
+          id: 2ywkIPvw1_
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 500
+          'y': 760
+        outputIds:
+          - - rnxIa7i8Oq
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: rnxIa7i8Oq
+        meta:
+          category: output
+          description: ''
+          id: f2-lELVbYz
+          label: Error
+          name: debug
+          x: 500
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: qPP5CGB7HS
+        meta:
+          category: output
+          description: ''
+          id: f2-lELVbYz
+          label: Error
+          name: debug
+          x: 400
+          'y': 620
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.body.manufacturerId}} !== undefined'
+        id: _if15NCIzG
+        meta:
+          category: logic
+          description: ''
+          id: _if15NCIzG
+          label: Check for ID
+          name: conditional
+          x: 340
+          'y': 180
+        outputIds:
+          - - M7s4McQ7A0
+          - - mFNwOMbgjD
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "Missing manufacturerId field."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: M7s4McQ7A0
+        meta:
+          category: output
+          description: ''
+          id: 2ywkIPvw1_
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 200
+          'y': 380
+        outputIds:
+          - - tOIUVmo-QV
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: tOIUVmo-QV
+        meta:
+          category: output
+          description: ''
+          id: f2-lELVbYz
+          label: Error
+          name: debug
+          x: 200
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: Gwrl3TcLww
+        meta:
+          annotationText: >-
+            The body must have a `manufacturerId` field.
+
+
+            This workflow does not verify that the ID is valid. If you have set
+            of known IDs, you could add verification here as well.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 60
+          'y': 120
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: GdzTic1NXW
+        meta:
+          annotationText: >-
+            Verify the signature and the issuer of the incoming registration
+            token.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 720
+          'y': 380
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 8n9R5TVSlZ
+        meta:
+          annotationText: >-
+            Check if the device with the incoming `manufacturerId` already
+            exists.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 800
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: B5elglBIOH
+        meta:
+          annotationText: >-
+            Create a new device, access key, and access secret and send them
+            back to the device.
+
+
+            The device is created from the Generator device recipe.
+
+
+            The access key is restricted to just this device.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 900
+          'y': 760
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          action: post
+          params:
+            - name: applicationKey
+              type: json
+              value: |-
+                {
+                    "deviceIds": ["{{working.device.id}}"],
+                    "description": "Generated by /api/register-device endpoint for device {{data.body.manufacturerId}}.",
+                    "filterType": "none"
+                }
+          resource: applicationKeys
+          responsePath: working.accessKey
+        id: 3QjT7d9Uz1
+        meta:
+          category: data
+          description: ''
+          id: 3QjT7d9Uz1
+          label: Losant API
+          name: losantapi
+          x: 700
+          'y': 860
+        outputIds:
+          - - Uzvt9Nuu8i
+        type: LosantApiNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postApiRegisterDevice-0~
+        meta:
+          category: trigger
+          description: ''
+          label: POST
+          name: endpoint
+          uiId: YyHFCMUUZO
+          x: 340
+          'y': 40
+        outputIds:
+          - - _if15NCIzG
+        type: endpoint
+    version: develop
+version: 1

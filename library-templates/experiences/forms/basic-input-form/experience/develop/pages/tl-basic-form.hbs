@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Basic Input Form</title>
+  </head>
+  <body class="p-5">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+
+          {{!
+            PAGE_START: To include this as a page within an existing experience layout,
+            keep everything between PAGE_START and PAGE_END. All other content can be
+            removed since it's provided by the surrounding layout.
+          }}
+
+          <h2 class="text-center">Input Form</h2>
+
+          {{!
+            Display a success or failure message based on the value of
+            the success query parameter (Ex. /tr-basic-form?success=true).
+          }}
+
+          {{#eq request.query.success 'true'}}
+          <div class="alert alert-success" role="alert">
+            Form successfully submitted!
+          </div>
+          {{/eq}}
+          
+          {{#eq request.query.success 'false'}}
+          <div class="alert alert-danger" role="alert">
+            Failed to submit form!
+          </div>
+          {{/eq}}
+
+          <div class="alert alert-secondary" role="alert">
+            <p>
+              This example form shows how a user can submit data from an
+              <a href="https://docs.losant.com/experiences/views/#pages" target="_blank">Experience Page</a> to a
+              <a href="https://docs.losant.com/workflows/experience-workflows/" target="_blank">Losant Workflow</a>.
+            </p>
+            <p>
+              1. When the <code>GET /tr-basic-form</code> endpoint is requested, the
+              <code>GET /tr-basic-form</code> workflow is triggered, which returns this page.
+            </p>
+            <p>
+              2. When this form is submitted, the browsers sends the form data to the
+              <code>POST /tr-basic-form</code> endpoint, which triggers the
+              <code>POST /tr-basic-form</code> workflow. That workflow is then responsible for handling
+              the data based on your requirements (e.g. saving to Data Table, updating a Device Tag,
+              recording Device State, etc.).
+            </p>
+            <p>
+              3. The workflow then redirects the user back to this page with a
+              <code>success</code> query parameter set to either <code>true</code> or
+              <code>false</code> (i.e. <code>/tr-basic-form?success=true</code>). This query parameter
+              is used to display a success or failure message to the user.
+            </p>
+            <p>
+              This page is meant demonstrate how forms work within Losant. It's designed to be modified to
+              fit your requirements. The form elements below are all based on
+              <a href="https://getbootstrap.com/docs/4.5/components/forms/" target="_blank">Bootstrap 4's Form Components</a>.
+              For more information on forms in general, refer to
+              <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form" target="_blank">MDN's &lt;form&gt; documentation</a>.
+            </p>
+          </div>
+          
+          {{!
+            When the "action" attribute is left blank, the form submits to the current path. So if the path is /tr-basic-form, this
+            form will submit to POST /tr-basic-form. The "action" attribute can be changed to any other endpoint.
+            e.g. action="/my-new-endpoint".
+          }}
+          <form method="POST" action="">
+
+            {{!
+              The "name" attribute is the name of the field that you'll see in the workflow payload. So in this example,
+              the workflow payload will contain an object with an "email" field set to whatever the user entered.
+
+              The "name" field must be unique for each form element.
+              The "id" field must be unique for each element on this page.
+            }}
+            <div class="form-group">
+              <label for="exampleFormControl1">Email address</label>
+              <input type="email" class="form-control" placeholder="name@example.com" id="exampleFormControl1" name="email">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControl2">Password</label>
+              <input type="password" class="form-control" id="exampleFormControl2" name="password">
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleFormControl3" name="checkbox">
+                <label class="form-check-label" for="exampleFormControl3">Check me out</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControl4">Example select</label>
+              <select class="form-control" id="exampleFormControl4" name="select">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControl5">Example multiple select</label>
+              <select multiple class="form-control" id="exampleFormControl5" name="multiSelect">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControl6">Example textarea</label>
+              <textarea class="form-control" id="exampleFormControl5" rows="3" name="textArea"></textarea>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radios" id="exampleRadios1" value="option1" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                  Option A
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2">
+                  Option B
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <input class="form-check-input" type="radio" name="radios" id="exampleRadios3" value="option3">
+                <label class="form-check-label" for="exampleRadios3">
+                  Option C
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControl6">Required Field</label>
+              <input type="text" class="form-control" placeholder="blue" id="exampleFormControl6" name="required" required>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControl7">Number between 10 and 100</label>
+              <input type="number" class="form-control" id="exampleFormControl7" name="number" value="50" min="10" max="100">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControl8">Text field with max length of 32 characters</label>
+              <input type="text" class="form-control" id="exampleFormControl8" name="textMaxLength" maxlength="32">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+          {{! PAGE_END }}
+
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

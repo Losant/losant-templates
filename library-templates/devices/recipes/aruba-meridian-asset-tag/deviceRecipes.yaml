@@ -1,0 +1,32 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: The battery, in percentage (0-100).
+        name: battery_level
+      - attributeTags: {}
+        dataType: number
+        description: The X position of the Tag on the Map/Floor.
+        name: location_x
+      - attributeTags: {}
+        dataType: number
+        description: The Y position of the Tag on the Map/Floor.
+        name: location_y
+      - attributeTags: {}
+        dataType: string
+        description: The Meridian Location identifier.
+        name: location_id
+      - attributeTags: {}
+        dataType: string
+        description: The Meridian Map/Floor identifier.
+        name: map_id
+    description: Recipe that represents a Meridian Asset Tag.
+    deviceClass: standalone
+    deviceName: Aruba Meridian Asset Tag
+    id: ~losant-deviceRecipe-arubaMeridianAssetTag-0~
+    name: Aruba Meridian Asset Tag
+    tags:
+      - key: mac
+        value: AABB112233CC
+version: 1

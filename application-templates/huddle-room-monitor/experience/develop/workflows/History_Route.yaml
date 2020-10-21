@@ -1,0 +1,99 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-historyRoute-1~
+    globals: []
+    id: ~losant-flowVersion-historyRoute-0~
+    name: History Route
+    nodes:
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-pageDashboardHistory-2~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+        id: f8M1kKCUku
+        meta:
+          category: output
+          description: ''
+          id: f8M1kKCUku
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 480
+          'y': 300
+        outputIds:
+          - - fuFc0QGwDz
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: fuFc0QGwDz
+        meta:
+          category: output
+          description: ''
+          id: fuFc0QGwDz
+          label: Debug
+          name: debug
+          x: 380
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{experience.user.userTags.role}} === ''manager'''
+        id: 1QHo8R6ZQU
+        meta:
+          category: logic
+          description: ''
+          id: 1QHo8R6ZQU
+          label: Manager?
+          name: conditional
+          x: 380
+          'y': 200
+        outputIds:
+          - - UYWIDajLeg
+          - - f8M1kKCUku
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+        id: UYWIDajLeg
+        meta:
+          category: output
+          description: ''
+          id: f8M1kKCUku
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 280
+          'y': 300
+        outputIds:
+          - - fuFc0QGwDz
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getHistory-2~
+        meta:
+          category: trigger
+          description: ''
+          id: oiHE6R02rf
+          label: Endpoint
+          name: endpoint
+          uiId: oiHE6R02rf
+          x: 380
+          'y': 100
+        outputIds:
+          - - 1QHo8R6ZQU
+        type: endpoint
+    version: develop
+version: 1

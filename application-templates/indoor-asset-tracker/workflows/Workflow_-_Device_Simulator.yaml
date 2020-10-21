@@ -1,0 +1,690 @@
+resourceType: Flow
+resources:
+  - description: >-
+      This workflow simulates state for the asset devices in the application on
+      a two-minute timer.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-workflowDeviceSimulator-0~
+    name: Workflow - Device Simulator
+    nodes:
+      - config:
+          currentItemPath: working.current
+          loopSourcePath: working.devices.items
+        id: mbvi74zUm_
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 820
+          groupStartY: 0
+          id: O2Oo0XqUoS
+          label: Loop Devices
+          name: loop
+          x: 320
+          'y': 220
+        outputIds:
+          - - vfQ5H5xL6f
+          - - UO9QDWkJPk
+        type: LoopNode
+      - config:
+          loopNodeId: mbvi74zUm_
+          shouldBreak: false
+        id: UWuBIxSM8f
+        meta:
+          category: loop
+          description: ''
+          groupId: mbvi74zUm_
+          id: 1YknoPSTiW
+          label: Next
+          name: loop-next
+          x: 540
+          'y': 1680
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          max: 18
+          min: 0
+          resultPath: working.random.tableNumber
+        id: Kqd3z5N84q
+        meta:
+          category: logic
+          description: 'Selects a random number, inclusively, between 0 and 18.'
+          groupId: mbvi74zUm_
+          id: QBikPJuLpv
+          label: Random Room Number
+          name: random-number
+          x: 1160
+          'y': 880
+        outputIds:
+          - - J2NdiS4ojf
+        type: RandomNumberNode
+      - config:
+          dataTableIdTemplate: ~losant-dataTable-coordinateMap-0~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "number": {
+                    "$eq": "{{working.random.tableNumber}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.roomInfo
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: J2NdiS4ojf
+        meta:
+          category: data
+          description: >-
+            Query the data table for the correlating room for the random number
+            generated in the previous node.
+          groupId: mbvi74zUm_
+          id: JdIeLDa5oG
+          label: Get Room Info
+          name: get-table-rows
+          x: 1160
+          'y': 1000
+        outputIds:
+          - - MayNiusXa8
+        type: DataTableQueryNode
+      - config:
+          message: ''
+          property: ''
+        id: vfQ5H5xL6f
+        meta:
+          category: output
+          description: ''
+          id: MSQyevb0aF
+          label: End
+          name: debug
+          x: 320
+          'y': 340
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: true
+          findMethod: findByAnyTags
+          findMultiple: true
+          includeState: true
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: type
+              valueTemplate: ''
+          tagsAsObject: true
+        id: tyaSzH4wi1
+        meta:
+          category: data
+          description: ''
+          id: anRh1IKWF_
+          label: Get Devices
+          name: get-device
+          x: 320
+          'y': 120
+        outputIds:
+          - - mbvi74zUm_
+        type: GetDeviceNode
+      - config:
+          defaultValue: 'null'
+          defaultValueType: json
+          getAll: false
+          keyName: '{{working.current.value.deviceId}}'
+          valuePath: working.storageValue
+        id: UO9QDWkJPk
+        meta:
+          category: data
+          description: >-
+            Retrieve the stored value, which is the timestamp of the last time
+            state was changed to a new room.
+          groupId: mbvi74zUm_
+          id: UO9QDWkJPk
+          label: Last State Timestamp
+          name: get-value
+          x: 820
+          'y': 80
+        outputIds:
+          - - VQK1EbWL-M
+        type: GetValueNode
+      - config:
+          diffDataPath: working.storageValue
+          operation: diff
+          resultPath: working.timeDifference
+        id: 5Hq1qOdeBx
+        meta:
+          category: logic
+          description: >-
+            Subtract the current time from the stored timestamp of the device's
+            last state change.
+          groupId: mbvi74zUm_
+          id: 5Hq1qOdeBx
+          label: Subtract Time
+          name: date-time
+          x: 420
+          'y': 240
+        outputIds:
+          - - XL24fDNoxL
+        type: DateTimeNode
+      - config:
+          message: Repeat Last State
+          property: ''
+        id: 76jSqVK2ro
+        meta:
+          category: output
+          description: ''
+          groupId: mbvi74zUm_
+          id: 76jSqVK2ro
+          label: Repeat State
+          name: debug
+          x: 220
+          'y': 800
+        outputIds:
+          - - UWuBIxSM8f
+        type: DebugNode
+      - config:
+          expression: '{{working.timeDifference}}>900000'
+        id: XL24fDNoxL
+        meta:
+          category: logic
+          description: Has more than 15 minutes passed since the last state change?
+          groupId: mbvi74zUm_
+          id: XL24fDNoxL
+          label: '>15 mins?'
+          name: conditional
+          x: 420
+          'y': 320
+        outputIds:
+          - - vqWV0OTaAh
+          - - 5Kb7gZl5SH
+        type: ConditionalNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: 'y'
+              valueTemplate: '{{working.current.value.compositeState.y.value}}'
+            - key: x
+              valueTemplate: '{{working.current.value.compositeState.x.value}}'
+            - key: room
+              valueTemplate: '{{working.current.value.compositeState.room.value}}'
+          deviceId: working.current.value.deviceId
+          deviceIdTemplateType: jsonPath
+          resultPath: working.results.stateReport
+          timeSourceType: payloadTime
+        id: vqWV0OTaAh
+        meta:
+          category: output
+          description: This node repeats the last reported device state.
+          groupId: mbvi74zUm_
+          id: uyR45r8Rr2
+          label: Repeat Last State
+          name: device-state
+          x: 220
+          'y': 720
+        outputIds:
+          - - 76jSqVK2ro
+        type: DeviceChangeStateNode
+      - config:
+          max: 9
+          min: 0
+          resultPath: working.random.chance
+        id: Pzod0J0WVh
+        meta:
+          category: logic
+          description: >-
+            Random number between 0 and 9, used in the following Conditional
+            Node.
+          groupId: mbvi74zUm_
+          id: Pzod0J0WVh
+          label: Chance
+          name: random-number
+          x: 560
+          'y': 500
+        outputIds:
+          - - jatd3f5B1K
+        type: RandomNumberNode
+      - config:
+          expression: '{{working.timeDifference}}>5400000'
+        id: 5Kb7gZl5SH
+        meta:
+          category: logic
+          description: Have more than 90 minutes passed?
+          groupId: mbvi74zUm_
+          id: 5Kb7gZl5SH
+          label: '>90 mins?'
+          name: conditional
+          x: 580
+          'y': 400
+        outputIds:
+          - - Pzod0J0WVh
+          - - Kqd3z5N84q
+        type: ConditionalNode
+      - config:
+          expression: '{{working.random.chance}}<1'
+        id: jatd3f5B1K
+        meta:
+          category: logic
+          description: >-
+            If the random value is 0 (less than 1) , give the chance to move
+            rooms.
+          groupId: mbvi74zUm_
+          id: jatd3f5B1K
+          label: 10% Chance
+          name: conditional
+          x: 560
+          'y': 580
+        outputIds:
+          - - vqWV0OTaAh
+          - - hkCqdL79qQ
+        type: ConditionalNode
+      - config: {}
+        id: TVSZHMRs6p
+        meta:
+          annotationText: >-
+            This workflow is triggered every 2 minutes.
+
+
+            This workflow simulates state for the asset devices in the
+            application, moving them around the campus every 15-90 minutes.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 260
+          x: 20
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: piMj9d6AW5
+        meta:
+          annotationText: >-
+            If less than 15 minutes have gone by, repeat the state and move to
+            the next loop iteration.
+          category: annotation
+          groupId: mbvi74zUm_
+          height: 160
+          label: Note
+          name: note
+          width: 220
+          x: 80
+          'y': 600
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.current.value.tags.class.[0]}}==''person'''
+        id: hkCqdL79qQ
+        meta:
+          category: logic
+          description: >-
+            This node takes the right path if the device is a "person" device,
+            and the left path if the device is an "equipment" device.
+          groupId: mbvi74zUm_
+          id: hkCqdL79qQ
+          label: Person or equipment?
+          name: conditional
+          x: 600
+          'y': 660
+        outputIds:
+          - - 8iT1qlV7kA
+          - - Kqd3z5N84q
+        type: ConditionalNode
+      - config:
+          expression: >-
+            {{working.current.value.compositeState.room.value}}=='Utility
+            Closet'
+        id: 8iT1qlV7kA
+        meta:
+          category: logic
+          description: >-
+            If the last value is the Utility Closet, branch to the right to move
+            rooms. If the last value is not the Utility Closet, move back to the
+            Utility Closet.
+          groupId: mbvi74zUm_
+          id: 8iT1qlV7kA
+          label: Last value?
+          name: conditional
+          x: 500
+          'y': 780
+        outputIds:
+          - - inK_zsOxnV
+          - - Kqd3z5N84q
+        type: ConditionalNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: 'y'
+              valueTemplate: '4.7'
+            - key: x
+              valueTemplate: '68.8'
+            - key: room
+              valueTemplate: Utility Closet
+            - key: movement
+              valueTemplate: 'true'
+          deviceId: working.current.value.deviceId
+          deviceIdTemplateType: jsonPath
+          resultPath: working.results.stateReport
+          timeSourceType: payloadTime
+        id: inK_zsOxnV
+        meta:
+          category: output
+          description: >-
+            The last location was not the Utility Closet, so the equipment needs
+            to be returned. Reset the item to the Utility Closet by reporting
+            its state.
+          groupId: mbvi74zUm_
+          id: uyR45r8Rr2
+          label: Return to Closet
+          name: device-state
+          x: 480
+          'y': 920
+        outputIds:
+          - - daZUX20pz2
+        type: DeviceChangeStateNode
+      - config:
+          message: Equipment to Closet
+          property: ''
+        id: EbXVgCaU6u
+        meta:
+          category: output
+          description: ''
+          groupId: mbvi74zUm_
+          id: 7uGVpJkKTv
+          label: Utility Closet
+          name: debug
+          x: 480
+          'y': 1080
+        outputIds:
+          - - UWuBIxSM8f
+        type: DebugNode
+      - config:
+          message: Move Rooms
+          property: ''
+        id: rFWUS4sEk-
+        meta:
+          category: output
+          description: ''
+          groupId: mbvi74zUm_
+          id: 7uGVpJkKTv
+          label: New State
+          name: debug
+          x: 1100
+          'y': 1400
+        outputIds:
+          - - UWuBIxSM8f
+        type: DebugNode
+      - config: {}
+        id: ar-6KV91RS
+        meta:
+          annotationText: 'If more than 90 minutes have gone by, report a random room.'
+          category: annotation
+          groupId: mbvi74zUm_
+          height: 140
+          label: Note
+          name: note
+          width: 180
+          x: 780
+          'y': 380
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          keyName: '{{working.current.value.deviceId}}'
+          resultPath: working.results.setStorage
+          value: time
+          valueType: path
+        id: daZUX20pz2
+        meta:
+          category: data
+          description: >-
+            Store the timestamp of when the state value was changed to a new
+            room.
+          groupId: mbvi74zUm_
+          id: D1hl_knvhk
+          label: Store Timestamp
+          name: store-value
+          x: 480
+          'y': 1000
+        outputIds:
+          - - EbXVgCaU6u
+        type: StoreValueNode
+      - config:
+          expression: >-
+            {{working.roomInfo.items.[0].roomName}}=={{working.current.value.compositeState.room.value}}
+        id: MayNiusXa8
+        meta:
+          category: logic
+          description: ''
+          groupId: mbvi74zUm_
+          id: MayNiusXa8
+          label: Conditional
+          name: conditional
+          x: 1160
+          'y': 1160
+        outputIds:
+          - - eh7h8htNQx
+          - - 24WSDUgAeD
+        type: ConditionalNode
+      - config:
+          message: This room was assigned twice in a row.
+          property: ''
+        id: d444nl6uuh
+        meta:
+          category: output
+          description: ''
+          groupId: mbvi74zUm_
+          id: 7uGVpJkKTv
+          label: Duplicate
+          name: debug
+          x: 1340
+          'y': 1460
+        outputIds:
+          - - UWuBIxSM8f
+        type: DebugNode
+      - config: {}
+        id: zTJPvHKnDN
+        meta:
+          annotationText: >-
+            Update the time only if a new room is selected. If a new room is not
+            selected, this flow will be repeat two minutes later. There is a 1
+            in 324 chance of a repeat loop occurring.
+          category: annotation
+          groupId: mbvi74zUm_
+          height: 160
+          label: Note
+          name: note
+          width: 320
+          x: 1380
+          'y': 1140
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: AqSY7GxsC6
+        meta:
+          annotationText: There is a 1 in 10 chance of moving to a new room.
+          category: annotation
+          groupId: mbvi74zUm_
+          height: 140
+          label: Note
+          name: note
+          width: 180
+          x: 380
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: FPIv75TSHa
+        meta:
+          annotationText: 'If the device is a person, move to a new room.'
+          category: annotation
+          groupId: mbvi74zUm_
+          height: 120
+          label: Note
+          name: note
+          width: 180
+          x: 780
+          'y': 620
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 38DiKr_s1o
+        meta:
+          annotationText: 'If the last room was the Utility Closet, move to a random room.'
+          category: annotation
+          groupId: mbvi74zUm_
+          height: 120
+          label: Note
+          name: note
+          width: 200
+          x: 680
+          'y': 760
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: vslsSmeGbC
+        meta:
+          annotationText: >-
+            If the device is an equipment device and the last room was not the
+            Utility Closet, move to the Utility Closet.
+          category: annotation
+          groupId: mbvi74zUm_
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 660
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: 'y'
+              valueTemplate: '{{working.roomInfo.items.[0].y}}'
+            - key: x
+              valueTemplate: '{{working.roomInfo.items.[0].x}}'
+            - key: room
+              valueTemplate: '{{working.roomInfo.items.[0].roomName}}'
+          deviceId: working.current.value.deviceId
+          deviceIdTemplateType: jsonPath
+          resultPath: working.results.stateReport
+          timeSourceType: payloadTime
+        id: 24WSDUgAeD
+        meta:
+          category: output
+          description: >-
+            Report state for the device using the values returned by the data
+            table query.
+          groupId: mbvi74zUm_
+          id: uyR45r8Rr2
+          label: Repeat State
+          name: device-state
+          x: 1340
+          'y': 1380
+        outputIds:
+          - - d444nl6uuh
+        type: DeviceChangeStateNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: 'y'
+              valueTemplate: '{{working.roomInfo.items.[0].y}}'
+            - key: x
+              valueTemplate: '{{working.roomInfo.items.[0].x}}'
+            - key: room
+              valueTemplate: '{{working.roomInfo.items.[0].roomName}}'
+            - key: movement
+              valueTemplate: 'true'
+          deviceId: working.current.value.deviceId
+          deviceIdTemplateType: jsonPath
+          resultPath: working.results.stateReport
+          timeSourceType: payloadTime
+        id: eh7h8htNQx
+        meta:
+          category: output
+          description: >-
+            Report state for the device using the values returned by the data
+            table query. This branch includes the "movement" attribute.
+          groupId: mbvi74zUm_
+          id: uyR45r8Rr2
+          label: Report Room
+          name: device-state
+          x: 1100
+          'y': 1240
+        outputIds:
+          - - kgc_kiAO7x
+        type: DeviceChangeStateNode
+      - config:
+          keyName: '{{working.current.value.deviceId}}'
+          resultPath: working.results.setStorage
+          value: time
+          valueType: path
+        id: kgc_kiAO7x
+        meta:
+          category: data
+          description: >-
+            Store the timestamp of when the state value was changed to a new
+            room.
+          groupId: mbvi74zUm_
+          id: D1hl_knvhk
+          label: Store Timestamp
+          name: store-value
+          x: 1100
+          'y': 1320
+        outputIds:
+          - - rFWUS4sEk-
+        type: StoreValueNode
+      - config:
+          expression: '{{working.storageValue}}==null'
+        id: VQK1EbWL-M
+        meta:
+          category: logic
+          description: ''
+          groupId: mbvi74zUm_
+          id: VQK1EbWL-M
+          label: Conditional
+          name: conditional
+          x: 820
+          'y': 160
+        outputIds:
+          - - 5Hq1qOdeBx
+          - - Kqd3z5N84q
+        type: ConditionalNode
+    triggers:
+      - config:
+          seconds: 120
+        key: ~losant-flow-workflowDeviceSimulator-0~-6AeVlQEldrwPZt_azFqlL
+        meta:
+          category: trigger
+          description: ''
+          id: CxAN9G6xlY
+          label: Every 2 Minutes
+          name: timer
+          timerTypeSelect: seconds
+          uiId: CxAN9G6xlY
+          x: 320
+          'y': 20
+        outputIds:
+          - - tyaSzH4wi1
+        type: timer
+      - config: {}
+        key: ~losant-flow-workflowDeviceSimulator-0~-l4hixPlkzOa_VFN6vF4Gc
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: yBS5DpxH70
+          label: Trigger
+          name: virtualButton
+          payload: ''
+          uiId: yBS5DpxH70
+          x: 560
+          'y': 20
+        outputIds:
+          - - tyaSzH4wi1
+        type: virtualButton
+version: 1

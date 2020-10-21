@@ -1,0 +1,211 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: shipment_id
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: orientation
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: shock
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: signal_strength
+      - attributeTags: {}
+        dataType: string
+        name: distCenterId
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-tracker0000-0~
+    name: Tracker 0000
+    tags:
+      - key: simId
+        value: "0000"
+  - attributes:
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: shipment_id
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: orientation
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: shock
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: signal_strength
+      - attributeTags: {}
+        dataType: string
+        name: distCenterId
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-tracker0001-1~
+    name: Tracker 0001
+    tags:
+      - key: simId
+        value: "0001"
+      - key: DeviceRecipe
+        value: GPS Tracker Recipe
+  - attributes:
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: shipment_id
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: orientation
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: shock
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: signal_strength
+      - attributeTags: {}
+        dataType: string
+        name: distCenterId
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-tracker0002-2~
+    name: Tracker 0002
+    tags:
+      - key: simId
+        value: "0002"
+      - key: DeviceRecipe
+        value: GPS Tracker Recipe
+  - attributes:
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: shipment_id
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: orientation
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: shock
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: signal_strength
+      - attributeTags: {}
+        dataType: string
+        name: distCenterId
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-tracker0003-3~
+    name: Tracker 0003
+    tags:
+      - key: simId
+        value: "0003"
+      - key: DeviceRecipe
+        value: GPS Tracker Recipe
+  - attributes:
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: shipment_id
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: orientation
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: shock
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: signal_strength
+      - attributeTags: {}
+        dataType: string
+        name: distCenterId
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-tracker0004-4~
+    name: Tracker 0004
+    tags:
+      - key: simId
+        value: "0004"
+      - key: DeviceRecipe
+        value: GPS Tracker Recipe
+version: 1

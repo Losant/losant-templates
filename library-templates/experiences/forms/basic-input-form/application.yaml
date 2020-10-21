@@ -1,0 +1,17 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to use a form to receive user input and process
+      that input using a workflow.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesFormsBasicInputForm-0~
+    name: Basic Input Form
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - form
+      - input
+version: 1

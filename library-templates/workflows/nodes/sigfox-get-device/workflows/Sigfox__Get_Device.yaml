@@ -1,0 +1,132 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: Your Sigfox API access login.
+          id: sigfox-access-login
+          label: API Access Login
+          required: true
+          type: stringTemplate
+        - description: Your Sigfox API access password.
+          id: sigfox-access-password
+          label: API Access Password
+          required: true
+          type: stringTemplate
+        - description: The Sigfox device ID.
+          id: sigfox-device-id
+          label: Device ID
+          required: true
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: Returns device information from Sigfox device.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: Retrieves a device from the Sigfox API.
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/svg+xml;base64,PHN2ZyBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA0OCA0OCIgdmlld0JveD0iMCAwIDQ4IDQ4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmZmZmYiPjxwYXRoIGQ9Im0zNi44IDI4LjFjOC44LTkuNCAxMy40LTE5IDEwLjItMjIuMi0zLTMuMS0xMi4yLjktMjEuNCA5bC0uMS0uMS0yLTEuOXYuMWMtOC4yLTctMTgtMTIuMy0yMi04LjMtNC40IDQuNCAyLjIgMTUuOSAxMC45IDI1bC4yLjJjLTMuNSA1LjctNC42IDEwLjQtMi42IDEyLjQgMi4xIDIuMiA3LjMuOCAxMy40LTNsLjUuNGM0LjggMy4yIDkgNC45IDEyIDQuOSAxLjYgMCAyLjktLjUgMy44LTEuNCAyLjUtMi41IDEuNS04LTIuOC0xNC45IDAgMC0uMS0uMS0uMS0uMnptLTMzLjctMjEuNmMuNC0uNCAxLjEtLjcgMi0uNyAzLjYgMCAxMC4zIDMuNCAxNy42IDkuOS0uNC40LS45LjgtMS4zIDEuMy0zLjMgMy4yLTYuMiA2LjYtOC41IDEwLTguNi05LjYtMTIuMS0xOC4yLTkuOC0yMC41em0zNSAzNWMtMS40IDEuNC01LjYuOC0xMi4yLTMuNXYtMTkuNHMwIDAgLjEuMWMzLjYgMy42IDYuNyA3LjQgOSAxMSAzLjQgNS42IDQuNiAxMC4yIDMuMSAxMS44eiIvPjwvc3ZnPg==
+    id: ~losant-flow-sigfoxGetDevice-0~
+    name: 'Sigfox: Get Device'
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: J_ZEtd4nfn
+        meta:
+          category: customNodeEnd
+          description: End the custom node run
+          label: Output
+          name: custom-node-end-single
+          x: 160
+          'y': 600
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials:
+            passwordTemplate: '{{data.sigfox-access-password}}'
+            usernameTemplate: '{{data.sigfox-access-login}}'
+          authType: basic
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo: []
+          method: GET
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: 'https://backend.sigfox.com/api/devices/{{data.sigfox-device-id}}'
+        id: pd9RVL6wfc
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 160
+          'y': 200
+        outputIds:
+          - - 3klRr0hzN_
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: qDkz7EkKf5
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 160
+          'y': 460
+        outputIds:
+          - - J_ZEtd4nfn
+        type: DebugNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: 3klRr0hzN_
+        meta:
+          category: logic
+          description: Removes the HTTP request object from the result.
+          label: Mutate
+          name: mutate
+          x: 160
+          'y': 320
+        outputIds:
+          - - qDkz7EkKf5
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Sigfox: Get Device'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 160
+          'y': 40
+        outputIds:
+          - - pd9RVL6wfc
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-sigfoxGetDevice-0~-BsBxRlguflob8N6qSIzTd
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+             "sigfox-access-login": "your-access-login",
+             "sigfox-access-password": "your-access-password",
+             "sigfox-device-id" : "your-device-id"
+            }
+          uiId: SvvfhBFCmk
+          x: 380
+          'y': 40
+        outputIds:
+          - - pd9RVL6wfc
+        type: virtualButton
+version: 1

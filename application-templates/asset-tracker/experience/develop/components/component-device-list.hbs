@@ -1,0 +1,67 @@
+{{!--
+  Description:
+
+  This component displays a list of devices. When a device is clicked,
+  the user is sent to /devices/ID_OF_CLICKED_DEVICE.
+
+  If an ID in the list matches the ID on the "deviceId" route parameter,
+  it will be displayed as selected.
+
+  Example Usage: {{component "component-device-list" pageData.devices}}
+
+  The following information is displayed:
+   Status indicator based on whether or not an open event exists associated to this device.
+   Image of an asset tracking device.
+   The name of the device.
+   The current GPS coordinates of the device.
+   A battery level indicator.
+
+--}}
+
+<ul>
+  {{#each this}}
+  <li>
+    <a class="device-list-item-link" href="/devices/{{this.id}}">
+      <div id="{{this.id}}" class="device-list-item{{#eq this.id @root.request.params.deviceId}} device-list-selected{{/eq}}">
+      <div class="device-list-status-indicator {{#eq this.event null}} device-list-status-green{{else}} device-list-status-red{{/eq}}"></div>
+        <div class="device-list-image-container">
+          <img src="{{file '/asset-tracker.jpg'}}">
+        </div>
+        <div style="margin-top: 7px; margin-bottom: 7px; align-items: center; line-height: normal; display: grid; grid-template-columns: auto; grid-template-rows: auto auto">
+        	<div style="grid-column-start: 1; grid-row-start: 1; ">{{this.name}}</div>
+          <div style="grid-column-start: 1; grid-row-start: 2; display: grid; grid-gap: 0 5px; align-items: center; grid-template-columns: min-content auto; grid-template-rows: auto">
+						<div style="grid-column-start: 1;">
+            	<img src="{{file '/location-icon.png'}}" style="height: 11px;">
+            </div>
+          	<div style="grid-column-start: 2; grid-row-start: 1; font-size: 11px; align-self: end; font-weight: normal;">
+              {{this.compositeState.location.value}}
+            </div>
+          </div>
+        </div>
+        {{! Battery Icon }}
+        <div style="margin-left: auto; font-size: 24px; transform: rotate(-90deg);">
+          {{#if this.compositeState.battery.value}}
+          {{#gte this.compositeState.battery.value 75}}
+          <ion-icon style="color: #22AE78;" name="battery-full" />
+          {{else}}
+          {{#gte this.compositeState.battery.value 25}}
+          <ion-icon style="color: #FEA233;" name="battery-half" />
+          {{else}}
+          <ion-icon style="color: #FC1526;" name="battery-dead" />
+          {{/gte}}
+          {{/gte}}
+          {{/if}}
+        </div>
+      </div>
+    </a>
+  </li>
+  {{/each}}
+</ul>
+
+<script>
+  $(function() {
+    // Scroll the first selected device into view.
+    let selected = $('.device-list-selected')[0];
+    if(selected) { selected.scrollIntoView(); }
+	});
+</script>

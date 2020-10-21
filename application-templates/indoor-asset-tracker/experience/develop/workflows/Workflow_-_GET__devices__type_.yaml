@@ -1,0 +1,188 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      Renders either a resident or equipment dashboard using the device's type
+      tag.
+    enabled: true
+    flowId: ~losant-flow-workflowGetDevicesType-5~
+    globals: []
+    id: ~losant-flowVersion-workflowGetDevicesType-3~
+    name: 'Workflow - GET /devices/{type}'
+    nodes:
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-kioskDashboardEquipment-5~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: l5_M_y8wME
+        meta:
+          category: output
+          description: Renders a dashboard for the equipment device selected in the menu.
+          id: l5_M_y8wME
+          label: Equipment Dashboard
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 360
+        outputIds:
+          - - LjmlHZ42SL
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: LjmlHZ42SL
+        meta:
+          category: output
+          description: ''
+          id: LjmlHZ42SL
+          label: Debug
+          name: debug
+          x: 40
+          'y': 460
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: gsBTofUbq9
+        meta:
+          annotationText: >-
+            Pass the device type to pageData. This will be used to add context
+            to the dashboard and render the devices with this `type` tag.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 360
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.query.deviceId}}'
+        id: sNlOCUm5M6
+        meta:
+          category: logic
+          description: Was a deviceId included as a query parameter?
+          id: sNlOCUm5M6
+          label: Conditional
+          name: conditional
+          x: 140
+          'y': 160
+        outputIds:
+          - - '-IN9AoF6OM'
+          - - DJdE51B3el
+        type: ConditionalNode
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-kioskDashboardResident-6~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 7Wr8MWWH5F
+        meta:
+          category: output
+          description: >-
+            Render this page using a specific resident's deviceId, included on
+            the Page Data Payload Path.
+          id: z4sxHQbEJ7
+          label: Resident Dashboard
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 360
+        outputIds:
+          - - Fuw7zY7B1L
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: Fuw7zY7B1L
+        meta:
+          category: output
+          description: ''
+          id: eWTHN2Bm-4
+          label: Debug
+          name: debug
+          x: 260
+          'y': 460
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: working.breadcrumbs
+              type: set
+              valueTemplate: |-
+                [
+                { "label": "Equipment", "url":"/type?class=equipment"},
+                {"label": "{{data.params.type}}" }
+                ]
+              valueTemplateType: json
+        id: '-IN9AoF6OM'
+        meta:
+          category: logic
+          description: >-
+            Append the breadcrumb navigation to the payload. This will allow for
+            a menu to be created.
+          id: N4URmS-aZq
+          label: Breadcrumbs
+          name: mutate
+          x: 40
+          'y': 260
+        outputIds:
+          - - l5_M_y8wME
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.breadcrumbs
+              type: set
+              valueTemplate: |-
+                [
+                { "label": "Resident", "url":"/type?class=person"},
+                {"label": "{{data.query.deviceId}}" }
+                ]
+              valueTemplateType: json
+            - destination: working.deviceId
+              source: data.query.deviceId
+              type: copy
+        id: DJdE51B3el
+        meta:
+          category: logic
+          description: >-
+            Append the breadcrumb navigation to the payload while also moving
+            the deviceId to the `working object.
+          id: N4URmS-aZq
+          label: Breadcrumbs
+          name: mutate
+          x: 260
+          'y': 260
+        outputIds:
+          - - 7Wr8MWWH5F
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getDevicesType-5~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /devices/{type}'
+          name: endpoint
+          uiId: 7FgS8ELuhy
+          x: 140
+          'y': 60
+        outputIds:
+          - - sNlOCUm5M6
+        type: endpoint
+    version: develop
+version: 1

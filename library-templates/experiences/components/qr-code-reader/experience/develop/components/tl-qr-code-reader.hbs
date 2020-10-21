@@ -1,0 +1,175 @@
+{{! Default variable values }}
+{{#* inline 'id'}}{{#if @args.id}}{{@args.id}}{{else}}tl-qr-code-reader{{/if}}{{/inline}}
+{{#* inline 'inputName'}}{{#if @args.inputName}}{{@args.inputName}}{{else}}qrcode{{/if}}{{/inline}}
+{{#* inline 'size'}}{{#if @args.size}}{{@args.size}}{{else}}360{{/if}}{{/inline}}
+{{#* inline 'onSuccessMethod'}}{{#if @args.onSuccessMethod}}{{@args.onSuccessMethod}}{{else}}get{{/if}}{{/inline}}
+{{#* inline 'variant'}}{{#if @args.variant}}{{@args.variant}}{{else}}primary{{/if}}{{/inline}}
+
+{{#with @args as |args|}}
+<style>
+  #{{> id}}.tl-qr-code-reader {
+    margin: 0 auto;
+    width: {{> size}}px;
+  }
+  #{{> id}} .tl-qr-code-reader-camera-wrap {
+    background: #fbfbfb;
+    padding: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #{{> id}} .tl-qr-camera-content-inner {
+    height: calc({{> size}}px - 10px);
+    display: flex;
+    width: 100%;
+  }
+  #{{> id}} .tl-qr-code-reader-camera-viewport {
+    display: none;
+  }
+  #{{> id}} .tl-qr-code-reader-camera-viewport,
+  #{{> id}} .tl-qr-code-reader-camera-placeholder {
+    flex: 1;
+  }
+  #{{> id}} .tl-qr-code-reader-camera-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+</style>
+
+<div id="{{> id}}" class="tl-qr-code-reader">
+  <div class="tl-qr-code-reader-camera-wrap">
+    <div class="tl-qr-camera-content-inner">
+      <div id="{{> id}}-camera-viewport" class="tl-qr-code-reader-camera-viewport"></div>
+      <div id="{{> id}}-tl-qr-code-reader-camera-placeholder" class="tl-qr-code-reader-camera-placeholder">
+        <img src="{{file '/tl-qr-code-reader/camera-scan.gif'}}" alt="QR Code Scanner" />
+      </div>
+    </div>
+    <button type="button" class="btn btn-{{> variant}} btn-block" id="{{> id}}-trigger-camera" disabled>
+      Open Camera
+    </button>
+  </div>
+  {{#unless args.onSuccessAction}}
+    <div class="form-group">
+      <label for="{{> id}}-input">Code</label>
+      <input type="text" class="form-control" id="{{> id}}-input" name="{{> inputName}}" value="{{args.inputValue}}" />
+    </div>
+  {{/unless}}
+</div>
+<script>
+  window.addEventListener('load', () => {
+    // enable the button if the library successfully loaded
+    const cameraBtn = document.getElementById('{{> id}}-trigger-camera');
+    const cameraPlaceholder = document.getElementById('{{> id}}-tl-qr-code-reader-camera-placeholder');
+    const cameraViewportId = '{{> id}}-camera-viewport';
+    const cameraViewport = document.getElementById(cameraViewportId);
+    if (window.Html5Qrcode) {
+      // library successfully loaded
+      const openCameraBtnLabel = cameraBtn.textContent; // pull this out of the button above
+      const openingCameraBtnLabel = 'Opening ...';
+      const closeCameraBtnLabel = 'Stop Scanning';
+      const closingCameraLabel = 'Stopping ...';
+      cameraBtn.disabled = false; // allow clicking the button after the library loads
+      const html5QrCode = new Html5Qrcode(cameraViewportId, false);
+
+      const startScanning = () => {
+        // provide feedback to the user that we are shutting down the camera
+        cameraBtn.disabled = true;
+        cameraBtn.textContent = openingCameraBtnLabel;
+        cameraPlaceholder.style.display = 'none';
+        cameraViewport.style.display = 'block';
+        html5QrCode.start(
+          { facingMode: "environment" }, // use an environment-facing camera if we have one. will fall back to a user-facing camera if that is the only one available.
+          { fps: 10, qrbox: 250, aspectRatio: 1 },
+          onQrCodeFound, // our success callback, defined above
+          onQrCodeNotFound // our error callback, defined above
+        ).then(() => {
+          // once the camera is running, set our button back into its ready state
+          cameraBtn.disabled = false;
+          cameraBtn.textContent = closeCameraBtnLabel;
+        })
+        .catch((error) => {
+          // if we fail to start the camera,
+          // alert the user
+          // and reset the button to its ready state
+          alert('Failed to activate camera!');
+          cameraBtn.disabled = false;
+          cameraBtn.textContent = openCameraBtnLabel;
+          cameraPlaceholder.style.display = '';
+          cameraViewport.style.display = 'none';
+        });
+      }
+
+      const stopScanning = () => {
+        // provide feedback to the user that we are shutting down the camera
+        cameraBtn.disabled = true;
+        cameraBtn.textContent = closingCameraLabel;
+        cameraPlaceholder.style.display = '';
+        cameraViewport.style.display = 'none';
+        // now, turn off the camera
+        html5QrCode.stop()
+        // and when we are finished, reset the button to its ready state
+        .then(() => {
+          cameraBtn.disabled = false;
+          cameraBtn.textContent = openCameraBtnLabel;
+        })
+        .catch(() => {
+          // if we fail to shut down the camera,
+          // alert the user
+          // and reset the button to its ready state
+          alert('Failed to disable camera!');
+          cameraBtn.disabled = false;
+          cameraBtn.textContent = closeCameraBtnLabel;
+          cameraPlaceholder.style.display = 'none';
+          cameraViewport.style.display = 'block';
+        });
+      }
+
+      const onQrCodeFound = (data) => {
+        // when a QR code is found, run this function.
+        // 'data' is the text string contained in the QR code.
+        stopScanning();
+        {{#if args.onSuccessAction}}
+          // build a form element
+          // and submit the QR data
+          const form = document.createElement('form');
+          form.action = '{{args.onSuccessAction}}';
+          form.method = '{{> onSuccessMethod}}';
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.value = data;
+          input.name = '{{> inputName}}';
+          form.appendChild(input);
+          document.body.appendChild(form);
+          form.submit();
+        {{else}}
+          // set the value of the input beneath the camera
+          document.getElementById('{{> id}}-input').value = data;
+        {{/if}}
+      }
+      
+      const onQrCodeNotFound = (errorMessage) => {}; // best to ignore this; it fires on every frame when a QR code is not found.
+
+      cameraBtn.addEventListener('click', () => {
+        if (html5QrCode._isScanning) {
+          stopScanning();
+        } else {
+          startScanning();
+        }
+      });
+      cameraPlaceholder.addEventListener('click', () => {
+        startScanning();
+      })
+    } else {
+      // library failed to load. disallow pushing the button and flip it into an error state.
+      cameraBtn.textContent = 'Cannot load camera!';
+      cameraBtn.classList.toggle('btn-primary');
+      cameraBtn.classList.toggle('btn-danger');
+    }
+  });
+</script>
+<!-- For additional information, including advanced options,
+see https://github.com/mebjas/html5-qrcode/tree/V1.2.2 -->
+<script defer src="{{file '/tl-qr-code-reader/html5-qrcode.min.js'}}"></script>
+{{/with}}

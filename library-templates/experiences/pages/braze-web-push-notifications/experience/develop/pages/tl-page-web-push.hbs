@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <title>Braze Web Push Notifications</title>
+
+      <script type="text/javascript">
+
+        // Braze SDK initialization. Directions from here:
+        // https://www.braze.com/docs/developer_guide/platform_integration_guides/web/initial_sdk_setup
+        // https://www.braze.com/docs/developer_guide/platform_integration_guides/web/push_notifications/integration/
+
+        // Register the service worker.
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
+              // Registration was successful
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+              // registration failed :(
+              console.log('ServiceWorker registration failed: ', err);
+            });
+          });
+        }
+        
+        // Load Braze SDK.
+        +function(a,p,P,b,y){a.appboy={};a.appboyQueue=[];for(var s="DeviceProperties Card Card.prototype.dismissCard Card.prototype.removeAllSubscriptions Card.prototype.removeSubscription Card.prototype.subscribeToClickedEvent Card.prototype.subscribeToDismissedEvent Banner CaptionedImage ClassicCard ControlCard ContentCards ContentCards.prototype.getUnviewedCardCount Feed Feed.prototype.getUnreadCardCount ControlMessage InAppMessage InAppMessage.SlideFrom InAppMessage.ClickAction InAppMessage.DismissType InAppMessage.OpenTarget InAppMessage.ImageStyle InAppMessage.Orientation InAppMessage.TextAlignment InAppMessage.CropType InAppMessage.prototype.closeMessage InAppMessage.prototype.removeAllSubscriptions InAppMessage.prototype.removeSubscription InAppMessage.prototype.subscribeToClickedEvent InAppMessage.prototype.subscribeToDismissedEvent FullScreenMessage ModalMessage HtmlMessage SlideUpMessage User User.Genders User.NotificationSubscriptionTypes User.prototype.addAlias User.prototype.addToCustomAttributeArray User.prototype.getUserId User.prototype.incrementCustomUserAttribute User.prototype.removeFromCustomAttributeArray User.prototype.setAvatarImageUrl User.prototype.setCountry User.prototype.setCustomLocationAttribute User.prototype.setCustomUserAttribute User.prototype.setDateOfBirth User.prototype.setEmail User.prototype.setEmailNotificationSubscriptionType User.prototype.setFirstName User.prototype.setGender User.prototype.setHomeCity User.prototype.setLanguage User.prototype.setLastKnownLocation User.prototype.setLastName User.prototype.setPhoneNumber User.prototype.setPushNotificationSubscriptionType InAppMessageButton InAppMessageButton.prototype.removeAllSubscriptions InAppMessageButton.prototype.removeSubscription InAppMessageButton.prototype.subscribeToClickedEvent display display.automaticallyShowNewInAppMessages display.destroyFeed display.hideContentCards display.showContentCards display.showFeed display.showInAppMessage display.toggleContentCards display.toggleFeed changeUser destroy getDeviceId initialize isPushBlocked isPushGranted isPushPermissionGranted isPushSupported logCardClick logCardDismissal logCardImpressions logContentCardsDisplayed logCustomEvent logFeedDisplayed logInAppMessageButtonClick logInAppMessageClick logInAppMessageHtmlClick logInAppMessageImpression logPurchase openSession registerAppboyPushMessages removeAllSubscriptions removeSubscription requestContentCardsRefresh requestFeedRefresh requestImmediateDataFlush resumeWebTracking setLogger stopWebTracking subscribeToContentCardsUpdates subscribeToFeedUpdates subscribeToInAppMessage subscribeToNewInAppMessages toggleAppboyLogging trackLocation unregisterAppboyPushMessages wipeData".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.appboy,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.appboyQueue.push(arguments); return true}"))()}window.appboy.getCachedContentCards=function(){return new window.appboy.ContentCards};window.appboy.getCachedFeed=function(){return new window.appboy.Feed};window.appboy.getUser=function(){return new window.appboy.User};(y=p.createElement(P)).type='text/javascript';
+          y.src='https://js.appboycdn.com/web-sdk/3.0/appboy.min.js';
+          y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
+        }(window,document,'script');
+
+        // Grab the ID of the authenticated experience user, if available.
+        // This will be null if no user is authenticated.
+        let userId = {{#if experience.user}}'{{experience.user.id}}'{{else}}null{{/if}};
+      
+        // Initialize the SDK.
+        // API Key and SDK Endpoint can be found at:
+        //   Manage App Group -> App Settings -> (Add a new Web App)
+        appboy.initialize('{{globals.tl-braze-api-key}}', {
+            baseUrl: '{{globals.tl-braze-sdk-endpoint}}',
+            enableLogging: true // TODO: disable for production.
+        });
+
+        // Optionally show all In-App Messages without custom handling.
+        appboy.display.automaticallyShowNewInAppMessages();
+
+        // If an experience user is logged in, set the external ID
+        // to the ID of that experience user.
+        if(userId) {
+          appboy.changeUser(userId);
+        }
+
+        // Start (or continue) a session.
+        appboy.openSession();
+      </script>
+
+    </head>
+    <body class="p-5">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="alert alert-secondary" role="alert">
+              <p>
+                Recent versions of most browsers only allow registering for push notifications
+                on user events like button pushes. The button below will prompt the user
+                to register for your application's push notifications.
+              </p>
+              <p>
+                If there is an authenticated experience user, the Braze
+                <a href="https://www.braze.com/docs/api/parameters#external-user-id">external ID</a>
+                is set to the Losant ID for that experience user.
+              </p>
+              <p>
+                Detailed logging is enabled by default, which can be seen by opening
+                your browser's console. Detailed logging should be disabled for production
+                applications.
+              </p>
+          </div>
+
+          <button type="button" class="btn btn-primary" onclick="appboy.registerAppboyPushMessages();">Register for Notifications</button>
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </body>
+    
+</html>

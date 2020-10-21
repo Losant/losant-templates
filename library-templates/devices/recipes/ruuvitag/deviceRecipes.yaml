@@ -1,0 +1,40 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: Accelerometer's X axis value.
+        name: accelerometer_x
+      - attributeTags: {}
+        dataType: number
+        description: Accelerometer's Y axis value.
+        name: accelerometer_y
+      - attributeTags: {}
+        dataType: number
+        description: Accelerometer's Z axis value.
+        name: accelerometer_z
+      - attributeTags: {}
+        dataType: number
+        description: The temperature, in Celsius.
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: Relative humidity, as a percentage between 0-100.
+        name: humidity
+      - attributeTags: {}
+        dataType: number
+        description: Air pressure, in Pa.
+        name: pressure
+      - attributeTags: {}
+        dataType: number
+        description: The battery level, in voltage.
+        name: battery
+    description: Open-source wireless sensor node.
+    deviceClass: standalone
+    deviceName: RuuviTag
+    id: ~losant-deviceRecipe-ruuviTag-0~
+    name: RuuviTag
+    tags:
+      - key: mac
+        value: AABCCDDEEFF
+version: 1

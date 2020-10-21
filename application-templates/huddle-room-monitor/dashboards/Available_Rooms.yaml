@@ -1,0 +1,179 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: image-overlay
+        config:
+          backgroundColor: transparent
+          defaultZoom: -1
+          imageUrl: >-
+            https://files.onlosant.com/~losant-application-applicationHuddleRoomMonitor-0~/office-floorplan.png
+          overlays:
+            - conditions:
+                - color: 'rgba(252, 21, 38, 1)'
+                  condition: '{{room-1.value}} === 1'
+                  id: QzaOXsJcAz
+                  shape: circle
+              defaultCondition:
+                color: 'rgba(34, 174, 120, 1)'
+                shape: circle
+              popupTemplate: ''
+              position: '1262,574'
+              size: small
+              type: indicator
+            - conditions:
+                - color: 'rgba(252, 21, 38, 1)'
+                  condition: '{{room-2.value}} === 1'
+                  id: QzaOXsJcAz
+                  shape: circle
+              defaultCondition:
+                color: 'rgba(34, 174, 120, 1)'
+                shape: circle
+              popupTemplate: ''
+              position: '1368,502'
+              size: medium
+              type: indicator
+            - conditions:
+                - color: 'rgba(252, 21, 38, 1)'
+                  condition: '{{room-3.value}} === 1'
+                  id: QzaOXsJcAz
+                  shape: circle
+              defaultCondition:
+                color: 'rgba(34, 174, 120, 1)'
+                shape: circle
+              popupTemplate: ''
+              position: '1472,436'
+              size: small
+              type: indicator
+            - conditions: []
+              defaultCondition:
+                color: 'rgba(0, 0, 0, 1)'
+                label: Room 1
+              popupTemplate: ''
+              position: '1262,626'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: 'rgba(0, 0, 0, 1)'
+                label: Room 2
+              popupTemplate: ''
+              position: '1374,548'
+              size: medium
+              type: label
+            - conditions: []
+              defaultCondition:
+                color: 'rgba(0, 0, 0, 1)'
+                label: Room 3
+              popupTemplate: ''
+              position: '1480,478'
+              size: medium
+              type: label
+          segments:
+            - aggregation: LAST
+              attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+              duration: 0
+              id: room-1
+              queryType: gauge
+            - aggregation: LAST
+              attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+              duration: 0
+              id: room-2
+              queryType: gauge
+            - aggregation: LAST
+              attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+              duration: 0
+              id: room-3
+              queryType: gauge
+        height: 3
+        id: p1mvX9y4am
+        startX: 0.5
+        startY: 0
+        title: Floor Plan
+        width: 3.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(252, 21, 38, 1)'
+              condition: '{{value-0}} === 1'
+              id: 6pSUYS5zHB
+              label: Occupied
+          defaultCondition:
+            color: 'rgba(34, 174, 120, 1)'
+            label: Available
+          duration: 0
+          segments:
+            - attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+        height: 1
+        id: pcq3Cpz8En
+        startX: 0
+        startY: 0
+        title: Huddle Room 1
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(252, 21, 38, 1)'
+              condition: '{{value-0}} === 1'
+              id: 6pSUYS5zHB
+              label: Occupied
+          defaultCondition:
+            color: 'rgba(34, 174, 120, 1)'
+            label: Available
+          duration: 0
+          segments:
+            - attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+        height: 1
+        id: iaPnDsC7E0
+        startX: 0
+        startY: 1
+        title: Huddle Room 2
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(252, 21, 38, 1)'
+              condition: '{{value-0}} === 1'
+              id: 6pSUYS5zHB
+              label: Occupied
+          defaultCondition:
+            color: 'rgba(34, 174, 120, 1)'
+            label: Available
+          duration: 0
+          segments:
+            - attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+        height: 1
+        id: xaXFRoEwEI
+        startX: 0
+        startY: 2
+        title: Huddle Room 3
+        width: 0.5
+    contextConfiguration: []
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-availableRooms-0~
+    name: Available Rooms
+    public: false
+    refreshRate: 60
+version: 1

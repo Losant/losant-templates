@@ -1,0 +1,564 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals:
+      - json: '5'
+        key: occupied_chance
+      - json: '900'
+        key: minimum_occupied_time_seconds
+      - json: '15'
+        key: unoccupied_chance
+      - json: '5400'
+        key: max_occupied_time_seconds
+    id: ~losant-flow-simulateRooms-0~
+    name: Simulate Rooms
+    nodes:
+      - config:
+          attributes:
+            - occupied
+          findMetadata: false
+          findMethod: query
+          findMultiple: true
+          includeState: true
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "deviceClass": {
+                    "$eq": "standalone"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: jaCHoVPcAT
+        meta:
+          category: data
+          description: ''
+          id: jaCHoVPcAT
+          label: 'Device: Get'
+          name: get-device
+          x: 340
+          'y': 240
+        outputIds:
+          - - 9lHXroNaG2
+        type: GetDeviceNode
+      - config:
+          message: ''
+          property: ''
+        id: m2AzVMvKHl
+        meta:
+          category: output
+          description: ''
+          id: m2AzVMvKHl
+          label: Debug
+          name: debug
+          x: 340
+          'y': 500
+        outputIds: []
+        type: DebugNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: working.devices
+        id: 9lHXroNaG2
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 700
+          groupStartY: 140
+          id: 9lHXroNaG2
+          label: Loop
+          name: loop
+          x: 340
+          'y': 360
+        outputIds:
+          - - m2AzVMvKHl
+          - - Y1QSAmRKTK
+        type: LoopNode
+      - config:
+          loopNodeId: 9lHXroNaG2
+          shouldBreak: false
+        id: kYA5v1samN
+        meta:
+          category: loop
+          description: ''
+          groupId: 9lHXroNaG2
+          id: kYA5v1samN
+          label: Next
+          name: loop-next
+          x: 740
+          'y': 2060
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          message: ''
+          property: ''
+        id: qsGkmDFmIy
+        meta:
+          category: output
+          description: ''
+          groupId: 9lHXroNaG2
+          id: qsGkmDFmIy
+          label: Debug
+          name: debug
+          x: 740
+          'y': 1960
+        outputIds:
+          - - kYA5v1samN
+        type: DebugNode
+      - config:
+          max: 100
+          min: 0
+          resultPath: working.random
+        id: 552OFXo8nk
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: 552OFXo8nk
+          label: Random Number
+          name: random-number
+          x: 1240
+          'y': 660
+        outputIds:
+          - - ZOT2ggPyz2
+        type: RandomNumberNode
+      - config:
+          expression: '{{working.random}} < {{globals.occupied_chance}}'
+        id: ZOT2ggPyz2
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: ZOT2ggPyz2
+          label: Conditional
+          name: conditional
+          x: 1240
+          'y': 760
+        outputIds:
+          - - zx44u79lEe
+          - - vz_U-vFp9J
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.state.occupied
+              type: set
+              valueTemplate: '1'
+        id: vz_U-vFp9J
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: IuNJ5N2jWe
+          label: Mutate
+          name: mutate
+          x: 1240
+          'y': 900
+        outputIds:
+          - - BKzJPatKvT
+        type: MutateNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.state
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: HPyDWtHHiB
+        meta:
+          category: output
+          description: ''
+          groupId: 9lHXroNaG2
+          id: HPyDWtHHiB
+          label: 'Device: State'
+          name: device-state
+          x: 740
+          'y': 1860
+        outputIds:
+          - - qsGkmDFmIy
+        type: DeviceChangeStateNode
+      - config:
+          keyName: '{{working.device.value.id}}:startTime'
+          resultPath: ''
+          value: '{{formatDate time ''X''}}'
+          valueType: number
+        id: BKzJPatKvT
+        meta:
+          category: data
+          description: ''
+          groupId: 9lHXroNaG2
+          id: BKzJPatKvT
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 1240
+          'y': 1000
+        outputIds:
+          - - HPyDWtHHiB
+        type: StoreValueNode
+      - config:
+          defaultValue: 'null'
+          defaultValueType: json
+          getAll: false
+          keyName: '{{working.device.value.id}}:startTime'
+          valuePath: working.startTime
+        id: Y1QSAmRKTK
+        meta:
+          category: data
+          description: ''
+          groupId: 9lHXroNaG2
+          id: Y1QSAmRKTK
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 700
+          'y': 260
+        outputIds:
+          - - fbVyxEUP-H
+        type: GetValueNode
+      - config:
+          expression: '{{working.startTime}} === null'
+        id: fbVyxEUP-H
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: fbVyxEUP-H
+          label: Conditional
+          name: conditional
+          x: 700
+          'y': 360
+        outputIds:
+          - - FXJvgCT2bX
+          - - 2OaRPMVyJJ
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.state.occupied
+              type: set
+              valueTemplate: '1'
+              valueTemplateType: json
+        id: OlVDtpDmuP
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: OlVDtpDmuP
+          label: Mutate
+          name: mutate
+          x: 460
+          'y': 700
+        outputIds:
+          - - Qc77BXh5mC
+        type: MutateNode
+      - config:
+          expression: '{{working.timeOccupied}} > {{globals.minimum_occupied_time_seconds}}'
+        id: NmfqrZHgY5
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: NmfqrZHgY5
+          label: Conditional
+          name: conditional
+          x: 240
+          'y': 940
+        outputIds:
+          - - HPyDWtHHiB
+          - - jVgTpIU-CW
+        type: ConditionalNode
+      - config:
+          expression: '{{working.timeOccupied}} > {{globals.max_occupied_time_seconds}}'
+        id: Qc77BXh5mC
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: Qc77BXh5mC
+          label: Conditional
+          name: conditional
+          x: 460
+          'y': 800
+        outputIds:
+          - - NmfqrZHgY5
+          - - tME0TjkF69
+        type: ConditionalNode
+      - config:
+          diffDataFormatString: X
+          diffDataPath: working.startTime
+          operation: diff
+          resultPath: working.timeOccupied
+          sourcePath: time
+        id: FXJvgCT2bX
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: FXJvgCT2bX
+          label: Date/Time
+          name: date-time
+          x: 460
+          'y': 500
+        outputIds:
+          - - j-9t1-aJOJ
+        type: DateTimeNode
+      - config:
+          statements:
+            - expression: '{{working.timeOccupied}} / 1000'
+              resultPath: working.timeOccupied
+        id: j-9t1-aJOJ
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: j-9t1-aJOJ
+          label: Math
+          name: math
+          x: 460
+          'y': 600
+        outputIds:
+          - - OlVDtpDmuP
+        type: MathNode
+      - config:
+          keyName: '{{working.device.value.id}}:startTime'
+          resultPath: ''
+          value: '{{formatDate time "X"}}'
+          valueType: clear
+        id: tME0TjkF69
+        meta:
+          category: data
+          description: ''
+          groupId: 9lHXroNaG2
+          id: BKzJPatKvT
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 700
+          'y': 1300
+        outputIds:
+          - - 58Cw8PkEnY
+        type: StoreValueNode
+      - config:
+          rules:
+            - destination: working.state.occupied
+              type: set
+              valueTemplate: '0'
+              valueTemplateType: json
+            - destination: working.state.meeting_time
+              type: set
+              valueTemplate: '{{working.timeOccupied}}'
+              valueTemplateType: json
+        id: 58Cw8PkEnY
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: OlVDtpDmuP
+          label: Mutate
+          name: mutate
+          x: 700
+          'y': 1400
+        outputIds:
+          - - HPyDWtHHiB
+        type: MutateNode
+      - config:
+          max: 100
+          min: 0
+          resultPath: working.random
+        id: jVgTpIU-CW
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: jVgTpIU-CW
+          label: Random Number
+          name: random-number
+          x: 480
+          'y': 1060
+        outputIds:
+          - - qHCvLeshch
+        type: RandomNumberNode
+      - config:
+          rules:
+            - destination: working.state.occupied
+              type: set
+              valueTemplate: '0'
+        id: zx44u79lEe
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: IuNJ5N2jWe
+          label: Mutate
+          name: mutate
+          x: 1020
+          'y': 1000
+        outputIds:
+          - - HPyDWtHHiB
+        type: MutateNode
+      - config:
+          expression: '{{working.random}} < {{globals.unoccupied_chance}}'
+        id: qHCvLeshch
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: ZOT2ggPyz2
+          label: Conditional
+          name: conditional
+          x: 480
+          'y': 1160
+        outputIds:
+          - - HPyDWtHHiB
+          - - tME0TjkF69
+        type: ConditionalNode
+      - config:
+          branchPath: ''
+          days:
+            - false
+            - true
+            - true
+            - true
+            - true
+            - true
+            - false
+          daysPath: ''
+          daysType: array
+          endTimeTemplate: '17:00'
+          sourcePath: time
+          startTimeTemplate: '08:00'
+          timeZoneTemplate: America/New_York
+        id: 2OaRPMVyJJ
+        meta:
+          category: logic
+          description: ''
+          groupId: 9lHXroNaG2
+          id: 2OaRPMVyJJ
+          label: Time Range
+          name: time-range
+          timeZoneTemplateType: selector
+          x: 1140
+          'y': 520
+        outputIds:
+          - - zx44u79lEe
+          - - 552OFXo8nk
+        type: TimeRangeNode
+      - config: {}
+        id: u38oEtzoGr
+        meta:
+          annotationText: >-
+            This branch: the room is already occupied. Keep it occupied for a
+            random amount of time between 15-90 minutes.
+          category: annotation
+          groupId: 9lHXroNaG2
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 380
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 4pogvJKib9
+        meta:
+          annotationText: >-
+            This branch: the room is not occupied. If it's currently in working
+            hours, give it small chance of being occupied.
+          category: annotation
+          groupId: 9lHXroNaG2
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 940
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: B2ofMiWO7C
+        meta:
+          annotationText: |-
+            Can only become occupied during working hours.
+
+            **EDIT THIS**  to change to your timezone.
+          category: annotation
+          groupId: 9lHXroNaG2
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 1360
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: '-zSFrxQiZc'
+        meta:
+          annotationText: >-
+            If the room has been occupied for 90 minutes (default max)
+            immediately set it to unoccupied.
+          category: annotation
+          groupId: 9lHXroNaG2
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 660
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: NkZ1Ke_oVE
+        meta:
+          annotationText: >-
+            Once a room becomes occupied, the start time is recorded to storage.
+            This is checked on future iterations to see if the room is already
+            occupied.
+          category: annotation
+          groupId: 9lHXroNaG2
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 1440
+          'y': 1000
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-simulateRooms-0~-mU2_NFF8WVFpFVyZGKjA1
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: 0BhpV_inof
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: 0BhpV_inof
+          x: 440
+          'y': 100
+        outputIds:
+          - - jaCHoVPcAT
+        type: virtualButton
+      - config:
+          seconds: 120
+        key: ~losant-flow-simulateRooms-0~-fD-ljzeWTAunUy6P0SECX
+        meta:
+          category: trigger
+          description: ''
+          id: 5hK3Pa-Zjm
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: 5hK3Pa-Zjm
+          x: 220
+          'y': 100
+        outputIds:
+          - - jaCHoVPcAT
+        type: timer
+version: 1

@@ -1,0 +1,69 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    description: The experience root. If a user is not logged in, they will be
+      redirected to /login.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-get-0~
+    method: get
+    route: /
+    staticReply:
+      type: redirect
+      value: /devices
+    unauthorizedReply:
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getDevices-2~
+    method: get
+    route: /devices
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getDevicesDeviceId-4~
+    method: get
+    route: /devices/{deviceId}
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: public
+    description: The public-facing route for the login page. Users who are already
+      logged in will get redirected to the home page (powered by the workflow).
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getLogin-3~
+    method: get
+    route: /login
+    version: develop
+  - access: public
+    description: Requests to this endpoint will delete the user's auth cookie and
+      redirect to the /login endpoint.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getLogout-5~
+    method: get
+    route: /logout
+    version: develop
+  - access: public
+    description: When a user submits login credentials, those credentials hit this
+      route. Then they are authenticated in the workflow backing this endpoint;
+      if valid, the user is redirected to the home page. If not, the user is
+      redirected back to the login page with a message about what went wrong.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postLogin-1~
+    method: post
+    route: /login
+    version: develop
+version: 1

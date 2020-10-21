@@ -1,0 +1,844 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-editDevice-0~
+    globals:
+      - json: '["aRequiredTag", "aCustomLabelTag"]'
+        key: editableTagKeys
+      - json: '["aReadOnlyTag"]'
+        key: readOnlyTagKeys
+      - json: |
+          {
+            "aCustomLabelTag": "My Custom Label"
+          }
+        key: tagLabelMap
+    id: ~losant-flowVersion-editDevice-0~
+    name: Edit Device
+    nodes:
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.params.deviceId}}'
+          includeState: false
+          resultPath: pageData.device
+          tagsAsObject: true
+        id: 6cNlbumcMK
+        meta:
+          category: data
+          description: ''
+          id: 6cNlbumcMK
+          label: 'Device: Get'
+          name: get-device
+          x: 460
+          'y': 160
+        outputIds:
+          - - HXYoNrF8f9
+        type: GetDeviceNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-editDevice-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '{{#if pageData.updatedDeviceResponse.error}}400{{else}}200{{/if}}'
+          sameSiteTemplate: ''
+        id: CcimDzspmg
+        meta:
+          category: output
+          description: ''
+          id: CcimDzspmg
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 400
+          'y': 1280
+        outputIds:
+          - - yom-2GVqVK
+        type: EndpointReplyNode
+      - config:
+          dataMethod: payloadPath
+          devicePayloadPath: working.newDeviceProps
+          idTemplate: '{{data.params.deviceId}}'
+          resultPath: working.updatedDevice
+          tagsAsObject: true
+        id: lbgezsbHqo
+        meta:
+          category: data
+          description: ''
+          id: lbgezsbHqo
+          label: 'Device: Update'
+          name: update-device
+          x: 760
+          'y': 760
+        outputIds:
+          - - oxfrf1qfWn
+        type: UpdateDeviceNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-editDevice-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '{{#if pageData.device}}200{{else}}404{{/if}}'
+          sameSiteTemplate: ''
+        id: aCy9lr_xhT
+        meta:
+          category: output
+          description: ''
+          id: CcimDzspmg
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 940
+          'y': 1620
+        outputIds: []
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: yom-2GVqVK
+        meta:
+          category: output
+          description: ''
+          id: yom-2GVqVK
+          label: Debug
+          name: debug
+          x: 400
+          'y': 1380
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '!!{{pageData.device.id}}'
+        id: HXYoNrF8f9
+        meta:
+          category: logic
+          description: ''
+          id: HXYoNrF8f9
+          label: Device Found?
+          name: conditional
+          x: 460
+          'y': 260
+        outputIds:
+          - - pQIhil-m4q
+          - - 46LXox1lLP
+        type: ConditionalNode
+      - config:
+          currentItemPath: working.currentTag
+          loopSourcePath: pageData.device.tags
+        id: ravQ38JXK7
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 260
+          groupStartY: 60
+          id: ravQ38JXK7
+          label: Sanitize Tags
+          name: loop
+          x: 400
+          'y': 1080
+        outputIds:
+          - - bllULI-0rL
+          - - Tk6_xC9DV7
+        type: LoopNode
+      - config:
+          loopNodeId: ravQ38JXK7
+          shouldBreak: false
+        id: uwMBGmXAbp
+        meta:
+          category: loop
+          description: ''
+          groupId: ravQ38JXK7
+          id: uwMBGmXAbp
+          label: Next
+          name: loop-next
+          x: 260
+          'y': 760
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          destArrayPath: working.sanitizedTags
+          rules:
+            - inputTemplate: '{{working.sanitizedTag}}'
+              type: push
+          sourceArrayPath: working.sanitizedTags
+        id: KoWRSylN_j
+        meta:
+          category: logic
+          description: ''
+          groupId: ravQ38JXK7
+          id: KoWRSylN_j
+          label: Array
+          name: array
+          x: 360
+          'y': 660
+        outputIds:
+          - - uwMBGmXAbp
+        type: ArrayNode
+      - config:
+          rules:
+            - inputTemplate: '{{working.currentTag.key}}'
+              outputPath: working.indexOfEditableTagKey
+              type: indexOf
+          sourceArrayPath: globals.editableTagKeys
+        id: Tk6_xC9DV7
+        meta:
+          category: logic
+          description: ''
+          groupId: ravQ38JXK7
+          id: Tk6_xC9DV7
+          label: Array
+          name: array
+          x: 260
+          'y': 160
+        outputIds:
+          - - f7ibUWIVzi
+        type: ArrayNode
+      - config:
+          expression: >-
+            {{working.indexOfEditableTagKey}} !== -1 ||
+            {{working.indexOfReadOnlyTagKey}} !== -1
+        id: lMFCNuRfZ6
+        meta:
+          category: logic
+          description: ''
+          groupId: ravQ38JXK7
+          id: lMFCNuRfZ6
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 360
+        outputIds:
+          - - uwMBGmXAbp
+          - - NRZSBoHFdr
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.sanitizedTag
+              type: set
+              valueTemplate: |-
+                {
+                  "key": "{{working.currentTag.key}}",
+                  "label": "{{#if (lookup globals.tagLabelMap working.currentTag.key)}}{{lookup globals.tagLabelMap working.currentTag.key}}{{else}}{{working.currentTag.key}}{{/if}}",
+                  "value": "{{working.currentTag.value.[0]}}",
+                  "readOnly": {{#eq working.indexOfReadOnlyTagKey -1}}false{{else}}true{{/eq}}
+                }
+              valueTemplateType: json
+        id: '-jbka6fQbe'
+        meta:
+          category: logic
+          description: ''
+          groupId: ravQ38JXK7
+          id: '-jbka6fQbe'
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 560
+        outputIds:
+          - - KoWRSylN_j
+        type: MutateNode
+      - config:
+          rules:
+            - inputTemplate: '{{working.currentTag.key}}'
+              outputPath: working.indexOfRequiredTagKey
+              type: indexOf
+          sourceArrayPath: globals.requiredTagKeys
+        id: NRZSBoHFdr
+        meta:
+          category: logic
+          description: ''
+          groupId: ravQ38JXK7
+          id: Tk6_xC9DV7
+          label: Array
+          name: array
+          x: 360
+          'y': 460
+        outputIds:
+          - - '-jbka6fQbe'
+        type: ArrayNode
+      - config:
+          rules:
+            - destination: pageData.device.sanitizedTags
+              type: set
+              valueTemplate: '{{working.sanitizedTags}}'
+        id: bllULI-0rL
+        meta:
+          category: logic
+          description: ''
+          id: bllULI-0rL
+          label: Mutate
+          name: mutate
+          x: 400
+          'y': 1180
+        outputIds:
+          - - CcimDzspmg
+        type: MutateNode
+      - config:
+          expression: '{{working.updatedDevice.id}}'
+        id: oxfrf1qfWn
+        meta:
+          category: logic
+          description: ''
+          id: oxfrf1qfWn
+          label: Success?
+          name: conditional
+          x: 760
+          'y': 860
+        outputIds:
+          - - BYCLE_sH-R
+          - - dR2_MHbK-u
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: pageData.updatedDeviceResponse
+              source: working.updatedDevice
+              type: move
+        id: BYCLE_sH-R
+        meta:
+          category: logic
+          description: ''
+          id: dzP4tIR7jo
+          label: Mutate
+          name: mutate
+          x: 660
+          'y': 960
+        outputIds:
+          - - ravQ38JXK7
+        type: MutateNode
+      - config:
+          rules:
+            - destination: pageData.device
+              source: working.updatedDevice
+              type: move
+            - destination: pageData.updatedDeviceResponse
+              type: set
+              valueTemplate: |-
+                {
+                  "success": true
+                }
+              valueTemplateType: json
+        id: dR2_MHbK-u
+        meta:
+          category: logic
+          description: ''
+          id: dzP4tIR7jo
+          label: Mutate
+          name: mutate
+          x: 860
+          'y': 960
+        outputIds:
+          - - ravQ38JXK7
+        type: MutateNode
+      - config:
+          expression: '{{data.method}} === ''post'''
+        id: 46LXox1lLP
+        meta:
+          category: logic
+          description: ''
+          id: 46LXox1lLP
+          label: POST Request?
+          name: conditional
+          x: 520
+          'y': 360
+        outputIds:
+          - - ravQ38JXK7
+          - - 7GE_wcsk_R
+        type: ConditionalNode
+      - config:
+          currentItemPath: working.currentSubmitted
+          loopSourcePath: data.body
+        id: 7GE_wcsk_R
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 260
+          groupStartY: 200
+          id: 7GE_wcsk_R
+          label: Validate
+          name: loop
+          x: 620
+          'y': 460
+        outputIds:
+          - - GYIXO8tjS7
+          - - FVYk_xTolt
+        type: LoopNode
+      - config:
+          loopNodeId: 7GE_wcsk_R
+          shouldBreak: false
+        id: 9CvCncQ5vI
+        meta:
+          category: loop
+          description: ''
+          groupId: 7GE_wcsk_R
+          id: 9CvCncQ5vI
+          label: Next
+          name: loop-next
+          x: 360
+          'y': 600
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          rules:
+            - inputTemplate: '{{working.currentSubmitted.key}}'
+              outputPath: working.indexOfCurrentEditableKey
+              type: indexOf
+          sourceArrayPath: globals.editableTagKeys
+        id: FVYk_xTolt
+        meta:
+          category: logic
+          description: ''
+          groupId: 7GE_wcsk_R
+          id: FVYk_xTolt
+          label: Array
+          name: array
+          x: 260
+          'y': 300
+        outputIds:
+          - - fP_3s2JvIx
+        type: ArrayNode
+      - config:
+          expression: '{{working.indexOfCurrentEditableKey}} !== -1'
+        id: fP_3s2JvIx
+        meta:
+          category: logic
+          description: ''
+          groupId: 7GE_wcsk_R
+          id: fP_3s2JvIx
+          label: Editable Tag?
+          name: conditional
+          x: 260
+          'y': 400
+        outputIds:
+          - - YjaVeicUbt
+          - - 9CvCncQ5vI
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.invalidSubmission
+              type: set
+              valueTemplate: 'true'
+              valueTemplateType: json
+        id: YjaVeicUbt
+        meta:
+          category: logic
+          description: ''
+          groupId: 7GE_wcsk_R
+          id: YjaVeicUbt
+          label: Mutate
+          name: mutate
+          x: 160
+          'y': 500
+        outputIds:
+          - - Rm_S6Vng-J
+        type: MutateNode
+      - config:
+          loopNodeId: 7GE_wcsk_R
+          shouldBreak: true
+        id: Rm_S6Vng-J
+        meta:
+          category: loop
+          description: ''
+          groupId: 7GE_wcsk_R
+          id: Rm_S6Vng-J
+          label: Break
+          name: loop-break
+          x: 160
+          'y': 600
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          rules:
+            - inputTemplate: '{{working.currentTag.key}}'
+              outputPath: working.indexOfReadOnlyTagKey
+              type: indexOf
+          sourceArrayPath: globals.readOnlyTagKeys
+        id: f7ibUWIVzi
+        meta:
+          category: logic
+          description: ''
+          groupId: ravQ38JXK7
+          id: Tk6_xC9DV7
+          label: Array
+          name: array
+          x: 260
+          'y': 260
+        outputIds:
+          - - lMFCNuRfZ6
+        type: ArrayNode
+      - config:
+          currentItemPath: working.currentTag
+          loopSourcePath: pageData.device.tags
+        id: KRc5tqv4OQ
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 260
+          groupStartY: 200
+          id: KRc5tqv4OQ
+          label: Build Tags
+          name: loop
+          x: 760
+          'y': 660
+        outputIds:
+          - - lbgezsbHqo
+          - - J3mDCftxDE
+        type: LoopNode
+      - config:
+          loopNodeId: KRc5tqv4OQ
+          shouldBreak: false
+        id: 0GL7vThfdN
+        meta:
+          category: loop
+          description: ''
+          groupId: KRc5tqv4OQ
+          id: 0GL7vThfdN
+          label: Next
+          name: loop-next
+          x: 260
+          'y': 600
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          expression: '{{lookup data.body working.currentTag.key}}'
+        id: J3mDCftxDE
+        meta:
+          category: logic
+          description: ''
+          groupId: KRc5tqv4OQ
+          id: J3mDCftxDE
+          label: New Value?
+          name: conditional
+          x: 260
+          'y': 300
+        outputIds:
+          - - ITlN6tCVH5
+          - - h45eHwonIT
+        type: ConditionalNode
+      - config:
+          destArrayPath: working.newDeviceProps.tags
+          rules:
+            - inputTemplate: '{{working.newTag}}'
+              type: push
+          sourceArrayPath: working.newDeviceProps.tags
+        id: AalFrzbdv2
+        meta:
+          category: logic
+          description: ''
+          groupId: KRc5tqv4OQ
+          id: AalFrzbdv2
+          label: Array
+          name: array
+          x: 260
+          'y': 500
+        outputIds:
+          - - 0GL7vThfdN
+        type: ArrayNode
+      - config:
+          rules:
+            - destination: working.newTag
+              type: set
+              valueTemplate: |-
+                {
+                  "key": "{{working.currentTag.key}}",
+                  "value": "{{lookup data.body working.currentTag.key}}"
+                }
+              valueTemplateType: json
+        id: h45eHwonIT
+        meta:
+          category: logic
+          description: ''
+          groupId: KRc5tqv4OQ
+          id: h45eHwonIT
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 400
+        outputIds:
+          - - AalFrzbdv2
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.newTag
+              type: set
+              valueTemplate: |-
+                {
+                  "key": "{{working.currentTag.key}}",
+                  "value": "{{working.currentTag.value.[0]}}"
+                }
+              valueTemplateType: json
+        id: ITlN6tCVH5
+        meta:
+          category: logic
+          description: ''
+          groupId: KRc5tqv4OQ
+          id: h45eHwonIT
+          label: Mutate
+          name: mutate
+          x: 160
+          'y': 400
+        outputIds:
+          - - AalFrzbdv2
+        type: MutateNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-editDevice-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: pQIhil-m4q
+        meta:
+          category: output
+          description: ''
+          id: CcimDzspmg
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 320
+          'y': 360
+        outputIds:
+          - - cs2HIsSv-n
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: cs2HIsSv-n
+        meta:
+          category: output
+          description: ''
+          id: cs2HIsSv-n
+          label: Debug
+          name: debug
+          x: 320
+          'y': 460
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: pageData.updatedDeviceResponse
+              type: set
+              valueTemplate: |-
+                {
+                  "error": {
+                      "message":"Invalid device tags provided",
+                      "type":"Validation"
+                  }
+                }
+              valueTemplateType: json
+        id: JjM6jkpcd4
+        meta:
+          category: logic
+          description: ''
+          id: YjaVeicUbt
+          label: Mutate
+          name: mutate
+          x: 560
+          'y': 660
+        outputIds:
+          - - ravQ38JXK7
+        type: MutateNode
+      - config:
+          expression: '!{{working.invalidSubmission}}'
+        id: GYIXO8tjS7
+        meta:
+          category: logic
+          description: ''
+          id: GYIXO8tjS7
+          label: Valid?
+          name: conditional
+          x: 660
+          'y': 560
+        outputIds:
+          - - JjM6jkpcd4
+          - - KRc5tqv4OQ
+        type: ConditionalNode
+      - config: {}
+        id: fA-KLqP7f3
+        meta:
+          annotationText: 'Given a device ID, if we cannot find the device, return a 404 error.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 40
+          'y': 340
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: XWZOqQuO4T
+        meta:
+          annotationText: >-
+            Here we "sanitize" our device tags for consumption by an experience
+            user:
+
+            - Only return tags marked as "editable" (in
+            `globals.editableTagKeys`) or "readonly" (in
+            `globals.readOnlyTagKeys`).
+
+            - Flag "readonly" tag keys so their corresponding inputs are
+            disabled.
+
+            - Add custom labels for any tags we've created a label for.
+
+
+            We add this as a new property to the device, instead of overwriting
+            the device's "tags" property, so that the original tags can still be
+            used within the render logic of the page if desired.
+          category: annotation
+          height: 360
+          label: Note
+          name: note
+          width: 340
+          x: 40
+          'y': 1000
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Os1XGF8Shc
+        meta:
+          annotationText: >-
+            If this is a "POST" request - as in, the user is attempting to
+            update tag values - we need to validate their input ...
+
+            - Only accept edits to tags marked as "editable" in
+            `globals.editableTagKeys`.
+
+            - If the user does submit values for disallowed tags, cancel the
+            update and return a validation error.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 420
+          x: 860
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: uv9V4HshIx
+        meta:
+          annotationText: >-
+            Build up our new device tags array, which is a merge of the
+            user-submitted values and the current values of any tags the user
+            did not provide a new value for. Then, submit the update to the
+            device.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 320
+          x: 960
+          'y': 660
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: QaIfv0rXz7
+        meta:
+          annotationText: >-
+            If the update was successful, add a "success" message to the
+            response. Otherwise, add the failure message to the response.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 220
+          x: 1060
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: wQ6b85Y6UC
+        meta:
+          annotationText: >-
+            Find the device by the matching ID in the URL. You may wish to also
+            verify that the experience user viewing / editing the device has
+            permissions, in which case you can replace this node with the one to
+            the right.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 400
+          x: 660
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          findMetadata: false
+          findMethod: query
+          findMultiple: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "id": {
+                    "$eq": "{{data.params.deviceId}}"
+                  }
+                },
+                {
+                  "experienceUserId": {
+                    "$eq": "{{experience.user.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: pageData.device
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: true
+        id: VQ2M9dihLh
+        meta:
+          category: data
+          description: ''
+          id: 6cNlbumcMK
+          label: 'Device: Get'
+          name: get-device
+          x: 1080
+          'y': 160
+        outputIds: []
+        type: GetDeviceNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getDevicesDeviceIdEdit-0~
+        meta:
+          category: trigger
+          description: ''
+          id: Sa_CoNGplv
+          label: GET
+          name: endpoint
+          uiId: Sa_CoNGplv
+          x: 360
+          'y': 60
+        outputIds:
+          - - 6cNlbumcMK
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-postDevicesDeviceIdEdit-1~
+        meta:
+          category: trigger
+          description: ''
+          id: Ix3XeRXXoy
+          label: POST
+          name: endpoint
+          uiId: Ix3XeRXXoy
+          x: 560
+          'y': 60
+        outputIds:
+          - - 6cNlbumcMK
+        type: endpoint
+    version: develop
+version: 1

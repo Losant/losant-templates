@@ -1,0 +1,20 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: The Aruba Meridian indoor asset tracking tag.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryDevicesRecipesArubaMeridianAssetTag-0~
+    name: Aruba Meridian Asset Tag
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - aruba
+      - meridian
+      - asset
+      - tag
+      - tracking
+      - indoor
+version: 1

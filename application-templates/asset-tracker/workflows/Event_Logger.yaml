@@ -1,0 +1,342 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals:
+      - json: '0'
+        key: tempMin
+      - json: '4'
+        key: tempMax
+      - json: '4'
+        key: shockThreshold
+      - json: '30'
+        key: orientationThreshold
+      - json: |-
+          {
+            "subject": "Shipment Temperature Outside Range",
+            "level": "critical"
+          }
+        key: tempEvent
+      - json: |-
+          {
+            "subject": "Shipment Experienced Significant Shock",
+            "level": "error"
+          }
+        key: shockEvent
+      - json: |-
+          {
+            "subject": "Shipment Orientation Outside of Range",
+            "level": "warning"
+          }
+        key: orientationEvent
+    id: ~losant-flow-eventLogger-1~
+    name: Event Logger
+    nodes:
+      - config:
+          dataMethod: payloadPath
+          eventPayloadPath: working.newEventInfo
+          timeSourceType: payloadTime
+        id: RsqCOjq2M0
+        meta:
+          category: data
+          description: ''
+          id: RsqCOjq2M0
+          label: 'Event: Create'
+          name: create-event
+          x: 280
+          'y': 740
+        outputIds:
+          - - bbJX73Rruf
+        type: CreateEventNode
+      - config:
+          expression: '{{data.shipment_id}}'
+        id: pldP6dEhUY
+        meta:
+          category: logic
+          description: ''
+          id: pldP6dEhUY
+          label: shipment_id?
+          name: conditional
+          x: 280
+          'y': 140
+        outputIds:
+          - []
+          - - vXpbihJSco
+            - IeED0Q5VIT
+            - 8qtTynBnuA
+        type: ConditionalNode
+      - config:
+          expression: >-
+            {{data.temperature}} <= {{globals.tempMin}} || {{data.temperature}}
+            >= {{globals.tempMax}}
+        id: vXpbihJSco
+        meta:
+          category: logic
+          description: ''
+          id: vXpbihJSco
+          label: Bad Temperature?
+          name: conditional
+          x: 80
+          'y': 240
+        outputIds:
+          - []
+          - - SszGWHh_46
+        type: ConditionalNode
+      - config:
+          expression: '{{data.shock}} >= {{globals.shockThreshold}}'
+        id: IeED0Q5VIT
+        meta:
+          category: logic
+          description: ''
+          id: vXpbihJSco
+          label: Bad Shock?
+          name: conditional
+          x: 480
+          'y': 240
+        outputIds:
+          - []
+          - - x-lrV0QuVm
+        type: ConditionalNode
+      - config:
+          expression: 'abs({{data.orientation}}) >= abs({{globals.orientationThreshold}})'
+        id: 8qtTynBnuA
+        meta:
+          category: logic
+          description: ''
+          id: vXpbihJSco
+          label: Bad Orientation?
+          name: conditional
+          x: 280
+          'y': 240
+        outputIds:
+          - []
+          - - dNZZxisbDO
+        type: ConditionalNode
+      - config:
+          findMetadata: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "eventTags": {
+                    "$eq": {
+                      "$tagKey": "shipment_id",
+                      "$tagValue": "{{data.shipment_id}}"
+                    }
+                  }
+                },
+                {
+                  "eventTags": {
+                    "$eq": {
+                      "$tagKey": "type",
+                      "$tagValue": "{{working.eventType}}"
+                    }
+                  }
+                }
+              ]
+            }
+          resultPath: working.existingEvent
+          sortDirection: desc
+          sortField: creationDate
+        id: 8BIuYY0MBY
+        meta:
+          category: data
+          description: ''
+          id: DHwAEBaSVj
+          label: 'Event: Get'
+          mode: queryTemplateSingle
+          name: get-event
+          x: 180
+          'y': 440
+        outputIds:
+          - - a3SgYp4iUw
+        type: GetEventNode
+      - config:
+          rules:
+            - destination: working.eventType
+              type: set
+              valueTemplate: temperature
+            - destination: working.newEventInfo
+              source: globals.tempEvent
+              type: copy
+        id: SszGWHh_46
+        meta:
+          category: logic
+          description: ''
+          id: SszGWHh_46
+          label: 'Type: temperature'
+          name: mutate
+          x: 80
+          'y': 340
+        outputIds:
+          - - 8BIuYY0MBY
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.eventType
+              type: set
+              valueTemplate: shock
+            - destination: working.newEventInfo
+              source: globals.shockEvent
+              type: copy
+        id: x-lrV0QuVm
+        meta:
+          category: logic
+          description: ''
+          id: SszGWHh_46
+          label: 'Type: shock'
+          name: mutate
+          x: 480
+          'y': 340
+        outputIds:
+          - - GiZm8VexjO
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.eventType
+              type: set
+              valueTemplate: orientation
+            - destination: working.newEventInfo
+              source: globals.orientationEvent
+              type: copy
+        id: dNZZxisbDO
+        meta:
+          category: logic
+          description: ''
+          id: SszGWHh_46
+          label: 'Type: orientation'
+          name: mutate
+          x: 280
+          'y': 340
+        outputIds:
+          - - 8BIuYY0MBY
+        type: MutateNode
+      - config:
+          expression: '{{working.existingEvent}}'
+        id: a3SgYp4iUw
+        meta:
+          category: logic
+          description: ''
+          id: a3SgYp4iUw
+          label: Event Exists?
+          name: conditional
+          x: 180
+          'y': 540
+        outputIds:
+          - - GiZm8VexjO
+          - []
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.newEventInfo.message
+              type: set
+              valueTemplate: 'Value recorded at: {{lookup data working.eventType}}'
+            - destination: working.newEventInfo.eventTags
+              type: set
+              valueTemplate: >-
+                { "shipment_id": "{{data.shipment_id}}", "type":
+                "{{working.eventType}}" }
+              valueTemplateType: json
+            - destination: working.newEventInfo.deviceId
+              type: set
+              valueTemplate: '{{triggerId}}'
+        id: GiZm8VexjO
+        meta:
+          category: logic
+          description: ''
+          id: SszGWHh_46
+          label: Extend Event Info
+          name: mutate
+          x: 280
+          'y': 640
+        outputIds:
+          - - RsqCOjq2M0
+        type: MutateNode
+      - config:
+          message: ''
+          property: ''
+        id: bbJX73Rruf
+        meta:
+          category: output
+          description: ''
+          id: bbJX73Rruf
+          label: Debug
+          name: debug
+          x: 280
+          'y': 840
+        outputIds: []
+        type: DebugNode
+      - config:
+          queryTemplate: |-
+            {
+              "$or": []
+            }
+          resultPath: ''
+        id: s9SJ0pUl57
+        meta:
+          category: data
+          description: ''
+          id: s9SJ0pUl57
+          label: 'Event: Delete'
+          mode: queryTemplate
+          name: delete-event
+          x: 720
+          'y': 140
+        outputIds: []
+        type: DeleteEventNode
+      - config: {}
+        id: GTc5Dp-Gjd
+        meta:
+          annotationText: >-
+            A shipment may have multiple shock events. It may not have multiple
+            temperature or orientation events.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 440
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: simId/
+        meta:
+          allowedAttributeType: any
+          category: trigger
+          description: ''
+          id: p8i2LBCGPh
+          label: 'Device: State'
+          maxAgeToggle: false
+          name: deviceIdsTags
+          timeUnit: '1'
+          uiId: p8i2LBCGPh
+          x: 280
+          'y': 40
+        outputIds:
+          - - pldP6dEhUY
+        type: deviceTag
+      - config: {}
+        key: ~losant-flow-eventLogger-1~-NfV48s66ILh1erSIoVFKk
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: qaX_Y8rMgB
+          label: Delete Events!
+          name: virtualButton
+          payload: |-
+            {
+            "shipment_id": "123",
+              "temperature": 44,
+              "shock": 33,
+              "orientation": -42
+            }
+          uiId: qaX_Y8rMgB
+          x: 720
+          'y': 40
+        outputIds:
+          - - s9SJ0pUl57
+        type: virtualButton
+version: 1

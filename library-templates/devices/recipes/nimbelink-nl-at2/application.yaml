@@ -1,0 +1,18 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: The Nimbelink NL-AT2 GPS asset tracker.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryDevicesRecipesNimbelinkNlAt2-0~
+    name: Nimbelink NL-AT2
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - nimbelink
+      - gps
+      - asset
+      - tracker
+version: 1

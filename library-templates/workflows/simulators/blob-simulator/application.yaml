@@ -1,0 +1,20 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Fetches random images, saves them to device state, and renders them
+      on dashboards.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsSimulatorsBlobSimulator-0~
+    name: Blob Simulator
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - blob
+      - simulator
+      - image
+      - camera
+      - video
+version: 1

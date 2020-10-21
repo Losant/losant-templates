@@ -1,0 +1,17 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Immediately send a web push message using the Braze API.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesBrazeWebPush-0~
+    name: Braze Web Push
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - braze
+      - push
+      - notifications
+version: 1

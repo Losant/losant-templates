@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlBasicForm-0~
+    localFilename: ./tl-basic-form.hbs
+    name: tl-basic-form
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

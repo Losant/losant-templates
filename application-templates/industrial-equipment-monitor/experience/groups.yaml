@@ -1,0 +1,28 @@
+resourceType: ExperienceGroupTree
+resources:
+  - children:
+      - children: []
+        deviceIds: []
+        deviceTags:
+          - key: group
+            value: Sadler Isberg
+        groupTags: {}
+        id: ~losant-experienceGroup-sadlerIsberg-1~
+        name: Sadler-Isberg
+        parentId: ~losant-experienceGroup-kanarra-0~
+      - children: []
+        deviceIds: []
+        deviceTags:
+          - key: group
+            value: Tekton Health
+        groupTags: {}
+        id: ~losant-experienceGroup-tektonHealth-2~
+        name: Tekton Health
+        parentId: ~losant-experienceGroup-kanarra-0~
+    deviceIds: []
+    deviceTags: []
+    groupTags: {}
+    id: ~losant-experienceGroup-kanarra-0~
+    name: Kanarra
+    parentId: null
+version: 1

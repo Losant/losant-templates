@@ -1,0 +1,473 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: L2cq59YEGc
+        startX: 0
+        startY: 0
+        title: Huddle Room 1
+        width: 4
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: graph
+        config:
+          duration: 604800000
+          realTime: false
+          recharts: true
+          resolution: 3600000
+          segments:
+            - aggregation: MAX
+              attribute: meeting_time
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+              expression: '{{value}} / 60'
+              graphType: bar
+              label: Meeting Duration
+              yAxisLabel: Minutes
+        height: 1.5
+        id: bBeB3IosvC
+        startX: 1
+        startY: 0.5
+        title: Meeting Durations
+        width: 3
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MEAN
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+        height: 1
+        id: PcIE1iVgrD
+        startX: 0
+        startY: 0.5
+        title: Average Meeting Duration
+        width: 1
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MAX
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+        height: 1
+        id: iD6Zx-SK4h
+        startX: 0
+        startY: 1.5
+        title: Longest Meeting
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MIN
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+        height: 1
+        id: RppUx1HNRA
+        startX: 0.5
+        startY: 1.5
+        title: Shortest Meeting
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#FFFFFF\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"circle\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"plasma\"\n      }\n    }\n\t}\t\n}"
+          segments:
+            - aggregation: SUM
+              attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+              duration: 604800000
+              id: time-series-0
+              queryType: time-series
+              resolution: 3600000
+          vegaVersion: vegaLite2
+        height: 1.5
+        id: m8z1KMkFhw
+        startX: 1
+        startY: 2
+        title: Occupancy Distribution
+        width: 3
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(252, 21, 38, 1)'
+              condition: '{{value-0}} === 1'
+              id: XBkyUZ_CvN
+              label: Occupied
+          defaultCondition:
+            color: 'rgba(34, 174, 120, 1)'
+            label: Available
+          duration: 0
+          segments:
+            - attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom1-2~
+              deviceTags: []
+        height: 1
+        id: st1MTaCNsD
+        startX: 0
+        startY: 2.5
+        title: Available
+        width: 1
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: Ca5HU2gN5H
+        startX: 0
+        startY: 3.5
+        title: Huddle Room 2
+        width: 4
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MEAN
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+        height: 1
+        id: cygnvc_Cim
+        startX: 0
+        startY: 4
+        title: Average Meeting Duration
+        width: 1
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: graph
+        config:
+          duration: 604800000
+          realTime: false
+          recharts: true
+          resolution: 3600000
+          segments:
+            - aggregation: MAX
+              attribute: meeting_time
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+              expression: '{{value}} / 60'
+              graphType: bar
+              label: Meeting Duration
+              yAxisLabel: Minutes
+        height: 1.5
+        id: b-S4QMwOn1
+        startX: 1
+        startY: 4
+        title: Meeting Durations
+        width: 3
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MAX
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+        height: 1
+        id: UGOiwuH6Tx
+        startX: 0
+        startY: 5
+        title: Longest Meeting
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MIN
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+        height: 1
+        id: MVKm5CGkta
+        startX: 0.5
+        startY: 5
+        title: Shortest Meeting
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#FFFFFF\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"circle\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"plasma\"\n      }\n    }\n\t}\t\n}"
+          segments:
+            - aggregation: SUM
+              attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+              duration: 604800000
+              id: time-series-0
+              queryType: time-series
+              resolution: 3600000
+          vegaVersion: vegaLite2
+        height: 1.5
+        id: vaLcNtgdKb
+        startX: 1
+        startY: 5.5
+        title: Occupancy Distribution
+        width: 3
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(252, 21, 38, 1)'
+              condition: '{{value-0}} === 1'
+              id: XBkyUZ_CvN
+              label: Occupied
+          defaultCondition:
+            color: 'rgba(34, 174, 120, 1)'
+            label: Available
+          duration: 0
+          segments:
+            - attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+        height: 1
+        id: ltY3pS-be8
+        startX: 0
+        startY: 6
+        title: Available
+        width: 1
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: oA-dUoDlpQ
+        startX: 0
+        startY: 7
+        title: Huddle Room 3
+        width: 4
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MEAN
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+        height: 1
+        id: WusY7kyLvJ
+        startX: 0
+        startY: 7.5
+        title: Average Meeting Duration
+        width: 1
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: graph
+        config:
+          duration: 604800000
+          realTime: false
+          recharts: true
+          resolution: 3600000
+          segments:
+            - aggregation: MAX
+              attribute: meeting_time
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-huddleRoom2-3~
+              deviceTags: []
+              expression: '{{value}} / 60'
+              graphType: bar
+              label: Meeting Duration
+              yAxisLabel: Minutes
+        height: 1.5
+        id: ZU9IFrUzrV
+        startX: 1
+        startY: 7.5
+        title: Meeting Durations
+        width: 3
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MAX
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+        height: 1
+        id: yREu7lTMXh
+        startX: 0
+        startY: 8.5
+        title: Longest Meeting
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: |-
+              {{#gt value-0 0}}
+              {{format (divide value-0 60) '0.0f'}} Minutes
+              {{else}}
+              Unknown
+              {{/gt}}
+          duration: 604800000
+          segments:
+            - aggregation: MIN
+              attribute: meeting_time
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+        height: 1
+        id: EpM_qaiUZn
+        startX: 0.5
+        startY: 8.5
+        title: Shortest Meeting
+        width: 0.5
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#FFFFFF\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"circle\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"plasma\"\n      }\n    }\n\t}\t\n}"
+          segments:
+            - aggregation: SUM
+              attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+              duration: 604800000
+              id: time-series-0
+              queryType: time-series
+              resolution: 3600000
+          vegaVersion: vegaLite2
+        height: 1.5
+        id: 6bFPQQA1My
+        startX: 1
+        startY: 9
+        title: Occupancy Distribution
+        width: 3
+      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(252, 21, 38, 1)'
+              condition: '{{value-0}} === 1'
+              id: XBkyUZ_CvN
+              label: Occupied
+          defaultCondition:
+            color: 'rgba(34, 174, 120, 1)'
+            label: Available
+          duration: 0
+          segments:
+            - attribute: occupied
+              deviceIds:
+                - ~losant-device-huddleRoom3-4~
+              deviceTags: []
+        height: 1
+        id: 46_2eWFhnl
+        startX: 0
+        startY: 9.5
+        title: Available
+        width: 1
+    contextConfiguration: []
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-occupancyHistory-1~
+    name: Occupancy History
+    public: false
+    refreshRate: 60
+version: 1

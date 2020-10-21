@@ -1,0 +1,65 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This value is the x value of the device's GPS location.
+        name: x
+      - attributeTags: {}
+        dataType: number
+        description: This value is the y value of the device's GPS location.
+        name: y
+      - attributeTags: {}
+        dataType: string
+        description: This string attribute is the name of the room in which the device
+          is currently located.
+        name: room
+      - attributeTags: {}
+        dataType: boolean
+        description: "This is a Boolean attribute that will only report as true if a
+          device has moved from one room to another on that specific state
+          report. "
+        name: movement
+    description: This recipe is to be used when creating a new Equipment device,
+      such as a wheelchair, oxygen concentrator, or floor lift.
+    deviceClass: standalone
+    deviceName: Equipment Device
+    id: ~losant-deviceRecipe-equipmentDevice-0~
+    name: Equipment Device
+    tags:
+      - key: type
+        value: "null"
+      - key: class
+        value: equipment
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This value is the x value of the device's GPS location.
+        name: x
+      - attributeTags: {}
+        dataType: number
+        description: This value is the y value of the device's GPS location.
+        name: y
+      - attributeTags: {}
+        dataType: string
+        description: This string attribute is the name of the room in which the device
+          is currently located.
+        name: room
+      - attributeTags: {}
+        dataType: boolean
+        description: "This is a Boolean attribute that will only report as true if a
+          device has moved from one room to another on that specific state
+          report. "
+        name: movement
+    description: This recipe is to be used when creating a new Person device, such
+      as a resident or a visitor.
+    deviceClass: standalone
+    deviceName: Person Device
+    id: ~losant-deviceRecipe-personDevice-1~
+    name: Person Device
+    tags:
+      - key: type
+        value: "null"
+      - key: class
+        value: person
+version: 1

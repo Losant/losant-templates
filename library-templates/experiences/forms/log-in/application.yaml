@@ -1,0 +1,20 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: An Experience User login form with authentication workflow.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesFormsLogIn-0~
+    name: Log In
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - authentication
+      - authorization
+      - login
+      - signin
+      - user
+      - featured
+version: 1

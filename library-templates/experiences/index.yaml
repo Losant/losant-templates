@@ -1,0 +1,6 @@
+name: Experiences
+description: These templates provide out-of-the-box features or reference
+  implementations to quickly add new functionality to your own experience.
+  Utilizing templates to add common functionality greatly reduces development
+  time while also ensuring your experience is developed using best practices and
+  the highest regard for security.

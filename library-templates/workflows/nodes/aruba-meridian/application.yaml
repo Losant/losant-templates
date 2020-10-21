@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This node provides access to Meridian's Asset Tracking tag details
+      using the Meridian Asset Tracking API.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesArubaMeridian-0~
+    name: Aruba Meridian
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - aruba
+      - meridian
+      - indoor
+      - tracking
+version: 1

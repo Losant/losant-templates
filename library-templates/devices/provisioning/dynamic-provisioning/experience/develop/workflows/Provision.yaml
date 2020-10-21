@@ -1,0 +1,495 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint POST /provision
+    enabled: true
+    flowId: ~losant-flow-provision-0~
+    globals: []
+    id: ~losant-flowVersion-provision-0~
+    name: Provision
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: bA_J5Hzo1Q
+        meta:
+          category: output
+          description: ''
+          id: bA_J5Hzo1Q
+          label: Debug
+          name: debug
+          x: 340
+          'y': 1000
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: false
+          resultPath: working.userDevices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: owner
+              valueTemplate: '{{experience.user.id}}'
+          tagsAsObject: false
+        id: _uxeEFEFqY
+        meta:
+          category: data
+          description: ''
+          id: _uxeEFEFqY
+          label: 'Device: Get'
+          name: get-device
+          x: 60
+          'y': 140
+        outputIds:
+          - - G8H-a4O3tY
+        type: GetDeviceNode
+      - config: {}
+        id: 3lDtHd9hkx
+        meta:
+          annotationText: Get all devices provisioned to the current user.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 260
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: false
+          resultPath: working.groupDevices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: group
+              valueTemplate: '{{experience.user.experienceGroups.[0].name}}'
+          tagsAsObject: false
+        id: G8H-a4O3tY
+        meta:
+          category: data
+          description: ''
+          id: _uxeEFEFqY
+          label: 'Device: Get'
+          name: get-device
+          x: 60
+          'y': 280
+        outputIds:
+          - - 9-CmmTbSp7
+        type: GetDeviceNode
+      - config: {}
+        id: 5eHX0-EIYb
+        meta:
+          annotationText: Get all devices provisioned to the user's group.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 260
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageProvision-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: 9-CmmTbSp7
+        meta:
+          category: output
+          description: ''
+          id: 9-CmmTbSp7
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 400
+        outputIds: []
+        type: EndpointReplyNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: false
+          includeState: false
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: manufacturerId
+              valueTemplate: '{{data.body.manufacturerId}}'
+          tagsAsObject: true
+        id: jTdoByvGLa
+        meta:
+          category: data
+          description: ''
+          id: jTdoByvGLa
+          label: 'Device: Get'
+          name: get-device
+          x: 460
+          'y': 640
+        outputIds:
+          - - hbLYRgF_6y
+        type: GetDeviceNode
+      - config: {}
+        id: cIn-N1simx
+        meta:
+          annotationText: Find the device that matches the incoming manufacturer ID.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 660
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.device}} !== null'
+        id: hbLYRgF_6y
+        meta:
+          category: logic
+          description: ''
+          id: hbLYRgF_6y
+          label: Device Exist?
+          name: conditional
+          x: 460
+          'y': 780
+        outputIds:
+          - - zZo_EWQS9U
+          - - c84CKR_aU9
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /provision?error=device_not_found
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: zZo_EWQS9U
+        meta:
+          category: output
+          description: ''
+          id: mb5qa9cF0m
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 900
+        outputIds:
+          - - bA_J5Hzo1Q
+        type: EndpointReplyNode
+      - config: {}
+        id: KVobOptQT9
+        meta:
+          annotationText: >-
+            If the device doesn't exist, send them back to `/provision` with an
+            error message.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 60
+          'y': 900
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '!{{working.device.tags.owner}} && !{{working.device.tags.group}}'
+        id: c84CKR_aU9
+        meta:
+          category: logic
+          description: ''
+          id: hbLYRgF_6y
+          label: Not Provisioned?
+          name: conditional
+          x: 740
+          'y': 900
+        outputIds:
+          - - 7zP-xtxqj2
+          - - BkWO-fNU11
+        type: ConditionalNode
+      - config: {}
+        id: SmKC4CXdAK
+        meta:
+          annotationText: >-
+            Making sure the device does not already have an `owner` or a `group`
+            tag. If it does, it's already been provisioned.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 940
+          'y': 900
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: jZOJKnNdEr
+        meta:
+          category: output
+          description: ''
+          id: bA_J5Hzo1Q
+          label: Debug
+          name: debug
+          x: 560
+          'y': 1120
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /provision?error=already_provisioned
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 7zP-xtxqj2
+        meta:
+          category: output
+          description: ''
+          id: mb5qa9cF0m
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 560
+          'y': 1020
+        outputIds:
+          - - jZOJKnNdEr
+        type: EndpointReplyNode
+      - config:
+          cases:
+            - caseLabel: To User
+              caseTemplate: provision_to_user
+              dontBreak: false
+            - caseLabel: To Group
+              caseTemplate: provision_to_group
+              dontBreak: false
+          switchTemplate: '{{data.body.provision_type}}'
+        id: BkWO-fNU11
+        meta:
+          category: logic
+          description: ''
+          id: BkWO-fNU11
+          label: Provision Type
+          name: switch
+          x: 880
+          'y': 1120
+        outputIds:
+          - - _mu0lD2uh_
+          - - cCW6XcjhLB
+          - - SlVjpUutAt
+        type: SwitchNode
+      - config:
+          message: ''
+          property: ''
+        id: SLgOskE82Z
+        meta:
+          category: output
+          description: ''
+          id: bA_J5Hzo1Q
+          label: Debug
+          name: debug
+          x: 1080
+          'y': 1380
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /provision?error=invalid_provision_type
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: _mu0lD2uh_
+        meta:
+          category: output
+          description: ''
+          id: mb5qa9cF0m
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1080
+          'y': 1280
+        outputIds:
+          - - SLgOskE82Z
+        type: EndpointReplyNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: ''
+          deviceTags:
+            - keyTemplate: owner
+              valueTemplate: '{{experience.user.id}}'
+          gatewayIdTemplate: ''
+          idTemplate: '{{working.device.id}}'
+          nameTemplate: ''
+          parentIdTemplate: ''
+          resultPath: ''
+          tagsAsObject: false
+        id: cCW6XcjhLB
+        meta:
+          category: data
+          description: ''
+          id: cCW6XcjhLB
+          label: 'Device: Update'
+          name: update-device
+          x: 680
+          'y': 1280
+        outputIds:
+          - - wcOpDcDtjI
+        type: UpdateDeviceNode
+      - config: {}
+        id: 2oOtF1diMc
+        meta:
+          annotationText: >-
+            When provisioned to a single user, set the `owner` tag on the device
+            to the ID of the experience user.
+
+
+            When provisioned to a group, set the `group` tag on the device to
+            the name of the group in which the current user is a member.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 1280
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: MhK2lbTnIL
+        meta:
+          category: output
+          description: ''
+          id: bA_J5Hzo1Q
+          label: Debug
+          name: debug
+          x: 780
+          'y': 1500
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /provision?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: wcOpDcDtjI
+        meta:
+          category: output
+          description: ''
+          id: mb5qa9cF0m
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 780
+          'y': 1400
+        outputIds:
+          - - MhK2lbTnIL
+        type: EndpointReplyNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: ''
+          deviceTags:
+            - keyTemplate: group
+              valueTemplate: '{{experience.user.experienceGroups.[0].name}}'
+          gatewayIdTemplate: ''
+          idTemplate: '{{working.device.id}}'
+          nameTemplate: ''
+          parentIdTemplate: ''
+          resultPath: ''
+          tagsAsObject: false
+        id: SlVjpUutAt
+        meta:
+          category: data
+          description: ''
+          id: cCW6XcjhLB
+          label: 'Device: Update'
+          name: update-device
+          x: 880
+          'y': 1280
+        outputIds:
+          - - wcOpDcDtjI
+        type: UpdateDeviceNode
+      - config:
+          message: ''
+          property: ''
+        id: huCc-7D3pa
+        meta:
+          category: output
+          description: ''
+          id: huCc-7D3pa
+          label: Debug
+          name: debug
+          x: 200
+          'y': 640
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postProvision-1~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /provision
+          name: endpoint
+          uiId: 6ZeNayGYE7
+          x: 460
+          'y': 540
+        outputIds:
+          - - jTdoByvGLa
+            - huCc-7D3pa
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getProvision-0~
+        meta:
+          category: trigger
+          description: ''
+          id: 02FnM3chML
+          label: GET /provision
+          name: endpoint
+          uiId: 02FnM3chML
+          x: 60
+          'y': 40
+        outputIds:
+          - - _uxeEFEFqY
+        type: endpoint
+    version: develop
+version: 1

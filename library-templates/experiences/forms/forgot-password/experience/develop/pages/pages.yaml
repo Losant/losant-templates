@@ -1,0 +1,18 @@
+resourceType: ExperienceView
+resources:
+  - description: Shows a form where a user can enter their email and request a
+      password reset.
+    id: ~losant-experienceView-tlPageForgotPassword-0~
+    localFilename: ./tl-page-forgot-password.hbs
+    name: tl-page-forgot-password
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: Displays a form that allows a user to submit a new password.
+    id: ~losant-experienceView-tlPageResetPassword-1~
+    localFilename: ./tl-page-reset-password.hbs
+    name: tl-page-reset-password
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

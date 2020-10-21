@@ -1,0 +1,18 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This node provides access to the Google Vision API.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesGcpVisionApi-0~
+    name: GCP Vision API
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - gcp
+      - google
+      - vision
+      - image
+version: 1

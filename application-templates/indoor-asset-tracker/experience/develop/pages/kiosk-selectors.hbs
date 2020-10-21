@@ -1,0 +1,52 @@
+<div class="panel-container">
+   <div class="panel-content-no-bkgd">
+      <div style="text-align:center; height:80%">
+         <!-- This value will exist if the request was for the / page-->
+         {{#if pageData.home}}
+            <h1>What are you looking for?</h1>
+            <div style="text-align:center; display:block;">
+               <a href="/type?class=person" style="width:200px;height:200px;margin:20px;" class="btn btn-default" role="button">
+                  <div style="padding-top:20%;">
+                     <img style="width:49%" src="{{file '/images/resident.png'}}"></img>
+                     <div style="margin:20px;color:#758D83;font-family:Helvetica;">Resident</div>
+                  </div>
+               </a>
+               <a href="/type?class=equipment" style="width:200px;height:200px;margin:20px;" class="btn btn-default" role="button">
+                  <div style="padding-top:20%;">
+                     <img style="width:50%" src="{{file '/images/wheelchair.png'}}"></img> 
+                     <div style="margin:20px;color:#758D83;font-family:Helvetica;">Equipment</div>
+                  </div>
+               </a>
+            </div>
+         {{else}}
+         <!--This value will exist if the user selected the "resident" button option-->
+            {{#eq pageData.view "resident"}}
+               <h1>Residents</h1>
+               <div>
+               {{#each pageData.devicesFound}}
+                  <a href="/devices/resident?deviceId={{deviceId}}" style="width:200px;height: 200px;margin:20px;" class="btn btn-default" role="button">
+                     <div style="padding-top:15%;">
+                        <img style="width:60%; border-radius:50%;" src="{{file '/residents/'}}{{tags.uniqueId.[0]}}.jpg"></img>
+                     </div>
+                     <div style="margin:20px;color:#758D83;font-family:Helvetica;text-transform:capitalize;">{{name}}</div>
+                  </a>
+               {{/each}}
+               </div>
+            <!--If the resident flag was not true, the button was selected for the "equipment" devices-->
+            {{else}}
+               <h1>What equipment are you looking for?</h1>
+               <div>
+               {{#each pageData.array}}
+                  <a href="/devices/{{.}}" style="width:200px;height: 200px;margin:20px;" class="btn btn-default" role="button">
+                     <div style="padding-top:15%;">
+                        <img style="width:60%" src="{{file '/images/'}}{{.}}.png"></img>
+                     </div>
+                     <div style="margin:20px;color:#758D83;font-family:Helvetica;text-transform:capitalize;">{{.}}</div>
+                  </a>
+               {{/each}}
+               </div>
+            {{/eq}}
+         {{/if}}
+      </div>
+   </div>
+</div>

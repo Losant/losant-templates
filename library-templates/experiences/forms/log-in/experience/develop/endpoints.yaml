@@ -1,0 +1,18 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getLogin-0~
+    method: get
+    route: /login
+    version: develop
+  - access: public
+    description: Endpoint that accepts and verifies an experience's email and password.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postLogin-1~
+    method: post
+    route: /login
+    version: develop
+version: 1

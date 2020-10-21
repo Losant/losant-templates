@@ -1,0 +1,157 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: This is your unique Algolia Application Identifier.
+          id: algolia-application-id
+          label: Application ID
+          required: true
+          type: stringTemplate
+        - description: >-
+            This is the Algolia public API key. It is recommended to use the
+            Algolia [Search-Only API
+            Key](https://www.algolia.com/doc/guides/security/api-keys/?language=go#search-only-api-key).
+          id: algolia-api-key
+          label: API key
+          required: true
+          type: stringTemplate
+        - description: This is your Algolia Index that you want to search.
+          id: algolia-index-name
+          label: Index name
+          required: true
+          type: stringTemplate
+        - description: >-
+            Algolia [Search
+            Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/)
+            to use to search your Algolia Index (i.e. query="function node").
+          id: algolia-search-params-string
+          label: Search params
+          required: false
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: >-
+        The result of the [Algolia HTTP
+        API](https://www.algolia.com/doc/rest-api/search/#search-index-get)
+        request. 
+
+
+        If the request fails, the result will be an object with an "error"
+        property.
+      resultMode: optional
+    enabled: true
+    flowId: ~losant-flow-algoliaSearch-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: opePhjJMmu
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 40
+          'y': 440
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo:
+            - key: X-Algolia-API-Key
+              valueTemplate: '{{data.algolia-api-key}}'
+            - key: X-Algolia-Application-Id
+              valueTemplate: '{{data.algolia-application-id}}'
+            - key: Content-Type
+              valueTemplate: application/json
+          method: GET
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://{{data.algolia-application-id}}-dsn.algolia.net/1/indexes/{{data.algolia-index-name}}?{{{data.algolia-search-params-string}}}
+        id: ibq0wgl6ie
+        meta:
+          category: data
+          description: ''
+          id: ibq0wgl6ie
+          label: HTTP
+          name: http
+          x: 40
+          'y': 140
+        outputIds:
+          - - NxvCSmaUNX
+        type: HttpNode
+      - config:
+          message: Output Of Custom Node
+          property: ''
+        id: '-qozXdNj4a'
+        meta:
+          category: output
+          description: ''
+          label: Output Of Custom Node
+          name: debug
+          x: 40
+          'y': 340
+        outputIds:
+          - - opePhjJMmu
+        type: DebugNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: NxvCSmaUNX
+        meta:
+          category: logic
+          description: Removes the request information from the result object.
+          id: UUE3OzizrB
+          label: Mutate
+          name: mutate
+          x: 40
+          'y': 240
+        outputIds:
+          - - '-qozXdNj4a'
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Algolia: Search Index Post'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 40
+          'y': 40
+        outputIds:
+          - - ibq0wgl6ie
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-algoliaSearch-0~-69SO-speLoDQN2F8oqzij
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: iyMxJ4y6Dw
+          label: Virtual Button for Testing
+          name: virtualButton
+          payload: |-
+            {
+              "algolia-application-id" : "<your-algolia-application-id>",
+              "algolia-api-key" : "<your-algolia-api-key>",
+              "algolia-index-name" : "<your-aalgolia-index-name>",
+              "algolia-search-params-string" : "<your-algolia-search-params-string>"
+            }
+          uiId: iyMxJ4y6Dw
+          x: 240
+          'y': 40
+        outputIds:
+          - - ibq0wgl6ie
+        type: virtualButton
+    version: v1.0.0
+version: 1

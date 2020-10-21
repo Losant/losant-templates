@@ -1,0 +1,359 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            The [REST
+            Endpoint](https://www.braze.com/docs/api/basics/#endpoints) that
+            corresponds to the Braze instance you're provisioned to.
+          id: endpoint
+          label: REST Endpoint
+          required: true
+          type: stringTemplate
+        - description: >-
+            The Braze [REST API
+            Key](https://www.braze.com/docs/api/basics/#app-group-rest-api-keys).
+            The key requires minimum permissions of "messages.send".
+          id: api_key
+          label: REST API Key
+          required: true
+          type: stringTemplate
+        - defaultValue: false
+          description: >-
+            If you intend to
+            [Broadcast](https://www.braze.com/docs/api/parameters#broadcast) an
+            API message to the entire segment that a campaign or canvas targets.
+          id: broadcast
+          label: Broadcast
+          type: checkbox
+        - description: >-
+            Comma-delimited list of [External User
+            IDs](https://www.braze.com/docs/api/parameters#external-user-id).
+            Optional.
+          id: external_user_ids
+          label: External User IDs
+          required: false
+          type: stringTemplate
+        - description: >-
+            Payload path that points to an array of [User
+            Alias](https://www.braze.com/docs/api/objects_filters/user_alias_object/)
+            objects. Optional.
+          id: user_aliases
+          label: User Aliases
+          required: false
+          type: payloadPath
+        - description: >-
+            The [Segment
+            Identifer](https://www.braze.com/docs/api/parameters#segment-identifier).
+            Optional.
+          id: segment_id
+          label: Segment ID
+          required: false
+          type: stringTemplate
+        - description: >-
+            Payload path that points to a [Connected
+            Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/)
+            object. Optional.
+          id: audience
+          label: Connected Audience
+          required: false
+          type: payloadPath
+        - description: >-
+            The [Campaign
+            Identifier](https://www.braze.com/docs/api/parameters#campaign-identifier).
+            Optional.
+          id: campaign_id
+          label: Campaign ID
+          required: false
+          type: stringTemplate
+        - description: >-
+            The [Send
+            Identifier](https://www.braze.com/docs/api/parameters#send-identifier).
+            Optional.
+          id: send_id
+          label: Send ID
+          required: false
+          type: stringTemplate
+        - defaultValue: false
+          description: >-
+            Whether or not to disable [Frequency
+            Capping](https://www.braze.com/docs/user_guide/engagement_tools/campaigns/testing_and_more/rate-limiting/#frequency-capping).
+          id: override_frequency_capping
+          label: Override Frequency Capping
+          type: checkbox
+        - defaultValue: subscribed
+          description: >-
+            Limits messages to users based on their state. Valid values are
+            'opted_in', 'subscribed', 'all'. Defaults to 'subscribed'.
+          id: recipient_subscription_state
+          label: Recipient Subscription State
+          required: false
+          type: stringTemplate
+        - description: >-
+            The notification message. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Required.
+          id: alert
+          label: Alert
+          required: true
+          type: stringTemplate
+        - description: >-
+            The title that appears in the notification drawer. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Required.
+          id: title
+          label: Title
+          required: true
+          type: stringTemplate
+        - description: >-
+            Payload path that points to an object that contains additional keys
+            and values to be sent in the push. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Optional.
+          id: extra
+          label: Extra
+          required: false
+          type: payloadPath
+        - description: >-
+            Used when providing a Campaign ID to specify which message variation
+            this message should be tracked under. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Optional.
+          id: message_variation_id
+          label: Message Variation ID
+          required: false
+          type: stringTemplate
+        - description: >-
+            A web URL. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Optional.
+          id: custom_uri
+          label: Custom URL
+          required: false
+          type: stringTemplate
+        - description: >-
+            URL for image to show. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Optional.
+          id: image_url
+          label: Image URL
+          required: false
+          type: stringTemplate
+        - description: >-
+            URL for large image. Supported on Chrome Windows/Android. See [Web
+            Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Optional.
+          id: large_image_url
+          label: Large Image URL
+          required: false
+          type: stringTemplate
+        - defaultValue: false
+          description: >-
+            Whether to require the user to dismiss the notification. Supported
+            on Mac Chrome. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Optional.
+          id: require_interaction
+          label: Require Interaction
+          type: checkbox
+        - description: >-
+            The
+            [TTL](https://www.braze.com/docs/user_guide/administrative/app_settings/manage_app_group/push_ttl_settings/#push-time-to-live-settings)
+            for the push message. Optional.
+          id: time_to_live
+          label: Time to Live (seconds)
+          required: false
+          type: numberTemplate
+        - defaultValue: false
+          description: >-
+            Defaults to false, if set to true, Braze will only send this push to
+            a user's most recently used browser, rather than all eligible
+            browsers. See [Web Push
+            Object](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            for details. Optional.
+          id: send_to_most_recent_device_only
+          label: Send to Most Recent Device Only
+          type: checkbox
+        - description: >-
+            Payload path that points to an array of [Web Push Button
+            Objects](https://www.braze.com/docs/api/objects_filters/web_objects/#web-push-object)
+            to display. Optional.
+          id: buttons
+          label: Buttons
+          required: false
+          type: payloadPath
+      outputCount: 1
+      resultDescription: >-
+        The result of the [Send
+        Message](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_messages/#response-details)
+        request.
+
+
+        If the request fails, the result will be an object with an "error"
+        property.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: >-
+      Immediately send a web push message using the [Braze
+      API](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_messages/).
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI0LjMuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxMTAgMTEwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxMTAgMTEwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU+CjxnIGlkPSJMYXllcl8yXzFfIj4KCTxnIGlkPSJMYXllcl8xLTIiPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00OS43LDYzYzAuOS04LjYsNi4zLTE1LjYsMTIuNi0xNS42czkuNyw3LDguOCwxNS42cy02LjEsMTUuNy0xMiwxNS43UzQ4LjQsNzMuMyw0OS43LDYzIE01NSwxMDIKCQkJYy0xNCwwLTI3LjMtNi4yLTM2LjItMTdjNy44LDIuNSwxNi41LDAuMywyMy4zLTYuNGMwLjctMC43LDEuNC0xLjUsMi0yLjNjMy4xLDYuNyw5LjEsMTAuMSwxNS4xLDEwLjFDNjkuNCw4Ni40LDc4LDc1LjksNzksNjIuOQoJCQlzLTYuMy0yMy4zLTE2LTIzLjNjLTMuNSwwLTcsMC45LTEwLDIuN2wzLTE3LjVjMC4zLTEuNCwwLTIuOS0wLjktNGMtMC45LTEuNC0xLjctMi0yLjktMmgtMTRjLTAuOCwwLTEuNSwwLjctMS42LDEuNQoJCQljLTAuNCwxLjYtMC42LDMuMy0wLjgsNWMtMC4xLDEuMSwwLjcsMS41LDEuNiwxLjVoMTAuMmMtMS42LDEwLTQuOCwyOS40LTUuNywzNC4zYy0wLjksNC42LTMuMiw4LjktNi41LDEyLjMKCQkJYy01LjYsNS42LTE1LjksNi45LTIyLDAuOEMxMS4zLDcyLDgsNjYuNiw4LDU1QzgsMjksMjksOCw1NSw4czQ3LDIxLDQ3LDQ3UzgxLDEwMiw1NSwxMDIgTTU1LDBDMjQuNiwwLDAsMjQuNiwwLDU1czI0LjYsNTUsNTUsNTUKCQkJczU1LTI0LjYsNTUtNTVTODUuNCwwLDU1LDAiLz4KCTwvZz4KPC9nPgo8L3N2Zz4K
+    id: ~losant-flow-brazeWebPush-0~
+    name: 'Braze: Web Push'
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: W_eottXP65
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 80
+          'y': 620
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: '{{jsonEncode working.body}}'
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+            - key: Authorization
+              valueTemplate: 'Bearer {{data.api_key}}'
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: '{{working.endpoint}}/messages/send'
+        id: AOhQEXKLP_
+        meta:
+          category: data
+          description: ''
+          id: AOhQEXKLP_
+          label: HTTP
+          name: http
+          x: 80
+          'y': 340
+        outputIds:
+          - - W_eottXP65
+            - tY_gJRXtIr
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: tY_gJRXtIr
+        meta:
+          category: output
+          description: ''
+          id: tY_gJRXtIr
+          label: Debug
+          name: debug
+          x: 280
+          'y': 540
+        outputIds: []
+        type: DebugNode
+      - config:
+          script: >-
+            payload.working = payload.working || {};
+
+            let inputs = payload.data;
+
+
+            let body = {
+                broadcast: payload.data.broadcast,
+                user_aliases: inputs.user_aliases,
+                segment_id: inputs.segment_id ? inputs.segment_id : undefined,
+                audience: inputs.audience,
+                campaign_id: inputs.campaign_id ? inputs.campaign_id : undefined,
+                send_id: inputs.send_id ? inputs.send_id : undefined,
+                override_frequency_capping: inputs.override_frequency_capping
+            };
+
+
+            if(inputs.external_user_ids) {
+                body.external_user_ids = inputs.external_user_ids.split(',').map((e) => e.trim());
+            }
+
+
+
+            body.messages = {
+                web_push: {
+                    alert: inputs.alert,
+                    title: inputs.title,
+                    extra: inputs.extra,
+                    message_variation_id: inputs.message_variation_id ? inputs.message_variation_id : undefined,
+                    custom_uri: inputs.custom_uri ? inputs.custom_uri : undefined,
+                    image_url: inputs.image_url ? inputs.image_url : undefined,
+                    large_image_url: inputs.large_image_url ? inputs.large_image_url : undefined,
+                    require_interaction: inputs.require_interaction,
+                    time_to_live: inputs.time_to_live ? inputs.time_to_live : undefined,
+                    send_to_most_recent_device_only: inputs.send_to_most_recent_device_only,
+                    buttons: inputs.buttons
+                }
+            };
+
+
+            let endpoint = inputs.endpoint;
+
+
+            // Fix the endpoint URL scheme. It should be "https://".
+
+            endpoint = 'https://' + endpoint.replace('http://',
+            '').replace('https://', '');
+
+
+            payload.working.endpoint = endpoint;
+
+            payload.working.body = body;
+        id: TVjDTLgrpg
+        meta:
+          category: logic
+          description: ''
+          id: TVjDTLgrpg
+          label: Function
+          name: function
+          x: 80
+          'y': 200
+        outputIds:
+          - - AOhQEXKLP_
+        type: RawFunctionNode
+      - config: {}
+        id: dsWPPtEZ2T
+        meta:
+          annotationText: Builds the body for the Braze API request.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 280
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Braze: Web Push'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 80
+          'y': 60
+        outputIds:
+          - - TVjDTLgrpg
+        type: customNodeStart
+version: 1

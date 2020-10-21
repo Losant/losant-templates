@@ -1,0 +1,29 @@
+<body id="login-page">
+   <div class="panel-container">
+      <div class="panel-content">
+         <div id="login-page-logo">
+            <img src="{{file '/kanarra-logo-stacked.png'}}" width="171">
+         </div>
+         {{#if pageData.loginFailure}}
+            {{component "errorAlert" "Incorrect email or password."}}
+         {{/if}}
+         <form method="post" class="panel-page-form">
+            <div class="form-group">
+               <label for="email">Email address</label>
+               <input autofocus required value="{{ pageData.email }}" type="email" class="form-control" name="email" id="email" placeholder="e.g. test.user@example.com">
+            </div>
+            <div class="form-group">
+               <label for="password">Password</label>
+               <input required minlength="8" maxlength="255" type="password" class="form-control" id="password" name="password">
+            </div>
+            <div style="text-align:center;">
+               <button type="submit" class="btn btn-info">Sign In</button>
+               <a href="/login?path=kiosk" class="btn btn-default" role="button">Kiosk Mode</a>
+            </div>
+         </form>
+         <div id="login-page-copyright">
+            Copyright © {{formatDate time 'YYYY'}}, Kanarra Inc, All Rights Reserved
+         </div>
+      </div>
+   </div>
+</body>

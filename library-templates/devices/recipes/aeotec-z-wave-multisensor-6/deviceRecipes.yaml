@@ -1,0 +1,39 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: The battery level, in volts.
+        name: battery
+      - attributeTags: {}
+        dataType: number
+        description: The relative humidity, in percentage 0-100.
+        name: humidity
+      - attributeTags: {}
+        dataType: number
+        description: The temperature, in Celsius.
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: The UV index, 0-10.
+        name: ultravioletIndex
+      - attributeTags: {}
+        dataType: number
+        description: The light level, in LUX.
+        name: illuminance
+      - attributeTags: {}
+        dataType: number
+        description: Whether tamper protection has been triggered. 0=no tamper. 1=tamper
+          detected.
+        name: tamper
+      - attributeTags: {}
+        dataType: number
+        description: Whether motion is detected. 0=no motion. 1=motion.
+        name: motion
+    description: The Aeotec Z-Wave MultiSensor 6 wireless smart home sensor.
+    deviceClass: standalone
+    deviceName: Aeotec MultiSensor 6
+    id: ~losant-deviceRecipe-aeotecMultiSensor6-0~
+    name: Aeotec MultiSensor 6
+    tags: []
+version: 1

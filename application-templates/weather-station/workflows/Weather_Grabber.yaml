@@ -1,0 +1,192 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Periodically requests weather data from the OpenWeatherMap API and stores
+      the result on a device.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-weatherGrabber-0~
+    name: Weather Grabber
+    nodes:
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.weather
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.openweathermap.org/data/2.5/weather?lat={{working.gps_parts.[0]}}&lon={{working.gps_parts.[1]}}&APPID={{globals.api_key}}
+        id: CSTa-u6aQ7
+        meta:
+          category: data
+          description: ''
+          id: CSTa-u6aQ7
+          label: HTTP
+          name: http
+          x: 180
+          'y': 400
+        outputIds:
+          - - XVgMLKePrL
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: Gcz_KvFnVX
+        meta:
+          category: output
+          description: ''
+          id: Gcz_KvFnVX
+          label: Debug
+          name: debug
+          x: 180
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: dew-point
+              valueTemplate: ''
+            - key: feels-like
+              valueTemplate: '{{subtract working.weather.body.main.feels_like 273.15}}'
+            - key: humidity
+              valueTemplate: '{{ working.weather.body.main.humidity }}'
+            - key: pressure
+              valueTemplate: '{{ working.weather.body.main.pressure }}'
+            - key: temp
+              valueTemplate: '{{subtract working.weather.body.main.temp 273.15}}'
+            - key: visibility
+              valueTemplate: '{{ working.weather.body.visibility }}'
+            - key: wind-speed
+              valueTemplate: '{{ working.weather.body.wind.speed }}'
+          deviceId: ~losant-device-weather-0~
+          deviceIdTemplateType: stringTemplate
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: 4lgTqZzT0M
+        meta:
+          category: output
+          description: ''
+          id: 4lgTqZzT0M
+          label: 'Device: State'
+          name: device-state
+          x: 300
+          'y': 720
+        outputIds:
+          - - Gcz_KvFnVX
+        type: DeviceChangeStateNode
+      - config: {}
+        id: qHZdOUGu6N
+        meta:
+          annotationText: >-
+            Request weather data from the OpenWeatherMap. The GPS location and
+            API key are stored in application globals.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 380
+          'y': 400
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: od-hVVrLGH
+        meta:
+          annotationText: 'If the request succeeded, report the weather data as device state.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.weather.statusCode}} === 200'
+        id: XVgMLKePrL
+        meta:
+          category: logic
+          description: ''
+          id: XVgMLKePrL
+          label: Conditional
+          name: conditional
+          x: 180
+          'y': 580
+        outputIds:
+          - - Gcz_KvFnVX
+          - - 4lgTqZzT0M
+        type: ConditionalNode
+      - config:
+          method: split
+          methodArgs:
+            - ','
+          resultPath: working.gps_parts
+          sourceData: '{{globals.gps_location}}'
+        id: KJ3WtFitaQ
+        meta:
+          category: logic
+          description: ''
+          id: KJ3WtFitaQ
+          label: String
+          name: string
+          x: 180
+          'y': 260
+        outputIds:
+          - - CSTa-u6aQ7
+        type: StringNode
+      - config: {}
+        id: nSqVpBsgv2
+        meta:
+          annotationText: 'Split the "lat,lon" string from globals into two separate values.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 380
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          seconds: 120
+        key: ~losant-flow-weatherGrabber-0~-5pfXZf5nyqEFj1X3UFyBC
+        meta:
+          category: trigger
+          description: ''
+          id: usX5K5X-vU
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: usX5K5X-vU
+          x: 80
+          'y': 80
+        outputIds:
+          - - KJ3WtFitaQ
+        type: timer
+      - config: {}
+        key: ~losant-flow-weatherGrabber-0~-IwWoDau5gmMKIgE9bAe0i
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: '-SKI2EnOoT'
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: '-SKI2EnOoT'
+          x: 280
+          'y': 80
+        outputIds:
+          - - KJ3WtFitaQ
+        type: virtualButton
+version: 1

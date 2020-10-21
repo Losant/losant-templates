@@ -1,0 +1,647 @@
+resourceType: Flow
+resources:
+  - description: >-
+      This Workflow calculates OEE and its metrics, for each paper machine,
+      every hour.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-oeeCalculations-1~
+    name: OEE Calculations
+    nodes:
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: false
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: type
+              valueTemplate: papermachine
+          tagsAsObject: true
+        id: VRZk6GL1ZM
+        meta:
+          category: data
+          description: ''
+          id: VRZk6GL1ZM
+          label: 'Device: Get'
+          name: get-device
+          x: 260
+          'y': 260
+        outputIds:
+          - - P03tmqKLT3
+        type: GetDeviceNode
+      - config: {}
+        id: VM7pR7vhxw
+        meta:
+          annotationText: |-
+            This will get all devices with the tag matching 
+
+            type = papermachine
+
+            Change the tag query to match your devices
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 380
+          x: 460
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          currentItemPath: working.deviceLoop
+          loopSourcePath: working.devices
+        id: P03tmqKLT3
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 260
+          groupStartY: 40
+          id: P03tmqKLT3
+          label: OEE by Device
+          name: loop
+          x: 260
+          'y': 400
+        outputIds:
+          - []
+          - - zX2q0zUB_r
+        type: LoopNode
+      - config:
+          loopNodeId: P03tmqKLT3
+          shouldBreak: false
+        id: 238IwE3OF-
+        meta:
+          category: loop
+          description: ''
+          groupId: P03tmqKLT3
+          id: 238IwE3OF-
+          label: Next
+          name: loop-next
+          x: 260
+          'y': 1900
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          message: ''
+          property: ''
+        id: n17n7uwbE2
+        meta:
+          category: output
+          description: ''
+          groupId: P03tmqKLT3
+          id: n17n7uwbE2
+          label: OEE
+          name: debug
+          x: 260
+          'y': 1820
+        outputIds:
+          - - 238IwE3OF-
+        type: DebugNode
+      - config:
+          aggregation: TIMEATVALUE
+          aggregationOptions:
+            - keyTemplate: value
+              valueTemplate: Running
+          attribute: status
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.oee.availability.running
+        id: zX2q0zUB_r
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: 'TAV: Running'
+          name: gauge
+          x: 260
+          'y': 180
+        outputIds:
+          - - TwPuslSCy8
+        type: GaugeNode
+      - config:
+          aggregation: TIMEATVALUE
+          aggregationOptions:
+            - keyTemplate: value
+              valueTemplate: Planned
+          attribute: status
+          deviceIds: []
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          deviceTags: []
+          duration: '2592000000'
+          resultPath: working.oee.availability.planned
+        id: TwPuslSCy8
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: 'TAV: Planned'
+          name: gauge
+          x: 260
+          'y': 280
+        outputIds:
+          - - yPya1XS_gE
+        type: GaugeNode
+      - config:
+          aggregation: TIMEATVALUE
+          aggregationOptions:
+            - keyTemplate: value
+              valueTemplate: Unplanned
+          attribute: status
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.oee.availability.unplanned
+        id: yPya1XS_gE
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: 'TAV: Unplanned'
+          name: gauge
+          x: 260
+          'y': 380
+        outputIds:
+          - - xZzhoNYI7b
+        type: GaugeNode
+      - config:
+          aggregation: TIMEATVALUE
+          aggregationOptions:
+            - keyTemplate: value
+              valueTemplate: Utility Outage
+          attribute: reason
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.oee.availability.utilityOutage
+        id: SDIsKT6yDe
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: 'TAV: Utility Outage'
+          name: gauge
+          x: 260
+          'y': 580
+        outputIds:
+          - - vKtCBBKivZ
+        type: GaugeNode
+      - config: {}
+        id: 4OXlX263uL
+        meta:
+          annotationText: >-
+            **AVAILABILITY**
+
+
+            The following *TAV: Data Gauge* nodes are pulling the **status**
+            attribute time at value (TAV) to be used in the Availability portion
+            of the OEE calculation.  There is one for:
+
+            * Running (**status** - 30 day Time at Value aggregation)
+
+            * Planned (**status** - 30 day Time at Value aggregation)
+
+            * Unplanned (**status** - 30 day Time at Value aggregation)
+
+            * Sheetbreak (**status** - 30 day Time at Value aggregation)
+
+            * Utility Outage (**reason** - 30 day Time at Value aggregation) -
+            *this uses a different attribute.  In this use case the Utility
+            outage was budgeted at the beginning of the year and therefore not
+            included in availability calculation, even though it is unplanned
+            downtime.*
+
+
+            *Any of these can be changed (added/subtracted) to match the
+            different status options for your machine*
+
+
+            _____
+
+            (Running + Planned + Unplanned + Sheetbreak) = totalTime  
+
+            (totalTime - Utility Outage) = scheduled runTime  
+
+            (Running + Sheetbreak)/scheduled runTime = Availability
+          category: annotation
+          groupId: P03tmqKLT3
+          height: 480
+          label: Note
+          name: note
+          width: 520
+          x: 460
+          'y': 180
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          statements:
+            - expression: >-
+                {{working.oee.availability.running.value}} +
+                {{working.oee.availability.planned.value}} +
+                {{working.oee.availability.unplanned.value}} +
+                {{working.oee.availability.sheetbreak.value}}
+              resultPath: working.oee.availability.totalTime
+            - expression: >-
+                {{working.oee.availability.totalTime}} -
+                {{working.oee.availability.utilityOutage.value}}
+              resultPath: working.oee.availability.runTime
+            - expression: >-
+                ({{working.oee.availability.running.value}}+{{working.oee.availability.sheetbreak.value}})/{{working.oee.availability.runTime}}
+              resultPath: working.oee.availability.value
+            - expression: '{{format working.oee.availability.value ''0.4f''}}'
+              resultPath: working.oee.availability.value
+            - expression: '{{working.oee.availability.value}}*100'
+              resultPath: working.oee.availability.percentage
+            - expression: '{{format working.oee.availability.percentage ''0.2f''}}'
+              resultPath: working.oee.availability.percentage
+        id: vKtCBBKivZ
+        meta:
+          category: logic
+          description: ''
+          groupId: P03tmqKLT3
+          id: vKtCBBKivZ
+          label: Availability
+          name: math
+          x: 260
+          'y': 680
+        outputIds:
+          - - JPU3Ep2k5O
+        type: MathNode
+      - config:
+          aggregation: SUM
+          attribute: currentTons
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.oee.quality.tons
+        id: Y1ffvmli4H
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: Quality Tons
+          name: gauge
+          x: 260
+          'y': 1160
+        outputIds:
+          - - KcwmI3Uqfu
+        type: GaugeNode
+      - config:
+          aggregation: SUM
+          attribute: currentWaste
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.oee.quality.waste
+        id: KcwmI3Uqfu
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: Waste Tons
+          name: gauge
+          x: 260
+          'y': 1260
+        outputIds:
+          - - vd-eNSKfQ9
+        type: GaugeNode
+      - config:
+          statements:
+            - expression: >-
+                {{working.oee.quality.tons.value}} +
+                {{working.oee.quality.waste.value}} 
+              resultPath: working.oee.quality.totalTons
+            - expression: >-
+                {{working.oee.quality.tons.value}}/{{working.oee.quality.totalTons}}
+              resultPath: working.oee.quality.value
+            - expression: '{{format working.oee.quality.value ''0.4f''}}'
+              resultPath: working.oee.quality.value
+            - expression: '{{working.oee.quality.value}}*100'
+              resultPath: working.oee.quality.percentage
+            - expression: '{{format working.oee.quality.percentage ''0.2f''}}'
+              resultPath: working.oee.quality.percentage
+        id: vd-eNSKfQ9
+        meta:
+          category: logic
+          description: ''
+          groupId: P03tmqKLT3
+          id: vKtCBBKivZ
+          label: Quality
+          name: math
+          x: 260
+          'y': 1360
+        outputIds:
+          - - 5EwhtiwHiI
+        type: MathNode
+      - config: {}
+        id: 8o15X7zkv_
+        meta:
+          annotationText: >
+            **QUALITY**
+
+
+            The following *Tons* Data Gauge nodes are using the sum aggregation
+            for **currentTons** and **currentWaste** attributes to be used in
+            the Quality portion of the OEE calculation.  There is one for:
+
+            * Quality Tons (**currentTons** - 30 day summation) 
+
+            * Waste Tons (**currentWaste** - 30 day summation) 
+
+
+            *These should be changed to match the good quality (tons in this
+            example) and the bad quality (waste in this example) attribute you
+            have for your device*
+
+
+            ______
+
+            (tons + waste) = totalTons  
+
+            tons/totalTons = Quality 
+          category: annotation
+          groupId: P03tmqKLT3
+          height: 340
+          label: Note
+          name: note
+          width: 520
+          x: 460
+          'y': 1160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          aggregation: MEAN
+          attribute: rate
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.oee.performance.rate
+        id: mW0YzHsTxl
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: Rate
+          name: gauge
+          x: 260
+          'y': 920
+        outputIds:
+          - - Y8kxq5v6xZ
+        type: GaugeNode
+      - config:
+          statements:
+            - expression: >-
+                {{working.oee.performance.rate.value}}/{{working.oee.performance.maxRate}}
+              resultPath: working.oee.performance.value
+            - expression: '{{format working.oee.performance.value ''0.4f''}}'
+              resultPath: working.oee.performance.value
+            - expression: '{{working.oee.performance.value}}*100'
+              resultPath: working.oee.performance.percentage
+            - expression: '{{format working.oee.performance.percentage ''0.2f''}}'
+              resultPath: working.oee.performance.percentage
+        id: Y8kxq5v6xZ
+        meta:
+          category: logic
+          description: ''
+          groupId: P03tmqKLT3
+          id: vKtCBBKivZ
+          label: Performance
+          name: math
+          x: 260
+          'y': 1020
+        outputIds:
+          - - Y1ffvmli4H
+        type: MathNode
+      - config: {}
+        id: xQM06E_LPk
+        meta:
+          annotationText: >
+            **PERFORMANCE**
+
+
+            The mutate *Max Rate* node is pulling the value associated with the
+            device tag **maxRate** and then copying the value to the performance
+            section of the payload.  The *Rate* Data Gauge node is pulling a 30
+            day mean aggregation of the **rate** attribute. 
+
+
+            *These should match the rate variables you are using, recommend
+            putting the max rate as a tag so that it can vary from device to
+            device*
+
+            ______
+
+            rate/maxRate = Performance 
+          category: annotation
+          groupId: P03tmqKLT3
+          height: 260
+          label: Note
+          name: note
+          width: 520
+          x: 460
+          'y': 820
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          statements:
+            - expression: >-
+                {{working.oee.performance.value}}*{{working.oee.quality.value}}*{{working.oee.availability.value}}
+              resultPath: working.oee.value
+            - expression: '{{format working.oee.value ''0.4f''}}'
+              resultPath: working.oee.value
+            - expression: '{{working.oee.value}}*100'
+              resultPath: working.oee.percentage
+            - expression: '{{format working.oee.percentage ''0.2f''}}'
+              resultPath: working.oee.percentage
+        id: 5EwhtiwHiI
+        meta:
+          category: logic
+          description: ''
+          groupId: P03tmqKLT3
+          id: 5EwhtiwHiI
+          label: OEE
+          name: math
+          x: 260
+          'y': 1560
+        outputIds:
+          - - JGSUuLmB2l
+        type: MathNode
+      - config: {}
+        id: 1-K2qnbB_e
+        meta:
+          annotationText: |-
+            **OEE**
+
+            (Availability)(Quality)(Performance) = OEE
+          category: annotation
+          groupId: P03tmqKLT3
+          height: 100
+          label: Note
+          name: note
+          width: 480
+          x: 460
+          'y': 1560
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: availability
+              valueTemplate: '{{working.oee.availability.percentage}}'
+            - key: oee
+              valueTemplate: '{{working.oee.percentage}}'
+            - key: performance
+              valueTemplate: '{{working.oee.performance.percentage}}'
+            - key: quality
+              valueTemplate: '{{working.oee.quality.percentage}}'
+          deviceId: working.deviceLoop.value.deviceId
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: JGSUuLmB2l
+        meta:
+          category: output
+          description: ''
+          groupId: P03tmqKLT3
+          id: JGSUuLmB2l
+          label: Update Device
+          name: device-state
+          x: 260
+          'y': 1740
+        outputIds:
+          - - n17n7uwbE2
+        type: DeviceChangeStateNode
+      - config: {}
+        id: QqpPndbZT3
+        meta:
+          annotationText: >-
+            This loops through every device that was pulled in the previous
+            Device: Get node.  It will then go through and calculate OEE and
+            it's properties (Availability, Performance, and Quality) for each
+            device. 
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 380
+          x: 460
+          'y': 400
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: J98Ymf7gde
+        meta:
+          annotationText: >-
+            This Workflow calculates the OEE every hour but it can be manually
+            triggered by hitting the Virtual Button.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 380
+          x: 460
+          'y': 100
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          aggregation: TIMEATVALUE
+          aggregationOptions:
+            - keyTemplate: value
+              valueTemplate: Sheetbreak
+          attribute: status
+          deviceIdsPath: working.deviceLoop.value.deviceId
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.oee.availability.sheetbreak
+        id: xZzhoNYI7b
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: P03tmqKLT3
+          id: zX2q0zUB_r
+          label: 'TAV: Sheetbreak'
+          name: gauge
+          x: 260
+          'y': 480
+        outputIds:
+          - - SDIsKT6yDe
+        type: GaugeNode
+      - config:
+          rules:
+            - destination: working.oee.performance.maxRate
+              source: 'working.deviceLoop.value.tags.maxRate.[0]'
+              type: copy
+        id: JPU3Ep2k5O
+        meta:
+          category: logic
+          description: ''
+          groupId: P03tmqKLT3
+          id: KTnaHkeLTX
+          label: MaxRate
+          name: mutate
+          x: 260
+          'y': 820
+        outputIds:
+          - - mW0YzHsTxl
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-oeeCalculations-1~-Fe2ZpHW9gawOw8lL0Ekdt
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: wdU5nSj29f
+          label: OEE Calculations
+          name: virtualButton
+          payload: ''
+          uiId: wdU5nSj29f
+          x: 60
+          'y': 100
+        outputIds:
+          - - VRZk6GL1ZM
+        type: virtualButton
+      - config:
+          seconds: 3600
+        key: ~losant-flow-oeeCalculations-1~-i0ALfbFIwtdvmgGLBZKG9
+        meta:
+          category: trigger
+          description: ''
+          id: 7a69EMvroj
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: 7a69EMvroj
+          x: 260
+          'y': 100
+        outputIds:
+          - - VRZk6GL1ZM
+        type: timer
+version: 1

@@ -1,0 +1,71 @@
+resourceType: ExperienceView
+resources:
+  - description: 'This page is a dashboard that displays a dashboard of the
+      equipment device matching a specific "type" tag. '
+    id: ~losant-experienceView-kioskDashboardEquipment-5~
+    layoutId: ~losant-experienceView-dashboardLayout-1~
+    localFilename: ./kiosk-dashboard-equipment.hbs
+    name: kiosk-dashboard-equipment
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: This page shows a context-based dashboard of a resident's location.
+    id: ~losant-experienceView-kioskDashboardResident-6~
+    layoutId: ~losant-experienceView-dashboardLayout-1~
+    localFilename: ./kiosk-dashboard-resident.hbs
+    name: kiosk-dashboard-resident
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: Users who are not logged in will be redirected to this page when
+      they try to visit the / page. This page loads a pinpad login form; when
+      the user submits the form, it will hit the POST /login endpoint with the
+      unique pincode of the user. If the credentials are valid, the user will
+      get an authentication cookie and will be redirected to the /kiosk page.
+    id: ~losant-experienceView-kioskLogIn-2~
+    layoutId: ~losant-experienceView-containerLayout-9~
+    localFilename: ./kiosk-log-in.hbs
+    name: kiosk-log-in
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: This page shows the home page of the kiosk, prompting users to
+      select residents or equipment to search for. Once one has been selected,
+      this page will display either a list of equipment types or a list of
+      residents based on values passed in from the workflow through pageData.
+    id: ~losant-experienceView-kioskSelectors-4~
+    layoutId: ~losant-experienceView-containerLayout-9~
+    localFilename: ./kiosk-selectors.hbs
+    name: kiosk-selectors
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: This page uses context to render a historical dashboard for a manager view.
+    id: ~losant-experienceView-managerDashboardDevice-10~
+    layoutId: ~losant-experienceView-dashboardLayout-1~
+    localFilename: ./manager-dashboard-device.hbs
+    name: manager-dashboard-device
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: "This is the manager home page, which renders a dashboard only for
+      logged-in users with a role=manager tag. Within the endpoint that renders
+      this template, we redirect to the manager login page if the experience
+      user is not logged in. "
+    id: ~losant-experienceView-managerDashboardHome-3~
+    layoutId: ~losant-experienceView-dashboardLayout-1~
+    localFilename: ./manager-dashboard-home.hbs
+    name: manager-dashboard-home
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: This is the login page for a manager. The manager login requires an
+      email and a password and will route to the manager's home page.
+    id: ~losant-experienceView-managerLogin-7~
+    layoutId: ~losant-experienceView-containerLayout-9~
+    localFilename: ./manager-login.hbs
+    name: manager-login
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

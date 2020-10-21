@@ -1,0 +1,16 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This node provide access to Hologram's API to retrieve device information.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesHologramGetDevice-0~
+    name: Hologram Get Device
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - hologram
+      - cellular
+version: 1

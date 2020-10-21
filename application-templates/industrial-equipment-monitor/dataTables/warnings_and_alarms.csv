@@ -1,0 +1,36 @@
+warning_or_alarm,warning_or_alarm_index,description,additional_information
+1,6,Under-Frequency,"After starting, if the generator stays under frequency for more than 30 seconds, it will shutdown."
+1,12,Undervoltage,"If the generator voltage falls below 60% for >5 seconds, an alarm will be issued."
+1,10,Missing Crank Pulse,This is a shutdown alarm. The alarm will activate after 12 consecutive revs where crank pulses are missing.
+1,2,High Coolant Temperature,"There is a 10 second delay before engine temperature is monitored.
+Once running there is a 1/4 second delay before shut down. The limit is set at 125° C or 257° F."
+1,5,RPM Sensor Failure,"During cranking: If the board does not see a valid RPM signal within four (4) seconds of cranking it will shut down and lock out on RPM sensor loss.
+During running: If the RPM signal is lost for one full second the board will shut the engine down, wait 15 seconds, then re-crank the engine if in AUTO, it will not re-crank in MANUAL.
+If no RPM signal is detected within the first four (4) seconds of cranking, the control board will shut the engine down and latch out on RPM sensor loss.
+If the RPM signal is detected the engine will start and run normally. If the RPM signal is subsequently lost the control board will try two more re-cranks before latching out and flashing the RPM Sensor Failure message (if it is in AUTO)."
+0,4,Canbus Comms Failure,"Where applicable, if the Canbus communications link fails to com- municate, a “Canbus Alarm” will be generated. This only applies to systems with external ignition modules. The alarm may be generated if:
+1. The physical link is broken.
+2. The Ignition Module fails or resets.
+3. The Nexus Controller fails or resets.
+4. Having the Battery Chargers 120 VAC connected without a
+battery installed.
+5. A blown 10 amp Ignition Module fuse (approximately 12
+inches away from the starter).
+6. A blown 25 amp system fuse (located approximately 12
+inches away from the DC alternator)."
+0,3,Low Fuel Pressure,Fuel pressure is monitored by a digital sensor with a fixed setpoint of below five (5) inches water column.
+1,3,Overcrank,Occurs if the engine has not started within the specified crank cycle.
+1,13,Overvoltage,"If the generator voltage rises above 110% for >3 seconds, an alarm will be issued.
+If the generator voltage rises above 130% for >0.2 seconds, an alarm will be issued."
+1,1,Low Oil Pressure,There is a 10 second delay before oil pressure is monitored.
+1,8,Low Coolant,"This is a shutdown alarm. The sensor will be continuously monitored. If an error condition is seen for five (5) consecutive seconds, the alarm will be displayed."
+1,7,Low Battery,"While running, if the average battery voltage falls below 11.9 volts for one (1) minute, the low battery alarm will be displayed."
+0,5,Maintenance Period Expired,"When a maintenance period expires, a warning message will be posted. The warning can be reset by hitting the Enter key. Resetting will clear the warning and reset the maintenance counters for the condition annunciated. The history log will reflect the maintenance warning."
+0,1,Check Engine,The control system has detected an emissions related fault. This fault cannot be cleared using the control panel interface. The unit will continue to operate in automatic mode. Contact your local servicing dealer.
+1,14,Ignition Fault,"When an ignition alarm occurs, a generic message “Ignition Fault” will be displayed as the fault code."
+1,4,Overspeed,"Warning indicator is measured and calculated by the microprocessor. Overspeed is defined as +20% of nominal engine speed for 3 seconds, or +25% immediate.
+Nominal engine speed = 60.0 Hz"
+0,2,Low Battery,"The microprocessor will continually monitor the battery voltage and display the Low Battery Voltage message if the battery voltage falls below 12.2 Volts for one (1) minute.
+No other action is taken on a low battery warning condition. The warning will automatically clear if the battery voltage rises above 12.2 volts."
+1,9,Missing Cam Pulse,This is a shutdown alarm. The alarm will activate after five (5) seconds of continuously missing cam pulses.
+1,11,Governor Sensor Fault,"The governor position is monitored by an analog feedback signal. If the throttle position is seen outside of the normal operating range, a shutdown alarm is displayed. If the throttle is commanded to move, and no movement is seen, a shutdown alarm is displayed."

@@ -1,0 +1,5 @@
+name: Provisioning
+description: These templates provide dynamic device registration, onboarding,
+  and provisioning functionality. These templates allow your solution to create
+  devices on-demand, instead of requiring devices to be pre-created in the
+  platform prior to being deployed.

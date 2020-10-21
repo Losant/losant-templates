@@ -1,0 +1,29 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: JWT-based dynamic device registration.
+    filesPath: ./files
+    globals:
+      - cloudOnly: true
+        description: The secret that is used when validating an incoming registration
+          JWT token. Do not share this secret anywhere public.
+        json: '"YOUR JWT SECRET"'
+        key: tl-jwt-register-secret
+      - cloudOnly: true
+        description: The URL of the entity that issued the registration JWT token. This
+          is usually your company URL.
+        json: '"example.com"'
+        key: tl-jwt-register-issuer
+    id: ~losant-application-libraryDevicesProvisioningDynamicRegistration-0~
+    name: Dynamic Registration
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - jwt
+      - provision
+      - onboard
+      - register
+      - registration
+version: 1

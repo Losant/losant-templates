@@ -1,0 +1,141 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: string
+        description: "Paper machine status states: Running, Planned, Unplanned, or
+          Sheetbreak."
+        name: status
+      - attributeTags: {}
+        dataType: number
+        description: Time at current status.
+        name: count
+      - attributeTags: {}
+        dataType: number
+        description: Time to be met to change current status.
+        name: time
+      - attributeTags: {}
+        dataType: string
+        description: In-depth description of the status.
+        name: reason
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: sku
+      - attributeTags: {}
+        dataType: number
+        description: SKU specific - tons/minute.
+        name: rate
+      - attributeTags: {}
+        dataType: number
+        description: SKU specific - tons created within quality.
+        name: tons
+      - attributeTags: {}
+        dataType: number
+        description: SKU specific - tons created that aren't sent on.
+        name: waste
+      - attributeTags: {}
+        dataType: number
+        description: SKU specific - tons to be created.
+        name: order
+      - attributeTags: {}
+        dataType: number
+        description: SKU specific - rate of trim.
+        name: trim
+      - attributeTags: {}
+        dataType: number
+        description: Overall quality- unrelated to the SKU production.
+        name: totalTons
+      - attributeTags: {}
+        dataType: number
+        description: Overall - unrelated to the SKU production.
+        name: totalWaste
+      - attributeTags: {}
+        dataType: number
+        description: Overall - unrelated to the SKU production.
+        name: totalTrim
+      - attributeTags: {}
+        dataType: number
+        description: SKU specific - tons created during sheetbreak.
+        name: sheetbreakTons
+      - attributeTags: {}
+        dataType: number
+        description: SKU specific - trim waste.
+        name: trimTons
+      - attributeTags: {}
+        dataType: number
+        description: Overall - unrelated to the SKU production.
+        name: sheetbreakTotal
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: skuRunTime
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: monthlyRate
+      - attributeTags: {}
+        dataType: number
+        description: Tons created each pass through simulation - used for summation for OEE.
+        name: currentTons
+      - attributeTags: {}
+        dataType: number
+        description: Waste created each pass through simulation - used for summation for
+          OEE.
+        name: currentWaste
+      - attributeTags: {}
+        dataType: boolean
+        description: "True: if machine state is currently sheetbreak."
+        name: sheetbreak
+      - attributeTags: {}
+        dataType: boolean
+        description: "True: if machine state is currently running."
+        name: running
+      - attributeTags: {}
+        dataType: boolean
+        description: "True: if machine state is currently unplanned downtime."
+        name: unplanned
+      - attributeTags: {}
+        dataType: boolean
+        description: "True: if machine state is currently planned downtime."
+        name: planned
+      - attributeTags: {}
+        dataType: number
+        description: Actual run time of SKU.
+        name: skuTime
+      - attributeTags: {}
+        dataType: number
+        description: Metric of OEE - found using OEE Calculation Workflow.
+        name: availability
+      - attributeTags: {}
+        dataType: number
+        description: Metric of OEE - found using OEE Calculation Workflow.
+        name: performance
+      - attributeTags: {}
+        dataType: number
+        description: Metric of OEE - found using OEE Calculation Workflow.
+        name: quality
+      - attributeTags: {}
+        dataType: number
+        description: Overall OEE - found using OEE Calculation Workflow.
+        name: oee
+    description: ""
+    deviceClass: standalone
+    deviceDescription: A unique paper machine creating toilet paper.
+    deviceName: "Paper Machine #"
+    id: ~losant-deviceRecipe-paperMachine-0~
+    name: Paper Machine
+    tags:
+      - key: type
+        value: papermachine
+      - key: sku
+        value: "2"
+      - key: order
+        value: 16200 tons
+      - key: scheduledTime
+        value: 810 min
+      - key: maxRate
+        value: "23"
+      - key: location
+        value: 39.1031, -84.5120
+version: 1

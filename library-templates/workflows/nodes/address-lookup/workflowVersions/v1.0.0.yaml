@@ -1,0 +1,169 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: The API key to use to send request Google Maps APIs.
+          id: apiKey
+          label: Google Maps API Key
+          required: true
+          type: stringTemplate
+        - description: >-
+            The GPS Coordinates to lookup address for in decimal degrees format
+            (e.g. 39.108,-84.509).
+          id: gpsCoordinates
+          label: GPS Coordinates
+          required: true
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: Address information found from gps coordinates that are passed in.
+      resultMode: required
+    enabled: true
+    flowId: ~losant-flow-addressLookup-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: hiKPTJtNfu
+        meta:
+          category: customNodeEnd
+          description: End the custom node run
+          label: Output
+          name: custom-node-end-single
+          x: 260
+          'y': 900
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo: []
+          method: GET
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://maps.googleapis.com/maps/api/geocode/json?latlng={{data.gpsCoordinates}}&key={{data.apiKey}}
+        id: ajubISqUJG
+        meta:
+          category: data
+          description: Makes the call to google maps API to get result of location.
+          label: Google Maps API
+          name: http
+          x: 260
+          'y': 300
+        outputIds:
+          - - 5NJqyYgGQv
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: Zh3XoobdW~
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 780
+        outputIds:
+          - - hiKPTJtNfu
+        type: DebugNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: 5NJqyYgGQv
+        meta:
+          category: logic
+          description: Removes the request information from the result object.
+          label: Mutate
+          name: mutate
+          x: 260
+          'y': 420
+        outputIds:
+          - - sk~xkGPEXs
+        type: MutateNode
+      - config:
+          expression: '{{working.result.statusCode}} === 200'
+        id: sk~xkGPEXs
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 540
+        outputIds:
+          - - LsSrmTHZRR
+          - - LkVzXH5CvP
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.result.address
+              source: 'working.result.body.results.[0].formatted_address'
+              type: copy
+        id: LkVzXH5CvP
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 660
+        outputIds:
+          - - Zh3XoobdW~
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.result.address
+              type: set
+              valueTemplate: unknown
+        id: LsSrmTHZRR
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 160
+          'y': 660
+        outputIds:
+          - - Zh3XoobdW~
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Location Reverse Lookup'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 180
+        outputIds:
+          - - ajubISqUJG
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-addressLookup-0~-cgk2htsrmfEDfUhHcZW0W
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "gpsCoordinates" : "39.9501567,-74.1175765",
+              "apiKey" : "your-api-key"
+            }
+          uiId: D6UBB5fGb7
+          x: 480
+          'y': 180
+        outputIds:
+          - - ajubISqUJG
+        type: virtualButton
+    version: v1.0.0
+version: 1

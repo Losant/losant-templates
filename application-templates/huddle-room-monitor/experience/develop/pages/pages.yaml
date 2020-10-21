@@ -1,0 +1,26 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-pageDashboardAvailable-3~
+    layoutId: ~losant-experienceView-layoutDashboard-0~
+    localFilename: ./page-dashboard-available.hbs
+    name: page-dashboard-available
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: ""
+    id: ~losant-experienceView-pageDashboardHistory-2~
+    layoutId: ~losant-experienceView-layoutDashboard-0~
+    localFilename: ./page-dashboard-history.hbs
+    name: page-dashboard-history
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: ""
+    id: ~losant-experienceView-pageLogin-1~
+    localFilename: ./page-login.hbs
+    name: page-login
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

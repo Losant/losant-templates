@@ -1,0 +1,95 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: distance
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: distanceIn
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: fillLevel
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: devEUI
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: carrier
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: lpp
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: gwAdrBit
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: gwChannel
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: gwID
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: gwFreq
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: gwRSSI
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: gwSNR
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: gwSF
+      - attributeTags: {}
+        dataType: number
+        name: altFT
+      - attributeTags: {}
+        dataType: number
+        name: alt
+      - attributeTags: {}
+        dataType: number
+        name: sat
+      - attributeTags: {}
+        dataType: number
+        name: vacc
+      - attributeTags: {}
+        dataType: number
+        name: hacc
+      - attributeTags: {}
+        dataType: number
+        name: lng
+      - attributeTags: {}
+        dataType: number
+        name: lat
+    description: Device recipe for the KST3320 Distance Sensor.
+    deviceClass: standalone
+    deviceName: KST3320
+    id: ~losant-deviceRecipe-kst3320-0~
+    name: KST3320
+    tags:
+      - key: dev_eui
+        value: 01AB34CD56EF7890
+      - key: serial_number
+        value: "123456"
+version: 1

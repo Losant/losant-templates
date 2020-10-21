@@ -1,0 +1,174 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-blobSimulator-0~
+    name: Blob Simulator
+    nodes:
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: base64
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.image
+          timeoutTemplate: ''
+          uriTemplate: 'https://picsum.photos/seed/{{working.randomNumber}}/360'
+        id: u16V87U58H
+        meta:
+          category: data
+          description: ''
+          id: u16V87U58H
+          label: HTTP
+          name: http
+          x: 300
+          'y': 280
+        outputIds:
+          - - GkSPSTzy7P
+        type: HttpNode
+      - config:
+          max: 10000
+          min: -10000
+          resultPath: working.randomNumber
+        id: NzErqbbPhN
+        meta:
+          category: logic
+          description: ''
+          id: NzErqbbPhN
+          label: Random Number
+          name: random-number
+          x: 300
+          'y': 180
+        outputIds:
+          - - u16V87U58H
+        type: RandomNumberNode
+      - config:
+          message: ''
+          property: ''
+        id: pyN219a-yi
+        meta:
+          category: output
+          description: ''
+          id: pyN219a-yi
+          label: Debug
+          name: debug
+          x: 300
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: image
+              valueTemplate: '{{working.image.body}}'
+          deviceId: ~losant-device-deviceRecordingBlobSimulatorOutput-0~
+          deviceIdTemplateType: stringTemplate
+          resultPath: working.stateResult
+          timeSourceType: payloadTime
+        id: GkSPSTzy7P
+        meta:
+          category: output
+          description: ''
+          id: GkSPSTzy7P
+          label: 'Device: State'
+          name: device-state
+          x: 300
+          'y': 380
+        outputIds:
+          - - pyN219a-yi
+        type: DeviceChangeStateNode
+      - config: {}
+        id: J5PjrXdrcK
+        meta:
+          annotationText: >-
+            By default, this simulator requests a random image from [Lorem
+            Picsum](https://picsum.photos/). The Random Number Node is
+            responsible for randomizing the returned image.
+
+
+            To use a different service to generate random images, update the URL
+            Template in the HTTP Node to your generator of choice. The Random
+            Number Node may not be necessary depending on your use case.
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 260
+          x: 20
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: oldK8xzVSq
+        meta:
+          annotationText: >-
+            **Important:** To record the received image as device state, you
+            must set the "Response Encoding Type" in the HTTP Node to "Base64".
+            This will put the response on your payload as an encoded string that
+            can be recorded as device state.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 500
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: uR9KOCN1pX
+        meta:
+          annotationText: >-
+            **Important:** The "Content Type" of the [blob
+            attribute](https://docs.losant.com/devices/blobs/) you are recording
+            the image to should match the type of image being returned. This
+            most likely should be "image/jpeg".
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 500
+          'y': 400
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-blobSimulator-0~-CT_N_upuQ_dll1r3pk9UO
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: oIuUKBA41m
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: oIuUKBA41m
+          x: 400
+          'y': 80
+        outputIds:
+          - - NzErqbbPhN
+        type: virtualButton
+      - config:
+          seconds: 60
+        key: ~losant-flow-blobSimulator-0~-GefX0qM8XQviY6zPEsFOf
+        meta:
+          category: trigger
+          description: ''
+          id: pFL0uaJa9y
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: pFL0uaJa9y
+          x: 200
+          'y': 80
+        outputIds:
+          - - NzErqbbPhN
+        type: timer
+version: 1

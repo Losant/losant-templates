@@ -1,0 +1,29 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    description: ""
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getTlLoginSso-2~
+    method: get
+    route: /tl-login-sso
+    staticReply:
+      statusCode: 200
+      type: page
+      value: ~losant-experienceView-tlPageLoginSso-0~
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getTlSaml-0~
+    method: get
+    route: /tl-saml
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postTlSaml-1~
+    method: post
+    route: /tl-saml
+    version: develop
+version: 1

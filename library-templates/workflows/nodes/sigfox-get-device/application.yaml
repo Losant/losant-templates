@@ -1,0 +1,16 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This node provide access to Sigfox's REST API to retrieve a
+      device's information.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesSigfoxGetDevice-0~
+    name: Sigfox Get Device
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - sigfox
+version: 1

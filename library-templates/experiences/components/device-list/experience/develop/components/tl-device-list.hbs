@@ -1,0 +1,32 @@
+{{#*inline "id"}}{{#if @args.id}}{{@args.id}}{{else}}tl-device-list{{/if}}{{/inline}}
+
+{{#with this as | devices |}}
+{{#with @args as | args |}}
+
+<div class="list-group" id="{{> id}}">
+  {{#each devices}}
+    <a
+      class="list-group-item list-group-item-action{{#eq args.selected this.id}} active{{/eq}}"
+      data-device-name="{{this.name}}"
+      data-device-id="{{this.id}}"
+      data-context="{{template args.context this}}"
+      href="{{#if args.link}}{{template args.link this}}{{else}}#{{/if}}"
+      id="{{> id}}-{{this.id}}">
+
+      {{#if args.imageFile}}
+        <img src="{{file (template args.imageFile this)}}" style="width:{{args.imageSize}}px; height:{{args.imageSize}}px; object-fit: contain;">
+      {{/if}}
+
+      {{#if args.labelComponent}}
+        {{component args.labelComponent this}}
+      {{else if args.label}}
+        {{template args.label this}}
+      {{else}}
+        {{this.name}}
+      {{/if}}
+    </a>
+  {{/each}}
+</div>
+
+{{/with}}
+{{/with}}

@@ -1,0 +1,257 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-workflowGet-1~
+    globals: []
+    id: ~losant-flowVersion-workflowGet-0~
+    name: Workflow - GET /
+    nodes:
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-pageDashboardDevice-3~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+        id: Skm-8e1DhY
+        meta:
+          category: output
+          description: ''
+          id: Skm-8e1DhY
+          label: Endpoint Reply
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 780
+        outputIds:
+          - - HsrCCGZoVa
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: HsrCCGZoVa
+        meta:
+          category: output
+          description: ''
+          id: HsrCCGZoVa
+          label: Debug
+          name: debug
+          x: 440
+          'y': 960
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMethod: id
+          idTemplate: '{{data.query.device}}'
+          includeState: false
+          resultPath: working.device
+          tagsAsObject: true
+        id: 7EmZS9fYNG
+        meta:
+          category: data
+          description: ''
+          id: 7EmZS9fYNG
+          label: 'Device: Get'
+          name: get-device
+          x: 540
+          'y': 680
+        outputIds:
+          - - Skm-8e1DhY
+        type: GetDeviceNode
+      - config:
+          attributes:
+            - state_description
+          findMethod: experienceUserIdOrEmail
+          findMultiple: true
+          idTemplate: '{{experience.user.id}}'
+          includeState: true
+          resultPath: working.devices
+          resultsPage: '0'
+          resultsPerPage: '100'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: true
+        id: DYJhy3zKKC
+        meta:
+          category: data
+          description: ''
+          id: 7EmZS9fYNG
+          label: Get Devices
+          name: get-device
+          x: 220
+          'y': 140
+        outputIds:
+          - - urpasYfNh_
+        type: GetDeviceNode
+      - config: {}
+        id: vCZw2rANHh
+        meta:
+          annotationText: >-
+            Get all devices associated with this user. This is used to populate
+            the device list on the left.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 420
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          deviceIdTemplate: '{{data.query.device}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: YPKaZf1_Yk
+        meta:
+          category: experience
+          description: ''
+          id: K72s1K40gF
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 440
+          'y': 500
+        outputIds:
+          - - J9gg9Mt0bJ
+          - - 7EmZS9fYNG
+        type: VerifyDeviceNode
+      - config: {}
+        id: 06iK1tci5z
+        meta:
+          annotationText: >-
+            Check to see if the user has access to the device ID provided on the
+            query parameter.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 640
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 43NGDjoNTT
+        meta:
+          annotationText: >-
+            If the user doesn't have access, redirect them to the overview page.
+            If they do have access, grab the full device and show the device
+            dashboard page.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 740
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.query.device}} != undefined'
+        id: urpasYfNh_
+        meta:
+          category: logic
+          description: ''
+          id: urpasYfNh_
+          label: Conditional
+          name: conditional
+          x: 220
+          'y': 320
+        outputIds:
+          - - ZtcFJ06B9D
+          - - YPKaZf1_Yk
+        type: ConditionalNode
+      - config: {}
+        id: KinHeyayW3
+        meta:
+          annotationText: 'If no ID was provided on the query, return the overview page.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 460
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-pageDashboardOverview-2~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+        id: ZtcFJ06B9D
+        meta:
+          category: output
+          description: ''
+          id: ZtcFJ06B9D
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 120
+          'y': 500
+        outputIds:
+          - - Ux9UKMMZH5
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: Ux9UKMMZH5
+        meta:
+          category: output
+          description: ''
+          id: HsrCCGZoVa
+          label: Debug
+          name: debug
+          x: 120
+          'y': 680
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+        id: J9gg9Mt0bJ
+        meta:
+          category: output
+          description: ''
+          id: Skm-8e1DhY
+          label: Endpoint Reply
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 680
+        outputIds:
+          - - HsrCCGZoVa
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-get-1~
+        meta:
+          category: trigger
+          description: ''
+          id: kwrxTD9sVK
+          label: Endpoint
+          name: endpoint
+          uiId: kwrxTD9sVK
+          x: 220
+          'y': 20
+        outputIds:
+          - - DYJhy3zKKC
+        type: endpoint
+    version: develop
+version: 1

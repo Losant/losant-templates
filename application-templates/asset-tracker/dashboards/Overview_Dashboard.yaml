@@ -1,0 +1,122 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: map
+        config:
+          additionalAttributes: null
+          attribute: location
+          clusterPoints: false
+          compositeResult: true
+          defaultBearing: 0
+          defaultCenter: '39.25196,-84.76681'
+          defaultPitch: 0
+          defaultZoom: 7
+          deviceIds: []
+          deviceTags:
+            - key: simId
+          duration: 0
+          endColor: '#8db319'
+          iconTemplate: |-
+            {{#if isLastPoint}}
+              {{#gte data.temperature 4}}
+                {{colorMarker '#FF1129'}}
+              {{else}}
+                {{#lte data.temperature 0}}
+                  {{colorMarker '#FF1129'}}
+                {{else}}
+                  {{#gte data.shock 4}}
+                    {{colorMarker '#FF1129'}}
+                  {{else}}
+                    {{#gte data.orientation 30}}
+                      {{colorMarker '#FF1129'}}
+                    {{else}}
+                      {{#lte data.orientation -30}}
+                        {{colorMarker '#FEA233'}}
+                      {{else}}
+                        {{colorMarker '#49AD79'}}
+                      {{/lte}}
+                    {{/gte}}
+                  {{/gte}}
+                {{/lte}}
+              {{/gte}}
+            {{/if}}
+          includeArrows: false
+          includeLines: false
+          mapStyle: normal
+          pinMode: advanced
+          popupTemplate: >-
+            #### {{deviceName}}
+
+
+            {{#eq data.distCenterId '__TRANSIT__'}}Currently in
+            transit{{else}}At {{data.distCenterId}}{{/eq}}
+
+
+            - **shipment_id:** {{data.shipment_id}}
+
+            - **temperature:** {{data.temperature}}
+
+            - **shock:** {{data.shock}}
+
+            - **orientation:** {{data.orientation}}
+
+            - **signal_strength:** {{data.signal_strength}}
+
+            - **battery:** {{data.battery}}
+          resizedPins: true
+          resolution: 60000
+          startColor: '#ff261b'
+        height: 3
+        id: ouaki1W51r
+        startX: 0
+        startY: 0
+        title: Shipments
+        width: 4
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: event-list
+        config:
+          allowUpdates: true
+          columns:
+            - id: defaultLevelColumn
+              type: level
+            - id: yANJ1cu2Y6
+              type: subjectWithMessage
+            - id: fgjY2SqAAb
+              selectedTag: shipment_id
+              type: tag
+            - id: defaultStateColumn
+              type: state
+            - id: vznOWPXmoh
+              type: creationDate
+          query: |-
+            {
+              "$or": [
+                {
+                  "creationDate": {
+                    "$gte": "{{ formatDate (subtract (currentDateTime 'x') 86400000) 'YYYY-MM-DD[T]HH:mm:[00Z]' }}"
+                  }
+                }
+              ]
+            }
+          sortDirection: desc
+          sortField: creationDate
+        height: 2
+        id: JbSBlsadYp
+        startX: 0
+        startY: 3
+        title: Events Last 24 Hours
+        width: 4
+    contextConfiguration:
+      - defaultValue: foo
+        name: string-0
+        type: string
+        validationConfig: {}
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-overviewDashboard-1~
+    name: Overview Dashboard
+    public: false
+    refreshRate: 60
+version: 1

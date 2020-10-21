@@ -1,0 +1,79 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-workflowGetLogout-2~
+    globals: []
+    id: ~losant-flowVersion-workflowGetLogout-1~
+    name: Workflow - GET /logout
+    nodes:
+      - config:
+          bodyTemplate: /login
+          bodyTemplateType: string
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+        id: GhlpDRGyhm
+        meta:
+          category: output
+          description: ''
+          id: GhlpDRGyhm
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 220
+          'y': 200
+        outputIds:
+          - - cvrbKzD1-y
+        type: EndpointReplyNode
+      - config: {}
+        id: YQo2ZCuTIN
+        meta:
+          annotationText: >-
+            Removes the `authorization` cookie, which will prevent any other
+            request by this user from being authenticated. Immediately redirect
+            them to /login.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 420
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: cvrbKzD1-y
+        meta:
+          category: output
+          description: ''
+          id: cvrbKzD1-y
+          label: Debug
+          name: debug
+          x: 220
+          'y': 400
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getLogout-0~
+        meta:
+          category: trigger
+          description: ''
+          id: bKPEmhE9VH
+          label: Endpoint
+          name: endpoint
+          uiId: bKPEmhE9VH
+          x: 220
+          'y': 60
+        outputIds:
+          - - GhlpDRGyhm
+        type: endpoint
+    version: develop
+version: 1

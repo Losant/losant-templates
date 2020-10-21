@@ -1,0 +1,64 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        name: manifold_temperature
+      - attributeTags: {}
+        dataType: number
+        name: rpm
+      - attributeTags: {}
+        dataType: number
+        name: battery_voltage
+      - attributeTags: {}
+        dataType: number
+        name: fuel_level
+      - attributeTags: {}
+        dataType: number
+        name: oil_pressure
+      - attributeTags: {}
+        dataType: number
+        name: output_current
+      - attributeTags: {}
+        dataType: number
+        name: running
+      - attributeTags: {}
+        dataType: gps
+        name: location
+      - attributeTags: {}
+        dataType: string
+        name: fault_description
+      - attributeTags: {}
+        dataType: string
+        name: maintenance_description
+      - attributeTags: {}
+        dataType: number
+        name: state_index
+      - attributeTags: {}
+        dataType: string
+        name: state_description
+      - attributeTags: {}
+        dataType: number
+        name: hours_running
+      - attributeTags: {}
+        dataType: number
+        name: days_running
+      - attributeTags: {}
+        dataType: number
+        name: is_in_maintenance_mode
+      - attributeTags: {}
+        dataType: number
+        name: is_in_faulted_mode
+      - attributeTags: {}
+        dataType: number
+        name: is_in_running_mode
+      - attributeTags: {}
+        dataType: number
+        name: is_in_stopped_mode
+    description: Industrial power generator.
+    deviceClass: standalone
+    deviceName: Device from recipe Generator
+    id: ~losant-deviceRecipe-generator-0~
+    name: Generator
+    tags: []
+version: 1

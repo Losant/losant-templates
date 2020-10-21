@@ -1,0 +1,370 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: 'Created for Endpoint GET /devices/{deviceId}'
+    enabled: true
+    flowId: ~losant-flow-getDevicesDeviceId-2~
+    globals: []
+    id: ~losant-flowVersion-getDevicesDeviceId-0~
+    name: 'GET /devices/{deviceId?}'
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-pageDashboardOverview-2~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+        id: LYI4xBXe3Q
+        meta:
+          category: output
+          description: ''
+          id: LYI4xBXe3Q
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 680
+        outputIds:
+          - - wnNpZvQcNm
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: wnNpZvQcNm
+        meta:
+          category: output
+          description: ''
+          id: wnNpZvQcNm
+          label: Debug
+          name: debug
+          x: 340
+          'y': 900
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: true
+          resultPath: pageData.devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: simId
+              valueTemplate: ''
+          tagsAsObject: true
+        id: oXwFsRIX0t
+        meta:
+          category: data
+          description: ''
+          id: oXwFsRIX0t
+          label: 'Device: Get'
+          name: get-device
+          x: 340
+          'y': 160
+        outputIds:
+          - - SXVPlJLz5h
+        type: GetDeviceNode
+      - config: {}
+        id: dWDCPMkbXX
+        meta:
+          annotationText: >-
+            Get all devices with a `simId` tag, which represents all cellular
+            asset trackers in this application.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 540
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: HOT5MXG8AK
+        meta:
+          annotationText: >-
+            If this is a device detail page, render the detail dashboard.
+            Otherwise, render the overview dashboard.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 640
+          'y': 660
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: pageData.devices
+        id: SXVPlJLz5h
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          id: SXVPlJLz5h
+          label: Loop
+          name: loop
+          x: 340
+          'y': 320
+        outputIds:
+          - - xIS7wgbGkn
+          - - tQUKWgjfy3
+        type: LoopNode
+      - config:
+          loopNodeId: SXVPlJLz5h
+          shouldBreak: false
+        id: ycamfxDAPi
+        meta:
+          category: loop
+          description: ''
+          groupId: SXVPlJLz5h
+          id: ycamfxDAPi
+          label: Next
+          name: loop-next
+          x: 200
+          'y': 1020
+        outputIds: []
+        type: LoopCapNode
+      - config: {}
+        id: lLxLzRabvu
+        meta:
+          annotationText: >-
+            Loop through each device to see if there are any open events for the
+            device.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 540
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          findMetadata: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "state": {
+                    "$eq": "new"
+                  }
+                },
+                {
+                  "deviceId": {
+                    "$eq": "{{working.device.value.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.device.value.event
+          sortDirection: desc
+          sortField: creationDate
+        id: 64b6bfjJAH
+        meta:
+          category: data
+          description: ''
+          groupId: SXVPlJLz5h
+          id: 64b6bfjJAH
+          label: 'Event: Get'
+          mode: queryTemplateSingle
+          name: get-event
+          x: 200
+          'y': 700
+        outputIds:
+          - - TCQ8pX3S2e
+        type: GetEventNode
+      - config:
+          destArrayPath: pageData.devicesWithEvents
+          rules:
+            - inputTemplate: '{{working.device.value}}'
+              type: push
+          sourceArrayPath: pageData.devicesWithEvents
+        id: TCQ8pX3S2e
+        meta:
+          category: logic
+          description: ''
+          groupId: SXVPlJLz5h
+          id: TCQ8pX3S2e
+          label: Array
+          name: array
+          x: 200
+          'y': 860
+        outputIds:
+          - - ycamfxDAPi
+        type: ArrayNode
+      - config:
+          rules:
+            - destination: pageData.devices
+              source: pageData.devicesWithEvents
+              type: move
+        id: xIS7wgbGkn
+        meta:
+          category: logic
+          description: ''
+          id: xIS7wgbGkn
+          label: Mutate
+          name: mutate
+          x: 340
+          'y': 480
+        outputIds:
+          - - kXMCFVhCA2
+        type: MutateNode
+      - config: {}
+        id: uu9c-7apOa
+        meta:
+          annotationText: Find a `new` event associated with this device.
+          category: annotation
+          groupId: SXVPlJLz5h
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Njqg5Nt8pz
+        meta:
+          annotationText: >-
+            Building up a new array of device objects. Each object in this array
+            has an `event` field that contains the event found above.
+          category: annotation
+          groupId: SXVPlJLz5h
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 840
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.params.deviceId}}'
+        id: kXMCFVhCA2
+        meta:
+          category: logic
+          description: ''
+          id: kXMCFVhCA2
+          label: Detail Route?
+          name: conditional
+          x: 340
+          'y': 580
+        outputIds:
+          - - LYI4xBXe3Q
+          - - RDcSHSZYr8
+        type: ConditionalNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-pageDashboardDevice-3~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+        id: RDcSHSZYr8
+        meta:
+          category: output
+          description: ''
+          id: LYI4xBXe3Q
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 440
+          'y': 680
+        outputIds:
+          - - wnNpZvQcNm
+        type: EndpointReplyNode
+      - config:
+          expression: '{{working.device.value.id}} === {{data.params.deviceId}}'
+        id: tQUKWgjfy3
+        meta:
+          category: logic
+          description: ''
+          groupId: SXVPlJLz5h
+          id: tQUKWgjfy3
+          label: Current Device?
+          name: conditional
+          x: 200
+          'y': 320
+        outputIds:
+          - - 64b6bfjJAH
+          - - jGrbgNnRN5
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: pageData.deviceName
+              type: set
+              valueTemplate: '{{working.device.value.name}}'
+        id: jGrbgNnRN5
+        meta:
+          category: logic
+          description: ''
+          groupId: SXVPlJLz5h
+          id: jGrbgNnRN5
+          label: Mutate
+          name: mutate
+          x: 300
+          'y': 460
+        outputIds:
+          - - 64b6bfjJAH
+        type: MutateNode
+      - config: {}
+        id: UCPMMF79Pi
+        meta:
+          annotationText: >-
+            If the ID of this device matches the ID of the device in the path,
+            set the device name on our `pageData` object.
+          category: annotation
+          groupId: SXVPlJLz5h
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 500
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getDevicesDeviceId-4~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /devices/{deviceId}'
+          name: endpoint
+          uiId: M5DdATUg0L
+          x: 440
+          'y': 60
+        outputIds:
+          - - oXwFsRIX0t
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getDevices-2~
+        meta:
+          category: trigger
+          description: ''
+          id: gliGCMxMZJ
+          label: GET /devices
+          name: endpoint
+          uiId: gliGCMxMZJ
+          x: 240
+          'y': 60
+        outputIds:
+          - - oXwFsRIX0t
+        type: endpoint
+    version: develop
+version: 1

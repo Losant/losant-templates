@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Includes a set of page layouts for the Bootstrap 4 framework.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesBoilerplatesBootstrap4Layouts-0~
+    name: Bootstrap 4 Layouts
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - layout
+      - bootstrap
+      - columns
+      - css
+      - featured
+version: 1

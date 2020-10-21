@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: Created for Endpoint GET /devices/{deviceId}/edit.
+    id: ~losant-experienceView-editDevice-0~
+    localFilename: ./Edit_Device.hbs
+    name: Edit Device
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

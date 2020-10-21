@@ -1,0 +1,25 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getDevicesDeviceIdEdit-0~
+    method: get
+    route: /devices/{deviceId}/edit
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postDevicesDeviceIdEdit-1~
+    method: post
+    route: /devices/{deviceId}/edit
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+version: 1

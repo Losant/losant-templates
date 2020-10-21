@@ -1,0 +1,16 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: The KST3320 distance sensor.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryDevicesRecipesKst3320DistanceSensor-0~
+    name: KST3320 Distance Sensor
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - kst
+      - distance
+version: 1

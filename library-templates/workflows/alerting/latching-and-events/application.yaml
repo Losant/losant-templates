@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates usage of the Latch Node, and auto-creating and
+      auto-resolving events.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsAlertingLatchingAndEvents-0~
+    name: Latching and Events
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - latch
+      - events
+      - auto-resolving
+      - threshold
+version: 1

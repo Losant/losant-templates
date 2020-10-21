@@ -1,0 +1,10 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getDeviceStateStreamDeviceId-1~
+    method: get
+    route: /device-state-stream/{deviceId}
+    version: develop
+version: 1

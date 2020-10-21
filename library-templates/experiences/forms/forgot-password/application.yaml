@@ -1,0 +1,28 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Provides the ability for experience users to reset a forgotten password.
+    filesPath: ./files
+    globals:
+      - cloudOnly: true
+        description: ""
+        json: '"YOUR_RESET_TOKEN_SECRET"'
+        key: tl-jwt-reset-secret
+      - cloudOnly: true
+        description: ""
+        json: '"example.com"'
+        key: tl-jwt-reset-issuer
+    id: ~losant-application-libraryExperiencesFormsForgotPassword-0~
+    name: Forgot Password
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - authentication
+      - password
+      - forgot
+      - reset
+      - user
+      - login
+version: 1

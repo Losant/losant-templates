@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Login | Kanarra</title>
+    
+    <link rel="icon" type="image/x-icon" href="{{file '/favicon.ico'}}">
+
+    <link rel="stylesheet" type="text/css" href="{{file '/reset.css'}}">
+
+    <style>
+      {{component "css-templates"}}
+    </style>
+  </head>
+  <body id="login-page">
+    <div class="panel-container">
+      <div class="panel-content">
+        <div id="login-page-logo">
+          <img src="{{file '/kanarra-logo-stacked.png'}}" width="171">
+        </div>
+        <form class="panel-page-form" action="/login" method="POST">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="jane@example.com" value="{{request.query.email}}" {{#eq request.query.invalid 'true'}}class="panel-page-invalid"{{/eq}}>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="password" {{#eq request.query.invalid 'true'}}class="panel-page-invalid"{{/eq}}>
+          <button class="large-button">Sign In</button>
+          {{#eq request.query.invalid 'true'}}
+            <div id="login-page-error">
+              Invalid username or password.
+            </div>
+          {{/eq}}
+        </form>
+        <div id="login-page-copyright">
+          Copyright © {{formatDate time 'YYYY'}}, Kanarra Inc, All Rights Reserved
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

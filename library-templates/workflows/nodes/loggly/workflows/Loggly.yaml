@@ -1,0 +1,136 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            [Customer
+            Tokens](http://loggly.com/docs/customer-token-authentication-token/)
+            are used by Loggly to associate data you send with your account. The
+            token is used as part of the API request.
+          id: token
+          label: Loggly Customer Token
+          required: true
+          type: stringTemplate
+        - description: The payload path of event data to send to Loggly.
+          id: payloadPath
+          label: Event Data
+          required: true
+          type: payloadPath
+      outputCount: 1
+      resultDescription: >-
+        The result of the [Loggly HTTP
+        API](https://www.loggly.com/docs/http-endpoint/) request. If the request
+        fails, the result will be an object with an "error" property.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: >-
+      Log payload data to Loggly using their [HTTP
+      API](https://www.loggly.com/docs/http-endpoint/).
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAFIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDAgNzkuMTYwNDUxLCAyMDE3LzA1LzA2LTAxOjA4OjIxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOCAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMTgtMDgtMTBUMTc6MzU6NTMtMDQ6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDE4LTA4LTEwVDE3OjM4OjM5LTA0OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDE4LTA4LTEwVDE3OjM4OjM5LTA0OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJkMTQxNTZmLWJiOWUtNGE0Ny1iYmI4LTBlOTkzMDFhMzlmNCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyZDE0MTU2Zi1iYjllLTRhNDctYmJiOC0wZTk5MzAxYTM5ZjQiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyZDE0MTU2Zi1iYjllLTRhNDctYmJiOC0wZTk5MzAxYTM5ZjQiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjJkMTQxNTZmLWJiOWUtNGE0Ny1iYmI4LTBlOTkzMDFhMzlmNCIgc3RFdnQ6d2hlbj0iMjAxOC0wOC0xMFQxNzozNTo1My0wNDowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKE1hY2ludG9zaCkiLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+dHQnmAAAALdJREFUWIXtl7EOgzAMRM+oU8v/fyllDQMlApFA7XNrRYolpuDjcY7BkZQSIuMBAPN7KlGIUqv2JlWd52tcAci4s3BbL4IM5IM19SveawWwbpxTHuOANQ4QFgCPtskaWgD3no0owRYpGgAdoAM0CaD9Q95qNecA4ONC1rA6wEAccpkSWCBOOewe0EDUJyJyMJXdpVkD8BlKRdy6Sy3UZBt2ANe4Oph82xrUDg534J8fop8A0BEOsADUghhMt4lmHgAAAABJRU5ErkJggg==
+    id: ~losant-flow-loggly-0~
+    name: Loggly
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: zNkS2LXYO1
+        meta:
+          category: customNodeEnd
+          description: Returns the result (or error) object to the outer workflow.
+          label: Output
+          name: custom-node-end-single
+          x: 260
+          'y': 620
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: '{{ jsonEncode data.payloadPath }}'
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo: []
+          method: POST
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: 'http://logs-01.loggly.com/inputs/{{data.token}}/tag/http/'
+        id: mNJ9jeWFs6
+        meta:
+          category: data
+          description: >-
+            Make Loggly HTTP request. Documentation:
+            https://www.loggly.com/docs/http-endpoint/
+          label: HTTP
+          name: http
+          x: 260
+          'y': 320
+        outputIds:
+          - - HMswVxjKOx
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: hT1zTJFCOQ
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 520
+        outputIds:
+          - - zNkS2LXYO1
+        type: DebugNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: HMswVxjKOx
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 260
+          'y': 420
+        outputIds:
+          - - hT1zTJFCOQ
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Loggly'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 180
+        outputIds:
+          - - mNJ9jeWFs6
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-loggly-0~-rrtmIvAKNcNomwvSkYrcY
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "token": "api-token-here",
+              "payloadPath": { "hello": "world" }
+            }
+          uiId: XuaCU7Oe07
+          x: 460
+          'y': 180
+        outputIds:
+          - - mNJ9jeWFs6
+        type: virtualButton
+version: 1

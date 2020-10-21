@@ -1,0 +1,19 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: number
+        name: warning_or_alarm
+      - constraint: required
+        dataType: number
+        name: warning_or_alarm_index
+      - constraint: required
+        dataType: string
+        name: description
+      - constraint: required
+        dataType: string
+        name: additional_information
+    id: ~losant-dataTable-warningsAndAlarms-0~
+    localFilename: ./warnings_and_alarms.csv
+    name: warnings_and_alarms
+version: 1

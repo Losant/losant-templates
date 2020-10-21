@@ -1,0 +1,492 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      A workflow managing both of the login pages: manager and kiosk. The
+      workflow includes both requests to view the login pages as well as
+      submissions of login credentials. Managers log in with username and
+      password, kiosk log in uses a pin tag on the user.
+    enabled: true
+    flowId: ~losant-flow-workflowGetPostLogin-1~
+    globals: []
+    id: ~losant-flowVersion-workflowGetPostLogin-0~
+    name: Workflow - GET & POST /login
+    nodes:
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-kioskLogIn-2~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: BkxSdV9P6-
+        meta:
+          category: output
+          description: >-
+            Invalid pin credentials. Return the user to the /kiosk login page
+            and alert them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 940
+          'y': 980
+        outputIds:
+          - - l0qmCDpS2Y
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: ''
+              valueTemplate: '{{working.token}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: r1-HdN5Dab
+        meta:
+          category: output
+          description: >-
+            Successful login. Redirect the user to the home page and set the
+            auth cookie for future requests.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1140
+          'y': 1080
+        outputIds:
+          - - l0qmCDpS2Y
+        type: EndpointReplyNode
+      - config:
+          expression: '{{ experience.user }}'
+        id: B1XrON5DTW
+        meta:
+          category: logic
+          description: Is the user logged in already?
+          label: Logged in?
+          name: conditional
+          x: 640
+          'y': 160
+        outputIds:
+          - - r1NSOEcw6Z
+          - - ryHSdE5vTZ
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: ryHSdE5vTZ
+        meta:
+          category: output
+          description: >-
+            User is logged in and navigating to the manager view. Return the /
+            home page to the user.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 740
+          'y': 300
+        outputIds: []
+        type: EndpointReplyNode
+      - config:
+          expression: '{{ data.method }} == ''post'''
+        id: r1NSOEcw6Z
+        meta:
+          category: logic
+          description: Was this a submission of login credentials?
+          label: POST request?
+          name: conditional
+          x: 540
+          'y': 300
+        outputIds:
+          - - TZCIRHMa8M
+          - - _PKzod1o0i
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": false
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-kioskLogIn-2~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: SyUrOE9wpW
+        meta:
+          category: output
+          description: Render the login page for the kiosk access.
+          label: Render Kiosk
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 460
+          'y': 660
+        outputIds:
+          - - q11Wd6ZDSo
+        type: EndpointReplyNode
+      - config:
+          emailOrIdTemplate: '{{working.pinLookup.email}}'
+          extraDataJsonTemplate: ''
+          invalidateExistingTokens: true
+          resultPath: working.token
+          ttlTemplate: '300000'
+        id: DyufpLcW6G
+        meta:
+          category: experience
+          description: ''
+          id: DyufpLcW6G
+          label: Generate Token
+          name: experience-user-token
+          x: 1140
+          'y': 980
+        outputIds:
+          - - r1-HdN5Dab
+        type: ExperienceUserTokenNode
+      - config:
+          expression: '{{working.pinLookup}}'
+        id: MnvVa61EyO
+        meta:
+          category: logic
+          description: ''
+          id: MnvVa61EyO
+          label: Valid pin?
+          name: conditional
+          x: 1040
+          'y': 840
+        outputIds:
+          - - BkxSdV9P6-
+          - - DyufpLcW6G
+        type: ConditionalNode
+      - config:
+          expression: '{{data.query.path}} === ''kiosk'''
+        id: _PKzod1o0i
+        meta:
+          category: logic
+          description: ''
+          id: j82PN-81K6
+          label: Kiosk request?
+          name: conditional
+          x: 880
+          'y': 600
+        outputIds:
+          - - T7bfF_8er4
+          - - wlqtgEd9N2
+        type: ConditionalNode
+      - config:
+          emailTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: true
+          passwordTemplate: '{{data.body.password}}'
+          tokenResultPath: data.responseToken
+          ttlTemplate: '1800000'
+          userResultPath: data.responseUser
+        id: T7bfF_8er4
+        meta:
+          authMode: emailPassword
+          category: experience
+          description: Do these credentials match an experience user?
+          label: Manager Log In
+          name: experience-user-auth
+          x: 720
+          'y': 720
+        outputIds:
+          - - CLiQcLLGxj
+          - - S1wFM7Txpt
+        type: ExperienceUserAuthNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-managerLogin-7~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: CLiQcLLGxj
+        meta:
+          category: output
+          description: >-
+            Invalid email and password credentials. Return the user to the login
+            page and alert them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 620
+          'y': 840
+        outputIds:
+          - - _vR3qcOclU
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: ''
+              valueTemplate: '{{data.responseToken}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: S1wFM7Txpt
+        meta:
+          category: output
+          description: >-
+            Successful login. Redirect the user to the manager home page and set
+            the auth cookie for future requests.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 820
+          'y': 840
+        outputIds:
+          - - _vR3qcOclU
+        type: EndpointReplyNode
+      - config:
+          expression: '{{data.query.path}} === ''kiosk'''
+        id: TZCIRHMa8M
+        meta:
+          category: logic
+          description: ''
+          id: j82PN-81K6
+          label: Which Log In?
+          name: conditional
+          x: 360
+          'y': 540
+        outputIds:
+          - - EmoP_HNluO
+          - - SyUrOE9wpW
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": false
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-managerLogin-7~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: EmoP_HNluO
+        meta:
+          category: output
+          description: Render the login page for manager access.
+          label: Render Manager
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 660
+        outputIds:
+          - - q11Wd6ZDSo
+        type: EndpointReplyNode
+      - config: {}
+        id: QeSAAlxfgx
+        meta:
+          annotationText: >-
+            If `?path=kiosk`, render the PIN login. Otherwise, render the
+            email/pass login.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 80
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: SFD0XXFgmw
+        meta:
+          annotationText: >
+            There are two path options for logging in. 
+
+
+            One is a username and password login that routes to the manager view
+            (`/login`) and the other a pin login that routes to a kiosk view
+            (`/login?path=kiosk`).
+
+
+            Requests to  `/login` will render the Manager Log In page.
+
+
+            Requests to and `/login?path=kiosk` will render the Kiosk Login In
+            page.
+          category: annotation
+          height: 280
+          label: Note
+          name: note
+          width: 320
+          x: 180
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: AtGRR3NuDo
+        meta:
+          annotationText: >-
+            PIN-based login. Query the existing users who are each tagged with a
+            unique pin.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 1260
+          'y': 720
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: q11Wd6ZDSo
+        meta:
+          category: output
+          description: ''
+          id: q11Wd6ZDSo
+          label: Debug
+          name: debug
+          x: 360
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: _vR3qcOclU
+        meta:
+          category: output
+          description: ''
+          id: q11Wd6ZDSo
+          label: Debug
+          name: debug
+          x: 720
+          'y': 960
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: R5nv9AqHAa
+        meta:
+          annotationText: User is already logged in. Redirect them back to /.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 940
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: MJd1nUu_qJ
+        meta:
+          annotationText: >-
+            Generate an authentication token for the user with the matching PIN.
+            Set that token on a cookie and redirect the user to /.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 1340
+          'y': 980
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: l0qmCDpS2Y
+        meta:
+          category: output
+          description: ''
+          id: l0qmCDpS2Y
+          label: Debug
+          name: debug
+          x: 880
+          'y': 1260
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: false
+          findMethod: userTags
+          findMultiple: false
+          resultPath: working.pinLookup
+          sortDirection: asc
+          sortField: email
+          userTags:
+            - keyTemplate: pin
+              valueTemplate: '{{data.body.password}}'
+        id: wlqtgEd9N2
+        meta:
+          category: experience
+          description: ''
+          id: wlqtgEd9N2
+          label: Pin Lookup
+          name: get-experience-user
+          x: 1040
+          'y': 700
+        outputIds:
+          - - MnvVa61EyO
+        type: GetExperienceUserNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postLogin-2~
+        meta:
+          category: trigger
+          description: When a user submits login credentials ...
+          label: POST /login
+          name: endpoint
+          uiId: SywHdN5P6W
+          x: 520
+          'y': 60
+        outputIds:
+          - - B1XrON5DTW
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getLogin-1~
+        meta:
+          category: trigger
+          description: When a user visits one of the login pages ...
+          label: GET /login
+          name: endpoint
+          uiId: SJ_SOV5D6W
+          x: 760
+          'y': 60
+        outputIds:
+          - - B1XrON5DTW
+        type: endpoint
+    version: develop
+version: 1

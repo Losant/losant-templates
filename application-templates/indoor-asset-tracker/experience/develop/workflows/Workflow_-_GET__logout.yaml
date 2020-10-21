@@ -1,0 +1,153 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      A workflow managing the logout page. Both kiosk and manager users route
+      through this logout.
+    enabled: true
+    flowId: ~losant-flow-workflowGetLogout-2~
+    globals: []
+    id: ~losant-flowVersion-workflowGetLogout-1~
+    name: Workflow - GET /logout
+    nodes:
+      - config:
+          bodyTemplate: /login
+          bodyTemplateType: string
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+        id: Bkx0DpwaW
+        meta:
+          category: output
+          description: >-
+            Delete the auth cookie and redirect the user to the manager login
+            page.
+          label: Manager Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 140
+          'y': 300
+        outputIds:
+          - - S1eeAPTDpZ
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: S1eeAPTDpZ
+        meta:
+          category: output
+          description: The user has been logged out ands redirected to a log in page.
+          label: Logout
+          name: debug
+          x: 260
+          'y': 420
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.query.path}}'
+        id: gBky_xjKN4
+        meta:
+          category: logic
+          description: Does the request have the `kiosk` query parameter?
+          id: gBky_xjKN4
+          label: Which Log In?
+          name: conditional
+          x: 260
+          'y': 180
+        outputIds:
+          - - Bkx0DpwaW
+          - - f_g0ryNe7i
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '/login?path={{data.query.path}}'
+          bodyTemplateType: string
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+        id: f_g0ryNe7i
+        meta:
+          category: output
+          description: >-
+            Delete the auth cookie and redirect the user to the kiosk login
+            page.
+          label: Kiosk Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 300
+        outputIds:
+          - - S1eeAPTDpZ
+        type: EndpointReplyNode
+      - config: {}
+        id: SPtbg6R4Vy
+        meta:
+          annotationText: >-
+            All users will be logged out on duplicate login.
+
+
+            Kiosk users will be logged out after one minute of inactivity on a
+            page. Kiosk user credentials will also be invalidated after 5
+            minutes.
+
+
+            Managers credentials will be invalidated after 30 minutes.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 20
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: kN8lHilO0H
+        meta:
+          annotationText: Render the correct login page.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 100
+          x: 300
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: tXbfau8CsV
+        meta:
+          annotationText: Kiosk log out includes a "kiosk" query path parameter.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 140
+          x: 500
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getLogout-3~
+        meta:
+          category: trigger
+          description: 'On a request to the logout route... '
+          label: GET /logout
+          name: endpoint
+          uiId: BkZxCwawTW
+          x: 260
+          'y': 100
+        outputIds:
+          - - gBky_xjKN4
+        type: endpoint
+    version: develop
+version: 1

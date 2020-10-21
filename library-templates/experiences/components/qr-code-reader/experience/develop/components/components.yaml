@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlQrCodeReader-1~
+    localFilename: ./tl-qr-code-reader.hbs
+    name: tl-qr-code-reader
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

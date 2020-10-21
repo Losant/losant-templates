@@ -1,0 +1,18 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Simulates a GPS device traveling along a predefined route.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsSimulatorsOutdoorAssetTracker-0~
+    name: Outdoor Asset Tracker
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - gps
+      - simulator
+      - location
+      - featured
+version: 1

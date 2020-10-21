@@ -1,0 +1,20 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getTlBasicForm-0~
+    method: get
+    route: /tl-basic-form
+    staticReply:
+      type: page
+      value: ~losant-experienceView-tlBasicForm-0~
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postTlBasicForm-1~
+    method: post
+    route: /tl-basic-form
+    version: develop
+version: 1

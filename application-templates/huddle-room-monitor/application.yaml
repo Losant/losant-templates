@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This template reduces wasted time searching for huddle rooms by
+      providing a real-time space availability and utilization application.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-applicationHuddleRoomMonitor-0~
+    name: Huddle Room Monitor
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

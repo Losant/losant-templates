@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Multi-view application that can be used to monitor and locate
+      assets in a physical environment.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-applicationIndoorAssetTracker-0~
+    name: Indoor Asset Tracker
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

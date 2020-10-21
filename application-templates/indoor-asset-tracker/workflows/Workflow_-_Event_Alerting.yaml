@@ -1,0 +1,245 @@
+resourceType: Flow
+resources:
+  - description: >-
+      This workflow creates Events when devices enter restricted or unauthorized
+      locations.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-workflowEventAlerting-3~
+    name: Workflow - Event Alerting
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: tDy4ZO1oPw
+        meta:
+          category: output
+          description: ''
+          id: tDy4ZO1oPw
+          label: Debug
+          name: debug
+          x: 340
+          'y': 660
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{triggerId}}'
+          eventTags: []
+          levelTemplate: warning
+          messageTemplate: '{{deviceName}} has moved off campus.'
+          resultPath: working.output.eventResult
+          subjectTemplate: Out of Bounds
+          timeSourceType: now
+        id: ZHy1zelefV
+        meta:
+          category: data
+          description: Create a "warning" event for the device that has moved off campus.
+          id: ZHy1zelefV
+          label: 'Alert: Off Campus'
+          name: create-event
+          x: 500
+          'y': 400
+        outputIds:
+          - - Qvp__Q33rC
+        type: CreateEventNode
+      - config:
+          dataTableIdTemplate: ~losant-dataTable-coordinateMap-0~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "roomName": {
+                    "$eq": "{{data.room}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.roomInfo
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: i1wyK4N1NZ
+        meta:
+          category: data
+          description: Query the data table for information on the current room.
+          id: i1wyK4N1NZ
+          label: Retrieve Room Information
+          name: get-table-rows
+          x: 220
+          'y': 100
+        outputIds:
+          - - gyX_7lqukS
+        type: DataTableQueryNode
+      - config:
+          expression: >-
+            {{deviceTags.class.[0]}}=='person' && {{data.room}}=='Utility
+            Closet'
+        id: gJrf_uDhAt
+        meta:
+          category: logic
+          description: >-
+            If the device has a device class of "class=person" and enters the
+            Utility Closet, take the right path. Otherwise, branch left.
+          id: gJrf_uDhAt
+          label: Unauthorized Access
+          name: conditional
+          x: 280
+          'y': 380
+        outputIds:
+          - - dA4TRcg3hA
+          - - _cI1PfMT7e
+        type: ConditionalNode
+      - config:
+          expression: '{{working.roomInfo.items.[0].restricted}}'
+        id: gyX_7lqukS
+        meta:
+          category: logic
+          description: Is the current room a restricted room?
+          id: gyX_7lqukS
+          label: Restricted?
+          name: conditional
+          x: 220
+          'y': 180
+        outputIds:
+          - - ZeFmKwjPz7
+          - - xlrL-nnrTQ
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: ZeFmKwjPz7
+        meta:
+          category: output
+          description: This room was not a restricted room.
+          id: ZeFmKwjPz7
+          label: Not Restricted
+          name: debug
+          x: 140
+          'y': 280
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.room}}==''Off Campus'''
+        id: xlrL-nnrTQ
+        meta:
+          category: logic
+          description: Has the device moved off campus?
+          id: xlrL-nnrTQ
+          label: Off Campus?
+          name: conditional
+          x: 340
+          'y': 280
+        outputIds:
+          - - gJrf_uDhAt
+          - - ZHy1zelefV
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: Qvp__Q33rC
+        meta:
+          category: output
+          description: ''
+          id: tDy4ZO1oPw
+          label: Off Campus
+          name: debug
+          x: 500
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{triggerId}}'
+          eventTags: []
+          levelTemplate: critical
+          messageTemplate: '{{deviceName}} has entered the {{data.room}}'
+          resultPath: working.output.eventResult
+          subjectTemplate: 'Unauthorized Access: {{data.room}}'
+          timeSourceType: now
+        id: _cI1PfMT7e
+        meta:
+          category: data
+          description: >-
+            Create an event for the person device that has entered the Utility
+            Closet.
+          id: ZHy1zelefV
+          label: Unauthorized Access
+          name: create-event
+          x: 340
+          'y': 580
+        outputIds:
+          - - tDy4ZO1oPw
+        type: CreateEventNode
+      - config:
+          message: ''
+          property: ''
+        id: dA4TRcg3hA
+        meta:
+          category: output
+          description: This device was an equipment device within the Utility Closet.
+          id: tDy4ZO1oPw
+          label: Equipment
+          name: debug
+          x: 160
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: JFplFH2fvY
+        meta:
+          annotationText: >-
+            This workflow first queries the data table for the room to which the
+            device has moved.
+
+
+            The restricted rooms are the Utility Closet and Off Campus.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: eNBv09msgy
+        meta:
+          annotationText: >-
+            Alerts are created when any device moves Off Campus and when any
+            person moves into the Utility Closet.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 560
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          attributeWhitelist:
+            - movement
+        key: class/
+        meta:
+          allowedAttributeType: attributeWhitelist
+          category: trigger
+          description: ''
+          id: 0AiKDi74w5
+          label: Movement
+          maxAgeToggle: false
+          name: deviceIdsTags
+          timeUnit: '1'
+          uiId: 0AiKDi74w5
+          x: 220
+          'y': 20
+        outputIds:
+          - - i1wyK4N1NZ
+        type: deviceTag
+version: 1

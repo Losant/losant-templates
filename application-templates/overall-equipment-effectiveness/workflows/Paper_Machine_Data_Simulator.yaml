@@ -1,0 +1,2001 @@
+resourceType: Flow
+resources:
+  - description: >-
+      This simulates the status and production of each paper machine. It runs
+      every minute.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-paperMachineDataSimulator-0~
+    name: Paper Machine Data Simulator
+    nodes:
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: true
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: type
+              valueTemplate: papermachine
+          tagsAsObject: false
+        id: YhEurDgcIO
+        meta:
+          category: data
+          description: ''
+          id: YhEurDgcIO
+          label: 'Device: Get'
+          name: get-device
+          x: 320
+          'y': 280
+        outputIds:
+          - - ZYR4WqJ3yy
+        type: GetDeviceNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: working.devices
+        id: ZYR4WqJ3yy
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 1520
+          groupStartY: 60
+          id: ZYR4WqJ3yy
+          label: Loop
+          name: loop
+          x: 320
+          'y': 480
+        outputIds:
+          - []
+          - - PtrFb9GkSL
+        type: LoopNode
+      - config:
+          max: 190
+          min: 0
+          resultPath: working.status.random
+        id: '-ax0vpAwb7'
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: VNTnA0XPTj
+          label: Random Number
+          name: random-number
+          x: 900
+          'y': 1440
+        outputIds:
+          - - TmlCjx85u6
+        type: RandomNumberNode
+      - config:
+          message: ''
+          property: ''
+        id: tGAObGRIUH
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: hTOyt1lftG
+          label: Sheetbreak
+          name: debug
+          x: 200
+          'y': 2620
+        outputIds:
+          - - kmhe-X6WdC
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: R5IxZOFqKx
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: hTOyt1lftG
+          label: Unplanned
+          name: debug
+          x: 760
+          'y': 3300
+        outputIds:
+          - - TaD85YNvUr
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: 0rwXF79Z8m
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: hTOyt1lftG
+          label: Planned
+          name: debug
+          x: 1700
+          'y': 2880
+        outputIds:
+          - - AXjcmzaHW8
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: n-Wo6n2ecS
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: hTOyt1lftG
+          label: Running
+          name: debug
+          x: 1800
+          'y': 2300
+        outputIds:
+          - - fIFk8G0gDb
+        type: DebugNode
+      - config:
+          max: 10
+          min: 4
+          resultPath: working.sheetbreak.threadtime
+        id: WJ7je6xTld
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 4q7xrLNQ27
+          label: Thread Time
+          name: random-number
+          x: 420
+          'y': 1860
+        outputIds:
+          - - GeUwgZ-mXO
+        type: RandomNumberNode
+      - config:
+          max: 4
+          min: 1
+          resultPath: working.sheetbreak.RandomReason
+        id: DKVmbjwrbw
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 4q7xrLNQ27
+          label: Reason
+          name: random-number
+          x: 420
+          'y': 2080
+        outputIds:
+          - - hsZp3O0qI5
+        type: RandomNumberNode
+      - config:
+          cases:
+            - caseLabel: Holes
+              caseTemplate: '1'
+              dontBreak: false
+            - caseLabel: Holes
+              caseTemplate: '2'
+              dontBreak: false
+            - caseLabel: Tension
+              caseTemplate: '3'
+              dontBreak: false
+          switchTemplate: '{{working.sheetbreak.RandomReason}}'
+        id: hsZp3O0qI5
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: J5EtNWZwUu
+          label: Sheetbreak Reason
+          name: switch
+          x: 420
+          'y': 2220
+        outputIds:
+          - - 0I8suELBal
+          - - inF-dvYDj0
+          - - inF-dvYDj0
+          - - f4dLq6l1Ad
+        type: SwitchNode
+      - config:
+          rules:
+            - destination: working.sheetbreak.reason
+              type: set
+              valueTemplate: Holes in Sheet
+        id: inF-dvYDj0
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 2380
+        outputIds:
+          - - Z4lrKsa67_
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.sheetbreak.reason
+              type: set
+              valueTemplate: Incorrect Web Tension
+        id: f4dLq6l1Ad
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 400
+          'y': 2380
+        outputIds:
+          - - Z4lrKsa67_
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.sheetbreak.reason
+              type: set
+              valueTemplate: Flocs in Sheet
+        id: 0I8suELBal
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 600
+          'y': 2380
+        outputIds:
+          - - Z4lrKsa67_
+        type: MutateNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: reason
+              valueTemplate: '{{working.sheetbreak.reason}}'
+            - key: time
+              valueTemplate: '{{working.sheetbreak.threadtime}}'
+            - key: status
+              valueTemplate: '{{working.status.current}}'
+            - key: count
+              valueTemplate: '{{working.data.out.count}}'
+            - key: sheetbreak
+              valueTemplate: '{{working.data.graph.sheetbreak}}'
+            - key: planned
+              valueTemplate: '{{working.data.graph.planned}}'
+            - key: unplanned
+              valueTemplate: '{{working.data.graph.unplanned}}'
+            - key: running
+              valueTemplate: '{{working.data.graph.running}}'
+            - key: skuTime
+              valueTemplate: '{{working.sku.out.time}}'
+            - key: monthlyRate
+              valueTemplate: '{{working.monthlyRate.value}}'
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: Z4lrKsa67_
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-zoalV6V3R'
+          label: 'Device: State'
+          name: device-state
+          x: 200
+          'y': 2520
+        outputIds:
+          - - tGAObGRIUH
+        type: DeviceChangeStateNode
+      - config:
+          max: 140
+          min: 65
+          resultPath: working.unplanned.time
+        id: qNHBz2reEN
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: lRk_AUjr5Z
+          label: Random Time
+          name: random-number
+          x: 820
+          'y': 2620
+        outputIds:
+          - - Ab1aya6e-P
+        type: RandomNumberNode
+      - config:
+          max: 10
+          min: 1
+          resultPath: working.planned.random
+        id: tL5lT1Fity
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: lRk_AUjr5Z
+          label: Reason
+          name: random-number
+          x: 1500
+          'y': 2460
+        outputIds:
+          - - _Ms-uMHM-O
+        type: RandomNumberNode
+      - config:
+          max: 240
+          min: 120
+          resultPath: working.running.time
+        id: 0CaATF5_Kn
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: lRk_AUjr5Z
+          label: Random Time
+          name: random-number
+          x: 1800
+          'y': 2140
+        outputIds:
+          - - 4AIqflqO93
+        type: RandomNumberNode
+      - config:
+          rules:
+            - destination: working.planned.reason
+              type: set
+              valueTemplate: SKU Change
+            - destination: working.planned.time
+              type: set
+              valueTemplate: '180'
+            - destination: working.data.out.count
+              type: set
+              valueTemplate: '0'
+            - destination: working.sku.out.time
+              type: set
+              valueTemplate: '0'
+        id: _Vsso9pvmE
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Hard Brand Change
+          name: mutate
+          x: 2280
+          'y': 2160
+        outputIds:
+          - - 0ZNvfQCv2t
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.planned.reason
+              type: set
+              valueTemplate: Scheduled Maintenance
+            - destination: working.planned.time
+              type: set
+              valueTemplate: '240'
+              valueTemplateType: json
+        id: x67IKrFntM
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Maintenance
+          name: mutate
+          x: 1380
+          'y': 2640
+        outputIds:
+          - - myOTTAdke1
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.planned.reason
+              type: set
+              valueTemplate: Utility Outage
+            - destination: working.planned.time
+              type: set
+              valueTemplate: '960'
+              valueTemplateType: json
+        id: '-74R_7VkgG'
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Outage
+          name: mutate
+          x: 1600
+          'y': 2640
+        outputIds:
+          - - myOTTAdke1
+        type: MutateNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: reason
+              valueTemplate: '{{working.planned.reason}}'
+            - key: status
+              valueTemplate: '{{working.status.current}}'
+            - key: count
+              valueTemplate: '{{working.data.out.count}}'
+            - key: time
+              valueTemplate: '{{working.planned.time}}'
+            - key: sheetbreak
+              valueTemplate: '{{working.data.graph.sheetbreak}}'
+            - key: planned
+              valueTemplate: '{{working.data.graph.planned}}'
+            - key: unplanned
+              valueTemplate: '{{working.data.graph.unplanned}}'
+            - key: running
+              valueTemplate: '{{working.data.graph.running}}'
+            - key: rate
+              valueTemplate: '{{working.sku.rate}}'
+            - key: tons
+              valueTemplate: '{{working.sku.out.tons}}'
+            - key: waste
+              valueTemplate: '{{working.sku.out.waste}}'
+            - key: order
+              valueTemplate: '{{working.sku.order}}'
+            - key: trim
+              valueTemplate: '{{working.sku.trim}}'
+            - key: sku
+              valueTemplate: '{{working.sku.value}}'
+            - key: skuTime
+              valueTemplate: '{{working.sku.out.time}}'
+            - key: sheetbreakTons
+              valueTemplate: '{{working.sku.out.sheetbreak}}'
+            - key: trimTons
+              valueTemplate: '{{working.sku.out.trim}}'
+            - key: skuRunTime
+              valueTemplate: '{{working.sku.scheduledTime}}'
+            - key: monthlyRate
+              valueTemplate: '{{working.monthlyRate.value}}'
+            - key: currentTons
+              valueTemplate: '0'
+            - key: currentWaste
+              valueTemplate: '0'
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: myOTTAdke1
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-zoalV6V3R'
+          label: 'Device: State'
+          name: device-state
+          x: 1700
+          'y': 2780
+        outputIds:
+          - - 0rwXF79Z8m
+        type: DeviceChangeStateNode
+      - config:
+          max: 4
+          min: 1
+          resultPath: working.unplanned.RandomReason
+        id: Ab1aya6e-P
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: lRk_AUjr5Z
+          label: Reason
+          name: random-number
+          x: 820
+          'y': 2720
+        outputIds:
+          - - Y7XyV0Q9PP
+        type: RandomNumberNode
+      - config:
+          cases:
+            - caseLabel: Hood
+              caseTemplate: '1'
+              dontBreak: false
+            - caseLabel: Headbox
+              caseTemplate: '2'
+              dontBreak: false
+            - caseLabel: Boiler
+              caseTemplate: '3'
+              dontBreak: false
+          switchTemplate: '{{working.unplanned.RandomReason}}'
+        id: Y7XyV0Q9PP
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: Ie-38MKIrN
+          label: Unplanned Reason
+          name: switch
+          x: 820
+          'y': 2820
+        outputIds:
+          - - '-9QCuARJex'
+          - - yH7E-4mcc8
+          - - IDtLBdhHDe
+          - - cBZAHXjEsS
+        type: SwitchNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: reason
+              valueTemplate: '{{working.unplanned.reason}}'
+            - key: status
+              valueTemplate: '{{working.status.current}}'
+            - key: count
+              valueTemplate: '{{working.data.out.count}}'
+            - key: time
+              valueTemplate: '{{working.unplanned.time}}'
+            - key: sheetbreak
+              valueTemplate: '{{working.data.graph.sheetbreak}}'
+            - key: planned
+              valueTemplate: '{{working.data.graph.planned}}'
+            - key: unplanned
+              valueTemplate: '{{working.data.graph.unplanned}}'
+            - key: running
+              valueTemplate: '{{working.data.graph.running}}'
+            - key: skuTime
+              valueTemplate: '{{working.sku.out.time}}'
+            - key: montlyRate
+              valueTemplate: '{{working.monthlyRate.value}}'
+            - key: currentTons
+              valueTemplate: '0'
+            - key: currentWaste
+              valueTemplate: '0'
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: fZjV8aZY2G
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-zoalV6V3R'
+          label: 'Device: State'
+          name: device-state
+          x: 760
+          'y': 3200
+        outputIds:
+          - - R5IxZOFqKx
+        type: DeviceChangeStateNode
+      - config:
+          rules:
+            - destination: working.unplanned.reason
+              type: set
+              valueTemplate: Yankee Hood Temp Out of Range
+        id: yH7E-4mcc8
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 460
+          'y': 3060
+        outputIds:
+          - - fZjV8aZY2G
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.unplanned.reason
+              type: set
+              valueTemplate: Boiler Shut Down
+        id: cBZAHXjEsS
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 1060
+          'y': 3060
+        outputIds:
+          - - fZjV8aZY2G
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.unplanned.reason
+              type: set
+              valueTemplate: Drive Failure
+        id: '-9QCuARJex'
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 1260
+          'y': 3060
+        outputIds:
+          - - fZjV8aZY2G
+        type: MutateNode
+      - config:
+          expression: '{{working.unplanned.time}} > 100'
+        id: IDtLBdhHDe
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: WOgpiblgAF
+          label: Conditional
+          name: conditional
+          x: 760
+          'y': 2960
+        outputIds:
+          - - ZmQPjRjmol
+          - - mLr6vvppvB
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.unplanned.reason
+              type: set
+              valueTemplate: Quick Mix Level Low
+        id: ZmQPjRjmol
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 660
+          'y': 3060
+        outputIds:
+          - - fZjV8aZY2G
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.unplanned.reason
+              type: set
+              valueTemplate: Water Quality out of Spec
+        id: mLr6vvppvB
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Mutate
+          name: mutate
+          x: 860
+          'y': 3060
+        outputIds:
+          - - fZjV8aZY2G
+        type: MutateNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: status
+              valueTemplate: '{{working.status.current}}'
+            - key: count
+              valueTemplate: '{{working.data.out.count}}'
+            - key: time
+              valueTemplate: '{{working.running.time}}'
+            - key: reason
+              valueTemplate: '{{working.status.current}}'
+            - key: sheetbreak
+              valueTemplate: '{{working.data.graph.sheetbreak}}'
+            - key: planned
+              valueTemplate: '{{working.data.graph.planned}}'
+            - key: unplanned
+              valueTemplate: '{{working.data.graph.unplanned}}'
+            - key: running
+              valueTemplate: '{{working.data.graph.running}}'
+            - key: skuTime
+              valueTemplate: '{{working.sku.out.time}}'
+            - key: monthlyRate
+              valueTemplate: '{{working.monthlyRate.value}}'
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: 4AIqflqO93
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-zoalV6V3R'
+          label: 'Device: State'
+          name: device-state
+          x: 1800
+          'y': 2220
+        outputIds:
+          - - n-Wo6n2ecS
+        type: DeviceChangeStateNode
+      - config:
+          rules:
+            - destination: working.data.in.count
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.count.value}}'
+            - destination: working.data.in.time
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.time.value}}'
+            - destination: working.data.in.reason
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.reason.value}}'
+            - destination: working.data.in.status
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.status.value}}'
+            - destination: working.data.in.state.planned
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.planned.value}}'
+            - destination: working.data.in.state.unplanned
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.unplanned.value}}'
+            - destination: working.data.in.state.running
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.running.value}}'
+            - destination: working.data.in.state.sheetbreak
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.sheetbreak.value}}'
+            - destination: working.sku.order
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.order.value}}'
+            - destination: working.sku.in.tons
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.tons.value}}'
+            - destination: working.sku.in.waste
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.waste.value}}'
+            - destination: working.sku.rate
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.rate.value}}'
+            - destination: working.sku.value
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.sku.value}}'
+            - destination: working.sku.trim
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.trim.value}}'
+            - destination: working.total.in.trim
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.totalTrim.value}}'
+            - destination: working.total.in.tons
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.totalTons.value}}'
+            - destination: working.total.in.waste
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.totalWaste.value}}'
+            - destination: working.sku.in.time
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.skuTime.value}}'
+            - destination: working.time.reset
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.resetTime.value}}'
+            - destination: working.total.in.sheetbreak
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.sheetbreakTotal.value}}'
+            - destination: working.data.averageRate
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.averageRate.value}}'
+            - destination: working.sku.in.trim
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.trimTons.value}}'
+            - destination: working.sku.in.sheetbreak
+              type: set
+              valueTemplate: '{{working.device.value.compositeState.sheetbreakTons.value}}'
+        id: mVP2UH9LDj
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: wrbIvAA630
+          label: Mutate
+          name: mutate
+          x: 940
+          'y': 500
+        outputIds:
+          - - Z3PPRhzkHF
+        type: MutateNode
+      - config:
+          expression: '{{working.data.in.count}} < {{working.data.in.time}}'
+        id: Z3PPRhzkHF
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: ia1qYuZeJo
+          label: Status Change?
+          name: conditional
+          x: 940
+          'y': 600
+        outputIds:
+          - - WncrDGw6Zq
+          - - ch9Pro88eB
+        type: ConditionalNode
+      - config:
+          statements:
+            - expression: '{{working.data.in.count}} + 1'
+              resultPath: working.data.out.count
+            - expression: '{{working.data.in.status}}'
+              resultPath: working.data.out.status
+            - expression: '{{working.data.in.time}}'
+              resultPath: working.data.out.time
+            - expression: '{{working.data.in.reason}}'
+              resultPath: working.data.out.reason
+            - expression: '{{working.sku.in.time}}+1'
+              resultPath: working.sku.out.time
+        id: FrTUWZBHzM
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: mRstzQY1pE
+          label: Math
+          name: math
+          x: 1640
+          'y': 1420
+        outputIds:
+          - - Jq6wQD6dws
+        type: MathNode
+      - config:
+          message: ''
+          property: ''
+        id: tySpKPKalJ
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 040yLNRsaQ
+          label: UPDATE
+          name: debug
+          x: 1640
+          'y': 1580
+        outputIds:
+          - - yzucBazD5Z
+        type: DebugNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: count
+              valueTemplate: '{{working.data.out.count}}'
+            - key: running
+              valueTemplate: '{{working.data.in.state.running}}'
+            - key: planned
+              valueTemplate: '{{working.data.in.state.planned}}'
+            - key: unplanned
+              valueTemplate: '{{working.data.in.state.unplanned}}'
+            - key: sheetbreak
+              valueTemplate: '{{working.data.in.state.sheetbreak}}'
+            - key: tons
+              valueTemplate: '{{working.sku.out.tons}}'
+            - key: waste
+              valueTemplate: '{{working.sku.out.waste}}'
+            - key: rate
+              valueTemplate: '{{working.sku.rate}}'
+            - key: order
+              valueTemplate: '{{working.sku.order}}'
+            - key: sku
+              valueTemplate: '{{working.sku.value}}'
+            - key: totalTrim
+              valueTemplate: '{{working.total.out.trim}}'
+            - key: totalWaste
+              valueTemplate: '{{working.total.out.waste}}'
+            - key: totalTons
+              valueTemplate: '{{working.total.out.tons}}'
+            - key: trim
+              valueTemplate: '{{working.sku.trim}}'
+            - key: skuTime
+              valueTemplate: '{{working.sku.out.time}}'
+            - key: sheetbreakTotal
+              valueTemplate: '{{working.total.out.sheetbreak}}'
+            - key: sheetbreakTons
+              valueTemplate: '{{working.sku.out.sheetbreak}}'
+            - key: trimTons
+              valueTemplate: '{{working.sku.out.trim}}'
+            - key: monthlyRate
+              valueTemplate: '{{working.monthlyRate.value}}'
+            - key: currentTons
+              valueTemplate: '{{working.current.tons}}'
+            - key: currentWaste
+              valueTemplate: '{{working.current.waste}}'
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: Jq6wQD6dws
+        meta:
+          category: output
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-zoalV6V3R'
+          label: 'Device: State'
+          name: device-state
+          x: 1640
+          'y': 1500
+        outputIds:
+          - - tySpKPKalJ
+        type: DeviceChangeStateNode
+      - config:
+          rules:
+            - destination: working.data.out.count
+              type: set
+              valueTemplate: '0'
+        id: DE1PEddN0N
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: f49tpWH7T1
+          label: Reset Count
+          name: mutate
+          x: 900
+          'y': 1340
+        outputIds:
+          - - '-ax0vpAwb7'
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.data.graph.sheetbreak
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.planned
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.unplanned
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.running
+              type: set
+              valueTemplate: '1'
+            - destination: working.status.current
+              type: set
+              valueTemplate: Running
+        id: 5njQOZ55qD
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 3jJv5b-YY6
+          label: Status Update
+          name: mutate
+          x: 1800
+          'y': 2060
+        outputIds:
+          - - 0CaATF5_Kn
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.data.graph.sheetbreak
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.planned
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.unplanned
+              type: set
+              valueTemplate: '1'
+            - destination: working.data.graph.running
+              type: set
+              valueTemplate: '0'
+            - destination: working.status.current
+              type: set
+              valueTemplate: Unplanned
+        id: otiwb5x2aU
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 3jJv5b-YY6
+          label: Status Update
+          name: mutate
+          x: 820
+          'y': 2520
+        outputIds:
+          - - qNHBz2reEN
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.data.graph.sheetbreak
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.planned
+              type: set
+              valueTemplate: '1'
+            - destination: working.data.graph.unplanned
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.running
+              type: set
+              valueTemplate: '0'
+            - destination: working.status.current
+              type: set
+              valueTemplate: Planned
+        id: shzBN7DOBs
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 3jJv5b-YY6
+          label: Status Update
+          name: mutate
+          x: 1500
+          'y': 2380
+        outputIds:
+          - - tL5lT1Fity
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.data.graph.sheetbreak
+              type: set
+              valueTemplate: '1'
+            - destination: working.data.graph.planned
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.unplanned
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.running
+              type: set
+              valueTemplate: '0'
+            - destination: working.status.current
+              type: set
+              valueTemplate: Sheetbreak
+        id: GeUwgZ-mXO
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 3jJv5b-YY6
+          label: Status Update
+          name: mutate
+          x: 420
+          'y': 1960
+        outputIds:
+          - - DKVmbjwrbw
+        type: MutateNode
+      - config:
+          max: 3
+          min: 1
+          resultPath: working.sku.value
+        id: ZyUwxle0p-
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: VhLxS2DD0A
+          label: Sku
+          name: random-number
+          x: 2160
+          'y': 1220
+        outputIds:
+          - - EqLzN63SzR
+        type: RandomNumberNode
+      - config:
+          expression: '{{working.sku.in.tons}} >= {{working.sku.order}}'
+        id: ch9Pro88eB
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: VNjwEcp-ZP
+          label: Order Complete?
+          name: conditional
+          x: 1900
+          'y': 920
+        outputIds:
+          - - NTAcHtiPsS
+          - - bPXYYiDzWI
+        type: ConditionalNode
+      - config:
+          max: 10
+          min: 5
+          resultPath: working.sku.random
+        id: EqLzN63SzR
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: IySFJtsm1b
+          label: Random Tons
+          name: random-number
+          x: 2160
+          'y': 1320
+        outputIds:
+          - - A2sNPjF61b
+        type: RandomNumberNode
+      - config:
+          statements:
+            - expression: '(({{working.sku.value}}+25)*{{working.sku.random}})*100'
+              resultPath: working.sku.order
+            - expression: '1/(2*{{working.sku.random}}) '
+              resultPath: working.sku.trim
+            - expression: 'round({{working.sku.order}}/{{working.sku.rate}})'
+              resultPath: working.sku.scheduledTime
+        id: 1Vtgr7PeV4
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: T89DltOd5O
+          label: Math
+          name: math
+          x: 2160
+          'y': 1520
+        outputIds:
+          - - m7lpf9gSc-
+        type: MathNode
+      - config:
+          rules:
+            - destination: working.sku.out.tons
+              type: set
+              valueTemplate: '0'
+            - destination: working.sku.out.waste
+              type: set
+              valueTemplate: '0'
+            - destination: working.sku.out.trim
+              type: set
+              valueTemplate: '0'
+            - destination: working.sku.out.sheetbreak
+              type: set
+              valueTemplate: '0'
+        id: m7lpf9gSc-
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: Vs7xEEGekH
+          label: Mutate
+          name: mutate
+          x: 2160
+          'y': 1620
+        outputIds:
+          - - kJlg3cIlLD
+        type: MutateNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: Running
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: Sheetbreak
+              dontBreak: false
+          switchTemplate: '{{working.data.in.status}}'
+        id: NTAcHtiPsS
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: O5dlp6Wq9c
+          label: Status
+          name: switch
+          x: 1640
+          'y': 1120
+        outputIds:
+          - - V67i3WL_xC
+          - - vGVnszmMzo
+          - - EKG2akOXuW
+        type: SwitchNode
+      - config:
+          statements:
+            - expression: '{{working.sku.in.waste}}+{{working.sku.trim}}'
+              resultPath: working.sku.out.waste
+            - expression: >-
+                {{working.sku.rate}}+{{working.sku.in.tons}}-{{working.sku.trim}}
+              resultPath: working.sku.out.tons
+            - expression: >-
+                {{working.total.in.tons}} + {{working.sku.rate}} -
+                {{working.sku.trim}}
+              resultPath: working.total.out.tons
+            - expression: '{{working.total.in.trim}} + {{working.sku.trim}}'
+              resultPath: working.total.out.trim
+            - expression: '{{working.total.in.waste}} + {{working.sku.trim}}'
+              resultPath: working.total.out.waste
+            - expression: '{{ working.total.in.sheetbreak }}'
+              resultPath: working.total.out.sheetbreak
+            - expression: '{{ working.sku.in.sheetbreak }}'
+              resultPath: working.sku.out.sheetbreak
+            - expression: '{{working.sku.in.trim}} + {{working.sku.trim}}'
+              resultPath: working.sku.out.trim
+            - expression: '{{working.sku.trim}}'
+              resultPath: working.current.waste
+            - expression: '{{working.sku.rate}} - {{working.sku.trim}}'
+              resultPath: working.current.tons
+        id: vGVnszmMzo
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: Y_-980yMit
+          label: Math
+          name: math
+          x: 1440
+          'y': 1260
+        outputIds:
+          - - FrTUWZBHzM
+        type: MathNode
+      - config:
+          statements:
+            - expression: '{{working.sku.rate}}+{{working.sku.in.waste}}'
+              resultPath: working.sku.out.waste
+            - expression: '{{working.sku.in.tons}}'
+              resultPath: working.sku.out.tons
+            - expression: '{{working.total.in.waste}} + {{working.sku.rate}}'
+              resultPath: working.total.out.waste
+            - expression: '{{working.total.in.trim}}'
+              resultPath: working.total.out.trim
+            - expression: '{{working.total.in.tons}}'
+              resultPath: working.total.out.tons
+            - expression: '{{working.sku.in.trim}}'
+              resultPath: working.sku.out.trim
+            - expression: '{{working.sku.rate}}+{{working.total.in.sheetbreak}}'
+              resultPath: working.total.out.sheetbreak
+            - expression: '{{working.sku.rate}}+{{working.sku.in.sheetbreak}}'
+              resultPath: working.sku.out.sheetbreak
+            - expression: '{{working.sku.rate}}'
+              resultPath: working.current.waste
+            - expression: '0'
+              resultPath: working.current.tons
+        id: EKG2akOXuW
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: Y_-980yMit
+          label: Math
+          name: math
+          x: 1640
+          'y': 1260
+        outputIds:
+          - - FrTUWZBHzM
+        type: MathNode
+      - config:
+          statements:
+            - expression: '{{working.sku.in.waste}}'
+              resultPath: working.sku.out.waste
+            - expression: '{{working.sku.in.tons}}'
+              resultPath: working.sku.out.tons
+            - expression: '{{working.sku.in.trim}}'
+              resultPath: working.sku.out.trim
+            - expression: '{{working.total.in.trim}}'
+              resultPath: working.total.out.trim
+            - expression: '{{working.total.in.tons}}'
+              resultPath: working.total.out.tons
+            - expression: '{{working.total.in.waste}}'
+              resultPath: working.total.out.waste
+            - expression: '{{ working.total.in.sheetbreak }}'
+              resultPath: 'working.total.out.sheetbreak '
+            - expression: '{{ working.sku.in.sheetbreak }}'
+              resultPath: 'working.sku.out.sheetbreak '
+        id: V67i3WL_xC
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: Y_-980yMit
+          label: Math
+          name: math
+          x: 1840
+          'y': 1260
+        outputIds:
+          - - FrTUWZBHzM
+        type: MathNode
+      - config:
+          expression: '{{working.planned.random}} === 1'
+        id: _Ms-uMHM-O
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: y9Of0yYxFR
+          label: Conditional
+          name: conditional
+          x: 1500
+          'y': 2540
+        outputIds:
+          - - x67IKrFntM
+          - - '-74R_7VkgG'
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.data.graph.sheetbreak
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.planned
+              type: set
+              valueTemplate: '1'
+            - destination: working.data.graph.unplanned
+              type: set
+              valueTemplate: '0'
+            - destination: working.data.graph.running
+              type: set
+              valueTemplate: '0'
+            - destination: working.status.current
+              type: set
+              valueTemplate: Planned
+        id: 0ZNvfQCv2t
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: 3jJv5b-YY6
+          label: Mutate
+          name: mutate
+          x: 2160
+          'y': 2260
+        outputIds:
+          - - myOTTAdke1
+        type: MutateNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: ''
+          deviceTags:
+            - keyTemplate: sku
+              valueTemplate: '{{working.sku.value}}'
+            - keyTemplate: order
+              valueTemplate: '{{working.sku.order}} tons'
+            - keyTemplate: scheduledTime
+              valueTemplate: '{{working.sku.scheduledTime}} min'
+          gatewayIdTemplate: ''
+          idTemplate: '{{working.device.value.deviceId}}'
+          nameTemplate: ''
+          parentIdTemplate: ''
+          resultPath: ''
+          tagsAsObject: false
+        id: kJlg3cIlLD
+        meta:
+          category: data
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: R8Dfw324bz
+          label: 'Device: Update'
+          name: update-device
+          x: 2160
+          'y': 1720
+        outputIds:
+          - - UqGUXJ4o9L
+        type: UpdateDeviceNode
+      - config:
+          expression: '{{working.brandchange}} === 1'
+        id: UqGUXJ4o9L
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: z62pezBYed
+          label: Hard Brand Change
+          name: conditional
+          x: 2160
+          'y': 2060
+        outputIds:
+          - - O41MF0PgT2
+          - - _Vsso9pvmE
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.planned.reason
+              type: set
+              valueTemplate: SKU Change
+            - destination: working.planned.time
+              type: set
+              valueTemplate: '20'
+            - destination: working.data.out.count
+              type: set
+              valueTemplate: '0'
+            - destination: working.sku.out.time
+              type: set
+              valueTemplate: '0'
+        id: O41MF0PgT2
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '-GYW6UM3RU'
+          label: Soft Brand Change
+          name: mutate
+          x: 2040
+          'y': 2160
+        outputIds:
+          - - 0ZNvfQCv2t
+        type: MutateNode
+      - config:
+          expression: '{{working.status.random}} < 115'
+        id: TmlCjx85u6
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '--ebXUaE4m'
+          label: Running?
+          name: conditional
+          x: 900
+          'y': 1540
+        outputIds:
+          - - l2hKuMwRi-
+          - - 5njQOZ55qD
+        type: ConditionalNode
+      - config:
+          expression: '{{working.status.random}} < 130'
+        id: l2hKuMwRi-
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '--ebXUaE4m'
+          label: Planned?
+          name: conditional
+          x: 780
+          'y': 1640
+        outputIds:
+          - - Zv3j90Rqg-
+          - - shzBN7DOBs
+        type: ConditionalNode
+      - config:
+          expression: '{{working.status.random}} < 140'
+        id: Zv3j90Rqg-
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: '--ebXUaE4m'
+          label: Unplanned?
+          name: conditional
+          x: 660
+          'y': 1740
+        outputIds:
+          - - WJ7je6xTld
+          - - otiwb5x2aU
+        type: ConditionalNode
+      - config:
+          aggregation: MEAN
+          attribute: rate
+          deviceIdsPath: working.device.value.id
+          duration: '2592000000'
+          findMethod: tagsIds
+          resultPath: working.monthlyRate
+        id: jbhk422Hzq
+        meta:
+          category: data
+          customRange: false
+          description: ''
+          deviceSelectionType: payload
+          groupId: ZYR4WqJ3yy
+          id: OZ2aI2baGM
+          label: Monthly Rate
+          name: gauge
+          x: 940
+          'y': 400
+        outputIds:
+          - - mVP2UH9LDj
+        type: GaugeNode
+      - config:
+          loopNodeId: ZYR4WqJ3yy
+          shouldBreak: false
+        id: kmhe-X6WdC
+        meta:
+          category: loop
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: kmhe-X6WdC
+          label: Next
+          name: loop-next
+          x: 200
+          'y': 2720
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          loopNodeId: ZYR4WqJ3yy
+          shouldBreak: false
+        id: TaD85YNvUr
+        meta:
+          category: loop
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: TaD85YNvUr
+          label: Next
+          name: loop-next
+          x: 760
+          'y': 3400
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          loopNodeId: ZYR4WqJ3yy
+          shouldBreak: false
+        id: AXjcmzaHW8
+        meta:
+          category: loop
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: AXjcmzaHW8
+          label: Next
+          name: loop-next
+          x: 1700
+          'y': 2980
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          loopNodeId: ZYR4WqJ3yy
+          shouldBreak: false
+        id: fIFk8G0gDb
+        meta:
+          category: loop
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: fIFk8G0gDb
+          label: Next
+          name: loop-next
+          x: 1800
+          'y': 2380
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          loopNodeId: ZYR4WqJ3yy
+          shouldBreak: false
+        id: yzucBazD5Z
+        meta:
+          category: loop
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: yzucBazD5Z
+          label: Next
+          name: loop-next
+          x: 1640
+          'y': 1660
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          max: 23
+          min: 16
+          resultPath: working.sku.rate
+        id: A2sNPjF61b
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: IySFJtsm1b
+          label: Rate
+          name: random-number
+          x: 2160
+          'y': 1420
+        outputIds:
+          - - 1Vtgr7PeV4
+        type: RandomNumberNode
+      - config: {}
+        id: HuwMLeGioP
+        meta:
+          annotationText: >-
+            This will Get any device with the tag:
+
+
+            **type = papermachine**
+
+
+            You can change this to match the type of device you will be running
+            your simulation on.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 360
+          x: 520
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: ulJ9ulYlpv
+        meta:
+          annotationText: >-
+            The timer runs the simulation every minute. The Virtual Button
+            allows for the workflow to be triggered manually during testing
+            phases of the simulation set up.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 520
+          'y': 120
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: J40UavkxQx
+        meta:
+          annotationText: >-
+            The loop is used so multiple devices of the same type can run
+            through the simulation.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 520
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 9DThAEZHpH
+        meta:
+          annotationText: >-
+            Monthly rate is calculated using this Gauge Node - it is performing
+            a 30 day average of the machine rate
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 100
+          label: Note
+          name: note
+          width: 300
+          x: 1140
+          'y': 400
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: dRCAs4Bc3F
+        meta:
+          annotationText: >-
+            This conditional is looking to see if the machine status is supposed
+            to change. The machine status and time for that status is randomly
+            determined in the status update portion of the simulation workflow. 
+            Each time the machine runs through the simulation the attribute
+            **count** increases by 1.  Once the value of **count** is greater
+            than the random status time it will run through the status update
+            simulation path of the workflow.
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 140
+          label: Note
+          name: note
+          width: 600
+          x: 1140
+          'y': 600
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: yJENB1Lml4
+        meta:
+          annotationText: |
+            **Machine Status Update Simulation Path** 
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 100
+          label: Note
+          name: note
+          width: 320
+          x: 700
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: vxhtDoa0hV
+        meta:
+          annotationText: >-
+            The **count** is reset to 0 and then a random number between 0 and
+            190 is selected. The random number is used in the conditional split
+            to decide the status of the machine.
+
+            * Running < 115
+
+            * Planned < 130
+
+            * Unplanned < 140
+
+            * Sheetbreaks >= 140
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 200
+          label: Note
+          name: note
+          width: 440
+          x: 440
+          'y': 1340
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: oajwHzm9Om
+        meta:
+          annotationText: >-
+            A random number is decided for thread time (minutes) - this is how
+            long it will take to bring the paper back to the reel and begin
+            winding again. All paper that is created while the machine is
+            attempting to be threaded is reworked and therefore counts against
+            Quality. 
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 180
+          label: Note
+          name: note
+          width: 320
+          x: 80
+          'y': 1860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 2r4WnfGN9X
+        meta:
+          annotationText: >-
+            A random number is selected between 1 and 4.  This value is used in
+            the switch node to decide the **reason** for the sheetbreak. 
+
+            * 1 & 2 - Holes in Sheet
+
+            * 3 - Incorrect Web Tension
+
+            * 4 - Flocs in Sheet
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 180
+          label: Note
+          name: note
+          width: 320
+          x: 80
+          'y': 2080
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: iQTPQrbbf1
+        meta:
+          annotationText: >-
+            A random number is selected between 65 and 140 which determines the
+            length of the downtime event. This is used in the Device: State node
+            below and updates the attribute **time**. 
+
+
+            Another random number is created between 1 and 4 and that is then
+            used in the switch node decide the **reason** for the unplanned
+            downtime event. 
+
+            * 1 - Yankee Hood Temp Out of Range
+
+            * 2 - Issue with the headbox, if the time is below 100 minutes 
+                * Time <= 100 - Quick Mix Level Low
+                * Time > 100 - Water Quality out of Spec
+            * 3 - Boiler Shut Down
+
+            * 4 - Drive Failure
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 340
+          label: Note
+          name: note
+          width: 400
+          x: 400
+          'y': 2520
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 2CwQaZHL_1
+        meta:
+          annotationText: >-
+            A random number between 1 and 10 is generated to decide the
+            **reason** behind the planned downtime event. 
+
+
+            The if the value is 1 then the machine goes into a utility outage
+            (this is the smallest odds of occurring because it should only occur
+            once or twice a year).  In this use case a utility outage is NOT
+            counted against availability because it is planned every year for
+            safety reasons.  In the OEE calculations if **reason** is *Utility
+            Outage* then the amount of time is removed from scheduled runtime. 
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 240
+          label: Note
+          name: note
+          width: 440
+          x: 1040
+          'y': 2380
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: '-n9_f2dSqH'
+        meta:
+          annotationText: >-
+            A random number between 120 and 240 is generated to decide the new
+            **count** value (time running before machine status change)
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 120
+          label: Note
+          name: note
+          width: 280
+          x: 1500
+          'y': 2060
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: r8RTjCGN45
+        meta:
+          annotationText: >-
+            If the machine status is not changing the simulation then looks to
+            see if the current production order is complete.  If it is the
+            machine goes into *Brand Change* 
+
+
+            If the order is not complete it goes to the switch node which leads
+            to the tonnage calculation (for quality and waste) based on the
+            status of the machine. 
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 140
+          label: Note
+          name: note
+          width: 560
+          x: 1320
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: OhxjAb55zI
+        meta:
+          annotationText: >-
+            If the order is complete and the next order is simulated.  The
+            following values are found using random values. 
+
+            * Type of Brand Change
+
+            * Sku Number (1-3)
+
+            * **order** - the amount of quality tons needed to be produced
+
+            * **rate** - the speed of the machine 16-23 
+
+            *  trim - amount of waste produced with every ton in order to create
+            a clean edge on the paper. 
+
+            * the amount of time it SHOULD take to fulfill the order based on
+            **order** and **rate**
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 280
+          label: Note
+          name: note
+          width: 480
+          x: 2360
+          'y': 1120
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: fFFlGembzR
+        meta:
+          annotationText: >-
+            Using the random value from above the type of brand change is
+            classified as a *Hard Brand Change* or *Soft Brand Change*.  
+
+
+            * Hard Brand Change - switch the machine from tissue to towel [180
+            minutes]
+
+            * Soft Brand Change - switch from one tissue sku to a different
+            tissue sku [20 minutes]
+
+
+            Depending on the type of brand change the amount of time the machine
+            is down to complete the brand change event changes. 
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 220
+          label: Note
+          name: note
+          width: 520
+          x: 2480
+          'y': 2060
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.device.value.compositeState.tons.value}} === undefined'
+        id: PtrFb9GkSL
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: PtrFb9GkSL
+          label: New Device?
+          name: conditional
+          x: 1520
+          'y': 180
+        outputIds:
+          - - jbhk422Hzq
+          - - uz4mTz4XVp
+        type: ConditionalNode
+      - config: {}
+        id: tEL306yRAC
+        meta:
+          annotationText: >-
+            This conditional is looking to see if the attribute **tons** has
+            ever been written to.  If it hasn't then it recognizes it is a new
+            device and sends it down the new production workflow path. This will
+            ensure that every attribute has a value written to it to ensure that
+            the device can make its way through the simulator from this point
+            forward without triggering any errors. 
+          category: annotation
+          groupId: ZYR4WqJ3yy
+          height: 160
+          label: Note
+          name: note
+          width: 500
+          x: 1720
+          'y': 180
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          statements:
+            - expression: '{{working.sku.in.time}}+1'
+              resultPath: working.sku.out.time
+        id: WncrDGw6Zq
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: WncrDGw6Zq
+          label: Update skuTime
+          name: math
+          x: 900
+          'y': 1240
+        outputIds:
+          - - DE1PEddN0N
+        type: MathNode
+      - config:
+          rules:
+            - destination: working.brandchange
+              type: set
+              valueTemplate: '2'
+        id: uz4mTz4XVp
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: Vs7xEEGekH
+          label: Brand Change
+          name: mutate
+          x: 2160
+          'y': 920
+        outputIds:
+          - - ZyUwxle0p-
+        type: MutateNode
+      - config:
+          max: 2
+          min: 0
+          resultPath: working.brandchange
+        id: bPXYYiDzWI
+        meta:
+          category: logic
+          description: ''
+          groupId: ZYR4WqJ3yy
+          id: FqxVaYULur
+          label: Brand Change
+          name: random-number
+          x: 2040
+          'y': 1060
+        outputIds:
+          - - ZyUwxle0p-
+        type: RandomNumberNode
+    triggers:
+      - config:
+          seconds: 60
+        key: ~losant-flow-paperMachineDataSimulator-0~-Dj8pq2cY3qaCcUQ6aBbQn
+        meta:
+          category: trigger
+          description: ''
+          id: 647i98-eiI
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: 647i98-eiI
+          x: 320
+          'y': 120
+        outputIds:
+          - - YhEurDgcIO
+        type: timer
+      - config: {}
+        key: ~losant-flow-paperMachineDataSimulator-0~-p9N6MA233tAYiGEmB8WNo
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: sinLbE_liL
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: sinLbE_liL
+          x: 120
+          'y': 120
+        outputIds:
+          - - YhEurDgcIO
+        type: virtualButton
+version: 1

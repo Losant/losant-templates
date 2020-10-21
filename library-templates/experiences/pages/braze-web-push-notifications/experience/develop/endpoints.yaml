@@ -1,0 +1,23 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    description: Endpoint to request the push notification test page.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getBrazeWebPush-0~
+    method: get
+    route: /braze-web-push
+    staticReply:
+      statusCode: 200
+      type: page
+      value: ~losant-experienceView-tlPageWebPush-0~
+    version: develop
+  - access: public
+    description: Endpoint used to retrieve the service worker JavaScript.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getServiceWorkerJs-1~
+    method: get
+    route: /service-worker.js
+    version: develop
+version: 1

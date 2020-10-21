@@ -1,0 +1,247 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            Specify your Particle API access token to get the diagnostics on
+            your device.
+          id: accessToken
+          label: Particle Access Token
+          required: true
+          type: stringTemplate
+        - description: Specify the Particle device ID.
+          id: deviceId
+          label: Particle Device ID
+          required: true
+          type: stringTemplate
+        - defaultValue: get
+          description: >-
+            Specify the API call to make on the given device.
+
+            The following is the list of method names to the API call:
+
+
+            - Update /v1/diagnostics/:deviceId/update
+
+            - Last /v1/diagnostics/:deviceId/last
+
+            - Get /v1/diagnostics/:deviceId
+
+            - MetaData /v1/diagnostics/:deviceId/metadata
+
+
+            For more details, see Particle
+            [documentation](https://docs.particle.io/reference/api/#remote-diagnostics)
+            on remote diagnostics.
+          id: method
+          label: Method
+          options:
+            - label: Update
+              value: update
+            - label: Last
+              value: last
+            - label: Get
+              value: get
+            - label: Meta Data
+              value: metadata
+          type: select
+      outputCount: 1
+      resultDescription: Result of Particle device diagnostic call...
+      resultMode: optional
+    enabled: true
+    flowId: ~losant-flow-particleDiagnostics-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working
+        id: AiqKLAKusT
+        meta:
+          category: customNodeEnd
+          description: End the custom node run
+          label: Output
+          name: custom-node-end-single
+          x: 260
+          'y': 780
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: ''
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working
+          headerInfo: []
+          method: POST
+          responsePath: working
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.particle.io/v1/diagnostics/{{data.deviceId}}/update?access_token={{data.accessToken}}
+        id: wGtFqWe5dY
+        meta:
+          category: data
+          description: ''
+          label: Update
+          name: http
+          x: 40
+          'y': 440
+        outputIds:
+          - - 4IUp059P6Q
+        type: HttpNode
+      - config:
+          authCredentials: {}
+          authType: none
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working
+          headerInfo: []
+          method: GET
+          responsePath: working
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.particle.io/v1/diagnostics/{{data.deviceId}}/last?access_token={{data.accessToken}}
+        id: pOG9cWyk9Q
+        meta:
+          category: data
+          description: ''
+          label: Last
+          name: http
+          x: 280
+          'y': 440
+        outputIds:
+          - - 4IUp059P6Q
+        type: HttpNode
+      - config:
+          authCredentials: {}
+          authType: none
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working
+          headerInfo: []
+          method: GET
+          responsePath: working
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.particle.io/v1/diagnostics/{{data.deviceId}}?access_token={{data.accessToken}}
+        id: NTf5GGNFlQ
+        meta:
+          category: data
+          description: ''
+          label: Get
+          name: http
+          x: 700
+          'y': 440
+        outputIds:
+          - - 4IUp059P6Q
+        type: HttpNode
+      - config:
+          authCredentials: {}
+          authType: none
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working
+          headerInfo: []
+          method: GET
+          responsePath: working
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.particle.io/v1/diagnostics/{{data.deviceId}}/metadata?access_token={{data.accessToken}}
+        id: s1~J_kHxVa
+        meta:
+          category: data
+          description: ''
+          label: Meta Data
+          name: http
+          x: 500
+          'y': 440
+        outputIds:
+          - - 4IUp059P6Q
+        type: HttpNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: update
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: last
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: metadata
+              dontBreak: false
+          switchTemplate: '{{data.method}}'
+        id: t89ogktS4H
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 280
+          'y': 300
+        outputIds:
+          - - NTf5GGNFlQ
+          - - wGtFqWe5dY
+          - - pOG9cWyk9Q
+          - - s1~J_kHxVa
+        type: SwitchNode
+      - config:
+          rules:
+            - source: working.request
+              type: remove
+        id: 4IUp059P6Q
+        meta:
+          category: logic
+          description: ''
+          label: Remove Request Object
+          name: mutate
+          x: 280
+          'y': 580
+        outputIds:
+          - - AiqKLAKusT
+            - 8BmDuJOVc~
+        type: MutateNode
+      - config:
+          message: ''
+          property: ''
+        id: 8BmDuJOVc~
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 100
+          'y': 660
+        outputIds:
+          - - AiqKLAKusT
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Particle: Diagnostics'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 120
+          'y': 160
+        outputIds:
+          - - t89ogktS4H
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-particleDiagnostics-0~-gmIBQDRtvWC5vEbbUFnIs
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: "{\n\t\"method\": \"get\",\n  \"accessToken\": \"my-access-token\",\n  \"deviceId\": \"my-device-id\"\n}"
+          uiId: 1bBx4LcnW~
+          x: 420
+          'y': 160
+        outputIds:
+          - - t89ogktS4H
+        type: virtualButton
+    version: v1.0.0
+version: 1

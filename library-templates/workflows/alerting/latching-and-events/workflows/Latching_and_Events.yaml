@@ -1,0 +1,372 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals:
+      - json: '"temperature"'
+        key: attributeName
+      - json: '"maxThreshold"'
+        key: maxThresholdAttributeTagName
+      - json: '"resetThreshold"'
+        key: resetThresholdAttributeTagName
+    id: ~losant-flow-latchingAndEvents-0~
+    name: Latching and Events
+    nodes:
+      - config:
+          branchPath: ''
+          isLatchedPath: working.isLatched
+          latchExpression: '{{working.value}} >= {{working.maxThreshold}}'
+          latchIdTemplate: '{{triggerId}}'
+          latchResultPath: ''
+          resetExpression: '{{working.value}} <= {{working.resetThreshold}}'
+          resetResultPath: working.belowReset
+          wasLatchedPath: working.wasLatched
+        id: X85xceQACi
+        meta:
+          category: logic
+          description: ''
+          id: X85xceQACi
+          label: Latch
+          name: latch
+          x: 460
+          'y': 500
+        outputIds:
+          - - cSecClGs8k
+          - - U8isR16WuI
+        type: LatchNode
+      - config:
+          rules:
+            - destination: working.maxThreshold
+              type: set
+              valueTemplate: '{{data.maxThreshold}}'
+            - destination: working.resetThreshold
+              type: set
+              valueTemplate: '{{data.resetThreshold}}'
+            - destination: working.value
+              type: set
+              valueTemplate: '{{data.value}}'
+        id: x6h-x0L5Qk
+        meta:
+          category: logic
+          description: ''
+          id: x6h-x0L5Qk
+          label: Mutate
+          name: mutate
+          x: 560
+          'y': 360
+        outputIds:
+          - - X85xceQACi
+        type: MutateNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{triggerId}}'
+          includeState: false
+          resultPath: working.device
+          tagsAsObject: false
+        id: hTOxqWh43a
+        meta:
+          category: data
+          description: ''
+          id: hTOxqWh43a
+          label: 'Device: Get'
+          name: get-device
+          x: 360
+          'y': 260
+        outputIds:
+          - - wNfSlGvMUY
+        type: GetDeviceNode
+      - config:
+          rules:
+            - destination: working.maxThreshold
+              type: set
+              valueTemplate: >-
+                {{lookup (valueByKey working.device.attributes
+                globals.attributeName "name" "attributeTags")
+                globals.maxThresholdAttributeTagName}}
+            - destination: working.resetThreshold
+              type: set
+              valueTemplate: >-
+                {{lookup (valueByKey working.device.attributes
+                globals.attributeName "name" "attributeTags")
+                globals.resetThresholdAttributeTagName}}
+            - destination: working.value
+              type: set
+              valueTemplate: '{{lookup data globals.attributeName}}'
+        id: wNfSlGvMUY
+        meta:
+          category: logic
+          description: ''
+          id: wNfSlGvMUY
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 360
+        outputIds:
+          - - X85xceQACi
+        type: MutateNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{working.device.id}}'
+          eventTags: []
+          levelTemplate: error
+          messageTemplate: 'Recorded value: {{value}}'
+          resultPath: working.createdEvent
+          subjectTemplate: Value Exceeded Threshold
+          timeSourcePath: time
+          timeSourceType: payloadPath
+        id: U8isR16WuI
+        meta:
+          category: data
+          description: ''
+          id: U8isR16WuI
+          label: 'Event: Create'
+          name: create-event
+          x: 560
+          'y': 640
+        outputIds:
+          - - 2_ybaDVbU_
+        type: CreateEventNode
+      - config:
+          expression: '{{working.wasLatched}} && !{{working.isLatched}}'
+        id: cSecClGs8k
+        meta:
+          category: logic
+          description: ''
+          id: cSecClGs8k
+          label: Conditional
+          name: conditional
+          x: 360
+          'y': 900
+        outputIds:
+          - - 5TtB4OBgjj
+          - - JxVyJlImQc
+        type: ConditionalNode
+      - config:
+          keyName: '{{triggerId}}-createdEventId'
+          resultPath: ''
+          value: working.createdEvent.id
+          valueType: path
+        id: 2_ybaDVbU_
+        meta:
+          category: data
+          description: ''
+          id: 2_ybaDVbU_
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 560
+          'y': 900
+        outputIds:
+          - - 5TtB4OBgjj
+        type: StoreValueNode
+      - config:
+          defaultValue: 'null'
+          defaultValueType: json
+          getAll: false
+          keyName: '{{triggerId}}-createdEventId'
+          valuePath: working.eventIdToResolve
+        id: JxVyJlImQc
+        meta:
+          category: data
+          description: ''
+          id: JxVyJlImQc
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 460
+          'y': 1000
+        outputIds:
+          - - SNWtQzoZ_7
+        type: GetValueNode
+      - config:
+          commentTemplate: ''
+          dataMethod: individualFields
+          dataSourcePath: ''
+          dataSourceType: payloadPath
+          eventTags: []
+          resultPath: ''
+          stateTemplate: resolved
+          targetEventIdTemplate: '{{working.eventIdToResolve}}'
+        id: SNWtQzoZ_7
+        meta:
+          category: data
+          description: ''
+          id: SNWtQzoZ_7
+          label: 'Event: Update'
+          mode: targetEventIdTemplate
+          name: update-event
+          x: 460
+          'y': 1100
+        outputIds:
+          - - 3GmuwTwXeA
+        type: UpdateEventNode
+      - config:
+          keyName: '{{triggerId}}-createdEventId'
+          resultPath: ''
+          value: ''
+          valueType: clear
+        id: 3GmuwTwXeA
+        meta:
+          category: data
+          description: ''
+          id: 3GmuwTwXeA
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 460
+          'y': 1200
+        outputIds:
+          - - 5TtB4OBgjj
+        type: StoreValueNode
+      - config: {}
+        id: 8GlTTgMBY3
+        meta:
+          annotationText: >-
+            When the reported value crosses our maxThreshold, the Latch Node
+            will take the `true` path. Here we are creating an event, but you
+            could take a number of actions when the workflow branches down this
+            path.
+
+
+            The Latch Node will not take the `true` path again until its reset
+            condition is met.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 600
+          x: 660
+          'y': 460
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: kgHkU7wcDR
+        meta:
+          annotationText: >-
+            All of the nodes wrapped by this annotation are used for
+            auto-resolving the created event when the Latch Node is reset - as
+            in, when the value falls below an acceptable level again. If you do
+            not wish to auto-resolve the events created by this workflow, you
+            can delete or disconnect these nodes.
+          category: annotation
+          height: 560
+          label: Note
+          name: note
+          width: 420
+          x: 340
+          'y': 740
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: 5TtB4OBgjj
+        meta:
+          category: output
+          description: ''
+          id: 5TtB4OBgjj
+          label: Debug
+          name: debug
+          x: 460
+          'y': 1340
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: aYRQPqMbLM
+        meta:
+          annotationText: >-
+            This Mutate Node is for normalizing the max, reset, and compared
+            values between the Virtual Button Trigger and the Device State
+            Trigger.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 400
+          x: 760
+          'y': 340
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: K2fGuC7sPG
+        meta:
+          annotationText: >-
+            Update this Device: State Trigger to fire this workflow on the
+            device(s) and attribute(s) you wish to target.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 320
+          x: 300
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: r_2lfuktQq
+        meta:
+          annotationText: >-
+            Update the following values in your Workflow Globals:
+
+
+            - **attributeName:** This is the name of the attribute whose value
+            you wish to latch and alert on.
+
+            - **maxThresholdAttributeTagName:** On the provided attribute, this
+            is the name (key) of the attribute tag where you store the threshold
+            over which a reported value should latch and create an event.
+
+            - **maxThresholdAttributeTagName:** On the provided attribute, this
+            is the name (key) of the attribute tag where you store the threshold
+            under which a reported value must fall before the latch is reset and
+            the event auto-resolves.
+          category: annotation
+          height: 420
+          label: Note
+          name: note
+          width: 320
+          x: 20
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-latchingAndEvents-0~-lnZCno0M7hhQ6tf-zM8qq
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: zaVupqff49
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+                "value": 70,
+                "maxThreshold": 90,
+                "resetThreshold": 80
+            }
+          uiId: zaVupqff49
+          x: 560
+          'y': 160
+        outputIds:
+          - - x6h-x0L5Qk
+        type: virtualButton
+      - config:
+          attributeWhitelist:
+            - temperature
+        key: ~losant-device-exampleDevice-0~
+        meta:
+          allowedAttributeType: attributeWhitelist
+          category: trigger
+          description: ''
+          id: H6447eE4K4
+          label: 'Device: State'
+          maxAgeToggle: false
+          name: deviceIdsTags
+          timeUnit: '1'
+          uiId: H6447eE4K4
+          x: 360
+          'y': 160
+        outputIds:
+          - - hTOxqWh43a
+        type: deviceId
+version: 1

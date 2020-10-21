@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlGoogleMap-0~
+    localFilename: ./tl-google-map.hbs
+    name: tl-google-map
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

@@ -1,0 +1,78 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: gps
+        description: The GPS coordinates.
+        name: location
+      - attributeTags: {}
+        dataType: number
+        description: The GPS location accuracy, in meters.
+        name: accuracy
+      - attributeTags: {}
+        dataType: string
+        description: 'The source of the location: "gps", "cell", "wifi".'
+        name: source
+      - attributeTags: {}
+        dataType: number
+        description: The battery level, in voltage.
+        name: battery
+      - attributeTags: {}
+        dataType: number
+        description: The temperature, in Celsius.
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: Cellular signal strength, 0-4. Analogous to the number of “bars”
+          for a cell phone.
+        name: signal_strength
+      - attributeTags: {}
+        dataType: number
+        description: The accelerometer's X axis value.
+        name: accelerometer_x
+      - attributeTags: {}
+        dataType: number
+        description: The accelerometer's Y axis value.
+        name: accelerometer_y
+      - attributeTags: {}
+        dataType: number
+        description: The accelerometer's Z axis value.
+        name: accelerometer_z
+      - attributeTags: {}
+        dataType: number
+        description: Signal level and check-in, in dBm.
+        name: rssi
+      - attributeTags: {}
+        dataType: number
+        description: The altitude in meters. This value only applies to GPS locations
+          and will be 777 for calculated locations (WiFi and cellular).
+        name: altitude
+      - attributeTags: {}
+        dataType: number
+        description: The speed in kilometers/hour. This value will only be present on
+          GPS records if available.
+        name: speed
+      - attributeTags: {}
+        dataType: number
+        description: The heading in degrees. This value will only be present on GPS
+          records if available.
+        name: heading
+    description: The Nimbelink NL-AT2 GPS asset tracker.
+    deviceClass: standalone
+    deviceName: Nimbelink NL-AT2
+    id: ~losant-deviceRecipe-nimbelinkNlAt2-0~
+    name: Nimbelink NL-AT2
+    tags:
+      - key: device_id
+        value: at-xxxAAABBBCC
+      - key: config_check_in_rate
+        value: "720"
+      - key: config_location_rate
+        value: "360"
+      - key: config_temperature_rate
+        value: "60"
+      - key: config_accelerometer_mode
+        value: "3"
+      - key: config_accelerometer_rate
+        value: "60"
+version: 1

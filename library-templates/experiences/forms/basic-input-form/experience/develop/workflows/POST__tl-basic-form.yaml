@@ -1,0 +1,117 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint POST /tl-basic-form
+    enabled: true
+    flowId: ~losant-flow-postTlBasicForm-0~
+    globals: []
+    id: ~losant-flowVersion-postTlBasicForm-0~
+    name: POST /tl-basic-form
+    nodes:
+      - config:
+          bodyTemplate: /tl-basic-form?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+        id: Eru8fq_4fx
+        meta:
+          category: output
+          description: ''
+          id: Eru8fq_4fx
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 520
+        outputIds:
+          - - ekR41OtlQT
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: ekR41OtlQT
+        meta:
+          category: output
+          description: ''
+          id: ekR41OtlQT
+          label: Debug
+          name: debug
+          x: 40
+          'y': 820
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: o5ytTFv_eU
+        meta:
+          annotationText: >-
+            The submitted form data is available on `data.body`. That object
+            will contain a field for each form element. The name of the field is
+            based on the form element's `name` attribute.
+
+
+            Try submitting the form a few times and checking the Debug log.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 280
+          x: 240
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: nxWroGroS_
+        meta:
+          annotationText: >-
+            **TODO**: this is where you can add any number of nodes to handle
+            the submitted form data. It's also a good idea to validate that all
+            incoming data exists and is in the correct format.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 280
+          x: 240
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: f1oU34zDL4
+        meta:
+          annotationText: >-
+            If everything went smoothly, redirect the user back to the form with
+            the `?success=true` query parameter. If the form data was invalid or
+            something failed, redirect the user with the `?success=false` query
+            parameter.
+
+
+            You can also change this behavior to redirect the user anywhere else
+            based on your requirements.
+          category: annotation
+          height: 280
+          label: Note
+          name: note
+          width: 280
+          x: 240
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postTlBasicForm-1~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /tl-basic-form
+          name: endpoint
+          uiId: 0GmvZu60u3
+          x: 40
+          'y': 40
+        outputIds:
+          - - Eru8fq_4fx
+        type: endpoint
+    version: develop
+version: 1

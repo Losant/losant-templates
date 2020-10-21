@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Monitors real-time geolocation, temperature, and shock for multiple
+      asset tracking devices.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-applicationAssetTracker-0~
+    name: Asset Tracker
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Displays a filterable dropdown menu for use in forms or for navigation.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesComponentsAdvancedDropdown-0~
+    name: Advanced Dropdown
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - dropdown
+      - select
+      - devices
+      - form
+      - navigation
+version: 1

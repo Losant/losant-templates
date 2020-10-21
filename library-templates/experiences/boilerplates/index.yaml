@@ -1,0 +1,5 @@
+name: Boilerplates
+description: Boilerplates provide foundations on which you can build your
+  experience. These handle the required markup to include dependencies, like
+  Twitter Bootstrap, as well as providing common layouts that can be directly
+  used by your experience.

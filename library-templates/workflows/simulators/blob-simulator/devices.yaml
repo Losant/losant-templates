@@ -1,0 +1,13 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        contentType: image/jpeg
+        dataType: blob
+        name: image
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-deviceRecordingBlobSimulatorOutput-0~
+    name: Device Recording Blob Simulator Output
+    tags: []
+version: 1

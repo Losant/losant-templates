@@ -1,0 +1,106 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: position-chart
+        config:
+          additionalAttributes: []
+          coordinateA: '0,0'
+          coordinateB: '100,25'
+          defaultCenter: '1017.48538,509.66522'
+          defaultZoom: -1
+          deviceIds:
+            - '{{ctx.deviceId-0}}'
+          deviceTags: []
+          duration: 0
+          endColor: '#8db319'
+          iconTemplate: >-
+            {{#if isLastPoint}}
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/residents/{{ctx.deviceId-0.tags.uniqueId.[0]}}@2x.png
+
+            {{else if isFirstPoint}}
+
+            {{colorMarker '#ff261b'}}
+
+            {{/if}}
+          imageUrl: >-
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+          includeArrows: false
+          includeLines: false
+          pinMode: advanced
+          pixelA: '89,190'
+          pixelB: '1894,822'
+          popupTemplate: >-
+            ##### **{{deviceName}}** {{#if isLastPoint}} (Current
+            Location){{else if isFirstPoint}} (Starting Location){{/if}}
+
+
+            {{format time}}
+
+
+            (x, y) = ({{format x}}, {{format y}})
+          resizedPins: true
+          resolution: 60000
+          startColor: '#ff261b'
+          xAttribute: x
+          yAttribute: 'y'
+        height: 3.5
+        id: madIN3tCG8
+        startX: 0
+        startY: 0
+        title: Floor Plan
+        width: 3
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: image
+        config:
+          bgColor: 'rgba(255, 255, 255, 0)'
+          imageSource: static
+          imageUrl: >-
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/residents/{{ctx.deviceId-0.tags.uniqueId}}.jpg
+        height: 2
+        id: lT0XA9nyFw
+        startX: 3
+        startY: 0
+        title: Resident Photo
+        width: 1
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{value-0}}==="Off Campus"||{{value-0}}==="Utility Closet"'
+              id: 2bOWXo6qAN
+              label: '{{value-0}}'
+          defaultCondition:
+            color: '#8db319'
+            label: '{{value-0}}'
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: room
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1.5
+        id: i-oAgjrJcl
+        startX: 3
+        startY: 2
+        title: Current Location
+        width: 1
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        defaultValue: ~losant-device-janeSmith-1~
+        name: deviceId-0
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-residentLocation-1~
+    name: Resident Location
+    public: false
+    refreshRate: 60
+version: 1

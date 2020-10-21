@@ -1,0 +1,254 @@
+html, body {
+  color: #758D83;
+  font-size: 13px;
+  font-family: Helvetica;
+  font-weight: 300;
+  background-color: #D0F8FA;
+  overflow: hidden;
+  height: 100%;
+}
+
+a {
+  color: #7D3024;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 27px;
+}
+
+.button {
+  height: 32px;
+  border-radius: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+  background-color: #758D83;
+  color: white;
+}
+
+label {
+  margin: 0;
+  padding: 0;
+}
+
+
+#layout-dashboard-page .layout-dashboard {
+  height: 100%;
+  display:grid;
+  grid-template-columns:auto;
+  grid-template-rows: auto;  
+}
+/*
+ *
+ * Layout - Dashboard Page
+ *
+ */
+
+ #layout-dashboard-page .layout {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px auto;
+  grid-template-rows: auto;  
+}
+
+#layout-dashboard-page .sidebar-container {
+  background-color: white;
+  box-sizing: border-box;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: min-content min-content auto;
+  overflow: hidden;
+  box-shadow: 3px 0px 10px rgba(117,141,131,0.25);
+}
+
+#layout-dashboard-page .sidebar-logo {
+  grid-row-start: 1;
+  margin-bottom: 15px;
+}
+
+#layout-dashboard-page .sidebar-logo > img {
+  width: 47px;
+  height: 47px;
+}
+
+#layout-dashboard-page .sidebar-header {
+  border-bottom: 4px solid #DFDCD3;
+  font-size: 17px;
+  line-height: 32px;
+  margin-bottom: 12px;
+  grid-row-start: 2;
+  font-weight: bold;
+}
+
+#layout-dashboard-page .sidebar-device-list {
+  grid-row-start: 3;
+  overflow-y: scroll;
+}
+
+#layout-dashboard-page .breadcrumbs {
+  font-size: 15px;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 30px;
+  padding-right: 30px;
+  grid-row-start: 1;
+}
+.breadcrumbs {
+  font-size: 15px;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 30px;
+  padding-right: 30px;
+  grid-row-start: 1;
+}
+.breadcrumbs a {
+  text-decoration: none;
+}
+
+#layout-dashboard-page .breadcrumbs a {
+  text-decoration: none;
+}
+
+#layout-dashboard-page .content-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: min-content auto;
+  overflow: hidden;
+}
+
+#layout-dashboard-page .page-container {
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 0px 30px 30px 30px;
+  overflow-y: scroll;
+  background-color: white;
+  grid-row-start: 2;
+  border-radius: 6px;
+}
+
+.icon-container {
+  box-sizing: border-box;
+margin-top: 6px;
+padding: 2px;
+width: 45px;
+height: 45px;
+border-radius: 22.5px;
+background-color: white;
+margin-right: 10px;
+padding: 5px;
+}
+
+/*
+ *
+ * Panel Page
+ *
+ */
+ .panel-container {
+  display:flex;
+  flex-direction:row;
+  height:100%;
+  width:100%;
+  align-items:center;
+  justify-content:center;
+}
+
+.panel-content {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  width:933px;
+  height:587px;
+  background-color:white;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.10);
+}
+.panel-content-no-bkgd {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  width:933px;
+  height:587px;
+}
+
+.panel-page-form {
+  width: 330px;
+}
+
+.panel-content .large-button {
+  width: 100%;
+  height: 52px;
+  border-radius: 6px;
+  background-color: #758D83;
+  color: white;
+  font-size: 20px;
+  border: 0px;
+  margin-bottom: 20px;
+}
+
+.panel-content input::placeholder {
+  color: #758D83;
+  font-weight: 300;
+}
+
+.panel-page-form label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.panel-page-form input {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #758D83;
+  border-radius: 6px;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 25px;
+  box-sizing: border-box;
+}
+
+.panel-page-invalid {
+  border: 1px solid #FF1129 !important;
+}
+
+/*
+ * 
+ * Login Page
+ *
+ */
+ #login-page {
+  background-color: #13DCE5;
+}
+
+#login-page-logo {
+  position:absolute;
+  top:22px;
+  left:0px;
+}
+
+#login-page a {
+  font-size: 14px;
+}
+
+#login-page-account-links {
+  width:100%;
+  text-align:center;
+}
+
+#login-page-copyright {
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  font-size: 12px;
+}
+
+#login-page-error {
+  color: #FF1129;
+  text-align: center;
+}

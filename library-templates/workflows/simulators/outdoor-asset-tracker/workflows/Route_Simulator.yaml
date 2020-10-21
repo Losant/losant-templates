@@ -1,0 +1,532 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals:
+      - json: '14'
+        key: pointsPerIteration
+    id: ~losant-flow-routeSimulator-0~
+    name: Route Simulator
+    nodes:
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.coordinates
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://files.onlosant.com/{{applicationId}}/tl-route-simulator/routeCoordinates.json
+        id: ZDUXmWVuIz
+        meta:
+          category: data
+          description: ''
+          id: ZDUXmWVuIz
+          label: Fetch Coords
+          name: http
+          x: 640
+          'y': 220
+        outputIds:
+          - - 5OsP596Y0r
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: BG8GyP0ggV
+        meta:
+          category: output
+          description: ''
+          id: BG8GyP0ggV
+          label: Debug
+          name: debug
+          x: 640
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/xml
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.xml
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://files.onlosant.com/{{applicationId}}/tl-route-simulator/routeCoordinates.gpx
+        id: 5aLY5ibWTw
+        meta:
+          category: data
+          description: ''
+          id: ZDUXmWVuIz
+          label: HTTP
+          name: http
+          x: 640
+          'y': 940
+        outputIds:
+          - - Bw5MAP2RtY
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: Y5_cPDWy6Y
+        meta:
+          category: output
+          description: ''
+          id: Y5_cPDWy6Y
+          label: Debug
+          name: debug
+          x: 640
+          'y': 1340
+        outputIds: []
+        type: DebugNode
+      - config:
+          documentPath: working.xml.body
+          resultFormatTemplate: json
+          resultPath: working.json
+          selectorTemplate: trkpt
+        id: Bw5MAP2RtY
+        meta:
+          category: logic
+          description: ''
+          id: Bw5MAP2RtY
+          label: HTML/XML Parser
+          name: html-parser
+          x: 640
+          'y': 1040
+        outputIds:
+          - - tU74GVHBxN
+        type: HtmlParserNode
+      - config:
+          currentItemPath: currentPoint
+          loopSourcePath: working.json
+        id: tU74GVHBxN
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          id: tU74GVHBxN
+          label: Loop
+          name: loop
+          x: 640
+          'y': 1140
+        outputIds:
+          - - DAiW1tpmbJ
+          - - m-SnxI8gw_
+        type: LoopNode
+      - config:
+          loopNodeId: tU74GVHBxN
+          shouldBreak: false
+        id: HRorcx_EM4
+        meta:
+          category: loop
+          description: ''
+          groupId: tU74GVHBxN
+          id: HRorcx_EM4
+          label: Next
+          name: loop-next
+          x: 200
+          'y': 400
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          destArrayPath: working.coordinates
+          rules:
+            - inputTemplate: >-
+                {{format (add 0 currentPoint.value.children.[0].attributes.lat)
+                ',.3f'}},{{format (add 0
+                currentPoint.value.children.[0].attributes.lon) ',.3f'}}
+              type: push
+          sourceArrayPath: working.coordinates
+        id: m-SnxI8gw_
+        meta:
+          category: logic
+          description: ''
+          groupId: tU74GVHBxN
+          id: m-SnxI8gw_
+          label: Array
+          name: array
+          x: 200
+          'y': 300
+        outputIds:
+          - - HRorcx_EM4
+        type: ArrayNode
+      - config:
+          contentTypeTemplate: application/json
+          encodingTemplate: utf8
+          fileContentsTemplate: '{{jsonEncode working.coordinates}}'
+          fileNameTemplate: customRouteCoordinates.json
+          parentDirectoryTemplate: /tl-route-simulator
+          resultPath: working.fileCreateResult
+          shouldOverwrite: false
+        id: DAiW1tpmbJ
+        meta:
+          category: data
+          description: ''
+          id: DAiW1tpmbJ
+          label: 'File: Create'
+          name: file-create
+          x: 640
+          'y': 1240
+        outputIds:
+          - - Y5_cPDWy6Y
+        type: FileCreateNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: coordinateIndex
+          valuePath: working.coordinateIndex
+        id: 5OsP596Y0r
+        meta:
+          category: data
+          description: ''
+          id: 5OsP596Y0r
+          label: Get Current Point Index
+          name: get-value
+          x: 640
+          'y': 320
+        outputIds:
+          - - 0nLCL_vEDW
+        type: GetValueNode
+      - config:
+          rules:
+            - indexTemplate: '{{working.coordinateIndex}}'
+              outputPath: working.coordinate
+              type: lookupAt
+          sourceArrayPath: working.coordinates.body
+        id: 0nLCL_vEDW
+        meta:
+          category: logic
+          description: ''
+          id: 0nLCL_vEDW
+          label: Look Up Current Point
+          name: array
+          x: 640
+          'y': 420
+        outputIds:
+          - - FOVlyrD5OP
+        type: ArrayNode
+      - config:
+          keyName: coordinateIndex
+          resultPath: ''
+          value: working.nextCoordinateIndex
+          valueType: path
+        id: HZbqSu93lL
+        meta:
+          category: data
+          description: ''
+          id: HZbqSu93lL
+          label: Set Next Point
+          name: store-value
+          x: 540
+          'y': 620
+        outputIds:
+          - - BG8GyP0ggV
+        type: StoreValueNode
+      - config:
+          statements:
+            - expression: >-
+                ({{working.coordinateIndex}} + {{globals.pointsPerIteration}}) %
+                {{length working.coordinates.body}}
+              resultPath: working.nextCoordinateIndex
+        id: FOVlyrD5OP
+        meta:
+          category: logic
+          description: ''
+          id: FOVlyrD5OP
+          label: Calculate Next Point
+          name: math
+          x: 540
+          'y': 520
+        outputIds:
+          - - HZbqSu93lL
+        type: MathNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: location
+              valueTemplate: '{{working.coordinate}}'
+          deviceId: MY_DEVICE_ID
+          deviceIdTemplateType: jsonPath
+          resultPath: working.stateResult
+          timeSourceType: payloadTime
+        id: 72wV0D4tvI
+        meta:
+          category: output
+          description: ''
+          id: 72wV0D4tvI
+          label: 'Device: State'
+          name: device-state
+          x: 740
+          'y': 520
+        outputIds:
+          - - BG8GyP0ggV
+        type: DeviceChangeStateNode
+      - config: {}
+        id: Xf1eYaCFWS
+        meta:
+          annotationText: >-
+            These nodes generate a JSON file containing normalized coordinates
+            given a GPX file stored in your [Application
+            Files](/applications/recent/files]). You can then use this generated
+            file to simulate a device traveling along a GPS route.
+
+
+            To generate your own GPX file:
+
+
+            1. Visit
+            [http://map.project-osrm.org/](http://map.project-osrm.org/).
+
+            2. In the top left corner, switch the route type from "Bike" to
+            "Car" before entering any locations.
+
+            3. Enter a "Start" destination string in the top input box and press
+            "Enter" to display a list of suggested locations, then click the
+            location you wish to use as the starting point for your route.
+
+            4. Enter an "End" destination string in the second input box and
+            follow the same steps for setting the destination as you did for
+            choosing a "Start".
+
+            5. If you wish to add additional stops on the route, click the "+"
+            button in the bottom right corner of the inputs. Then, set the
+            location for each stop.
+
+            6. While not required, your route should end at the same place as
+            your starting location; otherwise, when the simulator reaches the
+            final point along the route, it will "jump" back to the beginning
+            again instead of traveling there naturally.
+
+            7. After your route is complete, click the "Export GPX" button in
+            the bottom left portion of the window. This will download a file to
+            your computer.
+          category: annotation
+          height: 460
+          label: Note
+          name: note
+          width: 600
+          x: 20
+          'y': 840
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: xbs4ZaPR9x
+        meta:
+          annotationText: >-
+            Fetch our route JSON out of our [Application
+            Files](/applications/recent/files) and store it on our payload. If
+            you wish to use a different route, you should change the URL in this
+            node.
+
+
+            The route used to generate the default coordinates used in this
+            workflow can be found
+            [here](http://map.project-osrm.org/?z=9&center=39.846009%2C-84.606575&loc=39.716253%2C-86.295084&loc=39.997056%2C-82.893041&loc=39.049907%2C-84.665162&loc=38.171696%2C-85.735408&loc=39.716253%2C-86.295084&hl=en&alt=0&srv=0).
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 380
+          x: 840
+          'y': 220
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: lfE9cUdds2
+        meta:
+          annotationText: >-
+            By default, this workflow runs once per minute. If you wish to run
+            it more or less frequently, we recommend changing the
+            "pointsPerIteration" global value accordingly. For example, the
+            default "pointsPerIteration" is 14, meaning that every run of the
+            workflow advances 14 coordinates in the route JSON file. Given the
+            default route, the simulated trip takes about 10.5 hours to complete
+            - approximately highway speed.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 480
+          x: 40
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: q50NaFpdoJ
+        meta:
+          annotationText: >-
+            The coordinate to use for this iteration is stored, by index, in
+            Workflow Storage. On the first run, this will default to the first
+            point in the array.
+
+
+            Given an index, we look up the corresponding coordinate in the array
+            of route points.
+
+
+            If you change your coordinate URL, you should clear this index in
+            workflow storage to start again at the first point.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 440
+          x: 180
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: s_A8oNdrP1
+        meta:
+          annotationText: >-
+            Now, we need to advance the point index for our next iteration. This
+            Math Node also makes sure to wrap around to the beginning of the
+            route again should the next point extend beyond the length of the
+            trip.
+
+
+            After this calculation is complete, we overwrite our
+            "coordinateIndex" property in storage for use in the next workflow
+            run.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 360
+          x: 160
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: cq6ajp1DLv
+        meta:
+          annotationText: >-
+            You probably want to write this coordinate as state to a GPS
+            attribute on a device. To do so, edit this Device: State Node ...
+
+
+            1. Connect the node above to this Device State Node.
+
+            2. In the Device State Node, define the device that should receive
+            the state report.
+
+            3. Enter the name of your attribute. Remember that the attribute
+            should be the "GPS" data type.
+
+            4. The value is already correct in the node, assuming no other
+            changes were made to this workflow.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 440
+          x: 940
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Q8fUVS_GsN
+        meta:
+          annotationText: >-
+            Once you have a GPX file in hand ...
+
+
+            1. Upload the GPX file to your [Application
+            Files](/applications/recent/files).
+
+            2. Update the "URL Template" field of the [HTTP
+            Node](https://docs.losant.com/workflows/data/http/) in the helper
+            workflow to point to the location of the GPX file you just uploaded.
+
+            3. Update the [File: Create
+            Node](https://docs.losant.com/workflows/data/file-create/)'s "File
+            Name Template" to the name you wish to give this new file. The file
+            extension should be `.json` as the workflow will convert your GPX
+            file to JSON format.
+
+
+            Processing your file can take several seconds. Check the workflow's
+            [Debug
+            Log](https://docs.losant.com/workflows/outputs/debug/#debug-panel)
+            to know when the conversion has completed and the file is available
+            for use.
+
+
+            Once your file is generated, you can reference it in the HTTP Node
+            in the Route Simulator to begin using these new coordinates.
+          category: annotation
+          height: 360
+          label: Note
+          name: note
+          width: 480
+          x: 840
+          'y': 1040
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          seconds: 60
+        key: ~losant-flow-routeSimulator-0~-b0fQkfPNzlqW-udxz3nTp
+        meta:
+          category: trigger
+          description: ''
+          id: e9a_WYWCH1
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: ZATdP6PeE3
+          x: 540
+          'y': 120
+        outputIds:
+          - - ZDUXmWVuIz
+        type: timer
+      - config: {}
+        key: ~losant-flow-routeSimulator-0~-Hb1US6xAgmgcoB_JPhy3k
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: MuGszwtynd
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: MuGszwtynd
+          x: 740
+          'y': 120
+        outputIds:
+          - - ZDUXmWVuIz
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-routeSimulator-0~-5UavJ4etR8901qmbpxKo-
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: yzleKsgVj-
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: yzleKsgVj-
+          x: 640
+          'y': 840
+        outputIds:
+          - - 5aLY5ibWTw
+        type: virtualButton
+version: 1

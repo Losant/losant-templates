@@ -1,0 +1,32 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: string
+        name: name
+      - constraint: required
+        dataType: string
+        name: address1
+      - constraint: optional
+        dataType: string
+        name: address2
+      - constraint: required
+        dataType: string
+        name: city
+      - constraint: required
+        dataType: string
+        name: st
+      - constraint: required
+        dataType: string
+        name: zip
+      - constraint: required
+        dataType: string
+        name: coords
+      - constraint: unique
+        dataType: string
+        name: distCenterId
+    description: ''
+    id: ~losant-dataTable-distributionCenters-0~
+    localFilename: ./Distribution_Centers.csv
+    name: Distribution Centers
+version: 1

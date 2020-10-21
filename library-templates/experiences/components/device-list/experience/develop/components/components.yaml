@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlDeviceList-0~
+    localFilename: ./tl-device-list.hbs
+    name: tl-device-list
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

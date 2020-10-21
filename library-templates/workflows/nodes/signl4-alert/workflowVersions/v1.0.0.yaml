@@ -1,0 +1,132 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            This is the last part of your webhook URL:
+            https://connect.signl4.com/webhook/<teamsecret>.
+          id: stringTeamSecret
+          label: Team Secret
+          required: true
+          type: stringTemplate
+        - description: Notification message to be sent.
+          id: stringAlertMessage
+          label: Alert Message
+          required: true
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: |
+        The output value is the eventId of the submitted SIGNL4 event.
+      resultMode: optional
+    enabled: true
+    flowId: ~losant-flow-signl4Alert-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: zeydLvkgcd
+        meta:
+          category: customNodeEnd
+          description: |
+            The event ID of the triggered event.
+          label: eventId
+          name: custom-node-end-single
+          x: 40
+          'y': 440
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          message: ''
+          property: ''
+        id: gmiLVmwP79
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 340
+        outputIds:
+          - - zeydLvkgcd
+        type: DebugNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: |-
+            {
+              "Alert":"{{data.stringAlertMessage}}"
+            }
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: POST
+          responsePath: working.result
+          timeoutTemplate: '30'
+          uriTemplate: 'https://connect.signl4.com/webhook/{{data.stringTeamSecret}}'
+        id: de~jWG5LSo
+        meta:
+          category: data
+          description: ''
+          id: de~jWG5LSo
+          label: HTTP
+          name: http
+          x: 40
+          'y': 140
+        outputIds:
+          - - UUE3OzizrB
+        type: HttpNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: UUE3OzizrB
+        meta:
+          category: logic
+          description: Removes the request information from the result object.
+          id: UUE3OzizrB
+          label: Mutate
+          name: mutate
+          x: 40
+          'y': 240
+        outputIds:
+          - - gmiLVmwP79
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: SIGNL4 Alert'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 40
+          'y': 40
+        outputIds:
+          - - de~jWG5LSo
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-signl4Alert-0~-LBpp0RR7IoDEiSPYUbqja
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |
+            {
+              "stringTeamSecret":"<your-team-secret>",
+              "stringAlertMessage":"<your-alert-message>"
+            }
+          uiId: iy~65XOfes
+          x: 240
+          'y': 40
+        outputIds:
+          - - de~jWG5LSo
+        type: virtualButton
+    version: v1.0.0
+version: 1

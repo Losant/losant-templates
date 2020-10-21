@@ -1,0 +1,17 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: The Aeotec Z-Wave MultiSensor 6 wireless smart home sensor.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryDevicesRecipesAeotecZWaveMultiSensor6-0~
+    name: Aeotec Z-Wave MultiSensor 6
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - aeotec
+      - z-wave
+      - motion
+version: 1

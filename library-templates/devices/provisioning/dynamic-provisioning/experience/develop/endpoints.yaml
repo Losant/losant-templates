@@ -1,0 +1,17 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getProvision-0~
+    method: get
+    route: /provision
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postProvision-1~
+    method: post
+    route: /provision
+    version: develop
+version: 1

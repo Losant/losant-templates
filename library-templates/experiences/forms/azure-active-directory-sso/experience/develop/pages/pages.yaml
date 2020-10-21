@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlPageLoginSso-0~
+    localFilename: ./tl-page-login-sso.hbs
+    name: tl-page-login-sso
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

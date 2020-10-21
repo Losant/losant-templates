@@ -1,0 +1,117 @@
+{{#*inline "itemLabel"}}
+  {{#if @args.itemComponentName}}
+    {{component @args.itemComponentName this}}
+  {{else if @args.itemLabelTemplate}}
+    {{template @args.itemLabelTemplate this}}
+  {{else}}
+    {{this.name}}
+  {{/if}}
+{{/inline}}
+
+{{#*inline "id"}}{{#if @args.id}}{{@args.id}}{{else}}tl-advanced-dropdown{{/if}}{{/inline}}
+{{#*inline "variant"}}{{#if @args.variant}}{{@args.variant}}{{else}}light{{/if}}{{/inline}}
+
+{{#with this as | items |}}
+{{#with @args as | args |}}
+
+<div class="dropdown" id="{{> id}}">
+  <a class="btn btn-{{> variant}} dropdown-toggle" href="#" role="button" id="{{> id}}-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{#if args.selectedValue}}
+      {{#each items}}
+        {{#if args.itemValueProp}}
+          {{#eq args.selectedValue (lookup this args.itemValueProp)}}
+            {{> itemLabel this}}
+          {{/eq}}
+        {{else}}
+          {{#eq args.selectedValue this.id}}
+            {{> itemLabel this}}
+          {{/eq}}
+        {{/if}}
+      {{else}}
+        Select one ...
+      {{/each}}
+    {{else}}
+      Select one ...
+    {{/if}}
+  </a>
+  <div class="dropdown-menu" aria-labelledby="{{> id}}-menu-link">
+    <div class="form-group my-1 mx-2">
+      <label for="{{> id}}-filter" class="sr-only">Filter ...</label>
+      <input type="text" class="form-control" id="{{> id}}-filter" placeholder="Enter a name to filter" />
+    </div>
+    <div class="dropdown-items" id="{{> id}}-dropdown-items" role="listbox">
+      {{#each items}}
+        <a
+          role="option"
+          class="dropdown-item{{#if args.itemValueProp}}{{#eq args.selectedValue (lookup this args.itemValueProp)}} active{{/eq}}{{else}}{{#eq args.selectedValue this.id}} active{{/eq}}{{/if}}"
+          data-name="{{this.name}}"
+          data-id="{{this.id}}"
+          data-value="{{#if args.itemValueProp}}{{lookup this args.itemValueProp}}{{else}}{{this.id}}{{/if}}"
+          href="{{#if args.itemLinkTemplate}}{{template args.itemLinkTemplate this}}{{else}}#{{/if}}"
+          id="{{> id}}-{{this.id}}"
+        >
+          {{> itemLabel this}}
+        </a>
+      {{/each}}
+    </div>
+  </div>
+  {{#if args.inputName}}
+    <input type="hidden" name="{{args.inputName}}" value="{{lookup request.body args.inputName}}" />
+  {{/if}}
+</div>
+<script>
+  (function () {
+    // get references to the elements we need
+    const dropdown = document.querySelector('#{{> id}}');
+    const dropdownTrigger = dropdown.querySelector('#{{> id}}-menu-link');
+    const dropdownFilter = dropdown.querySelector('#{{> id}}-filter');
+    const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
+
+    // focus and clear the value of the input when the dropdown opens
+    // we are not using the events emitted by the dropdown on show / hide
+    // because that requires jQuery, and we do not know if jQuery is loaded yet
+    dropdownTrigger.addEventListener('click', () => {
+      // focus the input when the dropdown opens
+      setTimeout(() => dropdownFilter.focus(), 10);
+      // and reset its value
+      dropdownFilter.value = '';
+      dropdownFilter.dispatchEvent(new Event('input'));
+    });
+
+    // filter the items on user input
+    // in the absence of user input, show all items
+    dropdownFilter.addEventListener('input', ({ target: { value }}) => {
+      dropdownItems.forEach((item) => {
+        const nameToSearch = (item.textContent || item.innerText || '').toUpperCase();
+        if (!value || nameToSearch.includes(value.toUpperCase())) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+
+    {{#if args.inputName}}
+      // set the value of the input on item select
+      const input = dropdown.querySelector('input[name="{{args.inputName}}"]');
+      dropdownItems.forEach((item) => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          // set the text of our button to match the dropdown item text
+          dropdownTrigger.text = item.textContent || item.innerText || '';
+          // remove any previous selected states
+          dropdownItems.forEach((itemAgain) => {
+            itemAgain.classList.remove('active');
+          });
+          // and add the active class to our selected item
+          item.classList.add('active');
+          // and finally, set the value of the input
+          input.value = e.target.dataset.id;
+        });
+      });
+    {{/if}}
+  })();
+</script>
+
+{{/with}}
+{{/with}}

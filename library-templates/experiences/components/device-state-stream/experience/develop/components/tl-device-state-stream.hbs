@@ -1,0 +1,88 @@
+{{! Default variables}}
+{{#*inline 'id'}}{{#if @args.id}}{{@args.id}}{{else}}tl-device-state-stream{{/if}}{{/inline}}
+{{#*inline 'maxItems'}}{{#if @args.maxItems}}{{@args.maxItems}}{{else}}1{{/if}}{{/inline}}
+{{#*inline 'newItemsPosition'}}{{#eq @args.newItemsPosition 'top'}}top{{else}}bottom{{/eq}}{{/inline}}
+
+<div id="{{> id}}"></div>
+<template id="{{> id}}-template">
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title tl-device-state-stream-value"></h5>
+      <p class="card-text">{{@args.attribute}}</p>
+    </div>
+  </div>
+</template>
+<script>
+  (function() {
+    const streamContainer = document.getElementById('{{> id}}');
+    const template = document.getElementById('{{> id}}-template');
+
+    const getEntryMarkup = (textContent, className) => {
+      const el = template.content.cloneNode(true);
+      const textEl = el.querySelector('.tl-device-state-stream-value');
+      textEl.textContent = textContent;
+      if (className) {
+        textEl.classList.add(className);
+      }
+      return el;
+    }
+
+    // add a "Connecting" message
+    streamContainer.append(getEntryMarkup('Connecting ...', 'text-muted'));
+
+    // establish the stream
+    const eventSource = new EventSource(`/device-state-stream/{{@args.deviceId}}`);
+    let displayingStatusMessage = true;
+
+    // add a "Connected" message when the connection establishes
+    eventSource.addEventListener('open', () => {
+      displayingStatusMessage = true;
+      streamContainer.innerHTML = '';
+      streamContainer.append(getEntryMarkup('Connected ...', 'text-muted'));
+    });
+
+    // add an "Error" message when the connection fails
+    eventSource.addEventListener('error', (e) => {
+      displayingStatusMessage = true;
+      streamContainer.innerHTML = '';
+      streamContainer.append(getEntryMarkup('An error occurred.', 'text-danger'));
+    });
+    
+    // when the connection establishes, change the message.
+    eventSource.addEventListener('mqttMessage', (e) => {
+      const { topic, message } = JSON.parse(e.data);
+      let theMessage;
+      try {
+        // this could fail if the endpoint returns data from a custom MQTT topic
+        // and the messages are not stringified JSON objects
+        theMessage = JSON.parse(message); 
+      } catch (e) {
+        // if we fail to parse the message, simply do nothing
+      }
+      if (theMessage && theMessage.data && typeof theMessage.data['{{@args.attribute}}'] !== 'undefined') {
+        const innerText = theMessage.data['{{@args.attribute}}'];
+        // we have a message to display
+        // if we are currently displaying a status message,
+        // we need to remove that before appending these messages
+        if (displayingStatusMessage) {
+          streamContainer.innerHTML = '';
+          displayingStatusMessage = false;
+        }
+        // this enforces our "maxItems" prop
+        // by removing any elements needed to keep us at or below our max
+        while (streamContainer.children.length >= {{> maxItems}}) {
+          {{#eq @args.newItemsPosition 'top'}}
+            streamContainer.removeChild(streamContainer.lastElementChild);
+          {{else}}
+            streamContainer.removeChild(streamContainer.firstElementChild);
+          {{/eq}}
+        }
+        {{#eq @args.newItemsPosition 'top'}}
+          streamContainer.prepend(getEntryMarkup(innerText));
+        {{else}}
+          streamContainer.append(getEntryMarkup(innerText));
+        {{/eq}}
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,472 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      Renders a page with a list of buttons for both resident and equipment
+      devices.
+    enabled: true
+    flowId: ~losant-flow-workflowGetType-4~
+    globals: []
+    id: ~losant-flowVersion-workflowGetType-2~
+    name: Workflow - GET /type
+    nodes:
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-kioskSelectors-4~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 2sRHKaJ-wA
+        meta:
+          category: output
+          description: ''
+          id: 2sRHKaJ-wA
+          label: Equipment List
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 300
+          'y': 1000
+        outputIds:
+          - - qvoLFxgF_O
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: qvoLFxgF_O
+        meta:
+          category: output
+          description: ''
+          id: qvoLFxgF_O
+          label: Debug
+          name: debug
+          x: 300
+          'y': 1100
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: false
+          resultPath: working.devicesFound
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: class
+              valueTemplate: '{{data.query.class}}'
+          tagsAsObject: true
+        id: Z8kQXWUjZ_
+        meta:
+          category: data
+          description: >-
+            Query for devices of the same class as the query parameter value,
+            which is "equipment."
+          id: Z8kQXWUjZ_
+          label: Equipment Query
+          name: get-device
+          x: 300
+          'y': 540
+        outputIds:
+          - - aeItlj5ZG4
+        type: GetDeviceNode
+      - config:
+          currentItemPath: current
+          loopSourcePath: working.devicesFound
+        id: aeItlj5ZG4
+        meta:
+          category: logic
+          description: >-
+            Loops through the devices found in the query to create an array of
+            "types."
+          groupStartX: 200
+          groupStartY: 200
+          id: aeItlj5ZG4
+          label: Type array
+          name: loop
+          x: 300
+          'y': 660
+        outputIds:
+          - - fGpqR8UaGG
+          - - BVkRD6VBOp
+        type: LoopNode
+      - config:
+          loopNodeId: aeItlj5ZG4
+          shouldBreak: false
+        id: H0_gEVlw9Q
+        meta:
+          category: loop
+          description: ''
+          groupId: aeItlj5ZG4
+          id: H0_gEVlw9Q
+          label: Next
+          name: loop-next
+          x: 200
+          'y': 620
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          message: ''
+          property: ''
+        id: f2iEI8_Nde
+        meta:
+          category: output
+          description: The tag value already exists in the array.
+          groupId: aeItlj5ZG4
+          id: f2iEI8_Nde
+          label: Duplicate type
+          name: debug
+          x: 320
+          'y': 500
+        outputIds:
+          - - H0_gEVlw9Q
+        type: DebugNode
+      - config:
+          expression: '{{working.indexOf}}!==-1'
+        id: yk9t5lnm-E
+        meta:
+          category: logic
+          description: >-
+            If the value is 0 or higher, it currently exists in the array. If
+            the value is -1, it was not found in the array and is a unique tag.
+          groupId: aeItlj5ZG4
+          id: yk9t5lnm-E
+          label: Existing tag?
+          name: conditional
+          x: 200
+          'y': 380
+        outputIds:
+          - - SwhaBDJRNe
+          - - f2iEI8_Nde
+        type: ConditionalNode
+      - config:
+          destArrayPath: working.array
+          rules:
+            - inputTemplate: '{{current.value.tags.type.[0]}}'
+              type: concat
+          sourceArrayPath: working.array
+        id: SwhaBDJRNe
+        meta:
+          category: logic
+          description: Add the unique tag to the array.
+          groupId: aeItlj5ZG4
+          id: SwhaBDJRNe
+          label: Add to array
+          name: array
+          x: 120
+          'y': 460
+        outputIds:
+          - - PkOe24A3B4
+        type: ArrayNode
+      - config:
+          message: ''
+          property: ''
+        id: PkOe24A3B4
+        meta:
+          category: output
+          description: ''
+          groupId: aeItlj5ZG4
+          id: f2iEI8_Nde
+          label: Unique type
+          name: debug
+          x: 120
+          'y': 540
+        outputIds:
+          - - H0_gEVlw9Q
+        type: DebugNode
+      - config: {}
+        id: ivW5rjsWg1
+        meta:
+          annotationText: >-
+            This workflow is triggered by selecting either the "person" or "
+            equipment" button on the `/` page within the employee view. The
+            buttons on this page will append a query parameter as seen in the
+            switch node. The selection will load the correct list of devices to
+            choose from. 
+
+
+            - For the equipment selection, devices are returned from the query
+            that are tagged with the "class" of "equipment." 
+
+            - For the person selection, the query will look for device of the
+            "class" person that are also tagged with a type of "resident." This
+            will return all residents within the facility.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 460
+          x: 520
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: GT44cHyQ2Q
+        meta:
+          annotationText: >-
+            Creates an array of values that exist in the "type" tags. These
+            "type" values will be passed as pageData and used to create buttons.
+          category: annotation
+          groupId: aeItlj5ZG4
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 420
+          'y': 180
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: gGbAIR6q5X
+        meta:
+          annotationText: The "type" value already exists in the array.
+          category: annotation
+          groupId: aeItlj5ZG4
+          height: 100
+          label: Note
+          name: note
+          width: 140
+          x: 460
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: xhrhIMO8G_
+        meta:
+          annotationText: The "type" value is unique and is added to the array.
+          category: annotation
+          groupId: aeItlj5ZG4
+          height: 100
+          label: Note
+          name: note
+          width: 140
+          x: 20
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: cAVlj9WbPe
+        meta:
+          annotationText: >-
+            Pass the array of unique "type" values as pageData and render the
+            kiosk-list page.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 180
+          x: 500
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - inputTemplate: '{{current.value.tags.type.[0]}}'
+              outputPath: working.indexOf
+              type: indexOf
+          sourceArrayPath: working.array
+        id: BVkRD6VBOp
+        meta:
+          category: logic
+          description: 'Does the current type tag exist in the array at "working.array"? '
+          groupId: aeItlj5ZG4
+          id: BVkRD6VBOp
+          label: Value logged?
+          name: array
+          x: 200
+          'y': 280
+        outputIds:
+          - - yk9t5lnm-E
+        type: ArrayNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: person
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: equipment
+              dontBreak: false
+          switchTemplate: '{{data.query.class}}'
+        id: msfIAwB0Al
+        meta:
+          category: logic
+          description: Which class of device was selected from the menu?
+          id: msfIAwB0Al
+          label: Switch
+          name: switch
+          x: 280
+          'y': 280
+        outputIds:
+          - - MQd-oDeAUy
+          - - nfH3Qg9ugf
+          - - Z8kQXWUjZ_
+        type: SwitchNode
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-kioskSelectors-4~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: Kb3g1Tps9H
+        meta:
+          category: output
+          description: ''
+          id: 2sRHKaJ-wA
+          label: Resident List
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 100
+          'y': 760
+        outputIds:
+          - - 8j_kzhBJGV
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: 8j_kzhBJGV
+        meta:
+          category: output
+          description: ''
+          id: qvoLFxgF_O
+          label: Debug
+          name: debug
+          x: 100
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: false
+          resultPath: working.devicesFound
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: class
+              valueTemplate: '{{data.query.class}}'
+            - keyTemplate: type
+              valueTemplate: resident
+          tagsAsObject: true
+        id: nfH3Qg9ugf
+        meta:
+          category: data
+          description: Query for devices of the same class as the query parameter value.
+          id: Z8kQXWUjZ_
+          label: Resident Query
+          name: get-device
+          x: 100
+          'y': 540
+        outputIds:
+          - - hJpdszlsAG
+        type: GetDeviceNode
+      - config:
+          rules:
+            - destination: working.view
+              type: set
+              valueTemplate: resident
+            - destination: working.breadcrumbs
+              type: set
+              valueTemplate: |-
+                [
+                { "label": "Resident"}
+                ]
+              valueTemplateType: json
+        id: hJpdszlsAG
+        meta:
+          category: logic
+          description: >-
+            Append the view flag and breacrumb data to the pageData object. This
+            will render the correct view within the page.
+          id: N4URmS-aZq
+          label: Append Data
+          name: mutate
+          x: 100
+          'y': 660
+        outputIds:
+          - - Kb3g1Tps9H
+        type: MutateNode
+      - config:
+          message: ''
+          property: ''
+        id: MQd-oDeAUy
+        meta:
+          category: output
+          description: ''
+          id: qvoLFxgF_O
+          label: Debug
+          name: debug
+          x: 500
+          'y': 540
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: F75y4TvERj
+        meta:
+          annotationText: >-
+            Using a Loop, this workflow creates an array of each unique tag
+            "type" in order to render buttons for each equipment type. This
+            allows for scalability and the addition of new equipment types (AED,
+            etc.).
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 320
+          x: 500
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.breadcrumbs
+              type: set
+              valueTemplate: |-
+                [
+                { "label": "Equipment"}
+                ]
+              valueTemplateType: json
+        id: fGpqR8UaGG
+        meta:
+          category: logic
+          description: >-
+            Append the breadcrumb navigation to the payload. This label
+            corresponds to the name of the page.
+          id: N4URmS-aZq
+          label: Mutate
+          name: mutate
+          x: 300
+          'y': 800
+        outputIds:
+          - - 2sRHKaJ-wA
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getType-4~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /type
+          name: endpoint
+          uiId: T7J7dvvqJn
+          x: 280
+          'y': 160
+        outputIds:
+          - - msfIAwB0Al
+        type: endpoint
+    version: develop
+version: 1

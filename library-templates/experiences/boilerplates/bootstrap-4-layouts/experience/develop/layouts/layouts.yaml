@@ -1,0 +1,38 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-fixedWidthSingleColumn-3~
+    localFilename: ./Fixed_Width__Single_Column.hbs
+    name: Fixed Width, Single Column
+    version: develop
+    viewTags: {}
+    viewType: layout
+  - description: ""
+    id: ~losant-experienceView-fixedWidthTwoColumns-6~
+    localFilename: ./Fixed_Width__Two_Columns.hbs
+    name: Fixed Width, Two Columns
+    version: develop
+    viewTags: {}
+    viewType: layout
+  - description: ""
+    id: ~losant-experienceView-fullWidthSingleColumn-0~
+    localFilename: ./Full_Width__Single_Column.hbs
+    name: Full Width, Single Column
+    version: develop
+    viewTags: {}
+    viewType: layout
+  - description: ""
+    id: ~losant-experienceView-fullWidthTwoColumns-5~
+    localFilename: ./Full_Width__Two_Columns.hbs
+    name: Full Width, Two Columns
+    version: develop
+    viewTags: {}
+    viewType: layout
+  - description: ""
+    id: ~losant-experienceView-narrowWidthSingleColumn-4~
+    localFilename: ./Narrow_Width__Single_Column.hbs
+    name: Narrow Width, Single Column
+    version: develop
+    viewTags: {}
+    viewType: layout
+version: 1

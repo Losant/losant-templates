@@ -1,0 +1,380 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-getTlSamlPostTlSaml-0~
+    globals: []
+    id: ~losant-flowVersion-getTlSamlPostTlSaml-0~
+    name: GET /tl-saml & POST /tl-saml
+    nodes:
+      - config:
+          bodyTemplate: '{{working.samlUrl.redirectUrl}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: so-NtWfHxG
+        meta:
+          category: output
+          description: ''
+          id: so-NtWfHxG
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 340
+        outputIds:
+          - - BN7Bp-5j9W
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: BN7Bp-5j9W
+        meta:
+          category: output
+          description: ''
+          id: BN7Bp-5j9W
+          label: Debug
+          name: debug
+          x: 60
+          'y': 440
+        outputIds: []
+        type: DebugNode
+      - config:
+          idpMetadataTemplate: '{{globals.identityProviderMetadataTemplate}}'
+          resultPath: working.samlUrl
+          spMetadataTemplate: '{{globals.serviceProviderMetadataTemplate}}'
+        id: 8jFBjd6wCm
+        meta:
+          category: experience
+          description: ''
+          id: 8jFBjd6wCm
+          label: 'SAML: Login URL'
+          name: saml-login
+          x: 60
+          'y': 220
+        outputIds:
+          - - so-NtWfHxG
+        type: SamlLoginRedirectNode
+      - config:
+          idpMetadataTemplate: '{{globals.identityProviderMetadataTemplate}}'
+          resultPath: working.samlUser
+          samlResponseTemplate: '{{data.body.SAMLResponse}}'
+          spMetadataTemplate: '{{globals.serviceProviderMetadataTemplate}}'
+        id: uagpIJ0vcU
+        meta:
+          category: experience
+          description: ''
+          id: w6ub1d8KhP
+          label: 'SAML: Verify'
+          name: saml-verify
+          x: 80
+          'y': 720
+        outputIds:
+          - - nhwIz95rdF
+          - - w8AY54--m6
+        type: SamlVerifyNode
+      - config:
+          message: ''
+          property: ''
+        id: ptEFKHkDLU
+        meta:
+          category: output
+          description: ''
+          id: 12h8KilMkx
+          label: Debug
+          name: debug
+          x: 40
+          'y': 960
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: 5f7f3d2f8e6fd500078196d8
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+        id: nhwIz95rdF
+        meta:
+          category: output
+          description: >-
+            Invalid credentials. Return the user to the login page and alert
+            them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 860
+        outputIds:
+          - - ptEFKHkDLU
+        type: EndpointReplyNode
+      - config:
+          emailOrIdTemplate: '{{working.emailAddress}}'
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: working.experienceUser
+          sortDirection: asc
+          sortField: email
+        id: kIqDOj2fC7
+        meta:
+          category: experience
+          description: ''
+          id: sWEqShlHv7
+          label: 'User: Get'
+          name: get-experience-user
+          x: 280
+          'y': 940
+        outputIds:
+          - - ahB09muB2Q
+        type: GetExperienceUserNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: 5f7f3d2f8e6fd500078196d8
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: kjlSDe6yBQ
+        meta:
+          category: output
+          description: >-
+            Invalid credentials. Return the user to the login page and alert
+            them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 1380
+        outputIds:
+          - - z-WHU-kqsz
+        type: EndpointReplyNode
+      - config:
+          expression: '{{working.experienceUser}}'
+        id: ahB09muB2Q
+        meta:
+          category: logic
+          description: ''
+          id: 45itwDUVcj
+          label: Use Exists?
+          name: conditional
+          x: 280
+          'y': 1040
+        outputIds:
+          - - SJ65Z4OZgg
+          - - yvyfWukS_r
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.emailAddress
+              type: set
+              valueTemplate: >-
+                {{working.samlUser.attributes.[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress]}}
+        id: w8AY54--m6
+        meta:
+          category: logic
+          description: ''
+          id: QtAAq0M-Lo
+          label: Grab Email
+          name: mutate
+          x: 280
+          'y': 840
+        outputIds:
+          - - kIqDOj2fC7
+        type: MutateNode
+      - config:
+          dataMethod: individualFields
+          emailTemplate: '{{working.emailAddress}}'
+          firstNameTemplate: ''
+          groupIdTemplates: []
+          lastNameTemplate: ''
+          passwordTemplate: '{{working.samlUser.nameID}}'
+          resultPath: ''
+          userTags: []
+        id: SJ65Z4OZgg
+        meta:
+          category: experience
+          description: ''
+          id: jUodx9JrJr
+          label: 'User: Create'
+          name: create-experience-user
+          x: 200
+          'y': 1160
+        outputIds:
+          - - yvyfWukS_r
+        type: CreateExperienceUserNode
+      - config:
+          message: ''
+          property: ''
+        id: z-WHU-kqsz
+        meta:
+          category: output
+          description: ''
+          id: 12h8KilMkx
+          label: Debug
+          name: debug
+          x: 260
+          'y': 1500
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: '{{data.responseToken}}'
+          property: ''
+        id: rRc41DUwYT
+        meta:
+          category: output
+          description: ''
+          id: 12h8KilMkx
+          label: Debug
+          name: debug
+          x: 540
+          'y': 1540
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: /
+              valueTemplate: '{{working.responseToken}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: YFhKUVgF7x
+        meta:
+          category: output
+          description: >-
+            Successful login. Redirect the user to the home page and set the
+            auth cookie for future requests.
+          label: Set cookie & redirect to home
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 1400
+        outputIds:
+          - - rRc41DUwYT
+        type: EndpointReplyNode
+      - config:
+          emailOrIdTemplate: '{{working.emailAddress}}'
+          invalidateExistingTokens: false
+          resultPath: working.responseToken
+          ttlTemplate: ''
+        id: yvyfWukS_r
+        meta:
+          category: experience
+          description: ''
+          id: BKG0kEhGVB
+          label: Generate Token
+          name: experience-user-token
+          x: 400
+          'y': 1280
+        outputIds:
+          - - kjlSDe6yBQ
+            - YFhKUVgF7x
+        type: ExperienceUserTokenNode
+      - config: {}
+        id: YD-AOKdXJO
+        meta:
+          annotationText: Verifying the Active Directory response
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 280
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: sAztVbhMGU
+        meta:
+          annotationText: >-
+            Move the email to a more convenient place on the payload
+            `working.emailAddress`
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 500
+          'y': 820
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: ZmUOf6gXRj
+        meta:
+          annotationText: >
+            Checks to see if this user exists in Losant as an Experience User. 
+
+
+            If the user doesn't exist, we can create an Experience User for the
+            user at this email.
+
+
+            After, we can generate a token and set the authorization cookie for
+            that user.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 260
+          x: 560
+          'y': 1040
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlSaml-0~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /saml/login
+          name: endpoint
+          uiId: K_eTt1Q-8j
+          x: 60
+          'y': 100
+        outputIds:
+          - - 8jFBjd6wCm
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-postTlSaml-1~
+        meta:
+          category: trigger
+          description: ''
+          id: z7125GjD1O
+          label: POST /saml/assert
+          name: endpoint
+          uiId: IlS4GzgMHh
+          x: 80
+          'y': 600
+        outputIds:
+          - - uagpIJ0vcU
+        type: endpoint
+    version: develop
+version: 1

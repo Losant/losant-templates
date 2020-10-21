@@ -1,0 +1,31 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Example page that demonstrates how to register for and receive web
+      push notifications from the Braze customer engagement platform.
+    filesPath: ./files
+    globals:
+      - cloudOnly: false
+        description: ""
+        json: '"sdk.iad-03.appboy.com"'
+        key: tl-braze-sdk-endpoint
+      - cloudOnly: false
+        description: ""
+        json: '"ae7e0ec5-2d15-4dd1-8f39-239f2033ae28"'
+        key: tl-braze-api-key
+      - cloudOnly: true
+        description: ""
+        json: '"846ba560-560c-4724-80a5-9603e7f2e20c"'
+        key: tl-braze-rest-api-key
+    id: ~losant-application-libraryExperiencesPagesBrazeWebPushNotifications-0~
+    name: Braze Web Push Notifications
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - braze
+      - push
+      - notification
+      - alert
+version: 1

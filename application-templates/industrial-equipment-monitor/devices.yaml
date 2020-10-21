@@ -1,0 +1,418 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: manifold_temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rpm
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery_voltage
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: fuel_level
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: oil_pressure
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: output_current
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: running
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: fault_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: state_index
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: state_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: hours_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: days_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_faulted_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_running_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_stopped_mode
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-acz8BpA5Ajz6-0~
+    name: acz8bpA5ajz6
+    tags:
+      - key: DeviceRecipe
+        value: Generator
+      - key: serial
+        value: acz8bpA5ajz6
+      - key: model
+        value: RD04834
+      - key: image
+        value: /device-images/rd05034.png
+      - key: location
+        value: 37.6307885,-122.4184834
+      - key: group
+        value: Tekton Health
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: manifold_temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rpm
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery_voltage
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: fuel_level
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: oil_pressure
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: output_current
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: running
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: fault_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: state_index
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: state_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: hours_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: days_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_faulted_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_running_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_stopped_mode
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-bTrMUwapvBsU-1~
+    name: bTrMUwapvBsU
+    tags:
+      - key: DeviceRecipe
+        value: Generator
+      - key: serial
+        value: bTrMUwapvBsU
+      - key: model
+        value: QT130
+      - key: image
+        value: /device-images/rd05034.png
+      - key: location
+        value: 40.7411999,-84.1181147
+      - key: group
+        value: Tekton Health
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: manifold_temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rpm
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery_voltage
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: fuel_level
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: oil_pressure
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: output_current
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: running
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: fault_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: state_index
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: state_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: hours_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: days_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_faulted_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_running_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_stopped_mode
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-fBbha7ZyK233-2~
+    name: fBBHA7ZyK233
+    tags:
+      - key: DeviceRecipe
+        value: Generator
+      - key: serial
+        value: fBBHA7ZyK233
+      - key: model
+        value: QT130
+      - key: image
+        value: /device-images/rd05034.png
+      - key: location
+        value: 40.7411999,-84.1181147
+      - key: group
+        value: Tekton Health
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: manifold_temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rpm
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery_voltage
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: fuel_level
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: oil_pressure
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: output_current
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: running
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: fault_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: state_index
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: state_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: hours_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: days_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_faulted_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_running_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_stopped_mode
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-uGkK5MptEfkv-3~
+    name: uGkK5mptEFKV
+    tags:
+      - key: DeviceRecipe
+        value: Generator
+      - key: serial
+        value: uGkK5mptEFKV
+      - key: model
+        value: RD04834
+      - key: image
+        value: /device-images/rd05034.png
+      - key: location
+        value: 37.6307885,-122.4184834
+      - key: group
+        value: Sadler Isberg
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: manifold_temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rpm
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery_voltage
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: fuel_level
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: oil_pressure
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: output_current
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: running
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: location
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: fault_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: state_index
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: state_description
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: hours_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: days_running
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_faulted_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_running_mode
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: is_in_stopped_mode
+    children: []
+    description: ""
+    deviceClass: standalone
+    id: ~losant-device-wA4XusQwXpyH-4~
+    name: wA4xusQWXpyH
+    tags:
+      - key: DeviceRecipe
+        value: Generator
+      - key: serial
+        value: wA4xusQWXpyH
+      - key: model
+        value: QT130
+      - key: image
+        value: /device-images/rd05034.png
+      - key: location
+        value: 21.3629627,-157.9019452
+      - key: group
+        value: Sadler Isberg
+version: 1

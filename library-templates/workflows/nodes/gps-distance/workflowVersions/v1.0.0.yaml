@@ -1,0 +1,137 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            The starting GPS coordinate in any [supported
+            format](https://docs.losant.com/devices/state/#gps-attributes).
+          id: gpsStart
+          label: Starting GPS Point
+          required: true
+          type: stringTemplate
+        - description: >-
+            The ending GPS coordinate in any [supported
+            format](https://docs.losant.com/devices/state/#gps-attributes).
+          id: gpsEnd
+          label: Ending GPS Point
+          required: true
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: >-
+        The distance, in meters, between the two GPS coordinates. If the input
+        values are invalid GPS coordinates, the output will be null.
+      resultMode: required
+    enabled: true
+    flowId: ~losant-flow-gpsDistance-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: F5jeNPd_Dj
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 40
+          'y': 600
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          rules:
+            - destination: working.result
+              type: set
+              valueTemplate: '{{ gpsDistance data.gpsStart data.gpsEnd }}'
+              valueTemplateType: json
+        id: Poax0c~BvO
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 40
+          'y': 180
+        outputIds:
+          - - xj2wu67Px6
+        type: MutateNode
+      - config:
+          message: ''
+          property: ''
+        id: 1hxpjUBnw3
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 480
+        outputIds:
+          - - F5jeNPd_Dj
+        type: DebugNode
+      - config:
+          expression: '{{ working.result }} === false'
+        id: xj2wu67Px6
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 40
+          'y': 280
+        outputIds:
+          - - 1hxpjUBnw3
+          - - PMOla45kDg
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.result
+              type: set
+              valueTemplate: 'null'
+              valueTemplateType: json
+        id: PMOla45kDg
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 160
+          'y': 380
+        outputIds:
+          - - 1hxpjUBnw3
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: GPS Distance'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 40
+          'y': 40
+        outputIds:
+          - - Poax0c~BvO
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-gpsDistance-0~-HzEM3MCNP0LO34kOcvT-d
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            { 
+              "gpsStart" : "39.1029057,-84.5110194",
+              "gpsEnd" : "39.0836082,-84.5087825"
+            }
+          uiId: MmLvMxMmiU
+          x: 240
+          'y': 40
+        outputIds:
+          - - Poax0c~BvO
+        type: virtualButton
+    version: v1.0.0
+version: 1

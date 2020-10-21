@@ -1,0 +1,16 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This node provides access to Algolia's Search Index HTTPS GET API.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesAlgolia-0~
+    name: Algolia
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - algolia
+      - search
+version: 1

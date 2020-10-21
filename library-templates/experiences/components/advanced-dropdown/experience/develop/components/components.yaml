@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlAdvancedDropdown-1~
+    localFilename: ./tl-advanced-dropdown.hbs
+    name: tl-advanced-dropdown
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

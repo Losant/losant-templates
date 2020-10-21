@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlCollapsibleTree-1~
+    localFilename: ./tl-collapsible-tree.hbs
+    name: tl-collapsible-tree
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

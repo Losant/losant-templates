@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{! Set the title to "Overview | Kanarra" or "DEVICE_NAME | Kanarra". }}
+    <title>{{#if @root.pageData.device}}{{@root.pageData.device.name}}{{else}}Overview{{/if}} | Kanarra</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="{{file '/favicon.ico'}}">
+    
+    <link rel="stylesheet" type="text/css" href="{{file '/reset.css'}}">
+
+    <style>
+      {{component "css-templates"}}
+    </style>
+  </head>
+  <body id="layout-dashboard-page">
+    <div class="layout">
+
+      {{! Sidebar with device list }}
+      <div class="sidebar-container">
+        <div class="sidebar-logo">
+          <img src="{{file '/kanarra-logo-small.png'}}">
+        </div>
+        <div class="sidebar-header">
+            Devices
+        </div>
+        <div class="sidebar-device-list">
+          {{component 'component-device-list' @root.pageData.devices}}
+        </div>
+      </div>
+
+      {{! Main content. Breadcrumbs and Dashboard Page. }}
+      <div class="content-container">
+
+        <div class="breadcrumbs">
+          <div style="float:left;">
+            {{#if @root.pageData.deviceName}}
+              <a href="/">Overview</a> > {{@root.pageData.deviceName}}
+            {{else}}
+              Overview
+            {{/if}}
+          </div>
+          <div style="float: right;">
+            <a href="/logout">Log Out</a>
+          </div>
+        </div>
+
+        <div class="page-container">
+          {{! The special "page" helper is where the actual page contents are placed within this layout. }}
+          {{page}}
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>

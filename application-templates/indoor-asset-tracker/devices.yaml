@@ -1,0 +1,150 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This value is the x value of the device's GPS location.
+        name: x
+      - attributeTags: {}
+        dataType: number
+        description: This value is the y value of the device's GPS location.
+        name: y
+      - attributeTags: {}
+        dataType: string
+        description: This string attribute is the name of the room in which the device
+          is currently located.
+        name: room
+      - attributeTags: {}
+        dataType: boolean
+        description: "This is a Boolean attribute which will only report as true if a
+          device has moved from one room to another on that specific state
+          report. "
+        name: movement
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-floorLift-4~
+    name: Floor Lift
+    tags:
+      - key: type
+        value: lift
+      - key: class
+        value: equipment
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This value is the x value of the device's GPS location.
+        name: x
+      - attributeTags: {}
+        dataType: number
+        description: This value is the y value of the device's GPS location.
+        name: y
+      - attributeTags: {}
+        dataType: string
+        description: This string attribute is the name of the room in which the device
+          is currently located.
+        name: room
+      - attributeTags: {}
+        dataType: boolean
+        description: "This is a Boolean attribute which will only report as true if a
+          device has moved from one room to another on that specific state
+          report. "
+        name: movement
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-janeSmith-1~
+    name: Jane Smith
+    tags:
+      - key: type
+        value: resident
+      - key: class
+        value: person
+      - key: uniqueId
+        value: "123456"
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This value is the x value of the device's GPS location.
+        name: x
+      - attributeTags: {}
+        dataType: number
+        description: This value is the y value of the device's GPS location.
+        name: y
+      - attributeTags: {}
+        dataType: string
+        description: This string attribute is the name of the room in which the device
+          is currently located.
+        name: room
+      - attributeTags: {}
+        dataType: boolean
+        description: "This is a Boolean attribute which will only report as true if a
+          device has moved from one room to another on that specific state
+          report. "
+        name: movement
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-oxygenConcentrator-2~
+    name: Oxygen Concentrator
+    tags:
+      - key: type
+        value: concentrator
+      - key: class
+        value: equipment
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This value is the x value of the device's GPS location.
+        name: x
+      - attributeTags: {}
+        dataType: number
+        description: This value is the y value of the device's GPS location.
+        name: y
+      - attributeTags: {}
+        dataType: string
+        description: This string attribute is the name of the room in which the device
+          is currently located.
+        name: room
+      - attributeTags: {}
+        dataType: boolean
+        description: "This is a Boolean attribute which will only report as true if a
+          device has moved from one room to another on that specific state
+          report. "
+        name: movement
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-visitor-0~
+    name: Visitor
+    tags:
+      - key: type
+        value: visitor
+      - key: class
+        value: person
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This value is the x value of the device's GPS location.
+        name: x
+      - attributeTags: {}
+        dataType: number
+        description: This value is the y value of the device's GPS location.
+        name: y
+      - attributeTags: {}
+        dataType: string
+        description: This string attribute is the name of the room in which the device
+          is currently located.
+        name: room
+      - attributeTags: {}
+        dataType: boolean
+        description: "This is a Boolean attribute which will only report as true if a
+          device has moved from one room to another on that specific state
+          report. "
+        name: movement
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-wheelchair-3~
+    name: Wheelchair
+    tags:
+      - key: type
+        value: wheelchair
+      - key: class
+        value: equipment
+version: 1

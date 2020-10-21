@@ -1,0 +1,18 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: "Displays a list of devices. Each entry has a configurable link,
+      label, and optional device image. "
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesComponentsDeviceList-0~
+    name: Device List
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - devices
+      - list
+      - featured
+version: 1

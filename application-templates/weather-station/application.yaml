@@ -1,0 +1,25 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Requests weather data from an external API to populate a personal
+      weather dashboard.
+    filesPath: ./files
+    globals:
+      - cloudOnly: true
+        description: The location (latitude, longitude) that will be used when
+          requesting weather data.
+        json: '"39.108335,-84.509212"'
+        key: gps_location
+      - cloudOnly: true
+        description: "The OpenWeatherMap API key. Get your key here:
+          https://openweathermap.org/api"
+        json: '"d67219fedcd3af8f28ac11bd7e871b10"'
+        key: api_key
+    id: ~losant-application-applicationWeatherStation-0~
+    name: Weather Station
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

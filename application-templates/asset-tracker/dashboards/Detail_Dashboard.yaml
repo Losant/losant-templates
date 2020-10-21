@@ -1,0 +1,298 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: map
+        config:
+          additionalAttributes: null
+          attribute: location
+          clusterPoints: false
+          compositeResult: true
+          defaultBearing: 0
+          defaultPitch: 0
+          defaultZoom: 11
+          deviceIds:
+            - '{{ctx.deviceId}}'
+          deviceTags: []
+          duration: 0
+          endColor: '#8db319'
+          iconTemplate: |-
+            {{#if isLastPoint}}
+              {{#gte data.temperature 4}}
+                {{colorMarker '#FF1129'}}
+              {{else}}
+                {{#lte data.temperature 0}}
+                  {{colorMarker '#FF1129'}}
+                {{else}}
+                  {{#gte data.shock 4}}
+                    {{colorMarker '#FF1129'}}
+                  {{else}}
+                    {{#gte data.orientation 30}}
+                      {{colorMarker '#FF1129'}}
+                    {{else}}
+                      {{#lte data.orientation -30}}
+                        {{colorMarker '#FEA233'}}
+                      {{else}}
+                        {{colorMarker '#49AD79'}}
+                      {{/lte}}
+                    {{/gte}}
+                  {{/gte}}
+                {{/lte}}
+              {{/gte}}
+            {{/if}}
+          includeArrows: false
+          includeLines: false
+          pinMode: advanced
+          popupTemplate: >-
+            #### {{deviceName}}
+
+
+            {{#eq data.distCenterId '__TRANSIT__'}}Currently in
+            transit{{else}}At {{data.distCenterId}}{{/eq}}
+
+
+            - **shipment_id:** {{data.shipment_id}}
+
+            - **temperature:** {{data.temperature}}
+
+            - **shock:** {{data.shock}}
+
+            - **orientation:** {{data.orientation}}
+
+            - **signal_strength:** {{data.signal_strength}}
+
+            - **battery:** {{data.battery}}
+          resizedPins: true
+          resolution: 60000
+          startColor: '#ff261b'
+        height: 3
+        id: VNOM7rPt0r
+        startX: 0
+        startY: 0
+        title: Location
+        width: 2
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(73, 173, 121, 1)'
+              condition: '{{value-0}} !== ''__TRANSIT__'''
+              id: 2JWxWSlCMk
+              label: |-
+                ### At {{value-0}}
+                Shipment ID: {{value-1}}
+          defaultCondition:
+            color: 'rgba(5, 113, 128, 1)'
+            label: |-
+              ### In transit
+              Shipment ID: {{value-1}}
+          duration: 0
+          segments:
+            - attribute: distCenterId
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+            - attribute: shipment_id
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+        height: 1
+        id: lTC11ri6r2
+        startX: 2
+        startY: 0
+        title: Shipment Status
+        width: 2
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: 'rgba(10, 225, 255, 1)'
+              condition: '{{value}} <= 0'
+              id: _SXbAh_rbC
+            - color: 'rgba(255, 17, 41, 1)'
+              condition: '{{value}} >= 4'
+              id: eo6tdAx84p
+          gaugeMax: '6'
+          gaugeMin: '-2'
+          gaugeType: thermometer
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            attribute: temperature
+            color: 'rgba(73, 173, 121, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: Temp (C)
+        height: 2
+        id: Ou0FOzqeZ4
+        startX: 2
+        startY: 1
+        title: Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: 'rgba(254, 162, 51, 1)'
+              condition: '{{value}} < 50'
+              id: JEoC9HAZen
+            - color: 'rgba(255, 17, 41, 1)'
+              condition: '{{value}} < 20'
+              id: Xo1WWEDCAI
+          displayAsPercentage: true
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: battery
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            attribute: battery
+            color: 'rgba(73, 173, 121, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: ''
+        height: 1
+        id: JPtCFC0mpd
+        startX: 3.5
+        startY: 1
+        title: Battery
+        width: 0.5
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: 'rgba(255, 17, 41, 1)'
+              condition: '{{value}} >= 4'
+              id: eo6tdAx84p
+          gaugeMax: '8'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            attribute: shock
+            color: 'rgba(73, 173, 121, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: Force (G)
+        height: 1
+        id: CKl6foBhGi
+        startX: 2.5
+        startY: 1
+        title: Shock
+        width: 1
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: gauge
+        config:
+          gaugeMax: ''
+          gaugeMin: ''
+          gaugeType: number
+          precision: '2'
+          precisionType: significant
+          realTime: false
+          segment:
+            attribute: signal_strength
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: dBm
+        height: 1
+        id: unacOPwgFM
+        startX: 3.5
+        startY: 2
+        title: Signal Strength
+        width: 0.5
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: 'rgba(255, 17, 41, 1)'
+              condition: '{{value}} >= 25 || {{value}} <= -25'
+              id: eo6tdAx84p
+          gaugeMax: '90'
+          gaugeMin: '-90'
+          gaugeType: dial
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            attribute: orientation
+            color: 'rgba(73, 173, 121, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: Tilt (Deg)
+        height: 1
+        id: y0YXULY9Qx
+        startX: 2.5
+        startY: 2
+        title: Orientation
+        width: 1
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        blockType: event-list
+        config:
+          columns:
+            - id: defaultLevelColumn
+              type: level
+            - id: FHOM8t6YzW
+              type: subjectWithMessage
+            - id: 7HB6SxYL45
+              selectedTag: shipment_id
+              type: tag
+            - id: defaultStateColumn
+              type: state
+            - id: iCSWh-5M38
+              type: creationDate
+          query: |-
+            {
+              "$and": [
+                {
+                  "state": {
+                    "$eq": "new"
+                  }
+                },
+                {
+                  "deviceId": {
+                    "$eq": "{{ctx.deviceId}}"
+                  }
+                },
+                {
+                  "creationDate": {
+                    "$gte": "{{ formatDate (subtract (currentDateTime 'x') 86400000) 'YYYY-MM-DD[T]HH:mm:[00Z]' }}"
+                  }
+                }
+              ]
+            }
+          sortDirection: desc
+          sortField: creationDate
+        height: 2
+        id: oLeME10xeP
+        startX: 0
+        startY: 3
+        title: Tracker Events Last 24 Hours
+        width: 4
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationAssetTracker-0~
+        defaultValue: ~losant-device-tracker0000-0~
+        name: deviceId
+        type: deviceId
+        validationConfig:
+          deviceIds: []
+          deviceTags:
+            - key: simId
+          includeFullDevice: true
+        validationEnabled: true
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-detailDashboard-0~
+    name: Detail Dashboard
+    public: false
+    refreshRate: 30
+version: 1

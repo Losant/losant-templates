@@ -1,0 +1,16 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This node provide access to Particle's Remote Diagnostics API to
+      retrieve device information.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesParticleDiagnostics-0~
+    name: Particle Diagnostics
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - particle
+version: 1

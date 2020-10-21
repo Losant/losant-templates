@@ -1,0 +1,21 @@
+resourceType: ExperienceUser
+resources:
+  - email: brandon@losant.com
+    experienceGroupIds: []
+    id: ~losant-experienceUser-brandonLosantCom-2~
+    userTags: {}
+    password: qwerty123
+  - email: taron@losant.com
+    experienceGroupIds: []
+    id: ~losant-experienceUser-taronLosantCom-1~
+    userTags: {}
+    password: qwerty123
+  - email: test.user.zlnke5xrc5@example.com
+    experienceGroupIds:
+      - ~losant-experienceGroup-myExampleGroup-0~
+    firstName: Test
+    id: ~losant-experienceUser-testUserZlnke5Xrc5ExampleCom-0~
+    lastName: User
+    userTags: {}
+    password: qwerty123
+version: 1

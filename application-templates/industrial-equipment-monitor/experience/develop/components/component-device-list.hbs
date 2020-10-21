@@ -1,0 +1,41 @@
+{{!--
+  Description:
+
+  This component displays a list of devices. When a device is clicked,
+  the user is sent to /?device=ID_OF_CLICKED_DEVICE.
+
+  If an ID in the list matches the ID on the "device" query parameter,
+  it will be displayed as selected.
+
+  Example Usage: {{component "component-device-list" pageData.devices}}
+
+  The following information is displayed:
+   Status indicator based on "state_description" device attribute.
+     Green if attribute value is "Running", Red otherwise.
+   Image of device based on the "image" tag.
+   The serial number of the device based on the "serial" tag.  
+--}}
+
+<ul>
+  {{#each this}}
+  <li>
+    <a class="device-list-item-link" href="/?device={{this.id}}">
+      <div id="{{this.id}}" class="device-list-item{{#eq this.id @root.request.query.device}} device-list-selected{{/eq}}">
+      <div class="device-list-status-indicator {{#eq this.compositeState.state_description.value 'Running'}} device-list-status-green{{else}} device-list-status-red{{/eq}}"></div>
+        <div class="device-list-image-container">
+          <img src="{{file this.tags.image.[0]}}">
+        </div>
+        <div>{{this.tags.serial.[0]}}</div>
+      </div>
+    </a>
+  </li>
+  {{/each}}
+</ul>
+
+<script>
+  $(function() {
+    // Scroll the first selected device into view.
+    let selected = $('.device-list-selected')[0];
+    if(selected) { selected.scrollIntoView(); }
+	});
+</script>

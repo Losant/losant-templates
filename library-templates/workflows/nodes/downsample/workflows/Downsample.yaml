@@ -1,0 +1,323 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: The number of data points to process before returning a value.
+          id: bucketSize
+          label: Bucket Size
+          required: true
+          type: numberTemplate
+        - defaultValue: MEAN
+          description: How to downsample the received data.
+          id: technique
+          label: Downsample Technique
+          options:
+            - value: MEAN
+            - value: FIRST
+            - value: LAST
+          type: select
+        - description: >-
+            Optional identifier that allows this node to downsample multiple
+            sets of data.
+          id: id
+          label: Downsample Identifier
+          required: false
+          type: stringTemplate
+        - description: The incoming value that will be downsampled in each bucket.
+          id: value
+          label: Value
+          required: true
+          type: numberTemplate
+      outputCount: 2
+      resultDescription: >-
+        Will take the true path each time "Bucket Size" points have been
+        processed and the output will be the downsampled value based on the
+        specified technique. All other data points will result in the false path
+        and the raw value will be directly passed through.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: >-
+      Filters a streaming set of data by downsampling multiple data points into
+      a single value.
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iI2ZmZmZmZiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik0xOSA5aC00VjNIOXY2SDVsNyA3IDctN3pNNSAxOHYyaDE0di0ySDV6Ii8+PC9zdmc+
+    id: ~losant-flow-downsample-0~
+    name: Downsample
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: data.value
+        id: 0dTmhX_vcf
+        meta:
+          category: customNodeEnd
+          description: Take the "False" path
+          label: Output False
+          name: custom-node-end-false
+          x: 160
+          'y': 900
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          branchIndexTemplate: 1
+          resultSourcePath: working.result
+        id: sbDgkhS1iT
+        meta:
+          category: customNodeEnd
+          description: Take the "True" path
+          label: Output True
+          name: custom-node-end-true
+          x: 300
+          'y': 1400
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          defaultValue: '[]'
+          defaultValueType: json
+          keyName: 'downsample:points:{{data.id}}'
+          valuePath: working.points
+        id: OVs7TT4rHf
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 260
+          'y': 280
+        outputIds:
+          - - u_LZsZqdXG
+        type: GetValueNode
+      - config:
+          destArrayPath: working.points
+          rules:
+            - inputTemplate: '{{ data.value }}'
+              type: push
+          sourceArrayPath: working.points
+        id: BHC1n0b9wF
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 260
+          'y': 480
+        outputIds:
+          - - E6WxRavZHo
+        type: ArrayNode
+      - config:
+          expression: '{{ length working.points }} >= {{ data.bucketSize }}'
+        id: E6WxRavZHo
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 580
+        outputIds:
+          - - In8FS3w7xh
+          - - ch_tVEur3n
+        type: ConditionalNode
+      - config:
+          keyName: 'downsample:sum:{{data.id}}'
+          resultPath: working.sum
+          value: '{{ data.value }}'
+          valueType: incr
+        id: u_LZsZqdXG
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 260
+          'y': 380
+        outputIds:
+          - - BHC1n0b9wF
+        type: StoreValueNode
+      - config:
+          keyName: 'downsample:points:{{data.id}}'
+          resultPath: ''
+          value: working.points
+          valueType: path
+        id: In8FS3w7xh
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 160
+          'y': 700
+        outputIds:
+          - - vIlQCjEyMn
+        type: StoreValueNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: MEAN
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: FIRST
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: LAST
+              dontBreak: false
+          switchTemplate: '{{ data.technique }}'
+        id: fg_6SN34pP
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 360
+          'y': 980
+        outputIds:
+          - []
+          - - zqE1IIbSNR
+          - - pBAqEptkA6
+          - - 1XVHBLBR_A
+        type: SwitchNode
+      - config:
+          keyName: 'downsample:points:{{data.id}}'
+          resultPath: ''
+          value: 'null'
+          valueType: clear
+        id: ch_tVEur3n
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 360
+          'y': 700
+        outputIds:
+          - - fAdHnsDZ1l
+        type: StoreValueNode
+      - config:
+          keyName: 'downsample:sum:{{data.id}}'
+          resultPath: ''
+          value: '0'
+          valueType: clear
+        id: fAdHnsDZ1l
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 360
+          'y': 800
+        outputIds:
+          - - fg_6SN34pP
+        type: StoreValueNode
+      - config:
+          statements:
+            - expression: '{{ working.sum }} / {{ data.bucketSize }}'
+              resultPath: working.result
+        id: zqE1IIbSNR
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 100
+          'y': 1160
+        outputIds:
+          - - mEVM7n~yTX
+        type: MathNode
+      - config:
+          message: ''
+          property: ''
+        id: mEVM7n~yTX
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 300
+          'y': 1300
+        outputIds:
+          - - sbDgkhS1iT
+        type: DebugNode
+      - config:
+          destArrayPath: working.points
+          rules:
+            - outputPath: working.result
+              type: shift
+          sourceArrayPath: working.points
+        id: pBAqEptkA6
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 300
+          'y': 1160
+        outputIds:
+          - - mEVM7n~yTX
+        type: ArrayNode
+      - config:
+          destArrayPath: working.points
+          rules:
+            - outputPath: working.result
+              type: pop
+          sourceArrayPath: working.points
+        id: 1XVHBLBR_A
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 500
+          'y': 1160
+        outputIds:
+          - - mEVM7n~yTX
+        type: ArrayNode
+      - config:
+          message: ''
+          property: ''
+        id: vIlQCjEyMn
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 160
+          'y': 800
+        outputIds:
+          - - 0dTmhX_vcf
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Downsample'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 160
+          'y': 40
+        outputIds:
+          - - OVs7TT4rHf
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-downsample-0~-NGMwhySddytPy3X3u_U-e
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "bucketSize" : 5,
+              "technique" : "MEAN",
+              "value" : 5
+            }
+          uiId: g1gpt8Jgo4
+          x: 360
+          'y': 40
+        outputIds:
+          - - OVs7TT4rHf
+        type: virtualButton
+version: 1

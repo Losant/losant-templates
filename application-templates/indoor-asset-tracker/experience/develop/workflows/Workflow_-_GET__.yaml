@@ -1,0 +1,223 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Routes the user to the correct home page.
+    enabled: true
+    flowId: ~losant-flow-workflowGet-6~
+    globals: []
+    id: ~losant-flowVersion-workflowGet-4~
+    name: Workflow - GET /
+    nodes:
+      - config:
+          bodyTemplate: devices
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-managerDashboardHome-3~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: ms1kiBf61n
+        meta:
+          category: output
+          description: ''
+          id: ms1kiBf61n
+          label: Home Page
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 200
+          'y': 580
+        outputIds:
+          - - 9cZ_WqwuuD
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: 9cZ_WqwuuD
+        meta:
+          category: output
+          description: ''
+          id: 9cZ_WqwuuD
+          label: Manager
+          name: debug
+          x: 320
+          'y': 760
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.query.device}}'
+        id: K1xXiM7tBn
+        meta:
+          category: logic
+          description: ''
+          id: K1xXiM7tBn
+          label: Device Selected?
+          name: conditional
+          x: 300
+          'y': 420
+        outputIds:
+          - - ms1kiBf61n
+          - - 46he9ddEuV
+        type: ConditionalNode
+      - config:
+          attributes:
+            - room
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: true
+          resultPath: devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: class
+              valueTemplate: ''
+          tagsAsObject: true
+        id: DjXanygMk-
+        meta:
+          category: data
+          description: ''
+          id: R6gCRXZtjb
+          label: Get All Devices
+          name: get-device
+          x: 300
+          'y': 300
+        outputIds:
+          - - K1xXiM7tBn
+        type: GetDeviceNode
+      - config:
+          bodyTemplate: data.query
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-managerDashboardDevice-10~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: 46he9ddEuV
+        meta:
+          category: output
+          description: ''
+          id: ms1kiBf61n
+          label: Device Page
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 400
+          'y': 580
+        outputIds:
+          - - 9cZ_WqwuuD
+        type: EndpointReplyNode
+      - config:
+          expression: '{{experience.user.userTags.role}}==="manager"'
+        id: od-r2yDgW5
+        meta:
+          category: logic
+          description: ''
+          id: od-r2yDgW5
+          label: Manager?
+          name: conditional
+          x: 160
+          'y': 140
+        outputIds:
+          - - TX0-KT7Gye
+          - - DjXanygMk-
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+                "home":"true"
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-kioskSelectors-4~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: TX0-KT7Gye
+        meta:
+          category: output
+          description: >-
+            Route the user to the kiosk-selectors page to show the "home"
+            navigation view. This view asks the user which type of device they
+            are looking for within the space.
+          id: ms1kiBf61n
+          label: Kiosk Home
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 300
+        outputIds:
+          - - mAg7B8_UQt
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: mAg7B8_UQt
+        meta:
+          category: output
+          description: ''
+          id: 9cZ_WqwuuD
+          label: Employee
+          name: debug
+          x: 60
+          'y': 420
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: zThcTFUpG1
+        meta:
+          annotationText: >-
+            If the user is a manager, route them to the manager page view. If
+            they are not a manager, take them to the kiosk page view.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 220
+          x: 380
+          'y': 100
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: IbbvakDR0y
+        meta:
+          annotationText: >-
+            If the user selected a device, navigate them to the Historical Data
+            dashboard
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-get-0~
+        meta:
+          category: trigger
+          description: ''
+          id: 2WWKsFdv2P
+          label: Endpoint
+          name: endpoint
+          uiId: 2WWKsFdv2P
+          x: 160
+          'y': 40
+        outputIds:
+          - - od-r2yDgW5
+        type: endpoint
+    version: develop
+version: 1

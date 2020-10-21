@@ -1,0 +1,333 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: map
+        config:
+          additionalAttributes:
+            - is_in_faulted_mode
+          attribute: location
+          clusterPoints: false
+          compositeResult: true
+          defaultBearing: 0
+          defaultPitch: 0
+          defaultZoom: auto
+          deviceIds: []
+          deviceTags:
+            - fromCtx: experienceUser
+          duration: 0
+          endColor: 'rgba(34, 174, 120, 1)'
+          iconTemplate: |-
+            {{#eq data.is_in_faulted_mode 1}}
+            {{colorMarker '#FC1526'}}
+            {{else}}
+            {{colorMarker '#22AE78'}}
+            {{/eq}}
+          includeArrows: false
+          includeLines: false
+          pinMode: advanced
+          popupTemplate: >-
+            ##### **{{deviceName}}** {{#if isLastPoint}} (Current
+            Location){{else if isFirstPoint}} (Starting Location){{/if}}
+
+
+            {{format time}}
+
+
+            LatLng({{format latitude}}, {{format longitude}})
+          resizedPins: true
+          resolution: 60000
+          startColor: '#ff261b'
+        height: 3
+        id: 2x4qnhuphR
+        startX: 0
+        startY: 0
+        title: Generators
+        width: 3.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: gauge
+        config:
+          gaugeMax: '1200'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation: MAX
+            attribute: manifold_temperature
+            color: 'rgba(34, 174, 120, 1)'
+            deviceIds: []
+            deviceTags:
+              - fromCtx: experienceUser
+            label: ˚F
+        height: 1
+        id: wMTor1-Mb5
+        startX: 3.5
+        startY: 0
+        title: Max Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: gauge
+        config:
+          gaugeMax: '1200'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation: MIN
+            attribute: manifold_temperature
+            color: 'rgba(34, 174, 120, 1)'
+            deviceIds: []
+            deviceTags:
+              - fromCtx: experienceUser
+            label: ˚F
+        height: 1
+        id: NHrF8FUkT4
+        startX: 3.5
+        startY: 1
+        title: Min Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: gauge
+        config:
+          gaugeMax: '1200'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation: MEAN
+            attribute: manifold_temperature
+            color: 'rgba(34, 174, 120, 1)'
+            deviceIds: []
+            deviceTags:
+              - fromCtx: experienceUser
+            label: ˚F
+        height: 1
+        id: e_yZKcj3aA
+        startX: 3.5
+        startY: 2
+        title: Avg Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: device-list
+        config:
+          additionalAttributes:
+            - manifold_temperature
+            - is_in_running_mode
+            - rpm
+            - fuel_level
+            - battery_voltage
+          columns:
+            - headerTemplate: Serial
+              id: M1XNOoeMNP
+              rowTemplate: '{{format value}}'
+              source: serial
+              type: tag
+            - headerTemplate: Model
+              id: SczQxHe4Y1
+              rowTemplate: '{{format value}}'
+              source: model
+              type: tag
+            - headerTemplate: Man. Temp
+              id: fPWJGG2-D0
+              rowTemplate: '{{format value}} ˚F'
+              source: manifold_temperature
+              type: attribute
+            - headerTemplate: Running
+              id: X0xHFouXoH
+              rowTemplate: '{{#eq value 1}}true{{else}}false{{/eq}}'
+              source: is_in_running_mode
+              type: attribute
+            - headerTemplate: RPM
+              id: 7MbkKN1flM
+              rowTemplate: '{{format value}}'
+              source: rpm
+              type: attribute
+            - headerTemplate: Fuel Level
+              id: RdaAJLz2Xr
+              rowTemplate: '{{format value ''.0f''}} %'
+              source: fuel_level
+              type: attribute
+            - headerTemplate: Voltage
+              id: _5Sw4KmtxL
+              rowTemplate: '{{format value}} V'
+              source: battery_voltage
+              type: attribute
+          deviceLinkType: default
+          excludeConnectionInfo: false
+          query: '{"$or":[{"experienceUserId":{"$eq":"{{ctx.experienceUser}}"}}]}'
+          sortDirection: asc
+          sortField: name
+        height: 2
+        id: Tqrj9VPoIK
+        startX: 2
+        startY: 3
+        title: All Devices
+        width: 2
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: gauge
+        config:
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation: MEDIAN
+            attribute: fuel_level
+            color: 'rgba(5, 113, 128, 1)'
+            deviceIds: []
+            deviceTags:
+              - fromCtx: experienceUser
+            label: '%'
+        height: 1
+        id: xb8jcfWltF
+        startX: 0
+        startY: 3
+        title: Avg Fuel Level
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: gauge
+        config:
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation: MIN
+            attribute: fuel_level
+            color: 'rgba(5, 113, 128, 1)'
+            deviceIds: []
+            deviceTags:
+              - fromCtx: experienceUser
+            label: '%'
+        height: 1
+        id: ZR642eEO_4
+        startX: 0.5
+        startY: 3
+        title: Min Fuel Level
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 3600000
+          segments:
+            - aggregation: MEAN
+              attribute: fuel_level
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds: []
+              deviceTags:
+                - fromCtx: experienceUser
+              expression: ''
+              graphType: bar
+              label: Fuel Level
+              yAxisLabel: '%'
+              yAxisMax: '100'
+              yAxisMin: '0'
+        height: 1
+        id: '-AfuaAamVU'
+        startX: 1
+        startY: 3
+        title: Avg Fuel Level
+        width: 1
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: gauge
+        config:
+          gaugeMax: '14'
+          gaugeMin: '0'
+          gaugeType: battery
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation: MEAN
+            attribute: battery_voltage
+            color: 'rgba(130, 91, 255, 1)'
+            deviceIds: []
+            deviceTags:
+              - fromCtx: experienceUser
+            label: Volts
+        height: 1
+        id: JDw1-7QbM9
+        startX: 0
+        startY: 4
+        title: Avg Voltage
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: gauge
+        config:
+          gaugeMax: '14'
+          gaugeMin: '0'
+          gaugeType: battery
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation: MIN
+            attribute: battery_voltage
+            color: 'rgba(130, 91, 255, 1)'
+            deviceIds: []
+            deviceTags:
+              - fromCtx: experienceUser
+            label: Volts
+        height: 1
+        id: JRe5sTMuC5
+        startX: 0.5
+        startY: 4
+        title: Min Voltage
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 3600000
+          segments:
+            - aggregation: MEAN
+              attribute: battery_voltage
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds: []
+              deviceTags:
+                - fromCtx: experienceUser
+              expression: ''
+              graphType: bar
+              label: Battery Voltage
+              yAxisLabel: Volts
+              yAxisMax: '14'
+              yAxisMin: '0'
+        height: 1
+        id: 8FMxe-Ug_v
+        startX: 1
+        startY: 4
+        title: Avg Voltage
+        width: 1
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        defaultValue: ~losant-experienceUser-kanarraExampleCom-0~
+        name: experienceUser
+        type: experienceUser
+        validationConfig: {}
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-overview-1~
+    name: Overview
+    public: false
+    refreshRate: 60
+version: 1

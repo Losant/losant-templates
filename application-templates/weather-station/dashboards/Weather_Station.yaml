@@ -1,0 +1,198 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: gauge
+        config:
+          gaugeType: number
+          precision: '2'
+          precisionType: floating
+          realTime: false
+          segment:
+            attribute: temp
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-weather-0~
+            deviceTags: []
+            label: ˚C
+        height: 1
+        id: PDGdNOrKD_
+        startX: 0
+        startY: 0
+        title: Temperature
+        width: 1
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: graph
+        config:
+          duration: 3600000
+          realTime: false
+          recharts: true
+          resolution: 60000
+          segments:
+            - aggregation: MEAN
+              attribute: temp
+              color: '#ff261b'
+              cumulative: false
+              deviceIds:
+                - ~losant-device-weather-0~
+              deviceTags: []
+              expression: ''
+              graphType: line
+              label: Temperature
+              yAxisLabel: ˚C
+            - aggregation: MEAN
+              attribute: humidity
+              color: '#057180'
+              cumulative: false
+              deviceIds:
+                - ~losant-device-weather-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Humidity
+              lineType: monotone
+              lineWeight: 2
+              yAxisLabel: '%'
+        height: 2
+        id: R4rAvcsQ6I
+        startX: 1
+        startY: 0
+        title: Temperature vs. Humidity
+        width: 3
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: true
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: 4
+          precisionType: significant
+          realTime: false
+          segment:
+            attribute: humidity
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-weather-0~
+            deviceTags: []
+            label: Humidity
+        height: 1
+        id: 7AIXUW_iGO
+        startX: 0
+        startY: 1
+        title: Humidity
+        width: 1
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: gauge
+        config:
+          gaugeType: number
+          precision: '0'
+          precisionType: floating
+          realTime: false
+          segment:
+            attribute: pressure
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-weather-0~
+            deviceTags: []
+            label: millibars
+        height: 1
+        id: McwLCx48CZ
+        startX: 0
+        startY: 2
+        title: Pressure
+        width: 1
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: gauge
+        config:
+          gaugeType: number
+          precision: '2'
+          precisionType: floating
+          realTime: false
+          segment:
+            attribute: wind-speed
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-weather-0~
+            deviceTags: []
+            label: meters/sec
+        height: 1
+        id: MlfAkaaAe3
+        startX: 0
+        startY: 3
+        title: Wind Speed
+        width: 1
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: graph
+        config:
+          duration: 3600000
+          realTime: false
+          recharts: true
+          resolution: 60000
+          segments:
+            - aggregation: MEAN
+              attribute: pressure
+              color: '#ff261b'
+              cumulative: false
+              deviceIds:
+                - ~losant-device-weather-0~
+              deviceTags: []
+              expression: ''
+              graphType: line
+              label: Pressure
+              yAxisLabel: millibars
+        height: 2
+        id: lWe9mjdnpM
+        startX: 1
+        startY: 2
+        title: Pressure
+        width: 2
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: gauge
+        config:
+          gaugeType: number
+          precision: '0'
+          precisionType: floating
+          realTime: false
+          segment:
+            attribute: visibility
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-weather-0~
+            deviceTags: []
+            label: meters
+        height: 1
+        id: kBWn3__mLZ
+        startX: 3
+        startY: 2
+        title: Visibility
+        width: 1
+      - applicationId: ~losant-application-applicationWeatherStation-0~
+        blockType: gauge
+        config:
+          gaugeType: number
+          precision: '2'
+          precisionType: floating
+          realTime: false
+          segment:
+            attribute: feels-like
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-weather-0~
+            deviceTags: []
+            label: ˚C
+        height: 1
+        id: SF7YlMteY3
+        startX: 3
+        startY: 3
+        title: Feels Like
+        width: 1
+    contextConfiguration: []
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-weatherStation-0~
+    name: Weather Station
+    public: false
+    refreshRate: 60
+version: 1

@@ -1,0 +1,16 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Redacts a payload, obscuring sensitive values based on property names.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesRedactPayload-0~
+    name: Redact Payload
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - security
+      - censor
+version: 1

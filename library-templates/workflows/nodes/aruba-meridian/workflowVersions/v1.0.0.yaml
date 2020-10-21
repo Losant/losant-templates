@@ -1,0 +1,168 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: Your Meridian API authentication token.
+          id: authToken
+          label: Authentication Token
+          required: true
+          type: stringTemplate
+        - description: Your Meridian location ID.
+          id: locationId
+          label: Location ID
+          required: true
+          type: stringTemplate
+        - description: >-
+            Optional. If specified will return the details of a single asset
+            based on this MAC address.
+          id: assetMac
+          label: Asset MAC Address
+          required: false
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: >-
+        If a MAC address was supplied, the result will include details about the
+        individual device. If no MAC was supplied, a list of devices for the
+        specified location ID will be returned (up to 1,000).
+      resultMode: optional
+    enabled: true
+    flowId: ~losant-flow-meridianAssetTracking-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: raCDosc8k3
+        meta:
+          category: customNodeEnd
+          description: End the custom node run
+          label: Output
+          name: custom-node-end-single
+          x: 200
+          'y': 680
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo:
+            - key: Authorization
+              valueTemplate: 'Token {{data.authToken}}'
+          method: GET
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://edit.meridianapps.com/api/locations/{{data.locationId}}/asset-beacons/{{data.assetMac}}
+        id: _qYkpm7chG
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 300
+          'y': 320
+        outputIds:
+          - - Pk07YNyr4I
+        type: HttpNode
+      - config:
+          expression: '{{ data.assetMac }} !== undefined'
+        id: 3odR96xZSS
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 200
+          'y': 180
+        outputIds:
+          - - NehV6~djb6
+          - - _qYkpm7chG
+        type: ConditionalNode
+      - config:
+          authCredentials: {}
+          authType: none
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo:
+            - key: Authorization
+              valueTemplate: 'Token {{data.authToken}}'
+          method: GET
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://edit.meridianapps.com/api/locations/{{data.locationId}}/asset-beacons?page_size=1000
+        id: NehV6~djb6
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 100
+          'y': 320
+        outputIds:
+          - - Pk07YNyr4I
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: 7y8ckzluS3
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 200
+          'y': 580
+        outputIds:
+          - - raCDosc8k3
+        type: DebugNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: Pk07YNyr4I
+        meta:
+          category: logic
+          description: Removes the HTTP request object from the result.
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 460
+        outputIds:
+          - - 7y8ckzluS3
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Meridian: Asset Tracking'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 200
+          'y': 60
+        outputIds:
+          - - 3odR96xZSS
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-meridianAssetTracking-0~-gVJ6g3eZR3K9MObU-ECAn
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: QAC5I2EW97
+          x: 400
+          'y': 60
+        outputIds:
+          - - 3odR96xZSS
+        type: virtualButton
+    version: v1.0.0
+version: 1

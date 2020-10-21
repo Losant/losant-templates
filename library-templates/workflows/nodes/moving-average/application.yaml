@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Calculates a moving average over a configurable number of data points.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsNodesMovingAverage-0~
+    name: Moving Average
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - filter
+version: 1

@@ -1,0 +1,369 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(10, 225, 255, 1)'
+              condition: '{{ value-0 }} === "Stopped"'
+              id: kFSZA52Acm
+              label: '{{ value-0 }}'
+            - color: 'rgba(34, 174, 120, 1)'
+              condition: '{{ value-0 }} === "Running"'
+              id: w5h9xF1eKp
+              label: '{{ value-0 }}'
+            - color: 'rgba(252, 21, 38, 1)'
+              condition: '{{ value-0 }} === "Faulted"'
+              id: 96Q-LNmy0p
+              label: |-
+                {{ value-0 }}   
+                {{ value-1 }}
+            - color: 'rgba(130, 91, 255, 1)'
+              condition: '{{ value-0 }} === "Maintenance"'
+              id: Zfdp7xUltw
+              label: |-
+                Down for {{ value-0 }}  
+                {{ value-2 }}
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: ''
+          realTime: false
+          segments:
+            - attribute: state_description
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - attribute: fault_description
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - attribute: maintenance_description
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: cr6ezxo8TZ
+        startX: 0
+        startY: 0
+        title: Status
+        width: 1
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{ value-0 }} °F'
+          realTime: false
+          segments:
+            - attribute: manifold_temperature
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: 4aVDRTbiFN
+        startX: 2
+        startY: 0
+        title: Manifold Temp
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{ value-0 }} PSI'
+          realTime: false
+          segments:
+            - attribute: oil_pressure
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: xHecPQFE7s
+        startX: 2.5
+        startY: 0
+        title: Oil Pressure
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{ value-0 }} RPM'
+          realTime: false
+          segments:
+            - attribute: rpm
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: LfcYJYyw33
+        startX: 3.5
+        startY: 0
+        title: RPM
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{ value-0 }} Amps'
+          realTime: false
+          segments:
+            - attribute: output_current
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: swH5Ekpbzy
+        startX: 3
+        startY: 0
+        title: Output Current
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{ value-0 }} Volts'
+          realTime: false
+          segments:
+            - attribute: battery_voltage
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: Va8KjuHDcO
+        startX: 1
+        startY: 0
+        title: Battery Voltage
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{format value-0 '',.3'' }} %'
+          realTime: false
+          segments:
+            - attribute: fuel_level
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: dK8p3mGRTN
+        startX: 1.5
+        startY: 0
+        title: Fuel Level
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: image
+        config:
+          bgColor: 'rgba(255, 255, 255, 0)'
+          imageSource: static
+          imageUrl: >-
+            https://files.onlosant.com/~losant-application-applicationIndustrialEquipmentMonitor-0~{{ctx.deviceId-0.tags.image.[0]}}
+        height: 2
+        id: x3tDNbqu_s
+        startX: 0
+        startY: 1
+        title: Device Image
+        width: 1
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: graph
+        config:
+          duration: 21600000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation: MEAN
+              attribute: battery_voltage
+              color: '#ff261b'
+              cumulative: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: ''
+              graphType: line
+              label: Battery Voltage
+            - aggregation: MEAN
+              attribute: fuel_level
+              color: '#057180'
+              cumulative: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Fuel Level
+              lineType: monotone
+              lineWeight: 2
+            - aggregation: MEAN
+              attribute: manifold_temperature
+              color: '#0ae1ff'
+              cumulative: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Manifold Temp (F)
+              lineType: monotone
+              lineWeight: 2
+            - aggregation: MEAN
+              attribute: oil_pressure
+              color: '#a52711'
+              cumulative: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Oil Pressure (PSI)
+              lineType: monotone
+              lineWeight: 2
+            - aggregation: MEAN
+              attribute: output_current
+              color: '#ff9a25'
+              cumulative: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Output Current (Amps)
+              lineType: monotone
+              lineWeight: 2
+            - aggregation: MEAN
+              attribute: rpm
+              color: '#bf731c'
+              cumulative: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: RPM
+              lineType: monotone
+              lineWeight: 2
+            - aggregation: MEAN
+              attribute: running
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Running
+              lineType: step
+              lineWeight: 2
+              yAxisLabel: Running
+              yAxisMax: '2'
+              yAxisMin: '0'
+        height: 2
+        id: h6D1ILNDT6
+        startX: 1
+        startY: 1
+        title: Data Points
+        width: 3
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n\t\"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": {\n    \"type\": \"bar\"\n  },\n  \"config\": {\n    \"axis\": {\n      \"labels\": false,\n      \"domain\": false,\n      \"ticks\": false,\n      \"grid\": false\n    },\n    \"view\": {\n    \t\"fill\": \"transparent\",\n      \"stroke\": \"transparent\"\n    },\n    \"scale\": {\n      \"bandPaddingInner\": 0\n    }\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"axis\": null\n    },\n    \"y\": {\n      \"field\": \"value\",\n      \"type\": \"ordinal\",\n      \"scale\": {\n        \"domain\": []\n      },\n      \"axis\": null\n    },\n    \"color\": {\n      \"field\": \"value\", \"type\": \"ordinal\",\n      \"legend\": null,\n      \"scale\": {\n        \"domain\": [\"Running\",\"Faulted\",\"Stopped\",\"Maintenance\"],\n        \"range\": [\"#22AE78\",\"#FC1526\",\"#FC1526\",\"#0033FF\"]\n      }\n    }\n  }\n}"
+          segments:
+            - aggregation: LAST
+              attribute: state_description
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              duration: 86400000
+              id: time-series-0
+              queryType: time-series
+              resolution: 300000
+          vegaVersion: vegaLite2
+        height: 2
+        id: HK39BIEV3Y
+        startX: 0.5
+        startY: 3
+        title: State Over Last 24 Hours
+        width: 3.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{format value-0 ''.6''}} Hours'
+          duration: 0
+          segments:
+            - attribute: hours_running
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: qSuUkW99bO
+        startX: 0
+        startY: 3
+        title: Running Time
+        width: 0.5
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: '{{format value-0 ''.6''}} Days'
+          duration: 0
+          segments:
+            - attribute: days_running
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: HP1TQedr5v
+        startX: 0
+        startY: 4
+        title: Running Time
+        width: 0.5
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        defaultValue: ~losant-device-acz8BpA5Ajz6-0~
+        name: deviceId-0
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+        defaultValue: ~losant-experienceUser-kanarraExampleCom-0~
+        name: experienceUser-0
+        type: experienceUser
+        validationConfig: {}
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-generatorDetails-0~
+    name: Generator Details
+    public: false
+    refreshRate: 60
+version: 1

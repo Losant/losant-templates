@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Renders a Google Map with pins, including optional custom markers
+      and info bubbles.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesComponentsGoogleMaps-0~
+    name: Google Maps
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - gps
+      - location
+      - google
+      - map
+version: 1

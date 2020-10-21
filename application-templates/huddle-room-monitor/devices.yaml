@@ -1,0 +1,97 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: occupied_rooms
+        system:
+          aggregation: SUM
+          childAttributes:
+            - mode: all
+              name: occupied_rooms
+      - attributeTags: {}
+        dataType: number
+        name: total_rooms
+        system:
+          aggregation: SUM
+          childAttributes:
+            - mode: all
+              name: total_rooms
+    children:
+      - attributes:
+          - attributeTags: {}
+            dataType: number
+            description: ""
+            name: occupied_rooms
+            system:
+              aggregation: SUM
+              childAttributes:
+                - mode: all
+                  name: occupied
+          - attributeTags: {}
+            dataType: number
+            name: total_rooms
+            system:
+              aggregation: COUNT
+              childAttributes:
+                - mode: all
+                  name: occupied
+        children:
+          - attributes:
+              - attributeTags: {}
+                dataType: number
+                description: 1=occupied. 0=unoccupied.
+                name: occupied
+              - attributeTags:
+                  units: seconds
+                dataType: number
+                description: The duration of a meeting. Reported when the room becomes
+                  unoccupied.
+                name: meeting_time
+            children: []
+            deviceClass: standalone
+            id: ~losant-device-huddleRoom1-2~
+            name: Huddle Room 1
+            tags: []
+          - attributes:
+              - attributeTags: {}
+                dataType: number
+                description: 1=occupied. 0=unoccupied.
+                name: occupied
+              - attributeTags:
+                  units: seconds
+                dataType: number
+                name: meeting_time
+            children: []
+            deviceClass: standalone
+            id: ~losant-device-huddleRoom2-3~
+            name: Huddle Room 2
+            tags: []
+          - attributes:
+              - attributeTags: {}
+                dataType: number
+                description: 1=occupied. 0=unoccupied.
+                name: occupied
+              - attributeTags:
+                  units: seconds
+                dataType: number
+                name: meeting_time
+            children: []
+            deviceClass: standalone
+            id: ~losant-device-huddleRoom3-4~
+            name: Huddle Room 3
+            tags: []
+        deviceClass: system
+        id: ~losant-device-floor7-1~
+        keepDuplicates: false
+        name: Floor 7
+        systemInterval: 60
+        tags: []
+    deviceClass: system
+    id: ~losant-device-buildingA-0~
+    keepDuplicates: false
+    name: Building A
+    systemInterval: 60
+    tags: []
+version: 1

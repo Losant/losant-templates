@@ -1,0 +1,159 @@
+{{!-- Default variable values --}}
+{{#*inline "id"}}{{#if @args.id}}{{@args.id}}{{else}}tl-collapsible-list{{/if}}{{/inline}}
+{{#*inline "itemValue"}}{{#if @args.itemValueProp}}{{lookup this @args.itemValueProp}}{{else}}{{this.id}}{{/if}}{{/inline}}
+{{#*inline 'itemName'}}{{#if @args.itemLabelTemplate}}{{template @args.itemLabelTemplate this}}{{else}}{{this.name}}{{/if}}{{/inline}}
+{{#*inline "itemLabel"}}
+  {{#if @args.itemComponentName}}
+    {{component @args.itemComponentName this}}
+  {{else if @args.inputName}}
+    <div class="form-check tl-collapsible-list-item-checkbox">
+      <input
+        class="form-check-input"
+        name="{{@args.inputName}}"
+        type="checkbox"
+        value="{{> itemValue this}}"
+        id="{{> id}}-checkbox-{{> itemValue this}}"
+        {{#if @args.itemValueProp}}{{#includes @args.selectedValues (lookup this @args.itemValueProp)}}checked{{/includes}}{{else}}{{#includes @args.selectedValues this.id}}checked{{/includes}}{{/if}}
+      >
+      <label class="form-check-label" for="{{> id}}-checkbox-{{> itemValue this}}">
+        {{> itemName this}}
+      </label>
+    </div>
+  {{else if @args.itemLinkTemplate}}
+    <a href="{{template @args.itemLinkTemplate this}}" class="tl-collapsible-list-item-link">
+      {{> itemName this}}
+    </a>
+  {{else}}
+    {{> itemName this}}
+  {{/if}}
+{{/inline}}
+
+{{#*inline "togglerIcon"}}
+<span class="tl-collapsible-list-toggler {{#if @args.expandAll}}open{{/if}}">
+  <i class="tl-collapsible-list-toggler-icon"></i>
+</span>
+{{/inline}}
+
+{{#*inline "itemList"}}
+  {{#if items}}
+    <ul id="{{#if _isRoot}}{{> id}}{{/if}}" class="{{#unless _isRoot}}collapse {{/unless}}{{#if _expanded}}show {{/if}}tl-collapsible-list list-unstyled">
+      {{#each items}}
+        <li
+          data-item-value="{{> itemValue this}}"
+          class="tl-collapsible-list-item {{#if @args.itemValueProp}}{{#includes @args.selectedValues (lookup this @args.itemValueProp)}}tl-collapsible-list-selected{{/includes}}{{else}}{{#includes @args.selectedValues this.id}}tl-collapsible-list-selected{{/includes}}{{/if}}"
+        >
+          <div class="tl-collapsible-list-item-label">
+            {{#if @args.itemChildrenProp}}
+              {{#if (lookup this @args.itemChildrenProp)}}
+                {{> togglerIcon}}
+              {{/if}}
+            {{else}}
+              {{#if (lookup this 'children')}}
+                {{> togglerIcon}}
+              {{/if}}
+            {{/if}}
+            {{> itemLabel this }}
+          </div>
+          {{#if @args.itemChildrenProp}}
+            {{#if (lookup this @args.itemChildrenProp)}}
+              {{! To iterate is human; to recurse, divine. }}
+              {{> itemList items=(lookup this @args.itemChildrenProp) _expanded=@args.expandAll}}
+            {{/if}}
+          {{else}}
+            {{#if (lookup this 'children')}}
+              {{! To iterate is human; to recurse, divine. }}
+              {{> itemList items=(lookup this 'children') _expanded=@args.expandAll}}
+            {{/if}}
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+{{/inline}}
+
+<style>
+  #{{> id}}.list-unstyled {
+    margin-left: 4px;
+  }
+  #{{> id}} li {
+    margin-left: 16px;
+  }
+  #{{> id}} .tl-collapsible-list-toggler.open .tl-collapsible-list-toggler-icon {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  #{{> id}} .tl-collapsible-list-item-label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  #{{> id}} .tl-collapsible-list-toggler {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    margin-left: -16px;
+    text-align: center;
+  }
+    #{{> id}} .tl-collapsible-list-item-checkbox,
+    #{{> id}} .tl-collapsible-list-item-link {
+    flex: 1;
+  }
+  #{{> id}} .tl-collapsible-list-toggler-icon {
+    border-style: solid;
+    border-color: inherit;
+    border-width: 0 3px 3px 0;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+</style>
+
+{{> itemList items=this _isRoot="true" _expanded=true }}
+
+<script>
+  (function() {
+    // auto-expand any list that has a nested selected item
+    const getParents = (elem, selector) => {
+      // Setup parents array
+      const parents = [];
+      // Get matching parent elements
+      for ( ; elem && elem !== document; elem = elem.parentNode ) {
+        // Add matching parents to array
+        if ( selector ) {
+          if ( elem.matches( selector ) ) {
+            parents.push( elem );
+          }
+        } else {
+          parents.push( elem );
+        }
+      }
+      return parents;
+    };
+    document.querySelectorAll('#{{> id}} .tl-collapsible-list-selected').forEach((selectedItem) => {
+      const parents = getParents(selectedItem, '.tl-collapsible-list.collapse:not(.show)');
+      parents.forEach((parent) => {
+        parent.classList.add('show');
+        const parentToggler = parent.previousElementSibling;
+        if (parentToggler) {
+          const toggler = parentToggler.querySelector('.tl-collapsible-list-toggler');
+          if (toggler) {
+            toggler.classList.add('open');
+          }
+        }
+      });
+    });
+
+    // add the event listeners for toggling the expanded / collapsed state of each item
+    document.querySelectorAll('#{{> id}} .tl-collapsible-list-toggler').forEach((toggler) => {
+      toggler.addEventListener('click', function() {
+        this.classList.toggle('open');
+        const parent = this.closest('.tl-collapsible-list');
+        const listToToggle = parent.querySelector('.tl-collapsible-list');
+        listToToggle.classList.toggle('show');
+      });
+    });
+  })();
+</script>

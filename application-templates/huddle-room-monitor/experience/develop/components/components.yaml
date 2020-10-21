@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-cssTemplates-4~
+    localFilename: ./css-templates.hbs
+    name: css-templates
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

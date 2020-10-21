@@ -1,0 +1,367 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            Paste the JSON version of the [Service Account
+            Key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+            that will be used to create the OAuth token.
+          id: service_account
+          label: Service Account Key
+          required: true
+          type: stringTemplate
+        - description: >-
+            Provide the [OAuth
+            scope](https://developers.google.com/identity/protocols/googlescopes)
+            for this token. For example:
+            https://www.googleapis.com/auth/cloud-platform.
+          id: scope
+          label: Scope
+          required: true
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: >-
+        If successful, this returns an object with a single "token" property. If
+        it fails for any reason, an object with an "error" property will be
+        returned with more details.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: >-
+      Requests an [OAuth
+      token](https://developers.google.com/identity/protocols/OAuth2ServiceAccount)
+      from a GCP Service Account.
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/png;base64,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
+    id: ~losant-flow-gcpOAuth-0~
+    name: 'GCP: OAuth'
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.output
+        id: nHhH34kOD8
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 200
+          'y': 1220
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          destination: data.service_account
+          source: data.service_account
+        id: JnX-c9kub0
+        meta:
+          category: logic
+          description: ''
+          id: JnX-c9kub0
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 280
+          'y': 180
+        outputIds:
+          - - KRfNvCYAlE
+        type: JsonDecodeNode
+      - config:
+          algorithmTemplate: RS256
+          dataTemplate: |-
+            {
+            "aud": "https://www.googleapis.com/oauth2/v4/token",
+            "scope":"{{data.scope}}",
+            "sub": "{{data.service_account.client_email}}"
+            }
+          dataTemplateType: json
+          destinationPath: working.jwt
+          expiresIn: 3600
+          issuerTemplate: '{{data.service_account.client_email}}'
+          secretTemplate: '{{data.service_account.private_key}}'
+        id: lYZqc-fXw4
+        meta:
+          category: logic
+          description: ''
+          isExpRequired: true
+          label: 'JWT: Create'
+          name: jwt-create
+          timeUnit: Hours
+          x: 180
+          'y': 500
+        outputIds:
+          - - Hj6v90KSam
+        type: JWTCreateNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: >-
+            grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion={{
+            working.jwt }}
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.output
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/x-www-form-urlencoded
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: 'https://www.googleapis.com/oauth2/v4/token'
+        id: Hj6v90KSam
+        meta:
+          category: data
+          description: ''
+          id: RPIJUY9_eF
+          label: HTTP
+          name: http
+          x: 180
+          'y': 580
+        outputIds:
+          - - LqF_XVZBJh
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: UamQlE4m3g
+        meta:
+          category: output
+          description: ''
+          id: UamQlE4m3g
+          label: Debug
+          name: debug
+          x: 200
+          'y': 1140
+        outputIds:
+          - - nHhH34kOD8
+        type: DebugNode
+      - config:
+          expression: '{{working.output}} === undefined'
+        id: LqF_XVZBJh
+        meta:
+          category: logic
+          description: ''
+          id: LqF_XVZBJh
+          label: Conditional
+          name: conditional
+          x: 180
+          'y': 660
+        outputIds:
+          - - UamQlE4m3g
+          - - 0reYUy6y7f
+        type: ConditionalNode
+      - config:
+          keyName: 'token:{{data.service_account.private_key_id}}:{{data.scope}}'
+          resultPath: ''
+          value: >-
+            { "token": "{{working.result.body.access_token}}", "expires_on":
+            {{add time 3000000}} }
+          valueType: json
+        id: BzsFeXmGAH
+        meta:
+          category: data
+          description: ''
+          id: BzsFeXmGAH
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 520
+          'y': 1000
+        outputIds:
+          - - UamQlE4m3g
+        type: StoreValueNode
+      - config:
+          rules:
+            - destination: working.output.token
+              type: set
+              valueTemplate: '{{working.result.body.access_token}}'
+        id: '-69MEPQtlL'
+        meta:
+          category: logic
+          description: ''
+          id: '-69MEPQtlL'
+          label: Mutate
+          name: mutate
+          x: 520
+          'y': 920
+        outputIds:
+          - - BzsFeXmGAH
+        type: MutateNode
+      - config:
+          defaultValue: 'null'
+          defaultValueType: json
+          keyName: 'token:{{data.service_account.private_key_id}}:{{data.scope}}'
+          valuePath: working.cached
+        id: KRfNvCYAlE
+        meta:
+          category: data
+          description: ''
+          id: KRfNvCYAlE
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 280
+          'y': 300
+        outputIds:
+          - - jVO-llN3AU
+        type: GetValueNode
+      - config:
+          expression: >-
+            {{working.cached}} !== null && {{working.cached.expires_on}} >
+            {{time}}
+        id: jVO-llN3AU
+        meta:
+          category: logic
+          description: ''
+          id: jVO-llN3AU
+          label: Conditional
+          name: conditional
+          x: 280
+          'y': 400
+        outputIds:
+          - - lYZqc-fXw4
+          - - kiHyYpPqUq
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.output.token
+              type: set
+              valueTemplate: '{{working.cached.token}}'
+        id: kiHyYpPqUq
+        meta:
+          category: logic
+          description: ''
+          id: '-69MEPQtlL'
+          label: Mutate
+          name: mutate
+          x: 380
+          'y': 500
+        outputIds:
+          - - NsVAI2X9LI
+        type: MutateNode
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.output
+        id: QBpZfOysRM
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 380
+          'y': 660
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          message: ''
+          property: ''
+        id: NsVAI2X9LI
+        meta:
+          category: output
+          description: ''
+          id: UamQlE4m3g
+          label: Debug
+          name: debug
+          x: 380
+          'y': 580
+        outputIds:
+          - - QBpZfOysRM
+        type: DebugNode
+      - config: {}
+        id: NFRXBW_zAp
+        meta:
+          annotationText: >-
+            Check the token cache. If we've already generated a token with this
+            private_key_id / scope combination, and it's not expired, return it.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 3BWNDqQW0G
+        meta:
+          annotationText: >-
+            Cache the resulting token so we don't have to request it from Google
+            every time the caller needs it.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 720
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.result.statusCode}} == 200'
+        id: 0reYUy6y7f
+        meta:
+          category: logic
+          description: ''
+          id: 0reYUy6y7f
+          label: Conditional
+          name: conditional
+          x: 320
+          'y': 780
+        outputIds:
+          - - ZGYTTDiss0
+          - - '-69MEPQtlL'
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.output.error
+              type: set
+              valueTemplate: '{{working.result.body}}'
+        id: ZGYTTDiss0
+        meta:
+          category: logic
+          description: ''
+          id: ZGYTTDiss0
+          label: Mutate
+          name: mutate
+          x: 320
+          'y': 920
+        outputIds:
+          - - UamQlE4m3g
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: ''
+          label: 'Start: GCP: OAuth'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 280
+          'y': 60
+        outputIds:
+          - - JnX-c9kub0
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-gcpOAuth-0~-GrJAU0r4R0rfjtmQDBqly
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: 31OF4WTGQH
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "service_account": {   "type": "service_account",   "project_id": "your-project-id",   "private_key_id": "xxxxxx",   "private_key": "-----BEGIN PRIVATE KEY-----\nxxxxxx\n-----END PRIVATE KEY-----\n",   "client_email": "example@your-project-id.iam.gserviceaccount.com",   "client_id": "xxxx",   "auth_uri": "https://accounts.google.com/o/oauth2/auth",   "token_uri": "https://oauth2.googleapis.com/token",   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/example%40your-project-id.iam.gserviceaccount.com" },
+              "scope": "https://www.googleapis.com/auth/cloud-platform"
+            }
+          uiId: 31OF4WTGQH
+          x: 80
+          'y': 180
+        outputIds:
+          - - KRfNvCYAlE
+        type: virtualButton
+version: 1

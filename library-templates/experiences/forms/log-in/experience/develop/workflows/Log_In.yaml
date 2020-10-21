@@ -1,0 +1,293 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-logIn-0~
+    globals: []
+    id: ~losant-flowVersion-logIn-0~
+    name: Log In
+    nodes:
+      - config:
+          emailTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: false
+          passwordTemplate: '{{data.body.password}}'
+          tokenResultPath: working.token
+          ttlTemplate: ''
+          userResultPath: ''
+        id: v3n9Tq6Ae6
+        meta:
+          authMode: emailPassword
+          category: experience
+          description: Do these credentials match an experience user?
+          label: Authenticate
+          name: experience-user-auth
+          x: 220
+          'y': 920
+        outputIds:
+          - - qwUHUGa0Ft
+          - - tg6RCBH6em
+        type: ExperienceUserAuthNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: qwUHUGa0Ft
+        meta:
+          category: output
+          description: >-
+            Invalid credentials. Return the user to the login page and alert
+            them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 120
+          'y': 1080
+        outputIds:
+          - - KPkzwklSYY
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: ''
+              valueTemplate: '{{working.token}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: tg6RCBH6em
+        meta:
+          category: output
+          description: >-
+            Successful login. Redirect the user to the home page and set the
+            auth cookie for future requests.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 320
+          'y': 1080
+        outputIds:
+          - - KPkzwklSYY
+        type: EndpointReplyNode
+      - config:
+          expression: '{{ experience.user }}'
+        id: Ajhu2BDsC0
+        meta:
+          category: logic
+          description: Is the user logged in already?
+          label: Logged in?
+          name: conditional
+          x: 220
+          'y': 160
+        outputIds:
+          - - KDMxmsJAqE
+          - - gPqS6adfrp
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: gPqS6adfrp
+        meta:
+          category: output
+          description: User is already logged in. Redirect them to the home page.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 320
+          'y': 280
+        outputIds:
+          - - 006buDTbAb
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: 006buDTbAb
+        meta:
+          category: output
+          description: ''
+          id: 006buDTbAb
+          label: Debug
+          name: debug
+          x: 220
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: oSSc_kXs6g
+        meta:
+          annotationText: >-
+            If the user is already logged in, redirect them to the home page
+            (`/`).
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": false
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: KDMxmsJAqE
+        meta:
+          category: output
+          description: Render the login page for the user.
+          label: Render Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 120
+          'y': 280
+        outputIds:
+          - - 006buDTbAb
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: KPkzwklSYY
+        meta:
+          category: output
+          description: ''
+          id: KPkzwklSYY
+          label: Debug
+          name: debug
+          x: 220
+          'y': 1240
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: cq5zP9gSWb
+        meta:
+          annotationText: >-
+            If authentication succeeds, set the `authorization` cookie and
+            redirect the user to the home page (`/`).
+
+
+            If the authentication fails, redirect the user back to the log in
+            page with `loginFailure` set to `true`.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 520
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{ experience.user }}'
+        id: KwKCZ598oj
+        meta:
+          category: logic
+          description: Is the user logged in already?
+          label: Logged in?
+          name: conditional
+          x: 220
+          'y': 640
+        outputIds:
+          - - v3n9Tq6Ae6
+          - - rXI6TfD-W2
+        type: ConditionalNode
+      - config: {}
+        id: 3XIjLJfGOr
+        meta:
+          annotationText: >-
+            If the user is already logged in, redirect them to the home page
+            (`/`).
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: rXI6TfD-W2
+        meta:
+          category: output
+          description: User is already logged in. Redirect them to the home page.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 780
+        outputIds:
+          - - v3n9Tq6Ae6
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postLogin-1~
+        meta:
+          category: trigger
+          description: When a user submits login credentials ...
+          label: POST Login
+          name: endpoint
+          uiId: HYVyV1G4gl
+          x: 220
+          'y': 540
+        outputIds:
+          - - KwKCZ598oj
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getLogin-0~
+        meta:
+          category: trigger
+          description: When a user visits the login page ...
+          label: GET Login
+          name: endpoint
+          uiId: 1jNeP_bh49
+          x: 220
+          'y': 60
+        outputIds:
+          - - Ajhu2BDsC0
+        type: endpoint
+    version: develop
+version: 1

@@ -1,0 +1,229 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: The number of values to average together.
+          id: count
+          label: Count
+          required: true
+          type: numberTemplate
+        - description: >-
+            Optional identifier that allows this node to perform moving averages
+            for multiple sets of data.
+          id: id
+          label: Average identifier
+          required: false
+          type: stringTemplate
+        - description: The value to average.
+          id: value
+          label: Value
+          required: true
+          type: numberTemplate
+      outputCount: 1
+      resultDescription: >-
+        The calculated moving average. The result will be null if the there have
+        not been enough points received.
+      resultMode: required
+    enabled: true
+    flowId: ~losant-flow-movingAverage-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: 8CfWv9MBSL
+        meta:
+          category: customNodeEnd
+          description: End the custom node run
+          label: Output
+          name: custom-node-end-single
+          x: 380
+          'y': 1140
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          keyName: 'movingAverage:totalCount:{{data.id}}'
+          resultPath: working.totalCount
+          value: '1'
+          valueType: incr
+        id: BlsM8azqgT
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 400
+          'y': 220
+        outputIds:
+          - - SjygHCzumP
+        type: StoreValueNode
+      - config:
+          statements:
+            - expression: >-
+                {{working.average}} * ({{data.count}}-1)/{{data.count}} +
+                {{data.value}} / {{data.count}}
+              resultPath: working.result
+        id: uIUXk4uHv0
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 580
+          'y': 780
+        outputIds:
+          - - svsgtISgg0
+        type: MathNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          keyName: 'movingAverage:average:{{data.id}}'
+          valuePath: working.average
+        id: SjygHCzumP
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 400
+          'y': 320
+        outputIds:
+          - - huyMI8Xli4
+        type: GetValueNode
+      - config:
+          message: ''
+          property: ''
+        id: ury_RVzTxP
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 380
+          'y': 1040
+        outputIds:
+          - - 8CfWv9MBSL
+        type: DebugNode
+      - config:
+          keyName: 'movingAverage:average:{{data.id}}'
+          resultPath: ''
+          value: working.result
+          valueType: path
+        id: svsgtISgg0
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 380
+          'y': 940
+        outputIds:
+          - - ury_RVzTxP
+        type: StoreValueNode
+      - config:
+          expression: '{{working.totalCount}} > {{data.count}}'
+        id: huyMI8Xli4
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 400
+          'y': 420
+        outputIds:
+          - - gTyYJvvwDV
+          - - uIUXk4uHv0
+        type: ConditionalNode
+      - config:
+          expression: '{{working.totalCount}} < {{data.count}}'
+        id: DCbra~pVbo
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 280
+          'y': 640
+        outputIds:
+          - - fISKwj3daO
+          - - g8zJEUt6Bp
+        type: ConditionalNode
+      - config:
+          keyName: 'movingAverage:sum:{{data.id}}'
+          resultPath: working.sum
+          value: '{{data.value}}'
+          valueType: incr
+        id: gTyYJvvwDV
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 280
+          'y': 540
+        outputIds:
+          - - DCbra~pVbo
+        type: StoreValueNode
+      - config:
+          rules:
+            - destination: working.result
+              type: set
+              valueTemplate: 'null'
+              valueTemplateType: json
+        id: g8zJEUt6Bp
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 380
+          'y': 780
+        outputIds:
+          - - svsgtISgg0
+        type: MutateNode
+      - config:
+          statements:
+            - expression: '{{working.sum}} / {{data.count}}'
+              resultPath: working.result
+        id: fISKwj3daO
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 180
+          'y': 780
+        outputIds:
+          - - svsgtISgg0
+        type: MathNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Moving Average'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 300
+          'y': 60
+        outputIds:
+          - - BlsM8azqgT
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-movingAverage-0~-kwVCkkhY3TGLKuyaHyOkk
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: gGJy4GmN35
+          x: 500
+          'y': 60
+        outputIds:
+          - - BlsM8azqgT
+        type: virtualButton
+    version: v1.0.0
+version: 1

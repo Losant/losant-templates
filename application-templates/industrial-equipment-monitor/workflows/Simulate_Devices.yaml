@@ -1,0 +1,902 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-simulateDevices-0~
+    name: Simulate Devices
+    nodes:
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: true
+          resultPath: working.devices
+          resultsPage: '0'
+          resultsPerPage: '100'
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: DeviceRecipe
+              valueTemplate: Generator
+          tagsAsObject: true
+        id: vSEb5NLcQ0
+        meta:
+          category: data
+          description: ''
+          id: vSEb5NLcQ0
+          label: All Devices
+          name: get-device
+          x: 80
+          'y': 180
+        outputIds:
+          - - TtAlrIdp1v
+        type: GetDeviceNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: working.devices
+        id: TtAlrIdp1v
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 980
+          groupStartY: 220
+          id: TtAlrIdp1v
+          label: Loop
+          name: loop
+          x: 80
+          'y': 280
+        outputIds:
+          - - Alsrc_AdRy
+          - - wmm9qGsu6D
+        type: LoopNode
+      - config:
+          rules:
+            - destination: working.device
+              source: working.device.value
+              type: move
+        id: wmm9qGsu6D
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: wmm9qGsu6D
+          label: Mutate
+          name: mutate
+          x: 980
+          'y': 320
+        outputIds:
+          - - '-vMwZSQmZj'
+        type: MutateNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: location
+              valueTemplate: '{{working.device.tags.location.[0]}}'
+            - key: manifold_temperature
+              valueTemplate: '{{ working.randomNumber.manifold_temperature }}'
+            - key: rpm
+              valueTemplate: '{{ working.randomNumber.rpm }}'
+            - key: battery_voltage
+              valueTemplate: '{{ working.randomNumber.battery_voltage }}'
+            - key: fuel_level
+              valueTemplate: '{{ working.randomNumber.fuel_level }}'
+            - key: oil_pressure
+              valueTemplate: '{{ working.randomNumber.oil_pressure }}'
+            - key: output_current
+              valueTemplate: '{{ working.randomNumber.output_current }}'
+            - key: running
+              valueTemplate: '{{ working.randomNumber.running }}'
+            - key: fault_description
+              valueTemplate: '{{ working.alarmItem.items.0.description }}'
+            - key: maintenance_description
+              valueTemplate: '{{ working.maintenanceItem.items.0.description }}'
+            - key: state_description
+              valueTemplate: '{{ working.deviceStateDescription }}'
+            - key: hours_running
+              valueTemplate: '{{ working.math.hours_running }}'
+            - key: days_running
+              valueTemplate: '{{ working.math.days_running }}'
+            - key: is_in_faulted_mode
+              valueTemplate: '{{ working.mutate.is_in_faulted_mode }}'
+            - key: is_in_maintenance_mode
+              valueTemplate: '{{ working.mutate.is_in_maintenance_mode }}'
+            - key: is_in_running_mode
+              valueTemplate: '{{ working.mutate.is_in_running_mode }}'
+            - key: is_in_stopped_mode
+              valueTemplate: '{{ working.mutate.is_in_stopped_mode }}'
+          deviceId: working.device.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: 2_0IkVlgRG
+        meta:
+          category: output
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 2_0IkVlgRG
+          label: Device State
+          name: device-state
+          x: 740
+          'y': 2340
+        outputIds: []
+        type: DeviceChangeStateNode
+      - config:
+          message: Final - Simulated Data
+          property: ''
+        id: Alsrc_AdRy
+        meta:
+          category: output
+          description: ''
+          id: Alsrc_AdRy
+          label: Final - Simulated Data
+          name: debug
+          x: 80
+          'y': 380
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 1uGxsbSJ-a
+        meta:
+          annotationText: Loops through every device and created simulated data.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 280
+          'y': 180
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          max: 950
+          min: 750
+          resultPath: working.randomNumber.manifold_temperature
+        id: zyqx4Dl7eW
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Manifold Temp
+          name: random-number
+          x: 1360
+          'y': 840
+        outputIds:
+          - - rphIibXCJl
+        type: RandomNumberNode
+      - config:
+          expression: '{{ working.randomNumber.determine_if_running }} < 80'
+        id: u5ZknP8DEH
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: u5ZknP8DEH
+          label: Running ?
+          name: conditional
+          x: 980
+          'y': 520
+        outputIds:
+          - - y7tYn-XyVC
+          - - zyqx4Dl7eW
+        type: ConditionalNode
+      - config:
+          max: 1900
+          min: 1700
+          resultPath: working.randomNumber.rpm
+        id: rphIibXCJl
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: RPM
+          name: random-number
+          x: 1360
+          'y': 940
+        outputIds:
+          - - S-uD5Kjr8g
+        type: RandomNumberNode
+      - config:
+          max: 130
+          min: 119
+          resultPath: working.randomNumber.battery_voltage
+        id: S-uD5Kjr8g
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Battery Voltage
+          name: random-number
+          x: 1360
+          'y': 1040
+        outputIds:
+          - - 7MNkFlBG62
+        type: RandomNumberNode
+      - config:
+          max: 65
+          min: 40
+          resultPath: working.randomNumber.oil_pressure
+        id: p5s7vcgf_u
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Oil Pressure
+          name: random-number
+          x: 1360
+          'y': 1440
+        outputIds:
+          - - RiYMLOPyiJ
+        type: RandomNumberNode
+      - config:
+          max: 525
+          min: 400
+          resultPath: working.randomNumber.output_current
+        id: RiYMLOPyiJ
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Output Current
+          name: random-number
+          x: 1360
+          'y': 1540
+        outputIds:
+          - - _W2DGRd2dy
+        type: RandomNumberNode
+      - config:
+          expression: '{{ working.device.compositeState.fuel_level.value }} > 5'
+        id: 0nPcafARZR
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 0nPcafARZR
+          label: Fuel Level > 5
+          name: conditional
+          x: 1360
+          'y': 1240
+        outputIds:
+          - - 9LzgpYvedN
+          - - YCzUz_lapB
+        type: ConditionalNode
+      - config:
+          statements:
+            - expression: '{{ working.device.compositeState.fuel_level.value }} - 2.5'
+              resultPath: working.randomNumber.fuel_level
+        id: YCzUz_lapB
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: YCzUz_lapB
+          label: Math
+          name: math
+          x: 1460
+          'y': 1340
+        outputIds:
+          - - p5s7vcgf_u
+        type: MathNode
+      - config:
+          max: 65
+          min: 60
+          resultPath: working.randomNumber.manifold_temperature
+        id: _IvCGq2ZD-
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Manifold Temp
+          name: random-number
+          x: 940
+          'y': 840
+        outputIds:
+          - - YY-WH1zu7N
+        type: RandomNumberNode
+      - config:
+          max: 0
+          min: 0
+          resultPath: working.randomNumber.rpm
+        id: YY-WH1zu7N
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: RPM
+          name: random-number
+          x: 940
+          'y': 940
+        outputIds:
+          - - sBrj8kC3pw
+        type: RandomNumberNode
+      - config:
+          max: 130
+          min: 119
+          resultPath: working.randomNumber.battery_voltage
+        id: sBrj8kC3pw
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Battery Voltage
+          name: random-number
+          x: 940
+          'y': 1040
+        outputIds:
+          - - xlE0MtHuct
+        type: RandomNumberNode
+      - config:
+          max: 20
+          min: 10
+          resultPath: working.randomNumber.oil_pressure
+        id: a0IQXBpDML
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Oil Pressure
+          name: random-number
+          x: 940
+          'y': 1440
+        outputIds:
+          - - mBqnuOEOit
+        type: RandomNumberNode
+      - config:
+          max: 0
+          min: 0
+          resultPath: working.randomNumber.output_current
+        id: mBqnuOEOit
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Output Current
+          name: random-number
+          x: 940
+          'y': 1540
+        outputIds:
+          - - Cs8qKMPwr5
+        type: RandomNumberNode
+      - config:
+          expression: '{{ working.device.compositeState.fuel_level.value }} > 5'
+        id: '-n6GP-vksA'
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 0nPcafARZR
+          label: Fuel Level > 5
+          name: conditional
+          x: 940
+          'y': 1240
+        outputIds:
+          - - 0eiD-BwK2S
+          - - aaBsmBcrmS
+        type: ConditionalNode
+      - config:
+          statements:
+            - expression: '{{ working.device.compositeState.fuel_level.value }} - 0.005'
+              resultPath: working.randomNumber.fuel_level
+        id: aaBsmBcrmS
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: YCzUz_lapB
+          label: Math
+          name: math
+          x: 1040
+          'y': 1340
+        outputIds:
+          - - a0IQXBpDML
+        type: MathNode
+      - config:
+          max: 0
+          min: 0
+          resultPath: working.randomNumber.running
+        id: Cs8qKMPwr5
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Running
+          name: random-number
+          x: 940
+          'y': 1640
+        outputIds:
+          - - xnkqK_Oy11
+        type: RandomNumberNode
+      - config:
+          max: 1
+          min: 1
+          resultPath: working.randomNumber.running
+        id: _W2DGRd2dy
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Running
+          name: random-number
+          x: 1360
+          'y': 1640
+        outputIds:
+          - - fhK0dKbXQN
+        type: RandomNumberNode
+      - config:
+          max: 100
+          min: 0
+          resultPath: working.randomNumber.determine_if_running
+        id: '-vMwZSQmZj'
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: '-vMwZSQmZj'
+          label: Random Number
+          name: random-number
+          x: 980
+          'y': 420
+        outputIds:
+          - - u5ZknP8DEH
+        type: RandomNumberNode
+      - config:
+          message: End of Each Loop
+          property: ''
+        id: xamEWg56W6
+        meta:
+          category: output
+          description: ''
+          groupId: TtAlrIdp1v
+          id: xamEWg56W6
+          label: End of Each Loop
+          name: debug
+          x: 740
+          'y': 2440
+        outputIds: []
+        type: DebugNode
+      - config:
+          max: 100
+          min: 70
+          resultPath: working.randomNumber.fuel_level
+        id: 0eiD-BwK2S
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 0eiD-BwK2S
+          label: Fuel Level
+          name: random-number
+          x: 840
+          'y': 1340
+        outputIds:
+          - - a0IQXBpDML
+        type: RandomNumberNode
+      - config:
+          max: 100
+          min: 70
+          resultPath: working.randomNumber.fuel_level
+        id: 9LzgpYvedN
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 0eiD-BwK2S
+          label: Fuel Level
+          name: random-number
+          x: 1260
+          'y': 1340
+        outputIds:
+          - - p5s7vcgf_u
+        type: RandomNumberNode
+      - config:
+          expression: >-
+            {{ working.randomNumber.determine_if_running }} >= 80 && {{
+            working.randomNumber.determine_if_running }} < 90
+        id: y7tYn-XyVC
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: u5ZknP8DEH
+          label: Stopped ?
+          name: conditional
+          x: 720
+          'y': 620
+        outputIds:
+          - - jSsRs0kyuH
+          - - _IvCGq2ZD-
+        type: ConditionalNode
+      - config:
+          max: 65
+          min: 60
+          resultPath: working.randomNumber.manifold_temperature
+        id: jSsRs0kyuH
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Manifold Temp
+          name: random-number
+          x: 500
+          'y': 840
+        outputIds:
+          - - QPDG_-6Bdu
+        type: RandomNumberNode
+      - config:
+          max: 0
+          min: 0
+          resultPath: working.randomNumber.rpm
+        id: QPDG_-6Bdu
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: RPM
+          name: random-number
+          x: 500
+          'y': 940
+        outputIds:
+          - - 8x_HzGN83x
+        type: RandomNumberNode
+      - config:
+          max: 130
+          min: 119
+          resultPath: working.randomNumber.battery_voltage
+        id: 8x_HzGN83x
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Battery Voltage
+          name: random-number
+          x: 500
+          'y': 1040
+        outputIds:
+          - - szfU8cysef
+        type: RandomNumberNode
+      - config:
+          max: 20
+          min: 10
+          resultPath: working.randomNumber.oil_pressure
+        id: rNxaCsYSEe
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Oil Pressure
+          name: random-number
+          x: 500
+          'y': 1440
+        outputIds:
+          - - rY9AB-VWPp
+        type: RandomNumberNode
+      - config:
+          max: 0
+          min: 0
+          resultPath: working.randomNumber.output_current
+        id: rY9AB-VWPp
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Output Current
+          name: random-number
+          x: 500
+          'y': 1540
+        outputIds:
+          - - c7-kor5MJF
+        type: RandomNumberNode
+      - config:
+          expression: '{{ working.device.compositeState.fuel_level.value }} > 5'
+        id: 82HZE17INt
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 0nPcafARZR
+          label: Fuel Level > 5
+          name: conditional
+          x: 500
+          'y': 1240
+        outputIds:
+          - - dw_7BlmyHB
+          - - uyEFqAHEQN
+        type: ConditionalNode
+      - config:
+          statements:
+            - expression: '{{ working.device.compositeState.fuel_level.value }} - 0.005'
+              resultPath: working.randomNumber.fuel_level
+        id: uyEFqAHEQN
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: YCzUz_lapB
+          label: Math
+          name: math
+          x: 600
+          'y': 1340
+        outputIds:
+          - - rNxaCsYSEe
+        type: MathNode
+      - config:
+          max: 0
+          min: 0
+          resultPath: working.randomNumber.running
+        id: c7-kor5MJF
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: zyqx4Dl7eW
+          label: Running
+          name: random-number
+          x: 500
+          'y': 1640
+        outputIds:
+          - - 1_V_TK51qb
+        type: RandomNumberNode
+      - config:
+          max: 100
+          min: 70
+          resultPath: working.randomNumber.fuel_level
+        id: dw_7BlmyHB
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 0eiD-BwK2S
+          label: Fuel Level
+          name: random-number
+          x: 400
+          'y': 1340
+        outputIds:
+          - - rNxaCsYSEe
+        type: RandomNumberNode
+      - config:
+          dataTableIdTemplate: ~losant-dataTable-warningsAndAlarms-0~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: >-
+            {"$or":[{"warning_or_alarm_index":{"$eq":"{{
+            working.randomNumber.alarmRecordToGetByIndex
+            }}"}},{"warning_or_alarm":{"$eq":"1"}}]}
+          resultPath: working.alarmItem
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: I168xYqtla
+        meta:
+          category: data
+          description: ''
+          groupId: TtAlrIdp1v
+          id: qK0cSUG7oC
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          queryMode: $or
+          x: 500
+          'y': 1840
+        outputIds:
+          - - NSwfzIsXEK
+        type: DataTableQueryNode
+      - config:
+          max: 14
+          min: 1
+          resultPath: working.randomNumber.alarmRecordToGetByIndex
+        id: 1_V_TK51qb
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: AwgtXfeJvP
+          label: Random Number
+          name: random-number
+          x: 500
+          'y': 1740
+        outputIds:
+          - - I168xYqtla
+        type: RandomNumberNode
+      - config:
+          statements:
+            - expression: '{{ working.device.compositeState.hours_running.value }} + 2 / 60'
+              resultPath: working.math.hours_running
+            - expression: >-
+                {{ working.device.compositeState.days_running.value }} + 2 / 60
+                / 24
+              resultPath: working.math.days_running
+        id: 7bUf0Mqs5k
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 7bUf0Mqs5k
+          label: Math
+          name: math
+          x: 1360
+          'y': 2040
+        outputIds:
+          - - 2_0IkVlgRG
+        type: MathNode
+      - config:
+          rules:
+            - destination: working.deviceStateDescription
+              type: set
+              valueTemplate: Faulted
+            - destination: working.mutate.is_in_faulted_mode
+              type: set
+              valueTemplate: '1'
+            - destination: working.mutate.is_in_running_mode
+              type: set
+              valueTemplate: '0'
+            - destination: working.mutate.is_in_stopped_mode
+              type: set
+              valueTemplate: '0'
+        id: NSwfzIsXEK
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: a7av4JnPuv
+          label: Mutate
+          name: mutate
+          x: 500
+          'y': 1940
+        outputIds:
+          - - 2_0IkVlgRG
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.deviceStateDescription
+              type: set
+              valueTemplate: Stopped
+            - destination: working.mutate.is_in_faulted_mode
+              type: set
+              valueTemplate: '0'
+            - destination: working.mutate.is_in_running_mode
+              type: set
+              valueTemplate: '0'
+            - destination: working.mutate.is_in_stopped_mode
+              type: set
+              valueTemplate: '1'
+        id: xnkqK_Oy11
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: a7av4JnPuv
+          label: Mutate
+          name: mutate
+          x: 940
+          'y': 1940
+        outputIds:
+          - - 2_0IkVlgRG
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.deviceStateDescription
+              type: set
+              valueTemplate: Running
+            - destination: working.mutate.is_in_faulted_mode
+              type: set
+              valueTemplate: '0'
+            - destination: working.mutate.is_in_running_mode
+              type: set
+              valueTemplate: '1'
+            - destination: working.mutate.is_in_stopped_mode
+              type: set
+              valueTemplate: '0'
+        id: fhK0dKbXQN
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: a7av4JnPuv
+          label: Mutate
+          name: mutate
+          x: 1360
+          'y': 1940
+        outputIds:
+          - - 7bUf0Mqs5k
+        type: MutateNode
+      - config:
+          statements:
+            - expression: '{{ working.randomNumber.battery_voltage }} / 10'
+              resultPath: working.randomNumber.battery_voltage
+        id: 7MNkFlBG62
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 7MNkFlBG62
+          label: Battery Voltage continued
+          name: math
+          x: 1360
+          'y': 1140
+        outputIds:
+          - - 0nPcafARZR
+        type: MathNode
+      - config:
+          statements:
+            - expression: '{{ working.randomNumber.battery_voltage }} / 10'
+              resultPath: working.randomNumber.battery_voltage
+        id: xlE0MtHuct
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 7MNkFlBG62
+          label: Battery Voltage continued
+          name: math
+          x: 940
+          'y': 1140
+        outputIds:
+          - - '-n6GP-vksA'
+        type: MathNode
+      - config:
+          statements:
+            - expression: '{{ working.randomNumber.battery_voltage }} / 10'
+              resultPath: working.randomNumber.battery_voltage
+        id: szfU8cysef
+        meta:
+          category: logic
+          description: ''
+          groupId: TtAlrIdp1v
+          id: 7MNkFlBG62
+          label: Battery Voltage continued
+          name: math
+          x: 500
+          'y': 1140
+        outputIds:
+          - - 82HZE17INt
+        type: MathNode
+    triggers:
+      - config:
+          seconds: 120
+        key: ~losant-flow-simulateDevices-0~-u17poimTNwmJK1e0AzDDR
+        meta:
+          category: trigger
+          description: ''
+          id: ol2uQJI-bp
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: ol2uQJI-bp
+          x: 80
+          'y': 80
+        outputIds:
+          - - vSEb5NLcQ0
+        type: timer
+      - config: {}
+        key: ~losant-flow-simulateDevices-0~-1hvsMO4DlrfMlXDHm28sO
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: _enegVeMbq
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: _enegVeMbq
+          x: 280
+          'y': 80
+        outputIds:
+          - - vSEb5NLcQ0
+        type: virtualButton
+version: 1

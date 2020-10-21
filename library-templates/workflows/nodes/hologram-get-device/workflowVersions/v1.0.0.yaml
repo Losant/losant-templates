@@ -1,0 +1,124 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: Your Hologram API Key.
+          id: apiKey
+          label: Hologram API Key
+          required: false
+          type: stringTemplate
+        - description: The Hologram device ID to retrieve information about.
+          id: deviceId
+          label: Device ID
+          required: true
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: >-
+        An object containing the details about the requested device. Format
+        details can be found in [Hologram's API
+        documentation](https://hologram.io/docs/reference/cloud/http/#/reference/device-management/devices/get-a-device).
+      resultMode: required
+    enabled: true
+    flowId: ~losant-flow-hologramGetDevice-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: dYJ3uK0gX5
+        meta:
+          category: customNodeEnd
+          description: End the custom node run
+          label: Output
+          name: custom-node-end-single
+          x: 80
+          'y': 540
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          disableSSLVerification: false
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo: []
+          method: GET
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://dashboard.hologram.io/api/1/devices/{{data.deviceId}}?apikey={{data.apiKey}}
+        id: 60XiClM_HL
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 80
+          'y': 240
+        outputIds:
+          - - 01YlYSx5Da
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: xNejictvfJ
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 80
+          'y': 440
+        outputIds:
+          - - dYJ3uK0gX5
+        type: DebugNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: 01YlYSx5Da
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 80
+          'y': 340
+        outputIds:
+          - - xNejictvfJ
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Hologram: Get Device'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 80
+          'y': 60
+        outputIds:
+          - - 60XiClM_HL
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-hologramGetDevice-0~-1MwIDeYeeU4lomBHsHu6F
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "apiKey": "your-api-key",
+              "deviceId": "your-device-id"
+            }
+          uiId: kCd~2Tr2zi
+          x: 280
+          'y': 60
+        outputIds:
+          - - 60XiClM_HL
+        type: virtualButton
+    version: v1.0.0
+version: 1

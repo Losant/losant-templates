@@ -1,0 +1,176 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            The payload path containing the object to recursively search and
+            redact.
+          id: path
+          label: Payload Path
+          required: true
+          type: payloadPath
+        - description: >-
+            Which additional string(s) denote sensitive keys that should be
+            redacted? Provide a list of strings separated by commas. If one of
+            these words appears anywhere in an object key, the value of that key
+            will be redacted. 
+
+
+            For example, if you provide "sensitive" as the value here, any
+            object properties with "sensitive" in the name (such as
+            "mySensitiveValue") will return a redacted value.
+
+
+            The strings secret, token, password, auth, and key are always
+            redacted.
+          id: keysToRedactCSV
+          label: Additional Strings to Redact
+          required: false
+          type: stringTemplate
+      outputCount: 1
+      resultDescription: A copy of the original object with sensitive values redacted.
+      resultMode: required
+    enabled: true
+    flowId: ~losant-flow-redactPayload-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: processedPayload
+        id: 8AQgODtGuY
+        meta:
+          category: customNodeEnd
+          description: ''
+          label: 'End: Redact Payload'
+          name: custom-node-end-single
+          x: 260
+          'y': 500
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          script: >-
+            const defaultProtectedWords =
+            ["secret","token","password","auth","key"];
+
+            const processedAdditionalProtectedWords =
+            payload.data.keysToRedactCSV.split(',').map( key =>
+            key.toLowerCase().trim() ).filter( item => item.length > 0 )
+
+            const protectedWords = defaultProtectedWords.concat(
+            processedAdditionalProtectedWords );
+
+
+            const maybeRedactValue = ( key, val ) => {
+              if( !key ){
+                return val;
+              }
+              const lowerKey = key.toLowerCase();
+              for ( let i = 0; i < protectedWords.length; i++ ){
+               if ( lowerKey.indexOf( protectedWords[i] ) !== -1 ){
+                return "*******REDACTED*******"; 
+               }
+              }
+              return val;
+            }
+
+
+            const redactTreeOrPrimitive = ( key, val ) => {
+              const type = typeof val;
+              if ( type === 'string' ){
+                return maybeRedactValue( key, val );
+              } else if ( type === 'object' ){
+                // recurse
+                if ( Array.isArray( val ) ){
+                  return val.map( item => redactTreeOrPrimitive( null, item ) )
+                }
+                const keys = Object.keys( val );
+                return keys.reduce( ( acc, cur ) => { 
+                  return { 
+                    ...acc, 
+                    [cur] : redactTreeOrPrimitive( cur, val[cur] ) 
+                  };
+                }, {} );
+              } else {
+                return val; //number,boolean,symbol,bigint,undefined
+              }
+            }
+
+
+            payload.processedPayload = redactTreeOrPrimitive( null,
+            payload.data.path );
+        id: AHWsRWUJkU
+        meta:
+          category: logic
+          description: ''
+          id: AHWsRWUJkU
+          label: Redact
+          name: function
+          x: 260
+          'y': 300
+        outputIds:
+          - - nqfU2z3GL5
+        type: RawFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: nqfU2z3GL5
+        meta:
+          category: output
+          description: ''
+          id: nqfU2z3GL5
+          label: Debug
+          name: debug
+          x: 260
+          'y': 400
+        outputIds:
+          - - 8AQgODtGuY
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: ''
+          label: 'Start: Redact Payload'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 180
+        outputIds:
+          - - AHWsRWUJkU
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-redactPayload-0~-Ig5cuOUbQq3-ILm9_-PVK
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: KTYFoGMKyx
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "path":{
+                "clean":"sparkling",
+                "additionalSensitiveData":"password123",
+                "someSecretishThing":"The key is 42.",
+                "aNestedObject":{
+                   "token": "abc123"
+                },
+                "values":[
+                  {
+                    "password":"alphabravocharlie" 
+                  }
+                ]
+              },
+              "keysToRedactCSV":"hello,sensitive"
+            }
+          uiId: KTYFoGMKyx
+          x: 60
+          'y': 180
+        outputIds:
+          - - AHWsRWUJkU
+        type: virtualButton
+    version: v1.0.0
+version: 1

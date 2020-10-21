@@ -1,0 +1,257 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            The [Google Cloud API
+            key](https://cloud.google.com/docs/authentication/api-keys).
+          id: api_key
+          label: API Key
+          required: true
+          type: stringTemplate
+        - description: >-
+            The payload path to either a base64 encoded string or a URL to an
+            existing image.
+          id: image
+          label: Image Path
+          required: true
+          type: payloadPath
+        - defaultValue: base64
+          description: >-
+            The type of image data that exists at the Image Path. Either a
+            base64 encoded string or a URL.
+          id: image_type
+          label: Image Type
+          options:
+            - label: Base64 String
+              value: base64
+            - label: URL
+              value: url
+          type: select
+        - defaultValue: IMAGE_PROPERTIES
+          description: >-
+            Vision API Image Annotate Features.
+
+            See
+            [docs](https://cloud.google.com/vision/docs/reference/rest/v1/Feature).
+          id: feature
+          label: Features
+          options:
+            - label: Face detection
+              value: FACE_DETECTION
+            - label: Landmark detection
+              value: LANDMARK_DETECTION
+            - label: Logo detection
+              value: LOGO_DETECTION
+            - label: Label detection
+              value: LABEL_DETECTION
+            - label: Text detection
+              value: TEXT_DETECTION
+            - label: Image properties
+              value: IMAGE_PROPERTIES
+            - label: Crop hints
+              value: CROP_HINTS
+            - label: Object localization
+              value: OBJECT_LOCALIZATION
+          type: select
+        - defaultValue: 10
+          description: The maximum number of results to return.
+          id: max_results
+          label: Max Results
+          required: false
+          type: numberTemplate
+          validMin: 1
+      outputCount: 1
+      resultDescription: >-
+        If successful, this returns an object with a single "token" property. If
+        it fails for any reason, an object with an "error" property will be
+        returned with more details.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: >-
+      Requests an [OAuth
+      token](https://developers.google.com/identity/protocols/OAuth2ServiceAccount)
+      from a GCP Service Account.
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/png;base64,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
+    id: ~losant-flow-gcpVisionApi-0~
+    name: 'GCP: Vision API'
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: wb2BxcrV-M
+        meta:
+          category: customNodeEnd
+          description: ''
+          id: wb2BxcrV-M
+          label: Output
+          name: custom-node-end-single
+          x: 160
+          'y': 700
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: |-
+            {
+              "requests": [
+                {
+                  "image": {{jsonEncode working.imageRequestObject}},
+                  "features": [
+                    {
+                      "maxResults": {{data.max_results}},
+                      "type": "{{data.feature}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://vision.googleapis.com/v1/images:annotate?key={{data.api_key}}
+        id: 9SHHg9hbzj
+        meta:
+          category: data
+          description: ''
+          id: 1mN7sSdoVp
+          label: HTTP
+          name: http
+          x: 160
+          'y': 400
+        outputIds:
+          - - rDfvnMTdj8
+        type: HttpNode
+      - config:
+          expression: '{{data.image_type}} === ''base64'''
+        id: y_JJZM78eI
+        meta:
+          category: logic
+          description: ''
+          id: 7WgF6I7aVe
+          label: Image Type
+          name: conditional
+          x: 160
+          'y': 160
+        outputIds:
+          - - K36swZTXsV
+          - - rNfUcr3q-8
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: rDfvnMTdj8
+        meta:
+          category: output
+          description: ''
+          id: rDfvnMTdj8
+          label: Debug
+          name: debug
+          x: 160
+          'y': 500
+        outputIds:
+          - - 1XgbyZnFt4
+        type: DebugNode
+      - config:
+          rules:
+            - destination: working.imageRequestObject.content
+              type: set
+              valueTemplate: '{{data.image}}'
+        id: rNfUcr3q-8
+        meta:
+          category: logic
+          description: ''
+          id: rNfUcr3q-8
+          label: isBase64
+          name: mutate
+          x: 260
+          'y': 260
+        outputIds:
+          - - 9SHHg9hbzj
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.imageRequestObject.source.imageUri
+              type: set
+              valueTemplate: '{{data.image}}'
+        id: K36swZTXsV
+        meta:
+          category: logic
+          description: ''
+          id: rNfUcr3q-8
+          label: isURL
+          name: mutate
+          x: 60
+          'y': 260
+        outputIds:
+          - - 9SHHg9hbzj
+        type: MutateNode
+      - config:
+          rules:
+            - source: working.result.request
+              type: remove
+        id: 1XgbyZnFt4
+        meta:
+          category: logic
+          description: ''
+          id: 6zlk9tPqIn
+          label: Remove request
+          name: mutate
+          x: 160
+          'y': 600
+        outputIds:
+          - - wb2BxcrV-M
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: ''
+          label: 'Start: GCP: OAuth'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 40
+        outputIds:
+          - - y_JJZM78eI
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-gcpVisionApi-0~-77jBAXoI6kEnU74AZuevl
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: 31OF4WTGQH
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "image_type": "url",
+              "api_key": "API_KEY",
+              "image": "https://example.com/image.jpg",
+              "feature": "OBJECT_LOCALIZATION",
+              "max_results": 10
+            }
+          uiId: 31OF4WTGQH
+          x: 60
+          'y': 40
+        outputIds:
+          - - y_JJZM78eI
+        type: virtualButton
+version: 1

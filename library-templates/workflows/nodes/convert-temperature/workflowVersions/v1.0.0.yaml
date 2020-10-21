@@ -1,0 +1,254 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - defaultValue: Celsius
+          description: The units of the incoming temperature value.
+          id: inputUnits
+          label: Input Units
+          options:
+            - value: Celsius
+            - value: Fahrenheit
+            - value: Kelvin
+          type: select
+        - defaultValue: Fahrenheit
+          description: The units to convert the incoming temperature value to.
+          id: outputUnits
+          label: Output Units
+          options:
+            - value: Celsius
+            - value: Fahrenheit
+            - value: Kelvin
+          type: select
+        - description: The temperature value to convert.
+          id: value
+          label: Temperature Value
+          required: true
+          type: numberTemplate
+      outputCount: 1
+      resultDescription: >-
+        Outputs the converted value based on the specified input and output
+        units.
+      resultMode: required
+    enabled: true
+    flowId: ~losant-flow-convertTemp-0~
+    globals: []
+    id: ~losant-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: data.value
+        id: vnHdxaGDIB
+        meta:
+          category: customNodeEnd
+          description: End the custom node run
+          label: Output
+          name: custom-node-end-single
+          x: 860
+          'y': 540
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          message: '{{ data.select-0 }}'
+          property: ''
+        id: 2qI2EjZjjG
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 420
+          'y': 260
+        outputIds:
+          - - Y_iPPNAmnl
+        type: DebugNode
+      - config:
+          cases:
+            - caseLabel: C -> F
+              caseTemplate: 'Celsius:Fahrenheit'
+              dontBreak: false
+            - caseLabel: C -> K
+              caseTemplate: 'Celsius:Kelvin'
+              dontBreak: false
+            - caseLabel: F -> C
+              caseTemplate: 'Fahrenheit:Celsius'
+              dontBreak: false
+            - caseLabel: F -> K
+              caseTemplate: 'Fahrenheit:Kelvin'
+              dontBreak: false
+            - caseLabel: K -> C
+              caseTemplate: 'Kelvin:Celsius'
+              dontBreak: false
+            - caseLabel: K -> F
+              caseTemplate: 'Kelvin:Fahrenheit'
+              dontBreak: false
+          switchTemplate: '{{ data.inputUnits }}:{{data.outputUnits}}'
+        id: Y_iPPNAmnl
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 420
+          'y': 360
+        outputIds:
+          - - vnHdxaGDIB
+          - - 7xQEAAg9UH
+          - - ywjivJEKgV
+          - - tx8g2MhXdP
+          - - 4aJEHiJOpV
+          - - sVjlL4Hh5r
+          - - H75~lChL18
+        type: SwitchNode
+      - config:
+          statements:
+            - expression: '{{ data.value }} * (9/5) + 32'
+              resultPath: working.result
+        id: 7xQEAAg9UH
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 40
+          'y': 940
+        outputIds:
+          - - 4WhHb~DRh9
+        type: MathNode
+      - config:
+          statements:
+            - expression: '{{ data.value }} + 273.15'
+              resultPath: working.result
+        id: ywjivJEKgV
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 160
+          'y': 860
+        outputIds:
+          - - 4WhHb~DRh9
+        type: MathNode
+      - config:
+          statements:
+            - expression: '({{ data.value }} - 32) * (5/9)'
+              resultPath: working.result
+        id: tx8g2MhXdP
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 280
+          'y': 780
+        outputIds:
+          - - 4WhHb~DRh9
+        type: MathNode
+      - config:
+          statements:
+            - expression: '({{ data.value }} + 459.67) * (5/9)'
+              resultPath: working.result
+        id: 4aJEHiJOpV
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 420
+          'y': 700
+        outputIds:
+          - - 4WhHb~DRh9
+        type: MathNode
+      - config:
+          statements:
+            - expression: '{{ data.value }} - 273.15'
+              resultPath: working.result
+        id: sVjlL4Hh5r
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 540
+          'y': 620
+        outputIds:
+          - - 4WhHb~DRh9
+        type: MathNode
+      - config:
+          statements:
+            - expression: '{{ data.value }} * (9/5) - 459.67'
+              resultPath: working.result
+        id: H75~lChL18
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 660
+          'y': 540
+        outputIds:
+          - - 4WhHb~DRh9
+        type: MathNode
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: yTlVGZjecg
+        meta:
+          category: customNodeEnd
+          description: ''
+          label: Output
+          name: custom-node-end-single
+          x: 420
+          'y': 1180
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          message: ''
+          property: ''
+        id: 4WhHb~DRh9
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 420
+          'y': 1080
+        outputIds:
+          - - yTlVGZjecg
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The custom node fires here ...
+          label: 'Start: Convert Temperature'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 420
+          'y': 20
+        outputIds:
+          - - 2qI2EjZjjG
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-convertTemp-0~-tCZdSj9u72BHuIsGECwi7
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            { 
+              "inputUnits" : "Celsius",
+              "outputUnits" : "Fahrenheit",
+              "value" : 100
+            }
+          uiId: ySU09udbh8
+          x: 620
+          'y': 20
+        outputIds:
+          - - 2qI2EjZjjG
+        type: virtualButton
+    version: v1.0.0
+version: 1

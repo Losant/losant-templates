@@ -1,0 +1,30 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: string
+        name: roomName
+      - constraint: required
+        dataType: string
+        name: coordinates
+      - constraint: required
+        dataType: number
+        name: x
+      - constraint: required
+        dataType: number
+        name: 'y'
+      - constraint: unique
+        dataType: number
+        name: number
+      - constraint: optional
+        dataType: boolean
+        defaultValue: false
+        name: restricted
+    description: >-
+      This is a map of coordinates and room locations. This table is used to
+      randomly assign devices to rooms within the Device Simulator workflow. The
+      coordinates correlate to locations on the floor map.
+    id: ~losant-dataTable-coordinateMap-0~
+    localFilename: ./Coordinate_Map.csv
+    name: Coordinate Map
+version: 1

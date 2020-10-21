@@ -1,0 +1,97 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: position-chart
+        config:
+          additionalAttributes:
+            - room
+          coordinateA: '0,0'
+          coordinateB: '100,25'
+          defaultCenter: '1017.48538,509.66522'
+          defaultZoom: -1
+          deviceIds: []
+          deviceTags:
+            - fromCtx: deviceTag
+          duration: 0
+          endColor: '#8db319'
+          iconTemplate: >
+            {{#if isLastPoint}}
+
+            {{#eq deviceTags.type.[0] 'resident'}}
+
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/residents/{{deviceId}}@2x.png
+
+            {{else}}
+
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
+
+            {{/eq}}
+
+            {{/if}}
+          imageUrl: >-
+            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+          includeArrows: false
+          includeLines: false
+          pinMode: advanced
+          pixelA: '89,190'
+          pixelB: '1894,822'
+          popupTemplate: |-
+            ##### **{{deviceName}}** ({{data.room}})
+
+            {{format time}}
+
+            (x, y) = ({{format x}}, {{format y}})
+          resizedPins: true
+          resolution: 60000
+          startColor: '#ff261b'
+          xAttribute: x
+          yAttribute: 'y'
+        height: 3.5
+        id: w-AQ5jD7GB
+        startX: 0
+        startY: 0
+        title: Floor Plan
+        width: 3
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{value-0}}==="Off Campus"'
+              id: CVjJCj2ZSB
+              label: '{{value-0}}'
+          defaultCondition:
+            color: '#8db319'
+            label: '{{value-0}}'
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: room
+              deviceIds: []
+              deviceTags:
+                - fromCtx: deviceTag
+        height: 3.5
+        id: Qts_qOn4tb
+        startX: 3
+        startY: 0
+        title: Current Room
+        width: 1
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+        defaultValue:
+          key: type
+          value: concentrator
+        name: deviceTag
+        type: deviceTag
+        validationConfig: {}
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-filterByTypeLocation-2~
+    name: Filter by Type Location
+    public: false
+    refreshRate: 60
+version: 1

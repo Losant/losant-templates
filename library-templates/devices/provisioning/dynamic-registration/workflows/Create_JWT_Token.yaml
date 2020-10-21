@@ -1,0 +1,197 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Example workflow that creates the JWT token that would be deployed to all
+      fielded devices.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-createJwtToken-0~
+    name: Create JWT Token
+    nodes:
+      - config:
+          algorithmTemplate: HS256
+          dataTemplate: |-
+            {
+                "url": "https://~losant-application-libraryDevicesProvisioningDynamicRegistration-0~.onlosant.com/api/register-device"
+            }
+          dataTemplateType: json
+          destinationPath: working.result
+          expiresIn: ''
+          issuerTemplate: '{{globals.tl-jwt-register-issuer}}'
+          secretTemplate: '{{globals.tl-jwt-register-secret}}'
+        id: UUtqzcF_0L
+        meta:
+          category: logic
+          description: ''
+          id: UUtqzcF_0L
+          isExpRequired: false
+          label: 'JWT: Create'
+          name: jwt-create
+          timeUnit: Days
+          x: 200
+          'y': 160
+        outputIds:
+          - - 56eyJr40p6
+        type: JWTCreateNode
+      - config:
+          message: ''
+          property: working.result
+        id: 56eyJr40p6
+        meta:
+          category: output
+          description: ''
+          id: 56eyJr40p6
+          label: Debug
+          name: debug
+          x: 200
+          'y': 280
+        outputIds: []
+        type: DebugNode
+      - config:
+          complete: false
+          destinationPath: working.decoded
+          tokenTemplate: '{{data.token}}'
+        id: S_Uj1WKhJG
+        meta:
+          category: logic
+          description: ''
+          id: S_Uj1WKhJG
+          label: 'JWT: Decode'
+          name: jwt-decode
+          x: 300
+          'y': 700
+        outputIds:
+          - - Yz7WBzACrn
+        type: JWTDecodeNode
+      - config:
+          errorPath: working.error
+          issuerTemplate: '{{globals.tl-jwt-register-issuer}}'
+          secretTemplate: '{{globals.tl-jwt-register-secret}}'
+          tokenTemplate: '{{data.token}}'
+        id: dREOW1S1EQ
+        meta:
+          category: logic
+          description: ''
+          id: dREOW1S1EQ
+          label: 'JWT: Verify'
+          name: jwt-verify
+          x: 200
+          'y': 560
+        outputIds:
+          - - n15KaD9BPW
+          - - S_Uj1WKhJG
+        type: JWTVerifyNode
+      - config:
+          message: Invalid JWT Token
+          property: ''
+        id: n15KaD9BPW
+        meta:
+          category: output
+          description: ''
+          id: 56eyJr40p6
+          label: Debug
+          name: debug
+          x: 100
+          'y': 700
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: Yz7WBzACrn
+        meta:
+          category: output
+          description: ''
+          id: Yz7WBzACrn
+          label: Debug
+          name: debug
+          x: 300
+          'y': 820
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 01CFcaRW1o
+        meta:
+          annotationText: >-
+            Creates the registration JWT token. In most cases every device will
+            use the same token. The token is digitally signed using the secret
+            and issuer in Application Globals.
+
+
+            The token body contains the registration endpoint.
+
+
+            The token is placed on the payload at `working.result`. It is a
+            single, Base64-encoded, string. To use this token, copy it out of
+            the debug panel and flash it to your devices.
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 340
+          x: 400
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: KA4jv6TrIk
+        meta:
+          annotationText: >-
+            This is a helper workflow to manually verify your registration JWT
+            tokens.
+
+
+            This is useful during debugging if your registration endpoint is
+            failing due to invalid tokens.
+
+
+            To use this, edit the Virtual Button and add the token to the
+            `token` field in the button's payload section. When the button is
+            then clicked, the debug panel will display an error at
+            `working.error` or the decoded token at `working.decoded`.
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 340
+          x: 500
+          'y': 440
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-createJwtToken-0~-gvB7M3ipFCgJSFprT73bC
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: Pr4mSQTx8c
+          label: Create
+          name: virtualButton
+          payload: ''
+          uiId: Pr4mSQTx8c
+          x: 200
+          'y': 40
+        outputIds:
+          - - UUtqzcF_0L
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-createJwtToken-0~--gz9_imSDR
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: Pr4mSQTx8c
+          label: Verify
+          name: virtualButton
+          payload: |-
+            { 
+                "token": "YOUR-TOKEN-HERE"
+            }
+          uiId: UuzbmXv-R6
+          x: 200
+          'y': 440
+        outputIds:
+          - - dREOW1S1EQ
+        type: virtualButton
+version: 1

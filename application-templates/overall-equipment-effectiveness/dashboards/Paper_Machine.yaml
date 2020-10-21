@@ -1,0 +1,1157 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '{{value-0}} === "Running"'
+              id: WGawX--Hmw
+              label: Machine Running
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '{{value-0}} === "Unplanned"'
+              id: sohB88QVcM
+              label: |-
+                ## Unplanned Downtime
+                ### {{value-1}}
+            - color: 'rgba(5, 113, 128, 1)'
+              condition: '{{value-0}} === "Planned"'
+              id: pxNykfFp1G
+              label: |-
+                ## Planned Downtime
+                ### {{value-1}}
+            - color: 'rgba(10, 225, 255, 1)'
+              condition: '{{value-0}} === "Sheetbreak"'
+              id: WwbZPLfLnD
+              label: |-
+                ## Sheetbreak
+                ### {{value-1}}
+          defaultCondition:
+            color: 'rgba(255, 38, 27, 1)'
+            label: ''
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: status
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: MyzEt_aGWu
+        startX: 0
+        startY: 0
+        title: Status
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: pie
+        config:
+          duration: 2592000000
+          percentFormat: ''
+          segments:
+            - aggregation:
+                options:
+                  value: Planned
+                type: TIMEATVALUE
+              attribute: status
+              color: '#057180'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/3600000'
+              label: Planned
+            - aggregation:
+                options:
+                  value: Unplanned
+                type: TIMEATVALUE
+              attribute: status
+              color: '#ff9a25'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/3600000'
+              label: Unplanned
+            - aggregation:
+                options:
+                  value: Running
+                type: TIMEATVALUE
+              attribute: status
+              color: 'rgba(141, 179, 25, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/3600000'
+              label: Running
+          valueFormat: 0.2f
+        height: 2
+        id: MtHyTbv691
+        startX: 1
+        startY: 0
+        title: 'Machine Run Time [30 days, hours]'
+        width: 1.5
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: ECvHH7b3RB
+        startX: 3
+        startY: 0
+        title: '### Sheetbreaks [24 hours]'
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '{{value}} > 21.5'
+              id: JymqPk2C15
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '{{value}} >= 19'
+              id: sCuEIHr2ah
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{value}} < 19'
+              id: LgfCB3STS7
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '23'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: LAST
+            attribute: monthlyRate
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.deviceId-0}}'
+            deviceTags: []
+            label: Tons/Minute
+        height: 1
+        id: uaLmxfsOhj
+        startX: 2.5
+        startY: 0
+        title: 'Rate [30 days]'
+        width: 0.5
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: pie
+        config:
+          duration: 86400000
+          percentFormat: ''
+          segments:
+            - aggregation:
+                options:
+                  value: Holes in Sheet
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(130, 91, 255, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Holes in Sheet
+            - aggregation:
+                options:
+                  value: Flocs in Sheet
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(165, 39, 17, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Flocs in Sheet
+            - aggregation:
+                options:
+                  value: Incorrect Web Tension
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(229, 229, 59, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Incorrect Web Tension
+          valueFormat: ',.4'
+        height: 1
+        id: Hm7hB9OKfc
+        startX: 3
+        startY: 0.5
+        title: '[minutes]'
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '{{value}} > 21.5'
+              id: JymqPk2C15
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '{{value}} >= 19'
+              id: sCuEIHr2ah
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{value}} < 19'
+              id: LgfCB3STS7
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '23'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: rate
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.deviceId-0}}'
+            deviceTags: []
+            label: Tons/Minute
+        height: 1
+        id: hg4CUngD31
+        startX: 2.5
+        startY: 1
+        title: 'Rate [Current]'
+        width: 0.5
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: >-
+              #### Run Time:  {{format (divide value-0 3600000) '0.2f'}} hours  
+
+              #### Planned Downtime: {{format (divide value-1 3600000) '0.2f'}}
+              hours  
+
+              #### Unplanned Downtime: {{format (divide value-2 3600000)
+              '0.2f'}} hours  
+
+              ___
+
+              ### Total: {{ format (divide (add value-2 (add value-1 value-0))
+              86400000) '0.2f' }} days
+          duration: 2592000000
+          segments:
+            - aggregation:
+                options:
+                  value: Running
+                type: TIMEATVALUE
+              attribute: status
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Planned
+                type: TIMEATVALUE
+              attribute: status
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Unplanned
+                type: TIMEATVALUE
+              attribute: status
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Utility Outage
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: VYtXv2tll5
+        startX: 0
+        startY: 1
+        title: 'Machine Run Time [30 days]'
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: >
+              ###### Holes in Sheet:  {{format (divide value-0 60000) '0.2f'}}
+              mins
+
+              ###### Incorrect Web Tension: {{format (divide value-1 60000)
+              '0.2f'}} mins  
+
+              ###### Flocs in Sheet: {{format (divide value-2 60000) '0.2f'}}
+              mins  
+
+              ___
+
+
+              ##### Total: {{ format (divide  (add value-2 (add value-1
+              value-0)) 3600000) '0.2f' }} hours
+          duration: 86400000
+          segments:
+            - aggregation:
+                options:
+                  value: Holes in Sheet
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Incorrect Web Tension
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Flocs in Sheet
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 0.5
+        id: qKOSuOUZoC
+        startX: 3
+        startY: 1.5
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: planned
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Planned Downtime
+              lineType: step
+              lineWeight: 0
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: running
+              color: 'rgba(141, 179, 25, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Running
+              lineType: step
+              lineWeight: 0
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: sheetbreak
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Sheetbreak
+              lineType: step
+              lineWeight: 0
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: unplanned
+              color: 'rgba(255, 154, 37, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Unplanned Downtime
+              lineType: step
+              lineWeight: 0
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 1
+        id: yChgD71CDX
+        startX: 0
+        startY: 2
+        width: 4
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: ImGNBaBTx3
+        startX: 2
+        startY: 3
+        title: '### OEE [30 days]'
+        width: 2
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: eLpACL7WmL
+        startX: 0
+        startY: 3
+        title: '### Current Production '
+        width: 2
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(130, 91, 255, 1)'
+            label: '### **OEE: {{value-0}}%**'
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: oee
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: Xl7Bg_Euo_
+        startX: 3.5
+        startY: 3.5
+        title: 'OEE [30 days]'
+        width: 0.5
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(130, 91, 255, 1)'
+            label: '#### Availability: {{value-0 }}%'
+          duration: 0
+          realTime: false
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: availability
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: kSXu3IhMVx
+        startX: 2
+        startY: 3.5
+        title: 'Availability [30 Days]'
+        width: 0.5
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(130, 91, 255, 1)'
+            label: '#### Quality: {{value-0}}%'
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: quality
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: v-xzk3MkJG
+        startX: 3
+        startY: 3.5
+        title: 'Quality [30 days]'
+        width: 0.5
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: >+
+              ### SKU: {{value-0}}  
+
+              ___
+
+              #### Scheduled Run Time: {{format (divide value-1 value-2)
+              '0.2f'}} minutes
+
+              #### Order: {{value-1}} Quality tons  
+
+              #### Rate: {{value-2}} tons/minute
+
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: sku
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: order
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: rate
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: aLgUuFnfi8
+        startX: 0
+        startY: 3.5
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{divide value-1 value-0}}<.25'
+              id: u8Yq_YKntf
+              label: >-
+                ### Fulfilled: {{format (multiply (divide value-1 value-0)
+                100)'0.2f'}} %
+
+                _____
+
+                #### Current Run Time: {{value-2}} minutes
+
+                #### Quality: {{format value-1 '0.2f'}} tons  
+
+                #### Waste: {{format value-3 '0.2f'}} tons  
+
+                #### Total Produced: {{format (add value-1 value-3) '0.2f'}}
+                tons
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '{{divide value-1 value-0}}<.75'
+              id: z2ML77TBpK
+              label: >-
+                ### Fulfilled: {{format (multiply (divide value-1 value-0)
+                100)'0.2f'}} %
+
+                _____
+
+                #### Current Run Time: {{value-2}} minutes
+
+                #### Quality: {{format value-1 '0.2f'}} tons  
+
+                #### Waste: {{format value-3 '0.2f'}} tons  
+
+                #### Total Produced: {{format (add value-1 value-3) '0.2f'}}
+                tons
+            - color: '#8db319'
+              condition: '{{divide value-1 value-0}}>=.75'
+              id: a34PiFpuC9
+              label: >-
+                ### Fulfilled: {{format (multiply (divide value-1 value-0)
+                100)'0.2f'}} %
+
+                _____
+
+                #### Current Run Time: {{value-2}} minutes
+
+                #### Quality: {{format value-1 '0.2f'}} tons  
+
+                #### Waste: {{format value-3 '0.2f'}} tons  
+
+                #### Total Produced: {{format (add value-1 value-3) '0.2f'}}
+                tons
+          defaultCondition:
+            color: '#8db319'
+            label: >
+              ### Fulfilled: {{format (multiply (divide value-1 value-0)
+              100)'0.2f'}} %
+
+              _____
+
+              #### Current Run Time: {{value-2}} minutes
+
+              #### Quality: {{format value-1 '0.2f'}} tons  
+
+              #### Waste: {{format value-3 '0.2f'}} tons  
+
+              #### Total Produced: {{format (add value-1 value-3) '0.2f'}} tons
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: order
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: tons
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: skuTime
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: waste
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: ffzDZZxhm0
+        startX: 1
+        startY: 3.5
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(130, 91, 255, 1)'
+            label: |
+              #### Performance: {{value-0}}%  
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: performance
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: a68jSwm8Qu
+        startX: 2.5
+        startY: 3.5
+        title: 'Performance [30 days]'
+        width: 0.5
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 1200000
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: availability
+              color: '#ff261b'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: Availability
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: quality
+              color: '#057180'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: Quality
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: performance
+              color: '#0ae1ff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: Performance
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: oee
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: OEE
+              lineType: monotone
+              lineWeight: 3
+              yAxisFormat: ''
+              yAxisLabel: OEE %
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 1.5
+        id: 1uvyEZH2f0
+        startX: 2
+        startY: 4.5
+        title: OEE
+        width: 2
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: trimTons
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: Trim
+              lineType: monotone
+              lineWeight: 3
+              yAxisFormat: ',.6'
+              yAxisLabel: Waste Tons
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: waste
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: Total Waste
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ',.6'
+              yAxisLabel: Waste Tons
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: sheetbreakTons
+              color: '#0ae1ff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: Sheetbreak
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ',.6'
+              yAxisLabel: Waste Tons
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: tons
+              color: 'rgba(141, 179, 25, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: Quality Product
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ',.6'
+              yAxisLabel: Quality Tons
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 1.5
+        id: AJERO2HORx
+        startX: 0
+        startY: 4.5
+        title: 'Current Production SKU [24 hrs]'
+        width: 2
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: F50eTIHwmv
+        startX: 2
+        startY: 6
+        title: '### Unplanned Downtime [30 days]'
+        width: 2
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: tuxMfoYbYg
+        startX: 0
+        startY: 6
+        title: '### Planned Downtime [30 days]'
+        width: 2
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: pie
+        config:
+          duration: 2592000000
+          percentFormat: ''
+          segments:
+            - aggregation:
+                options:
+                  value: Yankee Hood Temp Out of Range
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(130, 91, 255, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Yankee Hood Temp Out
+            - aggregation:
+                options:
+                  value: Quick Mix Level Low
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(165, 39, 17, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Quick Mix Level Low
+            - aggregation:
+                options:
+                  value: Water Quality out of Spec
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(229, 229, 59, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Water Quality Out
+            - aggregation:
+                options:
+                  value: Boiler Shut Down
+                type: TIMEATVALUE
+              attribute: reason
+              color: '#bf731c'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Boiler Shut Down
+            - aggregation:
+                options:
+                  value: Drive Failure
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(5, 113, 128, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Drive Failure
+          valueFormat: ',.5'
+        height: 1
+        id: Y8_hfJysJc
+        startX: 3
+        startY: 6.5
+        title: '[minutes]'
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: >
+              #### Quick Mix Level Low: {{format (divide value-1 3600000)
+              '0.2f'}} hours  
+
+              #### Water Quality Out: {{format (divide value-2 3600000) '0.2f'}}
+              hours  
+
+              #### Yankee Hood Temp Out:  {{format (divide value-0 3600000)
+              '0.2f'}} hours  
+
+
+              #### Boiler Shut Down: {{format (divide value-3 3600000) '0.2f'}}
+              hours  
+
+              #### Drive Failure: {{format (divide value-4 3600000) '0.2f'}}
+              hours  
+
+
+              ____
+
+              ### Total: {{ format (divide (add value-4 (add value-3 (add
+              value-2 (add value-1 value-0)))) 3600000) '0.2f' }} hours
+          duration: 2592000000
+          segments:
+            - aggregation:
+                options:
+                  value: Yankee Hood Temp Out of Range
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Quick Mix Level Low
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Water Quality out of Spec
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Boiler Shut Down
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Drive Failure
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: FvspwH8ECu
+        startX: 2
+        startY: 6.5
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: pie
+        config:
+          duration: 2592000000
+          percentFormat: ''
+          segments:
+            - aggregation:
+                options:
+                  value: Scheduled Maintenance
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(130, 91, 255, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Scheduled Maintenance
+            - aggregation:
+                options:
+                  value: Utility Outage
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(165, 39, 17, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: Planned Utility Shutdown
+            - aggregation:
+                options:
+                  value: Sku Change
+                type: TIMEATVALUE
+              attribute: reason
+              color: 'rgba(229, 229, 59, 1)'
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+              expression: '{{value}}/60000'
+              label: SKU Change
+          valueFormat: ',.5'
+        height: 1
+        id: yC7gRDs0Gz
+        startX: 1
+        startY: 6.5
+        title: '[minutes]'
+        width: 1
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        blockType: indicator
+        config:
+          conditions: []
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: >
+              #### SKU Change:  {{format (divide value-0 3600000) '0.2f'}} hours
+
+              #### Scheduled Maintenance: {{format (divide value-1 3600000)
+              '0.2f'}} hours 
+
+              #### Planned Utility Shutdown: {{format (divide value-2 3600000)
+              '0.2f'}} hours
+
+              ______
+
+              ### Total: {{ format (divide  (add value-2 (add value-1 value-0))
+              3600000) '0.2f' }} hours
+          duration: 2592000000
+          segments:
+            - aggregation:
+                options:
+                  value: Sku Change
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Scheduled Maintenance
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+            - aggregation:
+                options:
+                  value: Utility Outage
+                type: TIMEATVALUE
+              attribute: reason
+              deviceIds:
+                - '{{ctx.deviceId-0}}'
+              deviceTags: []
+        height: 1
+        id: yEEHVG6tzY
+        startX: 0
+        startY: 6.5
+        width: 1
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+        defaultValue: ~losant-device-paperMachine1-0~
+        name: deviceId-0
+        type: deviceId
+        validationConfig:
+          deviceIds: []
+          deviceTags:
+            - key: type
+              value: papermachine
+          includeFullDevice: true
+        validationEnabled: true
+    defaultTheme: light
+    description: '### {{ctx.deviceId-0.name}} '
+    id: ~losant-dashboard-paperMachine-0~
+    name: Paper Machine
+    public: false
+    refreshRate: 60
+    reportConfigs: []
+version: 1

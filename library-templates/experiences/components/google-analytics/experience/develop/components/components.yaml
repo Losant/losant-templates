@@ -1,0 +1,9 @@
+resourceType: ExperienceView
+resources:
+  - id: ~losant-experienceView-tlGoogleAnalytics-0~
+    localFilename: ./tl-google-analytics.hbs
+    name: tl-google-analytics
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1
