@@ -20,13 +20,13 @@ This template adds a single Experience Component to your application, which can 
 
 ### Context 
 
-The component must be passed an array of objects (as `myArrayOfObjects` in the example above). In most cases, this will be an array of [Experience Groups](https://docs.losant.com/experiences/groups/) that are [passed into a page's `pageData`](https://docs.losant.com/workflows/outputs/endpoint-reply/#reply-type) via an [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/). The component's default argument values are written with the returned value of the [Group: Summary Node](https://docs.losant.com/workflows/experience/summary-group/) in mind.
+The component must be passed an array of objects (as `myArrayOfObjects` in the example above). In most cases, this will be an array of [Experience Groups](https://docs.losant.com/experiences/groups/) that are [passed into a page's `pageData`](https://docs.losant.com/workflows/outputs/endpoint-reply/#reply-type) via an [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/), usually through the [Group: Summary Node](https://docs.losant.com/workflows/experience/summary-group/). Given the default output of that node, you should target the `children` property of the returned object when instantiatiing the component; see the examples below.
 
 The component will iterate over the array and create an item for each in the tree as well as additional sub-trees if any item has child items.
 
 ### Arguments
 
-Additional arguments are passed in as key-value pairs after the context argument.
+Additional arguments are passed in as key-value pairs after the context argument. **Note:** The component's default argument values are written with the returned value of the Group: Summary Node in mind.
 
 | Property          | Description                                                                                                                                                                                                                                                                                                                                                                                                        | Default               |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
@@ -52,7 +52,7 @@ Assuming you have an [Experience Endpoint](https://docs.losant.com/experiences/e
 ```
 {{component
   'tl-collapsible-tree'
-  pageData.experienceGroups
+  pageData.experienceGroups.children
   selectedValues=request.params.groupId
   itemLinkTemplate="/groups/{{this.groupId}}"
 }}
@@ -65,7 +65,7 @@ Given a form where you wish to submit the selected group IDs under the name "gro
 ```
 {{component
   'tl-collapsible-tree'
-  pageData.experienceGroups
+  pageData.experienceGroups.children
   id="component-as-input"
   selectedValues=request.body.groupIds
   inputName="groupIds"
@@ -80,7 +80,7 @@ Given an array of groups, you could render a custom component for displaying an 
 ```
 {{component
   'tl-collapsible-tree'
-  pageData.experienceGroups
+  pageData.experienceGroups.children
   id="custom-label-component"
   selectedValues=request.query.groupIds
   itemComponentName="example-component"

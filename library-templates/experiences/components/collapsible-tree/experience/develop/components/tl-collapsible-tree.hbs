@@ -150,7 +150,7 @@
     document.querySelectorAll('#{{> id}} .tl-collapsible-list-toggler').forEach((toggler) => {
       toggler.addEventListener('click', function() {
         this.classList.toggle('open');
-        const parent = this.closest('.tl-collapsible-list');
+        const parent = this.closest('.tl-collapsible-list-item');
         const listToToggle = parent.querySelector('.tl-collapsible-list');
         listToToggle.classList.toggle('show');
       });
