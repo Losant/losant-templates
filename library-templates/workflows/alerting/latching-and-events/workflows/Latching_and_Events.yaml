@@ -111,7 +111,7 @@ resources:
           deviceIdTemplate: '{{working.device.id}}'
           eventTags: []
           levelTemplate: error
-          messageTemplate: 'Recorded value: {{value}}'
+          messageTemplate: 'Recorded value: {{working.value}}'
           resultPath: working.createdEvent
           subjectTemplate: Value Exceeded Threshold
           timeSourcePath: time
