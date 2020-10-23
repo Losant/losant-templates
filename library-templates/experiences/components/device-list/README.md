@@ -28,11 +28,11 @@ This component supports several [arguments](https://docs.losant.com/experiences/
 | Property          | Description                                                                                                                                                                                                                                                                          | Default                |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
 | id                | ([HTML5 ID](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id)) The ID of the element into which the component will be rendered. Note: If you are using multiple instances of this component on one page, this property is required and must be unique per instance.    | "tl-device-list"       |
-| label             | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) If set, changes the label that is displayed for each entry. For example, `label="{{tags.serial.[0]}}"`.                                                                              | "{{name}}"             |
+| label             | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) If set, changes the label that is displayed for each entry. For example, `label="{{this.tags.serial.[0]}}"`.                                                                              | "{{this.name}}"             |
 | labelComponent    | (String [Component Name](https://docs.losant.com/experiences/views/#components)) The name of a component to render for each device. The context passed to the component will be the device object. This is used instead of the `label` property to allow for more complex rendering options.|                        |
 | selected          | (String) The ID of the device marked as selected. By default, the selected device is highlighted blue. For example, `selected=request.query.device`.                                                                                                                                 |                        |
-| link              | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) The link URL that is applied to each entry in the list. For example, `link="?device={{id}}"`.                                                                                        |                        |
-| imageFile         | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) Relative path in your [Application Files](https://docs.losant.com/applications/files/) that contains an image to display for this device. The path must be relative (i.e. `/images/device.png`). The full file URL is added automatically, for example, `imageFile="{{tags.image.[0]}}"`.    |                        |
+| link              | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) The link URL that is applied to each entry in the list. For example, `link="?device={{this.id}}"`.                                                                                        |                        |
+| imageFile         | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) Relative path in your [Application Files](https://docs.losant.com/applications/files/) that contains an image to display for this device. The path must be relative (i.e. `/images/device.png`). The full file URL is added automatically. For example, `imageFile="{{this.tags.image.[0]}}"`.    |                        |
 | imageSize         | (Number) Width and height, in pixels, of the device image container. The image is scaled proportionally to fit in this container. For example, `imageSize=50`.                                                                                                                       |                        |
 
 ## Examples
@@ -89,7 +89,7 @@ A basic device list using a custom link.
 {{component 'tl-device-list' pageData.devices 
   id='device-list-ex-1'
   selected=request.query.device
-  link="/?device={{id}}"}}
+  link="/?device={{this.id}}"}}
 ```
 
 ![Basic Device List Example](./screenshot-basic.png)
@@ -101,9 +101,9 @@ A device list with a device image. The image location is stored on each device's
 {{component 'tl-device-list' pageData.devices 
   id='device-list-ex-2'
   selected=request.query.device
-  link='/?device={{id}}'
+  link='/?device={{this.id}}'
   imageSize=50
-  imageFile='{{tags.image.[0]}}'}}
+  imageFile='{{this.tags.image.[0]}}'}}
 ```
 
 ![Device List Example with Image](./screenshot-images.png)
@@ -115,10 +115,10 @@ A device list with images and a custom label. The label is set to the value stor
 {{component 'tl-device-list' pageData.devices 
   id='device-list-ex-3'
   selected=request.query.device
-  link='/?device={{id}}'
+  link='/?device={{this.id}}'
   imageSize=50
-  imageFile='{{tags.image.[0]}}'
-  label='Serial: {{tags.serial.[0]}}'}}
+  imageFile='{{this.tags.image.[0]}}'
+  label='Serial: {{this.tags.serial.[0]}}'}}
 ```
 
 ![Device List Example with Custom Label](./screenshot-custom-label.png)
