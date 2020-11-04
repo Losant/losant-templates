@@ -1,0 +1,521 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: edge
+    globals: []
+    id: ~losant-flow-edgeWorkflow-0~
+    minimumAgentVersion: 1.19.2
+    name: Edge Workflow
+    nodes:
+      - config:
+          encodingTemplate: utf8
+          errorIfFileExists: false
+          fileContentsTemplate: |-
+            module.exports = {
+                sayHello: (name) => `Hello, ${name}!`,
+                sayGoodbye: (name) => `Goodbye, ${name}!`
+            }
+          pathTemplate: /data/scripts/inline-script.js
+          resultPath: working.inlineScriptResult
+          shouldAppend: false
+        id: dajSHdWxWu
+        meta:
+          category: data
+          description: ''
+          id: dajSHdWxWu
+          label: 'File: Write'
+          name: file-write
+          x: 160
+          'y': 1040
+        outputIds:
+          - - IlZYe_ljUs
+        type: FileWriteNode
+      - config:
+          message: ''
+          property: ''
+        id: IlZYe_ljUs
+        meta:
+          category: output
+          description: ''
+          id: IlZYe_ljUs
+          label: Debug
+          name: debug
+          x: 360
+          'y': 1140
+        outputIds: []
+        type: DebugNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: reSync
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: sayHello
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: sayGoodbye
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: findCapital
+              dontBreak: false
+          switchTemplate: '{{data.name}}'
+        id: 1WUEyt4zm1
+        meta:
+          category: logic
+          description: ''
+          id: 1WUEyt4zm1
+          label: Switch
+          name: switch
+          x: 680
+          'y': 300
+        outputIds:
+          - []
+          - - dajSHdWxWu
+            - f81IIo-X0N
+            - 5HzmjKvhby
+          - - _rn-zTljwp
+          - - _rn-zTljwp
+          - - WwNCPmlN52
+        type: SwitchNode
+      - config:
+          script: >-
+            // If we try to use this script before it is written to the file
+            system,
+
+            // our function will fail
+
+            // hence the try / catch
+
+            try {
+                const inlineScript = require('/data/scripts/inline-script.js');
+                payload.result = inlineScript[payload.data.name](payload.data.payload.v1, payload.data.payload.v2);
+            } catch (e) {
+                payload.result = e;
+            }
+        id: _rn-zTljwp
+        meta:
+          category: logic
+          description: ''
+          id: OnGQznvxOT
+          label: Function
+          name: function
+          x: 640
+          'y': 720
+        outputIds:
+          - - 14MuhmHOS6
+        type: RawFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: 14MuhmHOS6
+        meta:
+          category: output
+          description: ''
+          id: 14MuhmHOS6
+          label: Debug
+          name: debug
+          x: 740
+          'y': 820
+        outputIds: []
+        type: DebugNode
+      - config:
+          encodingTemplate: utf8
+          errorIfFileExists: false
+          fileContentsTemplate: '{{{working.lodash.body}}}'
+          pathTemplate: /data/scripts/lodash.min.js
+          resultPath: working.lodashResult
+          shouldAppend: false
+        id: 53CL_w99NC
+        meta:
+          category: data
+          description: ''
+          id: 53CL_w99NC
+          label: 'File: Write'
+          name: file-write
+          x: 360
+          'y': 1040
+        outputIds:
+          - - IlZYe_ljUs
+        type: FileWriteNode
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.lodash
+          timeoutTemplate: ''
+          uriTemplate: 'https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js'
+        id: f81IIo-X0N
+        meta:
+          category: data
+          description: ''
+          id: f81IIo-X0N
+          label: HTTP
+          name: http
+          x: 360
+          'y': 940
+        outputIds:
+          - - 53CL_w99NC
+        type: HttpNode
+      - config:
+          script: >
+            // We need to make sure both of these files are loaded before we
+            move forward
+
+            try {
+                const countriesAndCapitals = require('/data/constants/countries-and-capitals.json');
+                const _ = require('/data/scripts/lodash.min.js');
+                const entry = _.find(countriesAndCapitals, { country: payload.data.payload });
+                payload.result = _.get(entry, 'city');
+            } catch (e) {
+                payloaod.result = e;
+            }
+        id: WwNCPmlN52
+        meta:
+          category: logic
+          description: ''
+          id: OnGQznvxOT
+          label: Function
+          name: function
+          x: 840
+          'y': 720
+        outputIds:
+          - - 14MuhmHOS6
+        type: RawFunctionNode
+      - config:
+          encodingTemplate: utf8
+          errorIfFileExists: false
+          fileContentsTemplate: '{{{jsonEncode working.countries.body}}}'
+          pathTemplate: /data/constants/countries-and-capitals.json
+          resultPath: working.countriesResult
+          shouldAppend: false
+        id: 1lidgib7iN
+        meta:
+          category: data
+          description: ''
+          id: 53CL_w99NC
+          label: 'File: Write'
+          name: file-write
+          x: 560
+          'y': 1040
+        outputIds:
+          - - IlZYe_ljUs
+        type: FileWriteNode
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.countries
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://files.onlosant.com/~losant-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~/tl-edge-scripts/countries-and-capitals.json
+        id: 5HzmjKvhby
+        meta:
+          category: data
+          description: ''
+          id: f81IIo-X0N
+          label: HTTP
+          name: http
+          x: 560
+          'y': 940
+        outputIds:
+          - - 1lidgib7iN
+        type: HttpNode
+      - config:
+          encodingTemplate: utf8
+          lengthTemplate: ''
+          pathTemplate: /data/scripts/inline-script.js
+          resultPath: working.inlineFile
+          startTemplate: ''
+        id: KMt3c4xYRB
+        meta:
+          category: data
+          description: ''
+          id: KMt3c4xYRB
+          label: 'File: Read'
+          name: file-read
+          x: 160
+          'y': 1360
+        outputIds:
+          - - BECu2LUS_b
+        type: FileReadNode
+      - config:
+          encodingTemplate: utf8
+          lengthTemplate: ''
+          pathTemplate: /data/scripts/lodash.min.js
+          resultPath: working.lodashFile
+          startTemplate: ''
+        id: soEDSyAsTL
+        meta:
+          category: data
+          description: ''
+          id: KMt3c4xYRB
+          label: 'File: Read'
+          name: file-read
+          x: 360
+          'y': 1360
+        outputIds:
+          - - BECu2LUS_b
+        type: FileReadNode
+      - config:
+          encodingTemplate: utf8
+          lengthTemplate: ''
+          pathTemplate: /data/constants/countries-and-capitals.json
+          resultPath: working.countriesFile
+          startTemplate: ''
+        id: Pz4NGAT6Pa
+        meta:
+          category: data
+          description: ''
+          id: KMt3c4xYRB
+          label: 'File: Read'
+          name: file-read
+          x: 560
+          'y': 1360
+        outputIds:
+          - - BECu2LUS_b
+        type: FileReadNode
+      - config:
+          message: ''
+          property: ''
+        id: BECu2LUS_b
+        meta:
+          category: output
+          description: ''
+          id: BECu2LUS_b
+          label: Debug
+          name: debug
+          x: 360
+          'y': 1460
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: o78HHt5Kh4
+        meta:
+          annotationText: >-
+            These simply read the default files we wrote to the file system and
+            print their contents in the debug log. This is useful for testing
+            that the files contain the expected contents.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 780
+          'y': 1280
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: ZyblYqSCfV
+        meta:
+          annotationText: >-
+            The scripts will load and write to the file system under three
+            different scenarios:
+
+
+            - On press of the virtual button
+
+            - On device connect
+
+            - When we send a "reSync" command to the device
+
+
+            They will **not** automatically write to the file system when a new
+            version is deployed to the device.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 600
+          x: 760
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: IrAdq2viV5
+        meta:
+          annotationText: >-
+            We write three files to the file system:
+
+
+            1. An inline script (`module.exports = { ... }`).
+
+            2. lodash, pulled from a CDN.
+
+            3. A JSON file, pulled from our application files. The JSON file
+            needs to be stringified using the `{{jsonEncode}}` helper.
+
+
+            **Only import scripts from trusted sources.** This workflow will
+            download JavaScript files and execute them on your device.
+            Therefore, if you utilize the third-party script features as
+            demonstrated here, you should only use trusted CDNs.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 600
+          x: 780
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: NbOcO5EsTI
+        meta:
+          annotationText: >-
+            `sayHello` and `sayGoodbye` commands take a string in the payload
+            for the name to greet (i.e. "George" or "Hillary").
+
+
+            `findCapital`, when provided a name of a country, will print the
+            name of that country's capital city as found in our JSON file.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 600
+          x: 1100
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: deviceCommand
+        meta:
+          category: trigger
+          description: ''
+          id: IwYyG58ex8
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: IwYyG58ex8
+          x: 560
+          'y': 120
+        outputIds:
+          - - 1WUEyt4zm1
+        type: deviceCommand
+      - config: {}
+        key: ~losant-flow-edgeWorkflow-0~-ohOswPKqdw_xaLKn8X8jM
+        meta:
+          category: trigger
+          description: ''
+          deviceId: ''
+          id: cPcZO0jdgU
+          label: Sync Resources
+          name: virtualButton
+          payload: ''
+          uiId: cPcZO0jdgU
+          x: 160
+          'y': 120
+        outputIds:
+          - - dajSHdWxWu
+            - f81IIo-X0N
+            - 5HzmjKvhby
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-edgeWorkflow-0~-rxpl0FNj45rb5iu9NPuFH
+        meta:
+          category: trigger
+          description: ''
+          deviceId: ''
+          id: WLlGrIOEIt
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: WLlGrIOEIt
+          x: 360
+          'y': 1260
+        outputIds:
+          - - KMt3c4xYRB
+            - soEDSyAsTL
+            - Pz4NGAT6Pa
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-edgeWorkflow-0~-f9uI0FlFtBDiuMQ_raAH9
+        meta:
+          category: trigger
+          description: ''
+          id: s18YDd1AFK
+          label: 'Device: Connect'
+          name: onConnect
+          uiId: s18YDd1AFK
+          x: 360
+          'y': 120
+        outputIds:
+          - - dajSHdWxWu
+            - f81IIo-X0N
+            - 5HzmjKvhby
+        type: onConnect
+      - config: {}
+        key: ~losant-flow-edgeWorkflow-0~-bvZqKdMCH8hhKw3k2sd1P
+        meta:
+          category: trigger
+          description: ''
+          deviceId: ''
+          id: T6rQF-YgC7
+          label: Say Hello
+          name: virtualButton
+          payload: |-
+            {
+                "name": "sayHello",
+                "payload": "George"
+            }
+          uiId: T6rQF-YgC7
+          x: 1020
+          'y': 460
+        outputIds:
+          - - _rn-zTljwp
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-edgeWorkflow-0~-zoEO7ZISjN
+        meta:
+          category: trigger
+          description: ''
+          deviceId: ''
+          id: T6rQF-YgC7
+          label: Say Goodbye
+          name: virtualButton
+          payload: |-
+            {
+                "name": "sayGoodbye",
+                "payload": "Hillary"
+            }
+          uiId: U_058irk-B
+          x: 940
+          'y': 540
+        outputIds:
+          - - _rn-zTljwp
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-edgeWorkflow-0~-DXTeyd1KqS
+        meta:
+          category: trigger
+          description: ''
+          deviceId: ''
+          id: T6rQF-YgC7
+          label: UK Capital
+          name: virtualButton
+          payload: |-
+            {
+                "name": "findCapital",
+                "payload": "United Kingdom"
+            }
+          uiId: HNgqnTELkz
+          x: 1020
+          'y': 620
+        outputIds:
+          - - WwNCPmlN52
+        type: virtualButton
+version: 1

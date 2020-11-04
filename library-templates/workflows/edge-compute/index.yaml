@@ -1,0 +1,4 @@
+name: Edge Compute
+description: This category contains Edge Workflows, which are workflows that are
+  deployed to your Edge Compute devices. These workflows demonstrate various
+  edge computing concepts that apply to many different application types.

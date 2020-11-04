@@ -1,0 +1,20 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to send JS scripts and JSON to your edge agent for
+      use within the Function Node.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~
+    name: Function Node Scripts
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - edge
+      - function
+      - require
+      - file
+      - script
+version: 1
