@@ -8,11 +8,11 @@ resources:
       - cloudOnly: true
         description: ""
         json: '"identityProviderMetadataTemplate"'
-        key: identityProviderMetadataTemplate
+        key: identityProviderMetadataTemplate_example_com
       - cloudOnly: true
         description: ""
         json: '"serviceProviderMetadataTemplate"'
-        key: serviceProviderMetadataTemplate
+        key: serviceProviderMetadataTemplate_example_com
     id: ~losant-application-libraryExperiencesFormsAzureActiveDirectorySso-0~
     name: Azure Active Directory SSO
     readmePath: ./README.md

@@ -48,8 +48,22 @@
           {{!
             This button redirects the user to GET /tl-saml
           }}
+          <form method="POST" action="">
 
-          <a href="/tl-saml"><button type="submit" class="btn btn-primary btn-lg btn-block">Login with SSO</button></a>
+            {{!
+              The "name" attribute is the name of the field that you'll see in the workflow payload. So in this example,
+              the workflow payload will contain an object with an "email" field set to whatever the user entered.
+
+              The "name" field must be unique for each form element.
+              The "id" field must be unique for each element on this page.
+            }}
+            <div class="form-group">
+              <label for="exampleFormControl1">Email address</label>
+              <input type="email" class="form-control" placeholder="name@example.com" id="exampleFormControl1" name="email">
+            </div>
+
+           <button type="submit" class="btn btn-primary">Log in with SSO</button>
+          </form>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

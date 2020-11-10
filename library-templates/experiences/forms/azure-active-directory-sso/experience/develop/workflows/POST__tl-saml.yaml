@@ -1,69 +1,16 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-getTlSamlPostTlSaml-0~
+    flowId: ~losant-flow-postTlSaml-1~
     globals: []
-    id: ~losant-flowVersion-getTlSamlPostTlSaml-0~
-    name: GET /tl-saml & POST /tl-saml
+    id: ~losant-flowVersion-postTlSaml-1~
+    name: POST /tl-saml
     nodes:
       - config:
-          bodyTemplate: '{{working.samlUrl.redirectUrl}}'
-          bodyTemplateType: string
-          cookieInfo: []
-          headerInfo: []
-          mqttTopicsTemplate: []
-          replyIdPath: ''
-          replyType: redirect
-          responseCodeTemplate: '302'
-          sameSiteTemplate: ''
-        id: so-NtWfHxG
-        meta:
-          category: output
-          description: ''
-          id: so-NtWfHxG
-          label: 'Endpoint: Reply'
-          mqttTopicsType: []
-          name: endpoint-reply
-          x: 60
-          'y': 340
-        outputIds:
-          - - BN7Bp-5j9W
-        type: EndpointReplyNode
-      - config:
-          message: ''
-          property: ''
-        id: BN7Bp-5j9W
-        meta:
-          category: output
-          description: ''
-          id: BN7Bp-5j9W
-          label: Debug
-          name: debug
-          x: 60
-          'y': 440
-        outputIds: []
-        type: DebugNode
-      - config:
-          idpMetadataTemplate: '{{globals.identityProviderMetadataTemplate}}'
-          resultPath: working.samlUrl
-          spMetadataTemplate: '{{globals.serviceProviderMetadataTemplate}}'
-        id: 8jFBjd6wCm
-        meta:
-          category: experience
-          description: ''
-          id: 8jFBjd6wCm
-          label: 'SAML: Login URL'
-          name: saml-login
-          x: 60
-          'y': 220
-        outputIds:
-          - - so-NtWfHxG
-        type: SamlLoginRedirectNode
-      - config:
-          idpMetadataTemplate: '{{globals.identityProviderMetadataTemplate}}'
+          idpMetadataTemplate: '{{working.identityProvider}}'
           resultPath: working.samlUser
           samlResponseTemplate: '{{data.body.SAMLResponse}}'
-          spMetadataTemplate: '{{globals.serviceProviderMetadataTemplate}}'
+          spMetadataTemplate: '{{working.serviceProvider}}'
         id: uagpIJ0vcU
         meta:
           category: experience
@@ -71,11 +18,11 @@ resources:
           id: w6ub1d8KhP
           label: 'SAML: Verify'
           name: saml-verify
-          x: 80
-          'y': 720
+          x: 400
+          'y': 640
         outputIds:
           - - nhwIz95rdF
-          - - w8AY54--m6
+          - - kIqDOj2fC7
         type: SamlVerifyNode
       - config:
           message: ''
@@ -87,8 +34,8 @@ resources:
           id: 12h8KilMkx
           label: Debug
           name: debug
-          x: 40
-          'y': 960
+          x: 260
+          'y': 900
         outputIds: []
         type: DebugNode
       - config:
@@ -106,6 +53,7 @@ resources:
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
+          sameSiteTemplate: ''
         id: nhwIz95rdF
         meta:
           category: output
@@ -115,8 +63,8 @@ resources:
           label: Login Failure
           mqttTopicsType: []
           name: endpoint-reply
-          x: 40
-          'y': 860
+          x: 260
+          'y': 800
         outputIds:
           - - ptEFKHkDLU
         type: EndpointReplyNode
@@ -135,41 +83,11 @@ resources:
           id: sWEqShlHv7
           label: 'User: Get'
           name: get-experience-user
-          x: 280
-          'y': 940
+          x: 520
+          'y': 780
         outputIds:
           - - ahB09muB2Q
         type: GetExperienceUserNode
-      - config:
-          bodyTemplate: |-
-            {
-              "loginFailure": true,
-              "email": {{jsonEncode data.body.email}}
-            }
-          bodyTemplateType: json
-          cookieInfo: []
-          headerInfo: []
-          layoutIdTemplate: ''
-          mqttTopicsTemplate: []
-          pageIdTemplate: 5f7f3d2f8e6fd500078196d8
-          replyIdPath: ''
-          replyType: page
-          responseCodeTemplate: '401'
-          sameSiteTemplate: ''
-        id: kjlSDe6yBQ
-        meta:
-          category: output
-          description: >-
-            Invalid credentials. Return the user to the login page and alert
-            them of the error.
-          label: Login Failure
-          mqttTopicsType: []
-          name: endpoint-reply
-          x: 260
-          'y': 1380
-        outputIds:
-          - - z-WHU-kqsz
-        type: EndpointReplyNode
       - config:
           expression: '{{working.experienceUser}}'
         id: ahB09muB2Q
@@ -179,30 +97,12 @@ resources:
           id: 45itwDUVcj
           label: Use Exists?
           name: conditional
-          x: 280
-          'y': 1040
+          x: 520
+          'y': 900
         outputIds:
           - - FBOBTvdQY-
           - - yvyfWukS_r
         type: ConditionalNode
-      - config:
-          rules:
-            - destination: working.emailAddress
-              type: set
-              valueTemplate: >-
-                {{working.samlUser.attributes.[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress]}}
-        id: w8AY54--m6
-        meta:
-          category: logic
-          description: ''
-          id: QtAAq0M-Lo
-          label: Grab Email
-          name: mutate
-          x: 280
-          'y': 840
-        outputIds:
-          - - kIqDOj2fC7
-        type: MutateNode
       - config:
           dataMethod: individualFields
           emailTemplate: '{{working.emailAddress}}'
@@ -210,7 +110,7 @@ resources:
           groupIdTemplates: []
           lastNameTemplate: ''
           passwordTemplate: '{{working.uuid}}'
-          resultPath: ''
+          resultPath: working.experienceUser
           userTags: []
         id: SJ65Z4OZgg
         meta:
@@ -219,25 +119,11 @@ resources:
           id: jUodx9JrJr
           label: 'User: Create'
           name: create-experience-user
-          x: 180
-          'y': 1200
+          x: 480
+          'y': 1140
         outputIds:
           - - yvyfWukS_r
         type: CreateExperienceUserNode
-      - config:
-          message: ''
-          property: ''
-        id: z-WHU-kqsz
-        meta:
-          category: output
-          description: ''
-          id: 12h8KilMkx
-          label: Debug
-          name: debug
-          x: 260
-          'y': 1500
-        outputIds: []
-        type: DebugNode
       - config:
           message: '{{data.responseToken}}'
           property: ''
@@ -248,8 +134,8 @@ resources:
           id: 12h8KilMkx
           label: Debug
           name: debug
-          x: 540
-          'y': 1620
+          x: 720
+          'y': 1460
         outputIds: []
         type: DebugNode
       - config:
@@ -275,8 +161,8 @@ resources:
           label: Set cookie & redirect to home
           mqttTopicsType: []
           name: endpoint-reply
-          x: 540
-          'y': 1480
+          x: 720
+          'y': 1360
         outputIds:
           - - rRc41DUwYT
         type: EndpointReplyNode
@@ -292,11 +178,10 @@ resources:
           id: BKG0kEhGVB
           label: Generate Token
           name: experience-user-token
-          x: 400
-          'y': 1280
+          x: 720
+          'y': 1240
         outputIds:
-          - - kjlSDe6yBQ
-            - YFhKUVgF7x
+          - - YFhKUVgF7x
         type: ExperienceUserTokenNode
       - config: {}
         id: YD-AOKdXJO
@@ -307,23 +192,8 @@ resources:
           label: Note
           name: note
           width: 260
-          x: 280
-          'y': 700
-        outputIds: []
-        type: AnnotationNode
-      - config: {}
-        id: sAztVbhMGU
-        meta:
-          annotationText: >-
-            Move the email to a more convenient place on the payload
-            `working.emailAddress`
-          category: annotation
-          height: 100
-          label: Note
-          name: note
-          width: 260
-          x: 500
-          'y': 820
+          x: 600
+          'y': 620
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -340,12 +210,12 @@ resources:
             After, we can generate a token and set the authorization cookie for
             that user.
           category: annotation
-          height: 200
+          height: 260
           label: Note
           name: note
           width: 260
-          x: 560
-          'y': 1040
+          x: 780
+          'y': 840
         outputIds: []
         type: AnnotationNode
       - config:
@@ -358,8 +228,8 @@ resources:
           id: FaORS4tqik
           label: Generate ID
           name: generate-id
-          x: 180
-          'y': 1120
+          x: 480
+          'y': 1040
         outputIds:
           - - SJ65Z4OZgg
         type: GenerateIdNode
@@ -372,37 +242,203 @@ resources:
           label: Note
           name: note
           width: 160
-          x: 0
-          'y': 1100
+          x: 300
+          'y': 980
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: QttaJm-Wim
+        meta:
+          annotationText: >-
+            FYI: User: Create Node
+
+
+            If you would like to set up defaults for a user, you may do so in
+            the User: Create Node. 
+
+
+            One reason you may want to do this is to automatically add the user
+            to an Experience Group.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 200
+          'y': 1140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.SAMLResponse
+              type: set
+              valueTemplate: '{{{decodeBase64 data.body.SAMLResponse}}}'
+        id: chZWX0F1UY
+        meta:
+          category: logic
+          description: ''
+          id: IWZj3EfVB0
+          label: Decode
+          name: mutate
+          x: 400
+          'y': 120
+        outputIds:
+          - - lekY0TCLmB
+        type: MutateNode
+      - config:
+          documentPath: working.SAMLResponse
+          resultFormatTemplate: json
+          resultPath: working.emailAddress
+          selectorTemplate: >-
+            AttributeStatement
+            Attribute[Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+        id: lekY0TCLmB
+        meta:
+          category: logic
+          description: ''
+          id: baSgDJ2LbW
+          label: HTML/XML Parser
+          name: html-parser
+          x: 400
+          'y': 200
+        outputIds:
+          - - GLvA-FlFSA
+        type: HtmlParserNode
+      - config:
+          method: split
+          methodArgs:
+            - '@'
+          resultPath: working.email.split
+          sourceData: '{{working.emailAddress}}'
+        id: ciTT8HWt73
+        meta:
+          category: logic
+          description: ''
+          id: KtOx3kQXGH
+          label: String
+          name: string
+          x: 400
+          'y': 360
+        outputIds:
+          - - mMSo7myKxc
+        type: StringNode
+      - config:
+          method: replaceAll
+          methodArgs:
+            - .
+            - _
+          resultPath: working.email.underscore
+          sourceData: '{{working.email.split.[1]}}'
+        id: mMSo7myKxc
+        meta:
+          category: logic
+          description: ''
+          id: KtOx3kQXGH
+          label: String
+          name: string
+          x: 400
+          'y': 440
+        outputIds:
+          - - rfEVe6nt2p
+        type: StringNode
+      - config:
+          rules:
+            - destination: working.serviceProviderGlobal
+              type: set
+              valueTemplate: 'serviceProviderMetadataTemplate_{{working.email.underscore}}'
+            - destination: working.identityProviderGlobal
+              type: set
+              valueTemplate: 'identityProviderMetadataTemplate_{{working.email.underscore}}'
+            - destination: working.serviceProvider
+              type: set
+              valueTemplate: |-
+                {{{ decodeURIComponent 
+                     (lookup globals working.serviceProviderGlobal)
+                }}}
+            - destination: working.identityProvider
+              type: set
+              valueTemplate: |-
+                {{{ decodeURIComponent 
+                     (lookup globals working.identityProviderGlobal)
+                }}}
+        id: rfEVe6nt2p
+        meta:
+          category: logic
+          description: ''
+          id: 4ZpiJ40lG_
+          label: Mutate
+          name: mutate
+          x: 400
+          'y': 520
+        outputIds:
+          - - uagpIJ0vcU
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.emailAddress
+              type: set
+              valueTemplate: >-
+                {{working.emailAddress.[0].children.[0].children.[0].children.[0].value}}
+        id: GLvA-FlFSA
+        meta:
+          category: logic
+          description: ''
+          id: GLvA-FlFSA
+          label: Mutate
+          name: mutate
+          x: 400
+          'y': 280
+        outputIds:
+          - - ciTT8HWt73
+        type: MutateNode
+      - config: {}
+        id: woJq-PPGaB
+        meta:
+          annotationText: Do an early parse of the XML to determine email address.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 120
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: vDpGWadWPM
+        meta:
+          annotationText: |-
+            Look up SSO global via email domain:
+
+            1. Split Email at "@"
+            2. Convert "." to "_"
+            3. Look up global at: 
+            ```
+            identityProviderMetadataTemplate_{{working.email.underscore}}
+            ```
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 360
+          x: 600
+          'y': 360
         outputIds: []
         type: AnnotationNode
     triggers:
-      - config: {}
-        key: ~losant-experienceEndpoint-getTlSaml-0~
-        meta:
-          category: trigger
-          description: ''
-          label: GET /saml/login
-          name: endpoint
-          uiId: K_eTt1Q-8j
-          x: 60
-          'y': 100
-        outputIds:
-          - - 8jFBjd6wCm
-        type: endpoint
       - config: {}
         key: ~losant-experienceEndpoint-postTlSaml-1~
         meta:
           category: trigger
           description: ''
           id: z7125GjD1O
-          label: POST /saml/assert
+          label: POST /tl-saml
           name: endpoint
           uiId: IlS4GzgMHh
-          x: 80
-          'y': 600
+          x: 400
+          'y': 40
         outputIds:
-          - - uagpIJ0vcU
+          - - chZWX0F1UY
         type: endpoint
     version: develop
 version: 1

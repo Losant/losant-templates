@@ -1,0 +1,386 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-postTlLoginSso-0~
+    globals: []
+    id: ~losant-flowVersion-postTlLoginSso-0~
+    name: POST /tl-login-sso
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: VRJxo3MlDd
+        meta:
+          category: output
+          description: ''
+          id: ekR41OtlQT
+          label: Debug
+          name: debug
+          x: 680
+          'y': 1120
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 6x9Cv801sV
+        meta:
+          annotationText: >-
+            The submitted form data is available on `data.body`. That object
+            will contain a field for each form element. The name of the field is
+            based on the form element's `name` attribute.
+
+
+            We may find the email at `data.body.email`
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 280
+          x: 600
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: FaSOq4FhfQ
+        meta:
+          annotationText: >-
+            Check for SAML error. If everything went smoothly, redirect the user
+            to Azure Active Directory.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 280
+          x: 660
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: '{{working.samlUrl.redirectUrl}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: lXyIC5a4uI
+        meta:
+          category: output
+          description: ''
+          id: so-NtWfHxG
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 680
+          'y': 1000
+        outputIds:
+          - - VRJxo3MlDd
+        type: EndpointReplyNode
+      - config:
+          idpMetadataTemplate: '{{working.identityProvider}}'
+          resultPath: working.samlUrl
+          spMetadataTemplate: '{{working.serviceProvider}}'
+        id: tyXdsd3ee3
+        meta:
+          category: experience
+          description: ''
+          id: 8jFBjd6wCm
+          label: 'SAML: Login URL'
+          name: saml-login
+          x: 460
+          'y': 720
+        outputIds:
+          - - tZt1l8DFQ2
+        type: SamlLoginRedirectNode
+      - config:
+          method: split
+          methodArgs:
+            - '@'
+          resultPath: working.email.split
+          sourceData: '{{data.body.email}}'
+        id: q0t9FNAt-_
+        meta:
+          category: logic
+          description: ''
+          id: KtOx3kQXGH
+          label: String
+          name: string
+          x: 400
+          'y': 300
+        outputIds:
+          - - PUQnMq_Mt3
+        type: StringNode
+      - config:
+          method: replaceAll
+          methodArgs:
+            - .
+            - _
+          resultPath: working.email.underscore
+          sourceData: '{{working.email.split.[1]}}'
+        id: PUQnMq_Mt3
+        meta:
+          category: logic
+          description: ''
+          id: KtOx3kQXGH
+          label: String
+          name: string
+          x: 400
+          'y': 380
+        outputIds:
+          - - aFqF95wT7v
+        type: StringNode
+      - config:
+          rules:
+            - destination: working.serviceProviderGlobal
+              type: set
+              valueTemplate: 'serviceProviderMetadataTemplate_{{working.email.underscore}}'
+            - destination: working.identityProviderGlobal
+              type: set
+              valueTemplate: 'identityProviderMetadataTemplate_{{working.email.underscore}}'
+            - destination: working.serviceProvider
+              type: set
+              valueTemplate: |-
+                {{{ decodeURIComponent 
+                     (lookup globals working.serviceProviderGlobal)
+                }}}
+            - destination: working.identityProvider
+              type: set
+              valueTemplate: |-
+                {{{ decodeURIComponent 
+                     (lookup globals working.identityProviderGlobal)
+                }}}
+        id: aFqF95wT7v
+        meta:
+          category: logic
+          description: ''
+          id: 4ZpiJ40lG_
+          label: Mutate
+          name: mutate
+          x: 400
+          'y': 460
+        outputIds:
+          - - bnv70E7pUE
+        type: MutateNode
+      - config: {}
+        id: sAfCGtmdQp
+        meta:
+          annotationText: |-
+            Look up SSO global via email domain:
+
+            1. Split Email at "@"
+            2. Convert "." to "_"
+            3. Look up global at: 
+            ```
+            identityProviderMetadataTemplate_{{working.email.underscore}}
+            ```
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 360
+          x: 600
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '!{{working.samlUrl.error}}'
+        id: tZt1l8DFQ2
+        meta:
+          category: logic
+          description: ''
+          id: tZt1l8DFQ2
+          label: Conditional
+          name: conditional
+          x: 460
+          'y': 840
+        outputIds:
+          - - lz7DT2GCYs
+          - - lXyIC5a4uI
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: kG_szXM88S
+        meta:
+          category: output
+          description: ''
+          id: 12h8KilMkx
+          label: Debug
+          name: debug
+          x: 440
+          'y': 1100
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageLoginSso-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: lz7DT2GCYs
+        meta:
+          category: output
+          description: >-
+            Invalid credentials. Return the user to the login page and alert
+            them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 440
+          'y': 1000
+        outputIds:
+          - - kG_szXM88S
+        type: EndpointReplyNode
+      - config:
+          errorsPath: ''
+          schema: "{\n\t\"type\": \"object\",\n  \"properties\": {\n    \"email\": {\n    \t\"type\": \"string\",\n      \"format\": \"email\"\n    }\n  },\n  \"required\": [\"email\"],\n  \"additionalProperties\": false\n}"
+          schemaType: json
+          toValidatePath: data.body
+        id: u3sjXF8llf
+        meta:
+          category: logic
+          description: Validate the data submitted in the post request.
+          label: Validate Payload
+          name: validate-payload
+          x: 400
+          'y': 160
+        outputIds:
+          - - wdJ1HWFaY0
+          - - q0t9FNAt-_
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Not a valid email address.",
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageLoginSso-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: wdJ1HWFaY0
+        meta:
+          category: output
+          description: An error occurred. Render the forgot password page with an error.
+          label: Invalid Email
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 180
+          'y': 300
+        outputIds:
+          - - YsH5dPl0kM
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: YsH5dPl0kM
+        meta:
+          category: output
+          description: ''
+          id: OfgH76b_kp
+          label: Debug
+          name: debug
+          x: 180
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{working.serviceProvider}} && {{working.identityProvider}}'
+        id: bnv70E7pUE
+        meta:
+          category: logic
+          description: ''
+          id: bnv70E7pUE
+          label: Globals Exist?
+          name: conditional
+          x: 400
+          'y': 580
+        outputIds:
+          - - 6sw8WuuI3u
+          - - tyXdsd3ee3
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /login
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 6sw8WuuI3u
+        meta:
+          category: output
+          description: An error occurred. Render the forgot password page with an error.
+          label: Redirect to Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 720
+        outputIds:
+          - - rYC7Bwly31
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: rYC7Bwly31
+        meta:
+          category: output
+          description: ''
+          id: OfgH76b_kp
+          label: Debug
+          name: debug
+          x: 240
+          'y': 820
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: ePyO6Aj2dH
+        meta:
+          annotationText: >-
+            Redirect to `/login` if no global was found for the parsed email
+            domain. ( see README for more information on global parsing. )
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 600
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postTlLoginSso-0~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /tl-login-sso
+          name: endpoint
+          uiId: WaU61ZoR9R
+          x: 400
+          'y': 40
+        outputIds:
+          - - u3sjXF8llf
+        type: endpoint
+    version: develop
+version: 1
