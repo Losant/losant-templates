@@ -1,0 +1,9 @@
+resourceType: Webhook
+resources:
+  - id: ~losant-webhook-receiveData-0~
+    name: Receive Data
+    responseCode: 200
+    verificationCode: ''
+    verificationType: none
+    waitForReply: false
+version: 1

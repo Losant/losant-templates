@@ -1,0 +1,136 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the battery of the device.
+        name: battery
+      - attributeTags: {}
+        dataType: gps
+        description: This is used to concatenate the latitude & longitude of the device.
+        name: location
+      - attributeTags: {}
+        dataType: number
+        description: "This is used to show the distance in milimeter. "
+        name: distance
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the distance in inches.
+        name: distanceIn
+      - attributeTags: {}
+        dataType: number
+        description: This is used to calculate the percent full.
+        name: fillLevel
+      - attributeTags: {}
+        dataType: string
+        description: This is the unique identifier of the device.
+        name: devEUI
+      - attributeTags: {}
+        dataType: string
+        description: This is used to show what LoRa carrier / network / provider the
+          device is on.
+        name: carrier
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Cayenne Low Power Payload
+        name: lpp
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show if the LoRa gateway utilizes Adaptive Data
+          Rates. If it does, the KST3320 will send an extended GPS payload that
+          includes Vertical & Horizontal Accuracy and Number of Satellites it
+          can see.
+        name: gwAdrBit
+      - attributeTags: {}
+        dataType: string
+        description: This is used to show what channel the gateway is on.
+        name: gwChannel
+      - attributeTags: {}
+        dataType: string
+        description: This is used to show the gateway identifier
+        name: gwID
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show what frequency the gateway is on.
+        name: gwFreq
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Received Signal Strength of the device
+          that the gateway reports.
+        name: gwRSSI
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Signal to Noise Ratio of the device that
+          the gateway reports.
+        name: gwSNR
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the gateway's Spreading Factor.
+        name: gwSF
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Altitude in feet.
+        name: altFT
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Altitude in meters.
+        name: alt
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the number of Satellites the device can see.
+          (only is shown if the gateway supports ADR)
+        name: sat
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Vertical Accuracy in meters. (only is
+          shown if the gateway supports ADR)
+        name: vacc
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Horizontal Accuracy. (only is shown if the
+          gateway supports ADR)
+        name: hacc
+      - attributeTags: {}
+        dataType: number
+        description: This is used to grab the Longitude.
+        name: lng
+      - attributeTags: {}
+        dataType: number
+        description: This is used to grab the Latitude.
+        name: lat
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Accelerometer X axis.
+        name: accel_x
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Accelerometer Y axis.
+        name: accel_y
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Accelerometer Y axis.
+        name: accel_z
+      - attributeTags: {}
+        dataType: number
+        description: "This is used to show the Temperature in celsius. "
+        name: temp
+      - attributeTags: {}
+        dataType: number
+        description: "This is used to show the Temperature in Fahrenheit. "
+        name: tempF
+      - attributeTags: {}
+        dataType: number
+        description: This is used to show the Humidity percent.
+        name: humidity
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-kst3320SimulatedDevice-0~
+    name: KST3320 (Simulated Device)
+    tags:
+      - key: dev_eui
+        value: 01AB34CD56EF7890
+      - key: serial_number
+        value: "123456"
+      - key: DeviceRecipe
+        value: KST3320 Simulated Device Recipe
+version: 1

@@ -1,0 +1,425 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: wrLmjT1pON
+        startX: 0
+        startY: 0
+        title: KST3320 Distance Sensor
+        width: 1
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: MYJ9Jj0l3T
+        startX: 1
+        startY: 0
+        title: Last known statistics / GPS Map
+        width: 3
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: device-state-table
+        config:
+          attributes:
+            - battery
+            - distance
+            - distanceIn
+            - fillLevel
+            - gwRSSI
+            - gwSNR
+          columns:
+            - headerTemplate: '{{name}}'
+              id: defaultTimestampColumn
+              rowTemplate: '{{format value}}'
+              type: timestamp
+            - headerTemplate: '{{name}}'
+              id: defaultDeviceNameColumn
+              rowTemplate: '{{format value}}'
+              type: deviceName
+            - attribute: distance
+              headerTemplate: Distance (mm)
+              id: Fq8xoeaXXb
+              rowTemplate: '{{format value}} mm'
+              type: attribute
+            - attribute: distanceIn
+              headerTemplate: Distance (in)
+              id: pp5UJkQAZv
+              rowTemplate: '{{format value ''.1f''}} in'
+              type: attribute
+            - attribute: fillLevel
+              headerTemplate: '% Full'
+              id: EsFqP9Jxx6
+              rowTemplate: '{{format value ''.0f''}}%'
+              type: attribute
+            - attribute: battery
+              headerTemplate: Battery
+              id: yyie5owQkR
+              rowTemplate: '{{format value}}%'
+              type: attribute
+            - attribute: gwRSSI
+              headerTemplate: RSSI
+              id: y2R5wHIGPC
+              rowTemplate: '{{format value}} dBm'
+              type: attribute
+            - attribute: gwSNR
+              headerTemplate: SNR
+              id: zjKFE5larx
+              rowTemplate: '{{format value}}'
+              type: attribute
+          deviceIds:
+            - ~losant-device-kst3320SimulatedDevice-0~
+          deviceTags: []
+          duration: 0
+        height: 1
+        id: yNImPdg1e3
+        startX: 1
+        startY: 0.5
+        title: ''
+        width: 3
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '{{percent}} < 60'
+              id: 36RALdVXrJ
+            - color: 'rgba(242, 245, 7, 1)'
+              condition: '{{percent}} > 60 && {{percent}} < 80'
+              id: AhavVdbAq3
+            - color: 'rgba(236, 41, 11, 1)'
+              condition: '{{percent}} > 81'
+              id: Byov19drFF
+          displayAsPercentage: true
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: number
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: distanceIn
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-kst3320SimulatedDevice-0~
+            deviceTags: []
+            label: in
+        height: 1.5
+        id: yO_uQDz5xI
+        startX: 0.5
+        startY: 0.5
+        title: Distance in Inches
+        width: 0.5
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: 'rgba(141, 179, 25, 1)'
+              condition: '{{percent}} < 60'
+              id: 36RALdVXrJ
+            - color: 'rgba(242, 245, 7, 1)'
+              condition: '{{percent}} > 60 && {{percent}} < 80'
+              id: AhavVdbAq3
+            - color: 'rgba(236, 41, 11, 1)'
+              condition: '{{percent}} > 81'
+              id: Byov19drFF
+          displayAsPercentage: true
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: tank
+          precision: '0'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: fillLevel
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-kst3320SimulatedDevice-0~
+            deviceTags: []
+            label: ''
+        height: 2
+        id: 9KYTdQCeuo
+        startX: 0
+        startY: 0.5
+        title: Fill Percentage
+        width: 0.5
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: map
+        config:
+          additionalAttributes: []
+          attribute: location
+          clusterPoints: false
+          compositeResult: true
+          defaultBearing: 0
+          defaultPitch: 0
+          defaultZoom: 16
+          deviceIds:
+            - ~losant-device-kst3320SimulatedDevice-0~
+          deviceTags: []
+          duration: 0
+          endColor: '#8db319'
+          iconTemplate: |-
+            {{#if isLastPoint}}
+            {{colorMarker '#d9351f'}}
+            {{else if isFirstPoint}}
+            {{colorMarker '#d9351f'}}
+            {{/if}}
+          includeArrows: false
+          includeLines: false
+          mapStyle: satellite
+          pinMode: advanced
+          popupTemplate: |-
+            ##### **{{deviceName}}** {{#if isLastPoint}}{{/if}}
+
+            {{format time}}
+
+            ({{format latitude}}, {{format longitude}})
+          resizedPins: true
+          resolution: 60000
+          startColor: '#ff261b'
+        height: 2
+        id: GyjT7SqyHb
+        startX: 1
+        startY: 1.5
+        width: 3
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '{{percent}} < 60'
+              id: 36RALdVXrJ
+            - color: 'rgba(242, 245, 7, 1)'
+              condition: '{{percent}} > 60 && {{percent}} < 80'
+              id: AhavVdbAq3
+            - color: 'rgba(236, 41, 11, 1)'
+              condition: '{{percent}} > 81'
+              id: Byov19drFF
+          displayAsPercentage: true
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: number
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: distance
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-kst3320SimulatedDevice-0~
+            deviceTags: []
+            label: mm
+        height: 1.5
+        id: tRJknF70lp
+        startX: 0.5
+        startY: 2
+        title: Distance in Millimeters
+        width: 0.5
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '{{percent}} > 75'
+              id: 36RALdVXrJ
+            - color: 'rgba(242, 245, 7, 1)'
+              condition: '{{percent}} > 50 && {{percent}} < 74'
+              id: AhavVdbAq3
+            - color: 'rgba(255, 147, 0, 1)'
+              condition: '{{percent}} > 25 && {{percent}} < 49'
+              id: Byov19drFF
+            - color: 'rgba(236, 41, 11, 1)'
+              condition: '{{percent}} < 24'
+              id: JaLQ-irGt8
+          displayAsPercentage: true
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: battery
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: battery
+            color: '#8db319'
+            deviceIds:
+              - ~losant-device-kst3320SimulatedDevice-0~
+            deviceTags: []
+            label: ''
+        height: 1
+        id: Hrzf_T65Fb
+        startX: 0
+        startY: 2.5
+        title: Battery Percentage
+        width: 0.5
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: mjkHt8wmOX
+        startX: 0
+        startY: 3.5
+        title: 'Historical Distance, Signal Strength & SNR Measurements'
+        width: 4
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: graph
+        config:
+          duration: 43200000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: distance
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-kst3320SimulatedDevice-0~
+              deviceTags: []
+              dotWeight: 2
+              expression: ''
+              graphType: line
+              label: KST3320 (Simulated One)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 3
+        id: IwDY2KXvCq
+        startX: 0
+        startY: 4
+        title: Historical Distance (Millimeter)
+        width: 1
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: graph
+        config:
+          duration: 43200000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: gwRSSI
+              color: 'rgba(255, 154, 37, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-kst3320SimulatedDevice-0~
+              deviceTags: []
+              dotWeight: 2
+              expression: ''
+              graphType: line
+              label: KST3320 (Simulated One)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 3
+        id: C9J5lZ-MG-
+        startX: 2
+        startY: 4
+        title: Historical Signal Strength (RSSI)
+        width: 1
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: graph
+        config:
+          duration: 43200000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: distanceIn
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-kst3320SimulatedDevice-0~
+              deviceTags: []
+              dotWeight: 2
+              expression: ''
+              graphType: line
+              label: KST3320 (Simulated One)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 3
+        id: 3AUMZ7gvft
+        startX: 1
+        startY: 4
+        title: Historical Distance (Inches)
+        width: 1
+      - applicationId: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+        blockType: graph
+        config:
+          duration: 43200000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: gwSNR
+              color: 'rgba(191, 115, 28, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-kst3320SimulatedDevice-0~
+              deviceTags: []
+              dotWeight: 2
+              expression: ''
+              graphType: line
+              label: KST3320 (Simulated One)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 3
+        id: FYpFERVcpc
+        startX: 3
+        startY: 4
+        title: Historical Signal to Noise Ratio (SNR)
+        width: 1
+    contextConfiguration: []
+    defaultTheme: light
+    description: |-
+      ![Image](https://kstechnologies.com/signatures/kstLogoSig.png)
+      #### KST33 Series Distance Sensor Simulated Data (Distance Only)
+      [**KS Technologies**](http://kstechnologies.com) | 
+      11580 Black Forest Road, Suite #60 | 
+      Colorado Springs, CO. 80908
+    id: ~losant-dashboard-simulatedKst3320DashboardDistanceOnly-2~
+    name: Simulated KST3320 Dashboard (Distance Only)
+    public: false
+    refreshRate: 60
+    reportConfigs: []
+version: 1

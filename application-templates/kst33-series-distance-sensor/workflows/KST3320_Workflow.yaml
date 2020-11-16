@@ -1,0 +1,390 @@
+resourceType: Flow
+resources:
+  - description: 'Workflow for a KST3320 on Actility, MachineQ or Helium Network.'
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-kst3320Workflow-0~
+    name: KST3320 Workflow
+    nodes:
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeState: false
+          resultPath: data.devObject
+          resultsPage: '0'
+          resultsPerPage: '100'
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: dev_eui
+              valueTemplate: '{{data.body.devEUI}}'
+          tagsAsObject: true
+        id: gJwerH6uEl
+        meta:
+          category: data
+          description: ''
+          id: gJwerH6uEl
+          label: 'Device: Get'
+          name: get-device
+          x: 260
+          'y': 1060
+        outputIds:
+          - - 9MAMM8RQWn
+        type: GetDeviceNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: distance
+              valueTemplate: '{{data.body.payload.distance}}'
+            - key: distanceIn
+              valueTemplate: '{{data.body.payload.distanceIN}}'
+            - key: battery
+              valueTemplate: '{{data.body.payload.battery}}'
+            - key: devEUI
+              valueTemplate: '{{data.body.devEUI}}'
+            - key: carrier
+              valueTemplate: '{{data.body.carrier}}'
+            - key: lpp
+              valueTemplate: '{{data.body.lpp}}'
+            - key: gwAdrBit
+              valueTemplate: '{{data.body.gateway.adrBit}}'
+            - key: gwChannel
+              valueTemplate: '{{data.body.gateway.channel}}'
+            - key: gwID
+              valueTemplate: '{{data.body.gateway.id}}'
+            - key: gwFreq
+              valueTemplate: '{{data.body.gateway.freq}}'
+            - key: gwRSSI
+              valueTemplate: '{{data.body.gateway.rssi}}'
+            - key: gwSF
+              valueTemplate: '{{data.body.gateway.sf}}'
+            - key: fillLevel
+              valueTemplate: '{{data.body.payload.fillLevel}}'
+            - key: lat
+              valueTemplate: '{{data.body.payload.lat}}'
+            - key: lng
+              valueTemplate: '{{data.body.payload.lng}}'
+            - key: location
+              valueTemplate: '{{data.body.payload.location}}'
+            - key: alt
+              valueTemplate: '{{data.body.payload.alt}}'
+            - key: altFT
+              valueTemplate: '{{data.body.payload.altFT}}'
+            - key: sat
+              valueTemplate: '{{data.body.payload.sat}}'
+            - key: vacc
+              valueTemplate: '{{data.body.payload.vacc}}'
+            - key: hacc
+              valueTemplate: '{{data.body.payload.hacc}}'
+            - key: gwSNR
+              valueTemplate: '{{data.body.gateway.snr}}'
+          deviceId: data.devObject.0.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: cFSn2eUjOE
+        meta:
+          category: output
+          description: ''
+          id: cFSn2eUjOE
+          label: Device State
+          name: device-state
+          x: 360
+          'y': 1280
+        outputIds:
+          - - 3aiFlTo-KE
+        type: DeviceChangeStateNode
+      - config:
+          message: ''
+          property: ''
+        id: 3aiFlTo-KE
+        meta:
+          category: output
+          description: ''
+          id: 3aiFlTo-KE
+          label: "\U0001F41EDebug"
+          name: debug
+          x: 360
+          'y': 1380
+        outputIds: []
+        type: DebugNode
+      - config:
+          statements:
+            - expression: '{{data.body.payload.distance}} * 0.0393701'
+              resultPath: data.body.payload.distanceIN
+        id: mVGbz6a8U4
+        meta:
+          category: logic
+          description: ''
+          id: mVGbz6a8U4
+          label: MM to IN
+          name: math
+          x: 220
+          'y': 500
+        outputIds:
+          - - W5CdBDQp6e
+        type: MathNode
+      - config:
+          method: concat
+          methodArgs:
+            - '{{data.body.payload.lng}}'
+          resultPath: data.body.payload.location
+          sourceData: '{{data.body.payload.lat}},'
+        id: VdlauM-bMV
+        meta:
+          category: logic
+          description: ''
+          id: VdlauM-bMV
+          label: Location
+          name: string
+          x: 220
+          'y': 700
+        outputIds:
+          - - PKYB0gs156
+        type: StringNode
+      - config:
+          expression: '{{data.body.lpp}} == 82'
+        id: HVo0XY0-Yf
+        meta:
+          category: logic
+          description: ''
+          id: HVo0XY0-Yf
+          label: Distance?
+          name: conditional
+          x: 40
+          'y': 500
+        outputIds:
+          - - PKpI-uw5Rx
+          - - mVGbz6a8U4
+        type: ConditionalNode
+      - config:
+          expression: '{{data.body.lpp}} == 88'
+        id: PKpI-uw5Rx
+        meta:
+          category: logic
+          description: ''
+          id: HVo0XY0-Yf
+          label: GPS?
+          name: conditional
+          x: 40
+          'y': 700
+        outputIds:
+          - - XHhXgt2GMX
+          - - VdlauM-bMV
+        type: ConditionalNode
+      - config:
+          statements:
+            - expression: '{{data.body.payload.alt}} * 3.280839895'
+              resultPath: data.body.payload.altFt
+        id: PKYB0gs156
+        meta:
+          category: logic
+          description: ''
+          id: PKYB0gs156
+          label: Meter to Feet
+          name: math
+          x: 400
+          'y': 700
+        outputIds:
+          - - e35o7aYoFj
+        type: MathNode
+      - config:
+          expression: '{{data.body.lpp}} == 78'
+        id: XHhXgt2GMX
+        meta:
+          category: logic
+          description: ''
+          id: HVo0XY0-Yf
+          label: Battery?
+          name: conditional
+          x: 80
+          'y': 940
+        outputIds:
+          - []
+          - - gJwerH6uEl
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: e35o7aYoFj
+        meta:
+          category: output
+          description: ''
+          id: 3aiFlTo-KE
+          label: "\U0001F5FA GPS"
+          name: debug
+          x: 400
+          'y': 800
+        outputIds:
+          - - gJwerH6uEl
+        type: DebugNode
+      - config:
+          script: >-
+            // "heightAboveFillLine" can be changed to accommodate a gap between
+            the KST3320 and the top of what you are measuring
+
+            var heightAboveFillLine = 0; // realistically, about 100mm
+
+
+            // "distanceToBottom" can be changed to the depth of what it is you
+            are measuring. KST3320 can see up to 4000mm
+
+            var distanceToBottom = 4000;
+
+
+            var calculatedPercentage;
+
+
+            calculatedPercentage = 100 - (100 *
+            ((payload.data.body.payload.distance -
+            heightAboveFillLine)/distanceToBottom));
+
+
+            if( calculatedPercentage >= 100) calculatedPercentage = 100;
+
+            if( calculatedPercentage < 0 ) calculatedPercentage = 0;
+
+
+            payload.data.body.payload.fillLevel = calculatedPercentage;
+        id: W5CdBDQp6e
+        meta:
+          category: logic
+          description: ''
+          id: W5CdBDQp6e
+          label: FIll Level
+          name: function
+          x: 400
+          'y': 500
+        outputIds:
+          - - gJwerH6uEl
+        type: RawFunctionNode
+      - config: {}
+        id: RLI3ul8vpZ
+        meta:
+          annotationText: >-
+            Choose the webhook that you created. If you have not created one,
+            please see the "Create Webhook in Losant" section in the About This
+            Application in the Overview.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 400
+          x: 20
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: U3d8wysGSG
+        meta:
+          annotationText: >-
+            This looks to see if the payload is equal to distance. If true, then
+            we move on to converting the distance from millimeters to inches and
+            set the fill level percentage calculation. 
+
+
+            The Fill Level function can be adjusted to accommodate your specific
+            application needs. Please see the comments in the function.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 600
+          x: 20
+          'y': 340
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 6ee7WHecJP
+        meta:
+          annotationText: >-
+            If the payload was not the distance payload, then we check to see if
+            it was the GPS payload. If this was true, then we move on to getting
+            the location and converting it from meters to feet.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 600
+          x: 20
+          'y': 600
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Wuvy5kchhc
+        meta:
+          annotationText: >-
+            If the payload was not the distance or GPS payload, then we check if
+            it was the battery payload. If this was true, we then get the
+            battery. (this only pushes once per day)
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 300
+          x: 20
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: XVTqIUcVUN
+        meta:
+          annotationText: >-
+            This workflow is used once you have purchased a KST3320 Dev Kit and
+            are ready to see real KST3320 data in the dashboard from a LoRa
+            network.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 400
+          x: 20
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.devObject}}'
+        id: 9MAMM8RQWn
+        meta:
+          category: logic
+          description: ''
+          id: 9MAMM8RQWn
+          label: Device Exists?
+          name: conditional
+          x: 260
+          'y': 1160
+        outputIds:
+          - - orYm0Sm8MX
+          - - cFSn2eUjOE
+        type: ConditionalNode
+      - config:
+          message: Device Not Found!
+          property: ''
+        id: orYm0Sm8MX
+        meta:
+          category: output
+          description: ''
+          id: orYm0Sm8MX
+          label: Debug
+          name: debug
+          x: 160
+          'y': 1280
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~losant-webhook-receiveData-0~
+        meta:
+          category: trigger
+          description: ''
+          id: J3JKYuA5-q
+          label: Webhook
+          name: webhook
+          uiId: J3JKYuA5-q
+          x: 120
+          'y': 240
+        outputIds:
+          - - HVo0XY0-Yf
+        type: webhook
+version: 1

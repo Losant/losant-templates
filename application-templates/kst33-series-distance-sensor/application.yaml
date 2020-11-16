@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to use the KST3320 LoRaWAN distance sensor from KS
+      Technologies.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-applicationKst33SeriesDistanceSensor-0~
+    name: KST33 Series Distance Sensor
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

@@ -1,0 +1,451 @@
+resourceType: Flow
+resources:
+  - description: KST3320 simulated (no real hardware needed) workflow.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-simulatedKst3320Workflow-1~
+    name: Simulated KST3320 Workflow
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: 3aiFlTo-KE
+        meta:
+          category: output
+          description: ''
+          id: 3aiFlTo-KE
+          label: "\U0001F41EDebug"
+          name: debug
+          x: 520
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          statements:
+            - expression: '{{data.distance}} * 0.0393701'
+              resultPath: data.distanceIn
+            - expression: '100 - (100 * (({{data.distance}} - 0)/4000))'
+              resultPath: data.fillLevel
+        id: mVGbz6a8U4
+        meta:
+          category: logic
+          description: ''
+          id: mVGbz6a8U4
+          label: Inch / Fill %
+          name: math
+          x: 280
+          'y': 600
+        outputIds:
+          - - D0XvsrAfvw
+        type: MathNode
+      - config:
+          max: 100
+          min: 90
+          resultPath: data.battery
+        id: hpPD5PADjM
+        meta:
+          category: logic
+          description: ''
+          id: hpPD5PADjM
+          label: Battery
+          name: random-number
+          x: 40
+          'y': 360
+        outputIds:
+          - - KlSA9_Q9jf
+        type: RandomNumberNode
+      - config:
+          max: 4000
+          min: 0
+          resultPath: data.distance
+        id: KlSA9_Q9jf
+        meta:
+          category: logic
+          description: ''
+          id: hpPD5PADjM
+          label: Distance
+          name: random-number
+          x: 280
+          'y': 520
+        outputIds:
+          - - mVGbz6a8U4
+        type: RandomNumberNode
+      - config:
+          max: -50
+          min: -100
+          resultPath: data.gwRSSI
+        id: D0XvsrAfvw
+        meta:
+          category: logic
+          description: ''
+          id: hpPD5PADjM
+          label: RSSI
+          name: random-number
+          x: 520
+          'y': 520
+        outputIds:
+          - - fQe-g56bEa
+        type: RandomNumberNode
+      - config:
+          max: 15
+          min: 5
+          resultPath: data.gwSNR
+        id: fQe-g56bEa
+        meta:
+          category: logic
+          description: ''
+          id: hpPD5PADjM
+          label: SNR
+          name: random-number
+          x: 520
+          'y': 600
+        outputIds:
+          - - pEiVH4yIjV
+        type: RandomNumberNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: accel_x
+              valueTemplate: '{{data.accel_x}}'
+            - key: accel_y
+              valueTemplate: '{{data.accel_y}}'
+            - key: accel_z
+              valueTemplate: '{{data.accel_z}}'
+            - key: alt
+              valueTemplate: '{{data.alt}}'
+            - key: altFT
+              valueTemplate: '{{data.altFT}}'
+            - key: battery
+              valueTemplate: '{{data.battery}}'
+            - key: carrier
+              valueTemplate: '{{data.carrier}}'
+            - key: devEUI
+              valueTemplate: '{{data.devEUI}}'
+            - key: distance
+              valueTemplate: '{{data.distance}}'
+            - key: distanceIn
+              valueTemplate: '{{data.distanceIn}}'
+            - key: fillLevel
+              valueTemplate: '{{data.fillLevel}}'
+            - key: gwAdrBit
+              valueTemplate: '{{data.gwAdrBit}}'
+            - key: gwChannel
+              valueTemplate: '{{data.gwChannel}}'
+            - key: gwFreq
+              valueTemplate: '{{data.gwFreq}}'
+            - key: gwID
+              valueTemplate: '{{data.gwID}}'
+            - key: gwRSSI
+              valueTemplate: '{{data.gwRSSI}}'
+            - key: gwSF
+              valueTemplate: '{{data.gwSF}}'
+            - key: gwSNR
+              valueTemplate: '{{data.gwSNR}}'
+            - key: hacc
+              valueTemplate: '{{data.hacc}}'
+            - key: humidity
+              valueTemplate: '{{data.humidity}}'
+            - key: lat
+              valueTemplate: '{{data.lat}}'
+            - key: lng
+              valueTemplate: '{{data.lng}}'
+            - key: location
+              valueTemplate: '{{data.location}}'
+            - key: lpp
+              valueTemplate: '{{data.lpp}}'
+            - key: sat
+              valueTemplate: '{{data.sat}}'
+            - key: temp
+              valueTemplate: '{{data.temp}}'
+            - key: tempF
+              valueTemplate: '{{data.tempF}}'
+            - key: vacc
+              valueTemplate: '{{data.vacc}}'
+          deviceId: ~losant-device-kst3320SimulatedDevice-0~
+          deviceIdTemplateType: stringTemplate
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: OPv8CQ4Lei
+        meta:
+          category: output
+          description: ''
+          id: cFSn2eUjOE
+          label: KST3320
+          name: device-state
+          x: 520
+          'y': 1080
+        outputIds:
+          - - 3aiFlTo-KE
+        type: DeviceChangeStateNode
+      - config:
+          max: 50
+          min: -20
+          resultPath: data.temp
+        id: pEiVH4yIjV
+        meta:
+          category: logic
+          description: ''
+          id: pEiVH4yIjV
+          label: Temperature
+          name: random-number
+          x: 760
+          'y': 520
+        outputIds:
+          - - Le9fgNlFQl
+        type: RandomNumberNode
+      - config:
+          max: 100
+          min: 0
+          resultPath: data.humidity
+        id: sj572tckw3
+        meta:
+          category: logic
+          description: ''
+          id: sj572tckw3
+          label: Humidity
+          name: random-number
+          x: 1000
+          'y': 520
+        outputIds:
+          - - '-qpxFc1uEh'
+        type: RandomNumberNode
+      - config:
+          max: 7.999
+          min: -7.999
+          resultPath: data.accel_x
+        id: AM5nb0tVQ6
+        meta:
+          category: logic
+          description: ''
+          id: AM5nb0tVQ6
+          label: Accel X
+          name: random-number
+          x: 520
+          'y': 780
+        outputIds:
+          - - j31rmh185W
+        type: RandomNumberNode
+      - config:
+          max: 7.999
+          min: -7.999
+          resultPath: data.accel_y
+        id: j31rmh185W
+        meta:
+          category: logic
+          description: ''
+          id: j31rmh185W
+          label: Accel Y
+          name: random-number
+          x: 520
+          'y': 860
+        outputIds:
+          - - ZslMtGtcwu
+        type: RandomNumberNode
+      - config:
+          max: 7.999
+          min: -7.999
+          resultPath: data.accel_z
+        id: ZslMtGtcwu
+        meta:
+          category: logic
+          description: ''
+          id: ZslMtGtcwu
+          label: Accel Z
+          name: random-number
+          x: 520
+          'y': 940
+        outputIds:
+          - - OPv8CQ4Lei
+        type: RandomNumberNode
+      - config:
+          statements:
+            - expression: '{{data.temp}} * 9/5 + 32'
+              resultPath: data.tempF
+        id: Le9fgNlFQl
+        meta:
+          category: logic
+          description: ''
+          id: mVGbz6a8U4
+          label: C° to F°
+          name: math
+          x: 760
+          'y': 600
+        outputIds:
+          - - sj572tckw3
+        type: MathNode
+      - config: {}
+        id: p8ZcQlFzaG
+        meta:
+          annotationText: Set the interval time for pushing all simulated data
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 220
+          x: 20
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: VI-IsEMK4Y
+        meta:
+          annotationText: Battery is shown as a % (0-100)
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 220
+          x: 20
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: EUjBPBQ8wK
+        meta:
+          annotationText: >
+            KST3320 has a 4 meter distance sensor (range 0-4000mm)
+
+
+            Inch / Fill % Node converts mm to inches and calculates Fill Level
+            based on mm distance
+          category: annotation
+          height: 380
+          label: Note
+          name: note
+          width: 220
+          x: 260
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: q4umnWHzN4
+        meta:
+          annotationText: >
+            RSSI & SNR simulate the Received Signal Strength Indicator and
+            Signal to Noise from the KST3320 to the LoRa Gateway / Hotspot
+          category: annotation
+          height: 380
+          label: Note
+          name: note
+          width: 220
+          x: 500
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: atOFzeysd5
+        meta:
+          annotationText: >
+            Temperature range from -20 - 50°C (since the KST3320 is IPx6 rated,
+            this temperature reading is inside the enclosure. There is a Gore
+            Membrane that lets the KST3320 breath)
+
+
+            C° to F° Node converts Celsius to Fahrenheit 
+          category: annotation
+          height: 380
+          label: Note
+          name: note
+          width: 220
+          x: 740
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: meIDLBtWx1
+        meta:
+          annotationText: >
+            Humidity range from 0-100% (since the KST3320 is IPx6 rated, this
+            humidity reading is inside the enclosure. There is a Gore Membrane
+            that lets the KST3320 breath)
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 220
+          x: 980
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: yq6ZvXH5Wp
+        meta:
+          annotationText: >-
+            GPS Sensor providing location. You can update the Latitude and
+            Longitude. KST3320 can also send altitude, # of Satellites seen,
+            horizontal & vertical accuracy. (currently not being simulated)
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 220
+          x: 260
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: XKTQYdv1w6
+        meta:
+          annotationText: '3 axis Accelerometer with ±8g resolution. '
+          category: annotation
+          height: 340
+          label: Note
+          name: note
+          width: 220
+          x: 500
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: a62YnNHXj5
+        meta:
+          annotationText: >-
+            This workflow is for simulating a KST3320 with all the available
+            sensors. This way you can see how the device will function before
+            purchasing a Dev Kit.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 400
+          x: 20
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: data.location
+              type: set
+              valueTemplate: '38.999796,-104.701690'
+        id: '-qpxFc1uEh'
+        meta:
+          category: logic
+          description: ''
+          id: '-qpxFc1uEh'
+          label: Location
+          name: mutate
+          x: 280
+          'y': 900
+        outputIds:
+          - - AM5nb0tVQ6
+        type: MutateNode
+    triggers:
+      - config:
+          seconds: 900
+        key: ~losant-flow-simulatedKst3320Workflow-1~-HdVX3KwBaOQAAZ6kvwFQN
+        meta:
+          category: trigger
+          description: ''
+          id: N8RAXHUjjL
+          label: Timer
+          name: timer
+          timeAt: ''
+          timerTypeSelect: seconds
+          uiId: N8RAXHUjjL
+          weekdays: []
+          x: 40
+          'y': 200
+        outputIds:
+          - - hpPD5PADjM
+        type: timer
+version: 1
