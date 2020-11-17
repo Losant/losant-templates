@@ -23,12 +23,11 @@ resources:
         blockType: device-state-table
         config:
           attributes:
-            - battery
             - distance
             - distanceIn
             - fillLevel
-            - hotspotRssi
-            - hotspotSNR
+            - gwRSSI
+            - gwSNR
           columns:
             - headerTemplate: '{{name}}'
               id: defaultTimestampColumn
@@ -53,17 +52,12 @@ resources:
               id: EsFqP9Jxx6
               rowTemplate: '{{format value ''.0f''}}%'
               type: attribute
-            - attribute: battery
-              headerTemplate: Battery
-              id: yyie5owQkR
-              rowTemplate: '{{format value}}%'
-              type: attribute
-            - attribute: hotspotRssi
+            - attribute: gwRSSI
               headerTemplate: RSSI
               id: y2R5wHIGPC
               rowTemplate: '{{format value}} dBm'
               type: attribute
-            - attribute: hotspotSNR
+            - attribute: gwSNR
               headerTemplate: SNR
               id: zjKFE5larx
               rowTemplate: '{{format value}}'
