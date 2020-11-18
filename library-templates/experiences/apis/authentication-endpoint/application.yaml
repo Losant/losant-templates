@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This template includes an Experience Endpoint to authenticate and
+      return an authentication token for Experiences Users via a RESTful API.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesApIsAuthenticationEndpoint-0~
+    name: Authentication Endpoint
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - authentication
+      - rest
+      - api
+      - user
+version: 1

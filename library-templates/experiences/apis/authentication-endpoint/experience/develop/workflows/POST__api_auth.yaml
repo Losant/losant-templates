@@ -1,0 +1,215 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Returns an authentication token for an experience user.
+    enabled: true
+    flowId: ~losant-flow-postApiAuth-0~
+    globals: []
+    id: ~losant-flowVersion-postApiAuth-0~
+    name: POST /api/auth
+    nodes:
+      - config:
+          bodyTemplate: "{\n\t\"success\": true,\n\t\"token\": \"{{working.userToken}}\"\n}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: cFQt82sB51
+        meta:
+          category: output
+          description: ''
+          id: cFQt82sB51
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 580
+          'y': 540
+        outputIds:
+          - - io1Lce5A8G
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: io1Lce5A8G
+        meta:
+          category: output
+          description: ''
+          id: io1Lce5A8G
+          label: Success
+          name: debug
+          x: 580
+          'y': 640
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorsPath: ''
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 1024
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "maxLength": 2048
+                    }
+                },
+                "required": ["email", "password"],
+                "additionalProperties": false
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: M4fNUDwDZ2
+        meta:
+          category: logic
+          description: ''
+          id: M4fNUDwDZ2
+          label: Validate Payload
+          name: validate-payload
+          x: 200
+          'y': 140
+        outputIds:
+          - - vzELOmFSUW
+          - - ua3mvz5tzS
+        type: ValidatePayloadNode
+      - config:
+          emailTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: false
+          passwordTemplate: '{{data.body.password}}'
+          tokenResultPath: ''
+          ttlTemplate: ''
+          userResultPath: ''
+        id: ua3mvz5tzS
+        meta:
+          authMode: emailPassword
+          category: experience
+          description: ''
+          id: ua3mvz5tzS
+          label: Authenticate
+          name: experience-user-auth
+          x: 440
+          'y': 300
+        outputIds:
+          - - U_Q2RCNeLZ
+          - - ffnIh2voLa
+        type: ExperienceUserAuthNode
+      - config:
+          emailOrIdTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: false
+          resultPath: working.userToken
+          ttlTemplate: ''
+        id: ffnIh2voLa
+        meta:
+          category: experience
+          description: ''
+          id: ffnIh2voLa
+          label: Generate Token
+          name: experience-user-token
+          x: 580
+          'y': 440
+        outputIds:
+          - - cFQt82sB51
+        type: ExperienceUserTokenNode
+      - config:
+          bodyTemplate: "{\n\t\"success\": false,\n\t\"error\": \"Invalid request. Body must contain valid email and password fields.\"\n}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: vzELOmFSUW
+        meta:
+          category: output
+          description: ''
+          id: cFQt82sB51
+          label: Invalid Payload
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 100
+          'y': 320
+        outputIds:
+          - - RBS8epMBi0
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: "{\n\t\"success\": false,\n\t\"error\": \"Invalid credentials.\"\n}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: U_Q2RCNeLZ
+        meta:
+          category: output
+          description: ''
+          id: cFQt82sB51
+          label: Invalid Credentials
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 360
+          'y': 440
+        outputIds:
+          - - 3hFgesu_pq
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: RBS8epMBi0
+        meta:
+          category: output
+          description: ''
+          id: RBS8epMBi0
+          label: Invalid Payload
+          name: debug
+          x: 100
+          'y': 420
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: 3hFgesu_pq
+        meta:
+          category: output
+          description: ''
+          id: 3hFgesu_pq
+          label: Authentication Failed
+          name: debug
+          x: 360
+          'y': 540
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postApiAuth-0~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /api/auth
+          name: endpoint
+          uiId: eN-1noLaX8
+          x: 200
+          'y': 40
+        outputIds:
+          - - M4fNUDwDZ2
+        type: endpoint
+    version: develop
+version: 1

@@ -1,0 +1,10 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postApiAuth-0~
+    method: post
+    route: /api/auth
+    version: develop
+version: 1
