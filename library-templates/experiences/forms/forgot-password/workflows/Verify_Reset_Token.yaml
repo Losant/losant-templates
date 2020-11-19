@@ -156,7 +156,7 @@ resources:
         type: ConditionalNode
       - config:
           expression: >-
-            {{formatDate working.user.passwordLastUpdated 'X'}} <
+            {{formatDate (defaultTo working.user.passwordLastUpdated 0) 'X'}} <
             {{working.decoded.iat}}
         id: gpVJDpxvyD
         meta:
