@@ -1,0 +1,31 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    description: A catch-all route that fires on any GET request that is not caught
+      by another route. This provides the behavior of a typical application's
+      404 page.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getAny-0~
+    method: get
+    route: /{any*}
+    staticReply:
+      statusCode: 404
+      type: page
+      value: ~losant-experienceView-404Page-0~
+    version: develop
+  - access: public
+    description: A catch-all route that fires on any POST request that is not caught
+      by another route. This provides the behavior of a typical application's
+      404 page.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postAny-1~
+    method: post
+    route: /{any*}
+    staticReply:
+      statusCode: 404
+      type: page
+      value: ~losant-experienceView-404Page-0~
+    version: develop
+version: 1

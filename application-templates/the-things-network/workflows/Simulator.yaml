@@ -1,0 +1,401 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Generates and encodes simulated payloads to mimic data being received from
+      TTN.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-simulator-2~
+    name: Simulator
+    nodes:
+      - config:
+          max: 360
+          min: 270
+          resultPath: working.voltage
+        id: wZWh1eN8qN
+        meta:
+          category: logic
+          description: ''
+          id: wZWh1eN8qN
+          label: Random Number
+          name: random-number
+          x: 240
+          'y': 280
+        outputIds:
+          - - jeUlgMq2Wd
+        type: RandomNumberNode
+      - config: {}
+        id: cdMkceR9dW
+        meta:
+          annotationText: >-
+            Random value between 270 and 360 (2.7 and 3.6 volts). Radio Bridge
+            reports in units of 10mv, so values are multiplied by 100.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 440
+          'y': 240
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          script: |-
+            // Initialize the buffer from an actual payload.
+            // This ensures the meta data is correct.
+            let buf = Buffer.from('HBQAADc=', 'base64');
+
+            // Write the random voltage value into the buffer.
+            buf.writeUInt16BE(payload.working.voltage, 3);
+
+            // Save the resulting payload as encoded base64.
+            payload.working.payload_raw = buf.toString('base64');
+        id: jeUlgMq2Wd
+        meta:
+          category: logic
+          description: ''
+          id: jeUlgMq2Wd
+          label: Voltage
+          name: function
+          x: 240
+          'y': 400
+        outputIds:
+          - - yo05jcmZZ3
+        type: RawFunctionNode
+      - config: {}
+        id: VYdC1R59NW
+        meta:
+          annotationText: >-
+            Creates a base64 encoded string identical to what's received through
+            TTN. For encoding details see Radio Bridge's documentation.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 440
+          'y': 400
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: |-
+            {
+              "downlink_url": "https://integrations.thethingsnetwork.org/ttn-us-west/api/v2/down/<your-TTN-details>",
+              "metadata": {
+                "gateways": [
+                  {
+                    "rf_chain": 0,
+                    "snr": 14,
+                    "rssi": -47,
+                    "channel": 0,
+                    "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ssZ'}}",
+                    "timestamp": {{formatDate time 'X'}},
+                    "gtw_id": "<your-gateway-id>"
+                  }
+                ],
+                "coding_rate": "4/5",
+                "data_rate": "SF9BW125",
+                "modulation": "LORA",
+                "frequency": 905.1,
+                "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ss.SSSZ'}}"
+              },
+              "payload_raw": "{{working.payload_raw}}",
+              "counter": 0,
+              "port": 1,
+              "hardware_serial": "0000000000000000",
+              "dev_id": "0000000000000000",
+              "app_id": "<your-TTN-app-id>"
+            }
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Authorization
+              valueTemplate: '{{globals.LORA_NETWORK_SERVER_AUTH_TOKEN}}'
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: ''
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://triggers.losant.com/webhooks/2Q30V5laDA1Sp_MYUE64WgnJtra3qTb5Fqz-zk3d
+        id: yo05jcmZZ3
+        meta:
+          category: output
+          description: ''
+          id: yo05jcmZZ3
+          label: HTTP
+          name: http
+          x: 140
+          'y': 560
+        outputIds:
+          - - bwJ7ENRCPV
+        type: HttpNode
+      - config: {}
+        id: RBKV8DZrGw
+        meta:
+          annotationText: >-
+            POST the data to the TTN Receiver webhook. Set the `dev_id` to the
+            simulation device and the encoded data to the base64 string
+            generated above.
+
+
+            For payload details see:
+
+
+            https://www.thethingsnetwork.org/docs/applications/http/
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 360
+          x: 440
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: bwJ7ENRCPV
+        meta:
+          category: output
+          description: ''
+          id: bwJ7ENRCPV
+          label: Debug
+          name: debug
+          x: 140
+          'y': 820
+        outputIds: []
+        type: DebugNode
+      - config:
+          script: |-
+            // Initialize from actual supervisory payload.
+            let buf = Buffer.from('HgERADEANwAAAAM=', 'base64');
+
+            buf[2] = 0x00; // Clear all supervisory bit flags.
+
+            payload.working = payload.working || {};
+            payload.working.payload_raw = buf.toString('base64');
+        id: kOVMtGryZz
+        meta:
+          category: logic
+          description: ''
+          id: kOVMtGryZz
+          label: Supervisory
+          name: function
+          x: 40
+          'y': 400
+        outputIds:
+          - - yo05jcmZZ3
+        type: RawFunctionNode
+      - config: {}
+        id: MSyXwgMQLJ
+        meta:
+          annotationText: >-
+            These allow you to simulate the Tamper events that come from Radio
+            Bridge devices.
+
+
+            Open = someone opened the lid.  
+
+            Closed = the lid was closed again.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 360
+          x: 440
+          'y': 940
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.tamper
+              type: set
+              valueTemplate: FQIB
+        id: c9hRu_rkGp
+        meta:
+          category: logic
+          description: ''
+          id: c9hRu_rkGp
+          label: Mutate
+          name: mutate
+          x: 240
+          'y': 1060
+        outputIds:
+          - - AZsklFCuSK
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.tamper
+              type: set
+              valueTemplate: EgIA
+        id: 0wRfpZf-dG
+        meta:
+          category: logic
+          description: ''
+          id: 0wRfpZf-dG
+          label: Mutate
+          name: mutate
+          x: 40
+          'y': 1060
+        outputIds:
+          - - AZsklFCuSK
+        type: MutateNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: |-
+            {
+              "downlink_url": "https://integrations.thethingsnetwork.org/ttn-us-west/api/v2/down/<your-TTN-details>",
+              "metadata": {
+                "gateways": [
+                  {
+                    "rf_chain": 0,
+                    "snr": 14,
+                    "rssi": -47,
+                    "channel": 0,
+                    "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ssZ'}}",
+                    "timestamp": {{formatDate time 'X'}},
+                    "gtw_id": "<your-gateway-id>"
+                  }
+                ],
+                "coding_rate": "4/5",
+                "data_rate": "SF9BW125",
+                "modulation": "LORA",
+                "frequency": 905.1,
+                "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ss.SSSZ'}}"
+              },
+              "payload_raw": "{{working.tamper}}",
+              "counter": 0,
+              "port": 1,
+              "hardware_serial": "0000000000000000",
+              "dev_id": "0000000000000000",
+              "app_id": "<your-TTN-app-id>"
+            }
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Authorization
+              valueTemplate: '{{globals.LORA_NETWORK_SERVER_AUTH_TOKEN}}'
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: ''
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://triggers.losant.com/webhooks/2Q30V5laDA1Sp_MYUE64WgnJtra3qTb5Fqz-zk3d
+        id: AZsklFCuSK
+        meta:
+          category: output
+          description: ''
+          id: yo05jcmZZ3
+          label: HTTP
+          name: http
+          x: 140
+          'y': 1180
+        outputIds:
+          - - EixmhLV_LF
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: EixmhLV_LF
+        meta:
+          category: output
+          description: ''
+          id: bwJ7ENRCPV
+          label: Debug
+          name: debug
+          x: 140
+          'y': 1420
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 5iNQCo3piK
+        meta:
+          annotationText: >-
+            Generates data every 5 minutes, but you can also push the Virtual
+            Button to generate simulated data at any time.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 440
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          seconds: 300
+        key: ~losant-flow-simulator-2~-iCNEwNYxqpkP7KgJ3K7z6
+        meta:
+          category: trigger
+          description: ''
+          id: GignUd9JS5
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: GignUd9JS5
+          x: 40
+          'y': 40
+        outputIds:
+          - - wZWh1eN8qN
+            - kOVMtGryZz
+        type: timer
+      - config: {}
+        key: ~losant-flow-simulator-2~-b4nLciXl3piCfghmSyJPV
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: A7E4hQgD6y
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: A7E4hQgD6y
+          x: 240
+          'y': 40
+        outputIds:
+          - - wZWh1eN8qN
+            - kOVMtGryZz
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-simulator-2~-GLH4IdZUqY
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: A7E4hQgD6y
+          label: Tamper Open
+          name: virtualButton
+          payload: ''
+          uiId: QEWlSalq2p
+          x: 40
+          'y': 940
+        outputIds:
+          - - 0wRfpZf-dG
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-simulator-2~-Bf6yL8f2GG
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: A7E4hQgD6y
+          label: Tamper Closed
+          name: virtualButton
+          payload: ''
+          uiId: anip90I8z0
+          x: 240
+          'y': 940
+        outputIds:
+          - - c9hRu_rkGp
+        type: virtualButton
+version: 1

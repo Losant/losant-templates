@@ -1,0 +1,18 @@
+resourceType: ExperienceView
+resources:
+  - description: Created for Endpoint GET /*.
+    id: ~losant-experienceView-404Page-0~
+    localFilename: ./404_Page.hbs
+    name: 404 Page
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: This page renders whenever a fatal error is thrown in a workflow
+      processing an experience endpoint request.
+    id: ~losant-experienceView-500Page-2~
+    localFilename: ./500_Page.hbs
+    name: 500 Page
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

@@ -1,0 +1,25 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags:
+          units: volts
+        dataType: number
+        description: The voltage read by the sensor.
+        name: voltage
+      - attributeTags:
+          units: volts
+        dataType: number
+        description: The voltage of the sensor's internal battery.
+        name: battery_voltage
+      - attributeTags: {}
+        dataType: number
+        description: 0 = tamper switch open. 1 = tamper switch closed.
+        name: tamper
+    children: []
+    deviceClass: standalone
+    id: ~losant-device-radioBridgeRbs306Vm30-1~
+    name: Radio Bridge RBS306-VM30
+    tags:
+      - key: dev_id
+        value: "0000000000000000"
+version: 1

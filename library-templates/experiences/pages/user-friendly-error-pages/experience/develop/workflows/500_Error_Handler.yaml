@@ -1,0 +1,152 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      A workflow that replies to any fatal error within an experience workflow
+      and issues a user-friendly page reply.
+    enabled: true
+    flowId: ~losant-flow-500ErrorHandler-1~
+    globals: []
+    id: ~losant-flowVersion-500ErrorHandler-1~
+    name: 500 Error Handler
+    nodes:
+      - config:
+          bodyTemplate: data
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-500Page-2~
+          replyIdPath: data.erroredPayload.data.replyId
+          replyType: page
+          responseCodeTemplate: '500'
+          sameSiteTemplate: ''
+        id: Xt_Oxw6hQ_
+        meta:
+          category: output
+          description: ''
+          id: Xt_Oxw6hQ_
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 120
+          'y': 200
+        outputIds:
+          - - c2cdQkN9G5
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: c2cdQkN9G5
+        meta:
+          category: output
+          description: ''
+          id: c2cdQkN9G5
+          label: Debug
+          name: debug
+          x: 120
+          'y': 300
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 1UtinVdkqA
+        meta:
+          annotationText: >-
+            The Workflow Error Trigger includes the original payload at the time
+            of the error under `data.erroredPayload`.
+
+
+            That payload, by default, includes a unique `replyId` property,
+            which is used to reply to the correct endpoint request from the
+            correct user.
+
+
+            This workflow **will not reply to the error request** if the
+            pre-error payload had its `replyId` property removed.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 500
+          x: 320
+          'y': 100
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: ''
+          timeoutTemplate: ''
+          uriTemplate: '{{aNonexistentUrl}}'
+        id: fDgTHAGEKu
+        meta:
+          category: data
+          description: ''
+          id: fDgTHAGEKu
+          label: HTTP
+          name: http
+          x: 120
+          'y': 720
+        outputIds: []
+        type: HttpNode
+      - config: {}
+        id: tCEfqz2flJ
+        meta:
+          annotationText: >-
+            **This is provided as a way for you to test your 500 Error page.**
+
+
+            With its current configuration, this HTTP Node will throw an error
+            when invoked, which will cause the Workflow Error trigger above to
+            fire and reply to your endpoint request.
+
+
+            1. Add an Endpoint Trigger to this workflow.
+
+            2. Choose one of your experience endpoints ...
+               - Make sure that the endpoint does not have a Static Reply configured, as a response will be issued before this workflow runs.
+               - While not required, a GET endpoint is easier to test in your browser as a POST endpoint requires a form submission with the correct `method` set.
+               - If the endpoint is configured through a separate workflow, you may encounter a race condition where sometimes this error case replies first, and sometimes the other workflow does.
+            3. Connect the Endpoint Trigger to this HTTP Node.
+
+            4. In a separate browser tab, make a request to the selected
+            endpoint.
+
+            5. **IMPORTANT:** When you are finished, remember to remove the
+            Endpoint Trigger you added in the first step.
+          category: annotation
+          height: 400
+          label: Note
+          name: note
+          width: 600
+          x: 320
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          scope: experience
+        key: >-
+          ~losant-application-libraryExperiencesPagesUserFriendlyErrorPages-0~-experience-flowError
+        meta:
+          category: trigger
+          description: ''
+          id: gcJTk4DlU4
+          label: Workflow Error
+          name: flowError
+          uiId: gcJTk4DlU4
+          x: 120
+          'y': 100
+        outputIds:
+          - - Xt_Oxw6hQ_
+        type: flowError
+    version: develop
+version: 1

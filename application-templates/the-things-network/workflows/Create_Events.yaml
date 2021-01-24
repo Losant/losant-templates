@@ -1,0 +1,282 @@
+resourceType: Flow
+resources:
+  - description: 'Generates Events on voltage thresholds, tamper, and low battery.'
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-createEvents-3~
+    name: Create Events
+    nodes:
+      - config:
+          expression: '{{data.tamper}} === 0'
+        id: Ikqry6MAJ8
+        meta:
+          category: logic
+          description: ''
+          id: Ikqry6MAJ8
+          label: Switch Open?
+          name: conditional
+          x: 80
+          'y': 320
+        outputIds:
+          - []
+          - - wDnAPJbOGp
+        type: ConditionalNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags: []
+          levelTemplate: critical
+          messageTemplate: 'Tamper switch has been opened on device {{device.name}}.'
+          resultPath: working.newEvent
+          subjectTemplate: Tamper Detected
+          timeSourceType: now
+        id: wDnAPJbOGp
+        meta:
+          category: data
+          description: ''
+          id: wDnAPJbOGp
+          label: 'Event: Create'
+          name: create-event
+          x: 80
+          'y': 420
+        outputIds:
+          - - 2Xhb5bt6wI
+        type: CreateEventNode
+      - config:
+          message: ''
+          property: ''
+        id: 2Xhb5bt6wI
+        meta:
+          category: output
+          description: ''
+          id: 2Xhb5bt6wI
+          label: Debug
+          name: debug
+          x: 80
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags: []
+          levelTemplate: warning
+          messageTemplate: 'Voltage sensor has read zero for device {{device.name}}.'
+          resultPath: working.newEvent
+          subjectTemplate: Zero Voltage
+          timeSourceType: now
+        id: sgYl5ChZtJ
+        meta:
+          category: data
+          description: ''
+          id: wDnAPJbOGp
+          label: 'Event: Create'
+          name: create-event
+          x: 360
+          'y': 420
+        outputIds:
+          - - 21AXQrtTb2
+        type: CreateEventNode
+      - config:
+          message: ''
+          property: ''
+        id: 21AXQrtTb2
+        meta:
+          category: output
+          description: ''
+          id: 2Xhb5bt6wI
+          label: Debug
+          name: debug
+          x: 360
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          branchPath: ''
+          isLatchedPath: ''
+          latchExpression: '{{data.voltage}} === 0'
+          latchIdTemplate: '{{device.id}}'
+          latchResultPath: ''
+          resetExpression: '{{data.voltage}} > 0.1'
+          resetResultPath: ''
+          wasLatchedPath: ''
+        id: YdB6rd0uiv
+        meta:
+          category: logic
+          description: ''
+          id: YdB6rd0uiv
+          label: Zero Voltage?
+          name: latch
+          x: 360
+          'y': 320
+        outputIds:
+          - []
+          - - sgYl5ChZtJ
+        type: LatchNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags: []
+          levelTemplate: warning
+          messageTemplate: >-
+            Low battery voltage ({{data.battery_voltage}}) for device
+            {{device.name}}.
+          resultPath: working.newEvent
+          subjectTemplate: Low Battery
+          timeSourceType: now
+        id: 66pxjNEUc4
+        meta:
+          category: data
+          description: ''
+          id: wDnAPJbOGp
+          label: 'Event: Create'
+          name: create-event
+          x: 640
+          'y': 420
+        outputIds:
+          - - 5M90TyMloC
+        type: CreateEventNode
+      - config:
+          message: ''
+          property: ''
+        id: 5M90TyMloC
+        meta:
+          category: output
+          description: ''
+          id: 2Xhb5bt6wI
+          label: Debug
+          name: debug
+          x: 640
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          branchPath: ''
+          isLatchedPath: ''
+          latchExpression: '{{data.battery_voltage}} < 2.75'
+          latchIdTemplate: '{{device.id}}'
+          latchResultPath: ''
+          resetExpression: '{{data.battery_voltage}} > 3'
+          resetResultPath: ''
+          wasLatchedPath: ''
+        id: 1hrQG43FQV
+        meta:
+          category: logic
+          description: ''
+          id: YdB6rd0uiv
+          label: Low Voltage?
+          name: latch
+          x: 640
+          'y': 320
+        outputIds:
+          - []
+          - - 66pxjNEUc4
+        type: LatchNode
+      - config: {}
+        id: YREJsd6-PO
+        meta:
+          annotationText: >-
+            Create an Event whenever `tamper` is reported as 0, which means the
+            tamper switch is open.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 40
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: gfTf-81ens
+        meta:
+          annotationText: >-
+            Create an Event whenever `voltage` is reported as 0. Uses a latch to
+            prevent multiple events until `voltage` goes back above 0.1.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 320
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: E0bCCzx5C1
+        meta:
+          annotationText: >-
+            Create an Event whenever `battery_voltage` is reported as less than
+            2.75. Uses a latch to prevent multiple events until
+            `battery_voltage` goes back above 3.0.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          attributeWhitelist:
+            - tamper
+        key: dev_id/
+        meta:
+          allowedAttributeType: attributeWhitelist
+          category: trigger
+          description: ''
+          id: dZ1YlFgXzi
+          label: Tamper
+          maxAgeToggle: false
+          name: deviceIdsTags
+          timeUnit: '1'
+          uiId: dZ1YlFgXzi
+          x: 80
+          'y': 220
+        outputIds:
+          - - Ikqry6MAJ8
+        type: deviceTag
+      - config:
+          attributeWhitelist:
+            - voltage
+        key: dev_id/
+        meta:
+          allowedAttributeType: attributeWhitelist
+          category: trigger
+          description: ''
+          id: dZ1YlFgXzi
+          label: Voltage
+          maxAgeToggle: false
+          name: deviceIdsTags
+          timeUnit: '1'
+          uiId: cSzapLhaiG
+          x: 360
+          'y': 220
+        outputIds:
+          - - YdB6rd0uiv
+        type: deviceTag
+      - config:
+          attributeWhitelist:
+            - battery_voltage
+        key: dev_id/
+        meta:
+          allowedAttributeType: attributeWhitelist
+          category: trigger
+          description: ''
+          id: dZ1YlFgXzi
+          label: Battery
+          maxAgeToggle: false
+          name: deviceIdsTags
+          timeUnit: '1'
+          uiId: llaVi0u0C0
+          x: 640
+          'y': 220
+        outputIds:
+          - - 1hrQG43FQV
+        type: deviceTag
+version: 1

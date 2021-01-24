@@ -1,0 +1,270 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: HiZoQhLK6b
+        startX: 0
+        startY: 0
+        title: Voltage Sensor
+        width: 4
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: voltage
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: area
+              label: Voltage
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Volts
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 3
+        id: e5z9jjrYqP
+        startX: 0
+        startY: 0.5
+        title: Sensor Voltage
+        width: 3
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: ''
+          gaugeMin: ''
+          gaugeType: number
+          precision: '2'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: LAST
+            attribute: voltage
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: Volts
+        height: 1
+        id: hiSX6LEmx_
+        startX: 3
+        startY: 0.5
+        title: Current Voltage
+        width: 1
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 86400000
+          gaugeMax: ''
+          gaugeMin: ''
+          gaugeType: number
+          precision: '2'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MAX
+            attribute: voltage
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: Volts
+        height: 1
+        id: qa281Uw7OA
+        startX: 3
+        startY: 1.5
+        title: Max Volts (24 hours)
+        width: 1
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 86400000
+          gaugeMax: ''
+          gaugeMin: ''
+          gaugeType: number
+          precision: '2'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MIN
+            attribute: voltage
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: Volts
+        height: 1
+        id: N_coZKnv5i
+        startX: 3
+        startY: 2.5
+        title: Min Volts (24 hours)
+        width: 1
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: jGo_DJI63C
+        startX: 0
+        startY: 3.5
+        title: Device
+        width: 4
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 1200000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: battery_voltage
+              color: 'rgba(141, 179, 25, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: area
+              label: Voltage
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Volts
+              yAxisMax: '4'
+              yAxisMin: ''
+        height: 1.5
+        id: Fe-1gh_Yfk
+        startX: 0
+        startY: 4
+        title: Battery Voltage
+        width: 1.5
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '3'
+          gaugeMin: '2.75'
+          gaugeType: battery
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: battery_voltage
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: volts
+        description: >-
+          The "low battery" bit will be flipped when the voltage drops below
+          2.75v.
+        height: 1.5
+        id: AHWbucGVC5
+        startX: 1.5
+        startY: 4
+        title: Battery Voltage
+        width: 0.5
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: device-state-table
+        config:
+          attributes:
+            - tamper
+          columns:
+            - headerTemplate: '{{name}}'
+              id: defaultTimestampColumn
+              rowTemplate: '{{format value}}'
+              type: timestamp
+            - attribute: tamper
+              headerTemplate: Tamper
+              id: hm7pp3Opi8
+              rowTemplate: |-
+                {{#eq value 0}}
+                Switch Open
+                {{else}}
+                Switch Closed
+                {{/eq}}
+              type: attribute
+          deviceIds:
+            - '{{ctx.device}}'
+          deviceTags: []
+          duration: 2592000000
+        height: 1.5
+        id: hRsNa3HuMY
+        startX: 2
+        startY: 4
+        title: Tamper History
+        width: 1.5
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{value-0}} === 0'
+              id: wo-AMacEgE
+              label: Switch Open
+          defaultCondition:
+            color: '#8db319'
+            label: Switch Closed
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: tamper
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+        height: 1.5
+        id: z3h45n62WM
+        startX: 3.5
+        startY: 4
+        title: Tamper
+        width: 0.5
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+        defaultValue: ~losant-device-radioBridgeRbs306Vm30-1~
+        name: device
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-radioBridgeVoltageSensor-0~
+    name: Radio Bridge Voltage Sensor
+    public: false
+    refreshRate: 60
+version: 1

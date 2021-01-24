@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to receive, decode, and visualize data from The
+      Things Network using Radio Bridge LoRaWAN devices.
+    filesPath: ./files
+    globals:
+      - cloudOnly: true
+        description: ""
+        json: '"my-secret-token"'
+        key: LORA_NETWORK_SERVER_AUTH_TOKEN
+    id: ~losant-application-applicationTheThingsNetwork-0~
+    name: The Things Network
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

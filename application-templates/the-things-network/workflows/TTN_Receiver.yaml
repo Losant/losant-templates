@@ -1,0 +1,379 @@
+resourceType: Flow
+resources:
+  - description: Receives sensor payloads from The Things Network HTTP Integration.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-ttnReceiver-0~
+    name: TTN Receiver
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: HJ7nbKWax
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 1040
+        outputIds: []
+        type: DebugNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: voltage
+              valueTemplate: '{{working.decoded.VoltageMeasurement}}'
+          deviceId: working.device.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: jADkh0tJRo
+        meta:
+          category: output
+          description: ''
+          id: jADkh0tJRo
+          label: 'Device: State'
+          name: device-state
+          x: 540
+          'y': 880
+        outputIds:
+          - - HJ7nbKWax
+        type: DeviceChangeStateNode
+      - config:
+          findMetadata: false
+          findMethod: findByAnyTags
+          findMultiple: false
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: dev_id
+              valueTemplate: '{{upper data.body.dev_id}}'
+          tagsAsObject: true
+        id: 4vWX4I5x_6
+        meta:
+          category: data
+          description: ''
+          id: 4vWX4I5x_6
+          label: 'Device: Get'
+          name: get-device
+          x: 600
+          'y': 260
+        outputIds:
+          - - 7ZG8SWq2p1
+        type: GetDeviceNode
+      - config:
+          expression: '{{working.device}} !== null'
+        id: 7ZG8SWq2p1
+        meta:
+          category: logic
+          description: ''
+          id: 7ZG8SWq2p1
+          label: Device Exists?
+          name: conditional
+          x: 600
+          'y': 360
+        outputIds:
+          - - ohW8jBUrr0
+          - - CgMpU8C8zW
+        type: ConditionalNode
+      - config: {}
+        id: DiXD0GvrHd
+        meta:
+          annotationText: >-
+            If no matching device is found, create one automatically using the
+            Radio Bridge RBS306-VM30 device recipe.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 220
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: >-
+            {{data.headers.authorization}} ===
+            {{globals.LORA_NETWORK_SERVER_AUTH_TOKEN}}
+        id: dvI7vHWZYq
+        meta:
+          category: logic
+          description: ''
+          id: dvI7vHWZYq
+          label: Authorized?
+          name: conditional
+          x: 500
+          'y': 140
+        outputIds:
+          - - RwmXMMt7X1
+          - - 4vWX4I5x_6
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: RwmXMMt7X1
+        meta:
+          category: output
+          description: ''
+          id: RwmXMMt7X1
+          label: Debug
+          name: debug
+          x: 400
+          'y': 260
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: BccwSy30gG
+        meta:
+          annotationText: >-
+            Check the value of the `authorization` header. It must match the
+            token stored in application globals.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 120
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~losant-flow-radioBridge-1~
+          customNodeVersion: default
+          fields:
+            - id: raw
+              value: '{{data.body.payload_raw}}'
+          resultPath: working.decoded
+        id: CgMpU8C8zW
+        meta:
+          category: customNodeExecute
+          customNodeId: ~losant-flow-radioBridge-1~
+          description: ''
+          id: 4_RiUH7XZE
+          label: Radio Bridge
+          name: custom-node-execute-node
+          x: 600
+          'y': 620
+        outputIds:
+          - - Nzt5ebiPNz
+        type: CustomNodeExecuteNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: Supervisory
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: Voltage Sensor
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: Tamper
+              dontBreak: false
+          switchTemplate: '{{working.decoded.Event}}'
+        id: Nzt5ebiPNz
+        meta:
+          category: logic
+          description: ''
+          id: Nzt5ebiPNz
+          label: Switch
+          name: switch
+          x: 600
+          'y': 720
+        outputIds:
+          - - YHcR6oHsCr
+          - - 7ZDtFnqfBV
+          - - jADkh0tJRo
+          - - IyXNOaiEdy
+        type: SwitchNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: battery_voltage
+              valueTemplate: '{{working.decoded.BatteryVoltage}}'
+          deviceId: working.device.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: 7ZDtFnqfBV
+        meta:
+          category: output
+          description: ''
+          id: jADkh0tJRo
+          label: 'Device: State'
+          name: device-state
+          x: 340
+          'y': 880
+        outputIds:
+          - - HJ7nbKWax
+        type: DeviceChangeStateNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: tamper
+              valueTemplate: '{{working.decoded.TamperState}}'
+          deviceId: working.device.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: IyXNOaiEdy
+        meta:
+          category: output
+          description: ''
+          id: jADkh0tJRo
+          label: 'Device: State'
+          name: device-state
+          x: 740
+          'y': 880
+        outputIds:
+          - - HJ7nbKWax
+        type: DeviceChangeStateNode
+      - config:
+          message: Device Not Found
+          property: ''
+        id: YHcR6oHsCr
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 940
+          'y': 880
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 3tTUUnKe2C
+        meta:
+          annotationText: >-
+            Watching for the Supervisory, Tamper, and voltage sensor events.
+
+
+            Supervisory and Tamper are the same across all Radio Bridge sensors.
+            If you're using a different sensor, this will need modified to
+            record your specific event data.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 300
+          x: 20
+          'y': 780
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          script: |-
+            let buf = Buffer.from(payload.data.body.payload_raw, 'base64');
+
+            // Result: 11 14 00 00 0D
+
+            // Voltage (0x14) and Periodic Report (0x00)
+            if(buf[1] === 0x14 && buf[2] === 0x00) {
+                // Voltage is a unsigned short and in units of 10mv.
+                // Divide by 100 to get voltage.
+                payload.data.voltage = buf.readUInt16BE(3) / 100;
+            }
+        id: Q-gDDQVuTK
+        meta:
+          category: logic
+          description: ''
+          id: Q-gDDQVuTK
+          label: Function
+          name: function
+          x: 960
+          'y': 160
+        outputIds:
+          - - Dh979d8OVs
+        type: RawFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: Dh979d8OVs
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 960
+          'y': 280
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: QysbEP_sRW
+        meta:
+          annotationText: >-
+            This is here to demonstrate how to manually decode Radio Bridge data
+            using a Function Node and the Buffer object. This is helpful if
+            you're using other LoRaWAN devices and would like to see how data
+            can be decoded.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 1160
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: ''
+          deviceTags:
+            - keyTemplate: dev_id
+              valueTemplate: '{{data.body.dev_id}}'
+          nameTemplate: ''
+          parentIdTemplate: ''
+          recipeIdTemplate: ~losant-deviceRecipe-radioBridgeRbs306Vm30-0~
+          resultPath: ''
+          tagsAsObject: false
+        id: ohW8jBUrr0
+        meta:
+          category: data
+          description: ''
+          id: ohW8jBUrr0
+          label: 'Device: Create'
+          name: create-device
+          x: 500
+          'y': 480
+        outputIds:
+          - - CgMpU8C8zW
+        type: CreateDeviceNode
+    triggers:
+      - config: {}
+        key: ~losant-webhook-theThingsNetwork-0~
+        meta:
+          category: trigger
+          description: ''
+          label: Webhook
+          name: webhook
+          uiId: H1hL0oZhl
+          x: 500
+          'y': 40
+        outputIds:
+          - - dvI7vHWZYq
+        type: webhook
+      - config: {}
+        key: ~losant-flow-ttnReceiver-0~-UaD7td7mPGZGY9DisS6gb
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: VrOuKJwEs-
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+              "body": {
+                "payload_raw": "ERQAAA0="
+              }
+            }
+          uiId: VrOuKJwEs-
+          x: 960
+          'y': 40
+        outputIds:
+          - - Q-gDDQVuTK
+        type: virtualButton
+version: 1
