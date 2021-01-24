@@ -16,7 +16,7 @@ resources:
           label: Debug
           name: debug
           x: 540
-          'y': 1040
+          'y': 1200
         outputIds: []
         type: DebugNode
       - config:
@@ -36,7 +36,7 @@ resources:
           label: 'Device: State'
           name: device-state
           x: 540
-          'y': 880
+          'y': 1040
         outputIds:
           - - HJ7nbKWax
         type: DeviceChangeStateNode
@@ -61,7 +61,7 @@ resources:
           label: 'Device: Get'
           name: get-device
           x: 600
-          'y': 260
+          'y': 420
         outputIds:
           - - 7ZG8SWq2p1
         type: GetDeviceNode
@@ -75,7 +75,7 @@ resources:
           label: Device Exists?
           name: conditional
           x: 600
-          'y': 360
+          'y': 520
         outputIds:
           - - ohW8jBUrr0
           - - CgMpU8C8zW
@@ -92,7 +92,7 @@ resources:
           name: note
           width: 260
           x: 220
-          'y': 420
+          'y': 580
         outputIds: []
         type: AnnotationNode
       - config:
@@ -107,7 +107,7 @@ resources:
           label: Authorized?
           name: conditional
           x: 500
-          'y': 140
+          'y': 300
         outputIds:
           - - RwmXMMt7X1
           - - 4vWX4I5x_6
@@ -123,7 +123,7 @@ resources:
           label: Debug
           name: debug
           x: 400
-          'y': 260
+          'y': 420
         outputIds: []
         type: DebugNode
       - config: {}
@@ -138,7 +138,7 @@ resources:
           name: note
           width: 260
           x: 120
-          'y': 140
+          'y': 300
         outputIds: []
         type: AnnotationNode
       - config:
@@ -157,7 +157,7 @@ resources:
           label: Radio Bridge
           name: custom-node-execute-node
           x: 600
-          'y': 620
+          'y': 780
         outputIds:
           - - Nzt5ebiPNz
         type: CustomNodeExecuteNode
@@ -181,7 +181,7 @@ resources:
           label: Switch
           name: switch
           x: 600
-          'y': 720
+          'y': 880
         outputIds:
           - - YHcR6oHsCr
           - - 7ZDtFnqfBV
@@ -205,7 +205,7 @@ resources:
           label: 'Device: State'
           name: device-state
           x: 340
-          'y': 880
+          'y': 1040
         outputIds:
           - - HJ7nbKWax
         type: DeviceChangeStateNode
@@ -226,7 +226,7 @@ resources:
           label: 'Device: State'
           name: device-state
           x: 740
-          'y': 880
+          'y': 1040
         outputIds:
           - - HJ7nbKWax
         type: DeviceChangeStateNode
@@ -240,7 +240,7 @@ resources:
           label: Debug
           name: debug
           x: 940
-          'y': 880
+          'y': 1040
         outputIds: []
         type: DebugNode
       - config: {}
@@ -259,7 +259,7 @@ resources:
           name: note
           width: 300
           x: 20
-          'y': 780
+          'y': 940
         outputIds: []
         type: AnnotationNode
       - config:
@@ -337,10 +337,23 @@ resources:
           label: 'Device: Create'
           name: create-device
           x: 500
-          'y': 480
+          'y': 640
         outputIds:
           - - CgMpU8C8zW
         type: CreateDeviceNode
+      - config: {}
+        id: 9xVMRXLydY
+        meta:
+          annotationText: This Virtual Button is invoked by the **Simulator** workflow.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 20
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
     triggers:
       - config: {}
         key: ~losant-webhook-theThingsNetwork-0~
@@ -375,5 +388,21 @@ resources:
           'y': 40
         outputIds:
           - - Q-gDDQVuTK
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-ttnReceiver-0~-10ZBceaTuhcJ8sXGjcxTF
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: atoPl_Nrcc
+          label: Simulator
+          name: virtualButton
+          payload: ''
+          uiId: atoPl_Nrcc
+          x: 300
+          'y': 40
+        outputIds:
+          - - dvI7vHWZYq
         type: virtualButton
 version: 1

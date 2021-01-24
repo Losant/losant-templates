@@ -43,7 +43,7 @@ This template automatically creates a unique [Webhook](https://docs.losant.com/a
 * Set the **Authorization** header to the same value you set for the `LORA_NETWORK_SERVER_AUTH_TOKEN` application global.
 
 ## Simulation Overview
-This template includes a **Simulator** workflow and device. The simulation workflow generates random sensor data every five minutes, encodes that data, and POSTs it to your webhook. This mimics exactly how data is received from TTN.
+This template includes a **Simulator** workflow and device. The simulation workflow generates random sensor data every five minutes, encodes that data, and invokes the **TTN Receiver** workflow. This mimics exactly how data is received from TTN by your application.
 
 The **Simulator** workflow also includes two [Virtual Buttons](https://docs.losant.com/workflows/triggers/virtual-button/) to simulate the built-in tamper switch inside Radio Bridge devices. Clicking the **Tamper Open** button will simulate someone attempting to remove the lid and tamper with the sensor. Clicking the **Tamper Closed** button will simulate the tamper button being pushed back down, which indicates the lid has been put back on the device.
 

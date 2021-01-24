@@ -60,7 +60,7 @@ resources:
           x: 240
           'y': 400
         outputIds:
-          - - yo05jcmZZ3
+          - - xVlWOS-Mw1
         type: RawFunctionNode
       - config: {}
         id: VYdC1R59NW
@@ -77,70 +77,12 @@ resources:
           'y': 400
         outputIds: []
         type: AnnotationNode
-      - config:
-          authCredentials: {}
-          authType: none
-          bodyTemplate: |-
-            {
-              "downlink_url": "https://integrations.thethingsnetwork.org/ttn-us-west/api/v2/down/<your-TTN-details>",
-              "metadata": {
-                "gateways": [
-                  {
-                    "rf_chain": 0,
-                    "snr": 14,
-                    "rssi": -47,
-                    "channel": 0,
-                    "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ssZ'}}",
-                    "timestamp": {{formatDate time 'X'}},
-                    "gtw_id": "<your-gateway-id>"
-                  }
-                ],
-                "coding_rate": "4/5",
-                "data_rate": "SF9BW125",
-                "modulation": "LORA",
-                "frequency": 905.1,
-                "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ss.SSSZ'}}"
-              },
-              "payload_raw": "{{working.payload_raw}}",
-              "counter": 0,
-              "port": 1,
-              "hardware_serial": "0000000000000000",
-              "dev_id": "0000000000000000",
-              "app_id": "<your-TTN-app-id>"
-            }
-          caCertTemplate: ''
-          disableSSLVerification: false
-          encodingTemplate: utf8
-          errorBehavior: throw
-          errorPath: ''
-          headerInfo:
-            - key: Authorization
-              valueTemplate: '{{globals.LORA_NETWORK_SERVER_AUTH_TOKEN}}'
-          method: POST
-          requestEncodingTemplate: utf8
-          responsePath: ''
-          timeoutTemplate: ''
-          uriTemplate: >-
-            https://triggers.losant.com/webhooks/2Q30V5laDA1Sp_MYUE64WgnJtra3qTb5Fqz-zk3d
-        id: yo05jcmZZ3
-        meta:
-          category: output
-          description: ''
-          id: yo05jcmZZ3
-          label: HTTP
-          name: http
-          x: 140
-          'y': 560
-        outputIds:
-          - - bwJ7ENRCPV
-        type: HttpNode
       - config: {}
         id: RBKV8DZrGw
         meta:
           annotationText: >-
-            POST the data to the TTN Receiver webhook. Set the `dev_id` to the
-            simulation device and the encoded data to the base64 string
-            generated above.
+            Invoke the TTN Receiver workflow. Set the `dev_id` to the simulation
+            device and the encoded data to the base64 string generated above.
 
 
             For payload details see:
@@ -189,7 +131,7 @@ resources:
           x: 40
           'y': 400
         outputIds:
-          - - yo05jcmZZ3
+          - - xVlWOS-Mw1
         type: RawFunctionNode
       - config: {}
         id: MSyXwgMQLJ
@@ -226,7 +168,7 @@ resources:
           x: 240
           'y': 1060
         outputIds:
-          - - AZsklFCuSK
+          - - GHAAXiyel-
         type: MutateNode
       - config:
           rules:
@@ -243,65 +185,8 @@ resources:
           x: 40
           'y': 1060
         outputIds:
-          - - AZsklFCuSK
+          - - GHAAXiyel-
         type: MutateNode
-      - config:
-          authCredentials: {}
-          authType: none
-          bodyTemplate: |-
-            {
-              "downlink_url": "https://integrations.thethingsnetwork.org/ttn-us-west/api/v2/down/<your-TTN-details>",
-              "metadata": {
-                "gateways": [
-                  {
-                    "rf_chain": 0,
-                    "snr": 14,
-                    "rssi": -47,
-                    "channel": 0,
-                    "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ssZ'}}",
-                    "timestamp": {{formatDate time 'X'}},
-                    "gtw_id": "<your-gateway-id>"
-                  }
-                ],
-                "coding_rate": "4/5",
-                "data_rate": "SF9BW125",
-                "modulation": "LORA",
-                "frequency": 905.1,
-                "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ss.SSSZ'}}"
-              },
-              "payload_raw": "{{working.tamper}}",
-              "counter": 0,
-              "port": 1,
-              "hardware_serial": "0000000000000000",
-              "dev_id": "0000000000000000",
-              "app_id": "<your-TTN-app-id>"
-            }
-          caCertTemplate: ''
-          disableSSLVerification: false
-          encodingTemplate: utf8
-          errorBehavior: throw
-          errorPath: ''
-          headerInfo:
-            - key: Authorization
-              valueTemplate: '{{globals.LORA_NETWORK_SERVER_AUTH_TOKEN}}'
-          method: POST
-          requestEncodingTemplate: utf8
-          responsePath: ''
-          timeoutTemplate: ''
-          uriTemplate: >-
-            https://triggers.losant.com/webhooks/2Q30V5laDA1Sp_MYUE64WgnJtra3qTb5Fqz-zk3d
-        id: AZsklFCuSK
-        meta:
-          category: output
-          description: ''
-          id: yo05jcmZZ3
-          label: HTTP
-          name: http
-          x: 140
-          'y': 1180
-        outputIds:
-          - - EixmhLV_LF
-        type: HttpNode
       - config:
           message: ''
           property: ''
@@ -313,7 +198,7 @@ resources:
           label: Debug
           name: debug
           x: 140
-          'y': 1420
+          'y': 1320
         outputIds: []
         type: DebugNode
       - config: {}
@@ -331,6 +216,106 @@ resources:
           'y': 20
         outputIds: []
         type: AnnotationNode
+      - config:
+          flowVersionTemplate: default
+          payloadTemplate: |-
+            {
+                "headers": {
+                    "authorization": "{{globals.LORA_NETWORK_SERVER_AUTH_TOKEN}}"
+                },
+                "body": {
+                    "downlink_url": "https://integrations.thethingsnetwork.org/ttn-us-west/api/v2/down/<your-TTN-details>",
+                    "metadata": {
+                        "gateways": [
+                        {
+                            "rf_chain": 0,
+                            "snr": 14,
+                            "rssi": -47,
+                            "channel": 0,
+                            "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ssZ'}}",
+                            "timestamp": {{formatDate time 'X'}},
+                            "gtw_id": "<your-gateway-id>"
+                        }
+                        ],
+                        "coding_rate": "4/5",
+                        "data_rate": "SF9BW125",
+                        "modulation": "LORA",
+                        "frequency": 905.1,
+                        "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ss.SSSZ'}}"
+                    },
+                    "payload_raw": "{{working.payload_raw}}",
+                    "counter": 0,
+                    "port": 1,
+                    "hardware_serial": "0000000000000000",
+                    "dev_id": "0000000000000000",
+                    "app_id": "<your-TTN-app-id>"
+                }
+            }
+          payloadTemplateType: json
+          triggerVirtualButtonId: atoPl_Nrcc
+          triggerWorkflowId: ~losant-flow-ttnReceiver-0~
+        id: xVlWOS-Mw1
+        meta:
+          category: output
+          description: ''
+          id: xVlWOS-Mw1
+          label: TTN Receiver
+          name: workflow-trigger
+          x: 140
+          'y': 560
+        outputIds:
+          - - bwJ7ENRCPV
+        type: WorkflowTriggerNode
+      - config:
+          flowVersionTemplate: default
+          payloadTemplate: |-
+            {
+                "headers": {
+                    "authorization": "{{globals.LORA_NETWORK_SERVER_AUTH_TOKEN}}"
+                },
+                "body": {
+                    "downlink_url": "https://integrations.thethingsnetwork.org/ttn-us-west/api/v2/down/<your-TTN-details>",
+                    "metadata": {
+                        "gateways": [
+                        {
+                            "rf_chain": 0,
+                            "snr": 14,
+                            "rssi": -47,
+                            "channel": 0,
+                            "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ssZ'}}",
+                            "timestamp": {{formatDate time 'X'}},
+                            "gtw_id": "<your-gateway-id>"
+                        }
+                        ],
+                        "coding_rate": "4/5",
+                        "data_rate": "SF9BW125",
+                        "modulation": "LORA",
+                        "frequency": 905.1,
+                        "time": "{{formatDate time 'YYYY-MM-DDTHH:MM:ss.SSSZ'}}"
+                    },
+                    "payload_raw": "{{working.tamper}}",
+                    "counter": 0,
+                    "port": 1,
+                    "hardware_serial": "0000000000000000",
+                    "dev_id": "0000000000000000",
+                    "app_id": "<your-TTN-app-id>"
+                }
+            }
+          payloadTemplateType: json
+          triggerVirtualButtonId: atoPl_Nrcc
+          triggerWorkflowId: ~losant-flow-ttnReceiver-0~
+        id: GHAAXiyel-
+        meta:
+          category: output
+          description: ''
+          id: GHAAXiyel-
+          label: TTN Receiver
+          name: workflow-trigger
+          x: 140
+          'y': 1200
+        outputIds:
+          - - EixmhLV_LF
+        type: WorkflowTriggerNode
     triggers:
       - config:
           seconds: 300
