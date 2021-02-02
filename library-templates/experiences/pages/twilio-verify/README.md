@@ -2,7 +2,7 @@
 
 This template is an example implementation of SMS-based two-factor authentication using [Twilio Verify](https://www.twilio.com/verify) within Losant Experiences. Leveraging Twilio Verify, this template could be extended to support [phone, email, and push notifications](https://www.twilio.com/verify).
 
-![Verify Form](./preview.png)
+![Twilio Verify Form](./twilio-verify-losant-screenshot.png)
 
 ## Usage 
 
