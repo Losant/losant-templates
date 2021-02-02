@@ -7,11 +7,11 @@ resources:
     globals:
       - cloudOnly: true
         description: This is the Client ID received from Itron.
-        json: '"b787fe40-a19d-46d9-b9dd-0341c64346a1"'
+        json: '"YOUR_CLIENT_ID"'
         key: clientId
       - cloudOnly: true
         description: This is the Client Secret received from Itron.
-        json: '"Fxkty8o9fKunx3x6MwzJ5kpCczoi8+K+iqT5OMYUbskefmew/BX7sQ"'
+        json: '"YOUR_CLIENT_SECRET"'
         key: clientSecret
       - cloudOnly: true
         description: This populates the "solutionName" parameter in the Itron Data
@@ -25,9 +25,5 @@ resources:
     imagePath: ./preview.png
     authorName: Losant
     authorUrl: https://www.losant.com
-    keywords:
-      - itron
-      - temperature
-      - hardware
-      - milli
+    keywords: []
 version: 1

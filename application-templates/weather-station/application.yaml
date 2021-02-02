@@ -13,7 +13,7 @@ resources:
       - cloudOnly: true
         description: "The OpenWeatherMap API key. Get your key here:
           https://openweathermap.org/api"
-        json: '"d67219fedcd3af8f28ac11bd7e871b10"'
+        json: '"YOUR_API_KEY"'
         key: api_key
     id: ~losant-application-applicationWeatherStation-0~
     name: Weather Station
