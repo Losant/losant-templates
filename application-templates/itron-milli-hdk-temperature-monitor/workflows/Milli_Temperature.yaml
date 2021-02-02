@@ -1,0 +1,544 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-milliTemperature-0~
+    name: Milli Temperature
+    nodes:
+      - config:
+          expression: '{{data.body.eventPayload.macId}}'
+        id: 52ODrMo6kk
+        meta:
+          category: logic
+          description: ''
+          id: 0Wb5b9LDY1
+          label: Conditional
+          name: conditional
+          x: 800
+          'y': 300
+        outputIds:
+          - - NTkMhMz3-y
+          - - GEgwJtA2Mt
+        type: ConditionalNode
+      - config:
+          message: Create an Event - No Mac ID on Incoming Webhook
+          property: ''
+        id: Fqc_dJgtPf
+        meta:
+          category: output
+          description: ''
+          id: jpqs9mdbsx
+          label: Error
+          name: debug
+          x: 700
+          'y': 500
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: false
+          includeState: false
+          resultPath: working.currentDevice
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: macId
+              valueTemplate: '{{data.body.eventPayload.macId}}'
+          tagsAsObject: true
+        id: GEgwJtA2Mt
+        meta:
+          category: data
+          description: ''
+          id: 6ag6ScgTzU
+          label: 'Device: Get'
+          name: get-device
+          x: 900
+          'y': 400
+        outputIds:
+          - - HcR654kO9k
+        type: GetDeviceNode
+      - config:
+          expression: '{{ working.currentDevice }}'
+        id: HcR654kO9k
+        meta:
+          category: logic
+          description: ''
+          id: QXJK1VKkD7
+          label: Device Exists?
+          name: conditional
+          x: 900
+          'y': 500
+        outputIds:
+          - - 7qoQv6p80Y
+          - - z7EO9cILs9
+        type: ConditionalNode
+      - config:
+          message: Webhook successfully reported state
+          property: ''
+        id: VsdHvE4CMV
+        meta:
+          category: output
+          description: ''
+          id: t0JrAJNvYP
+          label: Info
+          name: debug
+          x: 800
+          'y': 1000
+        outputIds: []
+        type: DebugNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: temperature
+              valueTemplate: '{{ data.body.eventPayload.temperature }}'
+          deviceId: working.currentDevice.id
+          deviceIdTemplateType: jsonPath
+          resultPath: working.deviceStateResult
+          timeSourcePath: data.body.eventPayload.timestamp
+          timeSourceType: payloadPath
+        id: iMqy18wSpQ
+        meta:
+          category: output
+          description: ''
+          id: m2Ml3JyIzT
+          label: Device State
+          name: device-state
+          x: 800
+          'y': 900
+        outputIds:
+          - - VsdHvE4CMV
+        type: DeviceChangeStateNode
+      - config:
+          expression: '{{ working.currentDevice.connectionInfo.connected }} !== 1'
+        id: z7EO9cILs9
+        meta:
+          category: logic
+          description: ''
+          id: 423ujwvj7L
+          label: Connected?
+          name: conditional
+          x: 840
+          'y': 700
+        outputIds:
+          - - iMqy18wSpQ
+          - - MznN8o-YSy
+        type: ConditionalNode
+      - config:
+          action: setConnectionStatus
+          params:
+            - name: deviceId
+              type: string
+              value: '{{ working.currentDevice.id }}'
+            - name: connectionStatus
+              type: json
+              value: |-
+                {
+                  "status": "connected"
+                }
+          resource: device
+        id: MznN8o-YSy
+        meta:
+          category: data
+          description: ''
+          id: UekRtH5UJC
+          label: Connected
+          name: losantapi
+          x: 900
+          'y': 800
+        outputIds:
+          - - iMqy18wSpQ
+        type: LosantApiNode
+      - config:
+          dataMethod: individualFields
+          dataSourcePath: data.body.eventPayload
+          dataSourceType: payloadPath
+          eventTags:
+            - keyTemplate: display_event_to_master_experience_group
+              valueTemplate: 'true'
+          levelTemplate: critical
+          messageTemplate: '{{ format data.body }}'
+          subjectTemplate: MAC ID is missing from webhook data
+          timeSourceType: now
+        id: NTkMhMz3-y
+        meta:
+          category: data
+          description: ''
+          id: unxs40ECk7
+          label: 'Event: Create'
+          name: create-event
+          x: 700
+          'y': 400
+        outputIds:
+          - - Fqc_dJgtPf
+        type: CreateEventNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: ''
+          deviceTags:
+            - keyTemplate: macId
+              valueTemplate: '{{ data.body.eventPayload.macId }}'
+            - keyTemplate: solution
+              valueTemplate: '{{ data.body.solution }}'
+            - keyTemplate: tenantId
+              valueTemplate: '{{ data.body.tenantId }}'
+          nameTemplate: 'Milli HDK {{data.body.eventPayload.macId}}'
+          parentIdTemplate: ''
+          recipeIdTemplate: ~losant-deviceRecipe-milliTempSensor-0~
+          resultPath: working.currentDevice
+          tagsAsObject: true
+        id: 7qoQv6p80Y
+        meta:
+          category: data
+          description: ''
+          id: 9vekAWcc7z
+          label: 'Device: Create'
+          name: create-device
+          x: 760
+          'y': 600
+        outputIds:
+          - - z7EO9cILs9
+        type: CreateDeviceNode
+      - config:
+          action: setConnectionStatus
+          params:
+            - name: deviceId
+              type: string
+              value: '{{ triggerId }}'
+            - name: connectionStatus
+              type: json
+              value: |-
+                {
+                  "status": "disconnected"
+                }
+          resource: device
+        id: W67Tp1Zg5g
+        meta:
+          category: data
+          description: ''
+          id: UekRtH5UJC
+          label: Disconnected
+          name: losantapi
+          x: 1160
+          'y': 1020
+        outputIds:
+          - - oDeOmcqWGt
+        type: LosantApiNode
+      - config:
+          message: Temperature Sensor Has Not Reported Data in One Day
+          property: ''
+        id: oDeOmcqWGt
+        meta:
+          category: output
+          description: ''
+          id: oDeOmcqWGt
+          label: Info
+          name: debug
+          x: 1160
+          'y': 1120
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: tyzbJv6tmI
+        meta:
+          annotationText: >-
+            ### Managing Connection Status
+
+
+            Since the Losant devices are not connecting to the Losant Broker, we
+            manage the "connected" status of each device manually.
+
+
+            Every time the Itron webhook reports state for a device, mark that
+            device as "connected" if it is not currently.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 600
+          x: 1120
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: bDmvmnVKQX
+        meta:
+          category: output
+          description: ''
+          id: WLTYkAxfQB
+          label: Debug
+          name: debug
+          x: 420
+          'y': 440
+        outputIds: []
+        type: DebugNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: |-
+            {
+              "eventType": "observationIngested",
+              "webhookUrl": "https://triggers.losant.com/webhooks/{{ working.losantWebhook.result.token }}",
+            }
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Authorization
+              valueTemplate: '{{working.itronAuth.body.accessToken}}'
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.itronCreateWebhook
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.data-platform.developer.ssni.com/api/solutions/{{globals.solutionName}}/webhooks
+        id: ody4ZjIXR2
+        meta:
+          category: data
+          description: ''
+          id: ~t7opOBp~u
+          label: Set Itron Webhook
+          name: http
+          x: 420
+          'y': 340
+        outputIds:
+          - - bDmvmnVKQX
+        type: HttpNode
+      - config: {}
+        id: LB_8wM0GXj
+        meta:
+          annotationText: >-
+            ### Initial Setup
+
+
+            The steps outlined here need only be completed one time, immediately
+            after creating your application.
+
+
+            1. Configure your `clientId`, `clientSecret`, and `solutionName`
+            within [Application
+            Globals](https://docs.losant.com/applications/overview/#application-globals).
+
+            2. Enable this workflow by clicking the "Enable" button in the
+            bottom right corner of this editor.
+
+            3. Click the Virtual Button alongside this note. This will add your
+            Losant application's webhook URL to your Itron Platform account.
+          category: annotation
+          height: 360
+          label: Note
+          name: note
+          width: 340
+          x: 40
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          action: get
+          params:
+            - name: webhookId
+              type: string
+              value: ~losant-webhook-milliTemperature-0~
+          resource: webhook
+          responsePath: working.losantWebhook
+        id: bwrHJ5x3bv
+        meta:
+          category: data
+          description: ''
+          id: uatYrUwtch
+          label: Get Losant Webhook
+          name: losantapi
+          x: 420
+          'y': 140
+        outputIds:
+          - - KDuHhzzQff
+        type: LosantApiNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: "{\n  \"clientId\": \"{{globals.clientId}}\",\n\t\"clientSecret\": \"{{globals.clientSecret}}\"\n}"
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.itronAuth
+          timeoutTemplate: ''
+          uriTemplate: 'https://api.data-platform.developer.ssni.com/api/tokens'
+        id: KDuHhzzQff
+        meta:
+          category: data
+          description: ''
+          id: umihxGIhHZ
+          label: Get Itron Token
+          name: http
+          x: 420
+          'y': 240
+        outputIds:
+          - - ody4ZjIXR2
+        type: HttpNode
+      - config: {}
+        id: 1dUNwXeyIx
+        meta:
+          annotationText: >-
+            ### Check Your Work
+
+
+            After you've pushed the Virtual Button above, a few seconds later
+            you should see a [Debug
+            Log](https://docs.losant.com/workflows/outputs/debug/#debug-panel)
+            message appear in the right column. Ensure the following:
+
+
+            - `working.itronCreateWebhook.statusCode` should equal `201`
+
+
+            If it does not, check the following:
+
+
+            - `working.itronAuth.body.accessToken` should have a redacted value
+
+
+            If not, the most likely problem is an issue with one of your three
+            global variables.
+          category: annotation
+          height: 280
+          label: Note
+          name: note
+          width: 560
+          x: 40
+          'y': 540
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Rjb7f9ndmB
+        meta:
+          annotationText: >-
+            ### Reporting State
+
+
+            Once your initial setup is complete, this flow will begin listening
+            for calls to the webhook you added to the Itron Platform.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 380
+          x: 700
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: sGnDbNY4vi
+        meta:
+          annotationText: >-
+            The webhook request should include a `macId` property for
+            identifying which device to associate with the state report.
+
+
+            If it does, we look up the device associated with that `macId` in
+            the Losant application.
+
+
+            If it does not, we create an event within the Losant application to
+            track the error.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 600
+          x: 1120
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: nMzBD08Q3Y
+        meta:
+          annotationText: >-
+            If the request includes a `macId` but the value is not associated
+            with a Losant device, we create a new device to associate with that
+            `macId`.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 360
+          x: 1120
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: q88plxu9xO
+        meta:
+          annotationText: >-
+            If a device has not received a state report for 24 hours, this flow
+            marks that device as "disconnected" within the [Device Connection
+            Log](https://docs.losant.com/devices/overview/#connection-log).
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 1380
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-milliTemperature-0~--K2ag1Yi9_KlGAJHrebqv
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: fbcEBDWa8C
+          label: Itron Auth Btn
+          name: virtualButton
+          payload: ''
+          uiId: fbcEBDWa8C
+          x: 420
+          'y': 40
+        outputIds:
+          - - bwrHJ5x3bv
+        type: virtualButton
+      - config: {}
+        key: ~losant-webhook-milliTemperature-0~
+        meta:
+          category: trigger
+          description: ''
+          id: 0tDawszrH3
+          label: Webhook
+          name: webhook
+          uiId: _SI23rEceD
+          x: 800
+          'y': 200
+        outputIds:
+          - - 52ODrMo6kk
+        type: webhook
+      - config:
+          seconds: 86400
+        key: device_type/MILLI_REFERENCE
+        meta:
+          category: trigger
+          description: ''
+          id: YjBd6_Cqvg
+          label: 'Device: Inactive'
+          name: deviceIdsTagsInactivity
+          uiId: YjBd6_Cqvg
+          x: 1160
+          'y': 920
+        outputIds:
+          - - W67Tp1Zg5g
+        type: deviceTagInactivity
+version: 1

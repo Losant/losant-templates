@@ -1,0 +1,23 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags:
+          units: °F
+        dataType: number
+        description: ""
+        name: temperature
+    description: Itron Milli5 HDK with Adafruit board and HDT-11 temperature sensor
+    deviceClass: standalone
+    deviceName: Device from recipe MilliTempSensor
+    id: ~losant-deviceRecipe-milliTempSensor-0~
+    name: MilliTempSensor
+    tags:
+      - key: device_type
+        value: MILLI_REFERENCE
+      - key: macId
+        value: <blank>
+      - key: solution
+        value: <blank>
+      - key: tenantId
+        value: <blank>
+version: 1

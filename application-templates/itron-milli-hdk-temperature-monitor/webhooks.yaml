@@ -1,0 +1,9 @@
+resourceType: Webhook
+resources:
+  - id: ~losant-webhook-milliTemperature-0~
+    name: Milli Temperature
+    responseCode: 200
+    verificationCode: ''
+    verificationType: none
+    waitForReply: false
+version: 1
