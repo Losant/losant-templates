@@ -1,0 +1,479 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      Verify form where the experience user enters the code received from
+      Twilio 
+    enabled: true
+    flowId: ~losant-flow-getPostTlVerifyForm-1~
+    globals: []
+    id: ~losant-flowVersion-getPostTlVerifyForm-1~
+    name: GET & POST /tl-verify-form
+    nodes:
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageVerify-1~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: zKQcWk7CpL
+        meta:
+          category: output
+          description: ''
+          id: zKQcWk7CpL
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 280
+          'y': 420
+        outputIds:
+          - - PWWk5702sA
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: PWWk5702sA
+        meta:
+          category: output
+          description: ''
+          id: PWWk5702sA
+          label: Debug
+          name: debug
+          x: 280
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: ''
+              valueTemplate: '{{working.authorization}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 1v9MonRtcr
+        meta:
+          category: output
+          description: ''
+          id: zKQcWk7CpL
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 600
+          'y': 1680
+        outputIds:
+          - - kDKP3-aqLk
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: kDKP3-aqLk
+        meta:
+          category: output
+          description: ''
+          id: PWWk5702sA
+          label: Debug
+          name: debug
+          x: 600
+          'y': 1780
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.query.token}}'
+        id: lTTa6o3rmY
+        meta:
+          category: logic
+          description: ''
+          id: lTTa6o3rmY
+          label: Token
+          name: conditional
+          x: 120
+          'y': 160
+        outputIds:
+          - - 06A0WYkPDC
+          - - bi_hHuYAxK
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /tl-verify-login
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 06A0WYkPDC
+        meta:
+          category: output
+          description: ''
+          id: zKQcWk7CpL
+          label: Redirect to Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 420
+        outputIds:
+          - - 8hCKKUOcc1
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: 8hCKKUOcc1
+        meta:
+          category: output
+          description: ''
+          id: PWWk5702sA
+          label: Debug
+          name: debug
+          x: 60
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorPath: ''
+          issuerTemplate: ''
+          secretTemplate: '{{globals.TL_VERIFY_SECRET}}'
+          tokenTemplate: '{{data.query.token}}'
+        id: bi_hHuYAxK
+        meta:
+          category: logic
+          description: ''
+          id: bi_hHuYAxK
+          label: 'JWT: Verify'
+          name: jwt-verify
+          x: 200
+          'y': 260
+        outputIds:
+          - - 06A0WYkPDC
+          - - zKQcWk7CpL
+        type: JWTVerifyNode
+      - config:
+          complete: true
+          destinationPath: working.validation
+          tokenTemplate: '{{data.query.token}}'
+        id: wxGx9MhRH3
+        meta:
+          category: logic
+          description: ''
+          id: ExvlE9rZxb
+          label: 'JWT: Decode'
+          name: jwt-decode
+          x: 360
+          'y': 1080
+        outputIds:
+          - - I-KmeB28Tw
+        type: JWTDecodeNode
+      - config:
+          errorPath: ''
+          issuerTemplate: ''
+          secretTemplate: '{{globals.TL_VERIFY_SECRET}}'
+          tokenTemplate: '{{data.query.token}}'
+        id: LQudg8y-qa
+        meta:
+          category: logic
+          description: ''
+          id: bi_hHuYAxK
+          label: 'JWT: Verify'
+          name: jwt-verify
+          x: 280
+          'y': 960
+        outputIds:
+          - - 85G7Luk6A0
+          - - wxGx9MhRH3
+        type: JWTVerifyNode
+      - config:
+          emailOrIdTemplate: '{{working.validation.payload.user}}'
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: working.user
+          sortDirection: asc
+          sortField: email
+        id: I-KmeB28Tw
+        meta:
+          category: experience
+          description: ''
+          id: XaIrqqv3ya
+          label: 'User: Get'
+          name: get-experience-user
+          x: 440
+          'y': 1180
+        outputIds:
+          - - EDqX5BzJzk
+        type: GetExperienceUserNode
+      - config:
+          expression: '{{working.user}}'
+        id: EDqX5BzJzk
+        meta:
+          category: logic
+          description: ''
+          id: xWPS-sFOGR
+          label: Valid User?
+          name: conditional
+          x: 440
+          'y': 1280
+        outputIds:
+          - - 85G7Luk6A0
+          - - Oj5kc5oL9c
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Not a valid Code.",
+              "loginFailure": true
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageVerify-1~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: 85G7Luk6A0
+        meta:
+          category: output
+          description: An error occurred. Render the forgot password page with an error.
+          label: Invalid Code
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 160
+          'y': 1560
+        outputIds:
+          - - bTl1E2BWFq
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: bTl1E2BWFq
+        meta:
+          category: output
+          description: ''
+          id: OfgH76b_kp
+          label: Debug
+          name: debug
+          x: 160
+          'y': 1660
+        outputIds: []
+        type: DebugNode
+      - config:
+          authCredentials:
+            passwordTemplate: '{{ globals.TWILIO_AUTH_TOKEN }}'
+            usernameTemplate: '{{ globals.TWILIO_ACCOUNT_SID }}'
+          authType: basic
+          bodyTemplate: >-
+            To={{ encodeURIComponent working.user.userTags.phone }}&Code={{
+            encodeURIComponent data.body.code }}
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.sendVerificationResponseError
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/x-www-form-urlencoded
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.sendVerificationResponse
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://verify.twilio.com/v2/Services/{{globals.VERIFICATION_SID}}/VerificationCheck
+        id: Oj5kc5oL9c
+        meta:
+          category: data
+          description: ''
+          id: '-gvxLukjjl'
+          label: VerificationCheck
+          name: http
+          x: 520
+          'y': 1380
+        outputIds:
+          - - N7TiaIuxct
+        type: HttpNode
+      - config:
+          expression: >-
+            !{{ working.sendVerificationResponseError }} &&
+            {{working.sendVerificationResponse.body.status}} === "approved"
+        id: N7TiaIuxct
+        meta:
+          category: logic
+          description: ''
+          id: cf5MWnZ5y5
+          label: 'Success ? '
+          name: conditional
+          x: 520
+          'y': 1480
+        outputIds:
+          - - 85G7Luk6A0
+          - - vu3IeWILxP
+        type: ConditionalNode
+      - config:
+          emailOrIdTemplate: '{{working.user.id}}'
+          invalidateExistingTokens: false
+          resultPath: working.authorization
+          ttlTemplate: ''
+        id: vu3IeWILxP
+        meta:
+          category: experience
+          description: ''
+          id: vu3IeWILxP
+          label: Generate Token
+          name: experience-user-token
+          x: 600
+          'y': 1600
+        outputIds:
+          - - 1v9MonRtcr
+        type: ExperienceUserTokenNode
+      - config: {}
+        id: mVdVhElhEU
+        meta:
+          annotationText: |-
+            Check and verify the `token` query parameter.
+
+            This is generated in the POST /tl-verify-login workflow.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 340
+          'y': 100
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: QSLWFBek20
+        meta:
+          annotationText: |-
+            Check and verify the `token` query parameter.
+
+            This is generated in the POST /tl-verify-login workflow.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 560
+          'y': 980
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: F2VGHgjRN4
+        meta:
+          annotationText: Check if the user submitted a `code` in the POST body.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 820
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: gkSzex0MJl
+        meta:
+          annotationText: >-
+            Using the Experience User ID in the JWT Token
+            (`{{working.validation.payload.user}}`), find a user by that ID.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 640
+          'y': 1220
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: v51btyqVAe
+        meta:
+          annotationText: >-
+            If Twilio Verification  succeeds, set the `authorization` cookie and
+            redirect the user to the home page (`/`).
+
+
+            If the authentication fails, redirect the user back to the log in
+            page with `loginFailure` set to `true`.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 800
+          'y': 1600
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: wbbtirM9r_
+        meta:
+          annotationText: >-
+            Verify code with the [Twilio VerificationCheck
+            API](https://www.twilio.com/docs/verify/api/verification-check).
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 720
+          'y': 1420
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          errorsPath: ''
+          schema: "{\n\t\"type\": \"object\",\n  \"properties\": {\n    \"code\": {\n    \t\"type\": \"string\"\n    }\n  },\n  \"required\": [\"code\"],\n  \"additionalProperties\": false\n}"
+          schemaType: json
+          toValidatePath: data.body
+        id: fhEZ7xwtKW
+        meta:
+          category: logic
+          description: Validate the data submitted in the post request.
+          label: Validate Payload
+          name: validate-payload
+          x: 180
+          'y': 860
+        outputIds:
+          - - 85G7Luk6A0
+          - - LQudg8y-qa
+        type: ValidatePayloadNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postTlVerifyForm-3~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /tl-verify-form
+          name: endpoint
+          uiId: kofoFVFIOK
+          x: 180
+          'y': 740
+        outputIds:
+          - - fhEZ7xwtKW
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlVerifyForm-2~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /tl-verify-form
+          name: endpoint
+          uiId: Icqf45TFMt
+          x: 120
+          'y': 20
+        outputIds:
+          - - lTTa6o3rmY
+        type: endpoint
+    version: develop
+version: 1

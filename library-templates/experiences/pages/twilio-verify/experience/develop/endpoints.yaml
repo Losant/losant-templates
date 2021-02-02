@@ -1,0 +1,40 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    description: "Verify form where the experience user enters the code received
+      from Twilio "
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getTlVerifyForm-2~
+    method: get
+    route: /tl-verify-form
+    version: develop
+  - access: public
+    description: A log in page that will verify the user's credentials and redirect
+      to /tl-verify-login.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getTlVerifyLogin-0~
+    method: get
+    route: /tl-verify-login
+    staticReply:
+      statusCode: 200
+      type: page
+      value: ~losant-experienceView-tlPageLogin-0~
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postTlVerifyForm-3~
+    method: post
+    route: /tl-verify-form
+    version: develop
+  - access: public
+    description: Endpoint that accepts and verifies an experience's email and password.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postTlVerifyLogin-1~
+    method: post
+    route: /tl-verify-login
+    version: develop
+version: 1

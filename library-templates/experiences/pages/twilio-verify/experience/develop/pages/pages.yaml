@@ -1,0 +1,18 @@
+resourceType: ExperienceView
+resources:
+  - description: A basic login form that's designed to accept an experience user's
+      email and password. This form submits back to the POST /tl-login endpoint.
+    id: ~losant-experienceView-tlPageLogin-0~
+    localFilename: ./tl-page-login.hbs
+    name: tl-page-login
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: ""
+    id: ~losant-experienceView-tlPageVerify-1~
+    localFilename: ./tl-page-verify.hbs
+    name: tl-page-verify
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

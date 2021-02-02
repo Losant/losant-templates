@@ -1,0 +1,431 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-postTlVerifyLogin-0~
+    globals: []
+    id: ~losant-flowVersion-postTlVerifyLogin-0~
+    name: POST /tl-verify-login
+    nodes:
+      - config:
+          emailTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: false
+          passwordTemplate: '{{data.body.password}}'
+          tokenResultPath: working.token
+          ttlTemplate: ''
+          userResultPath: working.user
+        id: v3n9Tq6Ae6
+        meta:
+          authMode: emailPassword
+          category: experience
+          description: Do these credentials match an experience user?
+          label: Authenticate
+          name: experience-user-auth
+          x: 400
+          'y': 500
+        outputIds:
+          - - qwUHUGa0Ft
+          - - '-gvxLukjjl'
+        type: ExperienceUserAuthNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: qwUHUGa0Ft
+        meta:
+          category: output
+          description: >-
+            Invalid credentials. Return the user to the login page and alert
+            them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 660
+        outputIds:
+          - - KPkzwklSYY
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: '/tl-verify-form?token={{ working.verification}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: tg6RCBH6em
+        meta:
+          category: output
+          description: >-
+            Successful login. Redirect the user to the home page and set the
+            auth cookie for future requests.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 620
+          'y': 960
+        outputIds:
+          - - KPkzwklSYY
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: KPkzwklSYY
+        meta:
+          category: output
+          description: ''
+          id: KPkzwklSYY
+          label: Debug
+          name: debug
+          x: 360
+          'y': 1080
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: cq5zP9gSWb
+        meta:
+          annotationText: >-
+            If authentication succeeds, send the user an SMS message using the
+            [Twlio Verification
+            API](https://www.twilio.com/docs/verify/api/verification).
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 820
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{ experience.user }}'
+        id: KwKCZ598oj
+        meta:
+          category: logic
+          description: Is the user logged in already?
+          label: Logged in?
+          name: conditional
+          x: 420
+          'y': 180
+        outputIds:
+          - - nmdHpqk8zu
+          - - rXI6TfD-W2
+        type: ConditionalNode
+      - config: {}
+        id: 3XIjLJfGOr
+        meta:
+          annotationText: >-
+            If the user is already logged in, redirect them to the home page
+            (`/`).
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 640
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: rXI6TfD-W2
+        meta:
+          category: output
+          description: User is already logged in. Redirect them to the home page.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 300
+        outputIds:
+          - - FF2Pu7XAbW
+        type: EndpointReplyNode
+      - config:
+          algorithmTemplate: HS256
+          dataTemplate: |-
+            {
+                "user": {{jsonEncode working.user.id}}
+            }
+          dataTemplateType: json
+          destinationPath: working.verification
+          expiresIn: 3600
+          issuerTemplate: ''
+          secretTemplate: '{{globals.TL_VERIFY_SECRET}}'
+        id: rG95fqc4ny
+        meta:
+          category: logic
+          description: ''
+          id: rG95fqc4ny
+          isExpRequired: true
+          label: 'JWT: Create'
+          name: jwt-create
+          timeUnit: Hours
+          x: 620
+          'y': 840
+        outputIds:
+          - - tg6RCBH6em
+        type: JWTCreateNode
+      - config:
+          authCredentials:
+            passwordTemplate: '{{ globals.TWILIO_AUTH_TOKEN }}'
+            usernameTemplate: '{{ globals.TWILIO_ACCOUNT_SID }}'
+          authType: basic
+          bodyTemplate: 'To={{ encodeURIComponent working.user.userTags.phone }}&Channel=sms'
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.sendVerificationResponseError
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/x-www-form-urlencoded
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.sendVerificationResponse
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://verify.twilio.com/v2/Services/{{globals.VERIFICATION_SID}}/Verifications
+        id: '-gvxLukjjl'
+        meta:
+          category: data
+          description: ''
+          id: '-gvxLukjjl'
+          label: 'Send Verification '
+          name: http
+          x: 600
+          'y': 620
+        outputIds:
+          - - cf5MWnZ5y5
+        type: HttpNode
+      - config:
+          expression: >-
+            !{{ working.sendVerificationResponseError }} &&
+            {{working.sendVerificationResponse.body.status}} === "pending"
+        id: cf5MWnZ5y5
+        meta:
+          category: logic
+          description: ''
+          id: cf5MWnZ5y5
+          label: 'Success ? '
+          name: conditional
+          x: 600
+          'y': 720
+        outputIds:
+          - - a5pOL7_B8e
+          - - rG95fqc4ny
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: WRIIdmBjAS
+        meta:
+          category: output
+          description: ''
+          id: KPkzwklSYY
+          label: Debug
+          name: debug
+          x: 420
+          'y': 900
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: a5pOL7_B8e
+        meta:
+          category: output
+          description: >-
+            Invalid credentials. Return the user to the login page and alert
+            them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 420
+          'y': 800
+        outputIds:
+          - - WRIIdmBjAS
+        type: EndpointReplyNode
+      - config:
+          errorsPath: ''
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 1024
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "maxLength": 2048
+                    }
+                },
+                "required": ["email", "password"],
+                "additionalProperties": false
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: nmdHpqk8zu
+        meta:
+          category: logic
+          description: Validate the data submitted in the post request.
+          label: Validate Payload
+          name: validate-payload
+          x: 320
+          'y': 300
+        outputIds:
+          - - XjoZy-r8Yl
+          - - v3n9Tq6Ae6
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Not a valid email address.",
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: XjoZy-r8Yl
+        meta:
+          category: output
+          description: An error occurred. Render the forgot password page with an error.
+          label: Invalid Email
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 200
+          'y': 420
+        outputIds:
+          - - pVJdzwx2_Y
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: pVJdzwx2_Y
+        meta:
+          category: output
+          description: ''
+          id: OfgH76b_kp
+          label: Debug
+          name: debug
+          x: 140
+          'y': 540
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: KWnWjQoQTN
+        meta:
+          annotationText: Validate the user provided a valid email and password
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 120
+          'y': 180
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: bCa-7GMfZ0
+        meta:
+          annotationText: Check the user's  email/password.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: UZ7N3n94pq
+        meta:
+          annotationText: Create a JWT `token` . See README for more details.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 820
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: FF2Pu7XAbW
+        meta:
+          category: output
+          description: ''
+          id: OfgH76b_kp
+          label: Debug
+          name: debug
+          x: 580
+          'y': 400
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postTlVerifyLogin-1~
+        meta:
+          category: trigger
+          description: When a user submits login credentials ...
+          label: POST Login
+          name: endpoint
+          uiId: HYVyV1G4gl
+          x: 420
+          'y': 80
+        outputIds:
+          - - KwKCZ598oj
+        type: endpoint
+    version: develop
+version: 1
