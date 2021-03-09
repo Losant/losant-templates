@@ -1,6 +1,6 @@
 # QR Code Reader Component
 
-This template renders a QR code reader that can tap into a device's camera to scan a QR code. This compoonent is commonly used in device provisioning flows (i.e. tying new hardware to user accounts).
+This template renders a QR code reader that can tap into a device's camera to scan a QR code. This component is commonly used in device provisioning flows (i.e. tying new hardware to user accounts).
 
 ## Dependencies
 
