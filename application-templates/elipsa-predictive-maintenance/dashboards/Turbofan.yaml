@@ -1,0 +1,585 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationElipsaPredictiveMaintenance-0~
+        blockType: graph
+        config:
+          duration: 10800000
+          realTime: false
+          recharts: true
+          resolution: 60000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: setting_1
+              color: '#ff261b'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Setting 1
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T2
+              color: '#057180'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T2
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T24
+              color: '#0ae1ff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T24
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T30
+              color: '#a52711'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T30
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T50
+              color: '#ff9a25'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T50
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: P2
+              color: '#bf731c'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: P2
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: P15
+              color: '#825bff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: P15
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: P30
+              color: '#412e80'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Series 8
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Nf
+              color: '#8db319'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Nf
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Nc
+              color: 'rgba(255, 38, 27, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Nc
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: prediction
+              color: 'rgba(255, 0, 0, 0.24)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Outlier Predicted
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Anomaly
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Ps30
+              color: '#057180'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Ps30
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: phi
+              color: '#0ae1ff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: phi
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: NRf
+              color: '#a52711'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: NRf
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: NRc
+              color: '#ff9a25'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: NRc
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: htBleed
+              color: '#bf731c'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: htBleed
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Nf_dmd
+              color: '#825bff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Nf_dmd
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: W31
+              color: '#412e80'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: W31
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: W32
+              color: '#8db319'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: W32
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: TRA
+              color: 'rgba(255, 38, 27, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: TRA
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: PCNfR_dmd
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: PCNfR_dmd
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 2
+        id: WWiSeLrTiM
+        startX: 0
+        startY: 0
+        title: Turbofan
+        width: 4
+      - applicationId: ~losant-application-applicationElipsaPredictiveMaintenance-0~
+        blockType: graph
+        config:
+          duration: 10800000
+          realTime: false
+          recharts: true
+          resolution: 60000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: anomaly_score
+              color: 'rgba(255, 154, 37, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Confidence
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Confidence
+              yAxisMax: '1'
+              yAxisMin: '0'
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: prediction
+              color: 'rgba(255, 0, 0, 0.24)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Outlier Predicted
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Anomaly Predicted
+              yAxisMax: '1'
+              yAxisMin: '0'
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: failure
+              color: '#0ae1ff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Failure
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 2
+        id: yxdlo2dCaR
+        startX: 0
+        startY: 2
+        title: Outlier Predictions
+        width: 4
+      - applicationId: ~losant-application-applicationElipsaPredictiveMaintenance-0~
+        blockType: graph
+        config:
+          duration: 604800000
+          realTime: false
+          recharts: true
+          resolution: 86400000
+          segments:
+            - aggregation:
+                options: {}
+                type: SUM
+              attribute: prediction
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~losant-device-turbofan-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Outlier Count
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 2
+        id: acOzJaQFRc
+        startX: 2.5
+        startY: 4
+        title: Outliers Per Day
+        width: 1.5
+      - applicationId: ~losant-application-applicationElipsaPredictiveMaintenance-0~
+        blockType: open-event-indicator
+        config:
+          allowUpdates: true
+          query: '{"$or":[]}'
+        height: 2
+        id: hc7eN9wW_N
+        startX: 0
+        startY: 4
+        title: Open Events
+        width: 0.5
+      - applicationId: ~losant-application-applicationElipsaPredictiveMaintenance-0~
+        blockType: event-list
+        config:
+          columns:
+            - id: defaultLevelColumn
+              type: level
+            - id: defaultSubjectColumn
+              type: subject
+            - id: defaultStateColumn
+              type: state
+            - id: defaultCreationDateColumn
+              type: creationDate
+          query: '{"$or":[{"state":{"$eq":"new"}}]}'
+          sortDirection: desc
+          sortField: creationDate
+        height: 2
+        id: AyLNiz-Wpn
+        startX: 0.5
+        startY: 4
+        title: Anomalies
+        width: 2
+    contextConfiguration: []
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-turbofan-0~
+    name: Turbofan
+    public: false
+    refreshRate: 60
+version: 1

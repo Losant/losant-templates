@@ -1,0 +1,313 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-predict-1~
+    name: Predict
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: 7isA8jPMnr
+        meta:
+          category: output
+          description: ''
+          id: 7isA8jPMnr
+          label: Debug
+          name: debug
+          x: 260
+          'y': 820
+        outputIds:
+          - - RXJ2XQ-iC-
+        type: DebugNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: |-
+            {
+              "Data":[ {{jsonEncode data}} ]
+            }
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.predict
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.predict
+          timeoutTemplate: ''
+          uriTemplate: '{{globals.elipsa_api}}'
+        id: fjM6aHmT-7
+        meta:
+          category: data
+          description: ''
+          id: fjM6aHmT-7
+          label: Elipsa API
+          name: http
+          x: 160
+          'y': 280
+        outputIds:
+          - - UhhPLWS09z
+        type: HttpNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: NRc
+              valueTemplate: ''
+            - key: NRf
+              valueTemplate: ''
+            - key: Nc
+              valueTemplate: ''
+            - key: Nf
+              valueTemplate: ''
+            - key: Nf_dmd
+              valueTemplate: ''
+            - key: P15
+              valueTemplate: ''
+            - key: P2
+              valueTemplate: ''
+            - key: P30
+              valueTemplate: ''
+            - key: PCNfR_dmd
+              valueTemplate: ''
+            - key: Ps30
+              valueTemplate: ''
+            - key: T2
+              valueTemplate: ''
+            - key: T24
+              valueTemplate: ''
+            - key: T30
+              valueTemplate: ''
+            - key: T50
+              valueTemplate: ''
+            - key: TRA
+              valueTemplate: ''
+            - key: W31
+              valueTemplate: ''
+            - key: W32
+              valueTemplate: ''
+            - key: anomaly_score
+              valueTemplate: >-
+                {{#if
+                working.predict.body.Prediction}}{{working.predict.body.[Anomaly
+                Score]}}{{else}}0{{/if}}
+            - key: failure
+              valueTemplate: ''
+            - key: htBleed
+              valueTemplate: ''
+            - key: phi
+              valueTemplate: ''
+            - key: prediction
+              valueTemplate: '{{working.predict.body.Prediction}}'
+            - key: setting_1
+              valueTemplate: ''
+            - key: time_in_cycles
+              valueTemplate: ''
+          deviceId: ~losant-device-turbofan-0~
+          deviceIdTemplateType: stringTemplate
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: H96TFWQJsh
+        meta:
+          category: output
+          description: ''
+          id: H96TFWQJsh
+          label: 'Device: State'
+          name: device-state
+          x: 260
+          'y': 540
+        outputIds:
+          - - 7isA8jPMnr
+        type: DeviceChangeStateNode
+      - config: {}
+        id: MDnBfUybRn
+        meta:
+          annotationText: >-
+            Trigger this workflow whenever telemetry data is received.
+
+
+            This trigger is configured for all attributes except `prediction`
+            and `anomaly_score`. Those two attributes are being reported by this
+            workflow and are not coming from the device itself.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 380
+          x: 360
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: gOli8sXqaL
+        meta:
+          annotationText: >-
+            Send the telemetry data to Elipsa AI's API. This is invoking a
+            pre-trained model performing anomaly detection.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 380
+          x: 360
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 3QiMQTtCJ5
+        meta:
+          annotationText: >-
+            Record the result back on the device in the `prediction` and
+            `anomaly_score` attributes.
+
+
+            `prediction` will be a `1` or `0`.  
+
+            `anomaly_score` is a number between 0-1 indicating the confidence
+            level of a predicted anomaly.
+
+
+            If `prediction` is `0`, `anomaly_score` can come back as a negative
+            number. The template in this node will overwrite the score to `0` if
+            there's no prediction.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 380
+          x: 460
+          'y': 540
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags: []
+          levelTemplate: warning
+          messageTemplate: >-
+            Outlier detected with confidence level of {{format
+            working.predict.body.[Anomaly Score] '0.2f'}}.
+
+
+            Attributes:  
+
+            {{#each data}}
+
+            {{@key}}: {{this}}  
+
+            {{/each}}
+          subjectTemplate: >-
+            Outlier Detected with Confidence {{format
+            working.predict.body.[Anomaly Score] '0.2f'}}
+          timeSourceType: payloadTime
+        id: m6NZDTrHBr
+        meta:
+          category: data
+          description: ''
+          id: F_EyQohHkK
+          label: 'Event: Create'
+          name: create-event
+          x: 260
+          'y': 1060
+        outputIds: []
+        type: CreateEventNode
+      - config:
+          branchPath: ''
+          isLatchedPath: ''
+          latchExpression: >-
+            {{working.predict.body.Prediction}} === 1 &&
+            {{working.predict.body.[Anomaly Score]}} > 0.5
+          latchIdTemplate: '{{device.id}}'
+          latchResultPath: ''
+          resetExpression: '{{working.predict.body.Prediction}} === 0'
+          resetResultPath: ''
+          wasLatchedPath: ''
+        id: RXJ2XQ-iC-
+        meta:
+          category: logic
+          description: ''
+          id: oujPcJDVce
+          label: Latch
+          name: latch
+          x: 260
+          'y': 920
+        outputIds:
+          - []
+          - - m6NZDTrHBr
+        type: LatchNode
+      - config: {}
+        id: Pmz-0TNGqx
+        meta:
+          annotationText: >-
+            If an anomaly was predicted and the confidence was greater than 0.5.
+            Confidence range is 0-1, so a score of 0.5 represents a fairly high
+            level of confidence that this is an anomaly.
+
+
+            Using a Latch Node to prevent multiple anomaly events. The latch
+            will reset once `prediction` resets to `0`.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 380
+          x: 460
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.predict.statusCode}} === 200'
+        id: UhhPLWS09z
+        meta:
+          category: logic
+          description: ''
+          id: UhhPLWS09z
+          label: 200 OK?
+          name: conditional
+          x: 160
+          'y': 420
+        outputIds:
+          - - j38K5Rai7x
+          - - H96TFWQJsh
+        type: ConditionalNode
+      - config:
+          message: Elipsa request failed.
+          property: ''
+        id: j38K5Rai7x
+        meta:
+          category: output
+          description: ''
+          id: j38K5Rai7x
+          label: Debug
+          name: debug
+          x: 60
+          'y': 540
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config:
+          attributeBlacklist:
+            - anomaly_score
+            - prediction
+        key: ~losant-device-turbofan-0~
+        meta:
+          allowedAttributeType: attributeBlacklist
+          category: trigger
+          description: ''
+          id: BmZEycz2O7
+          label: 'Device: State'
+          maxAgeToggle: false
+          name: deviceIdsTags
+          timeUnit: '1'
+          uiId: BmZEycz2O7
+          x: 160
+          'y': 60
+        outputIds:
+          - - fjM6aHmT-7
+        type: deviceId
+version: 1

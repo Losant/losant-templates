@@ -1,0 +1,299 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-simulator-0~
+    name: Simulator
+    nodes:
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.turbineData
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://files.onlosant.com/~losant-application-applicationElipsaPredictiveMaintenance-0~/TurbineEngine.csv
+        id: jjjcclQvn6
+        meta:
+          category: data
+          description: ''
+          id: jjjcclQvn6
+          label: HTTP
+          name: http
+          x: 180
+          'y': 300
+        outputIds:
+          - - TMtTGnCpkf
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: zZSx_Kp2xP
+        meta:
+          category: output
+          description: ''
+          id: zZSx_Kp2xP
+          label: Debug
+          name: debug
+          x: 280
+          'y': 1300
+        outputIds: []
+        type: DebugNode
+      - config:
+          destination: working.turbineData
+          recordDelimiterTemplate: |+
+
+          source: working.turbineData.body
+        id: 6mAkoXmbMi
+        meta:
+          category: logic
+          description: ''
+          id: 6mAkoXmbMi
+          label: 'CSV: Decode'
+          name: csv-decode
+          x: 280
+          'y': 660
+        outputIds:
+          - - nlz1tbQ0n9
+        type: CSVDecodeNode
+      - config:
+          expression: '{{working.turbineData.statusCode}} === 200'
+        id: TMtTGnCpkf
+        meta:
+          category: logic
+          description: ''
+          id: TMtTGnCpkf
+          label: 200 OK?
+          name: conditional
+          x: 180
+          'y': 460
+        outputIds:
+          - - eMm_Wwd0Ft
+          - - 6mAkoXmbMi
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: eMm_Wwd0Ft
+        meta:
+          category: output
+          description: ''
+          id: zZSx_Kp2xP
+          label: Debug
+          name: debug
+          x: 80
+          'y': 660
+        outputIds: []
+        type: DebugNode
+      - config:
+          keyName: index
+          resultPath: working.index
+          value: '1'
+          valueType: incr
+        id: nlz1tbQ0n9
+        meta:
+          category: data
+          description: ''
+          id: nlz1tbQ0n9
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 280
+          'y': 800
+        outputIds:
+          - - dlGGl90Zvi
+        type: StoreValueNode
+      - config:
+          statements:
+            - expression: '{{working.index}} % {{length working.turbineData}}'
+              resultPath: working.index
+        id: dlGGl90Zvi
+        meta:
+          category: logic
+          description: ''
+          id: dlGGl90Zvi
+          label: Math
+          name: math
+          x: 280
+          'y': 940
+        outputIds:
+          - - hRzN4vo77S
+        type: MathNode
+      - config:
+          rules:
+            - destination: working.row
+              type: set
+              valueTemplate: '{{jsonEncode (lookup working.turbineData working.index)}}'
+              valueTemplateType: json
+        id: hRzN4vo77S
+        meta:
+          category: logic
+          description: ''
+          id: hRzN4vo77S
+          label: Mutate
+          name: mutate
+          x: 280
+          'y': 1100
+        outputIds:
+          - - 3WrEs6c7Qr
+        type: MutateNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.row
+          deviceId: ~losant-device-turbofan-0~
+          deviceIdTemplateType: stringTemplate
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: 3WrEs6c7Qr
+        meta:
+          category: output
+          description: ''
+          id: 3WrEs6c7Qr
+          label: 'Device: State'
+          name: device-state
+          x: 280
+          'y': 1200
+        outputIds:
+          - - zZSx_Kp2xP
+        type: DeviceChangeStateNode
+      - config: {}
+        id: QBjewj--cK
+        meta:
+          annotationText: >-
+            This simulator is looping over a sample data set that can be found
+            in Files at `TurbineEngine.csv`.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 580
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 1DYpzVCQoo
+        meta:
+          annotationText: Download `TurbineEngine.csv` from files. The csv contains 3756 rows.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 380
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: zzLtwvtIwI
+        meta:
+          annotationText: >-
+            Decode the CSV into an array on the payload at
+            `working.turbineData`.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 660
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: GP0SHKYSG1
+        meta:
+          annotationText: >-
+            Workflow storage holds the current row we're simulating. This is
+            incremented on each iteration.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: t2oruDtSx6
+        meta:
+          annotationText: >-
+            Using `index % count` lets us continually increment `index` and when
+            we reach the end of the file, this will reset to 0 and our simulator
+            will start over.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 940
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Fk5rWvp_HO
+        meta:
+          annotationText: Grab the current row we're simulating and record it as device state.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 1100
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: sjbKB1SEUB
+        meta:
+          annotationText: Make sure the file downloaded successfully.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 380
+          'y': 460
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-simulator-0~-IFN8v4xb6NPAwsndCfGKD
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: fDdN-1RGnD
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: fDdN-1RGnD
+          x: 180
+          'y': 60
+        outputIds:
+          - - jjjcclQvn6
+        type: virtualButton
+      - config:
+          seconds: 60
+        key: ~losant-flow-simulator-0~-WMJIQNcFv863Eo7aZZ0k7
+        meta:
+          category: trigger
+          description: ''
+          id: 2BHnXMmL5G
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: 2BHnXMmL5G
+          x: 380
+          'y': 60
+        outputIds:
+          - - jjjcclQvn6
+        type: timer
+version: 1
