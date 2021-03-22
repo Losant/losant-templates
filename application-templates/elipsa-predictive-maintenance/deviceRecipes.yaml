@@ -68,7 +68,7 @@ resources:
         name: T50
       - attributeTags: {}
         dataType: number
-        description: ""
+        description: Throttle resolver angle.
         name: TRA
       - attributeTags:
           units: lbm/s
@@ -82,15 +82,16 @@ resources:
         name: W32
       - attributeTags: {}
         dataType: number
-        description: ""
+        description: Whether or not a failure occurred (0=no failure, 1=failure).
         name: failure
       - attributeTags: {}
         dataType: number
         description: Bleed enthalpy.
         name: htBleed
-      - attributeTags: {}
+      - attributeTags:
+          units: pps/psi
         dataType: number
-        description: ""
+        description: Ratio of fuel flow to Ps30.
         name: phi
       - attributeTags: {}
         dataType: number
@@ -103,15 +104,16 @@ resources:
         name: Nf
       - attributeTags: {}
         dataType: number
-        description: ""
+        description: Operational setting.
         name: setting_1
       - attributeTags: {}
         dataType: number
-        description: ""
+        description: The confidence that an outlier has been predicted on this data point.
         name: anomaly_score
       - attributeTags: {}
         dataType: number
-        description: ""
+        description: Whether or not an outlier has been detected (0=no outlier,
+          1=outlier detected).
         name: prediction
     description: ""
     deviceClass: standalone
