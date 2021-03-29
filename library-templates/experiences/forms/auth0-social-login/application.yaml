@@ -1,7 +1,8 @@
 resourceType: Application
 resources:
   - blobUrlTTL: 86400
-    description: ""
+    description: Demonstrates how to use Auth0 as a third-party login provider for
+      your Experience Users.
     filesPath: ./files
     globals: []
     id: ~losant-application-libraryExperiencesFormsAuth0SocialLogin-0~
