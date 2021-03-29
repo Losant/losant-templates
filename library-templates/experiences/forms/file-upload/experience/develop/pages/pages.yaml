@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlFileUpload-0~
+    localFilename: ./tl-file-upload.hbs
+    name: tl-file-upload
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

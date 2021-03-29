@@ -1,0 +1,1043 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-tlAuth0Login-0~
+    globals:
+      - json: '"AUTH0_APPLICATION_DOMAIN"'
+        key: domain
+      - json: '"AUTH0_APPLICATION_CLIENT_ID"'
+        key: clientId
+      - json: '"AUTH0_APPLICATION_CLIENT_SECRET"'
+        key: clientSecret
+      - json: '"MY_CSRF_STRING"'
+        key: csrfProtection
+      - json: '"openid profile email"'
+        key: defaultScope
+      - json: '"/tl-auth0-callback"'
+        key: callbackPath
+      - json: '"/tl-auth0-login"'
+        key: signInPagePath
+      - json: '"/tl-auth0-home"'
+        key: signedInRedirectPath
+      - json: '"/tl-auth0-logout"'
+        key: signOutPath
+    id: ~losant-flowVersion-tlAuth0Login-0~
+    name: tl-auth0-login
+    nodes:
+      - config:
+          expression: '{{experience.user}}'
+        id: Q1rueHxCmU
+        meta:
+          category: logic
+          description: ''
+          id: Q1rueHxCmU
+          label: Signed In?
+          name: conditional
+          x: 280
+          'y': 1040
+        outputIds:
+          - - Jgh4aKyZFl
+          - - ExRV_eX4sH
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '{{globals.signedInRedirectPath}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: ExRV_eX4sH
+        meta:
+          category: output
+          description: ''
+          id: ExRV_eX4sH
+          label: Rdr to Home
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 1140
+        outputIds:
+          - - f8e7ocRLX5
+        type: EndpointReplyNode
+      - config:
+          expression: '{{data.params.connection}}'
+        id: Jgh4aKyZFl
+        meta:
+          category: logic
+          description: ''
+          id: Jgh4aKyZFl
+          label: Connection?
+          name: conditional
+          x: 180
+          'y': 1140
+        outputIds:
+          - - STj87cazhb
+          - - inqwGfHpT8
+        type: ConditionalNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlAuth0Login-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: STj87cazhb
+        meta:
+          category: output
+          description: ''
+          id: ExRV_eX4sH
+          label: Display Login Page
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 140
+          'y': 1440
+        outputIds:
+          - - f8e7ocRLX5
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: >-
+            https://{{globals.domain}}/authorize?response_type=code&client_id={{globals.clientId}}&connection={{data.params.connection}}&redirect_uri={{data.headers.x-forwarded-proto}}://{{data.headers.host}}{{globals.callbackPath}}&state={{working.csrfTk}}&scope={{encodeURIComponent
+            (defaultTo data.query.scope globals.defaultScope)}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: zQkiiYjfEs
+        meta:
+          category: output
+          description: ''
+          id: zQkiiYjfEs
+          label: Rdr to Auth0
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 1340
+        outputIds:
+          - - f8e7ocRLX5
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: f8e7ocRLX5
+        meta:
+          category: output
+          description: ''
+          id: f8e7ocRLX5
+          label: Debug
+          name: debug
+          x: 260
+          'y': 1540
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{experience.user}}'
+        id: aKfIbjbwK1
+        meta:
+          category: logic
+          description: ''
+          id: Q1rueHxCmU
+          label: Signed In?
+          name: conditional
+          x: 2580
+          'y': 1040
+        outputIds:
+          - - HUyoQBuxEu
+          - - 1gfMVegvck
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '{{globals.signInPagePath}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: HUyoQBuxEu
+        meta:
+          category: output
+          description: ''
+          id: ExRV_eX4sH
+          label: Rdr to Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 2480
+          'y': 1140
+        outputIds:
+          - - Z0pzwqOVMK
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: >-
+            https://{{globals.domain}}/v2/logout?client_id={{globals.clientId}}&returnTo={{data.headers.x-forwarded-proto}}://{{data.headers.host}}{{globals.signInPagePath}}
+          bodyTemplateType: string
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 1gfMVegvck
+        meta:
+          category: output
+          description: ''
+          id: zQkiiYjfEs
+          label: Rdr to Auth0
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 2680
+          'y': 1140
+        outputIds:
+          - - Z0pzwqOVMK
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: Z0pzwqOVMK
+        meta:
+          category: output
+          description: ''
+          id: Z0pzwqOVMK
+          label: Debug
+          name: debug
+          x: 2580
+          'y': 1240
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: HscXyQcXO0
+        meta:
+          category: output
+          description: ''
+          id: HscXyQcXO0
+          label: Debug
+          name: debug
+          x: 1000
+          'y': 2140
+        outputIds: []
+        type: DebugNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: >-
+            grant_type=authorization_code&client_id={{globals.clientId}}&client_secret={{globals.clientSecret}}&code={{data.query.code}}&redirect_uri={{data.headers.x-forwarded-proto}}://{{data.headers.host}}{{globals.callbackPath}}
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/x-www-form-urlencoded
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.tkResponse
+          timeoutTemplate: ''
+          uriTemplate: 'https://{{globals.domain}}/oauth/token'
+        id: d5MD08iEvs
+        meta:
+          category: data
+          description: ''
+          id: d5MD08iEvs
+          label: Get Token
+          name: http
+          x: 1000
+          'y': 1240
+        outputIds:
+          - - VbU_lmk18u
+        type: HttpNode
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo:
+            - key: Authorization
+              valueTemplate: 'Bearer {{working.tkResponse.body.access_token}}'
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.infoResponse
+          timeoutTemplate: ''
+          uriTemplate: 'https://{{globals.domain}}/userinfo'
+        id: VbU_lmk18u
+        meta:
+          category: data
+          description: ''
+          id: d5MD08iEvs
+          label: Get User Info
+          name: http
+          x: 1020
+          'y': 1340
+        outputIds:
+          - - hH0m6b4Z84
+        type: HttpNode
+      - config:
+          emailOrIdTemplate: '{{working.infoResponse.body.email}}'
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: working.user
+          sortDirection: asc
+          sortField: email
+        id: hH0m6b4Z84
+        meta:
+          category: experience
+          description: ''
+          id: hH0m6b4Z84
+          label: 'User: Get'
+          name: get-experience-user
+          x: 1040
+          'y': 1440
+        outputIds:
+          - - IkWmhlsGWg
+        type: GetExperienceUserNode
+      - config:
+          expression: '{{working.user}}'
+        id: T8hQvty9K8
+        meta:
+          category: logic
+          description: ''
+          id: T8hQvty9K8
+          label: Exp User?
+          name: conditional
+          x: 1040
+          'y': 1640
+        outputIds:
+          - - NwsWS0Uwh4
+          - - vGEwh0Hc7t
+        type: ConditionalNode
+      - config:
+          emailOrIdTemplate: '{{working.user.email}}'
+          invalidateExistingTokens: false
+          resultPath: working.expToken
+          ttlTemplate: '{{multiply working.tkResponse.body.expires_in 1000}}'
+        id: rYcDaP-due
+        meta:
+          category: experience
+          description: ''
+          id: rYcDaP-due
+          label: Generate Token
+          name: experience-user-token
+          x: 1100
+          'y': 1940
+        outputIds:
+          - - 5C-0JZnoEd
+        type: ExperienceUserTokenNode
+      - config:
+          destinationPath: working.newUserPassword
+          idTypeTemplate: uuidv4
+        id: NwsWS0Uwh4
+        meta:
+          category: logic
+          description: ''
+          id: NwsWS0Uwh4
+          label: Generate Password
+          name: generate-id
+          x: 1000
+          'y': 1740
+        outputIds:
+          - - 1NO69qDbiO
+        type: GenerateIdNode
+      - config:
+          bodyTemplate: '{{globals.signedInRedirectPath}}'
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: ''
+              valueTemplate: '{{working.expToken}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 5C-0JZnoEd
+        meta:
+          category: output
+          description: ''
+          id: 5C-0JZnoEd
+          label: Rdr to Home
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1100
+          'y': 2040
+        outputIds:
+          - - HscXyQcXO0
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: '{{globals.signInPagePath}}?error=true'
+          bodyTemplateType: string
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: data.replyId
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: TFkRIk28fW
+        meta:
+          category: output
+          description: ''
+          id: TFkRIk28fW
+          label: Error Reply
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 900
+          'y': 2040
+        outputIds:
+          - - HscXyQcXO0
+        type: EndpointReplyNode
+      - config: {}
+        id: yvwoUH-5yw
+        meta:
+          annotationText: >-
+            ### Before using this template ...
+
+
+            You **MUST** set the following workflow global values:
+
+
+            - `domain`: The domain assigned to you by Auth0.
+
+            - `clientId`: Your Auth0 application's global Client ID.
+
+            - `clientSecret`: Your Auth0 application's global Client Secret.
+
+            - `csrfProtection`: A long, random, alphanumeric string used to
+            protect against [cross-site request
+            forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery)
+            attacks. You can generate one using the Virtual Button to the right.
+
+
+            You may also change the values set for the following globals, or
+            leave them as their default values:
+
+            - `defaultScope`: The [profile
+            scopes](https://auth0.com/docs/scopes/sample-use-cases-scopes-and-claims)
+            to request from your user by default. These can be overridden by
+            passing `scope` as a query parameter to your `signInPagePath`
+            endpoint, where the value is a space-separated list.
+
+            - `callbackPath`: The path to the endpoint Auth0 will request once a
+            user has granted permission to your application.
+
+            - `signInPagePath`: The path to your experience's sign-in page.
+
+            - `signedInRedirectPath`: The path to the experience page you wish
+            to redirect users to on successful sign-in. The endpoint tied to
+            this path should only allow access to authenticated users.
+
+            - `signedOutPath`: The path handling our sign-out requests. This
+            will delete the user's authorization cookie and redirect to Auth0's
+            sign-out endpoint. Auth0 will then redirect back to our
+            `signInPagePath` global.
+          category: annotation
+          height: 560
+          label: Note
+          name: note
+          width: 600
+          x: 60
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          destinationPath: working.generatedCsrf
+          idTypeTemplate: uuidv4
+        id: YSciMigmwQ
+        meta:
+          category: logic
+          description: ''
+          id: YSciMigmwQ
+          label: Generate csrfProtection
+          name: generate-id
+          x: 740
+          'y': 240
+        outputIds:
+          - - bi4UQVpkqa
+        type: GenerateIdNode
+      - config:
+          message: ''
+          property: ''
+        id: bi4UQVpkqa
+        meta:
+          category: output
+          description: ''
+          id: bi4UQVpkqa
+          label: Debug
+          name: debug
+          x: 740
+          'y': 340
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: tL5EcroA5w
+        meta:
+          annotationText: >-
+            ### Generate a CSRF Signing String
+
+
+            You may use the Virtual Button here to generate a value for your
+            `csrfProtection` global - or you may provide your own value for this
+            global.
+
+
+            1. Press the Virtual Button.
+
+            2. Open your workflow's Debug panel.
+
+            3. Copy the value placed at the payload path
+            `working.generatedCsrf`.
+
+            4. Open your workflow's Globals panel.
+
+            5. Paste the value in the "Value" input under the `csrfProtection`
+            global.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 600
+          x: 960
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: EjKcq5ZO8B
+        meta:
+          annotationText: >-
+            ### On request to our experience login endpoint ...
+
+
+            1. Check to see if the user is already signed in. If so, redirect
+            them to our (authenticated) home page.
+
+            2. If a connection is provided in the request, generate a CSRF token
+            and redirect to Auth0.
+
+            3. If no connection is provided, display the Log In page.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 420
+          x: 140
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 7UZkUb74lz
+        meta:
+          annotationText: >-
+            ### On a workflow error ...
+
+
+            Redirect to the experience login page with a generic error message
+            and remove the user's auth token (if applicable).
+
+
+            Workflow errors are most likely to occur in the HTTP Nodes
+            requesting a token or user info from Auth0.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 420
+          x: 340
+          'y': 1920
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: fb8JYf_A29
+        meta:
+          annotationText: >-
+            ### Auth0 will call back to our experience
+
+
+            1. In your Auth0 application, add the URL to your experience's
+            callback URL (i.e.
+            "https://myexperiencedomain.com/tl-auth0-callback") in the
+            application's Allowed Callback URLs.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 420
+          x: 800
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: VCW-s4KJu_
+        meta:
+          annotationText: >-
+            ### Auth0 grants a token
+
+
+            1. With the information provided in Auth0's callback, along with our
+            `clientId` and `clientSecret` we can request a token to query our
+            user.
+
+            2. We use that token to fetch info about the user, including their
+            first name, last name, and email address.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 560
+          x: 1240
+          'y': 1240
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: UNW8t0woKO
+        meta:
+          annotationText: >-
+            ### Create or update an Experience User
+
+
+            1. Check to see if we have an Experience User with the returned
+            email address already.
+
+            2. If not, we create an Experience User with the information
+            included in the response. (We cannot create an Experience User
+            without providing a password, so we'll generate a random one for
+            them.)
+
+            3. If we do have an Experience User, update the tags we get back
+            from the SSO provider. Do NOT delete any existing tags; simply
+            update values.
+          category: annotation
+          height: 360
+          label: Note
+          name: note
+          width: 360
+          x: 1260
+          'y': 1440
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: zvdMeoxWzO
+        meta:
+          annotationText: >-
+            ### Generate an experience token
+
+
+            1. With Auth0 vouching for our user's identity, we can generate a
+            token for use against our Experience Endpoints. We set the TTL of
+            the token to the TTL of the Auth0 token.
+
+            2. Finally, we redirect to our home route, which only allows
+            authenticated users.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 480
+          x: 1320
+          'y': 1920
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: q77YjX2RU3
+        meta:
+          annotationText: >-
+            ### Provide users a logout mechanism
+
+
+            1. If the user is signed in, delete the user's experience token
+            (stored in the `authorization` cookie and redirect to the Auth0
+            application's logout URL.
+
+            2. Auth0 will then redirect the user to our experience's login page,
+            as defined in the `returnTo` query parameter.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 420
+          x: 2460
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataMethod: jsonTemplate
+          emailOrIdTemplate: '{{working.user.id}}'
+          invalidateExistingTokens: false
+          resultPath: ''
+          userJsonTemplate: |-
+            {
+              "firstName":"{{defaultTo working.infoResponse.body.given_name working.user.firstName}}",
+              "lastName":"{{defaultTo working.infoResponse.body.family_name working.user.firstName}}",
+              "userTags": {{jsonEncode working.sanitizedUserTags}}
+            }
+        id: vGEwh0Hc7t
+        meta:
+          category: experience
+          description: ''
+          id: vGEwh0Hc7t
+          label: 'User: Update'
+          name: update-experience-user
+          x: 1200
+          'y': 1840
+        outputIds:
+          - - rYcDaP-due
+        type: UpdateExperienceUserNode
+      - config:
+          script: >-
+            // first, include the SSO provider as a tag
+
+            // we pass this as a query parameter to Auth0,
+
+            // which then passes it back to us in our callback
+
+            payload.working.sanitizedUserTags = {
+              ssoProvider: payload.working.tkDecoded.ssoProvider
+            };
+
+
+            // stringify all values in the SSO response
+
+            // and throw away any that are over our tag length limit
+
+            for (const [key, value] of
+            Object.entries(payload.working.infoResponse.body)) {
+              const stringValue = String(value);
+              if (stringValue.length <= 255) {
+                  payload.working.sanitizedUserTags[key] = stringValue;
+              }
+            }
+
+
+            // if we have a user,
+
+            // merge our sanitized tags on top of the existing tags
+
+            if (payload.working.user) {
+              payload.working.sanitizedUserTags = {
+                ...(payload.working.user.userTags || {}),
+                ...payload.working.sanitizedUserTags
+              };
+            }
+        id: IkWmhlsGWg
+        meta:
+          category: logic
+          description: ''
+          id: IkWmhlsGWg
+          label: Sanitize Tags
+          name: function
+          x: 1040
+          'y': 1540
+        outputIds:
+          - - T8hQvty9K8
+        type: RawFunctionNode
+      - config:
+          dataMethod: jsonTemplate
+          resultPath: working.user
+          userJsonTemplate: |-
+            {
+              "email":"{{working.infoResponse.body.email}}",
+              "password":"{{working.newUserPassword}}",
+              "firstName":"{{working.infoResponse.body.given_name}}",
+              "lastName":"{{working.infoResponse.body.family_name}}",
+              "userTags": {{jsonEncode working.sanitizedUserTags}}
+            }
+        id: 1NO69qDbiO
+        meta:
+          category: experience
+          description: ''
+          id: qBIHmsZzGt
+          label: 'User: Create'
+          name: create-experience-user
+          x: 1000
+          'y': 1840
+        outputIds:
+          - - rYcDaP-due
+        type: CreateExperienceUserNode
+      - config: {}
+        id: uERUtK3mht
+        meta:
+          annotationText: >-
+            ### Render the signed-in user page
+
+
+            While this could be handled using a static reply on the endpoint,
+            we'll use the workflow to render the page so that we can use the
+            `signInPagePath` global in our "Log out" link.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 420
+          x: 1900
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{experience.user}}'
+        id: NlLvlH5-wM
+        meta:
+          category: logic
+          description: ''
+          id: Q1rueHxCmU
+          label: Signed In?
+          name: conditional
+          x: 2020
+          'y': 1040
+        outputIds:
+          - - WH8uYes_vM
+          - - GZjYWckn2v
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '{{globals.signInPagePath}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: WH8uYes_vM
+        meta:
+          category: output
+          description: ''
+          id: ExRV_eX4sH
+          label: Rdr to Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1920
+          'y': 1140
+        outputIds:
+          - - oeiQTHhfMN
+        type: EndpointReplyNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlAuth0Home-1~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: GZjYWckn2v
+        meta:
+          category: output
+          description: ''
+          id: ExRV_eX4sH
+          label: Render Home
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 2120
+          'y': 1140
+        outputIds:
+          - - oeiQTHhfMN
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: oeiQTHhfMN
+        meta:
+          category: output
+          description: ''
+          id: Z0pzwqOVMK
+          label: Debug
+          name: debug
+          x: 2020
+          'y': 1240
+        outputIds: []
+        type: DebugNode
+      - config:
+          algorithmTemplate: HS256
+          dataTemplate: |-
+            {
+                "ssoProvider": "{{data.params.connection}}",
+                "replyId": "{{data.replyId}}"
+            }
+          dataTemplateType: json
+          destinationPath: working.csrfTk
+          expiresIn: 1800
+          issuerTemplate: '{{data.headers.host}}'
+          secretTemplate: '{{globals.csrfProtection}}'
+        id: inqwGfHpT8
+        meta:
+          category: logic
+          description: ''
+          id: inqwGfHpT8
+          isExpRequired: true
+          label: CSRF Generate
+          name: jwt-create
+          timeUnit: Minutes
+          x: 240
+          'y': 1240
+        outputIds:
+          - - zQkiiYjfEs
+        type: JWTCreateNode
+      - config:
+          errorPath: ''
+          issuerTemplate: '{{data.headers.host}}'
+          secretTemplate: '{{globals.csrfProtection}}'
+          tokenTemplate: '{{#if data.query.code}}{{data.query.state}}{{else}} {{/if}}'
+        id: 5SCAm8CtNz
+        meta:
+          category: logic
+          description: ''
+          id: 5SCAm8CtNz
+          label: CSRF Verify
+          name: jwt-verify
+          x: 900
+          'y': 1040
+        outputIds:
+          - - TFkRIk28fW
+          - - N3BWtcrW3C
+        type: JWTVerifyNode
+      - config:
+          complete: false
+          destinationPath: working.tkDecoded
+          tokenTemplate: '{{data.query.state}}'
+        id: N3BWtcrW3C
+        meta:
+          category: logic
+          description: ''
+          id: N3BWtcrW3C
+          label: 'JWT: Decode'
+          name: jwt-decode
+          x: 1000
+          'y': 1140
+        outputIds:
+          - - d5MD08iEvs
+        type: JWTDecodeNode
+      - config: {}
+        id: B19fFgLgqD
+        meta:
+          annotationText: >-
+            ### Verify CSRF token
+
+
+            1. Verify that the CSRF string we passed to Auth0 is valid using our
+            `csrfProtection` global value. If not, return an error.
+
+            2. If the token is valid, decode it to get the `ssoProvider`. We'll
+            use this to set a value in a user tag.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 560
+          x: 1220
+          'y': 1040
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlAuth0LoginConnection-0~
+        meta:
+          category: trigger
+          description: ''
+          id: sgg3L04fnB
+          label: Sign In Page
+          name: endpoint
+          uiId: sgg3L04fnB
+          x: 280
+          'y': 940
+        outputIds:
+          - - Q1rueHxCmU
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlAuth0Logout-2~
+        meta:
+          category: trigger
+          description: ''
+          id: lw2ImDS46m
+          label: Log Out
+          name: endpoint
+          uiId: lw2ImDS46m
+          x: 2580
+          'y': 940
+        outputIds:
+          - - aKfIbjbwK1
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlAuth0Callback-3~
+        meta:
+          category: trigger
+          description: ''
+          id: X9q9rSpHgu
+          label: Auth0 Callback
+          name: endpoint
+          uiId: X9q9rSpHgu
+          x: 900
+          'y': 940
+        outputIds:
+          - - 5SCAm8CtNz
+        type: endpoint
+      - config:
+          scope: local
+        key: ~losant-flow-tlAuth0Login-0~-flowError
+        meta:
+          category: trigger
+          description: ''
+          id: UGSPpyI1l-
+          label: Workflow Error
+          name: flowError
+          uiId: UGSPpyI1l-
+          x: 800
+          'y': 1940
+        outputIds:
+          - - TFkRIk28fW
+        type: flowError
+      - config: {}
+        key: ~losant-flow-tlAuth0Login-0~-Qr22vG_vbhR0r61cK0N8n
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: kjdSfSuts7
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: kjdSfSuts7
+          x: 740
+          'y': 140
+        outputIds:
+          - - YSciMigmwQ
+        type: virtualButton
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlAuth0Home-1~
+        meta:
+          category: trigger
+          description: ''
+          id: IUvuV6MAcp
+          label: Home Page
+          name: endpoint
+          uiId: IUvuV6MAcp
+          x: 2020
+          'y': 940
+        outputIds:
+          - - NlLvlH5-wM
+        type: endpoint
+    version: develop
+version: 1

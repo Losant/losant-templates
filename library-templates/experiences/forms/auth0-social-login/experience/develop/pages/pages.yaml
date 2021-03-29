@@ -1,0 +1,17 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlAuth0Home-1~
+    localFilename: ./tl-auth0-home.hbs
+    name: tl-auth0-home
+    version: develop
+    viewTags: {}
+    viewType: page
+  - description: ""
+    id: ~losant-experienceView-tlAuth0Login-0~
+    localFilename: ./tl-auth0-login.hbs
+    name: tl-auth0-login
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

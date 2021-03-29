@@ -1,0 +1,502 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-getPostTlFileUpload-0~
+    globals:
+      - json: |-
+          [
+              "image/png",
+              "image/gif",
+              "image/jpeg",
+              "image/svg+xml"
+          ]
+        key: example-accept
+      - json: '"userUploads"'
+        key: uploadsRoot
+    id: ~losant-flowVersion-getPostTlFileUpload-0~
+    name: GET & POST /tl-file-upload
+    nodes:
+      - config:
+          bodyTemplate: working.fileResponse.result.upload
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '201'
+          sameSiteTemplate: ''
+        id: Eru8fq_4fx
+        meta:
+          category: output
+          description: ''
+          id: Eru8fq_4fx
+          label: 'Reply: Signed URL'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 940
+          'y': 1080
+        outputIds:
+          - - ekR41OtlQT
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: ekR41OtlQT
+        meta:
+          category: output
+          description: ''
+          id: ekR41OtlQT
+          label: Debug
+          name: debug
+          x: 740
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: o5ytTFv_eU
+        meta:
+          annotationText: >-
+            The file itself is not submitted in the request. Rather, we submit
+            metadata about the file.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 280
+          x: 980
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: nxWroGroS_
+        meta:
+          annotationText: >-
+            The metadata is being submitted as a stringified JSON object. Here,
+            we parse the input and validate that it fits our expected shape. If
+            `globals.accept` is set, we also validate the `contentType` is one
+            of the allowed types.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 360
+          x: 980
+          'y': 380
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: f1oU34zDL4
+        meta:
+          annotationText: >-
+            If we have a signed URL, return it to the browser, where it will be
+            used to upload to the storage provider asynchronously on the client.
+            Otherwise, return an error.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 280
+          x: 1160
+          'y': 980
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          destination: working.__fileInfo__
+          errorBehavior: payloadPath
+          errorPath: working.fileError
+          source: data.body.__fileInfo__
+        id: obR__Z0YS_
+        meta:
+          category: logic
+          description: ''
+          id: obR__Z0YS_
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 760
+          'y': 380
+        outputIds:
+          - - _HuvWgYKS8
+        type: JsonDecodeNode
+      - config:
+          errorsPath: ''
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024
+                    },
+                    "fileSize": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 1073741274
+                    },
+                    "contentType": {
+                        {{#if globals.accept}}"enum": {{jsonEncode globals.accept}},{{/if}}
+                        "type": "string",
+                        "maxLength": 1024
+                    }
+                },
+                "required": ["name", "fileSize", "contentType"],
+                "additionalProperties": false
+            }
+          schemaType: json
+          toValidatePath: working.__fileInfo__
+        id: _HuvWgYKS8
+        meta:
+          category: logic
+          description: ''
+          id: _HuvWgYKS8
+          label: Validate Payload
+          name: validate-payload
+          x: 760
+          'y': 480
+        outputIds:
+          - - IgLwEEwxyk
+          - - M6ANUFgPu4
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: |-
+            {
+                "type": "Validation",
+                "message": "File upload does not match schema"
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: IgLwEEwxyk
+        meta:
+          category: output
+          description: ''
+          id: Eru8fq_4fx
+          label: 'Reply: Validation Error'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 1080
+        outputIds:
+          - - ekR41OtlQT
+        type: EndpointReplyNode
+      - config:
+          action: post
+          params:
+            - name: file
+              type: json
+              value: |-
+                {
+                    "name": "{{working.__fileInfo__.name}}",
+                    "fileSize": {{working.__fileInfo__.fileSize}},
+                    "contentType": "{{working.__fileInfo__.contentType}}",
+                    "parentDirectory": "{{working.__fileInfo__.directory}}",
+                    "type": "file"
+                }
+          resource: files
+          responsePath: working.fileResponse
+        id: IIRlfVmH6B
+        meta:
+          category: data
+          description: ''
+          id: IIRlfVmH6B
+          label: 'New File: Get Signed URL'
+          name: losantapi
+          x: 740
+          'y': 880
+        outputIds:
+          - - 5mBT7yGolq
+        type: LosantApiNode
+      - config:
+          expression: '{{working.fileResponse.result.upload}}'
+        id: 5mBT7yGolq
+        meta:
+          category: logic
+          description: ''
+          id: 5mBT7yGolq
+          label: Signed URL?
+          name: conditional
+          x: 840
+          'y': 980
+        outputIds:
+          - - fURIz578Jq
+          - - Eru8fq_4fx
+        type: ConditionalNode
+      - config:
+          bodyTemplate: working.fileResponse.error
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '{{working.fileResponse.error.statusCode}}'
+          sameSiteTemplate: ''
+        id: fURIz578Jq
+        meta:
+          category: output
+          description: ''
+          id: Eru8fq_4fx
+          label: 'Reply: Error'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 740
+          'y': 1080
+        outputIds:
+          - - ekR41OtlQT
+        type: EndpointReplyNode
+      - config: {}
+        id: joU4HWgbrO
+        meta:
+          annotationText: >-
+            ### To only accept specific file types ...
+
+
+            - Change the key of the "example-accept" workflow global to
+            "accept", and update the array of [MIME
+            types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
+            to those you wish to accept. This will be sent to the browser and
+            applied to the file input, and uploads will validate against this
+            MIME type when a file is uploaded.
+
+
+            For reference, here is a list of [common MIME
+            types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types).
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 600
+          x: 340
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlFileUpload-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: GCRJJo3XxD
+        meta:
+          category: output
+          description: ''
+          id: GCRJJo3XxD
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 460
+          'y': 380
+        outputIds:
+          - - 3osvC2hUmK
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: 3osvC2hUmK
+        meta:
+          category: output
+          description: ''
+          id: 3osvC2hUmK
+          label: Debug
+          name: debug
+          x: 460
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 1UODSu3jlH
+        meta:
+          annotationText: >-
+            Instead of a static reply, we use the workflow to reply to the page
+            request so we can send the "accept" workflow global down to the
+            page.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 160
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: lastUpdated
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1'
+            - name: filterField
+              type: string
+              value: name
+            - name: filter
+              type: string
+              value: '{{working.__fileInfo__.name}}'
+            - name: type
+              type: string
+              value: file
+            - name: status
+              type: string
+              value: ''
+            - name: directory
+              type: string
+              value: '{{working.__fileInfo__.directory}}'
+          resource: files
+          responsePath: working.existingFile
+        id: tYgBsy9es6
+        meta:
+          category: data
+          description: ''
+          id: tYgBsy9es6
+          label: Find Existing File
+          name: losantapi
+          x: 840
+          'y': 680
+        outputIds:
+          - - VMhLXauRXU
+        type: LosantApiNode
+      - config:
+          rules:
+            - destination: working.__fileInfo__.directory
+              type: set
+              valueTemplate: >-
+                /{{globals.uploadsRoot}}/{{defaultTo experience.user.id
+                '__anonymous__'}}
+        id: M6ANUFgPu4
+        meta:
+          category: logic
+          description: ''
+          id: M6ANUFgPu4
+          label: Set Directory
+          name: mutate
+          x: 840
+          'y': 580
+        outputIds:
+          - - tYgBsy9es6
+        type: MutateNode
+      - config:
+          expression: '{{working.existingFile.result.count}}'
+        id: VMhLXauRXU
+        meta:
+          category: logic
+          description: ''
+          id: VMhLXauRXU
+          label: Existing?
+          name: conditional
+          x: 840
+          'y': 780
+        outputIds:
+          - - IIRlfVmH6B
+          - - sfauVDWHGt
+        type: ConditionalNode
+      - config:
+          action: patch
+          params:
+            - name: fileId
+              type: string
+              value: '{{working.existingFile.result.items.[0].id}}'
+            - name: updates
+              type: json
+              value: |-
+                {
+                    "fileSize": {{working.__fileInfo__.fileSize}},
+                    "contentType": "{{working.__fileInfo__.contentType}}"
+                }
+          resource: file
+          responsePath: working.fileResponse
+        id: sfauVDWHGt
+        meta:
+          category: data
+          description: ''
+          id: IIRlfVmH6B
+          label: 'Existing File: Get Signed URL'
+          name: losantapi
+          x: 940
+          'y': 880
+        outputIds:
+          - - 5mBT7yGolq
+        type: LosantApiNode
+      - config: {}
+        id: 8hjxO2MTw0
+        meta:
+          annotationText: >-
+            Construct our upload directory from `globals.uploadRoot` and
+            `experience.user.id` (defaulting to "__anonymous__")
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 600
+          x: 1040
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: DLxziOizMb
+        meta:
+          annotationText: >-
+            Check to see if a file of this name already exists under the user's
+            directory. If so, use a different API call to retrieve a signed URL
+            vs. if this is a new file.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 280
+          x: 1160
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postTlFileUpload-0~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /tl-basic-form
+          name: endpoint
+          uiId: 0GmvZu60u3
+          x: 760
+          'y': 280
+        outputIds:
+          - - obR__Z0YS_
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlFileUpload-1~
+        meta:
+          category: trigger
+          description: ''
+          id: bU435yk-GU
+          label: GET /tl-file-upload
+          name: endpoint
+          uiId: bU435yk-GU
+          x: 460
+          'y': 280
+        outputIds:
+          - - GCRJJo3XxD
+        type: endpoint
+    version: develop
+version: 1

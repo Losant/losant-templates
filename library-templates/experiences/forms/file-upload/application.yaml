@@ -1,0 +1,17 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to upload an Experience User's file to Application Files.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesFormsFileUpload-0~
+    name: File Upload
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - upload
+      - file
+      - storage
+version: 1

@@ -1,0 +1,22 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: ""
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesFormsAuth0SocialLogin-0~
+    name: Auth0 Social Login
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - sso
+      - auth0
+      - social
+      - login
+      - github
+      - facebook
+      - linkedin
+      - microsoft
+version: 1

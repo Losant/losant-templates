@@ -1,0 +1,17 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getTlFileUpload-1~
+    method: get
+    route: /tl-file-upload
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postTlFileUpload-0~
+    method: post
+    route: /tl-file-upload
+    version: develop
+version: 1
