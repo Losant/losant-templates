@@ -18,7 +18,7 @@ After importing this template:
 When complete, you will have imported the following logic:
 
 1. The experience user navigates to `GET /tl-verify-login` and logs in with experience credentials.
-2. Upon successful login, the `POST /tl-verify-login` uses the [Twlio Verification API](https://www.twilio.com/docs/verify/api/verification) to send a verification code to the experience user's phone.
+2. Upon successful login, the `POST /tl-verify-login` uses the [Twilio Verification API](https://www.twilio.com/docs/verify/api/verification) to send a verification code to the experience user's phone.
 3. The user is redirected to `GET /tl-verify-form?token=JWT_TOKEN`. In the verification form, the user must enter the code received from Twilio.  
 4. The user-entered code is sent to the [Twilio Verification Check API](https://www.twilio.com/docs/verify/api/verification-check). 
 5. If the verification was successful, the user is authenticated to the experience and redirected to `/`.
