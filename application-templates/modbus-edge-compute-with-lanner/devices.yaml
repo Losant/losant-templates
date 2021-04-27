@@ -1,0 +1,79 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        name: temp_c
+      - attributeTags: {}
+        dataType: number
+        name: temp_f
+      - attributeTags: {}
+        dataType: number
+        name: humidity
+    children: []
+    description: Gateway running the Losant Edge Agent. Reads Modbus TCP/RTU sensor
+      data and reports values on behalf of its peripherals.
+    deviceClass: edgeCompute
+    id: ~losant-device-lannerGateway-0~
+    name: Lanner Gateway
+    tags: []
+  - attributes:
+      - attributeTags:
+          units: Celsius
+        dataType: number
+        description: The temperature, in Celsius.
+        name: temp_c
+      - attributeTags:
+          units: Fahrenheit
+        dataType: number
+        description: "The temperature, in Fahrenheit. "
+        name: temp_f
+      - attributeTags:
+          units: "%"
+        dataType: number
+        description: The humidity percentage (0-100).
+        name: humidity
+    children: []
+    description: |-
+      Modbus RTU temperature and humidity sensor:
+      https://www.amazon.com/dp/B078NRYBVZ
+    deviceClass: peripheral
+    gatewayId: ~losant-device-lannerGateway-0~
+    id: ~losant-device-modbusRtuSensor-1~
+    name: Modbus RTU Sensor
+    tags:
+      - key: serial_path
+        value: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AL065NV2-if00-port0
+  - attributes:
+      - attributeTags:
+          units: Celsius
+        dataType: number
+        description: The temperature, in Celsius.
+        name: temp_c
+      - attributeTags:
+          units: Fahrenheit
+        dataType: number
+        description: "The temperature, in Fahrenheit. "
+        name: temp_f
+      - attributeTags:
+          units: "%"
+        dataType: number
+        description: The humidity percentage (0-100).
+        name: humidity
+      - attributeTags: {}
+        dataType: boolean
+        description: Whether or not the equipment is running.
+        name: running
+    children: []
+    description: Recipe for Modbus TCP device designed to interact with the Modbus
+      TCP simulator.
+    deviceClass: peripheral
+    gatewayId: ~losant-device-lannerGateway-0~
+    id: ~losant-device-modbusTcpSensor-2~
+    name: Modbus TCP Sensor
+    tags:
+      - key: address
+        value: 192.168.86.130
+      - key: port
+        value: "502"
+version: 1

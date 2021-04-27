@@ -1,0 +1,43 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This template demonstrates how to read Modbus TCP and Modbus RTU
+      data using Lanner gateways and the Losant Edge Agent.
+    filesPath: ./files
+    globals:
+      - cloudOnly: false
+        description: Schema to validate the "update" command payload, which is used to
+          change the Modbus TCP simulation values.
+        json: |-
+          {
+            "type": "object",
+            "properties": {
+              "running": {
+                "type": "boolean"
+              },
+              "temp_c": {
+                "type": "number",
+                "minimum": -100,
+                "maximum": 100
+              },
+              "humidity": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "peripheral": {
+                "type": "string"
+              }
+            },
+            "required": ["running", "temp_c", "humidity", "peripheral"],
+            "additionalProperties": false
+          }
+        key: update_command_payload_schema
+    id: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+    name: Modbus Edge Compute with Lanner
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

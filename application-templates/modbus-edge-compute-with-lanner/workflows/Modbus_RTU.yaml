@@ -1,0 +1,277 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: edge
+    globals: []
+    id: ~losant-flow-modbusRtu-0~
+    minimumAgentVersion: 1.21.0
+    name: Modbus RTU
+    nodes:
+      - config:
+          findMethod: findByAllTags
+          findMultiple: true
+          resultPath: working.devices
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: serial_path
+              valueTemplate: ''
+        id: iE5QfZC4XN
+        meta:
+          category: data
+          description: ''
+          id: iE5QfZC4XN
+          label: 'Peripheral: Get'
+          name: get-peripheral
+          x: 160
+          'y': 200
+        outputIds:
+          - - s7aru9eLKe
+        type: GetPeripheralNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: working.devices
+          mapResultPath: ''
+          parallel: true
+        id: s7aru9eLKe
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 80
+          groupStartY: 120
+          id: s7aru9eLKe
+          label: Loop
+          name: loop
+          x: 160
+          'y': 300
+        outputIds:
+          - []
+          - - ip_WEpHgwR
+        type: LoopNode
+      - config:
+          loopNodeId: s7aru9eLKe
+          mapValuePath: ''
+          shouldBreak: false
+        id: xV-kcDSoMB
+        meta:
+          category: loop
+          description: ''
+          groupId: s7aru9eLKe
+          id: xV-kcDSoMB
+          label: Return
+          name: loop-return
+          x: 80
+          'y': 1120
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          areUnsignedInts: false
+          baudRateTemplate: '9600'
+          connectionTypeTemplate: serial
+          dataBitsTemplate: '8'
+          destinationPath: working.modbus
+          endiannessTemplate: big
+          parityTemplate: none
+          pathTemplate: '{{working.device.value.tags.serial_path.[0]}}'
+          readInstructions:
+            - addressTemplate: '0'
+              key: values
+              lengthTemplate: '2'
+              typeTemplate: holding-register
+          readInstructionsType: array
+          stopBitsTemplate: '1'
+          unitIdTemplate: '0'
+        id: ip_WEpHgwR
+        meta:
+          category: data
+          description: ''
+          groupId: s7aru9eLKe
+          id: fYQDCVXXb7
+          label: 'Modbus: Read'
+          name: modbus-read
+          x: 80
+          'y': 240
+        outputIds:
+          - - pfoYS5RKDJ
+        type: ModbusReadNode
+      - config:
+          statements:
+            - expression: '{{working.modbus.values.[0]}} / 10'
+              resultPath: working.state.temp_c
+            - expression: '{{working.modbus.values.[1]}} / 10'
+              resultPath: working.state.humidity
+            - expression: '{{working.state.temp_c}} * (9/5)  + 32'
+              resultPath: working.state.temp_f
+        id: pfoYS5RKDJ
+        meta:
+          category: logic
+          description: ''
+          groupId: s7aru9eLKe
+          id: 8NqKNG1fMt
+          label: Math
+          name: math
+          x: 80
+          'y': 620
+        outputIds:
+          - - U5LgWiHWFB
+        type: MathNode
+      - config:
+          message: ''
+          property: ''
+        id: YDqBinXUUD
+        meta:
+          category: output
+          description: ''
+          groupId: s7aru9eLKe
+          id: YDqBinXUUD
+          label: Debug
+          name: debug
+          x: 80
+          'y': 1020
+        outputIds:
+          - - xV-kcDSoMB
+        type: DebugNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.state
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: U5LgWiHWFB
+        meta:
+          category: output
+          description: ''
+          groupId: s7aru9eLKe
+          id: U5LgWiHWFB
+          label: 'Device: State'
+          name: device-state
+          x: 80
+          'y': 760
+        outputIds:
+          - - YDqBinXUUD
+        type: DeviceChangeStateNode
+      - config: {}
+        id: CMc8PCRtHH
+        meta:
+          annotationText: >-
+            Get every peripheral with the tag `serial_path`. Loop over each
+            peripheral and use the value of the `serial_path` tag to read its
+            corresponding serial device.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 360
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 7oWf_eMOsP
+        meta:
+          annotationText: >-
+            Read registers from the Modbus RTU sensor. The path to the serial
+            device is stored on each peripheral's `serial_path` tag. It contains
+            the full path to the serial device (e.g.
+            `/dev/serial/by-id/usb-FTDI...`).
+
+
+            This Modbus RTU sensor has two registers starting at address 0. The
+            first value is the temperature in Celsius (multiplied by 10) and the
+            second value is the humidity as a percentage (multiplied by 10).
+
+
+            These addresses are based on the sensor linked below. This node will
+            need modified to support other Modbus RTU sensors.
+
+
+            https://www.amazon.com/dp/B078NRYBVZ
+          category: annotation
+          groupId: s7aru9eLKe
+          height: 340
+          label: Note
+          name: note
+          width: 400
+          x: 280
+          'y': 240
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 0iNhZd8XFG
+        meta:
+          annotationText: >-
+            Convert the raw Modbus values to actual values. Also calculate the
+            temperature in Fahrenheit.
+          category: annotation
+          groupId: s7aru9eLKe
+          height: 100
+          label: Note
+          name: note
+          width: 400
+          x: 280
+          'y': 620
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 1-aZPda45M
+        meta:
+          annotationText: >-
+            The Math Node above is putting each value on an object at
+            `working.state` with fields for each attribute. The Device: State
+            Node can directly report that object as state.
+
+
+            ```
+
+            {
+              "temp_c": 23.1
+              "temp_f": 73.58
+              "humidity": 30.5
+            }
+
+            ```
+          category: annotation
+          groupId: s7aru9eLKe
+          height: 260
+          label: Note
+          name: note
+          width: 400
+          x: 280
+          'y': 760
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-modbusRtu-0~-jI0Ki9kjMh9pJqATVMivZ
+        meta:
+          category: trigger
+          description: ''
+          deviceId: ''
+          id: mfISmjIUjV
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: mfISmjIUjV
+          x: 60
+          'y': 60
+        outputIds:
+          - - iE5QfZC4XN
+        type: virtualButton
+      - config:
+          seconds: 90
+        key: ~losant-flow-modbusRtu-0~-gumpkOdzG_bw1Qsgd5wtT
+        meta:
+          category: trigger
+          description: ''
+          id: hR_G8bOlXi
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: hR_G8bOlXi
+          x: 260
+          'y': 60
+        outputIds:
+          - - iE5QfZC4XN
+        type: timer
+version: 1

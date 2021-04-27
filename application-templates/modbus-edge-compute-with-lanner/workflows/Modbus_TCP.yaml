@@ -1,0 +1,482 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: edge
+    globals: []
+    id: ~losant-flow-modbusTcp-1~
+    minimumAgentVersion: 1.21.0
+    name: Modbus TCP
+    nodes:
+      - config:
+          areUnsignedInts: false
+          connectionTypeTemplate: tcp
+          destinationPath: working.modbusResult
+          hostTemplate: '{{working.peripheral.tags.address.[0]}}'
+          portTemplate: '{{working.peripheral.tags.port.[0]}}'
+          unitIdTemplate: '0'
+          writeInstructions:
+            - addressTemplate: '0'
+              key: ''
+              typeTemplate: holding-register
+              valueTemplate: '{{format (multiply data.payload.temp_c 10) ''0.0f''}}'
+            - addressTemplate: '1'
+              key: ''
+              typeTemplate: holding-register
+              valueTemplate: '{{format (multiply data.payload.humidity 10) ''0.0f''}}'
+            - addressTemplate: '2'
+              key: ''
+              typeTemplate: holding-register
+              valueTemplate: '{{#if data.payload.running}}1{{else}}0{{/if}}'
+          writeInstructionsType: array
+        id: 5IsLZqPrOn
+        meta:
+          category: data
+          description: ''
+          id: 5IsLZqPrOn
+          label: 'Modbus: Write'
+          name: modbus-write
+          x: 240
+          'y': 960
+        outputIds:
+          - - AGm2DSPVWg
+        type: ModbusWriteNode
+      - config:
+          findMethod: findByAllTags
+          findMultiple: true
+          resultPath: working.devices
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: address
+              valueTemplate: ''
+        id: tDoT_3YJTG
+        meta:
+          category: data
+          description: ''
+          id: iE5QfZC4XN
+          label: 'Peripheral: Get'
+          name: get-peripheral
+          x: 140
+          'y': 160
+        outputIds:
+          - - Y6xiTq3OaW
+        type: GetPeripheralNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: working.devices
+          mapResultPath: ''
+          parallel: true
+        id: Y6xiTq3OaW
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 80
+          groupStartY: 80
+          id: s7aru9eLKe
+          label: Loop
+          name: loop
+          x: 140
+          'y': 260
+        outputIds:
+          - []
+          - - 4FRT-dabN4
+        type: LoopNode
+      - config:
+          statements:
+            - expression: '{{working.modbus.values.[0]}} / 10'
+              resultPath: working.state.temp_c
+            - expression: '{{working.modbus.values.[1]}} / 10'
+              resultPath: working.state.humidity
+            - expression: '{{working.state.temp_c}} * (9/5)  + 32'
+              resultPath: working.state.temp_f
+            - expression: '{{working.modbus.values.[2]}}'
+              resultPath: working.state.running
+        id: Fmcyqiyk-N
+        meta:
+          category: logic
+          description: ''
+          groupId: Y6xiTq3OaW
+          id: 8NqKNG1fMt
+          label: Math
+          name: math
+          x: 80
+          'y': 520
+        outputIds:
+          - - e3_COuIivZ
+        type: MathNode
+      - config:
+          message: ''
+          property: ''
+        id: XqkM5xoA1L
+        meta:
+          category: output
+          description: ''
+          groupId: Y6xiTq3OaW
+          id: YDqBinXUUD
+          label: Debug
+          name: debug
+          x: 80
+          'y': 1220
+        outputIds: []
+        type: DebugNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.state
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: e3_COuIivZ
+        meta:
+          category: output
+          description: ''
+          groupId: Y6xiTq3OaW
+          id: U5LgWiHWFB
+          label: 'Device: State'
+          name: device-state
+          x: 80
+          'y': 660
+        outputIds:
+          - - hoskXFs63K
+        type: DeviceChangeStateNode
+      - config: {}
+        id: 0FbBJUFMPh
+        meta:
+          annotationText: >-
+            Read registers from the Modbus TCP simulator. The address and port
+            to connect to are stored on each peripheral's `address` and `port`
+            tags.
+
+
+            The registers are defined in the Modbus TCP simulator script. By
+            default the simulator configuration is:
+
+
+            * Address 0: temperature in Celsius (multiplied by 10)
+
+            * Address 1: humidity percentage (multiplied by 10)
+
+            * Address 2: running state (0 or 1)
+          category: annotation
+          groupId: Y6xiTq3OaW
+          height: 240
+          label: Note
+          name: note
+          width: 400
+          x: 280
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: oOHqD4lIjL
+        meta:
+          annotationText: >-
+            Convert the raw Modbus values to actual values. Also calculate the
+            temperature in Fahrenheit.
+          category: annotation
+          groupId: Y6xiTq3OaW
+          height: 100
+          label: Note
+          name: note
+          width: 400
+          x: 280
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: zamKCwIZCz
+        meta:
+          annotationText: >-
+            The Math Node above is putting each value on an object at
+            `working.state` with fields for each attribute. The Device: State
+            Node can directly report that object as state.
+
+
+            ```
+
+            {
+              "temp_c": 23.1
+              "temp_f": 73.58
+              "humidity": 30.5
+              "running": 1
+            }
+
+            ```
+          category: annotation
+          groupId: Y6xiTq3OaW
+          height: 280
+          label: Note
+          name: note
+          width: 400
+          x: 280
+          'y': 660
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: h0zmNKKXye
+        meta:
+          annotationText: >-
+            Get every peripheral with the tag `address`. Loop over each
+            peripheral and use the value of the `address` and `port` tags to
+            connect to the Modbus device.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 340
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          areUnsignedInts: false
+          connectionTypeTemplate: tcp
+          destinationPath: working.modbus
+          endiannessTemplate: big
+          hostTemplate: '{{working.device.value.tags.address.[0]}}'
+          portTemplate: '{{working.device.value.tags.port.[0]}}'
+          readInstructions:
+            - addressTemplate: '0'
+              key: values
+              lengthTemplate: '3'
+              typeTemplate: holding-register
+          readInstructionsType: array
+          unitIdTemplate: '0'
+        id: 4FRT-dabN4
+        meta:
+          category: data
+          description: ''
+          groupId: Y6xiTq3OaW
+          id: fu16uziJys
+          label: 'Modbus: Read'
+          name: modbus-read
+          x: 80
+          'y': 200
+        outputIds:
+          - - Fmcyqiyk-N
+        type: ModbusReadNode
+      - config:
+          errorsPath: working.validationErrors
+          schema: globals.update_command_payload_schema
+          schemaType: path
+          toValidatePath: data.payload
+        id: vQoTlxUBV-
+        meta:
+          category: logic
+          description: ''
+          id: vQoTlxUBV-
+          label: Validate Payload
+          name: validate-payload
+          x: 140
+          'y': 740
+        outputIds:
+          - - if7W-GyGgr
+          - - 5lKMi2sACa
+        type: ValidatePayloadNode
+      - config:
+          message: Invalid command payload.
+          property: ''
+        id: if7W-GyGgr
+        meta:
+          category: output
+          description: ''
+          id: ymVvJndXLC
+          label: Debug
+          name: debug
+          x: 40
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMethod: id
+          idTemplate: '{{data.payload.peripheral}}'
+          resultPath: working.peripheral
+        id: 5lKMi2sACa
+        meta:
+          category: data
+          description: ''
+          id: 5lKMi2sACa
+          label: 'Peripheral: Get'
+          name: get-peripheral
+          x: 240
+          'y': 860
+        outputIds:
+          - - 5IsLZqPrOn
+        type: GetPeripheralNode
+      - config:
+          message: ''
+          property: ''
+        id: AGm2DSPVWg
+        meta:
+          category: output
+          description: ''
+          id: AGm2DSPVWg
+          label: Debug
+          name: debug
+          x: 240
+          'y': 1060
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{working.state.temp_c}} > 90'
+        id: hoskXFs63K
+        meta:
+          category: logic
+          description: ''
+          groupId: Y6xiTq3OaW
+          id: hoskXFs63K
+          label: Temp > 90?
+          name: conditional
+          x: 80
+          'y': 980
+        outputIds:
+          - - XqkM5xoA1L
+          - - bFfT1RSxBe
+        type: ConditionalNode
+      - config:
+          areUnsignedInts: false
+          connectionTypeTemplate: tcp
+          destinationPath: working.modbusWriteResult
+          hostTemplate: '{{working.device.value.tags.address.[0]}}'
+          portTemplate: '{{working.device.value.tags.port.[0]}}'
+          unitIdTemplate: '0'
+          writeInstructions:
+            - addressTemplate: '2'
+              key: ''
+              typeTemplate: holding-register
+              valueTemplate: '0'
+          writeInstructionsType: array
+        id: bFfT1RSxBe
+        meta:
+          category: data
+          description: ''
+          groupId: Y6xiTq3OaW
+          id: 5IsLZqPrOn
+          label: 'Modbus: Write'
+          name: modbus-write
+          x: 180
+          'y': 1100
+        outputIds:
+          - - XqkM5xoA1L
+        type: ModbusWriteNode
+      - config: {}
+        id: LLyg-cKEk7
+        meta:
+          annotationText: >-
+            An example of local control. If the temperature exceeds 90 degrees
+            C, set the `running` register on the device to 0. This represents
+            stopping the device before it can cause damage.
+          category: annotation
+          groupId: Y6xiTq3OaW
+          height: 180
+          label: Note
+          name: note
+          width: 400
+          x: 380
+          'y': 980
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: CvVhTKAoF6
+        meta:
+          annotationText: >-
+            The "update" command will write all three registers to the Modbus
+            TCP simulator. Example payload:
+
+
+            ```
+
+            {
+              "humidity": 44,
+              "temp_c": 24,
+              "running": true,
+              "peripheral": "<device-id>"
+            }
+
+            ```
+          category: annotation
+          height: 280
+          label: Note
+          name: note
+          width: 320
+          x: 340
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: NpYrCTyZsy
+        meta:
+          annotationText: >-
+            Get the correct device based on the `peripheral` field in the
+            command payload. The address and port of the Modbus server is on the
+            device's `address` and `port` tags.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 320
+          x: 440
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.name}} === ''update'''
+        id: mwy_z_H92Q
+        meta:
+          category: logic
+          description: ''
+          id: mwy_z_H92Q
+          label: Is Update?
+          name: conditional
+          x: 140
+          'y': 520
+        outputIds:
+          - - UV46x2c158
+          - - vQoTlxUBV-
+        type: ConditionalNode
+      - config:
+          message: Unexpected command received.
+          property: ''
+        id: UV46x2c158
+        meta:
+          category: output
+          description: ''
+          id: ymVvJndXLC
+          label: Debug
+          name: debug
+          x: 40
+          'y': 640
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config:
+          seconds: 90
+        key: ~losant-flow-modbusTcp-1~-Ze8HTHuYmclHbPiNEJqre
+        meta:
+          category: trigger
+          description: ''
+          id: 3HW_6zG7jk
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: 3HW_6zG7jk
+          x: 140
+          'y': 60
+        outputIds:
+          - - tDoT_3YJTG
+        type: timer
+      - config: {}
+        key: deviceCommand
+        meta:
+          category: trigger
+          description: ''
+          id: 4uSHYL-vIc
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: 4uSHYL-vIc
+          x: 140
+          'y': 420
+        outputIds:
+          - - mwy_z_H92Q
+        type: deviceCommand
+version: 1

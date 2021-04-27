@@ -1,0 +1,138 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: temp_c
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Temperature
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ˚C
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 2
+        id: '-7WyFl-WO5'
+        startX: 0
+        startY: 0
+        title: Temperature
+        width: 3.5
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: temp_c
+            color: 'rgba(5, 113, 128, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: ˚C
+        height: 2
+        id: U0fpS-0b9y
+        startX: 3.5
+        startY: 0
+        title: Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: humidity
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Humidity
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: '%'
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 2
+        id: 8LI1RJogMb
+        startX: 0
+        startY: 2
+        title: Humidity
+        width: 3.5
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: humidity
+            color: 'rgba(130, 91, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: '%'
+        height: 2
+        id: Xvei8JKkXx
+        startX: 3.5
+        startY: 2
+        title: Humidity
+        width: 0.5
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        defaultValue: ~losant-device-modbusRtuSensor-1~
+        name: device
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-modbusRtu-0~
+    name: Modbus RTU
+    public: false
+    refreshRate: 60
+version: 1

@@ -1,0 +1,271 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: input
+        config:
+          controls:
+            - color: '#8db319'
+              defaultQuery:
+                aggregation: LAST
+                attribute: temp_c
+                deviceIds:
+                  - ~losant-device-modbusTcpSensor-2~
+                deviceTags: []
+              defaultValue: 50
+              grid:
+                h: 1
+                w: 4
+                x: 0
+                'y': 3
+              id: range-0
+              label: Temperature ˚C
+              max: 100
+              min: 0
+              step: 1
+              templateId: temp_c
+              type: range
+            - color: '#8db319'
+              defaultQuery:
+                aggregation: LAST
+                attribute: humidity
+                deviceIds:
+                  - ~losant-device-modbusTcpSensor-2~
+                deviceTags: []
+              defaultValue: 50
+              grid:
+                h: 1
+                w: 4
+                x: 0
+                'y': 4
+              id: range-1
+              label: Humidity %
+              max: 100
+              min: 0
+              step: 1
+              templateId: humidity
+              type: range
+            - action: workflow
+              buttonId: HnbeXntlCb
+              color: '#8db319'
+              commandName: update
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              grid:
+                h: 1
+                w: 4
+                x: 0
+                'y': 6
+              id: button-0
+              label: Update Values
+              payload: |-
+                {
+                  "peripheral": "{{ctx.device.id}}",
+                  "temp_c": {{temp_c}},
+                  "humidity": {{humidity}},
+                  "running": {{running}}
+                }
+              templateId: button-0
+              type: button
+              workflowId: ~losant-flow-updateSimulator-2~
+            - color: '#8db319'
+              defaultQuery:
+                aggregation: LAST
+                attribute: running
+                deviceIds:
+                  - '{{ctx.device}}'
+                deviceTags: []
+              defaultValue: false
+              grid:
+                h: 1
+                w: 1
+                x: 0
+                'y': 5
+              id: toggle-0
+              includeLabel: true
+              label: Running
+              templateId: running
+              type: toggle
+            - grid:
+                h: 3
+                w: 4
+                x: 0
+                'y': 0
+              help: >-
+                The controls below change the Simulator values. When the "Update
+                Values" button is clicked, a command is sent to the Edge Agent
+                to write the simulator Modbus registers. The updated values will
+                be reported on the next update interval (every 90 seconds).
+              id: help-0
+              templateId: help-0
+              type: help
+        height: 3
+        id: TlZOtYKth3
+        startX: 0
+        startY: 0
+        title: Simulator Controller
+        width: 1
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: temp_c
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Temperature
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ˚C
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 2
+        id: 1rC7KbW2ww
+        startX: 1
+        startY: 0
+        title: Temperature
+        width: 2.5
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: temp_c
+            color: 'rgba(5, 113, 128, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: ˚C
+        height: 2
+        id: slTi9A92zB
+        startX: 3.5
+        startY: 0
+        title: Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: humidity
+            color: 'rgba(130, 91, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: '%'
+        height: 2
+        id: Q--eNNvbDw
+        startX: 3.5
+        startY: 2
+        title: Humidity
+        width: 0.5
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: humidity
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Humidity
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: '%'
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 2
+        id: PDEZYLvecf
+        startX: 1
+        startY: 2
+        title: Humidity
+        width: 2.5
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{value-0}} === false'
+              id: ULmtYQja-6
+              label: Not Running
+          defaultCondition:
+            color: '#8db319'
+            label: Running
+          duration: 0
+          realTime: false
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: running
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+        height: 1
+        id: CI1X6R5gmT
+        startX: 0
+        startY: 3
+        title: Running
+        width: 1
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+        defaultValue: ~losant-device-modbusTcpSensor-2~
+        name: device
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-modbusTcp-1~
+    name: Modbus TCP
+    public: false
+    refreshRate: 60
+version: 1

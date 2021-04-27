@@ -1,0 +1,66 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags:
+          units: Celsius
+        dataType: number
+        description: The temperature, in Celsius.
+        name: temp_c
+      - attributeTags:
+          units: Fahrenheit
+        dataType: number
+        description: "The temperature, in Fahrenheit. "
+        name: temp_f
+      - attributeTags:
+          units: "%"
+        dataType: number
+        description: The humidity percentage (0-100).
+        name: humidity
+    description: |-
+      Modbus RTU temperature and humidity sensor:
+      https://www.amazon.com/dp/B078NRYBVZ
+    deviceClass: peripheral
+    deviceDescription: |-
+      Modbus RTU temperature and humidity sensor:
+      https://www.amazon.com/dp/B078NRYBVZ
+    deviceName: Modbus RTU Sensor
+    gatewayId: ~losant-device-lannerGateway-0~
+    id: ~losant-deviceRecipe-modbusRtuSensor-0~
+    name: Modbus RTU Sensor
+    tags:
+      - key: serial_path
+        value: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AL065NV2-if00-port0
+  - attributes:
+      - attributeTags:
+          units: Celsius
+        dataType: number
+        description: The temperature, in Celsius.
+        name: temp_c
+      - attributeTags:
+          units: Fahrenheit
+        dataType: number
+        description: "The temperature, in Fahrenheit. "
+        name: temp_f
+      - attributeTags:
+          units: "%"
+        dataType: number
+        description: The humidity percentage (0-100).
+        name: humidity
+      - attributeTags: {}
+        dataType: boolean
+        description: Whether or not the equipment is running.
+        name: running
+    description: Recipe for Modbus TCP device designed to interact with the Modbus
+      TCP simulator.
+    deviceClass: peripheral
+    deviceDescription: Modbus TCP sensor. Designed to interact with the Modbus TCP simulator.
+    deviceName: Modbus TCP Sensor 01
+    gatewayId: ~losant-device-lannerGateway-0~
+    id: ~losant-deviceRecipe-modbusTcpSensor-1~
+    name: Modbus TCP Sensor
+    tags:
+      - key: address
+        value: 192.168.86.130
+      - key: port
+        value: "502"
+version: 1

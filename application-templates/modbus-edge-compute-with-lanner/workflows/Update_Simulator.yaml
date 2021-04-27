@@ -1,0 +1,183 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-updateSimulator-2~
+    name: Update Simulator
+    nodes:
+      - config:
+          message: Invalid payload.
+          property: ''
+        id: qfmyU9GHhO
+        meta:
+          category: output
+          description: ''
+          id: qfmyU9GHhO
+          label: Debug
+          name: debug
+          x: 60
+          'y': 280
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorsPath: working.validationErrors
+          schema: globals.update_command_payload_schema
+          schemaType: path
+          toValidatePath: data
+        id: spnVDDRJ5U
+        meta:
+          category: logic
+          description: ''
+          id: vQoTlxUBV-
+          label: Validate Payload
+          name: validate-payload
+          x: 160
+          'y': 180
+        outputIds:
+          - - qfmyU9GHhO
+          - - gmgcw8_jGP
+        type: ValidatePayloadNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.peripheral}}'
+          includeConnectionStatus: true
+          includeState: false
+          resultPath: working.peripheral
+          tagsAsObject: false
+        id: gmgcw8_jGP
+        meta:
+          category: data
+          description: ''
+          id: gmgcw8_jGP
+          label: 'Device: Get'
+          name: get-device
+          x: 160
+          'y': 380
+        outputIds:
+          - - wFJHKUpfDs
+        type: GetDeviceNode
+      - config:
+          expression: '{{working.peripheral}} && {{working.peripheral.gatewayId}} '
+        id: wFJHKUpfDs
+        meta:
+          category: logic
+          description: ''
+          id: wFJHKUpfDs
+          label: Found Device?
+          name: conditional
+          x: 160
+          'y': 480
+        outputIds:
+          - - lSrOMc2yvS
+          - - XN1feoo0XK
+        type: ConditionalNode
+      - config:
+          message: Device not found.
+          property: ''
+        id: lSrOMc2yvS
+        meta:
+          category: output
+          description: ''
+          id: qfmyU9GHhO
+          label: Debug
+          name: debug
+          x: 60
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: vW2ZWqC7fp
+        meta:
+          category: output
+          description: ''
+          id: vW2ZWqC7fp
+          label: Debug
+          name: debug
+          x: 160
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          deviceIdsPath: working.peripheral.gatewayId
+          nameTemplate: update
+          payloadTemplate: '{{jsonEncode data}}'
+          payloadTemplateType: json
+        id: XN1feoo0XK
+        meta:
+          category: output
+          description: ''
+          deviceSelectionType: payload
+          id: XN1feoo0XK
+          label: 'Device: Command'
+          name: device-command
+          x: 160
+          'y': 680
+        outputIds:
+          - - vW2ZWqC7fp
+        type: DeviceSendCommandNode
+      - config: {}
+        id: NQU2XGMMcQ
+        meta:
+          annotationText: >-
+            Virtual Button is invoked by the Input Controls block on the Modbus
+            TCP dashboard. Example payload:
+
+
+            ```
+
+            {
+              "peripheral": "<device-id>",
+              "running": 0,
+              "temp_c": 24,
+              "humidity": 40
+            }
+
+            ```
+              
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 360
+          x: 360
+          'y': 80
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: qJaKXEv0kX
+        meta:
+          annotationText: >-
+            Get the full device object for the incoming peripheral ID. This is
+            used to retrieve the peripheral's gateway ID, which is the actual
+            device we need to send a command to.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 360
+          x: 360
+          'y': 380
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-flow-updateSimulator-2~-3Ugqc2GpKxYwu__LmZVfi
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: HnbeXntlCb
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: HnbeXntlCb
+          x: 160
+          'y': 80
+        outputIds:
+          - - spnVDDRJ5U
+        type: virtualButton
+version: 1
