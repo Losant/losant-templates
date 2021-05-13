@@ -1,0 +1,17 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to build a multilingual Application Experience.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesPagesInternationalization-0~
+    name: Internationalization
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - i18n
+      - internationalization
+      - language
+version: 1

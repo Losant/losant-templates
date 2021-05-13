@@ -1,0 +1,247 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-tlI18NDemo-0~
+    globals: []
+    id: ~losant-flowVersion-tlI18NDemo-0~
+    name: tl-i18n-demo
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlI18NDemo-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: NKbuXVw4AR
+        meta:
+          category: output
+          description: ''
+          id: NKbuXVw4AR
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 360
+        outputIds:
+          - - Hi-3bkDMAB
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: Hi-3bkDMAB
+        meta:
+          category: output
+          description: ''
+          id: Hi-3bkDMAB
+          label: Debug
+          name: debug
+          x: 440
+          'y': 460
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          customNodeVersion: default
+          fields:
+            - id: _vffS7jwC8
+              value: ''
+            - id: languageTemplate
+              value: '{{data.params.language}}'
+            - id: pathTemplate
+              value: '{{data.path}}'
+            - id: vPbswn5Zr8
+              value: ''
+            - id: hostTemplate
+              value: ''
+          resultPath: pageData.dictionaryInfo
+        id: QGfo0UNd4M
+        meta:
+          category: customNodeExecute
+          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          description: ''
+          id: QGfo0UNd4M
+          label: tl-i18n-get-dictionary
+          name: custom-node-execute-node
+          x: 340
+          'y': 260
+        outputIds:
+          - - b2VZSrHPsg
+          - - NKbuXVw4AR
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: 404 - Page Not Found
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: b2VZSrHPsg
+        meta:
+          category: output
+          description: ''
+          id: NKbuXVw4AR
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 360
+        outputIds:
+          - - Hi-3bkDMAB
+        type: EndpointReplyNode
+      - config:
+          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          customNodeVersion: default
+          fields:
+            - id: _vffS7jwC8
+              value: ''
+            - id: languageTemplate
+              value: ''
+            - id: pathTemplate
+              value: ''
+            - id: vPbswn5Zr8
+              value: ''
+            - id: hostTemplate
+              value: '{{data.headers.host}}'
+          resultPath: pageData.dictionaryInfo
+        id: tNOhibOHYw
+        meta:
+          category: customNodeExecute
+          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          description: ''
+          id: QGfo0UNd4M
+          label: tl-i18n-get-dictionary
+          name: custom-node-execute-node
+          x: 540
+          'y': 260
+        outputIds:
+          - - b2VZSrHPsg
+          - - NKbuXVw4AR
+        type: CustomNodeExecuteNode
+      - config: {}
+        id: tK-0BAjDTZ
+        meta:
+          annotationText: On request to the path-based i18n endpoint ...
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 180
+          x: 340
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: T6wDUBPfhz
+        meta:
+          annotationText: On request to the subdomain-based i18n endpoint ...
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 180
+          x: 540
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 44p2yGBZkQ
+        meta:
+          annotationText: >-
+            If we find a dictionary matching the user's chosen language, take
+            the `true` path and reply with the `dictionaryInfo` applied to
+            `pageData`.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 280
+          x: 740
+          'y': 360
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 7Jc6kp72eX
+        meta:
+          annotationText: >-
+            If we fail to find a dictionary matching the chosen language, take
+            the `false` path. Here we are returning a basic 404 message, but you
+            could instead redirect the request to your default language.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 280
+          x: 40
+          'y': 360
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: MoWr2-8uIK
+        meta:
+          annotationText: >-
+            For subdomain-based language management, set the Host Template to
+            "{{data.headers.host}}".
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 280
+          x: 740
+          'y': 240
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 3GCRPPGl-k
+        meta:
+          annotationText: >-
+            For path-based language management, set the Language Template to
+            "{{data.params.language}}" (substituting "language" for the name of
+            your language parameter), and the Path Template to "{{data.path}}".
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 280
+          x: 40
+          'y': 120
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getLanguageTlI18NDemo-0~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /{language}/tl-i18n-demo'
+          name: endpoint
+          uiId: '-YBXcXrA2G'
+          x: 340
+          'y': 160
+        outputIds:
+          - - QGfo0UNd4M
+        type: endpoint
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlI18NDemoSubdomain-1~
+        meta:
+          category: trigger
+          description: ''
+          id: kJNOu_Vko7
+          label: GET /tl-i18n-demo-subdomain
+          name: endpoint
+          uiId: kJNOu_Vko7
+          x: 540
+          'y': 160
+        outputIds:
+          - - tNOhibOHYw
+        type: endpoint
+    version: develop
+version: 1

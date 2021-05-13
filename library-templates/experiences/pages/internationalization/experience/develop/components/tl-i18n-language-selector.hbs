@@ -1,0 +1,14 @@
+<div class="btn-group">
+  <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{#each this}}{{#eq @key @args.selectedLanguage}}{{emoji}} {{label}}{{/eq}}{{/each}}
+  </button>
+  <div class="dropdown-menu {{#if @args.rightAlign}}dropdown-menu-right{{/if}}">
+    {{#each this}}
+      <a
+        class="dropdown-item {{#eq @key @args.selectedLanguage}}active{{/eq}}"
+        href="{{component 'tl-i18n-language-href' mode=@args.mode language=@key hostNoLanguage=@args.hostNoLanguage pathNoLanguage=@args.pathNoLanguage}}">
+        {{emoji}} {{label}}
+      </a>
+    {{/each}}
+  </div>
+</div>

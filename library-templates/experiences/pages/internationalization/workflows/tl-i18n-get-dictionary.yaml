@@ -1,0 +1,480 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: >-
+            If you are maintaining your selected language as a path parameter on
+            your experience endpoints (such as "mydomain.com/fr/foo/bar"), enter
+            values for each of the inputs below.
+          id: _vffS7jwC8
+          label: Language as a Path Parameter
+          type: section
+        - description: >-
+            e.g. "{{data.params.language}}"
+
+
+            Enter the [language
+            code](https://www.w3schools.com/tags/ref_language_codes.asp), or a
+            template resolving to one, for the dictionary to return. The code
+            should correspond to the key of a dictionary defined in your custom
+            node.
+          id: languageTemplate
+          label: Language Template
+          required: false
+          type: stringTemplate
+        - description: >-
+            e.g. "{{data.path}}"
+
+
+            Enter the current path, or a template resolving to it. The language
+            specified above will be stripped from the path to return the
+            "pathNoLanguage" property, which the UI can use to link to the
+            current page in different languages.
+          id: pathTemplate
+          label: Path Template
+          required: false
+          type: stringTemplate
+        - description: >-
+            If you are maintaining your selected language as a subdomain (such
+            as "fr.mydomain.com/foo/bar"), enter the host for the current
+            request below.
+          id: vPbswn5Zr8
+          label: Language as a Subdomain
+          type: section
+        - description: >-
+            e.g. "{{data.headers.host}}"
+
+
+            The current language will be pulled from the first subdomain in the
+            value specified here. The code should correspond to the key of a
+            dictionary defined in your custom node. The value entered here will
+            also be used to construct the "hostNoLanguage" property, which the
+            UI can use to link to the current page in different languages.
+          id: hostTemplate
+          label: Host Template
+          required: false
+          type: stringTemplate
+      outputCount: 2
+      resultMode: required
+    customNodeSupports:
+      - cloud
+    description: ''
+    flowClass: customNode
+    globals: []
+    id: ~losant-flow-tlI18NGetDictionary-1~
+    name: tl-i18n-get-dictionary
+    nodes:
+      - config:
+          authCredentials: {}
+          authType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.dictionary
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.dictionary
+          timeoutTemplate: ''
+          uriTemplate: >-
+            {{lookup (lookup result.dictionaries result.selectedLanguage)
+            'url'}}
+        id: pYbfEx3tNB
+        meta:
+          category: data
+          description: ''
+          id: pYbfEx3tNB
+          label: Fetch Dictionary
+          name: http
+          x: 380
+          'y': 880
+        outputIds:
+          - - EroUXVWje0
+        type: HttpNode
+      - config:
+          message: ''
+          property: ''
+        id: EHnRwBbVFA
+        meta:
+          category: output
+          description: ''
+          id: EHnRwBbVFA
+          label: Debug
+          name: debug
+          x: 480
+          'y': 1280
+        outputIds:
+          - - 1a5Ts7CMuy
+        type: DebugNode
+      - config:
+          destination: working.dictionaryParsed
+          recordDelimiterTemplate: |+
+
+          source: working.dictionary.body
+        id: OtgaGBXcRl
+        meta:
+          category: logic
+          description: ''
+          id: OtgaGBXcRl
+          label: 'CSV: Decode'
+          name: csv-decode
+          x: 480
+          'y': 1080
+        outputIds:
+          - - wUU9jOGXJs
+        type: CSVDecodeNode
+      - config:
+          rules:
+            - destination: result.dictionaries.en
+              type: set
+              valueTemplate: "{\n  \"url\": \"https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/en.csv\",\n  \"label\": \"English\",\n  \"emoji\": \"\U0001F1FA\U0001F1F8\",\n  \"default\": true\n}"
+              valueTemplateType: json
+            - destination: result.dictionaries.es
+              type: set
+              valueTemplate: "{\n  \"url\": \"https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/es.csv\",\n  \"label\": \"Español\",\n  \"emoji\": \"\U0001F1EA\U0001F1F8\"\n}"
+              valueTemplateType: json
+            - destination: result.dictionaries.fr
+              type: set
+              valueTemplate: "{\n  \"url\": \"https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/fr.csv\",\n  \"label\": \"Français\",\n  \"emoji\": \"\U0001F1EB\U0001F1F7\"\n}"
+              valueTemplateType: json
+        id: xyDTHUBxIe
+        meta:
+          category: logic
+          description: ''
+          id: xyDTHUBxIe
+          label: Define Dictionaries
+          name: mutate
+          x: 380
+          'y': 280
+        outputIds:
+          - - 03dvYqF9Me
+        type: MutateNode
+      - config:
+          branchIndexTemplate: 1
+          resultSourcePath: result
+        id: 1a5Ts7CMuy
+        meta:
+          category: customNodeEnd
+          description: ''
+          id: 1a5Ts7CMuy
+          label: Output True
+          name: custom-node-end-true
+          x: 480
+          'y': 1380
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          expression: '{{working.dictionary.statusCode}} === 200'
+        id: EroUXVWje0
+        meta:
+          category: logic
+          description: ''
+          id: EroUXVWje0
+          label: Found?
+          name: conditional
+          x: 380
+          'y': 980
+        outputIds:
+          - - szCn1vDhGs
+          - - OtgaGBXcRl
+        type: ConditionalNode
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: result
+        id: omoWvaMj8k
+        meta:
+          category: customNodeEnd
+          description: ''
+          id: omoWvaMj8k
+          label: Output False
+          name: custom-node-end-false
+          x: 280
+          'y': 1380
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          message: ''
+          property: ''
+        id: szCn1vDhGs
+        meta:
+          category: output
+          description: ''
+          id: EHnRwBbVFA
+          label: Debug
+          name: debug
+          x: 280
+          'y': 1280
+        outputIds:
+          - - omoWvaMj8k
+        type: DebugNode
+      - config:
+          rules:
+            - destination: result.selectedLanguage
+              type: set
+              valueTemplate: '{{data.languageTemplate}}'
+        id: 245PpXmJUO
+        meta:
+          category: logic
+          description: ''
+          id: 245PpXmJUO
+          label: Mutate
+          name: mutate
+          x: 480
+          'y': 480
+        outputIds:
+          - - es-XDmQNSQ
+        type: MutateNode
+      - config:
+          script: >-
+            const dictionary = {};
+
+            (payload.working.dictionaryParsed || []).forEach(({ key, value }) =>
+            {
+                dictionary[key] = value;
+            });
+
+            payload.result.dictionary = dictionary;
+        id: wUU9jOGXJs
+        meta:
+          category: logic
+          description: ''
+          id: wUU9jOGXJs
+          label: Function
+          name: function
+          x: 480
+          'y': 1180
+        outputIds:
+          - - EHnRwBbVFA
+        type: RawFunctionNode
+      - config:
+          method: split
+          methodArgs:
+            - .
+          resultPath: working.hostSplit
+          sourceData: '{{data.hostTemplate}}'
+        id: O9AYfTFKpS
+        meta:
+          category: logic
+          description: ''
+          id: Joha70UkhV
+          label: Split Host
+          name: string
+          x: 280
+          'y': 480
+        outputIds:
+          - - glhBVES8lS
+        type: StringNode
+      - config:
+          rules:
+            - destination: result.selectedLanguage
+              type: set
+              valueTemplate: '{{working.hostSplit.[0]}}'
+        id: glhBVES8lS
+        meta:
+          category: logic
+          description: ''
+          id: 245PpXmJUO
+          label: Mutate
+          name: mutate
+          x: 280
+          'y': 580
+        outputIds:
+          - - es-XDmQNSQ
+        type: MutateNode
+      - config:
+          method: replaceFirst
+          methodArgs:
+            - '/{{result.selectedLanguage}}/'
+            - '/{{nothing}}'
+          resultPath: result.pathNoLanguage
+          sourceData: '{{data.pathTemplate}}'
+        id: es-XDmQNSQ
+        meta:
+          category: logic
+          description: ''
+          id: dEKp5wfIFQ
+          label: String
+          name: string
+          x: 380
+          'y': 680
+        outputIds:
+          - - '-Z1wDsilYj'
+        type: StringNode
+      - config:
+          expression: '{{data.languageTemplate}}'
+        id: 03dvYqF9Me
+        meta:
+          category: logic
+          description: ''
+          id: ACzWZjkUN7
+          label: Language Template?
+          name: conditional
+          x: 380
+          'y': 380
+        outputIds:
+          - - O9AYfTFKpS
+          - - 245PpXmJUO
+        type: ConditionalNode
+      - config:
+          method: replaceFirst
+          methodArgs:
+            - '{{result.selectedLanguage}}.'
+            - '{{nothing}}'
+          resultPath: result.hostNoLanguage
+          sourceData: '{{data.hostTemplate}}'
+        id: '-Z1wDsilYj'
+        meta:
+          category: logic
+          description: ''
+          id: dEKp5wfIFQ
+          label: String
+          name: string
+          x: 380
+          'y': 780
+        outputIds:
+          - - pYbfEx3tNB
+        type: StringNode
+      - config: {}
+        id: DUx2IY8FRw
+        meta:
+          annotationText: >-
+            Define each language you wish to support as an object, keyed by the
+            language code, in this Mutate Node. The object should have the
+            following properties:
+
+
+            - "url": The URL to the CSV containing your dictionary.
+
+            - "label": The name of the language (should be in the language it
+            represents, i.e. "Español" instead of "Spanish".
+
+            - "emoji": The Emoji representation of your language's flag.
+
+            - "default": Set this to `true` on your experience's default
+            language.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 600
+          x: 580
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: it2ew1Ur2C
+        meta:
+          annotationText: >-
+            If "Language Template" is provided, use that. Otherwise try to pull
+            the language off of the Host Template (as the first subdomain).
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 240
+          x: 20
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: pTrbqKPxqZ
+        meta:
+          annotationText: >-
+            Build the "pathNoLanguage" if "Path Template" is provided, and
+            "hostNoLanguage" if "Host Template" is provided.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 240
+          x: 580
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: eXZ4yj2xdS
+        meta:
+          annotationText: >-
+            If a dictionary matching the selected language cannot be found, take
+            the Custom Node's `false` path. In the workflow utilizing the Custom
+            Node, you can return a 404 or redirect to your default language.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 280
+          x: 80
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: LWbJVM-HTE
+        meta:
+          annotationText: >-
+            Decode the CSV and construct an object from the key-value pairs
+            found within it. Then, set that object as the `dictionary` property
+            in what the Custom Node returns.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 280
+          x: 680
+          'y': 1060
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Get String Table'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 180
+          'y': 180
+        outputIds:
+          - - xyDTHUBxIe
+        type: customNodeStart
+      - config: {}
+        key: ~losant-flow-tlI18NGetDictionary-1~-kDF-1MeLxGModS4wiYqqB
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: AJ5Qh8qpLq
+          label: 'Test: Path'
+          name: virtualButton
+          payload: |-
+            {
+                "languageTemplate": "es",
+                "pathTemplate": "/es/foo/bar"
+            }
+          uiId: AJ5Qh8qpLq
+          x: 380
+          'y': 180
+        outputIds:
+          - - xyDTHUBxIe
+        type: virtualButton
+      - config: {}
+        key: ~losant-flow-tlI18NGetDictionary-1~-QPtSk9c1i3
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          id: AJ5Qh8qpLq
+          label: 'Test: Subdomain'
+          name: virtualButton
+          payload: |-
+            {
+                "hostTemplate": "es.mydomain.com"
+            }
+          uiId: UzRe0MTjzE
+          x: 580
+          'y': 180
+        outputIds:
+          - - xyDTHUBxIe
+        type: virtualButton
+version: 1

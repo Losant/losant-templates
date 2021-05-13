@@ -1,0 +1,1 @@
+{{@root.request.headers.x-forwarded-proto}}://{{#eq @args.mode 'subdomain'}}{{@args.language}}.{{/eq}}{{defaultTo @args.hostNoLanguage @root.request.headers.host}}{{#ne @args.mode 'subdomain'}}/{{@args.language}}{{/ne}}{{defaultTo @args.pathNoLanguage @root.request.path}}

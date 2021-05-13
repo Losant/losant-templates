@@ -1,0 +1,24 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlI18NHeadInfo-2~
+    localFilename: ./tl-i18n-head-info.hbs
+    name: tl-i18n-head-info
+    version: develop
+    viewTags: {}
+    viewType: component
+  - description: ""
+    id: ~losant-experienceView-tlI18NLanguageHref-3~
+    localFilename: ./tl-i18n-language-href.hbs
+    name: tl-i18n-language-href
+    version: develop
+    viewTags: {}
+    viewType: component
+  - description: ""
+    id: ~losant-experienceView-tlI18NLanguageSelector-1~
+    localFilename: ./tl-i18n-language-selector.hbs
+    name: tl-i18n-language-selector
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

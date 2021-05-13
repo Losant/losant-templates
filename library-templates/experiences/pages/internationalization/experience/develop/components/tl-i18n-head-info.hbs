@@ -1,0 +1,6 @@
+{{#each this}}
+  <link ref="alternate" hreflang="{{@key}}" href="{{component 'tl-i18n-language-href' mode=@args.mode language=@key hostNoLanguage=@args.hostNoLanguage pathNoLanguage=@args.pathNoLanguage}}" />
+  {{#if default}}
+    <link ref="alternate" hreflang="x-default" href="{{component 'tl-i18n-language-href' mode=@args.mode language=@key hostNoLanguage=@args.hostNoLanguage pathNoLanguage=@args.pathNoLanguage}}" />
+  {{/if}}
+{{/each}}

@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: ""
+    id: ~losant-experienceView-tlI18NDemo-0~
+    localFilename: ./tl-i18n-demo.hbs
+    name: tl-i18n-demo
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1
