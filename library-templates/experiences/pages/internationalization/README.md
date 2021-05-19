@@ -85,7 +85,7 @@ Each object contains the following keys:
 
 - `url`: The public URL pointing to the CSV from which the dictionary will be loaded.
 - `label`: The title of the language. This title should be in the same language as the dictionary it represents. The label is used in the language selector dropdown.
-- `emoji`: The [Emoji representation](https://emojipedia.org/flags/) of the language's flag. This is also used in the language selector dropdown.
+- `flagUrl`: An image of the language's flag. This is also used in the language selector dropdown.
 - `default`: A boolean that, when set to `true`, specifies which language should be listed as the default in your HTML `<head>`. Only one of your languages should have this property set.
 
 ### Using the Custom Node
@@ -136,7 +136,7 @@ In an Experience Component, there are a few different ways to render the interat
 
 The included Custom Node also provides all the information needed to render a language selector; you may use the Experience Component included with this template or build your own:
 
-- `dictionaries`: This is the same object defined at the beginning of your custom node, and it includes the language codes as object keys, and the label and emoji as values. It will also include the flag for your default language.
+- `dictionaries`: This is the same object defined at the beginning of your custom node, and it includes the language codes as object keys, and the label and flagUrl as values. It will also include the flag for your default language.
 - `selectedLanguage`: This is the code for the currently selected language. This allows you to add a selected state to one of the options in your selector dropdown.
 - `pathNoLanguage`: When using path-based language management, this value provides the current path after the domain with the language removed. This can be used to construct paths to the same page in other languages.
 - `hostNoLanguage`: When using subdomain-based language management, this value is the current domain without the language code as a subdomain. This can be used to construct paths to the same page in other languages.

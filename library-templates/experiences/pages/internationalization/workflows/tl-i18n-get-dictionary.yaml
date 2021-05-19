@@ -128,15 +128,31 @@ resources:
           rules:
             - destination: result.dictionaries.en
               type: set
-              valueTemplate: "{\n  \"url\": \"https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/en.csv\",\n  \"label\": \"English\",\n  \"emoji\": \"\U0001F1FA\U0001F1F8\",\n  \"default\": true\n}"
+              valueTemplate: |-
+                {
+                  "url": "https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/en.csv",
+                  "label": "English",
+                  "flagUrl": "https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-flags/en.png",
+                  "default": true
+                }
               valueTemplateType: json
             - destination: result.dictionaries.es
               type: set
-              valueTemplate: "{\n  \"url\": \"https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/es.csv\",\n  \"label\": \"Español\",\n  \"emoji\": \"\U0001F1EA\U0001F1F8\"\n}"
+              valueTemplate: |-
+                {
+                  "url": "https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/es.csv",
+                  "label": "Español",
+                  "flagUrl": "https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-flags/es.png"
+                }
               valueTemplateType: json
             - destination: result.dictionaries.fr
               type: set
-              valueTemplate: "{\n  \"url\": \"https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/fr.csv\",\n  \"label\": \"Français\",\n  \"emoji\": \"\U0001F1EB\U0001F1F7\"\n}"
+              valueTemplate: |-
+                {
+                  "url": "https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/fr.csv",
+                  "label": "Français",
+                  "flagUrl": "https://~losant-files-domain~/~losant-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-flags/fr.png"
+                }
               valueTemplateType: json
         id: xyDTHUBxIe
         meta:

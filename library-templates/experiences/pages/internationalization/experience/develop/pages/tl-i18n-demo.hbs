@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <!-- languages -->
-    {{#if request.params.language}}
+    {{#if ../../request.params.language}}
       {{component
         'tl-i18n-head-info'
         dictionaryInfo.dictionaries
@@ -39,7 +39,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="ml-auto">
-        {{#if request.params.language}}
+        {{#if ../../request.params.language}}
           {{component
             'tl-i18n-language-selector'
             dictionaryInfo.dictionaries
@@ -63,8 +63,8 @@
 
     <div class="container text-center mt-2">
       {{#each dictionaryInfo.dictionaries}}
-        {{#eq @key ../dictionaryInfo.selectedLanguage}}
-          <div class="display-1">{{emoji}}</div>
+        {{#eq @key @root.pageData.dictionaryInfo.selectedLanguage}}
+          <div class="display-1">{{#if flagUrl}}<img src="{{flagUrl}}" alt="{{label}}" style="max-width: 80px" />{{/if}}</div>
         {{/eq}}
       {{/each}}
       <h1>{{dictionary.exampleTitle}}</h1>
