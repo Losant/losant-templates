@@ -1,0 +1,23 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to stream notebook and device exports directly to
+      an AWS S3 bucket.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsDataStreamExportsToAwsS3-0~
+    name: Stream Exports to AWS S3
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - aws
+      - s3
+      - notebook
+      - stream
+      - output
+      - file
+      - export
+      - callback
+version: 1
