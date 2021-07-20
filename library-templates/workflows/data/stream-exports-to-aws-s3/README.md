@@ -17,7 +17,7 @@ This template includes a handful of resources to demonstrate the functionality:
 
 ## Usage
 
-1. After importing the template, activate and then visit the included workflow.
+1. After importing the template, visit the included workflow and enable it.
 2. In the [workflow's globals](https://docs.losant.com/workflows/overview/#workflow-globals), set the following values:
    - `awsAccessKeyId`: The ID portion of your [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
    - `awsSecretAccessKey`: The secret portion of your AWS access key. 
