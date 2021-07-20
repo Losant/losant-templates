@@ -1,0 +1,4 @@
+name: Data
+description: These templates contains workflows demonstrating how to copy  data
+  from Losant applications to third-party sources, as well as methods for
+  manipulating, aggregating, and analyzing application data.
