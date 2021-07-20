@@ -1,6 +1,6 @@
 # Stream Exports to AWS S3
 
-This template demonstrates how to stream the results of [device exports](https://~losant-docs-url~/devices/overview/#exporting-devices) and [notebook execution outputs](https://~losant-docs-url~/notebooks/outputs/) directly to an AWS S3 bucket. In this scenario, the content is never stored in [Application Files](https://~losant-docs-url~/applications/files/) and is only accessible from your AWS S3 bucket, which you may optionally require user authentication to retrieve.
+This template demonstrates how to stream the results of [device exports](https://docs.losant.com/devices/overview/#exporting-devices) and [notebook execution outputs](https://docs.losant.com/notebooks/outputs/) directly to an AWS S3 bucket. In this scenario, the content is never stored in [Application Files](https://docs.losant.com/applications/files/) and is only accessible from your AWS S3 bucket, which you may optionally require user authentication to retrieve.
 
 ## Dependencies
 
@@ -10,35 +10,35 @@ In order to utilize this template, you must have an [AWS account](https://aws.am
 
 This template includes a handful of resources to demonstrate the functionality:
 
-- A simple [notebook](https://~losant-docs-url~/notebooks/overview/) that takes all [inputs](https://~losant-docs-url~/notebooks/overview/#inputs) and immediately returns them as [outputs](https://~losant-docs-url~/notebooks/overview/#output).
-- An [application file](https://~losant-docs-url~/applications/files/) (a simple text file) that is used as an input for the notebook.
-- A [webhook](https://~losant-docs-url~/applications/webhooks/) that serves as a callback URL for device export requests.
-- A [workflow](https://~losant-docs-url~/applications/webhooks/) that does the work of streaming the exports to AWS S3.
+- A simple [notebook](https://docs.losant.com/notebooks/overview/) that takes all [inputs](https://docs.losant.com/notebooks/overview/#inputs) and immediately returns them as [outputs](https://docs.losant.com/notebooks/overview/#output).
+- An [application file](https://docs.losant.com/applications/files/) (a simple text file) that is used as an input for the notebook.
+- A [webhook](https://docs.losant.com/applications/webhooks/) that serves as a callback URL for device export requests.
+- A [workflow](https://docs.losant.com/applications/webhooks/) that does the work of streaming the exports to AWS S3.
 
 ## Usage
 
 1. After importing the template, activate and then visit the included workflow.
-2. In the [workflow's globals](https://~losant-docs-url~/workflows/overview/#workflow-globals), set the following values:
+2. In the [workflow's globals](https://docs.losant.com/workflows/overview/#workflow-globals), set the following values:
    - `awsAccessKeyId`: The ID portion of your [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
    - `awsSecretAccessKey`: The secret portion of your AWS access key. 
    - `awsRegion`: The [region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) in which your S3 bucket exists.
    - `awsBucketName`: The name of the [bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html) in your AWS account.
-3. To test the device metadata export, click the [Virtual Button Trigger](https://~losant-docs-url~/workflows/triggers/virtual-button/) in the left portion of the workflow. Depending on how many devices are in your application, it may take a few seconds or several minutes for the [Webhook Trigger](https://~losant-docs-url~/workflows/triggers/webhook/) to fire with the result of the request.
-4. To test the notebook execution, click the Virtual Button Trigger in the right portion of the workflow. It will take a couple minutes for the [Notebook Trigger](https://~losant-docs-url~/workflows/triggers/notebook/) to fire with the results of the execution.
-5. Included in the workflow are some [AWS S3: Get Nodes](https://~losant-docs-url~/workflows/data/aws-s3-get/) that fetch the uploaded files after execution, returning a signed URL that can be used to download the contents. These are in place to assist with debugging when initially setting up the workflow for your use case, and they can be removed without affecting the functionality of the template.
+3. To test the device metadata export, click the [Virtual Button Trigger](https://docs.losant.com/workflows/triggers/virtual-button/) in the left portion of the workflow. Depending on how many devices are in your application, it may take a few seconds or several minutes for the [Webhook Trigger](https://docs.losant.com/workflows/triggers/webhook/) to fire with the result of the request.
+4. To test the notebook execution, click the Virtual Button Trigger in the right portion of the workflow. It will take a couple minutes for the [Notebook Trigger](https://docs.losant.com/workflows/triggers/notebook/) to fire with the results of the execution.
+5. Included in the workflow are some [AWS S3: Get Nodes](https://docs.losant.com/workflows/data/aws-s3-get/) that fetch the uploaded files after execution, returning a signed URL that can be used to download the contents. These are in place to assist with debugging when initially setting up the workflow for your use case, and they can be removed without affecting the functionality of the template.
 
 As a demonstration of the process, this template works without any additional configuration. To apply it to your specific use case, you will likely want to make a number of changes.
 
 ### Application Data Exports
 
-- The first [Losant API Node](https://~losant-docs-url~/workflows/data/losant-api/) fetches the included webhook's tokenized URL, which is necessary to pass it as a callback URL in the Losant API Node that follows it. You may optionally place the webhook URL directly in the second node and eliminate the first.
-- This demonstrates how to export all of your application's [device metadata](https://~losant-docs-url~/rest-api/devices/#export) (name, tags, etc.) to your S3 bucket. You may wish to export [device state data](https://~losant-docs-url~/rest-api/data/#export) or [events](https://~losant-docs-url~/rest-api/events/#export), or you may want to export only a subset of your devices. All of these options require changes to the second Losant API Node in the workflow.
-- To export data on a recurring basis, replace the Virtual Button Trigger with a [Timer Trigger](https://~losant-docs-url~/workflows/triggers/timer/) set to an interval or cron string for when you would like your exports to run.
+- The first [Losant API Node](https://docs.losant.com/workflows/data/losant-api/) fetches the included webhook's tokenized URL, which is necessary to pass it as a callback URL in the Losant API Node that follows it. You may optionally place the webhook URL directly in the second node and eliminate the first.
+- This demonstrates how to export all of your application's [device metadata](https://docs.losant.com/rest-api/devices/#export) (name, tags, etc.) to your S3 bucket. You may wish to export [device state data](https://docs.losant.com/rest-api/data/#export) or [events](https://docs.losant.com/rest-api/events/#export), or you may want to export only a subset of your devices. All of these options require changes to the second Losant API Node in the workflow.
+- To export data on a recurring basis, replace the Virtual Button Trigger with a [Timer Trigger](https://docs.losant.com/workflows/triggers/timer/) set to an interval or cron string for when you would like your exports to run.
 
 ### Notebook Execution Outputs
 
-- Change the target of the [Notebook Trigger](https://~losant-docs-url~/workflows/triggers/notebook/) to your existing notebook.
-- By default, the template uses a [Loop Node](https://~losant-docs-url~/workflows/logic/loop/) to stream all notebook outputs to your S3 bucket. If you would like to push only a specific output or outputs to S3, you may extract the [AWS S3: Put Node](https://~losant-docs-url~/workflows/data/aws-s3-put/) from the loop and modify it to target a specific output file.
+- Change the target of the [Notebook Trigger](https://docs.losant.com/workflows/triggers/notebook/) to your existing notebook.
+- By default, the template uses a [Loop Node](https://docs.losant.com/workflows/logic/loop/) to stream all notebook outputs to your S3 bucket. If you would like to push only a specific output or outputs to S3, you may extract the [AWS S3: Put Node](https://docs.losant.com/workflows/data/aws-s3-put/) from the loop and modify it to target a specific output file.
 - You may delete the included notebook and application file from the template once you have set up the workflow for your desired notebook.
 
 ## License
