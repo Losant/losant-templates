@@ -58,7 +58,7 @@ When the edge agent starts with this template's on-disk workflow installed, the 
 1. The edge workflow decodes the JWT token from the `REGISTRATION_TOKEN` environment variable to obtain the registration URL.
 1. The edge workflow POSTs the token and the ID from the `MANUFACTURER_ID` environment variable to the registration URL.
 1. The experience workflow validates the token and manufacturer ID. If valid, it replies with a newly created device ID, access key, and access secret.
-1. The edge workflow uses an [Agent Config: Set Node](TODO) to update the agent configuration with the new device ID, access key, and access secret.
+1. The edge workflow uses an [Agent Config: Set Node](https://docs.losant.com/workflows/data/agent-config-set/) to update the agent configuration with the new device ID, access key, and access secret.
 1. The edge agent will connect to the Losant broker using the new credentials.
 
 ## License
