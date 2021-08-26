@@ -1,0 +1,386 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: edge
+    globals:
+      - json: '"/data/files"'
+        key: fileDirectory
+    id: ~losant-flow-tlEdgeToFilesGetSignedUrLsPublishFiles-0~
+    minimumAgentVersion: 1.23.0
+    name: tl-edge-to-files Get Signed URLs / Publish Files
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: pA79J24Nx8
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 460
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          script: >-
+            const fs = require('fs');
+
+            const cp = require('child_process');
+
+            payload.working = {};
+
+
+            payload.working.files =
+            fs.readdirSync(payload.globals.fileDirectory).map((file) => {
+                return {
+                    fileName: file,
+                    fileSize: fs.statSync(`${payload.globals.fileDirectory}/${file}`).size,
+                    contentType: cp.execSync(`file --mime-type -b '${payload.globals.fileDirectory}/${file}'`).toString().trim()
+                }
+            });
+        id: k6RZnlA-GU
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 460
+          'y': 220
+        outputIds:
+          - - 748tlPR46D
+        type: RawFunctionNode
+      - config:
+          integrationId: losant
+          messageTemplate: |-
+            {
+              "deviceId": "{{deviceId}}",
+              "files": {{jsonEncode working.files}}
+            }
+          topicTemplate: tl-edge-to-files
+        id: Viez9PwPk3
+        meta:
+          category: output
+          description: ''
+          label: MQTT
+          name: mqtt
+          x: 460
+          'y': 420
+        outputIds:
+          - - pA79J24Nx8
+        type: MqttMessageNode
+      - config:
+          expression: '{{length working.files}} > 0'
+        id: 748tlPR46D
+        meta:
+          category: logic
+          description: ''
+          label: Files?
+          name: conditional
+          x: 460
+          'y': 320
+        outputIds:
+          - []
+          - - Viez9PwPk3
+        type: ConditionalNode
+      - config:
+          expression: '{{data.name}} === ''tl-upload-to-files'''
+        id: dj2L9LKrsv
+        meta:
+          category: logic
+          description: ''
+          label: Upload command?
+          name: conditional
+          x: 460
+          'y': 800
+        outputIds:
+          - []
+          - - V5HACv27_p
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: jsdu-lom_R
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 460
+          'y': 1000
+        outputIds: []
+        type: DebugNode
+      - config:
+          currentItemPath: working.fileToUpload
+          loopSourcePath: data.payload
+          mapResultPath: ''
+          parallel: true
+        id: V5HACv27_p
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 620
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 460
+          'y': 900
+        outputIds:
+          - - jsdu-lom_R
+          - - 98o0sJFo7Y
+        type: LoopNode
+      - config:
+          loopNodeId: V5HACv27_p
+          mapValuePath: ''
+          shouldBreak: false
+        id: mJgOyPdqe5
+        meta:
+          category: loop
+          description: ''
+          groupId: V5HACv27_p
+          label: Return
+          name: loop-return
+          x: 620
+          'y': 700
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          message: Success
+          property: ''
+        id: dYJIErEuy7
+        meta:
+          category: output
+          description: ''
+          groupId: V5HACv27_p
+          label: Success
+          name: debug
+          x: 720
+          'y': 600
+        outputIds:
+          - - mJgOyPdqe5
+        type: DebugNode
+      - config:
+          commandTemplate: >-
+            curl -X POST {{#each working.fileToUpload.value.fields}}-F
+            '{{@key}}={{{this}}}' {{/each}}-F
+            'file=@{{globals.fileDirectory}}/{{working.fileToUpload.value.fileName}}'
+            {{working.fileToUpload.value.url}}
+          cwdTemplate: ''
+          detached: false
+          encodingTemplate: utf8
+          envsTemplate: []
+          resultPath: working.uploadResult
+        id: 98o0sJFo7Y
+        meta:
+          category: data
+          description: ''
+          groupId: V5HACv27_p
+          label: Run Executable
+          name: run-executable
+          x: 620
+          'y': 300
+        outputIds:
+          - - ZAWdA6lpxS
+        type: ExecuteNode
+      - config:
+          expression: '!{{working.uploadResult.stdout}}'
+        id: ZAWdA6lpxS
+        meta:
+          category: logic
+          description: ''
+          groupId: V5HACv27_p
+          label: Succeeded?
+          name: conditional
+          x: 620
+          'y': 400
+        outputIds:
+          - - juLNXixiof
+          - - Y4OxOpt_-y
+        type: ConditionalNode
+      - config:
+          message: Failed to Upload
+          property: ''
+        id: juLNXixiof
+        meta:
+          category: output
+          description: ''
+          groupId: V5HACv27_p
+          label: Failed to Upload
+          name: debug
+          x: 520
+          'y': 600
+        outputIds:
+          - - mJgOyPdqe5
+        type: DebugNode
+      - config:
+          commandTemplate: 'rm {{globals.fileDirectory}}/{{working.fileToUpload.value.fileName}}'
+          cwdTemplate: ''
+          detached: false
+          encodingTemplate: utf8
+          envsTemplate: []
+          resultPath: working.rmResult
+        id: Y4OxOpt_-y
+        meta:
+          category: data
+          description: ''
+          groupId: V5HACv27_p
+          label: Run Executable
+          name: run-executable
+          x: 720
+          'y': 500
+        outputIds:
+          - - dYJIErEuy7
+        type: ExecuteNode
+      - config: {}
+        id: 6OrQ1yBo_A
+        meta:
+          annotationText: >-
+            After the application workflow receives our files on the custom
+            topic and generates signed URLs for each file, it will send a
+            command back down to the device with the upload credentials for
+            each.
+
+
+            This triggers on any command sent to the device; however, the
+            Conditional Node checks to see if the command name matches the name
+            as sent in the corresponding application workflow
+            ("tl-upload-to-files" by default). If it does not, this workflow
+            ignores the command.
+
+
+            The array of files is passed into the Loop Node, where they are
+            uploaded to the underlying storage provider.
+          category: annotation
+          height: 360
+          label: Note
+          name: note
+          width: 400
+          x: 660
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Q1ZzgOSq67
+        meta:
+          annotationText: >-
+            Replace this Virtual Button with a Timer Trigger to loop over the
+            items in your 'files' directory on a regular interval.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 320
+          x: 120
+          'y': 100
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: g4rGjNg72_
+        meta:
+          annotationText: >-
+            For each file we find in our directory, get its fileSize and
+            contentType (MIME type) within the Function Node.
+
+
+            If the MIME type will always be the same (for example, if files are
+            being placed here by a camera), you can remove the check from the
+            Function Node and put a static value in its place.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 400
+          x: 660
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: uHtPblfqB8
+        meta:
+          annotationText: >-
+            If we have any files to upload (checked with the Conditional Node),
+            publish the array of files to our custom MQTT topic
+            ("tl-edge-to-files" by default).
+
+
+            **Note:** The access key used by the edge compute device must have
+            publish permissions on the topic.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 320
+          x: 120
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: VDU1Lo2PDh
+        meta:
+          annotationText: >-
+            Given the credentials, file name, directory where the file is
+            located on disk, and the signed URL, we can use a Run Executable
+            Node to submit the file to the underlying storage provider using
+            `curl`.
+
+
+            **Note:** `curl` is not installed on Alpine versions of the Losant
+            Edge Agent; therefore, this template only works on non-Alpine
+            versions.
+          category: annotation
+          groupId: V5HACv27_p
+          height: 160
+          label: Note
+          name: note
+          width: 520
+          x: 80
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: W4HNBQrG4X
+        meta:
+          annotationText: >-
+            If the upload succeeded, remove the file from our local file system
+            so we know not to upload it again the next time our edge workflow
+            fires.
+          category: annotation
+          groupId: V5HACv27_p
+          height: 100
+          label: Note
+          name: note
+          width: 400
+          x: 920
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: >-
+          ~losant-flow-tlEdgeToFilesGetSignedUrLsPublishFiles-0~-ndKxHonl21wpTiYbfCBqe
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: L7wol7RxID
+          x: 460
+          'y': 120
+        outputIds:
+          - - k6RZnlA-GU
+        type: virtualButton
+      - config: {}
+        key: deviceCommand
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: EYMZcWldXU
+          x: 460
+          'y': 700
+        outputIds:
+          - - dj2L9LKrsv
+        type: deviceCommand
+version: 1

@@ -14,7 +14,7 @@ Once this template is imported and configured, you can test the example by:
 
 1. Configuring the Application Globals (details below).
 
-2. Navigating to `https://<your-app-id>.onlosant.com/tl-login-sso`.
+2. Navigating to `https://<your-app-id>.~losant-endpoint-domain~/tl-login-sso`.
 
 ![Example Form](./preview.png)
 
@@ -69,7 +69,7 @@ You can use this example directly or update it to support any application-specif
 Following from the example, you must update the following values:
 
 - `ENTITYID`: Globally unique name for an Identity Provider or a Service Provider. Depending on your environment, there may be a specific `entityId` required. However, in this example, you may set this value to your Experience URL.
-- `REDIRECT_URL`: Set to the value of `[Your experience url]/tl-saml`. For example, if your Experience URL was `https://5f3ac1c2d1b1a400075cb42a.onlosant.com`, the value you would configure would be `https://5f3ac1c2d1b1a400075cb42a.onlosant.com/tl-saml`.
+- `REDIRECT_URL`: Set to the value of `[Your experience url]/tl-saml`. For example, if your Experience URL was `https://5f3ac1c2d1b1a400075cb42a.~losant-endpoint-domain~`, the value you would configure would be `https://5f3ac1c2d1b1a400075cb42a.~losant-endpoint-domain~/tl-saml`.
 
 **Identity Provider Metadata Template**
 

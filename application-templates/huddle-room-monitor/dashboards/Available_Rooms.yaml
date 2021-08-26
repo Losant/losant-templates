@@ -7,7 +7,7 @@ resources:
           backgroundColor: transparent
           defaultZoom: -1
           imageUrl: >-
-            https://files.onlosant.com/~losant-application-applicationHuddleRoomMonitor-0~/office-floorplan.png
+            https://~losant-files-domain~/~losant-application-applicationHuddleRoomMonitor-0~/office-floorplan.png
           overlays:
             - conditions:
                 - color: 'rgba(252, 21, 38, 1)'

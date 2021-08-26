@@ -1,0 +1,465 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~losant-flow-getTlDataExplorerDeviceId-1~
+    globals:
+      - json: '["x", "y", "z", "flup"]'
+        key: x-allowedAttributes
+      - json: >-
+          ["FIRST", "LAST", "COUNT", "MAX", "MIN", "MEDIAN", "MEAN", "SUM",
+          "STD_DEV", "NONE"]
+        key: allowedAggregations
+    id: ~losant-flowVersion-getTlDataExplorerDeviceId-0~
+    name: 'GET /tl-data-explorer/{deviceId}'
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlDataExplorer-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: SBUIWIa_mk
+        meta:
+          category: output
+          description: ''
+          label: Page Reply
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 1060
+        outputIds:
+          - - cLn4FfNVVa
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: 404 Not Found
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: 9OL7dvY5N6
+        meta:
+          category: output
+          description: ''
+          label: 404 Reply
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 1060
+        outputIds:
+          - - cLn4FfNVVa
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: cLn4FfNVVa
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 1160
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: true
+          findMetadata: false
+          findMethod: id
+          idTemplate: >-
+            {{defaultTo data.params.deviceId
+            data.erroredPayload.data.params.deviceId}}
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: pageData.device
+          tagsAsObject: true
+        id: H25gAYIROn
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 620
+          'y': 260
+        outputIds:
+          - - ENtmUXYglj
+        type: GetDeviceNode
+      - config:
+          action: timeSeriesQuery
+          params:
+            - name: query
+              type: json
+              value: |-
+                {
+                  {{#if data.query.start}}"start": {{data.query.start}},{{/if}}
+                  {{#if data.query.end}}"end": {{data.query.end}},{{/if}}
+                  "resolution": {{data.query.resolution}},
+                  "aggregation": "{{data.query.aggregation}}",
+                  "deviceIds": ["{{data.params.deviceId}}"],
+                  "attributes": {{#eq (typeof data.query.attributes) 'array'}}{{jsonEncode data.query.attributes}}{{else}}["{{data.query.attributes}}"]{{/eq}}
+                }
+          resource: data
+          responsePath: pageData.data
+        id: mOLg-Dn3D9
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 680
+          'y': 960
+        outputIds:
+          - - SBUIWIa_mk
+        type: LosantApiNode
+      - config:
+          deviceIdTemplate: >-
+            {{defaultTo data.params.deviceId
+            data.erroredPayload.data.params.deviceId}}
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: Z1qs1mH4SO
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 520
+          'y': 160
+        outputIds:
+          - - 9OL7dvY5N6
+          - - H25gAYIROn
+        type: VerifyDeviceNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-tlDataExplorer-0~
+          replyIdPath: data.replyId
+          replyType: page
+          responseCodeTemplate: '500'
+          sameSiteTemplate: ''
+        id: NyqnbFHYKN
+        meta:
+          category: output
+          description: ''
+          label: 500 Reply
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 820
+          'y': 1060
+        outputIds:
+          - - cLn4FfNVVa
+        type: EndpointReplyNode
+      - config:
+          errorsPath: pageData.validationErrors
+          schema: |-
+            {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": {{defaultTo data.query.end 0}}
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": {{defaultTo data.query.start 0}}
+                },
+                "resolution": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "aggregation": {
+                  "type": "string",
+                  "enum": {{jsonEncode globals.allowedAggregations}}
+                },
+                "attributes": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    {{#if globals.allowedAttributes}}"enum": {{jsonEncode globals.allowedAttributes}},{{/if}}
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                }
+              },
+              "required": ["start", "end", "aggregation", "attributes", "resolution"]
+            }
+          schemaType: json
+          toValidatePath: data.query
+        id: J0HLPb73WK
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 620
+          'y': 860
+        outputIds:
+          - - SBUIWIa_mk
+          - - mOLg-Dn3D9
+        type: ValidatePayloadNode
+      - config:
+          rules:
+            - destination: data.query.start
+              type: set
+              valueTemplate: '{{data.query.start}}'
+              valueTemplateType: json
+            - destination: data.query.end
+              type: set
+              valueTemplate: '{{data.query.end}}'
+              valueTemplateType: json
+            - destination: data.query.resolution
+              type: set
+              valueTemplate: '{{data.query.resolution}}'
+              valueTemplateType: json
+        id: '-rlvW9vwwP'
+        meta:
+          category: logic
+          description: ''
+          label: Numberify
+          name: mutate
+          x: 620
+          'y': 560
+        outputIds:
+          - - 1wuadxqeIl
+        type: MutateNode
+      - config:
+          expression: '{{data.errorInfo}}'
+        id: ENtmUXYglj
+        meta:
+          category: logic
+          description: ''
+          label: Error?
+          name: conditional
+          x: 620
+          'y': 360
+        outputIds:
+          - - NezSoP9Yoj
+          - - kHKaZKDGdS
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: pageData.errorInfo
+              source: data.errorInfo
+              type: move
+        id: kHKaZKDGdS
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 820
+          'y': 560
+        outputIds:
+          - - NyqnbFHYKN
+        type: MutateNode
+      - config:
+          rules:
+            - destination: data.query.attributes
+              type: set
+              valueTemplate: >-
+                {{#eq (typeof data.query.attributes) 'array'}}{{jsonEncode
+                data.query.attributes}}{{else}}["{{data.query.attributes}}"]{{/eq}}
+              valueTemplateType: json
+            - destination: pageData.selectedAttributes
+              source: data.query.attributes
+              type: copy
+        id: plad8ayyPe
+        meta:
+          category: logic
+          description: ''
+          label: Arrayify
+          name: mutate
+          x: 720
+          'y': 760
+        outputIds:
+          - - J0HLPb73WK
+        type: MutateNode
+      - config:
+          expression: '{{data.query.attributes}}'
+        id: 1wuadxqeIl
+        meta:
+          category: logic
+          description: ''
+          label: Attributes?
+          name: conditional
+          x: 620
+          'y': 660
+        outputIds:
+          - - J0HLPb73WK
+          - - plad8ayyPe
+        type: ConditionalNode
+      - config:
+          expression: >-
+            {{data.query.start}} || {{data.query.end}} ||
+            {{data.query.attributes}} || {{data.query.resolution}} ||
+            {{data.query.aggregation}}
+        id: NezSoP9Yoj
+        meta:
+          category: logic
+          description: ''
+          label: Submission?
+          name: conditional
+          x: 580
+          'y': 460
+        outputIds:
+          - - SBUIWIa_mk
+          - - '-rlvW9vwwP'
+        type: ConditionalNode
+      - config: {}
+        id: FTTr8Y8dyw
+        meta:
+          annotationText: >-
+            If the user is not associated with the device, return a 404 page.
+            This `false` path will also be taken if the ID passed through the
+            URL is not associated with any device in the application.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 280
+          x: 40
+          'y': 100
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: ogkrpkqDbD
+        meta:
+          annotationText: >-
+            Edit this workflow node to return your application's standard 404
+            page. You can also import a standard one from the Template Library
+            via the "User-Friendly Error Pages" template.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 280
+          x: 40
+          'y': 1000
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: eh0ryHNIE6
+        meta:
+          annotationText: >-
+            By default, if a workflow error occurs, the user will be returned
+            the Data Explorer page with a red alert message stating the error.
+            You may wish to return your own 500 page here, in which case this
+            node should be edited to reference your page.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 340
+          x: 820
+          'y': 1160
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Ze6UwQ4lQb
+        meta:
+          annotationText: >-
+            If none of the query parameters associated with a Data Explorer form
+            submission are present, we treat this as a first visit and bypass
+            validation of the payload.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 320
+          x: 140
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: DqRff2aS0j
+        meta:
+          annotationText: >-
+            If the user only requests a single attribute, that is submitted as a
+            string query parameter. Multiple attributes are attached to the
+            payload as an array. This node normalizes both cases into an array.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 560
+          x: 920
+          'y': 740
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: GcLZx2TAmU
+        meta:
+          annotationText: >-
+            If the user submitted a request for data, we validate the payload
+            (time ranges, requested attributes, etc.) and, if valid, pass on to
+            the Losant API Node to actually retrieve the data and place it on
+            the payload.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 400
+          x: 880
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: AiZGXJGBa0
+        meta:
+          annotationText: >-
+            In the case of workflow errors (most commonly from users requesting
+            more data than can be placed on the payload), the Workflow Error
+            Trigger catches these and issues a user-friendly reply.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 820
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getTlDataExplorerDeviceId-0~
+        meta:
+          category: trigger
+          description: ''
+          label: Endpoint
+          name: endpoint
+          uiId: VE6k-fmg1I
+          x: 420
+          'y': 60
+        outputIds:
+          - - Z1qs1mH4SO
+        type: endpoint
+      - config:
+          scope: local
+        key: ~losant-flow-getTlDataExplorerDeviceId-1~-flowError
+        meta:
+          category: trigger
+          description: ''
+          label: Workflow Error
+          name: flowError
+          uiId: DbtzGkxrzP
+          x: 620
+          'y': 60
+        outputIds:
+          - - Z1qs1mH4SO
+        type: flowError
+    version: develop
+version: 1

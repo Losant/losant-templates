@@ -59,7 +59,7 @@ The following CURL command can be used to manually test the registration endpoin
 curl -H "Content-Type: application/json" \
 -X POST \
 -d '{ "token": "THE_REGISTRATION_TOKEN", "manufacturerId": "UNIQUE_MANUFACTURER_ID" }' \
-https://<YOUR_APP_ID>.onlosant.com/api/register-device
+https://<YOUR_APP_ID>.~losant-endpoint-domain~/api/register-device
 ```
 
 ## Sample Node.js Firmware

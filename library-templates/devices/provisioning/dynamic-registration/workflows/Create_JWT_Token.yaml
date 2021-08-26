@@ -12,7 +12,7 @@ resources:
           algorithmTemplate: HS256
           dataTemplate: |-
             {
-                "url": "https://~losant-application-libraryDevicesProvisioningDynamicRegistration-0~.onlosant.com/api/register-device"
+                "url": "https://~losant-application-libraryDevicesProvisioningDynamicRegistration-0~.~losant-endpoint-domain~/api/register-device"
             }
           dataTemplateType: json
           destinationPath: working.result

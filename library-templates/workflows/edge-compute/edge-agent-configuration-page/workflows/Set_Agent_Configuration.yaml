@@ -1,0 +1,786 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: edge
+    globals:
+      - json: |-
+          [
+              {
+                  "title": "Gateway",
+                  "type": "object",
+                  "properties": {
+                      "gateway.id": {
+                          "title": "Device ID",
+                          "type": "string",
+                          "pattern": "^[A-Fa-f\\d]{24}$"
+                      },
+                      "gateway.key": {
+                          "title": "Access Key",
+                          "type": "string",
+                          "pattern": "^[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$"
+                      },
+                      "gateway.secret": {
+                          "title": "Access Secret",
+                          "type": "string",
+                          "pattern": "^[A-Fa-f\\d]{64}$"
+                      },
+                      "gateway.protocol": {
+                          "title": "Protocol",
+                          "type": "string",
+                          "enum": ["mqtt://", "mqtts://", "ws://", "wss://"],
+                          "default": "mqtts://"
+                      },
+                      "gateway.host": {
+                          "title": "Host",
+                          "type": "string",
+                          "pattern": "^[a-zA-Z0-9-\\.]+$",
+                          "default": "~losant-broker-url~"
+                      },
+                      "gateway.clientSsl.keyPath": {
+                          "title": "Path to Client SSL Key",
+                          "type": "string"
+                      },
+                      "gateway.clientSsl.certificatePath": {
+                          "title": "Path to Client SSL Certificate",
+                          "type": "string"
+                      },
+                      "gateway.queueOfflineMessages": {
+                          "title": "Queue Offline Messages",
+                          "type": "boolean",
+                          "default": true
+                      },
+                      "gateway.subscribeToPeripheralUpdates": {
+                          "title": "Subscribe to Peripheral Updates",
+                          "type": "boolean",
+                          "default": true
+                      }
+                  }
+              },
+              {
+                  "title": "Local Broker",
+                  "type": "object",
+                  "properties": {
+                      "localBroker.enabled": {
+                          "title": "Enabled",
+                          "type": "boolean",
+                          "default": false
+                      },
+                      "localBroker.address": {
+                          "title": "IP Address",
+                          "type": "string",
+                          "pattern":"^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$",
+                          "default": "0.0.0.0"
+                      },
+                      "localBroker.port": {
+                          "title": "Port",
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 65535,
+                          "default": 1883
+                      },
+                      "localBroker.username": {
+                          "title": "Username",
+                          "type": "string"
+                      },
+                      "localBroker.password": {
+                          "title": "Password",
+                          "type": "string"
+                      },
+                      "localBroker.ssl.keyPath": {
+                          "title": "Path to SSL Key",
+                          "type": "string"
+                      },
+                      "localBroker.ssl.certificatePath": {
+                          "title": "Path to SSL Certificate",
+                          "type": "string"
+                      },
+                      "localBroker.ssl.bundlePath": {
+                          "title": "Path to SSL Bundle",
+                          "type": "string"
+                      }
+                  }
+              },
+              {
+                  "title": "Logging",
+                  "type": "object",
+                  "properties": {
+                      "logger.level": {
+                          "title": "Level",
+                          "type": "string",
+                          "enum": ["error", "warn", "info", "verbose"],
+                          "default": "info"
+                      },
+                      "logger.out": {
+                          "title": "Destination",
+                          "type": "string",
+                          "default": "console"
+                      }
+                  }
+              },
+              {
+                  "title": "Storage",
+                  "type": "object",
+                  "properties": {
+                      "store.path": {
+                          "title": "Path",
+                          "type": "string",
+                          "default": "./losant-edge-agent-store.db"
+                      }
+                  }
+              },
+              {
+                  "title": "UDP",
+                  "type": "object",
+                  "properties": {
+                      "udp.address": {
+                          "title": "IP Address",
+                          "type": "string",
+                          "pattern":"^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$",
+                          "default": "0.0.0.0"
+                      }
+                  }
+              },
+              {
+                  "title": "Webserver",
+                  "type": "object",
+                  "properties": {
+                      "webserver.enabled": {
+                          "title": "Enabled",
+                          "type": "boolean",
+                          "default": true
+                      },
+                      "webserver.address": {
+                          "title": "IP Address",
+                          "type": "string",
+                          "pattern":"^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$",
+                          "default": "0.0.0.0"
+                      },
+                      "webserver.port": {
+                          "title": "Port",
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 65535,
+                          "default": 8080
+                      },
+                      "webserver.username": {
+                          "title": "Username",
+                          "type": "string"
+                      },
+                      "webserver.password": {
+                          "title": "Password",
+                          "type": "string"
+                      },
+                      "webserver.ssl.keyPath": {
+                          "title": "Path to SSL Key",
+                          "type": "string"
+                      },
+                      "webserver.ssl.certificatePath": {
+                          "title": "Path to SSL Certificate",
+                          "type": "string"
+                      },
+                      "webserver.ssl.bundlePath": {
+                          "title": "Path to SSL Bundle",
+                          "type": "string"
+                      }
+                  }
+              },
+              {
+                  "title": "On-Disk Workflows",
+                  "type": "object",
+                  "properties": {
+                      "workflow.directory": {
+                          "title": "Path",
+                          "type": "string",
+                          "default": "./workflows"
+                      }
+                  }
+              }
+          ]
+        key: configSchemas
+      - json: '"admin"'
+        key: username
+      - json: '"admin123"'
+        key: password
+    id: ~losant-flow-setAgentConfiguration-0~
+    minimumAgentVersion: 1.24.0
+    name: Set Agent Configuration
+    nodes:
+      - config:
+          bodyTemplate: |-
+            <!doctype html>
+            <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                    <title>Set Agent Configuration</title>
+                    <style nonce="{{data.replyId}}">
+                        {{{working.styles}}}
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h2>Agent Configuration</h2>
+                        {{#if working.validationErrors}}
+                            <div class="alert alert-danger">
+                                <p><strong>Failed to save configuration. The following errors occurred:</strong></p>
+                                <ul>
+                                    {{#each working.validationErrors}}
+                                        <li>{{field}}: {{message}}</li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        {{/if}}
+                        {{#if working.configSetResult.error}}
+                            <div class="alert alert-danger">
+                                <p><strong>Failed to save configuration. The following error occurred:</strong></p>
+                                <p>{{working.configSetResult.error.type}}: {{working.configSetResult.error.message}}</p>
+                            </div>
+                        {{/if}}
+                        <form method="post">
+                            {{#each globals.configSchemas}}
+                                <fieldset>
+                                    <legend>{{title}}</legend>
+                                    {{#each properties}}
+                                        <div>
+                                            <label for="{{@key}}">{{title}}</label>
+                                            {{#if enum}}
+                                                <select name="{{@key}}" id="{{@key}}">
+                                                    {{#each enum}}
+                                                        <option value="{{this}}"{{#eq this (defaultTo (lookup @root.working.flattenedConfig @../key) default)}} selected{{/eq}}>{{this}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            {{else}}
+                                                {{#eq type 'boolean'}}
+                                                    <select name="{{@key}}" id="{{@key}}">
+                                                        <option value="true"{{#if (defaultTo (lookup @root.working.flattenedConfig @key) default)}} selected{{/if}}>true</option>
+                                                        <option value="false"{{#unless (defaultTo (lookup @root.working.flattenedConfig @key) default)}} selected{{/unless}}>false</option>
+                                                    </select>
+                                                {{else}}
+                                                    <input
+                                                        name="{{@key}}"
+                                                        id="{{@key}}"
+                                                        {{#eq type 'integer'}}
+                                                            type="number"
+                                                            step="1"
+                                                            min="{{minimum}}"
+                                                            max="{{maximum}}"
+                                                        {{else}}
+                                                            type="text"
+                                                        {{/eq}}
+                                                        {{#if pattern}}
+                                                            pattern="{{pattern}}"
+                                                        {{/if}}
+                                                        value="{{defaultTo (lookup @root.working.flattenedConfig @key) default}}"
+                                                    />
+                                                {{/eq}}
+                                            {{/if}}
+                                        </div>
+                                    {{/each}}
+                                </fieldset>
+                            {{/each}}
+                            <button type="submit">Update Agent Configuration</button>
+                        </form>
+                    </div>
+                </body>
+            </html>
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: text/html
+            - keyTemplate: Content-Security-Policy
+              valueTemplate: 'style-src ''nonce-{{data.replyId}}'';'
+          responseCodeTemplate: '200'
+        id: tTldFo1ilH
+        meta:
+          category: output
+          description: ''
+          label: Form Response
+          name: http-response
+          x: 540
+          'y': 1160
+        outputIds:
+          - - FEbVRlTpuw
+        type: HttpResponseNode
+      - config:
+          getAll: true
+          resultPath: working.currentConfig
+        id: mN063l8vXP
+        meta:
+          category: data
+          description: ''
+          label: 'Agent Config: Get'
+          name: agent-config-get
+          x: 440
+          'y': 660
+        outputIds:
+          - - Gbi4ZK5dSE
+        type: AgentConfigGetNode
+      - config:
+          message: ''
+          property: ''
+        id: FEbVRlTpuw
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 1260
+        outputIds: []
+        type: DebugNode
+      - config:
+          script: >-
+            //
+            https://www.geeksforgeeks.org/flatten-javascript-objects-into-a-single-depth-object/
+
+            // Declare a flatten function that takes 
+
+            // object as parameter and returns the 
+
+            // flatten object
+
+            const flattenObj = (ob) => {
+                const result = {};
+                // loop through the object "ob"
+                for (const i in ob) {
+              
+                    // We check the type of the i using
+                    // typeof() function and recursively
+                    // call the function again
+                    if ((typeof ob[i]) === 'object') {
+                        // To iterate is human; to recurse, divine.
+                        const temp = flattenObj(ob[i]);
+                        for (const j in temp) {
+                            // Store temp in result
+                            result[i + '.' + j] = temp[j];
+                        }
+                    }
+                    // Else store ob[i] in result directly
+                    else {
+                        result[i] = ob[i];
+                    }
+                }
+                return result;
+            };
+              
+            payload.working.flattenedConfig =
+            flattenObj(payload.working.currentConfig.value);
+        id: Gbi4ZK5dSE
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 440
+          'y': 760
+        outputIds:
+          - - tTldFo1ilH
+        type: RawFunctionNode
+      - config:
+          errorsPath: working.validationErrors
+          schema: working.mergedSchema
+          schemaType: path
+          toValidatePath: data.body
+        id: FGV6ibhy96
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 640
+          'y': 760
+        outputIds:
+          - - XLuQBHfYhi
+          - - dk1DI7N2d_
+        type: ValidatePayloadNode
+      - config:
+          rules:
+            - destination: working.flattenedConfig
+              source: data.body
+              type: move
+        id: XLuQBHfYhi
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 640
+          'y': 1060
+        outputIds:
+          - - tTldFo1ilH
+        type: MutateNode
+      - config:
+          script: >-
+            payload.working.mergedSchema = { type: 'object', properties: {},
+            additionalProperties: false };
+
+            payload.globals.configSchemas.forEach((schema) => {
+                Object.entries(schema.properties).forEach(([key, value]) => {
+                    const { type } = value;
+                    payload.working.mergedSchema.properties = {
+                        ...payload.working.mergedSchema.properties,
+                        [key]: {
+                            oneOf: [
+                                {
+                                    type: 'null',
+                                },
+                                value
+                            ]
+                        }
+                    };
+                    if (type === 'boolean') {
+                        payload.data.body[key] = payload.data.body[key] === 'true';
+                    } else if (type === 'integer') {
+                        payload.data.body[key] = Number(payload.data.body[key]);
+                    } else if (!payload.data.body[key]) {
+                        payload.data.body[key] = null;
+                    }
+                });
+            })
+        id: 2kFxviGeYF
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 640
+          'y': 660
+        outputIds:
+          - - FGV6ibhy96
+        type: RawFunctionNode
+      - config:
+          configSource: data.body
+          configSourceMethod: payloadPath
+          resultPath: working.configSetResult
+        id: dk1DI7N2d_
+        meta:
+          category: data
+          description: ''
+          label: 'Agent Config: Set'
+          name: agent-config-set
+          x: 740
+          'y': 860
+        outputIds:
+          - - iliTInz99v
+        type: AgentConfigSetNode
+      - config:
+          bodyTemplate: |-
+            <!doctype html>
+            <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                    <title>Set Agent Configuration</title>
+                    <style nonce="{{data.replyId}}">
+                        {{{working.styles}}}
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h2>Agent Configuration</h2>
+                        <div class="alert alert-success">
+                            <p><strong>Agent configuration updated.</strong></p>
+                            <p>Your changes are currently taking effect.</p>
+                        </div>
+                        <button onClick="window.location.href=window.location.href;">Refresh Page</button>
+                    </div>
+                </body>
+            </html>
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: text/html
+            - keyTemplate: Content-Security-Policy
+              valueTemplate: 'style-src ''nonce-{{data.replyId}}'';'
+          responseCodeTemplate: '200'
+        id: 2MJbiHWlf5
+        meta:
+          category: output
+          description: ''
+          label: Success Response
+          name: http-response
+          x: 740
+          'y': 1160
+        outputIds:
+          - - FEbVRlTpuw
+        type: HttpResponseNode
+      - config:
+          expression: '{{working.configSetResult.success}}'
+        id: iliTInz99v
+        meta:
+          category: logic
+          description: ''
+          label: Submit Success?
+          name: conditional
+          x: 740
+          'y': 960
+        outputIds:
+          - - XLuQBHfYhi
+          - - 2MJbiHWlf5
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.styles
+              type: set
+              valueTemplate: |-
+                body {
+                  font-family: sans-serif;
+                  margin: 0;
+                  padding: 0;
+                }
+
+                .container {
+                  margin: 20px auto;
+                  padding: 0 20px;
+                  max-width: 600px;
+                }
+
+                .alert {
+                  position: relative;
+                  padding: 12px 20px;
+                  margin-bottom: 1rem;
+                  border: 1px solid transparent;
+                  border-radius: 4px;
+                }
+
+                .alert-danger {
+                  color: #8d3244;
+                  background-color: #ffdbde;
+                  border-color:#ffccd1;
+                }
+
+                .alert-success {
+                  color: #516a22;
+                  background-color: #e8f0d1;
+                  border-color: #dfeabf;
+                }
+
+                fieldset {
+                  margin: 0 0 20px;
+                  padding: 20px;
+                  border: 1px solid #ccc;
+                }
+
+                legend {
+                  text-transform: uppercase;
+                  padding: 0 8px;
+                  font-size: 12px;
+                  font-weight: bold;
+                }
+
+                fieldset > div {
+                  margin-bottom: 15px;
+                }
+
+                input[type=text], input[type=number], select {
+                  width: 100%;
+                  padding: 12px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+                }
+
+                button {
+                  width: 100%;
+                  background-color: #4CAF50;
+                  color: white;
+                  padding: 14px 20px;
+                  margin: 8px 0;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                }
+
+                button:hover {
+                  background-color: #45a049;
+                }
+        id: fA8h5IGqCl
+        meta:
+          category: logic
+          description: ''
+          label: Set CSS
+          name: mutate
+          x: 540
+          'y': 460
+        outputIds:
+          - - '-00tj5XLwP'
+        type: MutateNode
+      - config:
+          expression: '{{data.method}} === ''post'''
+        id: '-00tj5XLwP'
+        meta:
+          category: logic
+          description: ''
+          label: POST?
+          name: conditional
+          x: 540
+          'y': 560
+        outputIds:
+          - - mN063l8vXP
+          - - 2kFxviGeYF
+        type: ConditionalNode
+      - config: {}
+        id: _eGOp2zWV7
+        meta:
+          annotationText: >-
+            This function ...
+
+            - Merges each of our schemas in `globals.configSchemas` into a
+            single object. (For use in the following Validate Payload Node.)
+
+            - Converts any property without a value to `null`. (Allows for
+            unsetting and returning to default.)
+
+            - Adds a "null" option to every property in the schema. (Allows the
+            request to pass with the null values.)
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 600
+          x: 860
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: eBbtL_iVT2
+        meta:
+          annotationText: >-
+            On successful submission, the agent must reboot. We display a
+            "working" page to the user and prompt them to refresh via a button.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 280
+          x: 960
+          'y': 1120
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: vs5ery8f31
+        meta:
+          annotationText: >-
+            This is our form. Values are populated with, in order of priority
+            ...
+
+
+            1. The value the user just submitted (in cases of a submission that
+            fails validation or fails the setting step).
+
+            2. The current config value (GET request only).
+
+            3. The default, if applicable.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 480
+          x: 100
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: _V4ZK8wuhw
+        meta:
+          annotationText: >-
+            This function flattens the deep-nested config object we get back
+            from the Agent Config: Get Node into a single-level object where
+            each property is dot-separated. The form then uses these values and
+            the dot-separated names for the inputs.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 360
+          x: 40
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: >-
+            !{{globals.username}} || !{{globals.password}} ||
+            {{data.headers.authorization}} === {{working.validHeader}}
+        id: DKEaMhuh5x
+        meta:
+          category: logic
+          description: ''
+          label: Auth
+          name: conditional
+          x: 360
+          'y': 360
+        outputIds:
+          - - ZaDujeI0N0
+          - - fA8h5IGqCl
+        type: ConditionalNode
+      - config:
+          bodyTemplate: Unauthorized
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: WWW-Authenticate
+              valueTemplate: Basic realm="Access to agent configuration page"
+          responseCodeTemplate: '401'
+        id: ZaDujeI0N0
+        meta:
+          category: output
+          description: ''
+          label: Unauthorized Response
+          name: http-response
+          x: 340
+          'y': 1160
+        outputIds:
+          - - FEbVRlTpuw
+        type: HttpResponseNode
+      - config:
+          rules:
+            - destination: working.validHeader
+              type: set
+              valueTemplate: >-
+                Basic {{{encodeBase64 (template '{{username}}:{{password}}'
+                globals)}}}
+        id: TR8rzY1SX2
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 260
+        outputIds:
+          - - DKEaMhuh5x
+        type: MutateNode
+    triggers:
+      - config:
+          method: get
+          route: /agent-configuration
+        key: get-/agent-configuration
+        meta:
+          category: trigger
+          description: ''
+          label: GET /agent-configuration
+          name: request
+          uiId: iPHm_fk1iH
+          x: 260
+          'y': 160
+        outputIds:
+          - - TR8rzY1SX2
+        type: request
+      - config:
+          method: post
+          route: /agent-configuration
+        key: post-/agent-configuration
+        meta:
+          category: trigger
+          description: ''
+          label: POST /agent-configuration
+          name: request
+          uiId: q314xKuvqT
+          x: 460
+          'y': 160
+        outputIds:
+          - - TR8rzY1SX2
+        type: request
+version: 1

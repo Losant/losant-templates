@@ -121,5 +121,7 @@ resources:
     deviceClass: standalone
     id: ~losant-device-turbofan-0~
     name: Turbofan
-    tags: []
+    tags:
+      - key: type
+        value: turbofan
 version: 1

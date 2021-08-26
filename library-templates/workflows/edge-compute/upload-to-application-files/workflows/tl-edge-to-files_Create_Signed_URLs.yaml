@@ -1,0 +1,380 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals:
+      - json: '"/tl-edge-to-files-uploads"'
+        key: uploadsRoot
+    id: ~losant-flow-tlEdgeToFilesCreateSignedUrLs-1~
+    name: tl-edge-to-files Create Signed URLs
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: kX9l7a043_
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 60
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          destination: working.files
+          errorBehavior: throw
+          errorPath: ''
+          source: data
+        id: JRKRmXNAq-
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 60
+          'y': 180
+        outputIds:
+          - - vVdFuBjvk9
+        type: JsonDecodeNode
+      - config:
+          currentItemPath: working.currentFile
+          loopSourcePath: working.files.files
+          mapResultPath: working.signedUrls
+          parallel: true
+        id: vVdFuBjvk9
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 60
+          'y': 280
+        outputIds:
+          - - Ow74d_zBRY
+          - - 60v1VjriNM
+        type: LoopNode
+      - config:
+          loopNodeId: vVdFuBjvk9
+          mapValuePath: working.fileResponse.result.upload
+          shouldBreak: false
+        id: J7GJQjEbx9
+        meta:
+          category: loop
+          description: ''
+          groupId: vVdFuBjvk9
+          label: Return
+          name: loop-return
+          x: 220
+          'y': 1000
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          action: post
+          params:
+            - name: file
+              type: json
+              value: |-
+                {
+                    "name": "{{working.currentFile.value.fileName}}",
+                    "fileSize": {{working.currentFile.value.fileSize}},
+                    "parentDirectory": "{{globals.uploadsRoot}}/{{working.files.deviceId}}",
+                    "contentType": "{{working.currentFile.value.contentType}}",
+                    "type": "file"
+                }
+          resource: files
+          responsePath: working.fileResponse
+        id: 60v1VjriNM
+        meta:
+          category: data
+          description: ''
+          groupId: vVdFuBjvk9
+          label: 'New File: Get Signed URL'
+          name: losantapi
+          x: 200
+          'y': 300
+        outputIds:
+          - - OTVzkBcwCU
+        type: LosantApiNode
+      - config:
+          expression: '{{working.fileResponse.result.upload}}'
+        id: OTVzkBcwCU
+        meta:
+          category: logic
+          description: ''
+          groupId: vVdFuBjvk9
+          label: Signed URL?
+          name: conditional
+          x: 200
+          'y': 400
+        outputIds:
+          - - 7Xb0YVjGui
+          - - '-Be5lELJ3B'
+        type: ConditionalNode
+      - config:
+          expression: '{{working.fileResponse.result.upload}}'
+        id: ELnQkdM-O7
+        meta:
+          category: logic
+          description: ''
+          groupId: vVdFuBjvk9
+          label: Signed URL?
+          name: conditional
+          x: 120
+          'y': 800
+        outputIds:
+          - - f-xaS6di-W
+          - - '-Be5lELJ3B'
+        type: ConditionalNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: lastUpdated
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1'
+            - name: filterField
+              type: string
+              value: name
+            - name: filter
+              type: string
+              value: '{{working.currentFile.value.fileName}}'
+            - name: type
+              type: string
+              value: file
+            - name: status
+              type: string
+              value: ''
+            - name: directory
+              type: string
+              value: '{{globals.uploadsRoot}}/{{working.files.deviceId}}'
+          resource: files
+          responsePath: working.existingFile
+        id: 7Xb0YVjGui
+        meta:
+          category: data
+          description: ''
+          groupId: vVdFuBjvk9
+          label: Find Existing File
+          name: losantapi
+          x: 120
+          'y': 500
+        outputIds:
+          - - EGQLC6Qt8u
+        type: LosantApiNode
+      - config:
+          expression: '{{working.existingFile.result.count}}'
+        id: EGQLC6Qt8u
+        meta:
+          category: logic
+          description: ''
+          groupId: vVdFuBjvk9
+          label: Existing?
+          name: conditional
+          x: 120
+          'y': 600
+        outputIds:
+          - - f-xaS6di-W
+          - - 5S9as16CxE
+        type: ConditionalNode
+      - config:
+          action: patch
+          params:
+            - name: fileId
+              type: string
+              value: '{{working.existingFile.result.items.[0].id}}'
+            - name: updates
+              type: json
+              value: |-
+                {
+                    "fileSize": {{working.currentFile.value.fileSize}},
+                    "contentType": "{{working.currentFile.value.contentType}}"
+                }
+          resource: file
+          responsePath: working.fileResponse
+        id: 5S9as16CxE
+        meta:
+          category: data
+          description: ''
+          groupId: vVdFuBjvk9
+          label: 'Existing File: Get Signed URL'
+          name: losantapi
+          x: 120
+          'y': 700
+        outputIds:
+          - - ELnQkdM-O7
+        type: LosantApiNode
+      - config:
+          rules:
+            - destination: working.fileResponse.result.upload.fileName
+              type: set
+              valueTemplate: '{{working.currentFile.value.fileName}}'
+        id: '-Be5lELJ3B'
+        meta:
+          category: logic
+          description: ''
+          groupId: vVdFuBjvk9
+          label: Mutate
+          name: mutate
+          x: 220
+          'y': 900
+        outputIds:
+          - - J7GJQjEbx9
+        type: MutateNode
+      - config:
+          destArrayPath: working.signedUrls
+          rules:
+            - type: compact
+          sourceArrayPath: working.signedUrls
+        id: Ow74d_zBRY
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 60
+          'y': 380
+        outputIds:
+          - - QlwR6Zb3C1
+        type: ArrayNode
+      - config:
+          deviceIdsPath: working.files.deviceId
+          nameTemplate: tl-upload-to-files
+          payloadTemplate: working.signedUrls
+          payloadTemplateType: path
+        id: QlwR6Zb3C1
+        meta:
+          category: output
+          description: ''
+          deviceSelectionType: payload
+          label: 'Device: Command'
+          name: device-command
+          x: 60
+          'y': 480
+        outputIds:
+          - - kX9l7a043_
+        type: DeviceSendCommandNode
+      - config:
+          message: Failure!
+          property: ''
+        id: f-xaS6di-W
+        meta:
+          category: output
+          description: ''
+          groupId: vVdFuBjvk9
+          label: Failure!
+          name: debug
+          x: 20
+          'y': 900
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: ajQ2pb7-Jt
+        meta:
+          annotationText: >-
+            This topic expects an array of file objects (name, size, and MIME
+            type) in the message. We parse this as JSON and feed the result into
+            a loop.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 260
+          'y': 80
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: rydPTkwcuP
+        meta:
+          annotationText: >-
+            Any file for which we failed to generate upload credentials is
+            removed from the array, and then the array is sent to the device as
+            the payload of a specific command.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 260
+          'y': 380
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: FJJkeu3m0U
+        meta:
+          annotationText: >-
+            We attempt to create a new file given the name, content type, file
+            size, and directory (combination of the uploadsRoot global and the
+            device ID). If successful, we return the result.
+          category: annotation
+          groupId: vVdFuBjvk9
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: bIaz_IKL3I
+        meta:
+          annotationText: >-
+            We move the name of the file into the upload credentials that we
+            will eventually return to the device so that the device knows which
+            file (by name) the credentials are for.
+          category: annotation
+          groupId: vVdFuBjvk9
+          height: 100
+          label: Note
+          name: note
+          width: 460
+          x: 420
+          'y': 880
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: BXqDGKPNks
+        meta:
+          annotationText: >-
+            In most cases, a failure to create a file is the result of the file
+            already existing (i.e. trying to upload a file to a directory that
+            already contains a file of that name). We test that case here and,
+            if that is the cause of the error, we instead generate credentials
+            to *replace* the existing file.
+          category: annotation
+          groupId: vVdFuBjvk9
+          height: 260
+          label: Note
+          name: note
+          width: 240
+          x: 340
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: tl-edge-to-files
+        meta:
+          category: trigger
+          description: ''
+          label: MQTT
+          name: mqtt
+          uiId: 7_gxp6xQ-T
+          x: 60
+          'y': 80
+        outputIds:
+          - - JRKRmXNAq-
+        type: mqttTopic
+version: 1

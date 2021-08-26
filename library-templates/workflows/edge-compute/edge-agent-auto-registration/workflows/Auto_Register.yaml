@@ -1,0 +1,210 @@
+resourceType: Flow
+resources:
+  - description: >-
+      POSTs the registration token and manufacturer ID to the registration
+      endpoint. When credentials are received, updates the Edge Agent
+      configuration.
+    flowClass: edge
+    globals: []
+    id: ~losant-flow-autoRegister-0~
+    minimumAgentVersion: 1.24.0
+    name: Auto Register
+    nodes:
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyTemplate: |-
+            {
+                "token": "{{{agentEnvironment.REGISTER_TOKEN}}}",
+                "manufacturerId": "{{{agentEnvironment.MANUFACTURER_ID}}}"
+            }
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.registerResponse
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.registerResponse
+          timeoutTemplate: ''
+          uriTemplate: '{{working.jwtDecoded.url}}'
+        id: 2QnOhAi1ia
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 40
+          'y': 540
+        outputIds:
+          - - aXJYxM5aKM
+        type: HttpNode
+      - config:
+          getAll: false
+          keyTemplate: gateway.key
+          resultPath: working.key
+        id: HVPvx1LeIP
+        meta:
+          category: data
+          description: ''
+          label: 'Agent Config: Get'
+          name: agent-config-get
+          x: 40
+          'y': 140
+        outputIds:
+          - - GJJMCMm2V7
+        type: AgentConfigGetNode
+      - config:
+          expression: '{{working.key.value}}'
+        id: GJJMCMm2V7
+        meta:
+          category: logic
+          description: ''
+          label: Registered?
+          name: conditional
+          x: 40
+          'y': 240
+        outputIds:
+          - - bsaarNxsxI
+          - []
+        type: ConditionalNode
+      - config: {}
+        id: B12KlIDlDn
+        meta:
+          annotationText: >-
+            Every minute, get the Edge Agent configuration and check for the
+            existence of an access key. If there's no access key, then this
+            device has not yet registered.
+
+
+            This runs every minute for added resilience. If the internet is
+            down, the registration attempt will fail. The timer will try every
+            minute until it succeeds.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 300
+          x: 240
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: QGV-kdVS8d
+        meta:
+          annotationText: >-
+            POST the manufacturer ID and registration JWT token to the
+            registration endpoint. The ID and token are passed to the Edge Agent
+            using environment variables:
+
+            * `MANUFACTURER_ID`
+
+            * `REGISTRATION_TOKEN`
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 300
+          x: 240
+          'y': 540
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: chzH8graiL
+        meta:
+          annotationText: >-
+            If successful, update the Edge Agent's configuration with the device
+            ID, access key, and access secret returned by the registration
+            endpoint.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 300
+          x: 240
+          'y': 780
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.registerResponse.statusCode}} === 200'
+        id: aXJYxM5aKM
+        meta:
+          category: logic
+          description: ''
+          label: Success?
+          name: conditional
+          x: 40
+          'y': 780
+        outputIds:
+          - []
+          - - e5_hOFWro0
+        type: ConditionalNode
+      - config:
+          destinationPath: working.jwtDecoded
+          tokenTemplate: '{{{agentEnvironment.REGISTER_TOKEN}}}'
+        id: bsaarNxsxI
+        meta:
+          category: logic
+          description: ''
+          label: 'JWT: Decode'
+          name: jwt-decode
+          x: 40
+          'y': 340
+        outputIds:
+          - - 2QnOhAi1ia
+        type: JWTDecodeNode
+      - config: {}
+        id: IQtWru68Fm
+        meta:
+          annotationText: >-
+            Decode the registration JWT token from the `REGISTRATION_TOKEN`
+            environment variable. This token contains the registration endpoint.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 300
+          x: 240
+          'y': 340
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          configSource:
+            - keyTemplate: gateway.id
+              valueTemplate: '{{working.registerResponse.body.deviceId}}'
+            - keyTemplate: gateway.key
+              valueTemplate: '{{working.registerResponse.body.accessKey}}'
+            - keyTemplate: gateway.secret
+              valueTemplate: '{{working.registerResponse.body.accessSecret}}'
+          configSourceMethod: individualFields
+          resultPath: ''
+        id: e5_hOFWro0
+        meta:
+          category: data
+          description: ''
+          label: 'Agent Config: Set'
+          name: agent-config-set
+          x: 40
+          'y': 880
+        outputIds: []
+        type: AgentConfigSetNode
+    triggers:
+      - config:
+          seconds: 60
+        key: ~losant-flow-autoRegister-0~-RPr1yWVbK2Cd7vr4Ra7Pz
+        meta:
+          category: trigger
+          description: ''
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: P0f9igKIpW
+          x: 40
+          'y': 40
+        outputIds:
+          - - HVPvx1LeIP
+        type: timer
+version: 1

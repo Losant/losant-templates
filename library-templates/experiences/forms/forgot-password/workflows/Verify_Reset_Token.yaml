@@ -67,7 +67,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: x24kP8OXfv
           label: 'JWT: Verify'
           name: jwt-verify
           x: 140
@@ -130,7 +129,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 36VTApt5-X
           label: Debug
           name: debug
           x: 560
@@ -157,7 +155,7 @@ resources:
       - config:
           expression: >-
             {{formatDate (defaultTo working.user.passwordLastUpdated 0) 'X'}} <
-            {{working.decoded.iat}}
+            {{add working.decoded.iat 10}}
         id: gpVJDpxvyD
         meta:
           category: logic
@@ -197,7 +195,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 36VTApt5-X
           label: Debug
           name: debug
           x: 140

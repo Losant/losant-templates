@@ -126,9 +126,9 @@ resources:
         meta:
           annotationText: >-
             **Important:** The "Content Type" of the [blob
-            attribute](https://docs.losant.com/devices/blobs/) you are recording
-            the image to should match the type of image being returned. This
-            most likely should be "image/jpeg".
+            attribute](https://~losant-docs-url~/devices/blobs/) you are
+            recording the image to should match the type of image being
+            returned. This most likely should be "image/jpeg".
           category: annotation
           height: 160
           label: Note

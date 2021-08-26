@@ -226,7 +226,7 @@ resources:
               lineType: monotone
               lineWeight: 2
               yAxisFormat: ''
-              yAxisLabel: Anomaly
+              yAxisLabel: Outlier
               yAxisMax: ''
               yAxisMin: ''
             - aggregation:
@@ -480,7 +480,7 @@ resources:
               lineType: monotone
               lineWeight: 2
               yAxisFormat: ''
-              yAxisLabel: Anomaly Predicted
+              yAxisLabel: Outlier Predicted
               yAxisMax: '1'
               yAxisMin: '0'
             - aggregation:
@@ -573,7 +573,7 @@ resources:
         id: AyLNiz-Wpn
         startX: 0.5
         startY: 4
-        title: Anomalies
+        title: Outlier Events
         width: 2
     contextConfiguration: []
     defaultTheme: light

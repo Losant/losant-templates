@@ -1,0 +1,18 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Allows for setting agent configuration files via a local web interface.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsEdgeComputeEdgeAgentConfigurationPage-0~
+    name: Edge Agent Configuration Page
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - edge
+      - agent
+      - config
+      - configuration
+version: 1

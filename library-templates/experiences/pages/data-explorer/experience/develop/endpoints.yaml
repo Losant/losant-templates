@@ -1,0 +1,10 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getTlDataExplorerDeviceId-0~
+    method: get
+    route: /tl-data-explorer/{deviceId}
+    version: develop
+version: 1

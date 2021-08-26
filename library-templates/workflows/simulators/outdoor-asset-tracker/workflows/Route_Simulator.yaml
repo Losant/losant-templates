@@ -24,7 +24,7 @@ resources:
           responsePath: working.coordinates
           timeoutTemplate: ''
           uriTemplate: >-
-            https://files.onlosant.com/{{applicationId}}/tl-route-simulator/routeCoordinates.json
+            https://~losant-files-domain~/{{applicationId}}/tl-route-simulator/routeCoordinates.json
         id: ZDUXmWVuIz
         meta:
           category: data
@@ -67,7 +67,7 @@ resources:
           responsePath: working.xml
           timeoutTemplate: ''
           uriTemplate: >-
-            https://files.onlosant.com/{{applicationId}}/tl-route-simulator/routeCoordinates.gpx
+            https://~losant-files-domain~/{{applicationId}}/tl-route-simulator/routeCoordinates.gpx
         id: 5aLY5ibWTw
         meta:
           category: data
@@ -452,11 +452,11 @@ resources:
             Files](/applications/recent/files).
 
             2. Update the "URL Template" field of the [HTTP
-            Node](https://docs.losant.com/workflows/data/http/) in the helper
+            Node](https://~losant-docs-url~/workflows/data/http/) in the helper
             workflow to point to the location of the GPX file you just uploaded.
 
             3. Update the [File: Create
-            Node](https://docs.losant.com/workflows/data/file-create/)'s "File
+            Node](https://~losant-docs-url~/workflows/data/file-create/)'s "File
             Name Template" to the name you wish to give this new file. The file
             extension should be `.json` as the workflow will convert your GPX
             file to JSON format.
@@ -464,7 +464,7 @@ resources:
 
             Processing your file can take several seconds. Check the workflow's
             [Debug
-            Log](https://docs.losant.com/workflows/outputs/debug/#debug-panel)
+            Log](https://~losant-docs-url~/workflows/outputs/debug/#debug-panel)
             to know when the conversion has completed and the file is available
             for use.
 

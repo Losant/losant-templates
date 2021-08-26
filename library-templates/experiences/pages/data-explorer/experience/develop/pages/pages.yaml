@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: Created for Endpoint GET /tl-data-explorer/{deviceId}.
+    id: ~losant-experienceView-tlDataExplorer-0~
+    localFilename: ./tl-data-explorer.hbs
+    name: tl-data-explorer
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

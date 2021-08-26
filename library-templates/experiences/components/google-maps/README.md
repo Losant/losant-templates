@@ -8,7 +8,7 @@ This component has no additional Losant dependencies, however, you must obtain a
 
 ## Usage
 
-This template creates a single [Experience Component](https://docs.losant.com/experiences/views/#components) that can be used in your [Experience Pages](https://docs.losant.com/experiences/views/#pages) or [Experience Layouts](https://docs.losant.com/experiences/views/#layouts). The component is named `tl-device-list`.
+This template creates a single [Experience Component](https://docs.losant.com/experiences/views/#components) that can be used in your [Experience Pages](https://docs.losant.com/experiences/views/#pages) or [Experience Layouts](https://docs.losant.com/experiences/views/#layouts). The component is named `tl-google-map`.
 
 ```
 {{component
@@ -59,7 +59,7 @@ Given a device tag with the key "location" and values in the format of "Lat,Lon"
   'tl-google-map'
   pageData.devices
   apiKey="MY_GOOGLE_MAPS_API_KEY"
-  markerLatLngTemplate="{{this.tags.location}}"
+  markerLatLngTemplate="{{this.tags.location.[0]}}"
 }}
 ```
 
@@ -106,13 +106,13 @@ Given a device tag with the key "markerImage" and values in the format of a URL 
   'tl-google-map'
   pageData.devices
   apiKey="MY_GOOGLE_MAPS_API_KEY"
-  markerIconTemplate="{{this.tags.markerImage}}"
+  markerIconTemplate="{{this.tags.markerImage.[0]}}"
 }}
 ```
 
 ## License
 
-Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2021 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

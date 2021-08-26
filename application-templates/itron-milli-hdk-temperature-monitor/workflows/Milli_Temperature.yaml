@@ -283,7 +283,7 @@ resources:
           bodyTemplate: |-
             {
               "eventType": "observationIngested",
-              "webhookUrl": "https://triggers.losant.com/webhooks/{{ working.losantWebhook.result.token }}",
+              "webhookUrl": "https://~losant-triggers-url~/webhooks/{{ working.losantWebhook.result.token }}",
             }
           caCertTemplate: ''
           disableSSLVerification: false
@@ -324,7 +324,7 @@ resources:
 
             1. Configure your `clientId`, `clientSecret`, and `solutionName`
             within [Application
-            Globals](https://docs.losant.com/applications/overview/#application-globals).
+            Globals](https://~losant-docs-url~/applications/overview/#application-globals).
 
             2. Enable this workflow by clicking the "Enable" button in the
             bottom right corner of this editor.
@@ -398,7 +398,7 @@ resources:
 
             After you've pushed the Virtual Button above, a few seconds later
             you should see a [Debug
-            Log](https://docs.losant.com/workflows/outputs/debug/#debug-panel)
+            Log](https://~losant-docs-url~/workflows/outputs/debug/#debug-panel)
             message appear in the right column. Ensure the following:
 
 
@@ -485,7 +485,7 @@ resources:
           annotationText: >-
             If a device has not received a state report for 24 hours, this flow
             marks that device as "disconnected" within the [Device Connection
-            Log](https://docs.losant.com/devices/overview/#connection-log).
+            Log](https://~losant-docs-url~/devices/overview/#connection-log).
           category: annotation
           height: 160
           label: Note

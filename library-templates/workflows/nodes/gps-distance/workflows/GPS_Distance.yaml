@@ -4,14 +4,14 @@ resources:
       fields:
         - description: >-
             The starting GPS coordinate in any [supported
-            format](https://docs.losant.com/devices/state/#gps-attributes).
+            format](https://~losant-docs-url~/devices/state/#gps-attributes).
           id: gpsStart
           label: Starting GPS Point
           required: true
           type: stringTemplate
         - description: >-
             The ending GPS coordinate in any [supported
-            format](https://docs.losant.com/devices/state/#gps-attributes).
+            format](https://~losant-docs-url~/devices/state/#gps-attributes).
           id: gpsEnd
           label: Ending GPS Point
           required: true

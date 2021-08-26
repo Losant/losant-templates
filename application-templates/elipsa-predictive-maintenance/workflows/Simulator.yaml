@@ -20,7 +20,7 @@ resources:
           responsePath: working.turbineData
           timeoutTemplate: ''
           uriTemplate: >-
-            https://files.onlosant.com/~losant-application-applicationElipsaPredictiveMaintenance-0~/TurbineEngine.csv
+            https://~losant-files-domain~/~losant-application-applicationElipsaPredictiveMaintenance-0~/TurbineEngine.csv
         id: jjjcclQvn6
         meta:
           category: data

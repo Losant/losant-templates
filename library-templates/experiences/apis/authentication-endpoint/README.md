@@ -7,7 +7,7 @@ This template includes an [Experience Endpoint](https://docs.losant.com/experien
 After importing the template, using a tool like [Postman](https://www.postman.com/), make a POST request to:
 
 ```
-https://<APPLICATION_ID>.onlosant.com/api/auth 
+https://<APPLICATION_ID>.~losant-endpoint-domain~/api/auth 
 ```
 
 You may find your base URL on the [Experience > Edit](https://app.losant.com/applications/recent/experience/versions/develop) page. 
@@ -38,7 +38,7 @@ If you open the Experience Workflow named  "POST /api/auth", you can view, updat
 
 Once you obtain an authentication token for an Experience User, the token can be appended to any subsequent HTTP request that requires authentication in the following ways:
 
-- A query parameter added to the URL (e.g. https://<APPLICATION_ID>.onlosant.com/my-user?authorization=<token>).
+- A query parameter added to the URL (e.g. https://<APPLICATION_ID>.~losant-endpoint-domain~/my-user?authorization=<token>).
 - An Authorization HTTP header with the value `Bearer <token>`.
 - A Cookie HTTP header in the format of `authorization=<token>`.
 

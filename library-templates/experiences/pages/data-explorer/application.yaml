@@ -1,0 +1,22 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Provides an interface for viewing device attribute values much like
+      the in-app Data Explorer.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryExperiencesPagesDataExplorer-0~
+    name: Data Explorer
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - data
+      - explorer
+      - table
+      - graph
+      - chart
+      - attribute
+      - value
+version: 1

@@ -20,7 +20,7 @@ resources:
               label: >-
                 There are no Milli Temperature Sensors provisioned yet. Please
                 see the
-                [README](https://app.losant.com/applications/~losant-application-applicationItronMilliHdkTemperatureMonitor-0~).
+                [README](https://~losant-app-url~/applications/~losant-application-applicationItronMilliHdkTemperatureMonitor-0~).
           defaultCondition:
             color: '#8db319'
             label: '{{value-0}}'
@@ -100,7 +100,7 @@ resources:
               id: defaultDeviceNameColumn
               rowTemplate: >-
                 [{{format
-                value}}](https://app.losant.com/dashboards/~losant-dashboard-temperatureDashboard-0~?ctx%5BdeviceId-0%5D={{deviceId}})
+                value}}](https://~losant-app-url~/dashboards/~losant-dashboard-temperatureDashboard-0~?ctx%5BdeviceId-0%5D={{deviceId}})
               type: deviceName
             - headerTemplate: '{{name}}'
               id: defaultTimestampColumn

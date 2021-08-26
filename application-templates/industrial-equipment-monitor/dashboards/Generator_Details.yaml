@@ -174,7 +174,7 @@ resources:
           bgColor: 'rgba(255, 255, 255, 0)'
           imageSource: static
           imageUrl: >-
-            https://files.onlosant.com/~losant-application-applicationIndustrialEquipmentMonitor-0~{{ctx.deviceId-0.tags.image.[0]}}
+            https://~losant-files-domain~/~losant-application-applicationIndustrialEquipmentMonitor-0~{{ctx.deviceId-0.tags.image.[0]}}
         height: 2
         id: x3tDNbqu_s
         startX: 0

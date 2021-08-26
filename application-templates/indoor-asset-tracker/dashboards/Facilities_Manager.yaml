@@ -20,18 +20,18 @@ resources:
 
             {{#eq deviceTags.type.[0] 'resident'}}
 
-            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/residents/{{deviceTags.uniqueId.[0]}}@2x.png
+            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/residents/{{deviceTags.uniqueId.[0]}}@2x.png
 
             {{else}}
 
-            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
+            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
 
             {{/eq}}
 
             {{/if}}
 
           imageUrl: >-
-            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
           includeArrows: false
           includeLines: false
           pinMode: advanced
@@ -171,7 +171,7 @@ resources:
           backgroundColor: 'rgba(5, 113, 128, 1)'
           defaultZoom: -0.6666666666666666
           imageUrl: >-
-            https://files.onlosant.com/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
           overlays:
             - conditions: []
               defaultCondition:

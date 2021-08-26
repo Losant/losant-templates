@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{!--
+      BEGIN Twitter Bootstrap v4 stylesheets and scripts
+      You may already have these in your page layout, in which case it is not necessary to include them again here.
+      NOTE: If you are not utilizing the Bootstrap framework, it is still necessary to include the jQuery declaration (first <script> line)
+      in your page / layout, as this template requires jQuery to be loaded into the web page.
+    --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    {{!--
+      END Twitter Bootstrap v4 stylesheets and scripts 
+    --}}
+    {{!--
+      BEGIN Data Explorer stylesheets and scripts
+      These lines MUST be included in your page / layout for this template to work.
+      The <link> tag must go within the page's <head> section.
+      The <script> tags may go in the head or at the bottom of the <body>; however,
+      they MUST be declared AFTER the <script> tag that pulls jQuery into the page (see above section).
+    --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/r-2.2.9/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    {{!--
+      END Data Explorer stylesheets and scripts
+    --}}
+    <title>Data Explorer</title>
+  </head>
+  <body>
+  {{!--
+    BEGIN Data Explorer markup & script instantiation
+    If you are moving the scripts defined in the <head> into a layout,
+    you should delete everything above this line
+    and everything below the "END" section at the bottom of the page.
+  --}}
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-md-4 col-lg-3 col-xl-2">
+          <form method="get" id="tl-data-explorer-form" novalidate>
+            <div class="card tl-data-explorer-attributes mb-3">
+              <div class="card-header">Attributes</div>
+              <div class="card-body overflow-auto" style="max-height: 360px">
+                <small class="d-block mb-2 tl-data-explorer-attributes-instruction">At least one is required.</small>
+                {{#each pageData.device.attributes}}
+                  {{#if @root.globals.allowedAttributes}}
+                    {{#includes @root.globals.allowedAttributes @key}}
+                      <div class="form-check overflow-hidden">
+                        <input class="form-check-input" type="checkbox" value="{{@key}}" id="checkbox-{{@key}}" name="attributes">
+                        <label class="form-check-label" for="checkbox-{{@key}}">
+                          {{@key}} <small class="text-muted">({{this.dataType}})</small>
+                        </label>
+                      </div>
+                    {{/includes}}
+                  {{else}}
+                    <div class="form-check overflow-hidden">
+                      <input class="form-check-input" type="checkbox" value="{{@key}}" id="checkbox-{{@key}}" name="attributes">
+                      <label class="form-check-label" for="checkbox-{{@key}}">
+                        {{@key}} <small class="text-muted">({{this.dataType}})</small>
+                      </label>
+                    </div>
+                  {{/if}}
+                {{/each}}
+              </div>
+            </div>
+            <div class="form-group position-relative tl-needs-validation">
+              <label for="tl-data-explorer-start">Start</label>
+              <input
+                class="form-control"
+                type="datetime-local"
+                name="start"
+                step="1"
+                id="tl-data-explorer-start"
+              />
+              <div class="invalid-tooltip" id="tl-start-tooltip"></div>
+            </div>
+            <div class="form-group position-relative tl-needs-validation">
+              <label for="tl-data-explorer-end">End <a href="#" id="tl-jump-to-now">(Jump to Now)</a></label>
+              <input
+                class="form-control"
+                type="datetime-local"
+                name="end"
+                step="1"
+                id="tl-data-explorer-end"
+              />
+              <div class="invalid-tooltip" id="tl-end-tooltip"></div>
+            </div>
+            <div class="form-group">
+              <label for="tl-data-explorer-aggregation">Aggregation</label>
+              <select class="form-control" id="tl-data-explorer-aggregation" name="aggregation">
+                {{#each globals.allowedAggregations}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="tl-data-explorer-resolution">Resolution</label>
+              <select class="form-control" id="tl-data-explorer-resolution" name="resolution">
+                <option value="1000">1 second</option>
+                <option value="10000">10 seconds</option>
+                <option value="30000">30 seconds</option>
+                <option value="60000">1 minute</option>
+                <option value="300000">5 minutes</option>
+                <option value="1200000">20 minutes</option>
+                <option value="3600000">60 minutes</option>
+                <option value="10800000">3 hours</option>
+                <option value="21600000">6 hours</option>
+                <option value="43200000">12 hours</option>
+                <option value="86400000">24 hours</option>
+                <option value="259200000">3 days</option>
+                <option value="604800000">7 days</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="tl-data-explorer-submit">Submit</button>
+            </div>
+          </form>
+        </div>
+
+        <script>
+          /**** constants and element pointers ****/
+          const formEl = document.getElementById('tl-data-explorer-form');
+          const startEl = document.getElementById('tl-data-explorer-start');
+          const endEl = document.getElementById('tl-data-explorer-end');
+          const aggregationEl = document.getElementById('tl-data-explorer-aggregation');
+          const resolutionEl = document.getElementById('tl-data-explorer-resolution');
+          const resolutionOptions = resolutionEl.querySelectorAll('option');
+
+          const resolutionMinPoints = 1;
+          const resolutionMaxPoints = 1000;
+          const resolutions = [
+            { label: '1 second', value: 1000 },
+            { label: '10 seconds', value: 10 * 1000 },
+            { label: '30 seconds', value: 30 * 1000 },
+            { label: '1 minute', value: 60 * 1000 },
+            { label: '5 minutes', value: 5 * 60 * 1000 },
+            { label: '20 minutes', value: 20 * 60 * 1000 },
+            { label: '60 minutes', value: 60 * 60 * 1000 },
+            { label: '3 hours', value: 3 * 60 * 60 * 1000 },
+            { label: '6 hours', value: 6 * 60 * 60 * 1000 },
+            { label: '12 hours', value: 12 * 60 * 60 * 1000 },
+            { label: '24 hours', value: 24 * 60 * 60 * 1000 },
+            { label: '3 days', value: 3 * 24 * 60 * 60 * 1000 },
+            { label: '7 days', value: 7 * 24 * 60 * 60 * 1000 }
+          ];
+
+          const resolutionsForDuration = (duration) => {
+            const selected = [];
+            if (!duration) { return selected; }
+            resolutions.forEach((resolution) => {
+              const val = duration / resolution.value;
+              if (val < resolutionMaxPoints && val > resolutionMinPoints) { selected.push(resolution.value); }
+            });
+            if (!selected.length) {
+              // if the user chooses a duration smaller than the smallest resolution
+              selected.push(resolutions[0].value);
+            }
+            return selected;
+          };
+
+          const getClosestResolutionForDuration = (requested, duration) => {
+            if (!duration) { return 1000; }
+
+            requested = Number(requested) || 0;
+            let closest = null;
+            let bestDiff = Infinity;
+            resolutionsForDuration(duration).forEach((resolution) => {
+              const diff = Math.abs(resolution - requested);
+              if (diff < bestDiff) {
+                bestDiff = diff;
+                closest = resolution;
+              }
+            });
+            return closest;
+          };
+
+          const timestampToInputISOString = (timestamp) => {
+            const tzOffset = new Date().getTimezoneOffset() * 60000; // offset in milliseconds
+            // https://stackoverflow.com/questions/10830357/javascript-toisostring-ignores-timezone-offset
+            return new Date(timestamp - tzOffset).toISOString().slice(0, -5);
+          }
+
+          const inputISOStringToTimestamp = (isoString) => {
+            return new Date(isoString).getTime();
+          }
+
+          const setDisabledResolutionOptions = (duration) => {
+            const acceptableResolutions = new Set(resolutionsForDuration(duration));
+            resolutionOptions.forEach((resOption) => {
+              if (acceptableResolutions.has(Number(resOption.value))) { // acceptable
+                resOption.removeAttribute('disabled');
+              } else { // unacceptable
+                resOption.setAttribute('disabled', 'disabled');
+              }
+            });
+          }
+
+          let hasSubmitted = false;
+
+          const prepDataForSubmit = () => {
+            const formData = new FormData(formEl);
+            formData.set('start', inputISOStringToTimestamp(formData.get('start')));
+            formData.set('end', inputISOStringToTimestamp(formData.get('end')));
+            return formData;
+          }
+
+          const setElementValidity = (el, message) => {
+            if (message) {
+              el.classList.add('is-invalid');
+              el.setCustomValidity(message);
+              el.nextElementSibling.classList.remove('d-none');
+              el.nextElementSibling.innerHTML = message;
+            } else {
+              el.classList.remove('is-invalid');
+              el.setCustomValidity('');
+              el.nextElementSibling.classList.add('d-none');
+              el.nextElementSibling.innerHTML = message;
+            }
+          }
+
+          const validate = (formData) => {
+            let isValid = true;
+            // at least one attribute must be selected
+            
+            const attributesHdEl = document.querySelector('.tl-data-explorer-attributes > .card-header');
+            const attributesInstructionEl = document.querySelector('.tl-data-explorer-attributes-instruction');
+            // at least one attribute must be selected
+            if (!formData.get('attributes')) {
+              isValid = false;
+              [attributesHdEl, attributesInstructionEl].forEach((el) => el.classList.add('text-danger'));
+            } else {
+              [attributesHdEl, attributesInstructionEl].forEach((el) => el.classList.remove('text-danger'));
+            }
+
+            // start and end must each resolve to valid dates
+            if (isNaN(formData.get('start'))) {
+              isValid = false;
+              setElementValidity(startEl, 'Invalid date');
+            } else if (formData.get('start') >= formData.get('end')) {
+              isValid = false;
+              setElementValidity(startEl, 'Must be before End');
+            } else {
+              setElementValidity(startEl);
+            }
+            if (isNaN(formData.get('end'))) {
+              isValid = false;
+              setElementValidity(endEl, 'Invalid date');
+            } else if (formData.get('end') <= formData.get('start')) {
+              isValid = false;
+              setElementValidity(endEl, 'Must be after Start');
+            } else {
+              setElementValidity(endEl);
+            }
+            return isValid;
+          }
+
+          const setQueryStringToForm = (queryString) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const endTime = Number(urlParams.get('end')) || new Date().getTime(); // default to now
+            const startTime = Number(urlParams.get('start')) || (endTime - 3600000); // default to 1 hour minus end
+            endEl.value = timestampToInputISOString(endTime);
+            startEl.value = timestampToInputISOString(startTime);
+            endEl.min = startEl.value;
+            startEl.max = endEl.value;
+
+            aggregationEl.value = urlParams.get('aggregation') || 'LAST';
+
+            const duration = endTime - startTime;
+            resolutionEl.value = getClosestResolutionForDuration(urlParams.get('resolution'), duration);
+            setDisabledResolutionOptions(duration);
+
+            const selectedAttributes = {{#if pageData.selectedAttributes}}{{jsonEncode pageData.selectedAttributes}}{{else}}[]{{/if}};
+            selectedAttributes.forEach((selectedAttr) => {
+              const checkbox = document.getElementById(`checkbox-${selectedAttr}`);
+              if (checkbox) {
+                checkbox.checked = true;
+              }
+            });
+          }
+
+          setQueryStringToForm(window.location.search);
+
+          // handle updates to the time inputs
+          // set the min / max of the companion input
+          // adjust the value of the companion input if necessary
+          // adjust the resolution to an acceptable value based on the new duration
+          // disable any out-of-bounds resolution options
+          document.querySelectorAll('#tl-data-explorer-form input, #tl-data-explorer-form select').forEach((el) => {
+            el.addEventListener('change', (e) => {
+              if (hasSubmitted) {
+                validate(prepDataForSubmit());
+              }
+              if (e.target.name === 'start' || e.target.name === 'end') {
+                if (!isNaN(inputISOStringToTimestamp(e.target.value))) {
+                  if (e.target.name === 'end') {
+                    startEl.max = e.target.value;
+                    if (startEl.value > e.target.value) {
+                      startEl.value = e.target.value;
+                    }
+                  } else { // start
+                    endEl.min = e.target.value;
+                    if (endEl.value < e.target.value) {
+                      endEl.value = e.target.value;
+                    }
+                  }
+                  const duration = inputISOStringToTimestamp(endEl.value) - inputISOStringToTimestamp(startEl.value);
+                  resolutionEl.value = String(getClosestResolutionForDuration(resolutionEl.value, duration));
+                  setDisabledResolutionOptions(duration);
+                }
+              }
+            });
+          });
+
+          document.getElementById('tl-jump-to-now').addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const endTs = inputISOStringToTimestamp(endEl.value);
+            const startTs = inputISOStringToTimestamp(startEl.value);
+            const duration = (endTs - startTs) || oneHour;
+            const nowTs = Math.floor(inputISOStringToTimestamp(Date.now()) / 1000) * 1000;
+            endEl.value = timestampToInputISOString(nowTs);
+            startEl.value = timestampToInputISOString(nowTs - duration);
+            endEl.dispatchEvent(new Event('change'));
+            startEl.dispatchEvent(new Event('change'));
+          });
+
+          // on form submission, write the form data to the url
+          formEl.addEventListener('submit', (event) => {
+            hasSubmitted = true;
+            document.querySelectorAll('.tl-needs-validation').forEach((el) => {
+              el.classList.add('was-validated');
+            });
+            event.preventDefault();
+            const data = prepDataForSubmit();
+            const isValid = validate(data);
+            // submission, if we have no errors
+            if (isValid) {
+              const qString = new URLSearchParams(data).toString();
+              const submitBtn = document.querySelector('#tl-data-explorer-submit');
+              submitBtn.disabled = true;
+              submitBtn.innerHTML = 'Submitting ...';
+              window.location = `${window.location.pathname}?${qString}`;
+            }
+          });
+
+        </script>
+
+        <div class="col-md-8 col-lg-9 col-xl-10">
+          {{#if pageData.errorInfo}}
+            {{!-- 500 error --}}
+            <div class="alert alert-danger">
+              <p><strong>The following error occurred:</strong></p>
+              <p>{{defaultTo pageData.errorInfo.error.name 'Unknown error'}}: {{defaultTo pageData.errorInfo.error.message 'An unknown error occurred'}}</p>
+            </div>
+          {{else if (length pageData.validationErrors)}}
+            {{!-- 4xx error (validation) --}}
+            <div class="alert alert-warning">
+              The following errors occurred:
+              <ul>
+              {{#each pageData.validationErrors}}
+                <li>{{field}}: {{message}}</li>
+              {{/each}}
+              </ul>
+            </div>
+          {{else if pageData.data.result.devices}}
+            {{!-- successful data query --}}
+            <div class="row mb-3">
+              {{#each pageData.selectedAttributes}}
+                <div class="col-lg-6 col-xl-4">
+                  <div class="card mb-4">
+                    <div class="card-header">
+                      {{this}}
+                    </div>
+                    {{#with this as |attributeName|}}
+                      {{#with (lookup @root.pageData.device.attributes attributeName) as |attribute|}}
+                        {{#match attribute.dataType '(number|boolean)'}}
+                          <div id="chart-{{attributeName}}"></div>
+                        {{else}}
+                          {{#eq @root.pageData.data.result.aggregation 'COUNT'}}
+                            <div id="chart-{{attributeName}}"></div>
+                          {{else}}
+                            <div class="card-body text-center">
+                              Cannot graph attributes of type "{{attribute.dataType}}" unless aggregating by "Count".
+                            </div>
+                          {{/eq}}
+                        {{/match}}
+                      {{/with}}
+                    {{/with}}
+                  </div>
+                </div>
+              {{/each}}
+            </div>
+            <button class="btn btn-light btn-sm float-sm-right" id="tl-data-explorer-export">Export to CSV</button>
+            <table id="tl-data-explorer-table" class="table table-bordered" style="min-width: 100%"></table>
+            <script>
+              const tableDateFormat = new Intl.DateTimeFormat('default', {
+                {{#eq request.query.aggregation 'NONE'}}fractionalSecondDigits: 3,{{/eq}}
+                timeZoneName: 'short',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric'
+              });
+              const exportEl = document.getElementById('tl-data-explorer-export');
+              const dataExplorerData = {{jsonEncode (lookup (lookup pageData.data.result.devices request.params.deviceId) 'points')}}.map((point) => {
+                return {
+                  $time: new Date(point.time).getTime(),
+                  ...point.data
+                }
+              });
+
+              const xTickFormatter = (val) => {
+                const duration = {{request.query.end}} - {{request.query.start}};
+                const resolution = {{request.query.resolution}};
+                const oneMinute = 60000;
+                const oneHour = oneMinute * 60;
+                const oneDay = oneHour * 24;
+                let options;
+                if (resolution % oneDay === 0) {
+                  options = { month: '2-digit', day: '2-digit' };
+                } else if (resolution % oneHour === 0 || resolution % oneMinute === 0) {
+                  options = {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    ...(duration <= oneDay ? {} : {
+                      month: '2-digit',
+                      day: '2-digit'
+                    })
+                  };            
+                } else {
+                  options = {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    ...(duration > oneDay ? {
+                      month: '2-digit',
+                      day: '2-digit'
+                    } : {})
+                  }
+                }
+
+                return Intl.DateTimeFormat('default', options).format(val);
+              };
+
+              document.addEventListener('DOMContentLoaded', async () => {
+                const table = $('#tl-data-explorer-table').DataTable({
+                  deferRender: true,
+                  searching: false,
+                  responsive: true,
+                  columns: [
+                    { 
+                      data: '$time',
+                      title: 'Time',
+                      type: 'num',
+                      render: (data, type) => {
+                        if (type === 'display') { 
+                          return tableDateFormat.format(data);
+                        }
+                        return data;
+                      }
+                    }{{#each pageData.selectedAttributes}},
+                    {
+                      data: '{{this}}',
+                      title: '{{this}}',
+                      defaultContent: ''{{#eq (lookup (lookup @root.pageData.device.attributes this) 'dataType') 'blob'}},
+                      render: (data) => {
+                        return data ? `<a href="${data}">(View File)</a>` : '';
+                      },
+                      orderable: false{{/eq}}
+                    }{{/each}}
+                  ],
+                  data: dataExplorerData
+                });
+                const charts = {};
+                const data = {};
+                const commonOptions = {
+                  xaxis: {
+                    type: 'numeric',
+                    tickAmount: 2,
+                    min: {{formatDate pageData.data.result.start 'x'}},
+                    max: {{formatDate pageData.data.result.end 'x'}} + 1,
+                    labels: {
+                      formatter: xTickFormatter
+                    }
+                  },
+                  yaxis: {
+                    decimalsInFloat: 2,
+                    labels: {
+                      minWidth: 36
+                    }
+                  },
+                  dataLabels: {
+                    enabled: false
+                  },
+                  stroke: {
+                    width: 2
+                  }
+                };
+                {{#each pageData.selectedAttributes}}
+                  {{#with this as |attributeName|}}
+                    {{#with (lookup @root.pageData.device.attributes attributeName) as |attribute|}}
+                      {{#match attribute.dataType '(number|boolean)'}}
+                        {{!-- duplicate of case below; changes in one must also be made in the other --}}
+                        data['{{attributeName}}'] = dataExplorerData.map(({ $time, {{attributeName}} }) => [$time, Number({{attributeName}})]).filter((item) => !isNaN(item[1]));
+                        charts['{{attributeName}}'] = new ApexCharts(document.getElementById("chart-{{attributeName}}"), {
+                          ...commonOptions,
+                          {{#if (lookup @root.experience.page.viewTags (template 'color-{{this}}' attributeName))}}colors: ['{{lookup @root.experience.page.viewTags (template 'color-{{this}}' attributeName)}}'],{{/if}}
+                          chart: {
+                            type: '{{defaultTo (lookup @root.experience.page.viewTags (template 'style-{{this}}' attributeName)) 'line'}}',
+                            id: '{{attributeName}}',
+                            group: 'charts',
+                            toolbar: {
+                              show: false
+                            }
+                          },
+                          series: [{
+                            name: '{{attributeName}}',
+                            data: data['{{attributeName}}']
+                          }]
+                        });
+                        charts['{{attributeName}}'].render();
+                      {{else}}
+                        {{#eq @root.pageData.data.result.aggregation 'COUNT'}}
+                          {{!-- duplicate of case above; changes in one must also be made in the other --}}
+                          data['{{attributeName}}'] = dataExplorerData.map(({ $time, {{attributeName}} }) => [$time, Number({{attributeName}})]).filter((item) => !isNaN(item[1]));
+                          charts['{{attributeName}}'] = new ApexCharts(document.getElementById("chart-{{attributeName}}"), {
+                            ...commonOptions,
+                            chart: {
+                              type: 'line',
+                              id: '{{attributeName}}',
+                              group: 'charts',
+                              toolbar: {
+                                show: false
+                              }
+                            },
+                            series: [{
+                              name: '{{attributeName}}',
+                              data: data['{{attributeName}}']
+                            }]
+                          });
+                          charts['{{attributeName}}'].render();
+                        {{/eq}}
+                      {{/match}}
+                    {{/with}}
+                  {{/with}}
+                {{/each}}
+                // export data
+                exportEl.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  // https://stackoverflow.com/a/31536517
+                  const header = ['$time'{{#each pageData.selectedAttributes}},'{{this}}'{{/each}}];
+                  let csv = [
+                    header.join(','), // header row first
+                    ...table.rows().data().toArray().map(row => header.map((fieldName) => {
+                      if (fieldName === '$time') {
+                        return `"${tableDateFormat.format(row[fieldName])}"`;
+                      }
+                      return JSON.stringify(row[fieldName]);
+                    }).join(','))
+                  ].join('\r\n');
+                  csv = encodeURI('data:text/csv;charset=utf-8,' + csv);
+                  // https://stackoverflow.com/a/14966131
+                  const link = document.createElement("a");
+                  link.setAttribute("href", csv);
+                  link.setAttribute("download", `deviceId:{{request.params.deviceId}}__start:${startEl.value}__end:${endEl.value}__aggregation:${aggregationEl.value}__resolution:${resolutionEl.value}.csv`);
+                  document.body.appendChild(link); // Required for FF
+                  link.click();
+                  link.remove();
+                });
+              });
+            </script>
+          {{else}}
+            {{!-- empty state --}}
+            <div class="alert alert-info">Select one or more attributes, a time range, and aggregation / resolution options to view device data.</div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  {{!--
+    END Data Explorer markup & script instantiation
+  --}}
+  </body>
+</html>

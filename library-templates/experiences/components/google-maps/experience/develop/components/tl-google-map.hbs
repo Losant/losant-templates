@@ -1,8 +1,8 @@
 {{! Default variable values }}
-{{#*inline 'id'}}{{#if @args.id}}{{@args.id}}{{else}}tl-google-map{{/if}}{{/inline}}
-{{#*inline 'height'}}{{#if @args.height}}{{@args.height}}{{else}}640px{{/if}}{{/inline}}
-{{#*inline 'defaultZoom'}}{{#if @args.defaultZoom}}{{@args.defaultZoom}}{{else}}8{{/if}}{{/inline}}
-{{#*inline 'defaultCenter'}}{{#if @args.defaultCenter}}{{@args.defaultCenter}}{{else}}39.108,-84.511{{/if}}{{/inline}}
+{{#*inline 'id'}}{{defaultTo @args.id 'tl-google-map'}}{{/inline}}
+{{#*inline 'height'}}{{defaultTo @args.height '640px'}}{{/inline}}
+{{#*inline 'defaultZoom'}}{{defaultTo @args.defaultZoom 8}}{{/inline}}
+{{#*inline 'defaultCenter'}}{{defaultTo @args.defaultCenter '39.108,-84.511'}}{{/inline}}
 
 {{#with this as | devices |}}
 {{#with @args as | args |}}
@@ -34,9 +34,9 @@
     );
     const mappedDevices = [
       {{#each devices}}
-        {{#if (template args.markerLatLngTemplate this)}}
+        {{#if (formatGps (template args.markerLatLngTemplate this))}}
           {
-            coordinate: [{{template args.markerLatLngTemplate this}}],
+            coordinate: [{{formatGps (template args.markerLatLngTemplate this)}}],
             infoWindowContent: `{{#if args.infoWindowComponentName}}{{component args.infoWindowComponentName this}}{{else}}{{{template args.infoWindowTemplate this}}}{{/if}}`,
             icon: '{{{template args.markerIconTemplate this}}}',
             label: '{{template args.markerLabelTemplate this}}'

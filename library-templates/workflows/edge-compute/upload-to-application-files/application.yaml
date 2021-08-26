@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to upload a file from an edge compute device to
+      Application Files.
+    filesPath: ./files
+    globals: []
+    id: ~losant-application-libraryWorkflowsEdgeComputeUploadToApplicationFiles-0~
+    name: Upload to Application Files
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - files
+      - edge
+      - upload
+      - curl
+version: 1

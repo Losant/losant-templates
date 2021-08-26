@@ -8,7 +8,7 @@ The page in this template, `tl-basic-form`, is intended as a reference implement
 
 This template also contains an endpoint and a workflow that receives and processes submitted data from the example form. When the form is submitted, the data is POSTed to the `/tl-basic-form` endpoint. That endpoint then triggers the `POST /tl-basic-form` workflow. The workflow contains notes on how to access and process the incoming data.
 
-Once this template is imported, you can test the example form by navigating to `https://<your-app-id>.onlosant.com/tl-basic-form`.
+Once this template is imported, you can test the example form by navigating to `https://<your-app-id>.~losant-endpoint-domain~/tl-basic-form`.
 
 ![Example Form](./example-form.png)
 

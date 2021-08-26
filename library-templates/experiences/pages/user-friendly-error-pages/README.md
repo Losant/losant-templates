@@ -21,7 +21,7 @@ The markup for each page is a barebones implementation; you should adjust the co
 
 ### Testing the 404 Page
 
-Causing your 404 page to display is quite simple: Simply open your web browser and navigate to an unconfigured route within your application experience (such as https://MY_APPLICATION_ID.onlosant.com/foo/bar/bat).
+Causing your 404 page to display is quite simple: Simply open your web browser and navigate to an unconfigured route within your application experience (such as https://MY_APPLICATION_ID.~losant-endpoint-domain~/foo/bar/bat).
 
 The endpoints within this template are configured with "catch-all" routes for GET and POST requests–meaning, if no other route in the application matches the request first, this one will always match and return the 404 page.
 

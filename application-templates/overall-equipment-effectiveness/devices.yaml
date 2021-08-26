@@ -269,9 +269,9 @@ resources:
       - key: sku
         value: "2"
       - key: order
-        value: 21600 tons
+        value: 27000 tons
       - key: scheduledTime
-        value: 982 min
+        value: 1688 min
       - key: maxRate
         value: "23"
       - key: location

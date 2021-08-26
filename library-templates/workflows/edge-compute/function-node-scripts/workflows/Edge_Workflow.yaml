@@ -221,7 +221,7 @@ resources:
           responsePath: working.countries
           timeoutTemplate: ''
           uriTemplate: >-
-            https://files.onlosant.com/~losant-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~/tl-edge-scripts/countries-and-capitals.json
+            https://~losant-files-domain~/~losant-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~/tl-edge-scripts/countries-and-capitals.json
         id: 5HzmjKvhby
         meta:
           category: data
