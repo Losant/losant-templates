@@ -1,0 +1,97 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Displays the list of pending provisions and provision form.
+    enabled: true
+    flowId: ~losant-flow-getProvision-0~
+    globals: []
+    id: ~losant-flowVersion-getProvision-0~
+    name: GET /provision
+    nodes:
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-pageProvision-5~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: MwVdmuSksK
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 300
+        outputIds:
+          - - o_GaKUHCuU
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: o_GaKUHCuU
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.provisionQueue
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: 3Du5wuCzoY
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 40
+          'y': 140
+        outputIds:
+          - - MwVdmuSksK
+        type: DataTableQueryNode
+      - config: {}
+        id: ZFRQmIJH5e
+        meta:
+          annotationText: >-
+            Query all rows from the Provision Queue table so we can display them
+            in the "Pending Provisioning Requests" table.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 240
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getProvision-0~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /provision
+          name: endpoint
+          uiId: FZZSw8VhSy
+          x: 40
+          'y': 40
+        outputIds:
+          - - 3Du5wuCzoY
+        type: endpoint
+    version: develop
+version: 1

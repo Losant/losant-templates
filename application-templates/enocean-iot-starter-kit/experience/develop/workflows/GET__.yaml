@@ -1,0 +1,306 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      Handles the home request to display the list of devices and the dashboard
+      for the selected device.
+    enabled: true
+    flowId: ~losant-flow-get-7~
+    globals: []
+    id: ~losant-flowVersion-get-9~
+    name: GET /
+    nodes:
+      - config:
+          bodyTemplate: working
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~losant-experienceView-pageHome-6~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: NWYlJK8bql
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 820
+        outputIds:
+          - - EyUtNZCWT6
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: EyUtNZCWT6
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 900
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: true
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: EURID
+              valueTemplate: ''
+          tagsAsObject: true
+        id: 6HK4UX9Lje
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 240
+          'y': 140
+        outputIds:
+          - - LYsSsvrhsV
+        type: GetDeviceNode
+      - config: {}
+        id: uRU78cnJRO
+        meta:
+          annotationText: >-
+            Get all EnOcean devices to populate the device list in the left
+            column.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.query.device}}'
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: working.device
+          tagsAsObject: true
+        id: Lx_S9_I4kb
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 440
+          'y': 500
+        outputIds:
+          - - gQNjTKCkZD
+        type: GetDeviceNode
+      - config: {}
+        id: pXBuPGyWdF
+        meta:
+          annotationText: Find the right dashboard for this device.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 740
+          'y': 720
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.recipeGlobalKey
+              type: set
+              valueTemplate: '{{working.device.tags.eep.[0]}}-dashboard'
+            - destination: working.dashboardId
+              type: set
+              valueTemplate: '{{lookup globals working.recipeGlobalKey}}'
+        id: 6-wUHXS_03
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 540
+          'y': 720
+        outputIds:
+          - - NWYlJK8bql
+        type: MutateNode
+      - config:
+          expression: '{{length working.devices}} > 0'
+        id: LYsSsvrhsV
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 240
+          'y': 260
+        outputIds:
+          - - MIwiYuDteA
+          - - lOpWs_C5c0
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /provision
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: MIwiYuDteA
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 140
+          'y': 380
+        outputIds: []
+        type: EndpointReplyNode
+      - config: {}
+        id: JKekPLZ9rL
+        meta:
+          annotationText: 'If there are no devices, redirect to the Provision page.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.query.device}}'
+        id: lOpWs_C5c0
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 340
+          'y': 380
+        outputIds:
+          - - QnSJLTinB7
+          - - Lx_S9_I4kb
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '/?device={{working.devices.[0].id}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: QnSJLTinB7
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 500
+        outputIds: []
+        type: EndpointReplyNode
+      - config: {}
+        id: BWQ-XQbROn
+        meta:
+          annotationText: >-
+            If there is not a device selected, redirect back to the home page
+            with the first device selected.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 540
+          'y': 380
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.device}}'
+        id: gQNjTKCkZD
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 440
+          'y': 600
+        outputIds:
+          - - lziIi6xzEL
+          - - 6-wUHXS_03
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '/?device={{working.devices.[0].id}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: lziIi6xzEL
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 720
+        outputIds: []
+        type: EndpointReplyNode
+      - config: {}
+        id: Li-0HpJyWU
+        meta:
+          annotationText: >-
+            If the selected device wasn't found, redirect back to the home page
+            with the first device selected.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 640
+          'y': 600
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-get-5~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /
+          name: endpoint
+          uiId: gn7a-kySxY
+          x: 240
+          'y': 40
+        outputIds:
+          - - 6HK4UX9Lje
+        type: endpoint
+    version: develop
+version: 1

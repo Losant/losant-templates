@@ -1,0 +1,256 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '50'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: temperature
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: °C
+        height: 1.5
+        id: 9qFQfy4xyD
+        startX: 0
+        startY: 0
+        title: Actual Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 604800000
+          gaugeMax: '50'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MIN
+            attribute: temperature
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: °C
+        height: 1.5
+        id: OFcd2Zur4y
+        startX: 0.5
+        startY: 0
+        title: Min. Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 604800000
+          gaugeMax: '50'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MAX
+            attribute: temperature
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: °C
+        height: 1.5
+        id: h3YoaQComw
+        startX: 1
+        startY: 0
+        title: Max Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: graph
+        config:
+          duration: 10800000
+          realTime: false
+          recharts: true
+          resolution: 30000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: temperature
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Temperature (°C)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: °C
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: humidity
+              color: 'rgba(255, 154, 37, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Humidity (%)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: '%'
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 3
+        id: L4iSFyVEEt
+        startX: 1.5
+        startY: 0
+        title: Time Series Graph
+        width: 2.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 604800000
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MAX
+            attribute: humidity
+            color: 'rgba(255, 154, 37, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: '%'
+        height: 1.5
+        id: i0vvwJciAQ
+        startX: 1
+        startY: 1.5
+        title: Max Humidity
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 604800000
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MIN
+            attribute: humidity
+            color: 'rgba(255, 154, 37, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: '%'
+        height: 1.5
+        id: 1a0oHzXYTz
+        startX: 0.5
+        startY: 1.5
+        title: Min. Humidity
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: humidity
+            color: 'rgba(255, 154, 37, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: '%'
+        height: 1.5
+        id: v80X7c2zH_
+        startX: 0
+        startY: 1.5
+        title: Actual Humidity
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n    \"scale\": {\n      \"bandPaddingInner\": 0,\n      \"round\": false\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#414855\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"rect\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"LightMulti\"\n      }\n    }\n\t}\t\n}"
+          segments:
+            - aggregation:
+                options: {}
+                type: SUM
+              attribute: temperature
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              duration: 604800000
+              id: time-series-0
+              queryType: time-series
+              resolution: 1200000
+          vegaVersion: vegaLite3
+        height: 2
+        id: emOM3NKUsc
+        startX: 0
+        startY: 3
+        title: Temperature Heat Map
+        width: 4
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        defaultValue: ~losant-device-edgeCompute-0~
+        name: device
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-a50403EhtsuTemperatureAndHumiditySensor-2~
+    name: A5-04-03 | EHTSU Temperature and Humidity Sensor
+    public: false
+    refreshRate: 5
+    reportConfigs: []
+version: 1

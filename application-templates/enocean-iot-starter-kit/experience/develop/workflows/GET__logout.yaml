@@ -1,0 +1,80 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      Removes the user's authentication cookie and redirects the user back to
+      the login page.
+    enabled: true
+    flowId: ~losant-flow-getLogout-2~
+    globals: []
+    id: ~losant-flowVersion-getLogout-2~
+    name: GET /logout
+    nodes:
+      - config:
+          bodyTemplate: /login
+          bodyTemplateType: string
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: a6w7OpyGfM
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 160
+        outputIds:
+          - - JMaHS1QCzB
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: JMaHS1QCzB
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 60
+          'y': 320
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 4bMTQD7ywt
+        meta:
+          annotationText: >-
+            Remove the authorization cookie and redirect the user back to
+            `/login`.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 260
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-getLogout-3~
+        meta:
+          category: trigger
+          description: ''
+          id: Y4edl7V1AI
+          label: Endpoint
+          name: endpoint
+          uiId: Y4edl7V1AI
+          x: 60
+          'y': 60
+        outputIds:
+          - - a6w7OpyGfM
+        type: endpoint
+    version: develop
+version: 1

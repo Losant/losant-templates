@@ -1,0 +1,142 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Receives provision commands from cloud, sends requests to EnOcean IoT
+      Connector.
+    flowClass: edge
+    globals: []
+    id: ~losant-flow-handleProvisionRequests-5~
+    minimumAgentVersion: 1.24.0
+    name: Handle Provision Requests
+    nodes:
+      - config:
+          message: ''
+          property: ''
+        id: 3Uduo3C9AG
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 60
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          authCredentials:
+            passwordTemplate: losant!123
+            usernameTemplate: losant
+          authType: basic
+          bodyTemplate: |-
+            {
+              "eep": "{{data.payload.eep}}",
+              "friendlyID": "{{data.payload.friendlyID}}",
+              "location": "{{data.payload.location}}",
+              "sourceEurid": "{{data.payload.sourceEurid}}"
+            }
+          caCertTemplate: ''
+          disableSSLVerification: true
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.result
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: POST
+          requestEncodingTemplate: utf8
+          responsePath: working.result
+          timeoutTemplate: ''
+          uriTemplate: 'https://proxy:443/api.beta/v1/devices'
+        id: cQgzpvBRhN
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 60
+          'y': 140
+        outputIds:
+          - - PwmvjHrg6E
+        type: HttpNode
+      - config:
+          expression: '{{working.result.statusCode}} === 200'
+        id: PwmvjHrg6E
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 60
+          'y': 340
+        outputIds:
+          - - 3Uduo3C9AG
+          - - Phjd1GX3lV
+        type: ConditionalNode
+      - config:
+          integrationId: losant
+          messageTemplate: '{{data.payload.id}}'
+          topicTemplate: provision-response
+        id: Phjd1GX3lV
+        meta:
+          category: output
+          description: ''
+          label: MQTT
+          name: mqtt
+          x: 180
+          'y': 460
+        outputIds:
+          - - 3Uduo3C9AG
+        type: MqttMessageNode
+      - config: {}
+        id: GbEp3Pim0o
+        meta:
+          annotationText: >-
+            If the provision was successful, send a message back to the cloud so
+            it can be removed from the queue.
+
+
+            The payload back to the cloud is just the ID (of the data table row)
+            for the provision request.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 300
+          x: 380
+          'y': 460
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: b5cVr4XS8Y
+        meta:
+          annotationText: >-
+            Make the provision request using the IoT Connector API.
+
+
+            TODO: You must update the username and password to match the
+            credentials configured in the `docker-compose.yml` file under the
+            `proxy` section.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 340
+          x: 260
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: deviceCommand
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: ExRmweSJqr
+          x: 60
+          'y': 40
+        outputIds:
+          - - cQgzpvBRhN
+        type: deviceCommand
+version: 1

@@ -1,0 +1,164 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: humidity
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: temperaturee
+      - attributeTags: {}
+        dataType: string
+        description: |-
+          event
+          heartbeat
+        name: trigger
+    description: |-
+      ETHSU
+      Temperature and Humidity Sensor
+    deviceClass: floating
+    deviceDescription: |-
+      ETHSU
+      Temperature and Humidity Sensor
+    deviceName: A5-04-03
+    id: ~losant-deviceRecipe-a50403-3~
+    name: A5-04-03
+    tags:
+      - key: EURID
+        value: <insert here>
+      - key: friendlyID
+        value: <insert here>
+      - key: eep
+        value: <insert here>
+      - key: locationId
+        value: <insert here>
+  - attributes:
+      - attributeTags:
+          units: °C
+        dataType: number
+        description: ""
+        name: temperature
+      - attributeTags:
+          units: "%"
+        dataType: number
+        description: ""
+        name: humidity
+      - attributeTags:
+          units: lx
+        dataType: number
+        description: ""
+        name: illumination
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: accelerationStatus
+      - attributeTags:
+          units: g
+        dataType: number
+        description: ""
+        name: accelerationX
+      - attributeTags:
+          units: g
+        dataType: number
+        description: ""
+        name: accelerationY
+      - attributeTags:
+          units: g
+        dataType: number
+        description: ""
+        name: accelerationZ
+      - attributeTags: {}
+        dataType: number
+        description: 0=closed, 1=open
+        name: contact
+      - attributeTags: {}
+        dataType: number
+        name: RSSI
+    description: |-
+      EMSIU
+      Multi-sensor
+    deviceClass: floating
+    deviceDescription: |-
+      EMSIU
+      Multi-sensor
+    deviceName: D2-14-41
+    id: ~losant-deviceRecipe-d21441-0~
+    name: D2-14-41
+    tags:
+      - key: EURID
+        value: <insert here>
+      - key: friendlyID
+        value: <insert here>
+      - key: eep
+        value: <insert here>
+      - key: locationId
+        value: <insert here>
+  - attributes:
+      - attributeTags: {}
+        dataType: boolean
+        description: 0=closed, 1=open
+        name: contact
+      - attributeTags: {}
+        dataType: number
+        name: RSSI
+    description: |-
+      EMCSU
+      Magnet Contact
+    deviceClass: floating
+    deviceDescription: |-
+      EMCSU
+      magnet contact
+    deviceName: D5-00-01
+    id: ~losant-deviceRecipe-d50001-2~
+    name: D5-00-01
+    tags:
+      - key: EURID
+        value: <insert here>
+      - key: friendlyID
+        value: <insert here>
+      - key: eep
+        value: <insert here>
+      - key: locationId
+        value: <insert here>
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rssi
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: status
+      - attributeTags: {}
+        dataType: number
+        description: 0=O, 1=I
+        name: rockerA
+      - attributeTags: {}
+        dataType: number
+        description: 0=O, 1=I
+        name: rockerB
+      - attributeTags: {}
+        dataType: number
+        name: RSSI
+    description: |-
+      EDRPU-W-EO
+      Double Rocker Pad
+    deviceClass: floating
+    deviceDescription: |-
+      EDRPU-W-EO
+      Double Rocker Pad
+    deviceName: EDRPU-W-EO
+    id: ~losant-deviceRecipe-f60202-1~
+    name: F6-02-02
+    tags:
+      - key: EURID
+        value: <insert here>
+      - key: eep
+        value: F6-02-02
+      - key: friendlyID
+        value: <insert here>
+      - key: locationId
+        value: <insert here>
+version: 1

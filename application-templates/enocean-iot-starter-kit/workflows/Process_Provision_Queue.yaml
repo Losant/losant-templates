@@ -1,0 +1,335 @@
+resourceType: Flow
+resources:
+  - description: Processes the provision queue and sends requests to Edge Compute device.
+    flowClass: cloud
+    globals: []
+    id: ~losant-flow-processProvisionQueue-4~
+    name: Process Provision Queue
+    nodes:
+      - config:
+          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.provisionQueue
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: gcz6tuA38A
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 40
+          'y': 160
+        outputIds:
+          - - 8eIBwP_a9p
+        type: DataTableQueryNode
+      - config:
+          message: ''
+          property: ''
+        id: sK5wvlp6l9
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 360
+        outputIds: []
+        type: DebugNode
+      - config:
+          currentItemPath: working.queueItem
+          loopSourcePath: working.provisionQueue.items
+          mapResultPath: ''
+          parallel: false
+        id: 8eIBwP_a9p
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 80
+          groupStartY: 120
+          label: Loop
+          name: loop
+          x: 40
+          'y': 260
+        outputIds:
+          - - sK5wvlp6l9
+          - - rZRtaH7OMS
+        type: LoopNode
+      - config:
+          loopNodeId: 8eIBwP_a9p
+          mapValuePath: ''
+          shouldBreak: false
+        id: C8C3Mosegj
+        meta:
+          category: loop
+          description: ''
+          groupId: 8eIBwP_a9p
+          label: Next
+          name: loop-next
+          x: 80
+          'y': 320
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          nameTemplate: provision
+          payloadTemplate: '{{jsonEncode working.queueItem.value}}'
+          payloadTemplateType: json
+          sendToDeviceIds:
+            - ~losant-device-edgeCompute-0~
+          sendToDeviceTags: []
+        id: rZRtaH7OMS
+        meta:
+          category: output
+          description: ''
+          deviceSelectionType: direct
+          groupId: 8eIBwP_a9p
+          label: 'Device: Command'
+          name: device-command
+          x: 80
+          'y': 220
+        outputIds:
+          - - C8C3Mosegj
+        type: DeviceSendCommandNode
+      - config: {}
+        id: CHwcs1GhYw
+        meta:
+          annotationText: >-
+            Send a "provision" command to the device that contains the provision
+            request.
+          category: annotation
+          groupId: 8eIBwP_a9p
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 280
+          'y': 120
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: SjArwXfQP6
+        meta:
+          annotationText: >-
+            Triggers whenever a provision response is received from an edge
+            agent. The payload of the message is the row ID in the Provision
+            Queue data table.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 380
+          x: 240
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: X30_I0AV4y
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 1100
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: byEvndZtYW
+        meta:
+          annotationText: >-
+            Every minute, query all pending provision requests from the data
+            table. For each request, send a command to the edge compute device.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 380
+          x: 240
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "id": {
+                    "$eq": "{{data}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.provisionRequest
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: mYBEozjdbG
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 40
+          'y': 560
+        outputIds:
+          - - CgpoMalkAf
+        type: DataTableQueryNode
+      - config: {}
+        id: XEePygnsI6
+        meta:
+          annotationText: 'The recipe to use is stored in application globals: `[EEP]-recipe`.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 380
+          x: 240
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.provisionRequest.count}} > 0'
+        id: CgpoMalkAf
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 40
+          'y': 660
+        outputIds:
+          - []
+          - - 2Ufn_9oxQK
+        type: ConditionalNode
+      - config:
+          attributesAsObject: false
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: peripheral
+          deviceTags:
+            - keyTemplate: eep
+              valueTemplate: '{{working.provisionRequest.items.[0].eep}}'
+            - keyTemplate: EURID
+              valueTemplate: '{{working.provisionRequest.items.[0].sourceEurid}}'
+            - keyTemplate: friendlyID
+              valueTemplate: '{{working.provisionRequest.items.[0].friendlyID}}'
+            - keyTemplate: locationId
+              valueTemplate: '{{working.provisionRequest.items.[0].location}}'
+          gatewayIdTemplate: ~losant-device-edgeCompute-0~
+          keepDuplicatesTemplate: false
+          nameTemplate: '{{working.provisionRequest.items.[0].eep}}'
+          parentIdTemplate: ''
+          recipeIdTemplate: '{{lookup globals working.recipeGlobalKey}}'
+          resultPath: ''
+          systemIntervalTemplate: 30
+          tagsAsObject: false
+        id: gr9Ay9lesr
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Create'
+          name: create-device
+          x: 40
+          'y': 860
+        outputIds:
+          - - lNJa42xjev
+        type: CreateDeviceNode
+      - config:
+          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          resultPath: ''
+          rowIdTemplate: '{{data}}'
+        id: lNJa42xjev
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Delete Rows'
+          name: delete-table-row
+          x: 40
+          'y': 980
+        outputIds:
+          - - X30_I0AV4y
+        type: DataTableDeleteRowNode
+      - config: {}
+        id: SNCipzGZp8
+        meta:
+          annotationText: >-
+            Once the device is created, remove the provision request from the
+            data table.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 380
+          x: 240
+          'y': 980
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.recipeGlobalKey
+              type: set
+              valueTemplate: '{{working.provisionRequest.items.[0].eep}}-recipe'
+        id: 2Ufn_9oxQK
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 40
+          'y': 760
+        outputIds:
+          - - gr9Ay9lesr
+        type: MutateNode
+    triggers:
+      - config:
+          seconds: 60
+        key: ~losant-flow-processProvisionQueue-4~-unUm96Tc5ZFA7PQb53VEn
+        meta:
+          category: trigger
+          description: ''
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: DSxJZEHtiK
+          x: 40
+          'y': 40
+        outputIds:
+          - - gcz6tuA38A
+        type: timer
+      - config: {}
+        key: ~losant-flow-processProvisionQueue-4~-QnqktedYbSM-Y1iVI7szx
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: QepfARPGUW
+          x: 240
+          'y': 40
+        outputIds:
+          - - gcz6tuA38A
+        type: virtualButton
+      - config: {}
+        key: provision-response
+        meta:
+          category: trigger
+          description: ''
+          label: Reponses
+          name: mqtt
+          uiId: 1WH_JmLjSh
+          x: 40
+          'y': 480
+        outputIds:
+          - - mYBEozjdbG
+        type: mqttTopic
+version: 1

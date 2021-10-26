@@ -1,0 +1,200 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Accepts the EnOcean device details and queues a provision request.
+    enabled: true
+    flowId: ~losant-flow-postProvision-3~
+    globals: []
+    id: ~losant-flowVersion-postProvision-3~
+    name: POST /provision
+    nodes:
+      - config:
+          bodyTemplate: /provision?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: Eru8fq_4fx
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 560
+        outputIds:
+          - - ekR41OtlQT
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: ekR41OtlQT
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 380
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: o5ytTFv_eU
+        meta:
+          annotationText: >-
+            The submitted form data is available on `data.body`. That object
+            will contain a field for each form element. The name of the field is
+            based on the form element's `name` attribute.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 280
+          x: 480
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: f1oU34zDL4
+        meta:
+          annotationText: >-
+            If everything went smoothly, redirect the user back to the form with
+            the `?success=true` query parameter. If the form data was invalid or
+            something failed, redirect the user with the `?success=false` query
+            parameter.
+
+
+            You can also change this behavior to redirect the user anywhere else
+            based on your requirements.
+          category: annotation
+          height: 280
+          label: Note
+          name: note
+          width: 280
+          x: 580
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataMethod: individualFields
+          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          resultPath: working.result
+          rowFields:
+            - columnTemplate: eep
+              valueTemplate: '{{data.body.field_eep}}'
+            - columnTemplate: friendlyID
+              valueTemplate: '{{data.body.field_friendly_id}}'
+            - columnTemplate: location
+              valueTemplate: '{{data.body.field_location}}'
+            - columnTemplate: sourceEurid
+              valueTemplate: '{{data.body.field_eur_id}}'
+        id: 96aMP0S2eq
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Insert Rows'
+          name: insert-table-row
+          x: 380
+          'y': 440
+        outputIds:
+          - - Eru8fq_4fx
+        type: DataTableInsertRowNode
+      - config: {}
+        id: UOi2QWJZ2B
+        meta:
+          annotationText: Queue the provision request.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 280
+          x: 580
+          'y': 440
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          errorsPath: ''
+          schema: |-
+            {
+              "type": "object",
+              "properties": {
+                "field_eur_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 8
+                },
+                "field_location": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "field_eep": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "field_friendly_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "field_eur_id",
+                "field_eep",
+                "field_friendly_id",
+                "field_location"
+              ]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: XNsPgKJc3H
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 280
+          'y': 280
+        outputIds:
+          - - 7FTM9GLn4A
+          - - 96aMP0S2eq
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: /provision?success=false
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 7FTM9GLn4A
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 180
+          'y': 560
+        outputIds: []
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~losant-experienceEndpoint-postProvision-1~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /provision
+          name: endpoint
+          uiId: 0GmvZu60u3
+          x: 280
+          'y': 40
+        outputIds:
+          - - XNsPgKJc3H
+        type: endpoint
+    version: develop
+version: 1

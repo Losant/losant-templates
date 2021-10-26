@@ -1,0 +1,9 @@
+resourceType: DeviceTree
+resources:
+  - attributes: []
+    children: []
+    deviceClass: edgeCompute
+    id: ~losant-device-edgeCompute-0~
+    name: Edge Compute
+    tags: []
+version: 1

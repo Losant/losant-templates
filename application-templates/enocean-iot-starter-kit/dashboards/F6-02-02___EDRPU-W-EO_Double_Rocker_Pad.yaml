@@ -1,0 +1,171 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '{{ value-0 }} === 0'
+              id: QukkcvYJTm
+              label: 'OFF'
+          defaultCondition:
+            color: '#8db319'
+            label: 'ON'
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: rockerB
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+        height: 1.5
+        id: V0qsBNrVNe
+        startX: 0
+        startY: 0
+        title: Left Rocker Switch
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '{{ value-0 }} === 0'
+              id: QukkcvYJTm
+              label: 'OFF'
+          defaultCondition:
+            color: '#8db319'
+            label: 'ON'
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: rockerA
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+        height: 1.5
+        id: yIM8zcpPRA
+        startX: 0.5
+        startY: 0
+        title: Right Rocker Switch
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: graph
+        config:
+          duration: 10800000
+          realTime: false
+          recharts: true
+          resolution: 30000
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: rockerA
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: area
+              label: Rocker A
+              lineType: stepAfter
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: 'ON'
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: rockerB
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: area
+              label: Rocker B
+              lineType: stepAfter
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: 'ON'
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 1.5
+        id: jPz2OSpPPv
+        startX: 1
+        startY: 0
+        title: Time Series
+        width: 3
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v3.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n    \"scale\": {\n      \"bandPaddingInner\": 0,\n      \"round\": false\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#414855\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"rect\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"LightMulti\"\n      }\n    }\n\t}\t\n}"
+          segments:
+            - aggregation:
+                options: {}
+                type: SUM
+              attribute: rockerA
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              duration: 604800000
+              id: time-series-0
+              queryType: time-series
+              resolution: 1200000
+          vegaVersion: vegaLite3
+        height: 2
+        id: flYAuP04jq
+        startX: 0
+        startY: 1.5
+        title: Left Rocker Pad ON Heat Map
+        width: 2
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v3.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n    \"scale\": {\n      \"bandPaddingInner\": 0,\n      \"round\": false\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#414855\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"rect\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"LightMulti\"\n      }\n    }\n\t}\t\n}"
+          segments:
+            - aggregation:
+                options: {}
+                type: SUM
+              attribute: rockerB
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              duration: 604800000
+              id: time-series-0
+              queryType: time-series
+              resolution: 1200000
+          vegaVersion: vegaLite3
+        height: 2
+        id: Wo02XX7Z2y
+        startX: 2
+        startY: 1.5
+        title: Right Rocker Pad ON Heat Map
+        width: 2
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        defaultValue: 6172256ef0b9e1000870320f
+        name: device
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-f60202EdrpuWEoDoubleRockerPad-1~
+    name: F6-02-02 | EDRPU-W-EO Double Rocker Pad
+    public: false
+    refreshRate: 5
+    reportConfigs: []
+version: 1

@@ -1,0 +1,93 @@
+{{! This form started the Basic Input form library template. }}
+<div class="py-5">
+  <h3 class="text-center mb-3">Pending Provisioning Requests</h3>
+  <div class="mb-5">
+    {{#eq pageData.provisionQueue.count 0}}
+      <div class="alert alert-secondary" role="alert">
+        There are no pending provisioning requests.
+      </div>
+    </div>
+    {{else}}
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">EEP</th>
+            <th scope="col">Friendly ID</th>
+            <th scope="col">Location</th>
+            <th scope="col">EURID</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each pageData.provisionQueue.items}}
+          <tr>
+            <td>{{formatDate this.createdAt}}</td>
+            <td>{{this.eep}}</td>
+            <td>{{this.friendlyID}}</td>
+            <td>{{this.location}}</td>
+            <td>{{this.sourceEurid}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{/eq}}
+  </div>
+
+  <h3 class="text-center mb-3">Provision New Device</h3>
+
+  {{!
+    Display a success or failure message based on the value of
+    the success query parameter (Ex. /tr-basic-form?success=true).
+  }}
+
+  {{#eq request.query.success 'true'}}
+  <div class="alert alert-success" role="alert">
+    Successfully submitted provision request!
+  </div>
+  {{/eq}}
+
+  {{#eq request.query.success 'false'}}
+  <div class="alert alert-danger" role="alert">
+    Failed to submit provision request!
+  </div>
+  {{/eq}}
+
+  {{!
+    When the "action" attribute is left blank, the form submits to the current path. So if the path is /tr-basic-form, this
+    form will submit to POST /tr-basic-form. The "action" attribute can be changed to any other endpoint.
+    e.g. action="/my-new-endpoint".
+  }}
+  <form method="POST" action="">
+
+    {{!
+      The "name" attribute is the name of the field that you'll see in the workflow payload. So in this example,
+      the workflow payload will contain an object with an "email" field set to whatever the user entered.
+
+      The "name" field must be unique for each form element.
+      The "id" field must be unique for each element on this page.
+    }}
+    <div class="form-group">
+      <label for="field_eep">EEP</label>
+      <input type="text" class="form-control" placeholder="A5-04-05" id="field_eep" name="field_eep" required>
+    </div>
+
+    <div class="form-group">
+      <label for="field_fiendly_id">Friendly ID</label>
+      <input type="text" class="form-control" placeholder="Room Panel 02" id="field_fiendly_id" name="field_friendly_id" required>
+    </div>
+
+    <div class="form-group">
+      <label for="field_location">Location</label>
+      <input type="text" class="form-control" placeholder="Level 2 / Room 221" id="field_location" name="field_location" required>
+    </div>
+
+    <div class="form-group">
+      <label for="field_eur_id">EURID</label>
+      <input type="text" class="form-control" placeholder="a1b2c3d4" id="field_eur_id" name="field_eur_id" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

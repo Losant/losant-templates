@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>{{#section 'pageTitle'}}{{experience.page.name}}{{/section}} - My Experience</title>
+    <link rel="icon" href="{{file '/tl-bs4-layouts/favicon.ico'}}">
+  </head>
+  <body>
+    {{component 'tl-nav-bs4'}}
+    {{!--
+      The "container-fluid" class gives us the full-width layout.
+      https://getbootstrap.com/docs/4.5/layout/overview/#containers
+      'col-{size}-{span}' defines how wide each column should be at the different screen sizes
+      https://getbootstrap.com/docs/4.5/layout/grid/#grid-options
+      'order-{size}-{priority}' defines the order in which our columns should display at different screen sizes
+      By default, we collapse to a single-column layout at medium screen sizes, with the left column displayed BELOW the main column.
+      https://getbootstrap.com/docs/4.5/layout/grid/#order-classes
+    --}}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-9 order-1 order-lg-2">{{page}}</div>
+        <div class="col-lg-3 order-2 order-lg-1">
+          {{#section 'tl-left-column'}}
+            This is the default left column content. To override this content on a per-page or per-component basis, define a <pre>\{{#fillSection 'tl-left-column'}}</pre> template in a file that is rendered by this layout.
+          {{/section}}
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>

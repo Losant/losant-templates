@@ -1,0 +1,20 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: string
+        name: eep
+      - constraint: required
+        dataType: string
+        name: friendlyID
+      - constraint: required
+        dataType: string
+        name: location
+      - constraint: required
+        dataType: string
+        name: sourceEurid
+    description: Table of the pending provisioning requests.
+    id: ~losant-dataTable-provisionQueue-0~
+    localFilename: ./Provision_Queue.csv
+    name: Provision Queue
+version: 1

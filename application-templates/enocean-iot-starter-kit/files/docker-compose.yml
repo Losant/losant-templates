@@ -1,0 +1,85 @@
+version: '3.9'
+services:
+    redis:
+        image: redis:latest
+        command: redis-server --protected-mode no
+        ports:
+            - "6379"
+        volumes:
+            - redis-volume:/data
+        restart: always
+    ingress:
+        image: enocean/iotconnector_ingress:latest
+        ports:
+            - "7070"
+        environment:
+            - REDIS_URL=redis
+            - IOT_LICENSE_KEY= #enter license here, be sure not to have empty space after “=” e.g. IOT_LICENSE_KEY=LBIBA-BRZHX-SVEOU-ARPWB
+            - IOT_AUTH_CALLBACK=  #enter URL here e.g. 192.167.1.1:8080 or myiotc.eastus.azurecontainer.io:8080
+            - IOT_GATEWAY_USERNAME= #enter new username for Aruba AP connection to IoTC. e.g. user1
+            - IOT_GATEWAY_PASSWORD= #enter new password for Aruba AP connection to IoTC. e.g. gkj35zkjasb5
+        depends_on:
+            - redis
+        restart: always
+    api:
+        image: enocean/iotconnector_api:latest
+        ports:
+            - "1887"
+        environment:
+            - REDIS_URL=redis
+        depends_on:
+            - redis
+        restart: always
+    engine:
+        image: enocean/iotconnector_engine:latest
+        environment:
+            - REDIS_URL=redis
+            - IOT_LICENSE_KEY= #enter license here, be sure not to have empty space after “=” e.g. IOT_LICENSE_KEY=LBIBA-BRZHX-SVEOU-ARPWB
+            - IOT_ENABLE_MQTT=1
+            - MQTT_CONNSTRING=losant_edge_agent:1883  # comment this section out if mqtt is not desired. Default path is locally deployed mosquitto broker - for tests only.
+            - IOT_MQTT_CLIENT_ID=enocean_iotc_1
+            # - IOT_AZURE_ENABLE=1
+            # - IOT_AZURE_CONNSTRING=
+        depends_on:
+            - redis
+        restart: always
+    proxy:
+        image: enocean/proxy:local
+        ports:
+            - "443:443"
+            - "80:80"
+            - "8080:8080"
+        secrets:
+            - source: secret-proxy-certificate
+              target: /etc/nginx/certs/cert.crt
+            - source: secret-proxy-key
+              target: /etc/nginx/certs/cert.key
+        environment:
+            - BASIC_AUTH_USERNAME= #enter new username for API connection of IoTC. e.g. user1
+            - BASIC_AUTH_PASSWORD= #enter new password for API connection to IoTC. e.g. 5a4sdFa$dsa
+        depends_on:
+            - ingress
+            - api
+        restart: always
+    losant_edge_agent:
+        image: losant/edge-agent:latest
+        ports:
+            - "1883:1883"
+        volumes:
+            - /var/lib/losant-edge-agent/data:/data
+        environment:
+            - DEVICE_ID= #enter the Losant device ID
+            - ACCESS_KEY= #enter the Losant access key
+            - ACCESS_SECRET= #enter the Losant access secret
+            - LOCAL_BROKER_ENABLED=true
+            - LOCAL_BROKER_PORT=1883
+            - WEBSERVER_ENABLED=true
+        restart: always
+volumes:
+    redis-volume:
+#secrets are defined by docker to keep sensitive information hidden
+secrets:
+    secret-proxy-certificate:
+        file: ../nginx/dev.localhost.crt
+    secret-proxy-key:
+        file: ../nginx/dev.localhost.key

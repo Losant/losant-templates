@@ -1,0 +1,231 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Receives sensor data from the EnOcean IoT Connector, transforms, and
+      forwards to Losant.
+    flowClass: edge
+    globals: []
+    id: ~losant-flow-handleEnOceanData-6~
+    minimumAgentVersion: 1.24.0
+    name: Handle EnOcean Data
+    nodes:
+      - config:
+          destination: data.message
+          errorBehavior: throw
+          errorPath: ''
+          source: data.message
+        id: Uyk62inFA0
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 140
+          'y': 140
+        outputIds:
+          - - Wfy5UgjKT5
+        type: JsonDecodeNode
+      - config:
+          message: ''
+          property: ''
+        id: uzEJgzU2Mj
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 240
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMethod: findByAllTags
+          findMultiple: false
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: EURID
+              valueTemplate: '{{ upper data.message.sensor.id }}'
+        id: Wfy5UgjKT5
+        meta:
+          category: data
+          description: ''
+          label: 'Peripheral: Get'
+          name: get-peripheral
+          x: 140
+          'y': 240
+        outputIds:
+          - - UyYRsGJBkw
+        type: GetPeripheralNode
+      - config:
+          script: |-
+            /*
+             * Maps EnOcean data values to numerical
+             * values more suited to Losant devices.
+             * e.g. "open" -> 1, "closed" -> 0, etc.
+             */
+
+            payload.working = payload.working || {};
+            const data = payload.data.message.telemetry.data;
+
+            var deviceState = {};
+
+            data.forEach(attribute => {
+                var attributeValue = attribute.value;
+
+                if (typeof attribute.value === 'string')
+                {
+                    switch(attribute.value.toLowerCase()) {
+                        case 'closed':
+                        case 'ao':
+                        case 'bo':
+                        case 'nopresencedetected':
+                            attributeValue = 0;
+                            break;
+                        case 'open':
+                        case 'ai':
+                        case 'bi':
+                        case 'presencedetected':
+                            attributeValue = 1;
+                            break;
+                    }
+                }
+                
+                deviceState[attribute.key] = attributeValue;
+            });
+
+            // Add RSSI value.
+            deviceState['RSSI'] = payload.data.message.raw.rssi;
+
+            payload.working.deviceState = deviceState;
+        id: GdVe_HwqdH
+        meta:
+          category: logic
+          description: ''
+          label: Create State
+          name: function
+          x: 240
+          'y': 460
+        outputIds:
+          - - M0eMlPRkDM
+        type: RawFunctionNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.deviceState
+          deviceId: working.device.id
+          deviceIdTemplateType: jsonPath
+          resultPath: working.deviceStateResult
+          timeSourceType: payloadTime
+        id: M0eMlPRkDM
+        meta:
+          category: output
+          description: ''
+          label: 'Device: State'
+          name: device-state
+          x: 240
+          'y': 620
+        outputIds:
+          - - uzEJgzU2Mj
+        type: DeviceChangeStateNode
+      - config:
+          expression: '{{ working.device }}'
+        id: UyYRsGJBkw
+        meta:
+          category: logic
+          description: ''
+          label: Device found?
+          name: conditional
+          x: 140
+          'y': 360
+        outputIds:
+          - - BrpqXXxPmW
+          - - GdVe_HwqdH
+        type: ConditionalNode
+      - config:
+          message: Losant Device Does Not Exist
+          property: ''
+        id: BrpqXXxPmW
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 460
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 8T2Oq0N1qw
+        meta:
+          annotationText: >-
+            Receives EnOcean data from all provisioned sensors. The data is
+            received as a JSON string that must be decoded.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 340
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: x8-N_y1x95
+        meta:
+          annotationText: >-
+            Protocol translation from EnOcean format to Losant device state
+            object. Also remap string values to numerical values. E.g. "open" ->
+            1, "closed" -> 0, etc.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 340
+          x: 440
+          'y': 460
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: J7PNwEbYSr
+        meta:
+          annotationText: Check than a Losant Device exists for the sensor reporting data.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 340
+          x: 340
+          'y': 240
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: hhENACfWzB
+        meta:
+          annotationText: Report the data as device state on behalf of the peripheral device.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 340
+          x: 440
+          'y': 620
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          integrationId: local
+        key: sensor/+/telemetry
+        meta:
+          category: trigger
+          description: ''
+          id: Q7sQlh2PMQ
+          label: MQTT
+          name: mqtt
+          uiId: CSDUR_rPjs
+          x: 140
+          'y': 40
+        outputIds:
+          - - Uyk62inFA0
+        type: mqttTopic
+version: 1

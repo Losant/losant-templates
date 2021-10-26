@@ -1,0 +1,10 @@
+resourceType: ExperienceUser
+resources:
+  - email: test.user@example.com
+    experienceGroupIds: []
+    firstName: Jane
+    id: ~losant-experienceUser-testUserExampleCom-0~
+    lastName: Doe
+    userTags: {}
+    password: qwerty123
+version: 1

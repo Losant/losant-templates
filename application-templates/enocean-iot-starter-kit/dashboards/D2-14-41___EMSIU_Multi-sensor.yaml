@@ -1,0 +1,432 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '50'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: temperature
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: °C
+        height: 1
+        id: 9qFQfy4xyD
+        startX: 0
+        startY: 0
+        title: Actual Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 604800000
+          gaugeMax: '50'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MIN
+            attribute: temperature
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: °C
+        height: 1
+        id: OFcd2Zur4y
+        startX: 0.5
+        startY: 0
+        title: Min. Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 604800000
+          gaugeMax: '50'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MAX
+            attribute: temperature
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: °C
+        height: 1
+        id: h3YoaQComw
+        startX: 1
+        startY: 0
+        title: Max Temperature
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: graph
+        config:
+          duration: 10800000
+          realTime: false
+          recharts: true
+          resolution: 30000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: temperature
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Temperature (°C)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: °C
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: accelerationX
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Acceleration X (g)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: g
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: accelerationY
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Acceleration Y (g)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: g
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: accelerationZ
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Acceleration Z (g)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: g
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: humidity
+              color: 'rgba(255, 154, 37, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Humidity (%)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: '%'
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: illumination
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Illumination (Lux)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Lux
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: contact
+              color: 'rgba(65, 46, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Contact (0=closed; 1=open)
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Contact
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 3
+        id: L4iSFyVEEt
+        startX: 1.5
+        startY: 0
+        title: Time Series Graph
+        width: 2.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '2'
+          gaugeMin: '-2'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: accelerationX
+            color: 'rgba(5, 113, 128, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: g
+        height: 1
+        id: Z9xOTG_wfS
+        startX: 0
+        startY: 1
+        title: Acceleration X
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '2'
+          gaugeMin: '-2'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: accelerationY
+            color: 'rgba(5, 113, 128, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: g
+        height: 1
+        id: K2mY7A2LXi
+        startX: 0.5
+        startY: 1
+        title: Acceleration Y
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '2'
+          gaugeMin: '-2'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: accelerationZ
+            color: 'rgba(5, 113, 128, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: g
+        height: 1
+        id: ZXtuAIAbpF
+        startX: 1
+        startY: 1
+        title: Acceleration Z
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{ value-0}} === 1'
+              id: 67FaXxqUNS
+              label: OPEN
+          defaultCondition:
+            color: 'rgba(255, 255, 255, 0)'
+            label: CLOSED
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: contact
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+        height: 1
+        id: 6FZ0Cvaapd
+        startX: 1
+        startY: 2
+        title: Contact
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: humidity
+            color: 'rgba(255, 154, 37, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: '%'
+        height: 1
+        id: v80X7c2zH_
+        startX: 0
+        startY: 2
+        title: Humidity
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '20000'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '6'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: illumination
+            color: 'rgba(130, 91, 255, 1)'
+            deviceIds:
+              - '{{ctx.device}}'
+            deviceTags: []
+            label: Lux
+        height: 1
+        id: EOloGJINa8
+        startX: 0.5
+        startY: 2
+        title: Illumination
+        width: 0.5
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        blockType: custom-chart
+        config:
+          configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n    \"scale\": {\n      \"bandPaddingInner\": 0,\n      \"round\": false\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#414855\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"rect\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"LightMulti\"\n      }\n    }\n\t}\t\n}"
+          segments:
+            - aggregation:
+                options: {}
+                type: SUM
+              attribute: temperature
+              deviceIds:
+                - '{{ctx.device}}'
+              deviceTags: []
+              duration: 604800000
+              id: time-series-0
+              queryType: time-series
+              resolution: 1200000
+          vegaVersion: vegaLite3
+        height: 2
+        id: emOM3NKUsc
+        startX: 0
+        startY: 3
+        title: Temperature Heat Map
+        width: 4
+    contextConfiguration:
+      - applicationId: ~losant-application-applicationEnOceanIoTStarterKit-0~
+        defaultValue: 6171e647c47eaf0007142215
+        name: device
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~losant-dashboard-d21441EmsiuMultiSensor-0~
+    name: D2-14-41 | EMSIU Multi-sensor
+    public: false
+    refreshRate: 5
+    reportConfigs: []
+version: 1

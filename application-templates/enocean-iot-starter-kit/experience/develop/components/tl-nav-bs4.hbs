@@ -1,0 +1,74 @@
+{{!--
+  This is provided as an inline helper for quickly generating navigation links in your header.
+  You are not required to use this helper; if you wish to write the links directly,
+  then copy the markup within the inline helper and paste it where you see fit.
+  Make sure to handle the "active" state for any link you insert manually.
+--}}
+{{#*inline "navItem"}}
+  <li class="nav-item{{#eq request.path href}} active{{/eq}}">
+    <a class="nav-link" href="{{href}}">{{label}}{{#eq request.path href}} <span class="sr-only">(current)</span>{{/eq}}</a>
+  </li>
+{{/inline}}
+{{#*inline "dropdownItem"}}
+  <a class="dropdown-item{{#eq request.path href}} active{{/eq}}" href="{{href}}">{{label}}</a>
+{{/inline}}
+
+    {{!--
+      Change 'navbar-light bg-light' to 'navbar-dark bg-dark' for an inverted color
+      More info: https://getbootstrap.com/docs/4.5/components/navbar/#color-schemes
+    --}}
+    <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
+
+      {{!--
+        Put your experience name here.
+        You may insert a logo but that will likely require additional styling.
+      --}}
+      <a class="navbar-brand" href="/">EnOcean IoT Starter Kit</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+          {{!--
+            Add your links here. These will display left to right alongside your logo.
+            Each must include a label (the text to display) and an href (the URL to take the user to).
+          --}}
+
+          {{> navItem label="Provision Device" href="/provision"}}
+
+        </ul>
+
+        {{!--
+          Links in this section are right-aligned within the navigation bar.
+        --}}
+        <ul class="navbar-nav">
+
+          {{#if experience.user}}
+          
+            {{!--
+              This dropdown will only display if visitor IS signed in.
+            --}}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="tl-user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{#if experience.user.firstName}}{{experience.user.firstName}}{{else}}{{experience.user.email}}{{/if}}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="tl-user-dropdown">
+                {{> dropdownItem href="/logout" label="Sign Out"}}
+              </div>
+            </li>
+
+          {{else}}
+
+            {{!--
+              This "Sign In" link will only display if visitor IS NOT signed in already.
+            --}}
+            {{> navItem label="Sign In" href="/login"}}
+
+          {{/if}}
+
+        </ul>
+      </div>
+    </nav>

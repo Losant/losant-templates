@@ -1,0 +1,58 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-get-5~
+    method: get
+    route: /
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getLogin-2~
+    method: get
+    route: /login
+    version: develop
+  - access: authenticated
+    description: Handles a user's log out request.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getLogout-3~
+    method: get
+    route: /logout
+    unauthorizedReply:
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-getProvision-0~
+    method: get
+    route: /provision
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: public
+    description: Endpoint that accepts and verifies an experience's email and password.
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postLogin-4~
+    method: post
+    route: /login
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    id: ~losant-experienceEndpoint-postProvision-1~
+    method: post
+    route: /provision
+    version: develop
+version: 1

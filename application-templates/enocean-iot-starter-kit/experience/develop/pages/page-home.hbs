@@ -1,0 +1,13 @@
+{{#fillSection 'tl-left-column'}}
+<div class="py-3">
+  <h5>Devices</h5>
+  <hr />
+  {{component 'tl-device-list' pageData.devices label='{{this.tags.friendlyID.[0]}}' link='/?device={{this.id}}' selected=request.query.device}}
+</div>
+{{/fillSection}}
+
+<div class="py-3">
+  <h5>{{pageData.device.tags.friendlyID.[0]}}</h5>
+  <hr />
+  {{element 'dashboard' dashboardId=pageData.dashboardId theme="light" hideHeader=true ctx=(obj device=pageData.device.id)}}
+</div>
