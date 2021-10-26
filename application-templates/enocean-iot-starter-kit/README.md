@@ -65,7 +65,7 @@ This application template includes a complete End User Experience to provision a
 You can access this experience by navigating to the following URL:
 
 ```
-https://<your-application-id>.~losant-endpoint-domain~
+https://<your-application-id>.onlosant.com
 ```
 
 You can easily obtain this URL by navigating to the **Edit** main navigation menu under the **Experiences** section.
