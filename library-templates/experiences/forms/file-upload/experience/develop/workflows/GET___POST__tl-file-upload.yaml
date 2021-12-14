@@ -1,7 +1,7 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-getPostTlFileUpload-0~
+    flowId: ~exportplaceholderid-flow-getPostTlFileUpload-0~
     globals:
       - json: |-
           [
@@ -13,7 +13,7 @@ resources:
         key: example-accept
       - json: '"userUploads"'
         key: uploadsRoot
-    id: ~losant-flowVersion-getPostTlFileUpload-0~
+    id: ~exportplaceholderid-flowVersion-getPostTlFileUpload-0~
     name: GET & POST /tl-file-upload
     nodes:
       - config:
@@ -286,7 +286,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlFileUpload-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlFileUpload-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -472,7 +472,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postTlFileUpload-0~
+        key: ~exportplaceholderid-experienceEndpoint-postTlFileUpload-0~
         meta:
           category: trigger
           description: ''
@@ -485,7 +485,7 @@ resources:
           - - obR__Z0YS_
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getTlFileUpload-1~
+        key: ~exportplaceholderid-experienceEndpoint-getTlFileUpload-1~
         meta:
           category: trigger
           description: ''

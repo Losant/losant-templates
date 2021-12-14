@@ -4,7 +4,7 @@ resources:
     description: This node generates OAuth Tokens from Google Cloud Service Accounts.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesGcpOAuth-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesGcpOAuth-0~
     name: GCP OAuth
     readmePath: ./README.md
     imagePath: ./preview.png

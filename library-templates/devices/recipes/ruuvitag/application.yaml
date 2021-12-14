@@ -4,7 +4,7 @@ resources:
     description: RuuviTag open-source wireless sensor node.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryDevicesRecipesRuuviTag-0~
+    id: ~exportplaceholderid-application-libraryDevicesRecipesRuuviTag-0~
     name: RuuviTag
     readmePath: ./README.md
     imagePath: ./preview.png

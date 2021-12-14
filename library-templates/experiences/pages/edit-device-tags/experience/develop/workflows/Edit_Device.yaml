@@ -1,7 +1,7 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-editDevice-0~
+    flowId: ~exportplaceholderid-flow-editDevice-0~
     globals:
       - json: '["aRequiredTag", "aCustomLabelTag"]'
         key: editableTagKeys
@@ -12,7 +12,7 @@ resources:
             "aCustomLabelTag": "My Custom Label"
           }
         key: tagLabelMap
-    id: ~losant-flowVersion-editDevice-0~
+    id: ~exportplaceholderid-flowVersion-editDevice-0~
     name: Edit Device
     nodes:
       - config:
@@ -41,7 +41,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-editDevice-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-editDevice-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '{{#if pageData.updatedDeviceResponse.error}}400{{else}}200{{/if}}'
@@ -84,7 +84,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-editDevice-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-editDevice-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '{{#if pageData.device}}200{{else}}404{{/if}}'
@@ -593,7 +593,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-editDevice-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-editDevice-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '404'
@@ -813,7 +813,7 @@ resources:
         type: GetDeviceNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getDevicesDeviceIdEdit-0~
+        key: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceIdEdit-0~
         meta:
           category: trigger
           description: ''
@@ -827,7 +827,7 @@ resources:
           - - 6cNlbumcMK
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-postDevicesDeviceIdEdit-1~
+        key: ~exportplaceholderid-experienceEndpoint-postDevicesDeviceIdEdit-1~
         meta:
           category: trigger
           description: ''

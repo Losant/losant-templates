@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-postTlSaml-1~
+    flowId: ~exportplaceholderid-flow-postTlSaml-1~
     globals: []
-    id: ~losant-flowVersion-postTlSaml-1~
+    id: ~exportplaceholderid-flowVersion-postTlSaml-1~
     name: POST /tl-saml
     nodes:
       - config:
@@ -427,7 +427,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postTlSaml-1~
+        key: ~exportplaceholderid-experienceEndpoint-postTlSaml-1~
         meta:
           category: trigger
           description: ''

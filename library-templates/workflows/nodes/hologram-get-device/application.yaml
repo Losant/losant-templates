@@ -4,7 +4,7 @@ resources:
     description: This node provide access to Hologram's API to retrieve device information.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesHologramGetDevice-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesHologramGetDevice-0~
     name: Hologram Get Device
     readmePath: ./README.md
     imagePath: ./preview.png

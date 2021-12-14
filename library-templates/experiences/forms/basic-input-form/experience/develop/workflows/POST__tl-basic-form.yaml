@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint POST /tl-basic-form
     enabled: true
-    flowId: ~losant-flow-postTlBasicForm-0~
+    flowId: ~exportplaceholderid-flow-postTlBasicForm-0~
     globals: []
-    id: ~losant-flowVersion-postTlBasicForm-0~
+    id: ~exportplaceholderid-flowVersion-postTlBasicForm-0~
     name: POST /tl-basic-form
     nodes:
       - config:
@@ -101,7 +101,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postTlBasicForm-1~
+        key: ~exportplaceholderid-experienceEndpoint-postTlBasicForm-1~
         meta:
           category: trigger
           description: ''

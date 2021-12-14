@@ -4,7 +4,7 @@ resources:
     description: Demonstrates how to build a multilingual Application Experience.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesPagesInternationalization-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesInternationalization-0~
     name: Internationalization
     readmePath: ./README.md
     imagePath: ./preview.png

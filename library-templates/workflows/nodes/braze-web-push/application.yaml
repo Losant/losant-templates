@@ -4,7 +4,7 @@ resources:
     description: Immediately send a web push message using the Braze API.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesBrazeWebPush-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesBrazeWebPush-0~
     name: Braze Web Push
     readmePath: ./README.md
     imagePath: ./preview.png

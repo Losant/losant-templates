@@ -3,14 +3,14 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getProvision-0~
+    id: ~exportplaceholderid-experienceEndpoint-getProvision-0~
     method: get
     route: /provision
     version: develop
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postProvision-1~
+    id: ~exportplaceholderid-experienceEndpoint-postProvision-1~
     method: post
     route: /provision
     version: develop

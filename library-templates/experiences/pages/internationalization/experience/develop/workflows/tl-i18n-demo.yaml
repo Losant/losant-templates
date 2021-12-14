@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-tlI18NDemo-0~
+    flowId: ~exportplaceholderid-flow-tlI18NDemo-0~
     globals: []
-    id: ~losant-flowVersion-tlI18NDemo-0~
+    id: ~exportplaceholderid-flowVersion-tlI18NDemo-0~
     name: tl-i18n-demo
     nodes:
       - config:
@@ -13,7 +13,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlI18NDemo-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlI18NDemo-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -46,7 +46,7 @@ resources:
         outputIds: []
         type: DebugNode
       - config:
-          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          customNodeId: ~exportplaceholderid-flow-tlI18NGetDictionary-1~
           customNodeVersion: default
           fields:
             - id: _vffS7jwC8
@@ -63,7 +63,7 @@ resources:
         id: QGfo0UNd4M
         meta:
           category: customNodeExecute
-          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          customNodeId: ~exportplaceholderid-flow-tlI18NGetDictionary-1~
           description: ''
           id: QGfo0UNd4M
           label: tl-i18n-get-dictionary
@@ -98,7 +98,7 @@ resources:
           - - Hi-3bkDMAB
         type: EndpointReplyNode
       - config:
-          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          customNodeId: ~exportplaceholderid-flow-tlI18NGetDictionary-1~
           customNodeVersion: default
           fields:
             - id: _vffS7jwC8
@@ -115,7 +115,7 @@ resources:
         id: tNOhibOHYw
         meta:
           category: customNodeExecute
-          customNodeId: ~losant-flow-tlI18NGetDictionary-1~
+          customNodeId: ~exportplaceholderid-flow-tlI18NGetDictionary-1~
           description: ''
           id: QGfo0UNd4M
           label: tl-i18n-get-dictionary
@@ -217,7 +217,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getLanguageTlI18NDemo-0~
+        key: ~exportplaceholderid-experienceEndpoint-getLanguageTlI18NDemo-0~
         meta:
           category: trigger
           description: ''
@@ -230,7 +230,7 @@ resources:
           - - QGfo0UNd4M
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getTlI18NDemoSubdomain-1~
+        key: ~exportplaceholderid-experienceEndpoint-getTlI18NDemoSubdomain-1~
         meta:
           category: trigger
           description: ''

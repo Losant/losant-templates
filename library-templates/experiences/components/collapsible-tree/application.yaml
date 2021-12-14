@@ -4,7 +4,7 @@ resources:
     description: Displays a collapsible list of nested items as checkboxes or links.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesComponentsCollapsibleTree-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsCollapsibleTree-0~
     name: Collapsible Tree
     readmePath: ./README.md
     imagePath: ./preview.png

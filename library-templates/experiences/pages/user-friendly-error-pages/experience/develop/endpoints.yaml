@@ -6,13 +6,13 @@ resources:
       404 page.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getAny-0~
+    id: ~exportplaceholderid-experienceEndpoint-getAny-0~
     method: get
     route: /{any*}
     staticReply:
       statusCode: 404
       type: page
-      value: ~losant-experienceView-404Page-0~
+      value: ~exportplaceholderid-experienceView-404Page-0~
     version: develop
   - access: public
     description: A catch-all route that fires on any POST request that is not caught
@@ -20,12 +20,12 @@ resources:
       404 page.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postAny-1~
+    id: ~exportplaceholderid-experienceEndpoint-postAny-1~
     method: post
     route: /{any*}
     staticReply:
       statusCode: 404
       type: page
-      value: ~losant-experienceView-404Page-0~
+      value: ~exportplaceholderid-experienceView-404Page-0~
     version: develop
 version: 1

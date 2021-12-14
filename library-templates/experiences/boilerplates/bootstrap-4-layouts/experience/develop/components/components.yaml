@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~losant-experienceView-tlNavBs4-2~
+    id: ~exportplaceholderid-experienceView-tlNavBs4-2~
     localFilename: ./tl-nav-bs4.hbs
     name: tl-nav-bs4
     version: develop

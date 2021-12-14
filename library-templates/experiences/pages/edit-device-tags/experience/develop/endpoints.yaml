@@ -3,7 +3,7 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getDevicesDeviceIdEdit-0~
+    id: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceIdEdit-0~
     method: get
     route: /devices/{deviceId}/edit
     unauthorizedReply:
@@ -14,7 +14,7 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postDevicesDeviceIdEdit-1~
+    id: ~exportplaceholderid-experienceEndpoint-postDevicesDeviceIdEdit-1~
     method: post
     route: /devices/{deviceId}/edit
     unauthorizedReply:

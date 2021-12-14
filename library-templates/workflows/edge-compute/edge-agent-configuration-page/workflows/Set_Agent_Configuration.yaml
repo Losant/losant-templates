@@ -34,7 +34,7 @@ resources:
                           "title": "Host",
                           "type": "string",
                           "pattern": "^[a-zA-Z0-9-\\.]+$",
-                          "default": "~losant-broker-url~"
+                          "default": "~exportplaceholderid-broker-url~"
                       },
                       "gateway.clientSsl.keyPath": {
                           "title": "Path to Client SSL Key",
@@ -201,7 +201,7 @@ resources:
         key: username
       - json: '"admin123"'
         key: password
-    id: ~losant-flow-setAgentConfiguration-0~
+    id: ~exportplaceholderid-flow-setAgentConfiguration-0~
     minimumAgentVersion: 1.24.0
     name: Set Agent Configuration
     nodes:

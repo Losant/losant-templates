@@ -5,7 +5,7 @@ resources:
     globals:
       - json: '"/data/files"'
         key: fileDirectory
-    id: ~losant-flow-tlEdgeToFilesGetSignedUrLsPublishFiles-0~
+    id: ~exportplaceholderid-flow-tlEdgeToFilesGetSignedUrLsPublishFiles-0~
     minimumAgentVersion: 1.23.0
     name: tl-edge-to-files Get Signed URLs / Publish Files
     nodes:
@@ -357,7 +357,7 @@ resources:
     triggers:
       - config: {}
         key: >-
-          ~losant-flow-tlEdgeToFilesGetSignedUrLsPublishFiles-0~-ndKxHonl21wpTiYbfCBqe
+          ~exportplaceholderid-flow-tlEdgeToFilesGetSignedUrLsPublishFiles-0~-ndKxHonl21wpTiYbfCBqe
         meta:
           category: trigger
           description: ''

@@ -4,7 +4,7 @@ resources:
     description: Dynamic provisioning of devices for Experience Users or Experience Groups.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryDevicesProvisioningDynamicProvisioning-0~
+    id: ~exportplaceholderid-application-libraryDevicesProvisioningDynamicProvisioning-0~
     name: Dynamic Provisioning
     readmePath: ./README.md
     imagePath: ./preview.png

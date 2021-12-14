@@ -24,7 +24,7 @@ resources:
     description: Recipe that represents a Meridian Asset Tag.
     deviceClass: standalone
     deviceName: Aruba Meridian Asset Tag
-    id: ~losant-deviceRecipe-arubaMeridianAssetTag-0~
+    id: ~exportplaceholderid-deviceRecipe-arubaMeridianAssetTag-0~
     name: Aruba Meridian Asset Tag
     tags:
       - key: mac

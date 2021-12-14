@@ -4,7 +4,7 @@ resources:
     description: An Experience User login form with authentication workflow.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesFormsLogIn-0~
+    id: ~exportplaceholderid-application-libraryExperiencesFormsLogIn-0~
     name: Log In
     readmePath: ./README.md
     imagePath: ./preview.png

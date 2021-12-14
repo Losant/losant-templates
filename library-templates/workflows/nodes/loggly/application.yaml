@@ -4,7 +4,7 @@ resources:
     description: Log payload data to Loggly using their HTTP API.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesLoggly-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesLoggly-0~
     name: Loggly
     readmePath: ./README.md
     imagePath: ./preview.png

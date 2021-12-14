@@ -68,9 +68,9 @@ resources:
         returned with more details.
       resultMode: optional
     enabled: true
-    flowId: ~losant-flow-gcpVisionApi-0~
+    flowId: ~exportplaceholderid-flow-gcpVisionApi-0~
     globals: []
-    id: ~losant-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100-0~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -224,7 +224,7 @@ resources:
           - - y_JJZM78eI
         type: customNodeStart
       - config: {}
-        key: ~losant-flow-gcpVisionApi-0~-OdjuCBR6c-TCGz6hIPOHy
+        key: ~exportplaceholderid-flow-gcpVisionApi-0~-OdjuCBR6c-TCGz6hIPOHy
         meta:
           category: trigger
           description: ''

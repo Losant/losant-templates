@@ -85,7 +85,7 @@ resources:
     description: Device recipe for the KST3320 Distance Sensor.
     deviceClass: standalone
     deviceName: KST3320
-    id: ~losant-deviceRecipe-kst3320-0~
+    id: ~exportplaceholderid-deviceRecipe-kst3320-0~
     name: KST3320
     tags:
       - key: dev_eui

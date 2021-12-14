@@ -13,13 +13,13 @@ resources:
         key: awsRegion
       - json: '"AWS_BUCKET_NAME"'
         key: awsBucketName
-    id: ~losant-flow-tlStreamExportsToS3-0~
+    id: ~exportplaceholderid-flow-tlStreamExportsToS3-0~
     name: tl-stream-exports-to-s3
     nodes:
       - config:
           contextTemplate: ''
           contextTemplateType: none
-          notebookIdTemplate: ~losant-notebook-basicNotebook-0~
+          notebookIdTemplate: ~exportplaceholderid-notebook-basicNotebook-0~
           relativeToSourceType: payloadTime
           resultPath: working.executionResponse
         id: xj_8aninoU
@@ -109,7 +109,7 @@ resources:
           params:
             - name: webhookId
               type: string
-              value: ~losant-webhook-callbackWebhook-0~
+              value: ~exportplaceholderid-webhook-callbackWebhook-0~
           resource: webhook
           responsePath: working.webhook
         id: xvVMlqLdGB
@@ -132,7 +132,7 @@ resources:
             - name: callbackUrl
               type: string
               value: >-
-                https://~losant-triggers-url~/webhooks/{{working.webhook.result.token}}
+                https://~exportplaceholderid-triggers-url~/webhooks/{{working.webhook.result.token}}
             - name: options
               type: json
               value: ''
@@ -346,7 +346,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-notebook-basicNotebook-0~
+        key: ~exportplaceholderid-notebook-basicNotebook-0~
         meta:
           category: trigger
           description: ''
@@ -359,7 +359,7 @@ resources:
           - - i5kmr0VIwY
         type: notebook
       - config: {}
-        key: ~losant-flow-tlStreamExportsToS3-0~-0UuqasLpTTRii1HeP4-_b
+        key: ~exportplaceholderid-flow-tlStreamExportsToS3-0~-0UuqasLpTTRii1HeP4-_b
         meta:
           category: trigger
           description: ''
@@ -373,7 +373,7 @@ resources:
           - - xj_8aninoU
         type: virtualButton
       - config: {}
-        key: ~losant-flow-tlStreamExportsToS3-0~-MBXE-l16QnCyi6zZm75Wg
+        key: ~exportplaceholderid-flow-tlStreamExportsToS3-0~-MBXE-l16QnCyi6zZm75Wg
         meta:
           category: trigger
           description: ''
@@ -387,7 +387,7 @@ resources:
           - - xvVMlqLdGB
         type: virtualButton
       - config: {}
-        key: ~losant-webhook-callbackWebhook-0~
+        key: ~exportplaceholderid-webhook-callbackWebhook-0~
         meta:
           category: trigger
           description: ''

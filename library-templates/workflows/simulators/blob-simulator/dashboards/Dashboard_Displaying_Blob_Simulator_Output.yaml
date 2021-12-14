@@ -1,12 +1,13 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-libraryWorkflowsSimulatorsBlobSimulator-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator-0~
         blockType: image
         config:
           attribute: image
           bgColor: 'rgba(255, 255, 255, 0)'
-          deviceId: ~losant-device-deviceRecordingBlobSimulatorOutput-0~
+          deviceId: ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput-0~
           imageSource: attribute
         height: 2
         id: aiwIPBsHV5
@@ -14,7 +15,8 @@ resources:
         startY: 0
         title: Image Block
         width: 2
-      - applicationId: ~losant-application-libraryWorkflowsSimulatorsBlobSimulator-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator-0~
         blockType: indicator
         config:
           conditions: []
@@ -28,7 +30,8 @@ resources:
                 type: LAST
               attribute: image
               deviceIds:
-                - ~losant-device-deviceRecordingBlobSimulatorOutput-0~
+                - >-
+                  ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput-0~
               deviceTags: []
         height: 2
         id: Y1JI62CbUh
@@ -39,7 +42,7 @@ resources:
     contextConfiguration: []
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-dashboardDisplayingBlobSimulatorOutput-0~
+    id: ~exportplaceholderid-dashboard-dashboardDisplayingBlobSimulatorOutput-0~
     name: Dashboard Displaying Blob Simulator Output
     public: false
     refreshRate: 60

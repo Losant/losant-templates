@@ -27,7 +27,7 @@ resources:
     globals: []
     iconData: >-
       data:image/svg+xml;base64,PHN2ZyBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA0OCA0OCIgdmlld0JveD0iMCAwIDQ4IDQ4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmZmZmYiPjxwYXRoIGQ9Im0zNi44IDI4LjFjOC44LTkuNCAxMy40LTE5IDEwLjItMjIuMi0zLTMuMS0xMi4yLjktMjEuNCA5bC0uMS0uMS0yLTEuOXYuMWMtOC4yLTctMTgtMTIuMy0yMi04LjMtNC40IDQuNCAyLjIgMTUuOSAxMC45IDI1bC4yLjJjLTMuNSA1LjctNC42IDEwLjQtMi42IDEyLjQgMi4xIDIuMiA3LjMuOCAxMy40LTNsLjUuNGM0LjggMy4yIDkgNC45IDEyIDQuOSAxLjYgMCAyLjktLjUgMy44LTEuNCAyLjUtMi41IDEuNS04LTIuOC0xNC45IDAgMC0uMS0uMS0uMS0uMnptLTMzLjctMjEuNmMuNC0uNCAxLjEtLjcgMi0uNyAzLjYgMCAxMC4zIDMuNCAxNy42IDkuOS0uNC40LS45LjgtMS4zIDEuMy0zLjMgMy4yLTYuMiA2LjYtOC41IDEwLTguNi05LjYtMTIuMS0xOC4yLTkuOC0yMC41em0zNSAzNWMtMS40IDEuNC01LjYuOC0xMi4yLTMuNXYtMTkuNHMwIDAgLjEuMWMzLjYgMy42IDYuNyA3LjQgOSAxMSAzLjQgNS42IDQuNiAxMC4yIDMuMSAxMS44eiIvPjwvc3ZnPg==
-    id: ~losant-flow-sigfoxGetDevice-0~
+    id: ~exportplaceholderid-flow-sigfoxGetDevice-0~
     name: 'Sigfox: Get Device'
     nodes:
       - config:
@@ -111,7 +111,7 @@ resources:
           - - pd9RVL6wfc
         type: customNodeStart
       - config: {}
-        key: ~losant-flow-sigfoxGetDevice-0~-BsBxRlguflob8N6qSIzTd
+        key: ~exportplaceholderid-flow-sigfoxGetDevice-0~-BsBxRlguflob8N6qSIzTd
         meta:
           category: trigger
           description: ''

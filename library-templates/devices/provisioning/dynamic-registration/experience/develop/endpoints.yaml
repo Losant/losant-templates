@@ -5,7 +5,7 @@ resources:
       themselves.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postApiRegisterDevice-0~
+    id: ~exportplaceholderid-experienceEndpoint-postApiRegisterDevice-0~
     method: post
     route: /api/register-device
     version: develop

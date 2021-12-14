@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~losant-flow-blobSimulator-0~
+    id: ~exportplaceholderid-flow-blobSimulator-0~
     name: Blob Simulator
     nodes:
       - config:
@@ -24,7 +24,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: u16V87U58H
           label: HTTP
           name: http
           x: 300
@@ -40,7 +39,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: NzErqbbPhN
           label: Random Number
           name: random-number
           x: 300
@@ -55,7 +53,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: pyN219a-yi
           label: Debug
           name: debug
           x: 300
@@ -67,7 +64,7 @@ resources:
           attrInfos:
             - key: image
               valueTemplate: '{{working.image.body}}'
-          deviceId: ~losant-device-deviceRecordingBlobSimulatorOutput-0~
+          deviceId: ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput-0~
           deviceIdTemplateType: stringTemplate
           resultPath: working.stateResult
           timeSourceType: payloadTime
@@ -75,7 +72,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: GkSPSTzy7P
           label: 'Device: State'
           name: device-state
           x: 300
@@ -126,8 +122,8 @@ resources:
         meta:
           annotationText: >-
             **Important:** The "Content Type" of the [blob
-            attribute](https://~losant-docs-url~/devices/blobs/) you are
-            recording the image to should match the type of image being
+            attribute](https://~exportplaceholderid-docs-url~/devices/blobs/)
+            you are recording the image to should match the type of image being
             returned. This most likely should be "image/jpeg".
           category: annotation
           height: 160
@@ -140,7 +136,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-flow-blobSimulator-0~-CT_N_upuQ_dll1r3pk9UO
+        key: ~exportplaceholderid-flow-blobSimulator-0~-CT_N_upuQ_dll1r3pk9UO
         meta:
           category: trigger
           description: ''
@@ -157,7 +153,7 @@ resources:
         type: virtualButton
       - config:
           seconds: 60
-        key: ~losant-flow-blobSimulator-0~-GefX0qM8XQviY6zPEsFOf
+        key: ~exportplaceholderid-flow-blobSimulator-0~-GefX0qM8XQviY6zPEsFOf
         meta:
           category: trigger
           description: ''

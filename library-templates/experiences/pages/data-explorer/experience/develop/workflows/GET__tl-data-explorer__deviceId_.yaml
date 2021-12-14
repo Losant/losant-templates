@@ -1,7 +1,7 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-getTlDataExplorerDeviceId-1~
+    flowId: ~exportplaceholderid-flow-getTlDataExplorerDeviceId-1~
     globals:
       - json: '["x", "y", "z", "flup"]'
         key: x-allowedAttributes
@@ -9,7 +9,7 @@ resources:
           ["FIRST", "LAST", "COUNT", "MAX", "MIN", "MEDIAN", "MEAN", "SUM",
           "STD_DEV", "NONE"]
         key: allowedAggregations
-    id: ~losant-flowVersion-getTlDataExplorerDeviceId-0~
+    id: ~exportplaceholderid-flowVersion-getTlDataExplorerDeviceId-0~
     name: 'GET /tl-data-explorer/{deviceId}'
     nodes:
       - config:
@@ -19,7 +19,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlDataExplorer-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlDataExplorer-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -145,7 +145,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlDataExplorer-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlDataExplorer-0~
           replyIdPath: data.replyId
           replyType: page
           responseCodeTemplate: '500'
@@ -435,7 +435,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getTlDataExplorerDeviceId-0~
+        key: ~exportplaceholderid-experienceEndpoint-getTlDataExplorerDeviceId-0~
         meta:
           category: trigger
           description: ''
@@ -449,7 +449,7 @@ resources:
         type: endpoint
       - config:
           scope: local
-        key: ~losant-flow-getTlDataExplorerDeviceId-1~-flowError
+        key: ~exportplaceholderid-flow-getTlDataExplorerDeviceId-1~-flowError
         meta:
           category: trigger
           description: ''

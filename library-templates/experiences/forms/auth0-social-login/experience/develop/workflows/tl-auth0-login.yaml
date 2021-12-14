@@ -1,7 +1,7 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-tlAuth0Login-0~
+    flowId: ~exportplaceholderid-flow-tlAuth0Login-0~
     globals:
       - json: '"AUTH0_APPLICATION_DOMAIN"'
         key: domain
@@ -21,7 +21,7 @@ resources:
         key: signedInRedirectPath
       - json: '"/tl-auth0-logout"'
         key: signOutPath
-    id: ~losant-flowVersion-tlAuth0Login-0~
+    id: ~exportplaceholderid-flowVersion-tlAuth0Login-0~
     name: tl-auth0-login
     nodes:
       - config:
@@ -83,7 +83,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlAuth0Login-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlAuth0Login-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -838,7 +838,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlAuth0Home-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlAuth0Home-1~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '302'
@@ -953,7 +953,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getTlAuth0LoginConnection-0~
+        key: ~exportplaceholderid-experienceEndpoint-getTlAuth0LoginConnection-0~
         meta:
           category: trigger
           description: ''
@@ -967,7 +967,7 @@ resources:
           - - Q1rueHxCmU
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getTlAuth0Logout-2~
+        key: ~exportplaceholderid-experienceEndpoint-getTlAuth0Logout-2~
         meta:
           category: trigger
           description: ''
@@ -981,7 +981,7 @@ resources:
           - - aKfIbjbwK1
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getTlAuth0Callback-3~
+        key: ~exportplaceholderid-experienceEndpoint-getTlAuth0Callback-3~
         meta:
           category: trigger
           description: ''
@@ -996,7 +996,7 @@ resources:
         type: endpoint
       - config:
           scope: local
-        key: ~losant-flow-tlAuth0Login-0~-flowError
+        key: ~exportplaceholderid-flow-tlAuth0Login-0~-flowError
         meta:
           category: trigger
           description: ''
@@ -1010,7 +1010,7 @@ resources:
           - - TFkRIk28fW
         type: flowError
       - config: {}
-        key: ~losant-flow-tlAuth0Login-0~-Qr22vG_vbhR0r61cK0N8n
+        key: ~exportplaceholderid-flow-tlAuth0Login-0~-Qr22vG_vbhR0r61cK0N8n
         meta:
           category: trigger
           description: ''
@@ -1026,7 +1026,7 @@ resources:
           - - YSciMigmwQ
         type: virtualButton
       - config: {}
-        key: ~losant-experienceEndpoint-getTlAuth0Home-1~
+        key: ~exportplaceholderid-experienceEndpoint-getTlAuth0Home-1~
         meta:
           category: trigger
           description: ''

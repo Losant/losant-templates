@@ -60,7 +60,7 @@ resources:
     description: The Nimbelink NL-AT2 GPS asset tracker.
     deviceClass: standalone
     deviceName: Nimbelink NL-AT2
-    id: ~losant-deviceRecipe-nimbelinkNlAt2-0~
+    id: ~exportplaceholderid-deviceRecipe-nimbelinkNlAt2-0~
     name: Nimbelink NL-AT2
     tags:
       - key: device_id

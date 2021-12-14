@@ -2,7 +2,7 @@
 
 Redacts a payload, obscuring sensitive values based on property names. **Note**: Property values are not searched, only property names.
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

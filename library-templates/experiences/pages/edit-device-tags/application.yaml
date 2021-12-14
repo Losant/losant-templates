@@ -4,7 +4,7 @@ resources:
     description: Display values of device tags and allow experience users to edit them.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesPagesEditDeviceTags-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesEditDeviceTags-0~
     name: Edit Device Tags
     readmePath: ./README.md
     imagePath: ./preview.png

@@ -20,7 +20,7 @@ This template adds a single experience component to your application, which can 
 
 ### Context 
 
-The component must be passed an array of objects (as `myArrayOfObjects` in the example above). In most cases, this will be an array of [devices](https://docs.losant.com/devices/overview/) or [experience groups](https://docs.losant.com/experiences/groups/) that are [passed into a page's `pageData`](https://docs.losant.com/workflows/outputs/endpoint-reply/#reply-type) via an [experience workflow](https://docs.losant.com/workflows/experience-workflows/).
+The component must be passed an array of objects (as `myArrayOfObjects` in the example above). In most cases, this will be an array of [devices](https://~exportplaceholderid-docs-url~/devices/overview/) or [experience groups](https://~exportplaceholderid-docs-url~/experiences/groups/) that are [passed into a page's `pageData`](https://~exportplaceholderid-docs-url~/workflows/outputs/endpoint-reply/#reply-type) via an [experience workflow](https://~exportplaceholderid-docs-url~/workflows/experience-workflows/).
 
 The component will iterate over the array and create a menu item in the drop-down menu for each object.
 
@@ -34,21 +34,21 @@ Additional arguments are passed in as key-value pairs after the context argument
 | inputName         | (String) If set, the name of the the input whose value should be associated with the selected menu item.                                                                                                                                                                                                                                                                                                   |                        |
 | selectedValue     | (String) The default value that should be selected on mount of the component, as matched against the `itemValueProp` argument when iterating over the array items.                                                                                                                                                                                                                                         |                        |
 | variant           | (String) The Bootstrap variant color to apply to the dropdown. This should be one of the [predefined contextual classes](https://getbootstrap.com/docs/4.5/utilities/colors/) or, if using your own, should match with one you have [generated](https://getbootstrap.com/docs/4.5/getting-started/theming/).                                                                                               | "light"                |
-| itemComponentName | ([Component Name](https://docs.losant.com/experiences/views/#components)) The name of a component to render for each menu item in place of the string output by `itemLabelTemplate`, for example, if you wish to include an icon alongside each label. Your component should render some text (i.e. not an image alone) against which the dropdown can filter its menu items.                            |                        |
-| itemLabelTemplate | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) The label for each menu item in the drop-down menu. If `itemComponentName` is set, this argument has no effect.                                                                                                                                                                                                  | "{{this.name}}"        |
-| itemLinkTemplate  | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) The URL to take the user to on selection of a menu item. If `inputName` is set, this argument has no effect; otherwise it is required.                                                                                                                                                                 |                        |
+| itemComponentName | ([Component Name](https://~exportplaceholderid-docs-url~/experiences/views/#components)) The name of a component to render for each menu item in place of the string output by `itemLabelTemplate`, for example, if you wish to include an icon alongside each label. Your component should render some text (i.e. not an image alone) against which the dropdown can filter its menu items.                            |                        |
+| itemLabelTemplate | (String [Template](https://~exportplaceholderid-docs-url~/workflows/accessing-payload-data/#string-templates)) The label for each menu item in the drop-down menu. If `itemComponentName` is set, this argument has no effect.                                                                                                                                                                                                  | "{{this.name}}"        |
+| itemLinkTemplate  | (String [Template](https://~exportplaceholderid-docs-url~/workflows/accessing-payload-data/#string-templates)) The URL to take the user to on selection of a menu item. If `inputName` is set, this argument has no effect; otherwise it is required.                                                                                                                                                                 |                        |
 | itemValueProp     | (String) The name of the prop on each iterated object where the value associated with each menu item can be found. This prop is used for determining which item should be selected by default, and also the value to associate with the selection when using this drop-down menu as a form element (i.e. when the `inputName` argument is set). The value of this prop should be unique per item in the array. | "id"                   |
 
 ## Examples
 
-In each of the following implementation examples, assume that the context passed into the component includes an array of devices generated from the [Device: Get Node](https://docs.losant.com/workflows/data/get-device/) with the following configuration:
+In each of the following implementation examples, assume that the context passed into the component includes an array of devices generated from the [Device: Get Node](https://~exportplaceholderid-docs-url~/workflows/data/get-device/) with the following configuration:
 - The "Return multiple devices" checkbox is checked.
 - The "Return tags as an object map instead of an array" is checked.
 - The Result Path is set to "pageData.devices".
 
 ### Using Dropdown as a Link
 
-Assuming you have an [experience endpoint](https://docs.losant.com/experiences/endpoints/) for the route `GET /devices/{id}`, the drop-down menu can link users to specific devices (and display the currently selected device) as shown below:
+Assuming you have an [experience endpoint](https://~exportplaceholderid-docs-url~/experiences/endpoints/) for the route `GET /devices/{id}`, the drop-down menu can link users to specific devices (and display the currently selected device) as shown below:
 
 ```
 {{component

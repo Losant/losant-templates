@@ -2,12 +2,12 @@
 
 Calculates the distance, in meters, between two GPS coordinates.
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 
-* `Starting GPS Point`: Starting GPS coordinate in any [supported format](https://docs.losant.com/devices/state/#gps-attributes).
-* `Ending GPS Point`: Ending GPS coordinate in any [supported format](https://docs.losant.com/devices/state/#gps-attributes).
+* `Starting GPS Point`: Starting GPS coordinate in any [supported format](https://~exportplaceholderid-docs-url~/devices/state/#gps-attributes).
+* `Ending GPS Point`: Ending GPS coordinate in any [supported format](https://~exportplaceholderid-docs-url~/devices/state/#gps-attributes).
 
 ## Output Result
 

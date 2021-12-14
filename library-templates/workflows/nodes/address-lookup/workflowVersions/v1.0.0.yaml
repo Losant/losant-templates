@@ -18,9 +18,9 @@ resources:
       resultDescription: Address information found from gps coordinates that are passed in.
       resultMode: required
     enabled: true
-    flowId: ~losant-flow-addressLookup-0~
+    flowId: ~exportplaceholderid-flow-addressLookup-0~
     globals: []
-    id: ~losant-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100-0~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -148,7 +148,7 @@ resources:
           - - ajubISqUJG
         type: customNodeStart
       - config: {}
-        key: ~losant-flow-addressLookup-0~-cgk2htsrmfEDfUhHcZW0W
+        key: ~exportplaceholderid-flow-addressLookup-0~-cgk2htsrmfEDfUhHcZW0W
         meta:
           category: trigger
           description: ''

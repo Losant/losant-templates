@@ -1,13 +1,13 @@
 # Outdoor Asset Tracker Simulator
 
 This template simulates a GPS device moving along a route of your choosing. The simulated data can then be used to:
-- [Record device state](https://docs.losant.com/devices/state/)
-- Build [GPS History dashboard blocks](https://docs.losant.com/dashboards/gps-history/)
-- Fire [geofence-based alerts](https://docs.losant.com/workflows/logic/geofence/)
+- [Record device state](https://~exportplaceholderid-docs-url~/devices/state/)
+- Build [GPS History dashboard blocks](https://~exportplaceholderid-docs-url~/dashboards/gps-history/)
+- Fire [geofence-based alerts](https://~exportplaceholderid-docs-url~/workflows/logic/geofence/)
 
 ## Dependencies
 
-This template requires no additional dependencies, but it is recommended that you use it in conjunction with a [device](https://docs.losant.com/devices/overview/) that has a [GPS attribute](https://docs.losant.com/devices/attributes/#gps) to record state.
+This template requires no additional dependencies, but it is recommended that you use it in conjunction with a [device](https://~exportplaceholderid-docs-url~/devices/overview/) that has a [GPS attribute](https://~exportplaceholderid-docs-url~/devices/attributes/#gps) to record state.
 
 ## Usage
 
@@ -40,16 +40,16 @@ If you need to generate a new route for your simulation, there is an additional 
 Once you have a GPX file in hand:
 
 1. Upload the GPX file to your [Application Files](/applications/recent/files).
-2. Update the "URL Template" field of the [HTTP Node](https://docs.losant.com/workflows/data/http/) in the helper workflow to point to the location of the GPX file you just uploaded.
-3. Update the [File: Create Node](https://docs.losant.com/workflows/data/file-create/)'s "File Name Template" to the name you wish to give this new file. The file extension should be `.json` since the workflow will convert your GPX file to JSON format.
+2. Update the "URL Template" field of the [HTTP Node](https://~exportplaceholderid-docs-url~/workflows/data/http/) in the helper workflow to point to the location of the GPX file you just uploaded.
+3. Update the [File: Create Node](https://~exportplaceholderid-docs-url~/workflows/data/file-create/)'s "File Name Template" to the name you wish to give this new file. The file extension should be `.json` since the workflow will convert your GPX file to JSON format.
 
-Processing your file can take several seconds. Check the workflow's [Debug Log](https://docs.losant.com/workflows/outputs/debug/#debug-panel) to know when the conversion has completed and the file is available for use.
+Processing your file can take several seconds. Check the workflow's [Debug Log](https://~exportplaceholderid-docs-url~/workflows/outputs/debug/#debug-panel) to know when the conversion has completed and the file is available for use.
 
 Once your file is generated, you can reference it in the HTTP Node in the Route Simulator to use these new coordinates.
 
 ### Changing Reporting Interval
 
-To change the frequency that the simulator runs, change the value within the workflow's [Timer Trigger Node](https://docs.losant.com/workflows/triggers/timer/). Depending on the number of points in your route and the frequency at which the simulator runs, you may also change the "pointsPerIteration" [workflow global value](https://docs.losant.com/workflows/overview/#workflow-globals) to adjust the speed of the simulated vehicle.
+To change the frequency that the simulator runs, change the value within the workflow's [Timer Trigger Node](https://~exportplaceholderid-docs-url~/workflows/triggers/timer/). Depending on the number of points in your route and the frequency at which the simulator runs, you may also change the "pointsPerIteration" [workflow global value](https://~exportplaceholderid-docs-url~/workflows/overview/#workflow-globals) to adjust the speed of the simulated vehicle.
 
 ### Using Reported Data
 

@@ -4,9 +4,9 @@ resources:
       A workflow that replies to any fatal error within an experience workflow
       and issues a user-friendly page reply.
     enabled: true
-    flowId: ~losant-flow-500ErrorHandler-1~
+    flowId: ~exportplaceholderid-flow-500ErrorHandler-1~
     globals: []
-    id: ~losant-flowVersion-500ErrorHandler-1~
+    id: ~exportplaceholderid-flowVersion-500ErrorHandler-1~
     name: 500 Error Handler
     nodes:
       - config:
@@ -16,7 +16,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-500Page-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-500Page-2~
           replyIdPath: data.erroredPayload.data.replyId
           replyType: page
           responseCodeTemplate: '500'
@@ -135,7 +135,7 @@ resources:
       - config:
           scope: experience
         key: >-
-          ~losant-application-libraryExperiencesPagesUserFriendlyErrorPages-0~-experience-flowError
+          ~exportplaceholderid-application-libraryExperiencesPagesUserFriendlyErrorPages-0~-experience-flowError
         meta:
           category: trigger
           description: ''

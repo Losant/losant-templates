@@ -5,7 +5,7 @@ resources:
       label, and optional device image. "
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesComponentsDeviceList-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsDeviceList-0~
     name: Device List
     readmePath: ./README.md
     imagePath: ./preview.png

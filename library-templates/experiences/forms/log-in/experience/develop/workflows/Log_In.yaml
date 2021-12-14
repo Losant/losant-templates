@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-logIn-0~
+    flowId: ~exportplaceholderid-flow-logIn-0~
     globals: []
-    id: ~losant-flowVersion-logIn-0~
+    id: ~exportplaceholderid-flowVersion-logIn-0~
     name: Log In
     nodes:
       - config:
@@ -39,7 +39,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -161,7 +161,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -264,7 +264,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postLogin-1~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin-1~
         meta:
           category: trigger
           description: When a user submits login credentials ...
@@ -277,7 +277,7 @@ resources:
           - - KwKCZ598oj
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getLogin-0~
+        key: ~exportplaceholderid-experienceEndpoint-getLogin-0~
         meta:
           category: trigger
           description: When a user visits the login page ...

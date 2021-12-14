@@ -2,7 +2,7 @@
 
 Calculates a moving average over a configurable number of data points.
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

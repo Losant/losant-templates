@@ -5,7 +5,7 @@ resources:
       return an authentication token for Experiences Users via a RESTful API.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesApIsAuthenticationEndpoint-0~
+    id: ~exportplaceholderid-application-libraryExperiencesApIsAuthenticationEndpoint-0~
     name: Authentication Endpoint
     readmePath: ./README.md
     imagePath: ./preview.png

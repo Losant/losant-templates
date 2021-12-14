@@ -5,7 +5,7 @@ resources:
       Application Files.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsEdgeComputeUploadToApplicationFiles-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsEdgeComputeUploadToApplicationFiles-0~
     name: Upload to Application Files
     readmePath: ./README.md
     imagePath: ./preview.png

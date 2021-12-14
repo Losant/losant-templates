@@ -6,7 +6,7 @@ resources:
       configuration.
     flowClass: edge
     globals: []
-    id: ~losant-flow-autoRegister-0~
+    id: ~exportplaceholderid-flow-autoRegister-0~
     minimumAgentVersion: 1.24.0
     name: Auto Register
     nodes:
@@ -194,7 +194,7 @@ resources:
     triggers:
       - config:
           seconds: 60
-        key: ~losant-flow-autoRegister-0~-RPr1yWVbK2Cd7vr4Ra7Pz
+        key: ~exportplaceholderid-flow-autoRegister-0~-RPr1yWVbK2Cd7vr4Ra7Pz
         meta:
           category: trigger
           description: ''

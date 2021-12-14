@@ -4,9 +4,9 @@ resources:
       Verify form where the experience user enters the code received from
       Twilio 
     enabled: true
-    flowId: ~losant-flow-getPostTlVerifyForm-1~
+    flowId: ~exportplaceholderid-flow-getPostTlVerifyForm-1~
     globals: []
-    id: ~losant-flowVersion-getPostTlVerifyForm-1~
+    id: ~exportplaceholderid-flowVersion-getPostTlVerifyForm-1~
     name: GET & POST /tl-verify-form
     nodes:
       - config:
@@ -15,7 +15,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageVerify-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageVerify-1~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -238,7 +238,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageVerify-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageVerify-1~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -450,7 +450,7 @@ resources:
         type: ValidatePayloadNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postTlVerifyForm-3~
+        key: ~exportplaceholderid-experienceEndpoint-postTlVerifyForm-3~
         meta:
           category: trigger
           description: ''
@@ -463,7 +463,7 @@ resources:
           - - fhEZ7xwtKW
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getTlVerifyForm-2~
+        key: ~exportplaceholderid-experienceEndpoint-getTlVerifyForm-2~
         meta:
           category: trigger
           description: ''

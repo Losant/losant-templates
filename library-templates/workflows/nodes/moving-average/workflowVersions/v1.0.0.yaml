@@ -25,9 +25,9 @@ resources:
         not been enough points received.
       resultMode: required
     enabled: true
-    flowId: ~losant-flow-movingAverage-0~
+    flowId: ~exportplaceholderid-flow-movingAverage-0~
     globals: []
-    id: ~losant-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100-0~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -212,7 +212,7 @@ resources:
           - - BlsM8azqgT
         type: customNodeStart
       - config: {}
-        key: ~losant-flow-movingAverage-0~-kwVCkkhY3TGLKuyaHyOkk
+        key: ~exportplaceholderid-flow-movingAverage-0~-kwVCkkhY3TGLKuyaHyOkk
         meta:
           category: trigger
           description: ''

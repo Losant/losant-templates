@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-getDeviceStateStreamDeviceId-0~
+    flowId: ~exportplaceholderid-flow-getDeviceStateStreamDeviceId-0~
     globals: []
-    id: ~losant-flowVersion-getDeviceStateStreamDeviceId-0~
+    id: ~exportplaceholderid-flowVersion-getDeviceStateStreamDeviceId-0~
     name: 'GET /device-state-stream/{deviceId}'
     nodes:
       - config:
@@ -48,7 +48,8 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getDeviceStateStreamDeviceId-1~
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-getDeviceStateStreamDeviceId-1~
         meta:
           category: trigger
           description: ''

@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Return the service work script.
     enabled: true
-    flowId: ~losant-flow-getServiceWorkerJs-0~
+    flowId: ~exportplaceholderid-flow-getServiceWorkerJs-0~
     globals: []
-    id: ~losant-flowVersion-getServiceWorkerJs-0~
+    id: ~exportplaceholderid-flowVersion-getServiceWorkerJs-0~
     name: GET service-worker.js
     nodes:
       - config:
@@ -83,7 +83,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getServiceWorkerJs-1~
+        key: ~exportplaceholderid-experienceEndpoint-getServiceWorkerJs-1~
         meta:
           category: trigger
           description: ''

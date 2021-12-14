@@ -31,7 +31,7 @@ resources:
     globals: []
     iconData: >-
       data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iI2ZmZmZmZiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik0yMiAxOHYtMkg4VjRoMkw3IDEgNCA0aDJ2MkgydjJoNHY4YzAgMS4xLjkgMiAyIDJoOHYyaC0ybDMgMyAzLTNoLTJ2LTJoNHpNMTAgOGg2djZoMlY4YzAtMS4xLS45LTItMi0yaC02djJ6Ii8+PC9zdmc+
-    id: ~losant-flow-movingAverage-0~
+    id: ~exportplaceholderid-flow-movingAverage-0~
     name: Moving Average
     nodes:
       - config:
@@ -217,7 +217,7 @@ resources:
           - - BlsM8azqgT
         type: customNodeStart
       - config: {}
-        key: ~losant-flow-movingAverage-0~-nszsIVlDkJ73YcRSAsqmk
+        key: ~exportplaceholderid-flow-movingAverage-0~-nszsIVlDkJ73YcRSAsqmk
         meta:
           category: trigger
           description: ''

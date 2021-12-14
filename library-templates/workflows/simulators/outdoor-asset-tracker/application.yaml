@@ -4,7 +4,7 @@ resources:
     description: Simulates a GPS device traveling along a predefined route.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsSimulatorsOutdoorAssetTracker-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsSimulatorsOutdoorAssetTracker-0~
     name: Outdoor Asset Tracker
     readmePath: ./README.md
     imagePath: ./preview.png

@@ -5,7 +5,7 @@ resources:
     globals:
       - json: '"/tl-edge-to-files-uploads"'
         key: uploadsRoot
-    id: ~losant-flow-tlEdgeToFilesCreateSignedUrLs-1~
+    id: ~exportplaceholderid-flow-tlEdgeToFilesCreateSignedUrLs-1~
     name: tl-edge-to-files Create Signed URLs
     nodes:
       - config:

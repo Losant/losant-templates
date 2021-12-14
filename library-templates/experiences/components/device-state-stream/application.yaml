@@ -5,7 +5,7 @@ resources:
       displays the state values.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesComponentsDeviceStateStream-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsDeviceStateStream-0~
     name: Device State Stream
     readmePath: ./README.md
     imagePath: ./preview.png

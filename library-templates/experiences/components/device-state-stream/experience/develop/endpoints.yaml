@@ -3,7 +3,7 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getDeviceStateStreamDeviceId-1~
+    id: ~exportplaceholderid-experienceEndpoint-getDeviceStateStreamDeviceId-1~
     method: get
     route: /device-state-stream/{deviceId}
     version: develop

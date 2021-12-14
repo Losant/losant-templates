@@ -1,7 +1,7 @@
 # KST3320 Distance Sensor
-This template contains a [Device Recipe](https://docs.losant.com/devices/device-recipes/) for the [KST3320 Distance Sensor](https://kstechnologies.com/kst3320).
+This template contains a [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) for the [KST3320 Distance Sensor](https://kstechnologies.com/kst3320).
 
-![KST3320](./kst3300_enclosure.png)
+![KST3320](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryDevicesRecipesKst3320DistanceSensor-0~/template/kst3300_enclosure.png)
 
 ## About the KST3320 Distance Sensor
 
@@ -12,7 +12,7 @@ This template contains a [Device Recipe](https://docs.losant.com/devices/device-
 For more details, see the [KST3320 product page](https://kstechnologies.com/kst3320).
 
 ## How to Use a Device Recipe
-This template imports a single [Device Recipe](https://docs.losant.com/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://docs.losant.com/devices/attributes/) and [Tags](https://docs.losant.com/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://docs.losant.com/devices/device-recipes/#bulk-device-creation) devices at once.
+This template imports a single [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://~exportplaceholderid-docs-url~/devices/attributes/) and [Tags](https://~exportplaceholderid-docs-url~/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://~exportplaceholderid-docs-url~/devices/device-recipes/#bulk-device-creation) devices at once.
 
 The `KST3320` device recipe contains all of the recommended attributes and tags when utilizing this sensor within the Losant platform.
 

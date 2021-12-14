@@ -4,7 +4,7 @@ resources:
     description: This node provides the ability to report a SIGNL4 event via the SIGNL4 API.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesSignl4Alert-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesSignl4Alert-0~
     name: SIGNL4 Alert
     readmePath: ./README.md
     imagePath: ./preview.png

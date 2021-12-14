@@ -1,13 +1,13 @@
 resourceType: Notebook
 resources:
   - description: Demo notebook that simply outputs all provided inputs.
-    id: ~losant-notebook-basicNotebook-0~
+    id: ~exportplaceholderid-notebook-basicNotebook-0~
     imageVersion: v2
     inputs:
       - fileName: hello-world.txt
         inputType: externalUrl
         sourceUrl: >-
-          https://~losant-files-domain~/~losant-application-libraryWorkflowsDataStreamExportsToAwsS3-0~/tl-stream-exports-to-s3/hello-world.txt
+          https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryWorkflowsDataStreamExportsToAwsS3-0~/tl-stream-exports-to-s3/hello-world.txt
     localFilename: ./all-inputs-to-outputs.ipynb.txt.ipynb
     name: Basic Notebook
     outputs:

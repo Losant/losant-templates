@@ -8,11 +8,11 @@ This template does not require any additional dependencies; all required scripts
 
 ## Usage
 
-When configuring your [Experience Pages](https://docs.losant.com/experiences/views/#pages), choose one of the included layouts for the page configuration:
+When configuring your [Experience Pages](https://~exportplaceholderid-docs-url~/experiences/views/#pages), choose one of the included layouts for the page configuration:
 
 - **Fixed Width, Single Column:** The container width is one of a handful of fixed sizes, which changes with current width of the browser window. At small window sizes (such as on mobile devices), the container width is equal to the window width. This container works well for static content pages.
 - **Fixed Width, Two Columns:** The container width is similar to the single column version, but it includes a narrow left column and a wider right column. At smaller window sizes, the left column displays below, instead of alongside, the right column.
-- **Fluid Width, Single Column:** The container width matches the current width of the browser window, regardless of window size. This container is a good choice for [Dashboard Pages](https://docs.losant.com/experiences/views/#dashboard-pages).
+- **Fluid Width, Single Column:** The container width matches the current width of the browser window, regardless of window size. This container is a good choice for [Dashboard Pages](https://~exportplaceholderid-docs-url~/experiences/views/#dashboard-pages).
 - **Fluid Width, Two Columns:** The container width is similar to the single column version, but it includes a narrow left column and a wider right column. At smaller window sizes, the left column displays below, instead of alongside, the right column.
 
 ### Configuring Navigation

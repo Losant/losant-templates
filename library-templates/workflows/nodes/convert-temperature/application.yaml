@@ -4,7 +4,7 @@ resources:
     description: Converts temperatures between Celsius, Fahrenheit, and Kelvin.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesConvertTemperature-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesConvertTemperature-0~
     name: Convert Temperature
     readmePath: ./README.md
     imagePath: ./preview.png

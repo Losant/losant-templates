@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Workflow that handles the JWT verification and device registration.
     enabled: true
-    flowId: ~losant-flow-registerDevice-1~
+    flowId: ~exportplaceholderid-flow-registerDevice-1~
     globals: []
-    id: ~losant-flowVersion-registerDevice-0~
+    id: ~exportplaceholderid-flowVersion-registerDevice-0~
     name: Register Device
     nodes:
       - config:
@@ -102,7 +102,7 @@ resources:
               valueTemplate: '{{data.body.manufacturerId}}'
           nameTemplate: 'Generator - {{data.body.manufacturerId}}'
           parentIdTemplate: ''
-          recipeIdTemplate: ~losant-deviceRecipe-tlGenerator-0~
+          recipeIdTemplate: ~exportplaceholderid-deviceRecipe-tlGenerator-0~
           resultPath: working.device
           tagsAsObject: false
         id: Rnojw97OVa
@@ -365,7 +365,7 @@ resources:
         type: LosantApiNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postApiRegisterDevice-0~
+        key: ~exportplaceholderid-experienceEndpoint-postApiRegisterDevice-0~
         meta:
           category: trigger
           description: ''

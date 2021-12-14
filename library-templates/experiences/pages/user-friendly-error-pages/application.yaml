@@ -4,7 +4,7 @@ resources:
     description: Includes implementations for 404 and 500 error pages.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesPagesUserFriendlyErrorPages-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesUserFriendlyErrorPages-0~
     name: User-Friendly Error Pages
     readmePath: ./README.md
     imagePath: ./preview.png

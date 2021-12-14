@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint POST /provision
     enabled: true
-    flowId: ~losant-flow-provision-0~
+    flowId: ~exportplaceholderid-flow-provision-0~
     globals: []
-    id: ~losant-flowVersion-provision-0~
+    id: ~exportplaceholderid-flowVersion-provision-0~
     name: Provision
     nodes:
       - config:
@@ -106,7 +106,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageProvision-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageProvision-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -464,7 +464,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postProvision-1~
+        key: ~exportplaceholderid-experienceEndpoint-postProvision-1~
         meta:
           category: trigger
           description: ''
@@ -478,7 +478,7 @@ resources:
             - huCc-7D3pa
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getProvision-0~
+        key: ~exportplaceholderid-experienceEndpoint-getProvision-0~
         meta:
           category: trigger
           description: ''

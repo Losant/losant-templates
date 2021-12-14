@@ -4,7 +4,7 @@ resources:
     description: The Aruba Meridian indoor asset tracking tag.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryDevicesRecipesArubaMeridianAssetTag-0~
+    id: ~exportplaceholderid-application-libraryDevicesRecipesArubaMeridianAssetTag-0~
     name: Aruba Meridian Asset Tag
     readmePath: ./README.md
     imagePath: ./preview.png

@@ -5,7 +5,7 @@ resources:
       retrieve device information.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesParticleDiagnostics-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesParticleDiagnostics-0~
     name: Particle Diagnostics
     readmePath: ./README.md
     imagePath: ./preview.png

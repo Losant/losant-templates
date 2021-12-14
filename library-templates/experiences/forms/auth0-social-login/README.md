@@ -1,6 +1,6 @@
 # Auth0 Social Login
 
-This template demonstrates how to use [Auth0](https://auth0.com/) as a third-party login provider for your [Experience Users](https://docs.losant.com/experiences/users/). Auth0 exposes and normalizes a number of third-party [Single Sign-on (SSO) providers](https://auth0.com/docs/sso), along with its own user management service. Utilitizing their service allows developers to very easily accept user sign-ins from a wide variety of SSO providers, including many social media platforms.
+This template demonstrates how to use [Auth0](https://auth0.com/) as a third-party login provider for your [Experience Users](https://~exportplaceholderid-docs-url~/experiences/users/). Auth0 exposes and normalizes a number of third-party [Single Sign-on (SSO) providers](https://auth0.com/docs/sso), along with its own user management service. Utilitizing their service allows developers to very easily accept user sign-ins from a wide variety of SSO providers, including many social media platforms.
 
 ## Dependencies
 
@@ -18,7 +18,7 @@ After installation, the template requires a handful of steps to create the conne
 
 After you have created your Auth0 application, there are a few values from it that must be applied within this template's workflow's globals. The values can be found within the "Basic Information" panel of your Auth0 application's "Settings" page. Copy each of the following values from the panel and paste them into the corresponding workflow global inputs.
 
-![Auth0 Basic Information](./auth0-basic-information.png)
+![Auth0 Basic Information](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesFormsAuth0SocialLogin-0~/template/auth0-basic-information.png)
 
 - `domain`: The Auth0 application's "Domain".
 - `clientId`: The Auth0 application's "Client ID".
@@ -61,11 +61,11 @@ Once you have chosen the paths you'd like to use, return to your Auth0 applicati
 - **Allowed Callback URLs**: The full URL that Auth0 will request on successful SSO sign-in. If your experience uses multiple domains or slugs, you will need to add multiple values here.
 - **Allowed Logout URLs**: The full URL that Auth0 should redirect to after a user signs out. This too requires multiple values if your experience uses multiple domains or slugs.
 
-![Auth0 URLs](./auth0-urls.png)
+![Auth0 URLs](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesFormsAuth0SocialLogin-0~/template/auth0-urls.png)
 
 Optionally, you may also set a custom **Token Expiration**, which is the length of the time (in seconds) that the authorization token will be active. Losant will use this value to generate a token of the same active length when authorizing the Auth0 user as a Losant Experience User.
 
-![Auth0 Token Expiration](./auth0-token-exp.png)
+![Auth0 Token Expiration](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesFormsAuth0SocialLogin-0~/template/auth0-token-exp.png)
 
 Make sure to scroll to the bottom of the screen and press "Save Changes" after all fields have been updated.
 
@@ -73,13 +73,13 @@ Make sure to scroll to the bottom of the screen and press "Save Changes" after a
 
 This template includes the following resources:
 
-- Four [Experience Endpoints](https://docs.losant.com/experiences/endpoints/) for:
+- Four [Experience Endpoints](https://~exportplaceholderid-docs-url~/experiences/endpoints/) for:
    1. Displaying the Losant experience sign-in page.
    2. Redirecting to the appropriate SSO provider.
    3. Calling back to Losant on successful login with the SSO provider.
    4. Allowing users to sign out.
-- One [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/) for negotiating the handshake between Losant and Auth0, and tying the sign-in event to a Losant Experience User.
-- Two [Experience Pages](https://docs.losant.com/experiences/views/) for:
+- One [Experience Workflow](https://~exportplaceholderid-docs-url~/workflows/experience-workflows/) for negotiating the handshake between Losant and Auth0, and tying the sign-in event to a Losant Experience User.
+- Two [Experience Pages](https://~exportplaceholderid-docs-url~/experiences/views/) for:
    1. Displaying the various SSO provider sign-in options.
    2. Showing the information collected on the signed-in user and allowing them to sign out.
 
@@ -96,7 +96,7 @@ This template includes UI buttons for the following SSO providers:
 
 These providers **will not work** unless the provider has been enabled within your Auth0 application. You can do this under the Authentication -> Social menu. Click the "Create Connection" button in the top right corner, and then add the provider(s) you wish to enable.
 
-![Auth0 Token Expiration](./auth0-connections.png)
+![Auth0 Token Expiration](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesFormsAuth0SocialLogin-0~/template/auth0-connections.png)
 
 Then, within this template's "tl-auth0-login" page, delete the buttons for any providers you have not enabled.
 

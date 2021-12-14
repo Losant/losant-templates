@@ -4,18 +4,18 @@ resources:
     description: Endpoint that displays the forgot password form.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getForgotPassword-0~
+    id: ~exportplaceholderid-experienceEndpoint-getForgotPassword-0~
     method: get
     route: /forgot-password
     staticReply:
       type: page
-      value: ~losant-experienceView-tlPageForgotPassword-0~
+      value: ~exportplaceholderid-experienceView-tlPageForgotPassword-0~
     version: develop
   - access: public
     description: Displays the reset password form.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getResetPassword-2~
+    id: ~exportplaceholderid-experienceEndpoint-getResetPassword-2~
     method: get
     route: /reset-password
     version: develop
@@ -24,7 +24,7 @@ resources:
       the POST /tl-forgot-password workflow to send a reset email.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postForgotPassword-1~
+    id: ~exportplaceholderid-experienceEndpoint-postForgotPassword-1~
     method: post
     route: /forgot-password
     version: develop
@@ -32,7 +32,7 @@ resources:
     description: Accepts a new password to reset the user's previous password.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postResetPassword-3~
+    id: ~exportplaceholderid-experienceEndpoint-postResetPassword-3~
     method: post
     route: /reset-password
     version: develop

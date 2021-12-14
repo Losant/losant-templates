@@ -5,7 +5,7 @@ resources:
       use within the Function Node.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~
     name: Function Node Scripts
     readmePath: ./README.md
     imagePath: ./preview.png

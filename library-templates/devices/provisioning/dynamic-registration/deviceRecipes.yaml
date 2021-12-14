@@ -58,7 +58,7 @@ resources:
     description: Industrial power generator.
     deviceClass: standalone
     deviceName: Generator
-    id: ~losant-deviceRecipe-tlGenerator-0~
+    id: ~exportplaceholderid-deviceRecipe-tlGenerator-0~
     name: tl-generator
     tags: []
 version: 1

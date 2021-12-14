@@ -1,34 +1,34 @@
 # Function Node Scripts
 
-This template demonstrates how to send reusable JavaScript libraries down to your [Edge Compute device](https://docs.losant.com/devices/edge-compute/) for use within the [Function Node](https://docs.losant.com/workflows/logic/function/). Libraries are written to the device's file system and thus are made available to *all edge workflows* running on the device–not just the one that created the files.
+This template demonstrates how to send reusable JavaScript libraries down to your [Edge Compute device](https://~exportplaceholderid-docs-url~/devices/edge-compute/) for use within the [Function Node](https://~exportplaceholderid-docs-url~/workflows/logic/function/). Libraries are written to the device's file system and thus are made available to *all edge workflows* running on the device–not just the one that created the files.
 
 ## Dependencies
 
 This template assumes you have an Edge Compute device that is connected to the Losant Broker and is currently running Edge workflows. It also assumes the user has a basic understanding of the JavaScript programming language.
 
-If you are new to Edge Compute, we recommend starting with the [Edge Compute Walkthrough](https://docs.losant.com/edge-compute/walkthrough/) before working with this template.
+If you are new to Edge Compute, we recommend starting with the [Edge Compute Walkthrough](https://~exportplaceholderid-docs-url~/edge-compute/walkthrough/) before working with this template.
 
 ## How to Use
 
-This template will create a single Edge workflow within your application. That workflow demonstrates how to write scripts to the file system, how to utilize those scripts in a Function Node, and how to re-sync scripts without requiring another [edge deployment](https://docs.losant.com/edge-compute/edge-deployments/).
+This template will create a single Edge workflow within your application. That workflow demonstrates how to write scripts to the file system, how to utilize those scripts in a Function Node, and how to re-sync scripts without requiring another [edge deployment](https://~exportplaceholderid-docs-url~/edge-compute/edge-deployments/).
 
 ### Writing Resources
 
 This template's workflow demonstrates writing files to the device's file system in three separate ways:
 
-1. By creating JavaScript functions inline in the body of the [File: Write Node](https://docs.losant.com/workflows/data/file-write/).
+1. By creating JavaScript functions inline in the body of the [File: Write Node](https://~exportplaceholderid-docs-url~/workflows/data/file-write/).
 2. By pulling a library ([lodash](https://lodash.com/)) from a CDN and writing it to the file system.
-3. By pulling a JSON file (included with the template) from your [Application Files](https://docs.losant.com/applications/files/) and writing it to the file system.
+3. By pulling a JSON file (included with the template) from your [Application Files](https://~exportplaceholderid-docs-url~/applications/files/) and writing it to the file system.
 
 There are three methods by which files can be loaded into the file system with the provided workflow:
 
-1. Via the [Device: Connect Trigger](https://docs.losant.com/workflows/triggers/on-connect/), which will attempt to load and write the files any time the device connects to the Losant Broker.
-2. By pressing a [Virtual Button](https://docs.losant.com/workflows/triggers/virtual-button/) within the workflow, which will cause the device to re-fetch and re-write the referenced files.
-3. By sending a "reSync" [command](https://docs.losant.com/devices/commands/) to the device.
+1. Via the [Device: Connect Trigger](https://~exportplaceholderid-docs-url~/workflows/triggers/on-connect/), which will attempt to load and write the files any time the device connects to the Losant Broker.
+2. By pressing a [Virtual Button](https://~exportplaceholderid-docs-url~/workflows/triggers/virtual-button/) within the workflow, which will cause the device to re-fetch and re-write the referenced files.
+3. By sending a "reSync" [command](https://~exportplaceholderid-docs-url~/devices/commands/) to the device.
 
 ### Utilizing Resources
 
-The [Function Node](https://docs.losant.com/workflows/logic/function/) supports [`require`](https://nodejs.org/en/knowledge/getting-started/what-is-require/), which allows for referencing files on the file system and utilizing their exported functions and data within the node.
+The [Function Node](https://~exportplaceholderid-docs-url~/workflows/logic/function/) supports [`require`](https://nodejs.org/en/knowledge/getting-started/what-is-require/), which allows for referencing files on the file system and utilizing their exported functions and data within the node.
 
 For example, given a file at the path "/data/my-script.js" with the following contents ...
 

@@ -29,7 +29,7 @@ resources:
     description: Verifies a password reset token.
     flowClass: customNode
     globals: []
-    id: ~losant-flow-verifyResetToken-2~
+    id: ~exportplaceholderid-flow-verifyResetToken-2~
     name: Verify Reset Token
     nodes:
       - config:

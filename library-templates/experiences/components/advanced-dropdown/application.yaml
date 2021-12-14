@@ -4,7 +4,7 @@ resources:
     description: Displays a filterable dropdown menu for use in forms or for navigation.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesComponentsAdvancedDropdown-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsAdvancedDropdown-0~
     name: Advanced Dropdown
     readmePath: ./README.md
     imagePath: ./preview.png

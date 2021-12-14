@@ -9,7 +9,7 @@ resources:
         key: maxThresholdAttributeTagName
       - json: '"resetThreshold"'
         key: resetThresholdAttributeTagName
-    id: ~losant-flow-latchingAndEvents-0~
+    id: ~exportplaceholderid-flow-latchingAndEvents-0~
     name: Latching and Events
     nodes:
       - config:
@@ -25,7 +25,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: X85xceQACi
           label: Latch
           name: latch
           x: 460
@@ -49,7 +48,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: x6h-x0L5Qk
           label: Mutate
           name: mutate
           x: 560
@@ -58,9 +56,11 @@ resources:
           - - X85xceQACi
         type: MutateNode
       - config:
+          attributesAsObject: false
           findMetadata: false
           findMethod: id
           idTemplate: '{{triggerId}}'
+          includeConnectionStatus: true
           includeState: false
           resultPath: working.device
           tagsAsObject: false
@@ -68,13 +68,13 @@ resources:
         meta:
           category: data
           description: ''
-          id: hTOxqWh43a
           label: 'Device: Get'
           name: get-device
           x: 360
           'y': 260
         outputIds:
           - - wNfSlGvMUY
+            - RSjx9kyxXM
         type: GetDeviceNode
       - config:
           rules:
@@ -97,7 +97,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: wNfSlGvMUY
           label: Mutate
           name: mutate
           x: 360
@@ -120,7 +119,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: U8isR16WuI
           label: 'Event: Create'
           name: create-event
           x: 560
@@ -134,7 +132,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: cSecClGs8k
           label: Conditional
           name: conditional
           x: 360
@@ -152,7 +149,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: 2_ybaDVbU_
           label: 'Storage: Set Value'
           name: store-value
           x: 560
@@ -170,7 +166,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: JxVyJlImQc
           label: 'Storage: Get Value'
           name: get-value
           x: 460
@@ -191,7 +186,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: SNWtQzoZ_7
           label: 'Event: Update'
           mode: targetEventIdTemplate
           name: update-event
@@ -209,7 +203,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: 3GmuwTwXeA
           label: 'Storage: Set Value'
           name: store-value
           x: 460
@@ -263,7 +256,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 5TtB4OBgjj
           label: Debug
           name: debug
           x: 460
@@ -328,9 +320,41 @@ resources:
           'y': 160
         outputIds: []
         type: AnnotationNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: temperature
+              valueTemplate: '70'
+          deviceId: ~exportplaceholderid-device-exampleDevice-0~
+          deviceIdTemplateType: stringTemplate
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: '-An_ItUpeV'
+        meta:
+          category: output
+          description: ''
+          label: 'Device: State'
+          name: device-state
+          x: 940
+          'y': 220
+        outputIds: []
+        type: DeviceChangeStateNode
+      - config:
+          message: ''
+          property: ''
+        id: RSjx9kyxXM
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 460
+          'y': 340
+        outputIds: []
+        type: DebugNode
     triggers:
       - config: {}
-        key: ~losant-flow-latchingAndEvents-0~-lnZCno0M7hhQ6tf-zM8qq
+        key: ~exportplaceholderid-flow-latchingAndEvents-0~-lnZCno0M7hhQ6tf-zM8qq
         meta:
           category: trigger
           description: ''
@@ -353,7 +377,7 @@ resources:
       - config:
           attributeWhitelist:
             - temperature
-        key: ~losant-device-exampleDevice-0~
+        key: ~exportplaceholderid-device-exampleDevice-0~
         meta:
           allowedAttributeType: attributeWhitelist
           category: trigger
@@ -369,4 +393,18 @@ resources:
         outputIds:
           - - hTOxqWh43a
         type: deviceId
+      - config: {}
+        key: ~exportplaceholderid-flow-latchingAndEvents-0~-Hj5c55KtovBnLRBXxZKbQ
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: eLkrodE2PE
+          x: 960
+          'y': 60
+        outputIds:
+          - - '-An_ItUpeV'
+        type: virtualButton
 version: 1

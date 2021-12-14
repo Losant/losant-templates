@@ -12,7 +12,7 @@ resources:
         description: ""
         json: '"example.com"'
         key: tl-jwt-reset-issuer
-    id: ~losant-application-libraryExperiencesFormsForgotPassword-0~
+    id: ~exportplaceholderid-application-libraryExperiencesFormsForgotPassword-0~
     name: Forgot Password
     readmePath: ./README.md
     imagePath: ./preview.png

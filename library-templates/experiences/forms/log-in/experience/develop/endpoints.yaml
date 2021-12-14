@@ -3,7 +3,7 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogin-0~
+    id: ~exportplaceholderid-experienceEndpoint-getLogin-0~
     method: get
     route: /login
     version: develop
@@ -11,7 +11,7 @@ resources:
     description: Handles a user's log out request.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogout-2~
+    id: ~exportplaceholderid-experienceEndpoint-getLogout-2~
     method: get
     route: /logout
     unauthorizedReply:
@@ -22,7 +22,7 @@ resources:
     description: Endpoint that accepts and verifies an experience's email and password.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postLogin-1~
+    id: ~exportplaceholderid-experienceEndpoint-postLogin-1~
     method: post
     route: /login
     version: develop

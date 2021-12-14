@@ -1,6 +1,6 @@
 # File Upload Form
 
-This template demonstrates how to accept large file uploads from [Experience Users](https://docs.losant.com/experiences/users/) and place them in [Application Files](https://docs.losant.com/applications/files/). This allows for receiving larger files (images, CSVs, etc.) through an [Experience Endpoint](https://docs.losant.com/experiences/endpoints/) that would otherwise be rejected for not fitting within the allowed workflow payload size limit.
+This template demonstrates how to accept large file uploads from [Experience Users](https://~exportplaceholderid-docs-url~/experiences/users/) and place them in [Application Files](https://~exportplaceholderid-docs-url~/applications/files/). This allows for receiving larger files (images, CSVs, etc.) through an [Experience Endpoint](https://~exportplaceholderid-docs-url~/experiences/endpoints/) that would otherwise be rejected for not fitting within the allowed workflow payload size limit.
 
 ## Dependencies
 
@@ -10,22 +10,22 @@ This template has no additional dependencies, though the interface is tailored t
 
 This template includes the following resources:
 
-1. One [Experience Page](https://docs.losant.com/experiences/views/#pages): Displays the form input and handles the file upload to the underlying storage engine.
-2. Two [Experience Endpoints](https://docs.losant.com/experiences/endpoints/): One for replying to requests to display the form, and one to handle requests to upload a file.
-3. One [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/): Handles requests to the included endpoints, including generating and replying with a signed URL that the browser can use to complete the file upload.
+1. One [Experience Page](https://~exportplaceholderid-docs-url~/experiences/views/#pages): Displays the form input and handles the file upload to the underlying storage engine.
+2. Two [Experience Endpoints](https://~exportplaceholderid-docs-url~/experiences/endpoints/): One for replying to requests to display the form, and one to handle requests to upload a file.
+3. One [Experience Workflow](https://~exportplaceholderid-docs-url~/workflows/experience-workflows/): Handles requests to the included endpoints, including generating and replying with a signed URL that the browser can use to complete the file upload.
 
-After importing the template, in a browser visit the page "/tl-file-upload" on your [experience domain or slug](https://docs.losant.com/experiences/domains/). Click the "Choose File" button to browse your computer's file system and choose a file to upload. then click the "Upload File" button. Depending on the size of the file, the upload may take a few seconds.
+After importing the template, in a browser visit the page "/tl-file-upload" on your [experience domain or slug](https://~exportplaceholderid-docs-url~/experiences/domains/). Click the "Choose File" button to browse your computer's file system and choose a file to upload. then click the "Upload File" button. Depending on the size of the file, the upload may take a few seconds.
 
 ### Accessing Uploaded Files
 
-Uploaded files are publicly available at a URL of the form "https://~losant-files-domain~/APPLICATION\_ID/UPLOAD\_ROOT/USER_ID/FILE_NAME.EXT", where ...
+Uploaded files are publicly available at a URL of the form "https://~exportplaceholderid-files-domain~/APPLICATION\_ID/UPLOAD\_ROOT/USER_ID/FILE_NAME.EXT", where ...
 
 - `APPLICATION_ID` is the ID of the application where you've imported this template.
-- `UPLOAD_ROOT` is the root directory for all user uploads. This can be changed by setting the `uploadsRoot` [workflow global](https://docs.losant.com/workflows/overview/#workflow-globals). The default value is "userUploads".
+- `UPLOAD_ROOT` is the root directory for all user uploads. This can be changed by setting the `uploadsRoot` [workflow global](https://~exportplaceholderid-docs-url~/workflows/overview/#workflow-globals). The default value is "userUploads".
 - `USER_ID` is the ID of the Experience User who uploaded the file. This defaults to "\__anonymous__" if the file was uploaded by a non-signed-in user.
 - `FILE_NAME.EXT` is the name of the uploaded file, including its extension (e.g. ".jpg", ".png").
 
-You may also browse all user uploads by visiting your [Application Files](https://docs.losant.com/applications/files/) and navigating to the directory defined in the `uploadsRoot` global.
+You may also browse all user uploads by visiting your [Application Files](https://~exportplaceholderid-docs-url~/applications/files/) and navigating to the directory defined in the `uploadsRoot` global.
 
 ### Limiting Accepted File Types
 
@@ -41,8 +41,8 @@ By default, this template allows all site visitors to upload files, with non-sig
 
 To limit file uploads to just signed-in users:
 
-- Update the [access control](https://docs.losant.com/experiences/endpoints/#access-control) for both the  `GET /tl-file-upload` and `POST /tl-file-upload` endpoints to only allow requests from "Any authenticated user".
-- For the `GET` endpoint, you likely want to issue a [static reply](https://docs.losant.com/experiences/endpoints/#reply-types) for unauthorized users, redirecting them to your sign-in page.
+- Update the [access control](https://~exportplaceholderid-docs-url~/experiences/endpoints/#access-control) for both the  `GET /tl-file-upload` and `POST /tl-file-upload` endpoints to only allow requests from "Any authenticated user".
+- For the `GET` endpoint, you likely want to issue a [static reply](https://~exportplaceholderid-docs-url~/experiences/endpoints/#reply-types) for unauthorized users, redirecting them to your sign-in page.
 - Besides the access control update, no additional changes are needed for the `POST` endpoint.
 
 ## How It Works

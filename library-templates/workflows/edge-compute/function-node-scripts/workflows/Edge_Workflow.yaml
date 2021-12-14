@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: edge
     globals: []
-    id: ~losant-flow-edgeWorkflow-0~
+    id: ~exportplaceholderid-flow-edgeWorkflow-0~
     minimumAgentVersion: 1.19.2
     name: Edge Workflow
     nodes:
@@ -221,7 +221,7 @@ resources:
           responsePath: working.countries
           timeoutTemplate: ''
           uriTemplate: >-
-            https://~losant-files-domain~/~losant-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~/tl-edge-scripts/countries-and-capitals.json
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~/tl-edge-scripts/countries-and-capitals.json
         id: 5HzmjKvhby
         meta:
           category: data
@@ -407,7 +407,7 @@ resources:
           - - 1WUEyt4zm1
         type: deviceCommand
       - config: {}
-        key: ~losant-flow-edgeWorkflow-0~-ohOswPKqdw_xaLKn8X8jM
+        key: ~exportplaceholderid-flow-edgeWorkflow-0~-ohOswPKqdw_xaLKn8X8jM
         meta:
           category: trigger
           description: ''
@@ -425,7 +425,7 @@ resources:
             - 5HzmjKvhby
         type: virtualButton
       - config: {}
-        key: ~losant-flow-edgeWorkflow-0~-rxpl0FNj45rb5iu9NPuFH
+        key: ~exportplaceholderid-flow-edgeWorkflow-0~-rxpl0FNj45rb5iu9NPuFH
         meta:
           category: trigger
           description: ''
@@ -443,7 +443,7 @@ resources:
             - Pz4NGAT6Pa
         type: virtualButton
       - config: {}
-        key: ~losant-flow-edgeWorkflow-0~-f9uI0FlFtBDiuMQ_raAH9
+        key: ~exportplaceholderid-flow-edgeWorkflow-0~-f9uI0FlFtBDiuMQ_raAH9
         meta:
           category: trigger
           description: ''
@@ -459,7 +459,7 @@ resources:
             - 5HzmjKvhby
         type: onConnect
       - config: {}
-        key: ~losant-flow-edgeWorkflow-0~-bvZqKdMCH8hhKw3k2sd1P
+        key: ~exportplaceholderid-flow-edgeWorkflow-0~-bvZqKdMCH8hhKw3k2sd1P
         meta:
           category: trigger
           description: ''
@@ -479,7 +479,7 @@ resources:
           - - _rn-zTljwp
         type: virtualButton
       - config: {}
-        key: ~losant-flow-edgeWorkflow-0~-zoEO7ZISjN
+        key: ~exportplaceholderid-flow-edgeWorkflow-0~-zoEO7ZISjN
         meta:
           category: trigger
           description: ''
@@ -499,7 +499,7 @@ resources:
           - - _rn-zTljwp
         type: virtualButton
       - config: {}
-        key: ~losant-flow-edgeWorkflow-0~-DXTeyd1KqS
+        key: ~exportplaceholderid-flow-edgeWorkflow-0~-DXTeyd1KqS
         meta:
           category: trigger
           description: ''

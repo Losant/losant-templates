@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~losant-experienceView-tlFileUpload-0~
+    id: ~exportplaceholderid-experienceView-tlFileUpload-0~
     localFilename: ./tl-file-upload.hbs
     name: tl-file-upload
     version: develop

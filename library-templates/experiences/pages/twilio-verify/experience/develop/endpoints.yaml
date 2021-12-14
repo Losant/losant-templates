@@ -5,7 +5,7 @@ resources:
       from Twilio "
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getTlVerifyForm-2~
+    id: ~exportplaceholderid-experienceEndpoint-getTlVerifyForm-2~
     method: get
     route: /tl-verify-form
     version: develop
@@ -14,18 +14,18 @@ resources:
       to /tl-verify-login.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getTlVerifyLogin-0~
+    id: ~exportplaceholderid-experienceEndpoint-getTlVerifyLogin-0~
     method: get
     route: /tl-verify-login
     staticReply:
       statusCode: 200
       type: page
-      value: ~losant-experienceView-tlPageLogin-0~
+      value: ~exportplaceholderid-experienceView-tlPageLogin-0~
     version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postTlVerifyForm-3~
+    id: ~exportplaceholderid-experienceEndpoint-postTlVerifyForm-3~
     method: post
     route: /tl-verify-form
     version: develop
@@ -33,7 +33,7 @@ resources:
     description: Endpoint that accepts and verifies an experience's email and password.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postTlVerifyLogin-1~
+    id: ~exportplaceholderid-experienceEndpoint-postTlVerifyLogin-1~
     method: post
     route: /tl-verify-login
     version: develop

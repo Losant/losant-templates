@@ -13,7 +13,7 @@ resources:
         description: ""
         json: '"serviceProviderMetadataTemplate"'
         key: serviceProviderMetadataTemplate_example_com
-    id: ~losant-application-libraryExperiencesFormsAzureActiveDirectorySso-0~
+    id: ~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso-0~
     name: Azure Active Directory SSO
     readmePath: ./README.md
     imagePath: ./preview.png

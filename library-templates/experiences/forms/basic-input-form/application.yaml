@@ -5,7 +5,7 @@ resources:
       that input using a workflow.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesFormsBasicInputForm-0~
+    id: ~exportplaceholderid-application-libraryExperiencesFormsBasicInputForm-0~
     name: Basic Input Form
     readmePath: ./README.md
     imagePath: ./preview.png

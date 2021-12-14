@@ -1,16 +1,16 @@
 # Experience Authentication Endpoint
 
-This template includes an [Experience Endpoint](https://docs.losant.com/experiences/endpoints/) (`/api/auth`) to authenticate and return an [authentication token](https://docs.losant.com/experiences/endpoints/#passing-authorization-tokens) for [Experiences Users](https://docs.losant.com/experiences/users/) via a RESTful API.
+This template includes an [Experience Endpoint](https://~exportplaceholderid-docs-url~/experiences/endpoints/) (`/api/auth`) to authenticate and return an [authentication token](https://~exportplaceholderid-docs-url~/experiences/endpoints/#passing-authorization-tokens) for [Experiences Users](https://~exportplaceholderid-docs-url~/experiences/users/) via a RESTful API.
 
 ## Usage 
 
 After importing the template, using a tool like [Postman](https://www.postman.com/), make a POST request to:
 
 ```
-https://<APPLICATION_ID>.~losant-endpoint-domain~/api/auth 
+https://<APPLICATION_ID>.~exportplaceholderid-endpoint-domain~/api/auth 
 ```
 
-You may find your base URL on the [Experience > Edit](https://app.losant.com/applications/recent/experience/versions/develop) page. 
+You may find your base URL on the [Experience > Edit](https://~exportplaceholderid-app-url~/applications/recent/experience/versions/develop) page. 
 
 In the body of the request, include an Experience User's email and password:
 
@@ -30,7 +30,7 @@ If successful, you will get a response:
 }
 ```
 
-This token can now be used to make subsequent requests to any other authenticated Experience Endpoints within your application. You can easily create more with the [Experience Wizard](https://app.losant.com/applications/recent/experience/versions/develop).
+This token can now be used to make subsequent requests to any other authenticated Experience Endpoints within your application. You can easily create more with the [Experience Wizard](https://~exportplaceholderid-app-url~/applications/recent/experience/versions/develop).
 
 If you open the Experience Workflow named  "POST /api/auth", you can view, update, change, or extend this implementation. 
 
@@ -38,7 +38,7 @@ If you open the Experience Workflow named  "POST /api/auth", you can view, updat
 
 Once you obtain an authentication token for an Experience User, the token can be appended to any subsequent HTTP request that requires authentication in the following ways:
 
-- A query parameter added to the URL (e.g. https://<APPLICATION_ID>.~losant-endpoint-domain~/my-user?authorization=<token>).
+- A query parameter added to the URL (e.g. https://<APPLICATION_ID>.~exportplaceholderid-endpoint-domain~/my-user?authorization=<token>).
 - An Authorization HTTP header with the value `Bearer <token>`.
 - A Cookie HTTP header in the format of `authorization=<token>`.
 
@@ -50,9 +50,9 @@ When a valid user session is found within an Experience Workflow, you may access
 
 ## Resources
 
-- [Building an Experience API](https://docs.losant.com/guides/building-an-experience-api/overview/)
-- [Generate Token Node](https://docs.losant.com/workflows/experience/generate-token/)
-- [Experience Authenticate Node](https://docs.losant.com/workflows/experience/authenticate/)
+- [Building an Experience API](https://~exportplaceholderid-docs-url~/guides/building-an-experience-api/overview/)
+- [Generate Token Node](https://~exportplaceholderid-docs-url~/workflows/experience/generate-token/)
+- [Experience Authenticate Node](https://~exportplaceholderid-docs-url~/workflows/experience/authenticate/)
 
 
 ## License

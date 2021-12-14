@@ -4,7 +4,7 @@ resources:
     description: This node provides access to the Google Vision API.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryWorkflowsNodesGcpVisionApi-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesGcpVisionApi-0~
     name: GCP Vision API
     readmePath: ./README.md
     imagePath: ./preview.png

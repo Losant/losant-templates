@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Returns an authentication token for an experience user.
     enabled: true
-    flowId: ~losant-flow-postApiAuth-0~
+    flowId: ~exportplaceholderid-flow-postApiAuth-0~
     globals: []
-    id: ~losant-flowVersion-postApiAuth-0~
+    id: ~exportplaceholderid-flowVersion-postApiAuth-0~
     name: POST /api/auth
     nodes:
       - config:
@@ -199,7 +199,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postApiAuth-0~
+        key: ~exportplaceholderid-experienceEndpoint-postApiAuth-0~
         meta:
           category: trigger
           description: ''

@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: Created for Endpoint GET /provision.
-    id: ~losant-experienceView-tlPageProvision-0~
+    id: ~exportplaceholderid-experienceView-tlPageProvision-0~
     localFilename: ./tl-page-provision.hbs
     name: tl-page-provision
     version: develop

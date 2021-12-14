@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-postTlVerifyLogin-0~
+    flowId: ~exportplaceholderid-flow-postTlVerifyLogin-0~
     globals: []
-    id: ~losant-flowVersion-postTlVerifyLogin-0~
+    id: ~exportplaceholderid-flowVersion-postTlVerifyLogin-0~
     name: POST /tl-verify-login
     nodes:
       - config:
@@ -39,7 +39,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -264,7 +264,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -329,7 +329,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -415,7 +415,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postTlVerifyLogin-1~
+        key: ~exportplaceholderid-experienceEndpoint-postTlVerifyLogin-1~
         meta:
           category: trigger
           description: When a user submits login credentials ...

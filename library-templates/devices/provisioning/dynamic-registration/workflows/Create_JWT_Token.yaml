@@ -5,14 +5,14 @@ resources:
       fielded devices.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-createJwtToken-0~
+    id: ~exportplaceholderid-flow-createJwtToken-0~
     name: Create JWT Token
     nodes:
       - config:
           algorithmTemplate: HS256
           dataTemplate: |-
             {
-                "url": "https://~losant-application-libraryDevicesProvisioningDynamicRegistration-0~.~losant-endpoint-domain~/api/register-device"
+                "url": "https://~exportplaceholderid-application-libraryDevicesProvisioningDynamicRegistration-0~.~exportplaceholderid-endpoint-domain~/api/register-device"
             }
           dataTemplateType: json
           destinationPath: working.result
@@ -160,7 +160,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-flow-createJwtToken-0~-gvB7M3ipFCgJSFprT73bC
+        key: ~exportplaceholderid-flow-createJwtToken-0~-gvB7M3ipFCgJSFprT73bC
         meta:
           category: trigger
           description: ''
@@ -176,7 +176,7 @@ resources:
           - - UUtqzcF_0L
         type: virtualButton
       - config: {}
-        key: ~losant-flow-createJwtToken-0~--gz9_imSDR
+        key: ~exportplaceholderid-flow-createJwtToken-0~--gz9_imSDR
         meta:
           category: trigger
           description: ''

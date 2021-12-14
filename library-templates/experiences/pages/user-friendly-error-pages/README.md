@@ -5,9 +5,9 @@ This template includes implementations for returning user-friendly error screens
 ## Included Resources
 
 The template includes the following resources:
-- Two [experience pages](https://docs.losant.com/experiences/views/#pages) (one for 404 errors and one for 500 errors) that you can serve to your [experience users](https://docs.losant.com/experiences/users/) should they encounter such errors when navigating your application experience.
-- Two [experience endpoints](https://docs.losant.com/experiences/endpoints/) for catching unconfigured GET and POST routes and issuing replies with your 404 Page.
-- An [experience workflow](https://docs.losant.com/workflows/experience-workflows/) with a [Workflow Error Trigger](https://docs.losant.com/workflows/triggers/flow-error/#experience) for catching errors thrown in other experience workflows and replying with your 500 Page. 
+- Two [experience pages](https://~exportplaceholderid-docs-url~/experiences/views/#pages) (one for 404 errors and one for 500 errors) that you can serve to your [experience users](https://~exportplaceholderid-docs-url~/experiences/users/) should they encounter such errors when navigating your application experience.
+- Two [experience endpoints](https://~exportplaceholderid-docs-url~/experiences/endpoints/) for catching unconfigured GET and POST routes and issuing replies with your 404 Page.
+- An [experience workflow](https://~exportplaceholderid-docs-url~/workflows/experience-workflows/) with a [Workflow Error Trigger](https://~exportplaceholderid-docs-url~/workflows/triggers/flow-error/#experience) for catching errors thrown in other experience workflows and replying with your 500 Page. 
 
 ## Usage
 
@@ -15,13 +15,13 @@ Once the template is installed, it will immediately begin handling 404 and 500 e
 
 ### Editing the Pages
 
-Each page includes some wrapper markup that, if you are making use of [experience layouts](https://docs.losant.com/experiences/views/#layouts) within your application, you will want to remove and instead set each page's "layout" property appropriately. The sections that can be removed are clearly marked within each page.
+Each page includes some wrapper markup that, if you are making use of [experience layouts](https://~exportplaceholderid-docs-url~/experiences/views/#layouts) within your application, you will want to remove and instead set each page's "layout" property appropriately. The sections that can be removed are clearly marked within each page.
 
 The markup for each page is a barebones implementation; you should adjust the content appropriately to reflect the design and the voice of your brand. There are numerous articles (such as [this one](https://blog.prototypr.io/a-ux-guide-for-designing-error-pages-fb9ced1f1c8a)) that speak to best practices when designing error pages for your users.
 
 ### Testing the 404 Page
 
-Causing your 404 page to display is quite simple: Simply open your web browser and navigate to an unconfigured route within your application experience (such as https://MY_APPLICATION_ID.~losant-endpoint-domain~/foo/bar/bat).
+Causing your 404 page to display is quite simple: Simply open your web browser and navigate to an unconfigured route within your application experience (such as https://MY_APPLICATION_ID.~exportplaceholderid-endpoint-domain~/foo/bar/bat).
 
 The endpoints within this template are configured with "catch-all" routes for GET and POST requests–meaning, if no other route in the application matches the request first, this one will always match and return the 404 page.
 

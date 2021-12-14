@@ -4,7 +4,7 @@ This template adds a component containing the JavaScript snippet required to tra
 
 ## Dependencies
 
-This template requires you to have a [Google Analytics](https://marketingplatform.google.com/about/analytics/) account and to set up a property for your [experience's domain or slug](https://docs.losant.com/experiences/domains/).
+This template requires you to have a [Google Analytics](https://marketingplatform.google.com/about/analytics/) account and to set up a property for your [experience's domain or slug](https://~exportplaceholderid-docs-url~/experiences/domains/).
 
 ## Usage
 

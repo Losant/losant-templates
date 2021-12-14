@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~losant-experienceView-tlDeviceList-0~
+    id: ~exportplaceholderid-experienceView-tlDeviceList-0~
     localFilename: ./tl-device-list.hbs
     name: tl-device-list
     version: develop

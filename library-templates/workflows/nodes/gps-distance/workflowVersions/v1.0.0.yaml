@@ -4,14 +4,14 @@ resources:
       fields:
         - description: >-
             The starting GPS coordinate in any [supported
-            format](https://~losant-docs-url~/devices/state/#gps-attributes).
+            format](https://~exportplaceholderid-docs-url~/devices/state/#gps-attributes).
           id: gpsStart
           label: Starting GPS Point
           required: true
           type: stringTemplate
         - description: >-
             The ending GPS coordinate in any [supported
-            format](https://~losant-docs-url~/devices/state/#gps-attributes).
+            format](https://~exportplaceholderid-docs-url~/devices/state/#gps-attributes).
           id: gpsEnd
           label: Ending GPS Point
           required: true
@@ -22,9 +22,9 @@ resources:
         values are invalid GPS coordinates, the output will be null.
       resultMode: required
     enabled: true
-    flowId: ~losant-flow-gpsDistance-0~
+    flowId: ~exportplaceholderid-flow-gpsDistance-0~
     globals: []
-    id: ~losant-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100-0~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -116,7 +116,7 @@ resources:
           - - Poax0c~BvO
         type: customNodeStart
       - config: {}
-        key: ~losant-flow-gpsDistance-0~-HzEM3MCNP0LO34kOcvT-d
+        key: ~exportplaceholderid-flow-gpsDistance-0~-HzEM3MCNP0LO34kOcvT-d
         meta:
           category: trigger
           description: ''

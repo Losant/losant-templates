@@ -4,7 +4,7 @@ resources:
     description: Adds the Google Analytics tracking code to your application experience.
     filesPath: ./files
     globals: []
-    id: ~losant-application-libraryExperiencesComponentsGoogleAnalytics-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsGoogleAnalytics-0~
     name: Google Analytics
     readmePath: ./README.md
     imagePath: ./preview.png

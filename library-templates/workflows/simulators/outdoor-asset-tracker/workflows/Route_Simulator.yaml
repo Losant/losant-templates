@@ -5,7 +5,7 @@ resources:
     globals:
       - json: '14'
         key: pointsPerIteration
-    id: ~losant-flow-routeSimulator-0~
+    id: ~exportplaceholderid-flow-routeSimulator-0~
     name: Route Simulator
     nodes:
       - config:
@@ -24,7 +24,7 @@ resources:
           responsePath: working.coordinates
           timeoutTemplate: ''
           uriTemplate: >-
-            https://~losant-files-domain~/{{applicationId}}/tl-route-simulator/routeCoordinates.json
+            https://~exportplaceholderid-files-domain~/{{applicationId}}/tl-route-simulator/routeCoordinates.json
         id: ZDUXmWVuIz
         meta:
           category: data
@@ -67,7 +67,7 @@ resources:
           responsePath: working.xml
           timeoutTemplate: ''
           uriTemplate: >-
-            https://~losant-files-domain~/{{applicationId}}/tl-route-simulator/routeCoordinates.gpx
+            https://~exportplaceholderid-files-domain~/{{applicationId}}/tl-route-simulator/routeCoordinates.gpx
         id: 5aLY5ibWTw
         meta:
           category: data
@@ -452,19 +452,20 @@ resources:
             Files](/applications/recent/files).
 
             2. Update the "URL Template" field of the [HTTP
-            Node](https://~losant-docs-url~/workflows/data/http/) in the helper
-            workflow to point to the location of the GPX file you just uploaded.
+            Node](https://~exportplaceholderid-docs-url~/workflows/data/http/)
+            in the helper workflow to point to the location of the GPX file you
+            just uploaded.
 
             3. Update the [File: Create
-            Node](https://~losant-docs-url~/workflows/data/file-create/)'s "File
-            Name Template" to the name you wish to give this new file. The file
-            extension should be `.json` as the workflow will convert your GPX
-            file to JSON format.
+            Node](https://~exportplaceholderid-docs-url~/workflows/data/file-create/)'s
+            "File Name Template" to the name you wish to give this new file. The
+            file extension should be `.json` as the workflow will convert your
+            GPX file to JSON format.
 
 
             Processing your file can take several seconds. Check the workflow's
             [Debug
-            Log](https://~losant-docs-url~/workflows/outputs/debug/#debug-panel)
+            Log](https://~exportplaceholderid-docs-url~/workflows/outputs/debug/#debug-panel)
             to know when the conversion has completed and the file is available
             for use.
 
@@ -483,7 +484,7 @@ resources:
     triggers:
       - config:
           seconds: 60
-        key: ~losant-flow-routeSimulator-0~-b0fQkfPNzlqW-udxz3nTp
+        key: ~exportplaceholderid-flow-routeSimulator-0~-b0fQkfPNzlqW-udxz3nTp
         meta:
           category: trigger
           description: ''
@@ -498,7 +499,7 @@ resources:
           - - ZDUXmWVuIz
         type: timer
       - config: {}
-        key: ~losant-flow-routeSimulator-0~-Hb1US6xAgmgcoB_JPhy3k
+        key: ~exportplaceholderid-flow-routeSimulator-0~-Hb1US6xAgmgcoB_JPhy3k
         meta:
           category: trigger
           description: ''
@@ -514,7 +515,7 @@ resources:
           - - ZDUXmWVuIz
         type: virtualButton
       - config: {}
-        key: ~losant-flow-routeSimulator-0~-5UavJ4etR8901qmbpxKo-
+        key: ~exportplaceholderid-flow-routeSimulator-0~-5UavJ4etR8901qmbpxKo-
         meta:
           category: trigger
           description: ''
