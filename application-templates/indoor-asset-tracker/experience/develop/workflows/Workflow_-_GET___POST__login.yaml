@@ -6,9 +6,9 @@ resources:
       submissions of login credentials. Managers log in with username and
       password, kiosk log in uses a pin tag on the user.
     enabled: true
-    flowId: ~losant-flow-workflowGetPostLogin-1~
+    flowId: ~exportplaceholderid-flow-workflowGetPostLogin-1~
     globals: []
-    id: ~losant-flowVersion-workflowGetPostLogin-0~
+    id: ~exportplaceholderid-flowVersion-workflowGetPostLogin-0~
     name: Workflow - GET & POST /login
     nodes:
       - config:
@@ -21,7 +21,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-kioskLogIn-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-kioskLogIn-2~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -129,7 +129,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-kioskLogIn-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-kioskLogIn-2~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -224,7 +224,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-managerLogin-7~
+          pageIdTemplate: ~exportplaceholderid-experienceView-managerLogin-7~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -296,7 +296,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-managerLogin-7~
+          pageIdTemplate: ~exportplaceholderid-experienceView-managerLogin-7~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -463,7 +463,7 @@ resources:
         type: GetExperienceUserNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postLogin-2~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin-2~
         meta:
           category: trigger
           description: When a user submits login credentials ...
@@ -476,7 +476,7 @@ resources:
           - - B1XrON5DTW
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getLogin-1~
+        key: ~exportplaceholderid-experienceEndpoint-getLogin-1~
         meta:
           category: trigger
           description: When a user visits one of the login pages ...

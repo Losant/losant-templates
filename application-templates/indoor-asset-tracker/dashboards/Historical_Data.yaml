@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: position-chart
         config:
           additionalAttributes:
@@ -20,17 +20,17 @@ resources:
 
             {{#eq deviceTags.type.[0] 'resident'}}
 
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/residents/{{deviceTags.uniqueId.[0]}}@2x.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/residents/{{deviceTags.uniqueId.[0]}}@2x.png
 
             {{else}}
 
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
 
             {{/eq}}
 
             {{/if}}
           imageUrl: >-
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
           includeArrows: true
           includeLines: true
           pinMode: advanced
@@ -55,7 +55,7 @@ resources:
         startY: 0
         title: 24-Hour Historical View
         width: 4
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: open-event-indicator
         config:
           allowUpdates: true
@@ -80,7 +80,7 @@ resources:
         startY: 4
         title: Warning Events
         width: 1
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: event-list
         config:
           allowUpdates: true
@@ -116,7 +116,7 @@ resources:
         startY: 4
         title: 'New {{ctx.deviceId-0.name}} Events'
         width: 2
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: indicator
         config:
           conditions:
@@ -150,7 +150,7 @@ resources:
         startY: 4
         title: Current Data
         width: 1
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: open-event-indicator
         config:
           allowUpdates: true
@@ -175,7 +175,7 @@ resources:
         startY: 5
         title: Critical Events
         width: 1
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: section-header
         config: {}
         description: >-
@@ -197,13 +197,13 @@ resources:
         startY: 6
         title: 24-Hour Cumulative Usage
         width: 4
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: image-overlay
         config:
           backgroundColor: transparent
           defaultZoom: -0.6667
           imageUrl: >-
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
           overlays:
             - conditions: []
               defaultCondition:
@@ -346,8 +346,8 @@ resources:
         title: '24-Hour {{ctx.deviceId-0.name}} Occupancy'
         width: 4
     contextConfiguration:
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
-        defaultValue: ~losant-device-janeSmith-1~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
+        defaultValue: ~exportplaceholderid-device-janeSmith-1~
         name: deviceId-0
         type: deviceId
         validationConfig:
@@ -355,7 +355,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-historicalData-3~
+    id: ~exportplaceholderid-dashboard-historicalData-3~
     name: Historical Data
     public: false
     refreshRate: 60

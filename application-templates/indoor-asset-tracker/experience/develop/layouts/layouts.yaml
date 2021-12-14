@@ -3,7 +3,7 @@ resources:
   - description: This layout is used to display all pages excluding those containing
       dashboards.. If a non-manager user is logged in and viewing the page, they
       will be logged out after 60 seconds due to the nature of a physical kiosk.
-    id: ~losant-experienceView-containerLayout-9~
+    id: ~exportplaceholderid-experienceView-containerLayout-9~
     localFilename: ./Container_Layout.hbs
     name: Container Layout
     version: develop
@@ -11,7 +11,7 @@ resources:
     viewType: layout
   - description: This layout is used to display dashboards within both the kiosk and
       manager views.
-    id: ~losant-experienceView-dashboardLayout-1~
+    id: ~exportplaceholderid-experienceView-dashboardLayout-1~
     localFilename: ./Dashboard_Layout.hbs
     name: Dashboard Layout
     version: develop

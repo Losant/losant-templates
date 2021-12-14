@@ -5,7 +5,7 @@ resources:
       a two-minute timer.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-workflowDeviceSimulator-0~
+    id: ~exportplaceholderid-flow-workflowDeviceSimulator-0~
     name: Workflow - Device Simulator
     nodes:
       - config:
@@ -59,7 +59,7 @@ resources:
           - - J2NdiS4ojf
         type: RandomNumberNode
       - config:
-          dataTableIdTemplate: ~losant-dataTable-coordinateMap-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-coordinateMap-0~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''
@@ -657,7 +657,8 @@ resources:
     triggers:
       - config:
           seconds: 120
-        key: ~losant-flow-workflowDeviceSimulator-0~-6AeVlQEldrwPZt_azFqlL
+        key: >-
+          ~exportplaceholderid-flow-workflowDeviceSimulator-0~-6AeVlQEldrwPZt_azFqlL
         meta:
           category: trigger
           description: ''
@@ -672,7 +673,8 @@ resources:
           - - tyaSzH4wi1
         type: timer
       - config: {}
-        key: ~losant-flow-workflowDeviceSimulator-0~-l4hixPlkzOa_VFN6vF4Gc
+        key: >-
+          ~exportplaceholderid-flow-workflowDeviceSimulator-0~-l4hixPlkzOa_VFN6vF4Gc
         meta:
           category: trigger
           description: ''

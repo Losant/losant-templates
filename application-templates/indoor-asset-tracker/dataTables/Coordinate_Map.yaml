@@ -24,7 +24,7 @@ resources:
       This is a map of coordinates and room locations. This table is used to
       randomly assign devices to rooms within the Device Simulator workflow. The
       coordinates correlate to locations on the floor map.
-    id: ~losant-dataTable-coordinateMap-0~
+    id: ~exportplaceholderid-dataTable-coordinateMap-0~
     localFilename: ./Coordinate_Map.csv
     name: Coordinate Map
 version: 1

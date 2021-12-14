@@ -24,7 +24,7 @@ resources:
       such as a wheelchair, oxygen concentrator, or floor lift.
     deviceClass: standalone
     deviceName: Equipment Device
-    id: ~losant-deviceRecipe-equipmentDevice-0~
+    id: ~exportplaceholderid-deviceRecipe-equipmentDevice-0~
     name: Equipment Device
     tags:
       - key: type
@@ -55,7 +55,7 @@ resources:
       as a resident or a visitor.
     deviceClass: standalone
     deviceName: Person Device
-    id: ~losant-deviceRecipe-personDevice-1~
+    id: ~exportplaceholderid-deviceRecipe-personDevice-1~
     name: Person Device
     tags:
       - key: type

@@ -5,7 +5,7 @@ resources:
       locations.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-workflowEventAlerting-3~
+    id: ~exportplaceholderid-flow-workflowEventAlerting-3~
     name: Workflow - Event Alerting
     nodes:
       - config:
@@ -45,7 +45,7 @@ resources:
           - - Qvp__Q33rC
         type: CreateEventNode
       - config:
-          dataTableIdTemplate: ~losant-dataTable-coordinateMap-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-coordinateMap-0~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''

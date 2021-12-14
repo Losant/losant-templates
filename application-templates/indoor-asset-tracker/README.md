@@ -11,12 +11,12 @@ This template uses several images to represent various types of equipment, visit
 * Real-time location-based event alerts and monitoring
 
 ## Setup
-To begin using this template, enable the [Device Simulator](/applications/~losant-application-applicationIndoorAssetTracker-0~/workflows/~losant-flow-workflowDeviceSimulator-0~/develop) workflow and the [Event Alerting](/applications/~losant-application-applicationIndoorAssetTracker-0~/workflows/~losant-flow-workflowEventAlerting-3~/develop) workflow.
+To begin using this template, enable the [Device Simulator](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowDeviceSimulator-0~/develop) workflow and the [Event Alerting](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowEventAlerting-3~/develop) workflow.
 
 ## Device Simulation
 This workflow simulates the movement of devices every 15-90 minutes and includes conditional-based logic detailed below.
 
-The devices simulated in this template were made to operate similarly and comparably to BLE or UWB devices in the physical space, much like an [Aruba Meridian](https://docs.losant.com/applications/integrations/#meridian) device.
+The devices simulated in this template were made to operate similarly and comparably to BLE or UWB devices in the physical space, much like an [Aruba Meridian](https://~exportplaceholderid-docs-url~/applications/integrations/#meridian) device.
 
 ## Devices
 
@@ -64,8 +64,8 @@ All users require an `email`, `password`, and a `pin` tag. `Pin` must be a uniqu
 ### Device Recipes
 Device Recipes have been created to assist when extending this template:
 
-- [Equipment Device Recipe](/applications/~losant-application-applicationIndoorAssetTracker-0~/device-recipes/~losant-deviceRecipe-equipmentDevice-0~/properties)
-- [Person Device Recipe](/applications/~losant-application-applicationIndoorAssetTracker-0~/device-recipes/~losant-deviceRecipe-personDevice-1~/properties)
+- [Equipment Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/device-recipes/~exportplaceholderid-deviceRecipe-equipmentDevice-0~/properties)
+- [Person Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/device-recipes/~exportplaceholderid-deviceRecipe-personDevice-1~/properties)
 
 These recipes have been preconfigured with the required tags used to dynamically render values in experiences. These tags are:
 
@@ -83,11 +83,11 @@ These require additions to Losant Files to render correctly in the experience.
 ## Resources
 The following list contains resources related to this template:
 
-* [Dashboard Context Variables](https://docs.losant.com/dashboards/context-variables/)
-* [Experience Dashboard Pages](https://docs.losant.com/experiences/views/#dashboard-pages)
-* [Experience Users](https://docs.losant.com/experiences/users/)
-* [Experience User Tags](https://docs.losant.com/experiences/users/#user-tags)
-* [Data Tables](https://docs.losant.com/data-tables/overview/)
+* [Dashboard Context Variables](https://~exportplaceholderid-docs-url~/dashboards/context-variables/)
+* [Experience Dashboard Pages](https://~exportplaceholderid-docs-url~/experiences/views/#dashboard-pages)
+* [Experience Users](https://~exportplaceholderid-docs-url~/experiences/users/)
+* [Experience User Tags](https://~exportplaceholderid-docs-url~/experiences/users/#user-tags)
+* [Data Tables](https://~exportplaceholderid-docs-url~/data-tables/overview/)
 
 ## License
 

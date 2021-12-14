@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: position-chart
         config:
           additionalAttributes:
@@ -20,18 +20,18 @@ resources:
 
             {{#eq deviceTags.type.[0] 'resident'}}
 
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/residents/{{deviceTags.uniqueId.[0]}}@2x.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/residents/{{deviceTags.uniqueId.[0]}}@2x.png
 
             {{else}}
 
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
 
             {{/eq}}
 
             {{/if}}
 
           imageUrl: >-
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
           includeArrows: false
           includeLines: false
           pinMode: advanced
@@ -56,7 +56,7 @@ resources:
         startY: 0
         title: Current Device Locations
         width: 4
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: event-list
         config:
           allowUpdates: true
@@ -78,7 +78,7 @@ resources:
         startY: 3
         title: New Events
         width: 3
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: open-event-indicator
         config:
           allowUpdates: true
@@ -98,7 +98,7 @@ resources:
         startY: 3
         title: Critical Events
         width: 1
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: open-event-indicator
         config:
           allowUpdates: true
@@ -118,7 +118,7 @@ resources:
         startY: 4
         title: Warning Events
         width: 1
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: device-list
         config:
           additionalAttributes: []
@@ -144,7 +144,7 @@ resources:
         startY: 5
         title: Devices
         width: 4
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: section-header
         config: {}
         description: >-
@@ -165,13 +165,13 @@ resources:
         startY: 6.5
         title: 7 Day Cumulative Resident Usage
         width: 4
-      - applicationId: ~losant-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
         blockType: image-overlay
         config:
           backgroundColor: 'rgba(5, 113, 128, 1)'
           defaultZoom: -0.6666666666666666
           imageUrl: >-
-            https://~losant-files-domain~/~losant-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
           overlays:
             - conditions: []
               defaultCondition:
@@ -323,7 +323,7 @@ resources:
     contextConfiguration: []
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-facilitiesManager-0~
+    id: ~exportplaceholderid-dashboard-facilitiesManager-0~
     name: Facilities Manager
     public: false
     refreshRate: 60

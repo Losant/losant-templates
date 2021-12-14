@@ -5,7 +5,7 @@ resources:
       redirected to /login.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-get-0~
+    id: ~exportplaceholderid-experienceEndpoint-get-0~
     method: get
     route: /
     unauthorizedReply:
@@ -19,7 +19,7 @@ resources:
       (/login?path=kiosk).
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getDevicesType-5~
+    id: ~exportplaceholderid-experienceEndpoint-getDevicesType-5~
     method: get
     route: /devices/{type}
     unauthorizedReply:
@@ -33,7 +33,7 @@ resources:
       (powered by the workflow).
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogin-1~
+    id: ~exportplaceholderid-experienceEndpoint-getLogin-1~
     method: get
     route: /login
     version: develop
@@ -42,7 +42,7 @@ resources:
       redirect to the /login endpoint.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogout-3~
+    id: ~exportplaceholderid-experienceEndpoint-getLogout-3~
     method: get
     route: /logout
     version: develop
@@ -53,7 +53,7 @@ resources:
       (/login?path=kiosk).
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getType-4~
+    id: ~exportplaceholderid-experienceEndpoint-getType-4~
     method: get
     route: /type
     unauthorizedReply:
@@ -68,7 +68,7 @@ resources:
       redirected back to the login page with a message about what went wrong.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postLogin-2~
+    id: ~exportplaceholderid-experienceEndpoint-postLogin-2~
     method: post
     route: /login
     version: develop

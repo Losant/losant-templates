@@ -5,7 +5,7 @@ resources:
       assets in a physical environment.
     filesPath: ./files
     globals: []
-    id: ~losant-application-applicationIndoorAssetTracker-0~
+    id: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
     name: Indoor Asset Tracker
     readmePath: ./README.md
     imagePath: ./preview.png
