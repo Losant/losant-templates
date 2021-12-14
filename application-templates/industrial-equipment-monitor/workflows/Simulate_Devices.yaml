@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~losant-flow-simulateDevices-0~
+    id: ~exportplaceholderid-flow-simulateDevices-0~
     name: Simulate Devices
     nodes:
       - config:
@@ -671,7 +671,7 @@ resources:
           - - rNxaCsYSEe
         type: RandomNumberNode
       - config:
-          dataTableIdTemplate: ~losant-dataTable-warningsAndAlarms-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-warningsAndAlarms-0~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''
@@ -869,7 +869,7 @@ resources:
     triggers:
       - config:
           seconds: 120
-        key: ~losant-flow-simulateDevices-0~-u17poimTNwmJK1e0AzDDR
+        key: ~exportplaceholderid-flow-simulateDevices-0~-u17poimTNwmJK1e0AzDDR
         meta:
           category: trigger
           description: ''
@@ -884,7 +884,7 @@ resources:
           - - vSEb5NLcQ0
         type: timer
       - config: {}
-        key: ~losant-flow-simulateDevices-0~-1hvsMO4DlrfMlXDHm28sO
+        key: ~exportplaceholderid-flow-simulateDevices-0~-1hvsMO4DlrfMlXDHm28sO
         meta:
           category: trigger
           description: ''

@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: map
         config:
           additionalAttributes: null
@@ -71,7 +71,7 @@ resources:
         startY: 0
         title: Location
         width: 2
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: indicator
         config:
           conditions:
@@ -102,7 +102,7 @@ resources:
         startY: 0
         title: Shipment Status
         width: 2
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: gauge
         config:
           conditions:
@@ -131,7 +131,7 @@ resources:
         startY: 1
         title: Temperature
         width: 0.5
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: gauge
         config:
           conditions:
@@ -161,7 +161,7 @@ resources:
         startY: 1
         title: Battery
         width: 0.5
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: gauge
         config:
           conditions:
@@ -187,7 +187,7 @@ resources:
         startY: 1
         title: Shock
         width: 1
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: gauge
         config:
           gaugeMax: ''
@@ -209,7 +209,7 @@ resources:
         startY: 2
         title: Signal Strength
         width: 0.5
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: gauge
         config:
           conditions:
@@ -235,7 +235,7 @@ resources:
         startY: 2
         title: Orientation
         width: 1
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: event-list
         config:
           columns:
@@ -279,8 +279,8 @@ resources:
         title: Tracker Events Last 24 Hours
         width: 4
     contextConfiguration:
-      - applicationId: ~losant-application-applicationAssetTracker-0~
-        defaultValue: ~losant-device-tracker0000-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+        defaultValue: ~exportplaceholderid-device-tracker0000-0~
         name: deviceId
         type: deviceId
         validationConfig:
@@ -291,7 +291,7 @@ resources:
         validationEnabled: true
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-detailDashboard-0~
+    id: ~exportplaceholderid-dashboard-detailDashboard-0~
     name: Detail Dashboard
     public: false
     refreshRate: 30

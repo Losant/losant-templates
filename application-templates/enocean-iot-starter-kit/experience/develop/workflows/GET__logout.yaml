@@ -4,9 +4,9 @@ resources:
       Removes the user's authentication cookie and redirects the user back to
       the login page.
     enabled: true
-    flowId: ~losant-flow-getLogout-2~
+    flowId: ~exportplaceholderid-flow-getLogout-2~
     globals: []
-    id: ~losant-flowVersion-getLogout-2~
+    id: ~exportplaceholderid-flowVersion-getLogout-2~
     name: GET /logout
     nodes:
       - config:
@@ -63,7 +63,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getLogout-3~
+        key: ~exportplaceholderid-experienceEndpoint-getLogout-3~
         meta:
           category: trigger
           description: ''

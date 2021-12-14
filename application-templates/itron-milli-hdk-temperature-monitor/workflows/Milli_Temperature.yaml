@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~losant-flow-milliTemperature-0~
+    id: ~exportplaceholderid-flow-milliTemperature-0~
     name: Milli Temperature
     nodes:
       - config:
@@ -187,7 +187,7 @@ resources:
               valueTemplate: '{{ data.body.tenantId }}'
           nameTemplate: 'Milli HDK {{data.body.eventPayload.macId}}'
           parentIdTemplate: ''
-          recipeIdTemplate: ~losant-deviceRecipe-milliTempSensor-0~
+          recipeIdTemplate: ~exportplaceholderid-deviceRecipe-milliTempSensor-0~
           resultPath: working.currentDevice
           tagsAsObject: true
         id: 7qoQv6p80Y
@@ -283,7 +283,7 @@ resources:
           bodyTemplate: |-
             {
               "eventType": "observationIngested",
-              "webhookUrl": "https://~losant-triggers-url~/webhooks/{{ working.losantWebhook.result.token }}",
+              "webhookUrl": "https://~exportplaceholderid-triggers-url~/webhooks/{{ working.losantWebhook.result.token }}",
             }
           caCertTemplate: ''
           disableSSLVerification: false
@@ -324,7 +324,7 @@ resources:
 
             1. Configure your `clientId`, `clientSecret`, and `solutionName`
             within [Application
-            Globals](https://~losant-docs-url~/applications/overview/#application-globals).
+            Globals](https://~exportplaceholderid-docs-url~/applications/overview/#application-globals).
 
             2. Enable this workflow by clicking the "Enable" button in the
             bottom right corner of this editor.
@@ -345,7 +345,7 @@ resources:
           params:
             - name: webhookId
               type: string
-              value: ~losant-webhook-milliTemperature-0~
+              value: ~exportplaceholderid-webhook-milliTemperature-0~
           resource: webhook
           responsePath: working.losantWebhook
         id: bwrHJ5x3bv
@@ -398,7 +398,7 @@ resources:
 
             After you've pushed the Virtual Button above, a few seconds later
             you should see a [Debug
-            Log](https://~losant-docs-url~/workflows/outputs/debug/#debug-panel)
+            Log](https://~exportplaceholderid-docs-url~/workflows/outputs/debug/#debug-panel)
             message appear in the right column. Ensure the following:
 
 
@@ -485,7 +485,7 @@ resources:
           annotationText: >-
             If a device has not received a state report for 24 hours, this flow
             marks that device as "disconnected" within the [Device Connection
-            Log](https://~losant-docs-url~/devices/overview/#connection-log).
+            Log](https://~exportplaceholderid-docs-url~/devices/overview/#connection-log).
           category: annotation
           height: 160
           label: Note
@@ -497,7 +497,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-flow-milliTemperature-0~--K2ag1Yi9_KlGAJHrebqv
+        key: ~exportplaceholderid-flow-milliTemperature-0~--K2ag1Yi9_KlGAJHrebqv
         meta:
           category: trigger
           description: ''
@@ -513,7 +513,7 @@ resources:
           - - bwrHJ5x3bv
         type: virtualButton
       - config: {}
-        key: ~losant-webhook-milliTemperature-0~
+        key: ~exportplaceholderid-webhook-milliTemperature-0~
         meta:
           category: trigger
           description: ''

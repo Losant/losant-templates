@@ -3,7 +3,7 @@ resources:
   - description: Receives sensor payloads from The Things Network HTTP Integration.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-ttnReceiver-0~
+    id: ~exportplaceholderid-flow-ttnReceiver-0~
     name: TTN Receiver
     nodes:
       - config:
@@ -142,7 +142,7 @@ resources:
         outputIds: []
         type: AnnotationNode
       - config:
-          customNodeId: ~losant-flow-radioBridge-1~
+          customNodeId: ~exportplaceholderid-flow-radioBridge-1~
           customNodeVersion: default
           fields:
             - id: raw
@@ -151,7 +151,7 @@ resources:
         id: CgMpU8C8zW
         meta:
           category: customNodeExecute
-          customNodeId: ~losant-flow-radioBridge-1~
+          customNodeId: ~exportplaceholderid-flow-radioBridge-1~
           description: ''
           id: 4_RiUH7XZE
           label: Radio Bridge
@@ -326,7 +326,7 @@ resources:
               valueTemplate: '{{data.body.dev_id}}'
           nameTemplate: ''
           parentIdTemplate: ''
-          recipeIdTemplate: ~losant-deviceRecipe-radioBridgeRbs306Vm30-0~
+          recipeIdTemplate: ~exportplaceholderid-deviceRecipe-radioBridgeRbs306Vm30-0~
           resultPath: ''
           tagsAsObject: false
         id: ohW8jBUrr0
@@ -356,7 +356,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-webhook-theThingsNetwork-0~
+        key: ~exportplaceholderid-webhook-theThingsNetwork-0~
         meta:
           category: trigger
           description: ''
@@ -369,7 +369,7 @@ resources:
           - - dvI7vHWZYq
         type: webhook
       - config: {}
-        key: ~losant-flow-ttnReceiver-0~-UaD7td7mPGZGY9DisS6gb
+        key: ~exportplaceholderid-flow-ttnReceiver-0~-UaD7td7mPGZGY9DisS6gb
         meta:
           category: trigger
           description: ''
@@ -390,7 +390,7 @@ resources:
           - - Q-gDDQVuTK
         type: virtualButton
       - config: {}
-        key: ~losant-flow-ttnReceiver-0~-10ZBceaTuhcJ8sXGjcxTF
+        key: ~exportplaceholderid-flow-ttnReceiver-0~-10ZBceaTuhcJ8sXGjcxTF
         meta:
           category: trigger
           description: ''

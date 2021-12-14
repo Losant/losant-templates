@@ -5,7 +5,7 @@ resources:
       the result on a device.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-weatherGrabber-0~
+    id: ~exportplaceholderid-flow-weatherGrabber-0~
     name: Weather Grabber
     nodes:
       - config:
@@ -66,7 +66,7 @@ resources:
               valueTemplate: '{{ working.weather.body.visibility }}'
             - key: wind-speed
               valueTemplate: '{{ working.weather.body.wind.speed }}'
-          deviceId: ~losant-device-weather-0~
+          deviceId: ~exportplaceholderid-device-weather-0~
           deviceIdTemplateType: stringTemplate
           resultPath: ''
           timeSourceType: payloadTime
@@ -159,7 +159,7 @@ resources:
     triggers:
       - config:
           seconds: 120
-        key: ~losant-flow-weatherGrabber-0~-5pfXZf5nyqEFj1X3UFyBC
+        key: ~exportplaceholderid-flow-weatherGrabber-0~-5pfXZf5nyqEFj1X3UFyBC
         meta:
           category: trigger
           description: ''
@@ -174,7 +174,7 @@ resources:
           - - KJ3WtFitaQ
         type: timer
       - config: {}
-        key: ~losant-flow-weatherGrabber-0~-IwWoDau5gmMKIgE9bAe0i
+        key: ~exportplaceholderid-flow-weatherGrabber-0~-IwWoDau5gmMKIgE9bAe0i
         meta:
           category: trigger
           description: ''

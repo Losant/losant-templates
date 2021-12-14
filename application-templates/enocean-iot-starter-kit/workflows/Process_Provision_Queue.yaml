@@ -3,11 +3,11 @@ resources:
   - description: Processes the provision queue and sends requests to Edge Compute device.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-processProvisionQueue-4~
+    id: ~exportplaceholderid-flow-processProvisionQueue-4~
     name: Process Provision Queue
     nodes:
       - config:
-          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-provisionQueue-0~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''
@@ -78,7 +78,7 @@ resources:
           payloadTemplate: '{{jsonEncode working.queueItem.value}}'
           payloadTemplateType: json
           sendToDeviceIds:
-            - ~losant-device-edgeCompute-0~
+            - ~exportplaceholderid-device-edgeCompute-0~
           sendToDeviceTags: []
         id: rZRtaH7OMS
         meta:
@@ -154,7 +154,7 @@ resources:
         outputIds: []
         type: AnnotationNode
       - config:
-          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-provisionQueue-0~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''
@@ -224,7 +224,7 @@ resources:
               valueTemplate: '{{working.provisionRequest.items.[0].friendlyID}}'
             - keyTemplate: locationId
               valueTemplate: '{{working.provisionRequest.items.[0].location}}'
-          gatewayIdTemplate: ~losant-device-edgeCompute-0~
+          gatewayIdTemplate: ~exportplaceholderid-device-edgeCompute-0~
           keepDuplicatesTemplate: false
           nameTemplate: '{{working.provisionRequest.items.[0].eep}}'
           parentIdTemplate: ''
@@ -244,7 +244,7 @@ resources:
           - - lNJa42xjev
         type: CreateDeviceNode
       - config:
-          dataTableIdTemplate: ~losant-dataTable-provisionQueue-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-provisionQueue-0~
           resultPath: ''
           rowIdTemplate: '{{data}}'
         id: lNJa42xjev
@@ -292,7 +292,8 @@ resources:
     triggers:
       - config:
           seconds: 60
-        key: ~losant-flow-processProvisionQueue-4~-unUm96Tc5ZFA7PQb53VEn
+        key: >-
+          ~exportplaceholderid-flow-processProvisionQueue-4~-unUm96Tc5ZFA7PQb53VEn
         meta:
           category: trigger
           description: ''
@@ -302,11 +303,11 @@ resources:
           uiId: DSxJZEHtiK
           x: 40
           'y': 40
-        outputIds:
-          - - gcz6tuA38A
+        outputIds: []
         type: timer
       - config: {}
-        key: ~losant-flow-processProvisionQueue-4~-QnqktedYbSM-Y1iVI7szx
+        key: >-
+          ~exportplaceholderid-flow-processProvisionQueue-4~-QnqktedYbSM-Y1iVI7szx
         meta:
           category: trigger
           description: ''

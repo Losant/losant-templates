@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -10,7 +10,7 @@ resources:
         startY: 0
         title: Voltage Sensor
         width: 4
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: graph
         config:
           duration: 86400000
@@ -44,7 +44,7 @@ resources:
         startY: 0.5
         title: Sensor Voltage
         width: 3
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -71,7 +71,7 @@ resources:
         startY: 0.5
         title: Current Voltage
         width: 1
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -98,7 +98,7 @@ resources:
         startY: 1.5
         title: Max Volts (24 hours)
         width: 1
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -125,7 +125,7 @@ resources:
         startY: 2.5
         title: Min Volts (24 hours)
         width: 1
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -134,7 +134,7 @@ resources:
         startY: 3.5
         title: Device
         width: 4
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: graph
         config:
           duration: 86400000
@@ -168,7 +168,7 @@ resources:
         startY: 4
         title: Battery Voltage
         width: 1.5
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -197,7 +197,7 @@ resources:
         startY: 4
         title: Battery Voltage
         width: 0.5
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: device-state-table
         config:
           attributes:
@@ -227,7 +227,7 @@ resources:
         startY: 4
         title: Tamper History
         width: 1.5
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
         blockType: indicator
         config:
           conditions:
@@ -254,8 +254,8 @@ resources:
         title: Tamper
         width: 0.5
     contextConfiguration:
-      - applicationId: ~losant-application-applicationTheThingsNetwork-0~
-        defaultValue: ~losant-device-radioBridgeRbs306Vm30-1~
+      - applicationId: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
+        defaultValue: ~exportplaceholderid-device-radioBridgeRbs306Vm30-1~
         name: device
         type: deviceId
         validationConfig:
@@ -263,7 +263,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-radioBridgeVoltageSensor-0~
+    id: ~exportplaceholderid-dashboard-radioBridgeVoltageSensor-0~
     name: Radio Bridge Voltage Sensor
     public: false
     refreshRate: 60

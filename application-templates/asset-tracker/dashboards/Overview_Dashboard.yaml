@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: map
         config:
           additionalAttributes: null
@@ -73,7 +73,7 @@ resources:
         startY: 0
         title: Shipments
         width: 4
-      - applicationId: ~losant-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
         blockType: event-list
         config:
           allowUpdates: true
@@ -115,7 +115,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-overviewDashboard-1~
+    id: ~exportplaceholderid-dashboard-overviewDashboard-1~
     name: Overview Dashboard
     public: false
     refreshRate: 60

@@ -35,7 +35,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~losant-device-tracker0000-0~
+    id: ~exportplaceholderid-device-tracker0000-0~
     name: Tracker 0000
     tags:
       - key: simId
@@ -75,7 +75,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~losant-device-tracker0001-1~
+    id: ~exportplaceholderid-device-tracker0001-1~
     name: Tracker 0001
     tags:
       - key: simId
@@ -117,7 +117,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~losant-device-tracker0002-2~
+    id: ~exportplaceholderid-device-tracker0002-2~
     name: Tracker 0002
     tags:
       - key: simId
@@ -159,7 +159,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~losant-device-tracker0003-3~
+    id: ~exportplaceholderid-device-tracker0003-3~
     name: Tracker 0003
     tags:
       - key: simId
@@ -201,7 +201,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~losant-device-tracker0004-4~
+    id: ~exportplaceholderid-device-tracker0004-4~
     name: Tracker 0004
     tags:
       - key: simId

@@ -5,7 +5,7 @@ resources:
       every minute.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-paperMachineDataSimulator-0~
+    id: ~exportplaceholderid-flow-paperMachineDataSimulator-0~
     name: Paper Machine Data Simulator
     nodes:
       - config:
@@ -1968,7 +1968,8 @@ resources:
     triggers:
       - config:
           seconds: 60
-        key: ~losant-flow-paperMachineDataSimulator-0~-Dj8pq2cY3qaCcUQ6aBbQn
+        key: >-
+          ~exportplaceholderid-flow-paperMachineDataSimulator-0~-Dj8pq2cY3qaCcUQ6aBbQn
         meta:
           category: trigger
           description: ''
@@ -1983,7 +1984,8 @@ resources:
           - - YhEurDgcIO
         type: timer
       - config: {}
-        key: ~losant-flow-paperMachineDataSimulator-0~-p9N6MA233tAYiGEmB8WNo
+        key: >-
+          ~exportplaceholderid-flow-paperMachineDataSimulator-0~-p9N6MA233tAYiGEmB8WNo
         meta:
           category: trigger
           description: ''

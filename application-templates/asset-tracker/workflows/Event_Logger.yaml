@@ -29,7 +29,7 @@ resources:
             "level": "warning"
           }
         key: orientationEvent
-    id: ~losant-flow-eventLogger-1~
+    id: ~exportplaceholderid-flow-eventLogger-1~
     name: Event Logger
     nodes:
       - config:
@@ -318,7 +318,7 @@ resources:
           - - pldP6dEhUY
         type: deviceTag
       - config: {}
-        key: ~losant-flow-eventLogger-1~-NfV48s66ILh1erSIoVFKk
+        key: ~exportplaceholderid-flow-eventLogger-1~-NfV48s66ILh1erSIoVFKk
         meta:
           category: trigger
           description: ''

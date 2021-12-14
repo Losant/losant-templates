@@ -13,7 +13,7 @@ resources:
       - constraint: required
         dataType: string
         name: additional_information
-    id: ~losant-dataTable-warningsAndAlarms-0~
+    id: ~exportplaceholderid-dataTable-warningsAndAlarms-0~
     localFilename: ./warnings_and_alarms.csv
     name: warnings_and_alarms
 version: 1

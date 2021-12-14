@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~losant-flow-simulator-0~
+    id: ~exportplaceholderid-flow-simulator-0~
     name: Simulator
     nodes:
       - config:
@@ -20,12 +20,11 @@ resources:
           responsePath: working.turbineData
           timeoutTemplate: ''
           uriTemplate: >-
-            https://~losant-files-domain~/~losant-application-applicationElipsaPredictiveMaintenance-0~/TurbineEngine.csv
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~/TurbineEngine.csv
         id: jjjcclQvn6
         meta:
           category: data
           description: ''
-          id: jjjcclQvn6
           label: HTTP
           name: http
           x: 180
@@ -40,7 +39,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: zZSx_Kp2xP
           label: Debug
           name: debug
           x: 280
@@ -56,7 +54,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: 6mAkoXmbMi
           label: 'CSV: Decode'
           name: csv-decode
           x: 280
@@ -70,7 +67,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: TMtTGnCpkf
           label: 200 OK?
           name: conditional
           x: 180
@@ -86,7 +82,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: zZSx_Kp2xP
           label: Debug
           name: debug
           x: 80
@@ -102,7 +97,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: nlz1tbQ0n9
           label: 'Storage: Set Value'
           name: store-value
           x: 280
@@ -118,7 +112,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: dlGGl90Zvi
           label: Math
           name: math
           x: 280
@@ -136,7 +129,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: hRzN4vo77S
           label: Mutate
           name: mutate
           x: 280
@@ -147,7 +139,7 @@ resources:
       - config:
           attrDataMethod: payloadPath
           attrPayloadPath: working.row
-          deviceId: ~losant-device-turbofan-0~
+          deviceId: ~exportplaceholderid-device-turbofan-0~
           deviceIdTemplateType: stringTemplate
           resultPath: ''
           timeSourceType: payloadTime
@@ -155,7 +147,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 3WrEs6c7Qr
           label: 'Device: State'
           name: device-state
           x: 280
@@ -265,12 +256,11 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-flow-simulator-0~-IFN8v4xb6NPAwsndCfGKD
+        key: ~exportplaceholderid-flow-simulator-0~-IFN8v4xb6NPAwsndCfGKD
         meta:
           category: trigger
           description: ''
           deviceId: null
-          id: fDdN-1RGnD
           label: Virtual Button
           name: virtualButton
           payload: ''
@@ -282,11 +272,10 @@ resources:
         type: virtualButton
       - config:
           seconds: 60
-        key: ~losant-flow-simulator-0~-WMJIQNcFv863Eo7aZZ0k7
+        key: ~exportplaceholderid-flow-simulator-0~-WMJIQNcFv863Eo7aZZ0k7
         meta:
           category: trigger
           description: ''
-          id: 2BHnXMmL5G
           label: Timer
           name: timer
           timerTypeSelect: seconds

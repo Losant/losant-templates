@@ -3,7 +3,7 @@ resources:
   - email: test.user@example.com
     experienceGroupIds: []
     firstName: Test
-    id: ~losant-experienceUser-testUserExampleCom-0~
+    id: ~exportplaceholderid-experienceUser-testUserExampleCom-0~
     lastName: User
     userTags: {}
     password: qwerty123

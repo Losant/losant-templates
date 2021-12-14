@@ -5,12 +5,12 @@ resources:
       redirected to /login.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-get-4~
+    id: ~exportplaceholderid-experienceEndpoint-get-4~
     method: get
     route: /
     staticReply:
       type: page
-      value: ~losant-experienceView-pageDashboardAvailable-3~
+      value: ~exportplaceholderid-experienceView-pageDashboardAvailable-3~
     unauthorizedReply:
       statusCode: 302
       type: redirect
@@ -19,7 +19,7 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getHistory-2~
+    id: ~exportplaceholderid-experienceEndpoint-getHistory-2~
     method: get
     route: /history
     unauthorizedReply:
@@ -32,7 +32,7 @@ resources:
       logged in will get redirected to the home page (powered by the workflow).
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogin-1~
+    id: ~exportplaceholderid-experienceEndpoint-getLogin-1~
     method: get
     route: /login
     version: develop
@@ -41,7 +41,7 @@ resources:
       redirect to the /login endpoint.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogout-0~
+    id: ~exportplaceholderid-experienceEndpoint-getLogout-0~
     method: get
     route: /logout
     version: develop
@@ -52,7 +52,7 @@ resources:
       redirected back to the login page with a message about what went wrong.
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postLogin-3~
+    id: ~exportplaceholderid-experienceEndpoint-postLogin-3~
     method: post
     route: /login
     version: develop

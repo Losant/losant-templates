@@ -3,7 +3,7 @@ resources:
   - email: employee@example.com
     experienceGroupIds: []
     firstName: John
-    id: ~losant-experienceUser-employeeExampleCom-0~
+    id: ~exportplaceholderid-experienceUser-employeeExampleCom-0~
     lastName: Smith
     userTags:
       role: employee
@@ -11,7 +11,7 @@ resources:
   - email: manager@example.com
     experienceGroupIds: []
     firstName: Jane
-    id: ~losant-experienceUser-managerExampleCom-1~
+    id: ~exportplaceholderid-experienceUser-managerExampleCom-1~
     lastName: Smith
     userTags:
       role: manager

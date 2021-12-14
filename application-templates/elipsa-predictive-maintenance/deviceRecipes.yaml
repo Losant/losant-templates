@@ -120,7 +120,7 @@ resources:
     deviceDescription: Represents the attributes found in the Turbofan dataset from
       NASA's Prognostic Data Repository.
     deviceName: Turbofan
-    id: ~losant-deviceRecipe-turbofan-0~
+    id: ~exportplaceholderid-deviceRecipe-turbofan-0~
     name: Turbofan
     tags: []
 version: 1

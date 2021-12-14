@@ -1,13 +1,13 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~losant-experienceView-componentDeviceList-4~
+    id: ~exportplaceholderid-experienceView-componentDeviceList-4~
     localFilename: ./component-device-list.hbs
     name: component-device-list
     version: develop
     viewTags: {}
     viewType: component
-  - id: ~losant-experienceView-cssTemplates-5~
+  - id: ~exportplaceholderid-experienceView-cssTemplates-5~
     localFilename: ./css-templates.hbs
     name: css-templates
     version: develop

@@ -58,7 +58,7 @@ resources:
     description: Industrial power generator.
     deviceClass: standalone
     deviceName: Device from recipe Generator
-    id: ~losant-deviceRecipe-generator-0~
+    id: ~exportplaceholderid-deviceRecipe-generator-0~
     name: Generator
     tags: []
 version: 1

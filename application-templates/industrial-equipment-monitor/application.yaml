@@ -5,7 +5,7 @@ resources:
       customers and users.
     filesPath: ./files
     globals: []
-    id: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+    id: ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
     name: Industrial Equipment Monitor
     readmePath: ./README.md
     imagePath: ./preview.png

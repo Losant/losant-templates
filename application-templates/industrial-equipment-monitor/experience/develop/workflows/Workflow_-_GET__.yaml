@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-workflowGet-1~
+    flowId: ~exportplaceholderid-flow-workflowGet-1~
     globals: []
-    id: ~losant-flowVersion-workflowGet-0~
+    id: ~exportplaceholderid-flowVersion-workflowGet-0~
     name: Workflow - GET /
     nodes:
       - config:
@@ -13,7 +13,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-pageDashboardDevice-3~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardDevice-3~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -185,7 +185,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-pageDashboardOverview-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardOverview-2~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -240,7 +240,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-get-1~
+        key: ~exportplaceholderid-experienceEndpoint-get-1~
         meta:
           category: trigger
           description: ''

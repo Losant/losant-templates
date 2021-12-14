@@ -2,20 +2,20 @@ resourceType: ExperienceUser
 resources:
   - email: kanarra@example.com
     experienceGroupIds:
-      - ~losant-experienceGroup-kanarra-0~
-    id: ~losant-experienceUser-kanarraExampleCom-0~
+      - ~exportplaceholderid-experienceGroup-kanarra-0~
+    id: ~exportplaceholderid-experienceUser-kanarraExampleCom-0~
     userTags: {}
     password: qwerty123
   - email: sadler-isberg@example.com
     experienceGroupIds:
-      - ~losant-experienceGroup-sadlerIsberg-1~
-    id: ~losant-experienceUser-sadlerIsbergExampleCom-1~
+      - ~exportplaceholderid-experienceGroup-sadlerIsberg-1~
+    id: ~exportplaceholderid-experienceUser-sadlerIsbergExampleCom-1~
     userTags: {}
     password: qwerty123
   - email: tekton-health@example.com
     experienceGroupIds:
-      - ~losant-experienceGroup-tektonHealth-2~
-    id: ~losant-experienceUser-tektonHealthExampleCom-2~
+      - ~exportplaceholderid-experienceGroup-tektonHealth-2~
+    id: ~exportplaceholderid-experienceUser-tektonHealthExampleCom-2~
     userTags: {}
     password: qwerty123
 version: 1

@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Handles both the GET and POST requests for user authentication.
     enabled: true
-    flowId: ~losant-flow-getPostLogin-1~
+    flowId: ~exportplaceholderid-flow-getPostLogin-1~
     globals: []
-    id: ~losant-flowVersion-getPostLogin-1~
+    id: ~exportplaceholderid-flowVersion-getPostLogin-1~
     name: GET & POST /login
     nodes:
       - config:
@@ -40,7 +40,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-pageLogin-4~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageLogin-4~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -161,7 +161,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-pageLogin-4~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageLogin-4~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -263,7 +263,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postLogin-4~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin-4~
         meta:
           category: trigger
           description: When a user submits login credentials ...
@@ -276,7 +276,7 @@ resources:
           - - KwKCZ598oj
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getLogin-2~
+        key: ~exportplaceholderid-experienceEndpoint-getLogin-2~
         meta:
           category: trigger
           description: When a user visits the login page ...

@@ -5,7 +5,7 @@ resources:
       every hour.
     flowClass: cloud
     globals: []
-    id: ~losant-flow-oeeCalculations-1~
+    id: ~exportplaceholderid-flow-oeeCalculations-1~
     name: OEE Calculations
     nodes:
       - config:
@@ -613,7 +613,7 @@ resources:
         type: MutateNode
     triggers:
       - config: {}
-        key: ~losant-flow-oeeCalculations-1~-Fe2ZpHW9gawOw8lL0Ekdt
+        key: ~exportplaceholderid-flow-oeeCalculations-1~-Fe2ZpHW9gawOw8lL0Ekdt
         meta:
           category: trigger
           description: ''
@@ -630,7 +630,7 @@ resources:
         type: virtualButton
       - config:
           seconds: 3600
-        key: ~losant-flow-oeeCalculations-1~-i0ALfbFIwtdvmgGLBZKG9
+        key: ~exportplaceholderid-flow-oeeCalculations-1~-i0ALfbFIwtdvmgGLBZKG9
         meta:
           category: trigger
           description: ''

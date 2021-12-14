@@ -24,8 +24,8 @@ resources:
       Modbus RTU temperature and humidity sensor:
       https://www.amazon.com/dp/B078NRYBVZ
     deviceName: Modbus RTU Sensor
-    gatewayId: ~losant-device-lannerGateway-0~
-    id: ~losant-deviceRecipe-modbusRtuSensor-0~
+    gatewayId: ~exportplaceholderid-device-lannerGateway-0~
+    id: ~exportplaceholderid-deviceRecipe-modbusRtuSensor-0~
     name: Modbus RTU Sensor
     tags:
       - key: serial_path
@@ -55,8 +55,8 @@ resources:
     deviceClass: peripheral
     deviceDescription: Modbus TCP sensor. Designed to interact with the Modbus TCP simulator.
     deviceName: Modbus TCP Sensor 01
-    gatewayId: ~losant-device-lannerGateway-0~
-    id: ~losant-deviceRecipe-modbusTcpSensor-1~
+    gatewayId: ~exportplaceholderid-device-lannerGateway-0~
+    id: ~exportplaceholderid-deviceRecipe-modbusTcpSensor-1~
     name: Modbus TCP Sensor
     tags:
       - key: address

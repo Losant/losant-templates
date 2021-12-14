@@ -4,9 +4,9 @@ resources:
       A workflow managing the login page - both requests to view the page as
       well as submissions of login credentials.
     enabled: true
-    flowId: ~losant-flow-loginLogout-3~
+    flowId: ~exportplaceholderid-flow-loginLogout-3~
     globals: []
-    id: ~losant-flowVersion-loginLogout-1~
+    id: ~exportplaceholderid-flowVersion-loginLogout-1~
     name: Login / Logout
     nodes:
       - config:
@@ -145,7 +145,7 @@ resources:
           cookieInfo: []
           headerInfo: []
           layoutIdTemplate: ''
-          pageIdTemplate: ~losant-experienceView-pageLogin-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageLogin-1~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -195,7 +195,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postLogin-1~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin-1~
         meta:
           category: trigger
           description: When a user submits login credentials ...
@@ -208,7 +208,7 @@ resources:
           - - B1XrON5DTW
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getLogin-3~
+        key: ~exportplaceholderid-experienceEndpoint-getLogin-3~
         meta:
           category: trigger
           description: When a user visits the login page ...
@@ -221,7 +221,7 @@ resources:
           - - B1XrON5DTW
         type: endpoint
       - config: {}
-        key: ~losant-experienceEndpoint-getLogout-5~
+        key: ~exportplaceholderid-experienceEndpoint-getLogout-5~
         meta:
           category: trigger
           description: >-

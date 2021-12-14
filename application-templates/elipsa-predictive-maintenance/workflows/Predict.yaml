@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~losant-flow-predict-1~
+    id: ~exportplaceholderid-flow-predict-1~
     name: Predict
     nodes:
       - config:
@@ -107,7 +107,7 @@ resources:
               valueTemplate: ''
             - key: time_in_cycles
               valueTemplate: ''
-          deviceId: ~losant-device-turbofan-0~
+          deviceId: ~exportplaceholderid-device-turbofan-0~
           deviceIdTemplateType: stringTemplate
           resultPath: ''
           timeSourceType: payloadTime
@@ -294,7 +294,7 @@ resources:
           attributeBlacklist:
             - anomaly_score
             - prediction
-        key: ~losant-device-turbofan-0~
+        key: ~exportplaceholderid-device-turbofan-0~
         meta:
           allowedAttributeType: attributeBlacklist
           category: trigger

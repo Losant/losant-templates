@@ -1,8 +1,9 @@
 resourceType: Webhook
 resources:
-  - id: ~losant-webhook-milliTemperature-0~
+  - id: ~exportplaceholderid-webhook-milliTemperature-0~
     name: Milli Temperature
     responseCode: 200
+    token: ~exportplaceholderid-webhookToken-milliTemperature-0~
     verificationCode: ''
     verificationType: none
     waitForReply: false

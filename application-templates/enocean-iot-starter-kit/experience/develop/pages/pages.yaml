@@ -1,8 +1,8 @@
 resourceType: ExperienceView
 resources:
   - description: Created for Endpoint GET /.
-    id: ~losant-experienceView-pageHome-6~
-    layoutId: ~losant-experienceView-fullWidthTwoColumns-1~
+    id: ~exportplaceholderid-experienceView-pageHome-6~
+    layoutId: ~exportplaceholderid-experienceView-fullWidthTwoColumns-1~
     localFilename: ./page-home.hbs
     name: page-home
     version: develop
@@ -10,16 +10,16 @@ resources:
     viewType: page
   - description: A basic login form that's designed to accept an experience user's
       email and password. This form submits back to the POST /tl-login endpoint.
-    id: ~losant-experienceView-pageLogin-4~
-    layoutId: ~losant-experienceView-narrowWidthSingleColumn-2~
+    id: ~exportplaceholderid-experienceView-pageLogin-4~
+    layoutId: ~exportplaceholderid-experienceView-narrowWidthSingleColumn-2~
     localFilename: ./page-login.hbs
     name: page-login
     version: develop
     viewTags: {}
     viewType: page
   - description: ""
-    id: ~losant-experienceView-pageProvision-5~
-    layoutId: ~losant-experienceView-fixedWidthSingleColumn-0~
+    id: ~exportplaceholderid-experienceView-pageProvision-5~
+    layoutId: ~exportplaceholderid-experienceView-fixedWidthSingleColumn-0~
     localFilename: ./page-provision.hbs
     name: page-provision
     version: develop

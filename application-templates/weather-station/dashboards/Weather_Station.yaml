@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: gauge
         config:
           gaugeType: number
@@ -12,7 +12,7 @@ resources:
             attribute: temp
             color: '#8db319'
             deviceIds:
-              - ~losant-device-weather-0~
+              - ~exportplaceholderid-device-weather-0~
             deviceTags: []
             label: ˚C
         height: 1
@@ -21,7 +21,7 @@ resources:
         startY: 0
         title: Temperature
         width: 1
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: graph
         config:
           duration: 3600000
@@ -34,7 +34,7 @@ resources:
               color: '#ff261b'
               cumulative: false
               deviceIds:
-                - ~losant-device-weather-0~
+                - ~exportplaceholderid-device-weather-0~
               deviceTags: []
               expression: ''
               graphType: line
@@ -45,7 +45,7 @@ resources:
               color: '#057180'
               cumulative: false
               deviceIds:
-                - ~losant-device-weather-0~
+                - ~exportplaceholderid-device-weather-0~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -60,7 +60,7 @@ resources:
         startY: 0
         title: Temperature vs. Humidity
         width: 3
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: gauge
         config:
           displayAsPercentage: true
@@ -74,7 +74,7 @@ resources:
             attribute: humidity
             color: '#8db319'
             deviceIds:
-              - ~losant-device-weather-0~
+              - ~exportplaceholderid-device-weather-0~
             deviceTags: []
             label: Humidity
         height: 1
@@ -83,7 +83,7 @@ resources:
         startY: 1
         title: Humidity
         width: 1
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: gauge
         config:
           gaugeType: number
@@ -94,7 +94,7 @@ resources:
             attribute: pressure
             color: '#8db319'
             deviceIds:
-              - ~losant-device-weather-0~
+              - ~exportplaceholderid-device-weather-0~
             deviceTags: []
             label: millibars
         height: 1
@@ -103,7 +103,7 @@ resources:
         startY: 2
         title: Pressure
         width: 1
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: gauge
         config:
           gaugeType: number
@@ -114,7 +114,7 @@ resources:
             attribute: wind-speed
             color: '#8db319'
             deviceIds:
-              - ~losant-device-weather-0~
+              - ~exportplaceholderid-device-weather-0~
             deviceTags: []
             label: meters/sec
         height: 1
@@ -123,7 +123,7 @@ resources:
         startY: 3
         title: Wind Speed
         width: 1
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: graph
         config:
           duration: 3600000
@@ -136,7 +136,7 @@ resources:
               color: '#ff261b'
               cumulative: false
               deviceIds:
-                - ~losant-device-weather-0~
+                - ~exportplaceholderid-device-weather-0~
               deviceTags: []
               expression: ''
               graphType: line
@@ -148,7 +148,7 @@ resources:
         startY: 2
         title: Pressure
         width: 2
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: gauge
         config:
           gaugeType: number
@@ -159,7 +159,7 @@ resources:
             attribute: visibility
             color: '#8db319'
             deviceIds:
-              - ~losant-device-weather-0~
+              - ~exportplaceholderid-device-weather-0~
             deviceTags: []
             label: meters
         height: 1
@@ -168,7 +168,7 @@ resources:
         startY: 2
         title: Visibility
         width: 1
-      - applicationId: ~losant-application-applicationWeatherStation-0~
+      - applicationId: ~exportplaceholderid-application-applicationWeatherStation-0~
         blockType: gauge
         config:
           gaugeType: number
@@ -179,7 +179,7 @@ resources:
             attribute: feels-like
             color: '#8db319'
             deviceIds:
-              - ~losant-device-weather-0~
+              - ~exportplaceholderid-device-weather-0~
             deviceTags: []
             label: ˚C
         height: 1
@@ -191,7 +191,7 @@ resources:
     contextConfiguration: []
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-weatherStation-0~
+    id: ~exportplaceholderid-dashboard-weatherStation-0~
     name: Weather Station
     public: false
     refreshRate: 60

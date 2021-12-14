@@ -23,7 +23,7 @@ resources:
       ETHSU
       Temperature and Humidity Sensor
     deviceName: A5-04-03
-    id: ~losant-deviceRecipe-a50403-3~
+    id: ~exportplaceholderid-deviceRecipe-a50403-3~
     name: A5-04-03
     tags:
       - key: EURID
@@ -84,7 +84,7 @@ resources:
       EMSIU
       Multi-sensor
     deviceName: D2-14-41
-    id: ~losant-deviceRecipe-d21441-0~
+    id: ~exportplaceholderid-deviceRecipe-d21441-0~
     name: D2-14-41
     tags:
       - key: EURID
@@ -111,7 +111,7 @@ resources:
       EMCSU
       magnet contact
     deviceName: D5-00-01
-    id: ~losant-deviceRecipe-d50001-2~
+    id: ~exportplaceholderid-deviceRecipe-d50001-2~
     name: D5-00-01
     tags:
       - key: EURID
@@ -126,10 +126,6 @@ resources:
       - attributeTags: {}
         dataType: number
         description: ""
-        name: rssi
-      - attributeTags: {}
-        dataType: number
-        description: ""
         name: status
       - attributeTags: {}
         dataType: number
@@ -141,6 +137,7 @@ resources:
         name: rockerB
       - attributeTags: {}
         dataType: number
+        description: ""
         name: RSSI
     description: |-
       EDRPU-W-EO
@@ -150,7 +147,7 @@ resources:
       EDRPU-W-EO
       Double Rocker Pad
     deviceName: EDRPU-W-EO
-    id: ~losant-deviceRecipe-f60202-1~
+    id: ~exportplaceholderid-deviceRecipe-f60202-1~
     name: F6-02-02
     tags:
       - key: EURID

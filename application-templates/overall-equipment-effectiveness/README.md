@@ -7,17 +7,17 @@ Calculating OEE is very specific to each organization's machine types and manufa
 This is a tool to guide your thinking when you implement OEE in your unique solution. It utilizes features of Losant that can be used to perform the OEE calculations.
 
 ## Setup
-1. Enable the [Paper Machine Data Simulator](/applications/~losant-application-applicationOverallEquipmentEffectiveness-0~/workflows/~losant-flow-paperMachineDataSimulator-0~/develop) workflow.  
-2. Enable the [OEE Calculations](/applications/~losant-application-applicationOverallEquipmentEffectiveness-0~/workflows/~losant-flow-oeeCalculations-1~/develop) workflow.
+1. Enable the [Paper Machine Data Simulator](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-paperMachineDataSimulator-0~/develop) workflow.  
+2. Enable the [OEE Calculations](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-oeeCalculations-1~/develop) workflow.
 
 ## Dashboards
-This template includes [one dashboard](https://app.losant.com/dashboards/~losant-dashboard-paperMachine-0~): an OEE overview of a single paper machine. The dashboard is built with [context variables](https://docs.losant.com/dashboards/context-variables/) to allow the user to switch between the different paper machine devices. This template calculates OEE every hour, so OEE calculations will not appear on the dashboard until one hour has elapsed.
+This template includes [one dashboard](https://~exportplaceholderid-app-url~/dashboards/~exportplaceholderid-dashboard-paperMachine-0~): an OEE overview of a single paper machine. The dashboard is built with [context variables](https://~exportplaceholderid-docs-url~/dashboards/context-variables/) to allow the user to switch between the different paper machine devices. This template calculates OEE every hour, so OEE calculations will not appear on the dashboard until one hour has elapsed.
 
 ## OEE Calculation
-This template includes an [OEE Calculations](/applications/~losant-application-applicationOverallEquipmentEffectiveness-0~/workflows/~losant-flow-oeeCalculations-1~/develop) workflow, which will calculate the three parts of OEE over the last 30 days and save the results on device attributes.
+This template includes an [OEE Calculations](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-oeeCalculations-1~/develop) workflow, which will calculate the three parts of OEE over the last 30 days and save the results on device attributes.
 
 ### Availability 
-Availability is calculated using a 30-day [Time At Value](https://docs.losant.com/references/aggregations/#time-at-value) aggregation of the paper machine's status and reason [string attributes](https://docs.losant.com/devices/attributes/#strings).
+Availability is calculated using a 30-day [Time At Value](https://~exportplaceholderid-docs-url~/references/aggregations/#time-at-value) aggregation of the paper machine's status and reason [string attributes](https://~exportplaceholderid-docs-url~/devices/attributes/#strings).
 
 ```
 (Running + Planned + Unplanned + Sheetbreak) = totalTime  
@@ -28,14 +28,14 @@ Availability is calculated using a 30-day [Time At Value](https://docs.losant.co
 Note: Availability takes into account the scheduled run time for each specific machine/process. Every process has different ways of calculating scheduled run time. Items that could affect run time include technician shifts, holidays, or orders. This use case assumes the machine will be running 24/7/365 with the exception of the utility outage.
 
 ### Performance
-Performance is calculated using a 30-day [mean aggregation](https://docs.losant.com/references/aggregations/#mean) of the paper machine's rate attribute. It then compares the mean to the maxRate for the machine where maxRate is set as a [Device Tag](https://docs.losant.com/devices/overview/#device-tags) since it is a constant value and could vary by machine.
+Performance is calculated using a 30-day [mean aggregation](https://~exportplaceholderid-docs-url~/references/aggregations/#mean) of the paper machine's rate attribute. It then compares the mean to the maxRate for the machine where maxRate is set as a [Device Tag](https://~exportplaceholderid-docs-url~/devices/overview/#device-tags) since it is a constant value and could vary by machine.
 
 ```
 rate/maxRate = Performance
 ```
 
 ### Quality 
-Quality is calculated using a 30-day [sum aggregation](https://docs.losant.com/references/aggregations/#sum) of the paper machine's currentTons and currentWaste attributes.
+Quality is calculated using a 30-day [sum aggregation](https://~exportplaceholderid-docs-url~/references/aggregations/#sum) of the paper machine's currentTons and currentWaste attributes.
 
 These attributes should be changed to match the good quality (currentTons in this example) and the bad quality (currentWaste in this example) attribute you have for your device.
 
@@ -47,7 +47,7 @@ tons/totalTons = Quality
 ## Paper Machine Process and Simulation
 OEE is a very process-focused calculation, so we built this template with a paper machine process in mind. This section offers insight into the process so that you can modify the OEE calculations to fit your needs.
 
-When the [Paper Machine Data Simulator](/applications/~losant-application-applicationOverallEquipmentEffectiveness-0~/workflows/~losant-flow-paperMachineDataSimulator-0~/develop) workflow is enabled, it will simulate the status of every paper machine as well as the production of paper. 
+When the [Paper Machine Data Simulator](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-paperMachineDataSimulator-0~/develop) workflow is enabled, it will simulate the status of every paper machine as well as the production of paper. 
 
 These paper machines have several different status values. The status of the machine is a string attribute on each device. The values called out below in italics are the string values that are recorded for each state.
 

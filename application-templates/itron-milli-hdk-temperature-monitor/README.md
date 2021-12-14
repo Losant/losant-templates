@@ -10,7 +10,7 @@ The Milli HDK is made up of an Arduino and a Milli 5 NIC Arduino shield. The Ard
 
 The [Milli HDK Reference Application](https://developer.itron.com/content/milli-developer-kit-reference-application) demonstrates how to use the the Milli HDK to read and report data from a temperature sensor.
 
-![Itron Milli Developer Kit](./itron-milli.png)
+![Itron Milli Developer Kit](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~/template/itron-milli.png)
 
 ## Key Components
 
@@ -22,7 +22,7 @@ The [Milli HDK Reference Application](https://developer.itron.com/content/milli-
 
 1. Set up your Itron Milli HDK by following the [Getting Started Guide](https://developer.itron.com/content/milli-developer-kit-arduino-v10-getting-started-guide).
 1. Follow the [Reference Application Instructions](https://developer.itron.com/content/milli-developer-kit-reference-application) to add the temperature sensor to your Milli HDK.
-1. Add `clientId`, `clientSecret`, and `solutionName` [Application Globals](https://docs.losant.com/applications/overview/#application-globals). Set these to the corresponding values obtained from the Starfish Platform.
+1. Add `clientId`, `clientSecret`, and `solutionName` [Application Globals](https://~exportplaceholderid-docs-url~/applications/overview/#application-globals). Set these to the corresponding values obtained from the Starfish Platform.
 1. Enable the **Milli Temperature** workflow.
 1. Open the **Milli Temperature** workflow and click the **Itron Auth Btn** virtual button. This will register the Losant webhook with the Starfish Platform. Review the output of the Debug Panel to confirm the webhook was successfully registered. Once the webhook has been registered, any devices in the Starfish Platform will begin showing up in your Losant application.
 

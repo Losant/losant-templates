@@ -3,7 +3,7 @@ resources:
   - description: 'Generates Events on voltage thresholds, tamper, and low battery.'
     flowClass: cloud
     globals: []
-    id: ~losant-flow-createEvents-3~
+    id: ~exportplaceholderid-flow-createEvents-3~
     name: Create Events
     nodes:
       - config:

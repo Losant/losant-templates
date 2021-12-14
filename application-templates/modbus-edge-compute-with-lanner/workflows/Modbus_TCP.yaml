@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: edge
     globals: []
-    id: ~losant-flow-modbusTcp-1~
+    id: ~exportplaceholderid-flow-modbusTcp-1~
     minimumAgentVersion: 1.21.0
     name: Modbus TCP
     nodes:
@@ -451,7 +451,7 @@ resources:
     triggers:
       - config:
           seconds: 90
-        key: ~losant-flow-modbusTcp-1~-Ze8HTHuYmclHbPiNEJqre
+        key: ~exportplaceholderid-flow-modbusTcp-1~-Ze8HTHuYmclHbPiNEJqre
         meta:
           category: trigger
           description: ''

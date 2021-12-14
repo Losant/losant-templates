@@ -14,7 +14,7 @@ resources:
     description: Gateway running the Losant Edge Agent. Reads Modbus TCP/RTU sensor
       data and reports values on behalf of its peripherals.
     deviceClass: edgeCompute
-    id: ~losant-device-lannerGateway-0~
+    id: ~exportplaceholderid-device-lannerGateway-0~
     name: Lanner Gateway
     tags: []
   - attributes:
@@ -38,8 +38,8 @@ resources:
       Modbus RTU temperature and humidity sensor:
       https://www.amazon.com/dp/B078NRYBVZ
     deviceClass: peripheral
-    gatewayId: ~losant-device-lannerGateway-0~
-    id: ~losant-device-modbusRtuSensor-1~
+    gatewayId: ~exportplaceholderid-device-lannerGateway-0~
+    id: ~exportplaceholderid-device-modbusRtuSensor-1~
     name: Modbus RTU Sensor
     tags:
       - key: serial_path
@@ -68,8 +68,8 @@ resources:
     description: Recipe for Modbus TCP device designed to interact with the Modbus
       TCP simulator.
     deviceClass: peripheral
-    gatewayId: ~losant-device-lannerGateway-0~
-    id: ~losant-device-modbusTcpSensor-2~
+    gatewayId: ~exportplaceholderid-device-lannerGateway-0~
+    id: ~exportplaceholderid-device-modbusTcpSensor-2~
     name: Modbus TCP Sensor
     tags:
       - key: address

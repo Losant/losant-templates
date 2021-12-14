@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Starter workflow for building a response to this endpoint
     enabled: true
-    flowId: ~losant-flow-workflowPostLogin-3~
+    flowId: ~exportplaceholderid-flow-workflowPostLogin-3~
     globals: []
-    id: ~losant-flowVersion-workflowPostLogin-2~
+    id: ~exportplaceholderid-flowVersion-workflowPostLogin-2~
     name: Workflow - POST /login
     nodes:
       - config:
@@ -89,7 +89,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-postLogin-2~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin-2~
         meta:
           category: trigger
           description: ''

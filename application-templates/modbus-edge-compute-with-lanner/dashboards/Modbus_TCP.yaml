@@ -1,7 +1,8 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: input
         config:
           controls:
@@ -10,7 +11,7 @@ resources:
                 aggregation: LAST
                 attribute: temp_c
                 deviceIds:
-                  - ~losant-device-modbusTcpSensor-2~
+                  - ~exportplaceholderid-device-modbusTcpSensor-2~
                 deviceTags: []
               defaultValue: 50
               grid:
@@ -30,7 +31,7 @@ resources:
                 aggregation: LAST
                 attribute: humidity
                 deviceIds:
-                  - ~losant-device-modbusTcpSensor-2~
+                  - ~exportplaceholderid-device-modbusTcpSensor-2~
                 deviceTags: []
               defaultValue: 50
               grid:
@@ -68,7 +69,7 @@ resources:
                 }
               templateId: button-0
               type: button
-              workflowId: ~losant-flow-updateSimulator-2~
+              workflowId: ~exportplaceholderid-flow-updateSimulator-2~
             - color: '#8db319'
               defaultQuery:
                 aggregation: LAST
@@ -106,7 +107,8 @@ resources:
         startY: 0
         title: Simulator Controller
         width: 1
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: graph
         config:
           duration: 86400000
@@ -140,7 +142,8 @@ resources:
         startY: 0
         title: Temperature
         width: 2.5
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -166,7 +169,8 @@ resources:
         startY: 0
         title: Temperature
         width: 0.5
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -192,7 +196,8 @@ resources:
         startY: 2
         title: Humidity
         width: 0.5
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: graph
         config:
           duration: 86400000
@@ -226,7 +231,8 @@ resources:
         startY: 2
         title: Humidity
         width: 2.5
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: indicator
         config:
           conditions:
@@ -255,8 +261,9 @@ resources:
         title: Running
         width: 1
     contextConfiguration:
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
-        defaultValue: ~losant-device-modbusTcpSensor-2~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+        defaultValue: ~exportplaceholderid-device-modbusTcpSensor-2~
         name: device
         type: deviceId
         validationConfig:
@@ -264,7 +271,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-modbusTcp-1~
+    id: ~exportplaceholderid-dashboard-modbusTcp-1~
     name: Modbus TCP
     public: false
     refreshRate: 60

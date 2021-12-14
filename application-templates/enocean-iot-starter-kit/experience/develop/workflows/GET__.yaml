@@ -4,9 +4,9 @@ resources:
       Handles the home request to display the list of devices and the dashboard
       for the selected device.
     enabled: true
-    flowId: ~losant-flow-get-7~
+    flowId: ~exportplaceholderid-flow-get-7~
     globals: []
-    id: ~losant-flowVersion-get-9~
+    id: ~exportplaceholderid-flowVersion-get-9~
     name: GET /
     nodes:
       - config:
@@ -16,7 +16,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-pageHome-6~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageHome-6~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -290,7 +290,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-get-5~
+        key: ~exportplaceholderid-experienceEndpoint-get-5~
         meta:
           category: trigger
           description: ''

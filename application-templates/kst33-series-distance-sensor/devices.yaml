@@ -124,7 +124,7 @@ resources:
         name: humidity
     children: []
     deviceClass: standalone
-    id: ~losant-device-kst3320SimulatedDevice-0~
+    id: ~exportplaceholderid-device-kst3320SimulatedDevice-0~
     name: KST3320 (Simulated Device)
     tags:
       - key: dev_eui

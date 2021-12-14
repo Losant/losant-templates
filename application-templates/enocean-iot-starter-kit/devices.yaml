@@ -3,7 +3,41 @@ resources:
   - attributes: []
     children: []
     deviceClass: edgeCompute
-    id: ~losant-device-edgeCompute-0~
+    id: ~exportplaceholderid-device-edgeCompute-0~
     name: Edge Compute
     tags: []
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: status
+      - attributeTags: {}
+        dataType: number
+        description: 0=O, 1=I
+        name: rockerA
+      - attributeTags: {}
+        dataType: number
+        description: 0=O, 1=I
+        name: rockerB
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: RSSI
+    children: []
+    description: |-
+      EDRPU-W-EO
+      Double Rocker Pad
+    deviceClass: peripheral
+    gatewayId: ~exportplaceholderid-device-edgeCompute-0~
+    id: ~exportplaceholderid-device-f60202-2~
+    name: F6-02-02
+    tags:
+      - key: eep
+        value: F6-02-02
+      - key: EURID
+        value: 002ED052
+      - key: friendlyID
+        value: Double Rocker Pad
+      - key: locationId
+        value: My Desk
 version: 1

@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~losant-experienceView-layoutDashboardPage-0~
+    id: ~exportplaceholderid-experienceView-layoutDashboardPage-0~
     localFilename: ./layout-dashboard-page.hbs
     name: layout-dashboard-page
     version: develop

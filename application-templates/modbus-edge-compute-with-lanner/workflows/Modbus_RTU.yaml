@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: edge
     globals: []
-    id: ~losant-flow-modbusRtu-0~
+    id: ~exportplaceholderid-flow-modbusRtu-0~
     minimumAgentVersion: 1.21.0
     name: Modbus RTU
     nodes:
@@ -243,7 +243,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~losant-flow-modbusRtu-0~-jI0Ki9kjMh9pJqATVMivZ
+        key: ~exportplaceholderid-flow-modbusRtu-0~-jI0Ki9kjMh9pJqATVMivZ
         meta:
           category: trigger
           description: ''
@@ -260,7 +260,7 @@ resources:
         type: virtualButton
       - config:
           seconds: 90
-        key: ~losant-flow-modbusRtu-0~-gumpkOdzG_bw1Qsgd5wtT
+        key: ~exportplaceholderid-flow-modbusRtu-0~-gumpkOdzG_bw1Qsgd5wtT
         meta:
           category: trigger
           description: ''

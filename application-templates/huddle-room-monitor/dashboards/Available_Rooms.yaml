@@ -1,13 +1,13 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
         blockType: image-overlay
         config:
           backgroundColor: transparent
           defaultZoom: -1
           imageUrl: >-
-            https://~losant-files-domain~/~losant-application-applicationHuddleRoomMonitor-0~/office-floorplan.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationHuddleRoomMonitor-0~/office-floorplan.png
           overlays:
             - conditions:
                 - color: 'rgba(252, 21, 38, 1)'
@@ -73,7 +73,7 @@ resources:
             - aggregation: LAST
               attribute: occupied
               deviceIds:
-                - ~losant-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1-2~
               deviceTags: []
               duration: 0
               id: room-1
@@ -81,7 +81,7 @@ resources:
             - aggregation: LAST
               attribute: occupied
               deviceIds:
-                - ~losant-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2-3~
               deviceTags: []
               duration: 0
               id: room-2
@@ -89,7 +89,7 @@ resources:
             - aggregation: LAST
               attribute: occupied
               deviceIds:
-                - ~losant-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3-4~
               deviceTags: []
               duration: 0
               id: room-3
@@ -100,7 +100,7 @@ resources:
         startY: 0
         title: Floor Plan
         width: 3.5
-      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
         blockType: indicator
         config:
           conditions:
@@ -115,7 +115,7 @@ resources:
           segments:
             - attribute: occupied
               deviceIds:
-                - ~losant-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1-2~
               deviceTags: []
         height: 1
         id: pcq3Cpz8En
@@ -123,7 +123,7 @@ resources:
         startY: 0
         title: Huddle Room 1
         width: 0.5
-      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
         blockType: indicator
         config:
           conditions:
@@ -138,7 +138,7 @@ resources:
           segments:
             - attribute: occupied
               deviceIds:
-                - ~losant-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2-3~
               deviceTags: []
         height: 1
         id: iaPnDsC7E0
@@ -146,7 +146,7 @@ resources:
         startY: 1
         title: Huddle Room 2
         width: 0.5
-      - applicationId: ~losant-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
         blockType: indicator
         config:
           conditions:
@@ -161,7 +161,7 @@ resources:
           segments:
             - attribute: occupied
               deviceIds:
-                - ~losant-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3-4~
               deviceTags: []
         height: 1
         id: xaXFRoEwEI
@@ -172,7 +172,7 @@ resources:
     contextConfiguration: []
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-availableRooms-0~
+    id: ~exportplaceholderid-dashboard-availableRooms-0~
     name: Available Rooms
     public: false
     refreshRate: 60

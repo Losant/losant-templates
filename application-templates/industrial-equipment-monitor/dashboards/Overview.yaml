@@ -1,7 +1,8 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: map
         config:
           additionalAttributes:
@@ -44,7 +45,8 @@ resources:
         startY: 0
         title: Generators
         width: 3.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: gauge
         config:
           gaugeMax: '1200'
@@ -67,7 +69,8 @@ resources:
         startY: 0
         title: Max Temperature
         width: 0.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: gauge
         config:
           gaugeMax: '1200'
@@ -90,7 +93,8 @@ resources:
         startY: 1
         title: Min Temperature
         width: 0.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: gauge
         config:
           gaugeMax: '1200'
@@ -113,7 +117,8 @@ resources:
         startY: 2
         title: Avg Temperature
         width: 0.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: device-list
         config:
           additionalAttributes:
@@ -169,7 +174,8 @@ resources:
         startY: 3
         title: All Devices
         width: 2
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: gauge
         config:
           gaugeMax: '100'
@@ -192,7 +198,8 @@ resources:
         startY: 3
         title: Avg Fuel Level
         width: 0.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: gauge
         config:
           gaugeMax: '100'
@@ -215,7 +222,8 @@ resources:
         startY: 3
         title: Min Fuel Level
         width: 0.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: graph
         config:
           duration: 86400000
@@ -243,7 +251,8 @@ resources:
         startY: 3
         title: Avg Fuel Level
         width: 1
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: gauge
         config:
           gaugeMax: '14'
@@ -266,7 +275,8 @@ resources:
         startY: 4
         title: Avg Voltage
         width: 0.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: gauge
         config:
           gaugeMax: '14'
@@ -289,7 +299,8 @@ resources:
         startY: 4
         title: Min Voltage
         width: 0.5
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
         blockType: graph
         config:
           duration: 86400000
@@ -318,15 +329,16 @@ resources:
         title: Avg Voltage
         width: 1
     contextConfiguration:
-      - applicationId: ~losant-application-applicationIndustrialEquipmentMonitor-0~
-        defaultValue: ~losant-experienceUser-kanarraExampleCom-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+        defaultValue: ~exportplaceholderid-experienceUser-kanarraExampleCom-0~
         name: experienceUser
         type: experienceUser
         validationConfig: {}
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-overview-1~
+    id: ~exportplaceholderid-dashboard-overview-1~
     name: Overview
     public: false
     refreshRate: 60

@@ -15,7 +15,7 @@ resources:
         key: defaultState
       - json: '"__TRANSIT__"'
         key: transitStatus
-    id: ~losant-flow-dataSimulator-0~
+    id: ~exportplaceholderid-flow-dataSimulator-0~
     name: Data Simulator
     nodes:
       - config:
@@ -7658,7 +7658,7 @@ resources:
           - - Nt8lHt0s9O
         type: RandomNumberNode
       - config:
-          dataTableIdTemplate: ~losant-dataTable-distributionCenters-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-distributionCenters-0~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''
@@ -7835,7 +7835,7 @@ resources:
         type: RandomNumberNode
     triggers:
       - config: {}
-        key: ~losant-flow-dataSimulator-0~-Xm2Gcy7vz-SQuHblraMJ2
+        key: ~exportplaceholderid-flow-dataSimulator-0~-Xm2Gcy7vz-SQuHblraMJ2
         meta:
           category: trigger
           description: ''
@@ -7852,7 +7852,7 @@ resources:
         type: virtualButton
       - config:
           seconds: 120
-        key: ~losant-flow-dataSimulator-0~-YsyjYqzFjaWa5sIdqy7gQ
+        key: ~exportplaceholderid-flow-dataSimulator-0~-YsyjYqzFjaWa5sIdqy7gQ
         meta:
           category: trigger
           description: ''

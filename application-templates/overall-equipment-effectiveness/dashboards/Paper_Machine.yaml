@@ -1,7 +1,8 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions:
@@ -52,7 +53,8 @@ resources:
         startY: 0
         title: Status
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: pie
         config:
           duration: 2592000000
@@ -98,7 +100,8 @@ resources:
         startY: 0
         title: 'Machine Run Time [30 days, hours]'
         width: 1.5
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -107,7 +110,8 @@ resources:
         startY: 0
         title: '### Sheetbreaks [24 hours]'
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: gauge
         config:
           conditions:
@@ -144,7 +148,8 @@ resources:
         startY: 0
         title: 'Rate [30 days]'
         width: 0.5
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: pie
         config:
           duration: 86400000
@@ -190,7 +195,8 @@ resources:
         startY: 0.5
         title: '[minutes]'
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: gauge
         config:
           conditions:
@@ -227,7 +233,8 @@ resources:
         startY: 1
         title: 'Rate [Current]'
         width: 0.5
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -286,7 +293,8 @@ resources:
         startY: 1
         title: 'Machine Run Time [30 days]'
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -338,7 +346,8 @@ resources:
         startX: 3
         startY: 1.5
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: graph
         config:
           duration: 86400000
@@ -431,7 +440,8 @@ resources:
         startX: 0
         startY: 2
         width: 4
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -440,7 +450,8 @@ resources:
         startY: 3
         title: '### OEE [30 days]'
         width: 2
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -449,7 +460,8 @@ resources:
         startY: 3
         title: '### Current Production '
         width: 2
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -471,7 +483,8 @@ resources:
         startY: 3.5
         title: 'OEE [30 days]'
         width: 0.5
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -494,7 +507,8 @@ resources:
         startY: 3.5
         title: 'Availability [30 Days]'
         width: 0.5
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -516,7 +530,8 @@ resources:
         startY: 3.5
         title: 'Quality [30 days]'
         width: 0.5
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -562,7 +577,8 @@ resources:
         startX: 0
         startY: 3.5
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions:
@@ -667,7 +683,8 @@ resources:
         startX: 1
         startY: 3.5
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -690,7 +707,8 @@ resources:
         startY: 3.5
         title: 'Performance [30 days]'
         width: 0.5
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: graph
         config:
           duration: 86400000
@@ -784,7 +802,8 @@ resources:
         startY: 4.5
         title: OEE
         width: 2
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: graph
         config:
           duration: 86400000
@@ -878,7 +897,8 @@ resources:
         startY: 4.5
         title: 'Current Production SKU [24 hrs]'
         width: 2
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -887,7 +907,8 @@ resources:
         startY: 6
         title: '### Unplanned Downtime [30 days]'
         width: 2
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -896,7 +917,8 @@ resources:
         startY: 6
         title: '### Planned Downtime [30 days]'
         width: 2
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: pie
         config:
           duration: 2592000000
@@ -964,7 +986,8 @@ resources:
         startY: 6.5
         title: '[minutes]'
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -1039,7 +1062,8 @@ resources:
         startX: 2
         startY: 6.5
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: pie
         config:
           duration: 2592000000
@@ -1085,7 +1109,8 @@ resources:
         startY: 6.5
         title: '[minutes]'
         width: 1
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
         blockType: indicator
         config:
           conditions: []
@@ -1136,8 +1161,9 @@ resources:
         startY: 6.5
         width: 1
     contextConfiguration:
-      - applicationId: ~losant-application-applicationOverallEquipmentEffectiveness-0~
-        defaultValue: ~losant-device-paperMachine1-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+        defaultValue: ~exportplaceholderid-device-paperMachine1-0~
         name: deviceId-0
         type: deviceId
         validationConfig:
@@ -1149,7 +1175,7 @@ resources:
         validationEnabled: true
     defaultTheme: light
     description: '### {{ctx.deviceId-0.name}} '
-    id: ~losant-dashboard-paperMachine-0~
+    id: ~exportplaceholderid-dashboard-paperMachine-0~
     name: Paper Machine
     public: false
     refreshRate: 60

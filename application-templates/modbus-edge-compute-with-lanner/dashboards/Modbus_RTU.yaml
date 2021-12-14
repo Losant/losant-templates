@@ -1,7 +1,8 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: graph
         config:
           duration: 86400000
@@ -35,7 +36,8 @@ resources:
         startY: 0
         title: Temperature
         width: 3.5
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -61,7 +63,8 @@ resources:
         startY: 0
         title: Temperature
         width: 0.5
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: graph
         config:
           duration: 86400000
@@ -95,7 +98,8 @@ resources:
         startY: 2
         title: Humidity
         width: 3.5
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -122,8 +126,9 @@ resources:
         title: Humidity
         width: 0.5
     contextConfiguration:
-      - applicationId: ~losant-application-applicationModbusEdgeComputeWithLanner-0~
-        defaultValue: ~losant-device-modbusRtuSensor-1~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+        defaultValue: ~exportplaceholderid-device-modbusRtuSensor-1~
         name: device
         type: deviceId
         validationConfig:
@@ -131,7 +136,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-modbusRtu-0~
+    id: ~exportplaceholderid-dashboard-modbusRtu-0~
     name: Modbus RTU
     public: false
     refreshRate: 60

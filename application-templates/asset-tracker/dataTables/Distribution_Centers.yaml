@@ -26,7 +26,7 @@ resources:
         dataType: string
         name: distCenterId
     description: ''
-    id: ~losant-dataTable-distributionCenters-0~
+    id: ~exportplaceholderid-dataTable-distributionCenters-0~
     localFilename: ./Distribution_Centers.csv
     name: Distribution Centers
 version: 1

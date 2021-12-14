@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~losant-flow-historyRoute-1~
+    flowId: ~exportplaceholderid-flow-historyRoute-1~
     globals: []
-    id: ~losant-flowVersion-historyRoute-0~
+    id: ~exportplaceholderid-flowVersion-historyRoute-0~
     name: History Route
     nodes:
       - config:
@@ -12,7 +12,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~losant-experienceView-pageDashboardHistory-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardHistory-2~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -82,7 +82,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~losant-experienceEndpoint-getHistory-2~
+        key: ~exportplaceholderid-experienceEndpoint-getHistory-2~
         meta:
           category: trigger
           description: ''

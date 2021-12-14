@@ -4,7 +4,7 @@ This template contains workflows and dashboards to demonstrate the functionality
 
 The KST3320 is equipped with a 4-meter distance sensor, 3-axis accelerometer, temperature and humidity sensors, and GPS. With these sensors you detect various material levels, angle of the KST3320, monitor relative ambient temperature and humidity, and pinpoint the KST3320's exact position in the world.
 
-![KST3320](./kst3300_enclosure.png)
+![KST3320](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~/template/kst3300_enclosure.png)
 
 ## How to Purchase a KST3320 Dev Kit
 To obtain a KST3320 Dev Kit or learn about additional purchasing options, please [contact the KS Technologies sales team](https://kstechnologies.com/contact). 
@@ -48,34 +48,34 @@ https://ow0wlg9ee7.execute-api.us-west-2.amazonaws.com/dev/helium/kst3320
 ```
 
 ## Create the Losant Device
-Follow the instructions below to create a [Losant Device](https://docs.losant.com/devices/overview/) that represents your physical KST3320 sensor.
+Follow the instructions below to create a [Losant Device](https://~exportplaceholderid-docs-url~/devices/overview/) that represents your physical KST3320 sensor.
 
 On the main application menu, click **Devices** to display your application's device list.
 
-![Losant Devices Menu](./devices-menu.png)
+![Losant Devices Menu](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~/template/devices-menu.png)
 
 On to the top right corner of the screen, select from dropdown next to the **Add Device** button and click **Create From Recipe**.
 
-![Losant Add Device from Recipe](./create-from-recipe.png)
+![Losant Add Device from Recipe](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~/template/create-from-recipe.png)
 
 Select the **KST3320 Device Recipe**.
 
-![Losant Device Recipe](./create-from-kst-recipe.png)
+![Losant Device Recipe](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~/template/create-from-kst-recipe.png)
 
 Click the **Create From Recipe** button to create the device. Once created, you'll be taken to the overview page for the new device.
 
 On the device overview page, give the device any name you'd like and change the **dev_eui** and **serial_number** tag values to match the values of your physical KST3320 device.
 
-![Losant Device Tags](./device-tags.png)
+![Losant Device Tags](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~/template/device-tags.png)
 
 Click the **Save Device** button at the bottom of the page.
 
 ## Register the Losant Webhook with KS Technologies
-This template involves two webhooks. The webhook above, that you gave to your LoRaWAN network provider, is used to send your sensor data to KS Technologies for parsing and normalization. This template automatically creates a unique [Losant Webhook](https://docs.losant.com/applications/webhooks/) so KS Technologies can forward that normalized sensor data to your application.
+This template involves two webhooks. The webhook above, that you gave to your LoRaWAN network provider, is used to send your sensor data to KS Technologies for parsing and normalization. This template automatically creates a unique [Losant Webhook](https://~exportplaceholderid-docs-url~/applications/webhooks/) so KS Technologies can forward that normalized sensor data to your application.
 
 You can find your unique webhook URL by clicking the **Webhooks** item in the main application menu.
 
-![Losant Webhooks](./webhooks-menu.png)
+![Losant Webhooks](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~/template/webhooks-menu.png)
 
 Copy the URL for the **Receive Data** webhook.
 
@@ -86,7 +86,7 @@ Lastly, you must enable the **KST3320 Workflow** workflow so that it will run wh
 ## The Dashboard for Your KST3320 Device
 This template contains the **KST3320 Dashboard (Distance)** dashboard, which can be used to visualize data from any of your physical KST3320 devices.
 
-This dashboard uses a [Context Variable](https://docs.losant.com/dashboards/context-variables/) to quickly switch between any device you have. You can change the device by clicking the gear icon on the top right corner of the dashboard. In that menu, you can then select a new device from the **Dashboard Context** section.
+This dashboard uses a [Context Variable](https://~exportplaceholderid-docs-url~/dashboards/context-variables/) to quickly switch between any device you have. You can change the device by clicking the gear icon on the top right corner of the dashboard. In that menu, you can then select a new device from the **Dashboard Context** section.
 
 ## How to Modify the KST3320 Simulation Workflow
 The **Simulated KST3320 Workflow** workflow can be modified to report any custom test data you require. Simulated device data can be viewed on the **Simulated KST3320 Dashboard (All Sensors)** or the **Simulated KST3320 Dashboard (Distance)** dashboards.
@@ -102,7 +102,7 @@ The list below contains the possible range of values that the simulator will pro
 * **Location**: a static GPS value of "38.999796,-104.701690".
 * **Accelerometer X, Y & Z**: random values between -7.999 and 7.999.
 
-You can also adjust the [Timer Trigger](https://docs.losant.com/workflows/triggers/timer/) to control the rate at which simulated data is generated. The default value is every 15 minutes.
+You can also adjust the [Timer Trigger](https://~exportplaceholderid-docs-url~/workflows/triggers/timer/) to control the rate at which simulated data is generated. The default value is every 15 minutes.
 
 ## License
 

@@ -1,14 +1,14 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~losant-experienceView-tlDeviceList-7~
+    id: ~exportplaceholderid-experienceView-tlDeviceList-7~
     localFilename: ./tl-device-list.hbs
     name: tl-device-list
     version: develop
     viewTags: {}
     viewType: component
   - description: ""
-    id: ~losant-experienceView-tlNavBs4-3~
+    id: ~exportplaceholderid-experienceView-tlNavBs4-3~
     localFilename: ./tl-nav-bs4.hbs
     name: tl-nav-bs4
     version: develop

@@ -3,7 +3,7 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-get-1~
+    id: ~exportplaceholderid-experienceEndpoint-get-1~
     method: get
     route: /
     unauthorizedReply:
@@ -14,25 +14,25 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogin-3~
+    id: ~exportplaceholderid-experienceEndpoint-getLogin-3~
     method: get
     route: /login
     staticReply:
       statusCode: 200
       type: page
-      value: ~losant-experienceView-pageLogin-1~
+      value: ~exportplaceholderid-experienceView-pageLogin-1~
     version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-getLogout-0~
+    id: ~exportplaceholderid-experienceEndpoint-getLogout-0~
     method: get
     route: /logout
     version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~losant-experienceEndpoint-postLogin-2~
+    id: ~exportplaceholderid-experienceEndpoint-postLogin-2~
     method: post
     route: /login
     version: develop

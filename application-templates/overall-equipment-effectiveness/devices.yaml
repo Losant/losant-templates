@@ -122,7 +122,7 @@ resources:
     children: []
     description: A unique paper machine creating toilet paper.
     deviceClass: standalone
-    id: ~losant-device-paperMachine1-0~
+    id: ~exportplaceholderid-device-paperMachine1-0~
     name: Paper Machine 1
     tags:
       - key: type
@@ -261,7 +261,7 @@ resources:
     children: []
     description: A unique paper machine creating toilet paper.
     deviceClass: standalone
-    id: ~losant-device-paperMachine2-1~
+    id: ~exportplaceholderid-device-paperMachine2-1~
     name: Paper Machine 2
     tags:
       - key: type

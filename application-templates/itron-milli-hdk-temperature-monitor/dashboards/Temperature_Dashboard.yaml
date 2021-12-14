@@ -1,7 +1,8 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -10,7 +11,8 @@ resources:
         startY: 0
         title: Overview - All Temperature Sensors
         width: 4
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: indicator
         config:
           conditions:
@@ -20,7 +22,7 @@ resources:
               label: >-
                 There are no Milli Temperature Sensors provisioned yet. Please
                 see the
-                [README](https://~losant-app-url~/applications/~losant-application-applicationItronMilliHdkTemperatureMonitor-0~).
+                [README](https://~exportplaceholderid-app-url~/applications/~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~).
           defaultCondition:
             color: '#8db319'
             label: '{{value-0}}'
@@ -40,7 +42,8 @@ resources:
         startY: 0.5
         title: Num. of Sensors
         width: 0.5
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
           duration: 604800000
@@ -65,7 +68,8 @@ resources:
         startY: 0.5
         title: Min. Temp. (7 days)
         width: 0.5
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
           duration: 604800000
@@ -90,7 +94,8 @@ resources:
         startY: 0.5
         title: Max Temp. (7 days)
         width: 0.5
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: device-state-table
         config:
           attributes:
@@ -100,7 +105,7 @@ resources:
               id: defaultDeviceNameColumn
               rowTemplate: >-
                 [{{format
-                value}}](https://~losant-app-url~/dashboards/~losant-dashboard-temperatureDashboard-0~?ctx%5BdeviceId-0%5D={{deviceId}})
+                value}}](https://~exportplaceholderid-app-url~/dashboards/~exportplaceholderid-dashboard-temperatureDashboard-0~?ctx%5BdeviceId-0%5D={{deviceId}})
               type: deviceName
             - headerTemplate: '{{name}}'
               id: defaultTimestampColumn
@@ -126,7 +131,8 @@ resources:
           Milli Temperature Sensors - Click a Milli Temp. sensor name for more
           information
         width: 2
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
           duration: 604800000
@@ -151,7 +157,8 @@ resources:
         startY: 0.5
         title: Avg. Temp (7 days)
         width: 0.5
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: section-header
         config: {}
         height: 0.5
@@ -162,7 +169,8 @@ resources:
           {{defaultTo ctx.deviceId-0.name 'Choose a device above to view
           details'}}
         width: 4
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
           conditions: []
@@ -186,7 +194,8 @@ resources:
         startY: 2
         title: Actual Temperature
         width: 1
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: graph
         config:
           duration: 3600000
@@ -215,7 +224,8 @@ resources:
         startY: 2
         title: Temperature Trend
         width: 3
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
           duration: 604800000
@@ -239,7 +249,8 @@ resources:
         startY: 3
         title: Min. Temperature (7 Days)
         width: 1
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
           duration: 604800000
@@ -263,7 +274,8 @@ resources:
         startY: 4
         title: Max Temperature (7 Days)
         width: 1
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: device-state-table
         config:
           attributes:
@@ -299,7 +311,8 @@ resources:
         title: Temperature Sensor Device History Over the Last 60 Minutes
         width: 4
     contextConfiguration:
-      - applicationId: ~losant-application-applicationItronMilliHdkTemperatureMonitor-0~
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         defaultValue: 5e56c9be91d58f00065efa1e
         name: deviceId-0
         type: deviceId
@@ -308,7 +321,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~losant-dashboard-temperatureDashboard-0~
+    id: ~exportplaceholderid-dashboard-temperatureDashboard-0~
     name: Temperature Dashboard
     public: false
     refreshRate: 30
