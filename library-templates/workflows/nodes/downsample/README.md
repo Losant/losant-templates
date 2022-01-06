@@ -2,7 +2,7 @@
 
 Downsamples (or decimates) buckets of data points into a single value. As data is streamed into this node, each time `Bucket Size` points have been received, it will output a single data point based on the specified `Downsample Technique`. This node is useful for filtering high-frequency data.
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

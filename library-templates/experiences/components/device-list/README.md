@@ -6,33 +6,33 @@ This template displays a list of devices. Each entry has a configurable link, la
 This component requires the use of [Twitter Bootstrap v4](https://getbootstrap.com) as a CSS and JS framework. Losant recommends installing the "Bootstrap 4 Layouts" template in conjunction with this one.
 
 ## Usage
-This template creates a single [Experience Component](https://~exportplaceholderid-docs-url~/experiences/views/#components) that can be used within your [Experience Pages](https://~exportplaceholderid-docs-url~/experiences/views/#pages) or [Experience Layouts](https://~exportplaceholderid-docs-url~/experiences/views/#layouts).
+This template creates a single [Experience Component](https://docs.losant.com/experiences/views/#components) that can be used within your [Experience Pages](https://docs.losant.com/experiences/views/#pages) or [Experience Layouts](https://docs.losant.com/experiences/views/#layouts).
 
 ```
 {{component 'tl-device-list' devices [args...]}} 
 ```
 
-![Example Device List with Images](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesComponentsDeviceList-0~/template/screenshot-basic.png)
+![Example Device List with Images](./screenshot-basic.png)
 
 ## Configuration
 
 ### Context
-The [context](https://~exportplaceholderid-docs-url~/experiences/views/#passing-custom-context) passed to the component must be an array of device objects. The format of these objects must match what is returned by the [Device: Get Node](https://~exportplaceholderid-docs-url~/workflows/data/get-device/) or the [Losant API](https://~exportplaceholderid-docs-url~/rest-api/devices/#get). For example:
+The [context](https://docs.losant.com/experiences/views/#passing-custom-context) passed to the component must be an array of device objects. The format of these objects must match what is returned by the [Device: Get Node](https://docs.losant.com/workflows/data/get-device/) or the [Losant API](https://docs.losant.com/rest-api/devices/#get). For example:
 ```
 {{component 'tl-device-list' pageData.devices}}
 ```
 
 ### Arguments
-This component supports several [arguments](https://~exportplaceholderid-docs-url~/experiences/views/#passing-custom-arguments) to change its behavior and the data displayed. If the argument supports a template, the context for that template will be set to the specific device object for that entry. The arguments are:
+This component supports several [arguments](https://docs.losant.com/experiences/views/#passing-custom-arguments) to change its behavior and the data displayed. If the argument supports a template, the context for that template will be set to the specific device object for that entry. The arguments are:
 
 | Property          | Description                                                                                                                                                                                                                                                                          | Default                |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
 | id                | ([HTML5 ID](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id)) The ID of the element into which the component will be rendered. Note: If you are using multiple instances of this component on one page, this property is required and must be unique per instance.    | "tl-device-list"       |
-| label             | (String [Template](https://~exportplaceholderid-docs-url~/workflows/accessing-payload-data/#string-templates)) If set, changes the label that is displayed for each entry. For example, `label="{{this.tags.serial.[0]}}"`.                                                                              | "{{this.name}}"             |
-| labelComponent    | (String [Component Name](https://~exportplaceholderid-docs-url~/experiences/views/#components)) The name of a component to render for each device. The context passed to the component will be the device object. This is used instead of the `label` property to allow for more complex rendering options.|                        |
+| label             | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) If set, changes the label that is displayed for each entry. For example, `label="{{this.tags.serial.[0]}}"`.                                                                              | "{{this.name}}"             |
+| labelComponent    | (String [Component Name](https://docs.losant.com/experiences/views/#components)) The name of a component to render for each device. The context passed to the component will be the device object. This is used instead of the `label` property to allow for more complex rendering options.|                        |
 | selected          | (String) The ID of the device marked as selected. By default, the selected device is highlighted blue. For example, `selected=request.query.device`.                                                                                                                                 |                        |
-| link              | (String [Template](https://~exportplaceholderid-docs-url~/workflows/accessing-payload-data/#string-templates)) The link URL that is applied to each entry in the list. For example, `link="?device={{this.id}}"`.                                                                                        |                        |
-| imageFile         | (String [Template](https://~exportplaceholderid-docs-url~/workflows/accessing-payload-data/#string-templates)) Relative path in your [Application Files](https://~exportplaceholderid-docs-url~/applications/files/) that contains an image to display for this device. The path must be relative (i.e. `/images/device.png`). The full file URL is added automatically. For example, `imageFile="{{this.tags.image.[0]}}"`.    |                        |
+| link              | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) The link URL that is applied to each entry in the list. For example, `link="?device={{this.id}}"`.                                                                                        |                        |
+| imageFile         | (String [Template](https://docs.losant.com/workflows/accessing-payload-data/#string-templates)) Relative path in your [Application Files](https://docs.losant.com/applications/files/) that contains an image to display for this device. The path must be relative (i.e. `/images/device.png`). The full file URL is added automatically. For example, `imageFile="{{this.tags.image.[0]}}"`.    |                        |
 | imageSize         | (Number) Width and height, in pixels, of the device image container. The image is scaled proportionally to fit in this container. For example, `imageSize=50`.                                                                                                                       |                        |
 
 ## Examples
@@ -92,7 +92,7 @@ A basic device list using a custom link.
   link="/?device={{this.id}}"}}
 ```
 
-![Basic Device List Example](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesComponentsDeviceList-0~/template/screenshot-basic.png)
+![Basic Device List Example](./screenshot-basic.png)
 
 ### Device Image
 A device list with a device image. The image location is stored on each device's `image` tag.
@@ -106,7 +106,7 @@ A device list with a device image. The image location is stored on each device's
   imageFile='{{this.tags.image.[0]}}'}}
 ```
 
-![Device List Example with Image](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesComponentsDeviceList-0~/template/screenshot-images.png)
+![Device List Example with Image](./screenshot-images.png)
 
 ### Custom Label
 A device list with images and a custom label. The label is set to the value stored on each device's `serial` tag.
@@ -121,7 +121,7 @@ A device list with images and a custom label. The label is set to the value stor
   label='Serial: {{this.tags.serial.[0]}}'}}
 ```
 
-![Device List Example with Custom Label](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesComponentsDeviceList-0~/template/screenshot-custom-label.png)
+![Device List Example with Custom Label](./screenshot-custom-label.png)
 
 ## License
 

@@ -1,7 +1,7 @@
 # SIGNL4 Alert
 [SIGNL4](https://www.signl4.com/) provides mobile alerting via app, push, text, and voice with tracking and escalation. This node provides the ability to report a SIGNL4 event via the [SIGNL4 API](https://www.signl4.com/developers/api).
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 * `SIGNL4 Team Secret`: Your SIGNL4 team secret.

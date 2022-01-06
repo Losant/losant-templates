@@ -45,10 +45,10 @@ The password for all users is `qwerty123`. Users can be modified, added, or remo
 ## Resources
 The following list contains helpful resources that are related to how this template is implemented:
 
-* [Dashboard Context Variables](https://~exportplaceholderid-docs-url~/dashboards/context-variables/)
-* [Experience Dashboard Pages](https://~exportplaceholderid-docs-url~/experiences/views/#dashboard-pages)
-* [Experience Users](https://~exportplaceholderid-docs-url~/experiences/users/)
-* [Experience Groups](https://~exportplaceholderid-docs-url~/experiences/groups/)
+* [Dashboard Context Variables](https://docs.losant.com/dashboards/context-variables/)
+* [Experience Dashboard Pages](https://docs.losant.com/experiences/views/#dashboard-pages)
+* [Experience Users](https://docs.losant.com/experiences/users/)
+* [Experience Groups](https://docs.losant.com/experiences/groups/)
 * [Nested Experience Groups Webinar](https://www.losant.com/deeper-dive-webinar-series?demo=nested-experience-groups)
 
 ---

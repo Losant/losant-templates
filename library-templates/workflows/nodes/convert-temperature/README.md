@@ -4,7 +4,7 @@ Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 
 ## How to Use this Node
 
-This node will be imported as a [Custom Node](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+This node will be imported as a [Custom Node](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

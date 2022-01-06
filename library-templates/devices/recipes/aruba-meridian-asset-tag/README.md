@@ -1,7 +1,7 @@
 # Aruba Meridian Asset Tag
-This template contains a [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) for a [Aruba Meridian Asset Tag](https://www.arubanetworks.com/products/location-services/aruba-tags/). This recipe is designed to work with the Losant [Aruba Meridian Integration](https://~exportplaceholderid-docs-url~/applications/integrations/#meridian).
+This template contains a [Device Recipe](https://docs.losant.com/devices/device-recipes/) for a [Aruba Meridian Asset Tag](https://www.arubanetworks.com/products/location-services/aruba-tags/). This recipe is designed to work with the Losant [Aruba Meridian Integration](https://docs.losant.com/applications/integrations/#meridian).
 
-![Aruba Meridian Asset Tag](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryDevicesRecipesArubaMeridianAssetTag-0~/template/aruba_tags.png)
+![Aruba Meridian Asset Tag](./aruba_tags.png)
 
 ## About Aruba Meridian
 
@@ -12,7 +12,7 @@ This template contains a [Device Recipe](https://~exportplaceholderid-docs-url~/
 For more details, see the [Aruba Meridian website](https://www.arubanetworks.com/products/location-services/app-platform/).
 
 ## How to Use a Device Recipe
-This template imports a single [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://~exportplaceholderid-docs-url~/devices/attributes/) and [Tags](https://~exportplaceholderid-docs-url~/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://~exportplaceholderid-docs-url~/devices/device-recipes/#bulk-device-creation) devices at once.
+This template imports a single [Device Recipe](https://docs.losant.com/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://docs.losant.com/devices/attributes/) and [Tags](https://docs.losant.com/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://docs.losant.com/devices/device-recipes/#bulk-device-creation) devices at once.
 
 The `Aruba Meridian Asset Tag` device recipe contains all of the recommended attributes and tags when utilizing the Aruba Meridian sensors and service within the Losant platform.
 

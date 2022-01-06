@@ -16,7 +16,7 @@ To begin using this template, enable the [Device Simulator](/applications/~expor
 ## Device Simulation
 This workflow simulates the movement of devices every 15-90 minutes and includes conditional-based logic detailed below.
 
-The devices simulated in this template were made to operate similarly and comparably to BLE or UWB devices in the physical space, much like an [Aruba Meridian](https://~exportplaceholderid-docs-url~/applications/integrations/#meridian) device.
+The devices simulated in this template were made to operate similarly and comparably to BLE or UWB devices in the physical space, much like an [Aruba Meridian](https://docs.losant.com/applications/integrations/#meridian) device.
 
 ## Devices
 
@@ -83,11 +83,11 @@ These require additions to Losant Files to render correctly in the experience.
 ## Resources
 The following list contains resources related to this template:
 
-* [Dashboard Context Variables](https://~exportplaceholderid-docs-url~/dashboards/context-variables/)
-* [Experience Dashboard Pages](https://~exportplaceholderid-docs-url~/experiences/views/#dashboard-pages)
-* [Experience Users](https://~exportplaceholderid-docs-url~/experiences/users/)
-* [Experience User Tags](https://~exportplaceholderid-docs-url~/experiences/users/#user-tags)
-* [Data Tables](https://~exportplaceholderid-docs-url~/data-tables/overview/)
+* [Dashboard Context Variables](https://docs.losant.com/dashboards/context-variables/)
+* [Experience Dashboard Pages](https://docs.losant.com/experiences/views/#dashboard-pages)
+* [Experience Users](https://docs.losant.com/experiences/users/)
+* [Experience User Tags](https://docs.losant.com/experiences/users/#user-tags)
+* [Data Tables](https://docs.losant.com/data-tables/overview/)
 
 ## License
 

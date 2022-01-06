@@ -1,6 +1,6 @@
 # Experience Internationalization
 
-This template demonstrates how to build a multilingual [Application Experience](https://~exportplaceholderid-docs-url~/experiences/overview/), with the language managed in the URL and controlled by a dropdown menu.
+This template demonstrates how to build a multilingual [Application Experience](https://docs.losant.com/experiences/overview/), with the language managed in the URL and controlled by a dropdown menu.
 
 ## Dependencies
 
@@ -10,17 +10,17 @@ The included language selector dropdown requires the use of [Twitter Bootstrap v
 
 This template includes the following resources for setting up your multilingual experience:
 
-- A [Custom Node](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/) that returns a dictionary for the specified language as well as other helpful info that can be used in the user interface.
-- An [Experience Component](https://~exportplaceholderid-docs-url~/experiences/views/#components) that renders a language dropdown selector.
+- A [Custom Node](https://docs.losant.com/workflows/custom-nodes/overview/) that returns a dictionary for the specified language as well as other helpful info that can be used in the user interface.
+- An [Experience Component](https://docs.losant.com/experiences/views/#components) that renders a language dropdown selector.
 - Another Experience Component that renders the appropriate `<link>` tags to be placed in your page's `<head>`.
 - A third Experience Component that renders a language-specific URL; this is used within the other two components listed above.
 
 The template also includes these resources for demonstrating the functionality:
 
-- Two [Experience Endpoints](https://~exportplaceholderid-docs-url~/experiences/endpoints/) – one for serving the chosen language as a path parameter, and one for serving it as a subdomain. (The subdomain example requires additional setup as described below.)
-- An [Experience Workflow](https://~exportplaceholderid-docs-url~/workflows/experience-workflows/) that handles requests to the two endpoints, returns the selected language's dictionary using the provided custom node, and issues replies.
-- An [Experience Page](https://~exportplaceholderid-docs-url~/experiences/views/#pages) that displays content in the chosen language, along with the language selector dropdown.
-- Three dictionary examples for English, Spanish, and French, all provided as CSVs in [Application Files](https://~exportplaceholderid-docs-url~/applications/files/).
+- Two [Experience Endpoints](https://docs.losant.com/experiences/endpoints/) – one for serving the chosen language as a path parameter, and one for serving it as a subdomain. (The subdomain example requires additional setup as described below.)
+- An [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/) that handles requests to the two endpoints, returns the selected language's dictionary using the provided custom node, and issues replies.
+- An [Experience Page](https://docs.losant.com/experiences/views/#pages) that displays content in the chosen language, along with the language selector dropdown.
+- Three dictionary examples for English, Spanish, and French, all provided as CSVs in [Application Files](https://docs.losant.com/applications/files/).
 
 ## Choose a Language Management Mode
 
@@ -30,14 +30,14 @@ The method you choose will affect this template's setup steps. While the mode ca
 
 ### Language as a Path Parameter
 
-If you wish to manage the chosen language in the path of your URL (i.e. "mydomain.com/LANGUAGE/foo/bar"), you will need to update all of your endpoints to take the language as an initial [parameter](https://~exportplaceholderid-docs-url~/experiences/endpoints/#route). For example:
+If you wish to manage the chosen language in the path of your URL (i.e. "mydomain.com/LANGUAGE/foo/bar"), you will need to update all of your endpoints to take the language as an initial [parameter](https://docs.losant.com/experiences/endpoints/#route). For example:
 
 - A path of "/foo/bar" becomes "/{language}/foo/bar".
 - A path of "/devices/{id}" becomes "/{language}/devices/{id}".
 
 ### Language as a Subdomain
 
-Outside of the one-time configuration of the [Experience Domain(s)](https://~exportplaceholderid-docs-url~/experiences/domains/), managing the chosen language as a subdomain (i.e. "LANGUAGE.mydomain.com") is the easier of the two options supported by this template. Doing so requires setting up either:
+Outside of the one-time configuration of the [Experience Domain(s)](https://docs.losant.com/experiences/domains/), managing the chosen language as a subdomain (i.e. "LANGUAGE.mydomain.com") is the easier of the two options supported by this template. Doing so requires setting up either:
 
 - Individual domains per supported language ("en.mydomain.com" and "fr.mydomain.com"), or
 - One [wildcard](https://en.wikipedia.org/wiki/Wildcard_DNS_record) subdomain, where the wildcard represents the language code ("*.mydomain.com").
@@ -52,7 +52,7 @@ Using the template as such would also require registering multiple experience do
 
 Setting up a multilingual site takes quite a bit of work, and while this template can be used as a starting point, there are a number of changes you must make within your application to fully internationalize your end-user experience.
 
-In addition, when utilizing this template, **none of your endpoints may make use of [static replies](https://~exportplaceholderid-docs-url~/experiences/endpoints/#reply-types)**; all must use a workflow to respond to the request because the workflow is necessary to look up the language dictionary.
+In addition, when utilizing this template, **none of your endpoints may make use of [static replies](https://docs.losant.com/experiences/endpoints/#reply-types)**; all must use a workflow to respond to the request because the workflow is necessary to look up the language dictionary.
 
 ### Configuring Endpoints and Domains
 
@@ -79,7 +79,7 @@ Each row in the CSV after the header represents an internationalized string used
 
 #### Defining a Language
 
-At the top of the included Custom Node is a [Mutate Node](https://~exportplaceholderid-docs-url~/workflows/logic/mutate/) that defines each supported language in your application as a JSON object. Additional languages can be added to your application by including a new entry within this node.
+At the top of the included Custom Node is a [Mutate Node](https://docs.losant.com/workflows/logic/mutate/) that defines each supported language in your application as a JSON object. Additional languages can be added to your application by including a new entry within this node.
 
 Each object contains the following keys:
 
@@ -90,7 +90,7 @@ Each object contains the following keys:
 
 ### Using the Custom Node
 
-As stated above, every endpoint must utilize a workflow that starts with an [Endpoint Trigger](https://~exportplaceholderid-docs-url~/workflows/triggers/endpoint/) and responds using an [Endpoint Reply Node](https://~exportplaceholderid-docs-url~/workflows/outputs/endpoint-reply/). Between them, the dictionary must be loaded onto the payload through the provided Custom Node.
+As stated above, every endpoint must utilize a workflow that starts with an [Endpoint Trigger](https://docs.losant.com/workflows/triggers/endpoint/) and responds using an [Endpoint Reply Node](https://docs.losant.com/workflows/outputs/endpoint-reply/). Between them, the dictionary must be loaded onto the payload through the provided Custom Node.
 
 If a dictionary for the specified language cannot be found, the Custom Node will take its `false` output. This allows you an opportunity to render a custom 404 page or redirect the user to the same page in your default language.
 
@@ -128,8 +128,8 @@ You can also use the built-in [`{{#with}}` Handlebars helper](https://handlebars
 
 In an Experience Component, there are a few different ways to render the interationalized string. Given a value you wish to render from your dictionary at the key "myString", you must either:
 
-- Pass the dictionary as [context](https://~exportplaceholderid-docs-url~/experiences/views/#passing-custom-context). Given a component rendered as `{{component 'my-component' pageData.dictionaryInfo.dictionary}}`,render the string as `{{myString}}`.
-- Pass the dictionary as a [custom argument](https://~exportplaceholderid-docs-url~/experiences/views/#passing-custom-arguments). Given a component rendered as `{{component 'my-component' dictionary=pageData.dictionaryInfo.dictionary}}`, render the string as `{{@args.dictionary.myString}}`.
+- Pass the dictionary as [context](https://docs.losant.com/experiences/views/#passing-custom-context). Given a component rendered as `{{component 'my-component' pageData.dictionaryInfo.dictionary}}`,render the string as `{{myString}}`.
+- Pass the dictionary as a [custom argument](https://docs.losant.com/experiences/views/#passing-custom-arguments). Given a component rendered as `{{component 'my-component' dictionary=pageData.dictionaryInfo.dictionary}}`, render the string as `{{@args.dictionary.myString}}`.
 - Reference the `@root` payload. Regardless of the context or arguments passed to your component, render the string as `{{@root.pageData.dictionaryInfo.dictionary.myString}}`.
 
 ### Rendering a Language Selector

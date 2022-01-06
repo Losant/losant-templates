@@ -15,7 +15,7 @@ Even though this template is built around outlier detection for industrial equip
 * Combining IoT and AI in a real-world use case 
 * Real-time outlier detection using AI models
 * Simulation using a real-world dataset
-* Automatic [Event](https://~exportplaceholderid-docs-url~/applications/events/) creation based on AI predictions
+* Automatic [Event](https://docs.losant.com/applications/events/) creation based on AI predictions
 
 ## Setup
 1. Enable the `Predict` workflow.
@@ -23,9 +23,9 @@ Even though this template is built around outlier detection for industrial equip
 
 ## About Elipsa
 
-[Elipsa's](https://www.elipsa.ai/) no-code environment makes training and utilizing AI models easy and approachable. Elipsa works seamlessly with Losant's [data exports](https://~exportplaceholderid-docs-url~/devices/bulk-actions/#request-data-export) to quickly train AI models with little-to-no data reformatting, cleaning, or engineering.
+[Elipsa's](https://www.elipsa.ai/) no-code environment makes training and utilizing AI models easy and approachable. Elipsa works seamlessly with Losant's [data exports](https://docs.losant.com/devices/bulk-actions/#request-data-export) to quickly train AI models with little-to-no data reformatting, cleaning, or engineering.
 
-![Elipsa Logo](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~/template/elipsa-logo.jpg)
+![Elipsa Logo](./elipsa-logo.jpg)
 
 ## About this Template's AI Model
 
@@ -43,7 +43,7 @@ The outlier detection model being executed by this template has been trained on 
 
 ## About the Simulation Data
 
-This template includes a simulator that replays a subset of data extracted from the dataset above. You can find the simulation data in [Files](https://~exportplaceholderid-docs-url~/applications/files/) at `TurbineEngine.csv`.
+This template includes a simulator that replays a subset of data extracted from the dataset above. You can find the simulation data in [Files](https://docs.losant.com/applications/files/) at `TurbineEngine.csv`.
 
 Every minute, the `Simulator` workflow pulls the next row from the simulation data and reports it as state to the `Turbofan` device. When the end of the file has been reached, the simulator will start over at the first row.
 
@@ -64,7 +64,7 @@ If `Prediction` is set to `1`, an outlier has been detected. The `Anomaly Score`
 
 ## Events
 
-Whenever an outlier occurs with an `Anomaly Score` above `0.5`, which indicates a high degree of confidence, an [Event](https://~exportplaceholderid-docs-url~/applications/events/) is created in your application. The event contains the confidence level and lists the values of every attribute that caused the outlier.
+Whenever an outlier occurs with an `Anomaly Score` above `0.5`, which indicates a high degree of confidence, an [Event](https://docs.losant.com/applications/events/) is created in your application. The event contains the confidence level and lists the values of every attribute that caused the outlier.
 
 ---
 

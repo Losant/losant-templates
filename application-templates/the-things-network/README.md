@@ -14,7 +14,7 @@ This template is a useful starting point for any organization wishing to develop
 * Dashboard to visualize live and historical sensor data.
 
 ## Setup
-1. Add an [Application Global](https://~exportplaceholderid-docs-url~/applications/overview/#application-globals) named `LORA_NETWORK_SERVER_AUTH_TOKEN` and set it to a complex string similar to a strong password.
+1. Add an [Application Global](https://docs.losant.com/applications/overview/#application-globals) named `LORA_NETWORK_SERVER_AUTH_TOKEN` and set it to a complex string similar to a strong password.
 2. Enable the **TTN Receiver** workflow.
 3. Enable the **Create Events** workflow.
 4. Enable the **Simulator** workflow.
@@ -22,7 +22,7 @@ This template is a useful starting point for any organization wishing to develop
 ## The Radio Bridge RBS306-VM30 (Voltage Sensor)
 This template provides an out-of-the-box implementation that supports the [Radio Bridge RBS306-VM30 Voltage Sensor](https://radiobridge.com/products/wireless-ip67-voltage-sensor). To purchase your own Radio Bridge sensors, please visit the [How to Buy](https://radiobridge.com/how-to-buy) page.
 
-![Radio Bridge RBS306-VM30](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationTheThingsNetwork-0~/template/radio-bridge-RBS306-VM30.png)
+![Radio Bridge RBS306-VM30](./radio-bridge-RBS306-VM30.png)
 
 The **TTN Receiver** workflow will automatically create new devices the first time it receives data. Once your Radio Bridge sensors are reporting data to TTN, it will show up in Losant automatically.
 
@@ -35,9 +35,9 @@ There are many TTN-compatible LoRaWAN gateways available. The gateway you choose
 Radio Bridge provides their own free console that integrates with your TTN account and handles adding and configuring sensors. Follow [their instructions](https://radiobridge.com/documents/How%20to%20Connect%20LoRaWAN%20Sensors.pdf) to properly add Radio Bridge sensors to your TTN account.
 
 ## Configure The Things Network HTTP Integration for Losant
-This template automatically creates a unique [Webhook](https://~exportplaceholderid-docs-url~/applications/webhooks/) that you can use to configure your [TTN HTTP Integration](https://www.thethingsnetwork.org/docs/applications/http/).
+This template automatically creates a unique [Webhook](https://docs.losant.com/applications/webhooks/) that you can use to configure your [TTN HTTP Integration](https://www.thethingsnetwork.org/docs/applications/http/).
 
-![TTN HTTP Integration Configuration](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationTheThingsNetwork-0~/template/ttn-http-integration-config.png)
+![TTN HTTP Integration Configuration](./ttn-http-integration-config.png)
 
 * Set the **URL** to the URL of the webhook created by this template.
 * Set the **Authorization** header to the same value you set for the `LORA_NETWORK_SERVER_AUTH_TOKEN` application global.
@@ -45,15 +45,15 @@ This template automatically creates a unique [Webhook](https://~exportplaceholde
 ## Simulation Overview
 This template includes a **Simulator** workflow and device. The simulation workflow generates random sensor data every five minutes, encodes that data, and invokes the **TTN Receiver** workflow. This mimics exactly how data is received from TTN by your application.
 
-The **Simulator** workflow also includes two [Virtual Buttons](https://~exportplaceholderid-docs-url~/workflows/triggers/virtual-button/) to simulate the built-in tamper switch inside Radio Bridge devices. Clicking the **Tamper Open** button will simulate someone attempting to remove the lid and tamper with the sensor. Clicking the **Tamper Closed** button will simulate the tamper button being pushed back down, which indicates the lid has been put back on the device.
+The **Simulator** workflow also includes two [Virtual Buttons](https://docs.losant.com/workflows/triggers/virtual-button/) to simulate the built-in tamper switch inside Radio Bridge devices. Clicking the **Tamper Open** button will simulate someone attempting to remove the lid and tamper with the sensor. Clicking the **Tamper Closed** button will simulate the tamper button being pushed back down, which indicates the lid has been put back on the device.
 
 ## Dashboard Overview
 This template includes a dashboard that displays real-time and historical voltage sensor data. It also displays information about the device itself, including battery voltage and a history of the tamper state.
 
-The dashboard is configured with a [Device ID Context Variable](https://~exportplaceholderid-docs-url~/dashboards/context-variables/#using-device-ids). This context variable defaults to the simulated device. If you add your own Radio Bridge voltage sensor to this application, you can easily view its details by switching the value of the dashboard's context variable.
+The dashboard is configured with a [Device ID Context Variable](https://docs.losant.com/dashboards/context-variables/#using-device-ids). This context variable defaults to the simulated device. If you add your own Radio Bridge voltage sensor to this application, you can easily view its details by switching the value of the dashboard's context variable.
 
 ## Events
-This template includes a **Create Events** workflow that will create [Events](https://~exportplaceholderid-docs-url~/applications/events/) under the following scenarios:
+This template includes a **Create Events** workflow that will create [Events](https://docs.losant.com/applications/events/) under the following scenarios:
 
 1. **Tamper Detected** - created when a device reports a `tamper` value equal to `0`, which indicates the device is currently being tampered with.
 2. **Zero Voltage** - created when the voltage sensor reports a value of `0`. This is useful in power monitoring applications to send an alert if a loss of power occurs.

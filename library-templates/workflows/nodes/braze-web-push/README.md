@@ -1,6 +1,6 @@
 # Braze: Web Push
 
-Immediately send a web push message using the [Braze API](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_messages/). Once imported, this node will be available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+Immediately send a web push message using the [Braze API](https://www.braze.com/docs/api/endpoints/messaging/send_messages/post_send_messages/). Once imported, this node will be available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

@@ -1,7 +1,7 @@
 # RuuviTag
-This template contains a [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) for the [RuuviTag](https://ruuvi.com/ruuvitag-specs/) open-source wireless sensor node.
+This template contains a [Device Recipe](https://docs.losant.com/devices/device-recipes/) for the [RuuviTag](https://ruuvi.com/ruuvitag-specs/) open-source wireless sensor node.
 
-![RuuviTag](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryDevicesRecipesRuuviTag-0~/template/ruuvitag.png)
+![RuuviTag](./ruuvitag.png)
 
 ## About the RuuviTag
 
@@ -14,7 +14,7 @@ This template contains a [Device Recipe](https://~exportplaceholderid-docs-url~/
 For more details, see the [RuuviTag product page](https://ruuvi.com/ruuvitag-specs/).
 
 ## How to Use a Device Recipe
-This template imports a single [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://~exportplaceholderid-docs-url~/devices/attributes/) and [Tags](https://~exportplaceholderid-docs-url~/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://~exportplaceholderid-docs-url~/devices/device-recipes/#bulk-device-creation) devices at once.
+This template imports a single [Device Recipe](https://docs.losant.com/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://docs.losant.com/devices/attributes/) and [Tags](https://docs.losant.com/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://docs.losant.com/devices/device-recipes/#bulk-device-creation) devices at once.
 
 The `RuuviTag` device recipe contains all of the recommended attributes and tags when utilizing the RuuviTag sensor within the Losant platform.
 

@@ -2,7 +2,7 @@
 
 This node provides access to the [Google Vision API](https://cloud.google.com/vision/docs).
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

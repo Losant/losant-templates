@@ -2,7 +2,7 @@
 
 This node performs a GPS location reverse lookup and returns the associated address with a location. This lookup is performed using [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro#ReverseGeocoding). To use this node, you need an API key from [Google Cloud Platform](https://developers.google.com/maps/documentation/geocoding/get-api-key).
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

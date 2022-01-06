@@ -1,7 +1,7 @@
 # Nimbelink NL-AT2
-This template contains a [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) for the [Nimbelink NL-AT2](https://nimbelink.com/products/asset-tracking-solution-product-nl-at2/) GPS asset tracking device. This recipe is intended to be used with Nimbelink's Pub/Sub message format and Losant's [Google Pub/Sub Integration](https://~exportplaceholderid-docs-url~/applications/integrations/#google-pubsub).
+This template contains a [Device Recipe](https://docs.losant.com/devices/device-recipes/) for the [Nimbelink NL-AT2](https://nimbelink.com/products/asset-tracking-solution-product-nl-at2/) GPS asset tracking device. This recipe is intended to be used with Nimbelink's Pub/Sub message format and Losant's [Google Pub/Sub Integration](https://docs.losant.com/applications/integrations/#google-pubsub).
 
-![Nimbelink NL-AT2](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryDevicesRecipesNimbelinkNlAt2-0~/template/NL-AT2.png)
+![Nimbelink NL-AT2](./NL-AT2.png)
 
 ## About the Nimbelink NL-AT2
 
@@ -10,7 +10,7 @@ This template contains a [Device Recipe](https://~exportplaceholderid-docs-url~/
 For more details, see the [Nimbelink NL-AT2 product page](https://nimbelink.com/products/asset-tracking-solution-product-nl-at2/).
 
 ## How to Use a Device Recipe
-This template imports a single [Device Recipe](https://~exportplaceholderid-docs-url~/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://~exportplaceholderid-docs-url~/devices/attributes/) and [Tags](https://~exportplaceholderid-docs-url~/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://~exportplaceholderid-docs-url~/devices/device-recipes/#bulk-device-creation) devices at once.
+This template imports a single [Device Recipe](https://docs.losant.com/devices/device-recipes/) into your application. Device recipes allow you to quickly create devices from a predefined set of [Attributes](https://docs.losant.com/devices/attributes/) and [Tags](https://docs.losant.com/devices/overview/#device-tags). Device recipes can be used to create a single device, or used to [create many](https://docs.losant.com/devices/device-recipes/#bulk-device-creation) devices at once.
 
 The `Nimbelink NL-AT2` device recipe contains all of the recommended attributes and tags when utilizing this asset tracker within the Losant platform.
 

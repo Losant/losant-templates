@@ -13,7 +13,7 @@ To incorporate a QR code into your provisioning experience, see the QR Code Read
 ## The Provisioning Form
 This template comes with an example page and form that you can use to test the provisioning functionality.
 
-![Provisioning Form](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryDevicesProvisioningDynamicProvisioning-0~/template/provisioning_page.png)
+![Provisioning Form](./provisioning_page.png)
 
 This template includes two endpoints that are used to render this page and process the user input:
 

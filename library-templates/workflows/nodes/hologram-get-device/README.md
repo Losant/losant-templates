@@ -2,7 +2,7 @@
 
 This node provide access to [Hologram's API](https://hologram.io/docs/reference/cloud/http/#/reference/device-management/devices/get-a-device) to retrieve device information.
 
-Once imported, this node is available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+Once imported, this node is available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 

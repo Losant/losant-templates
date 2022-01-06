@@ -1,18 +1,18 @@
 # EnOcean IoT Starter Kit Application Template
 This template provides an orchestration and visualization implementation for the [EnOcean IoT Starter Kit](https://www.enocean.com/en/applications/iot-solutions/). The EnOcean IoT Starter Kit contains all of the required hardware and software to provision and receive raw sensor data. This template adds dashboards and a provisioning user interface to make it easy to utilize EnOcean sensors in production smart environment applications.
 
-![EnOcean Dashboard](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~/template/enocean-dashboard.png)
+![EnOcean Dashboard](./enocean-dashboard.png)
 
 ## Template Features
 * Dashboard to instantly visualize data from EnOcean IoT Starter Kit sensors.
 * Edge workflows to process and forward EnOcean data to the Losant IoT Platform.
 * Customizable user interface to easily onboard and visualize EnOcean sensors.
-* Docker Compose file to quickly install the [Losant Edge Agent](https://~exportplaceholderid-docs-url~/edge-compute/edge-agent-installation/) and [EnOcean IoT Connector](https://iot.enocean.com/) on Linux gateways.
+* Docker Compose file to quickly install the [Losant Edge Agent](https://docs.losant.com/edge-compute/edge-agent-installation/) and [EnOcean IoT Connector](https://iot.enocean.com/) on Linux gateways.
 
 ## How it Works
 This template demonstrates a complete sensor-to-cloud solution designed for enterprise smart environments. There are several components that work together to seamlessly deliver sensor data from your environment to your IoT applications hosted in the Losant IoT Platform.
 
-![EnOcean and Losant Communication Diagram](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~/template/enocean-losant-diagram.png)
+![EnOcean and Losant Communication Diagram](./enocean-losant-diagram.png)
 
 ### Communication Flow
 
@@ -30,7 +30,7 @@ To utilize this template, the following components are required:
 1. A license (paid or trial) for the [EnOcean IoT Connector](https://iot.enocean.com/).
 
 ## Gateway Setup
-This template provides a [Docker Compose](https://docs.docker.com/compose/compose-file/) file that makes it easy to install and configure the Losant Edge Agent, EnOcean IoT Connector, and other software dependencies. The file is named `docker-compose.yml` in your [Application Files](https://~exportplaceholderid-docs-url~/applications/files/). This file is a modified version of the Docker Compose file provided by EnOcean. You can find the original in the [IoT Connector repository](https://bitbucket.org/enocean-cloud/iotconnector-docs/src/master/deploy/local_deployment/docker-compose.yml).
+This template provides a [Docker Compose](https://docs.docker.com/compose/compose-file/) file that makes it easy to install and configure the Losant Edge Agent, EnOcean IoT Connector, and other software dependencies. The file is named `docker-compose.yml` in your [Application Files](https://docs.losant.com/applications/files/). This file is a modified version of the Docker Compose file provided by EnOcean. You can find the original in the [IoT Connector repository](https://bitbucket.org/enocean-cloud/iotconnector-docs/src/master/deploy/local_deployment/docker-compose.yml).
 
 ### Configure the Gateway
 The only required software to install on your gateway is [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/). Refer to Docker's installation documentation for instructions.
@@ -57,7 +57,7 @@ As part of the IoT Connector instructions, you will run `docker-compose up -d`, 
 Application workflows are disabled by default when an application is created from an import or a template. Therefore, you must enable the `Process Provision Queue` workflow.
 
 ## Deploy the Edge Workflows
-This template includes two [Edge Workflows](https://~exportplaceholderid-docs-url~/workflows/edge-workflows/) that must be deployed to the **Edge Compute** device. Navigate to the workflow editor for both edge workflows, click the **Deploy** button at the top right of the page, and select the **Edge Compute** device in the deploy dialog.
+This template includes two [Edge Workflows](https://docs.losant.com/workflows/edge-workflows/) that must be deployed to the **Edge Compute** device. Navigate to the workflow editor for both edge workflows, click the **Deploy** button at the top right of the page, and select the **Edge Compute** device in the deploy dialog.
 
 ## Provision your EnOcean IoT Starter Kit Devices
 This application template includes a complete End User Experience to provision and visualize data from your EnOcean sensors.
@@ -65,12 +65,12 @@ This application template includes a complete End User Experience to provision a
 You can access this experience by navigating to the following URL:
 
 ```
-https://<your-application-id>.~exportplaceholderid-endpoint-domain~
+https://<your-application-id>.onlosant.com
 ```
 
 You can easily obtain this URL by navigating to the **Edit** main navigation menu under the **Experiences** section.
 
-This template comes with a built-in [Experience User](https://~exportplaceholderid-docs-url~/experiences/users/) with the following credentials:
+This template comes with a built-in [Experience User](https://docs.losant.com/experiences/users/) with the following credentials:
 * `Username`: test.user@example.com
 * `Password`: qwerty123
 

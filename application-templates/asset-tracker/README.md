@@ -15,7 +15,7 @@ This template illustrates a geolocation asset tracking solution with temperature
 
 ## Setup
 1. Enable the [Data Simulator](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-dataSimulator-0~/develop) workflow.
-2. Enable the [Event Logger](https://~exportplaceholderid-app-url~/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-eventLogger-1~/develop) workflow.
+2. Enable the [Event Logger](https://app.losant.com/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-eventLogger-1~/develop) workflow.
 
 ## Data Simulator
 When the [Data Simulator](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-dataSimulator-0~/develop) workflow is enabled, it will simulate the movement of GPS devices between Indianapolis, Columbus, Cincinnati, and Louisville. While in transit, these devices will log fluctuations in temperature, orientation, and signal strength. Battery level will deplete over the course of a trip and shipments are susceptible to random shock events. When a tracker leaves one of the four cities, it will start a new shipment, resetting all of these state properties.
@@ -50,9 +50,9 @@ Password: qwerty123
 Users can be modified, added, or removed by navigating to the experience's [Users & Groups](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/experience/users) page.
 
 ## Resources
-* [Events](https://~exportplaceholderid-docs-url~/applications/events/)
-* [Data Tables](https://~exportplaceholderid-docs-url~/data-tables/overview/)
-* [GPS History Dashboard Block](https://~exportplaceholderid-docs-url~/dashboards/gps-history/)
+* [Events](https://docs.losant.com/applications/events/)
+* [Data Tables](https://docs.losant.com/data-tables/overview/)
+* [GPS History Dashboard Block](https://docs.losant.com/dashboards/gps-history/)
 
 ---
 

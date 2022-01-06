@@ -1,13 +1,13 @@
 # Modbus Edge Compute with Lanner
 
-This template demonstrates how to read and write [Modbus TCP](https://en.wikipedia.org/wiki/Modbus) and [Modbus RTU](https://en.wikipedia.org/wiki/Modbus) data using [Lanner gateways](https://www.lanner-america.com/bundle-solutions/losant/) and the [Losant Edge Agent](https://~exportplaceholderid-docs-url~/edge-compute/overview/).
+This template demonstrates how to read and write [Modbus TCP](https://en.wikipedia.org/wiki/Modbus) and [Modbus RTU](https://en.wikipedia.org/wiki/Modbus) data using [Lanner gateways](https://www.lanner-america.com/bundle-solutions/losant/) and the [Losant Edge Agent](https://docs.losant.com/edge-compute/overview/).
 
 This template is designed to act as a hardware and software Modbus development kit. By purchasing the off-the-shelf components listed below, your organization can immediately begin experimenting with Modbus in your own environment. The lessons learned from this template's reference implementation can then be applied to your own Modbus sensors and equipment.
 
-![Modbus Lanner Losant Diagram](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~/template/modbus-lanner-losant.jpg)
+![Modbus Lanner Losant Diagram](./modbus-lanner-losant.jpg)
 
 ## Key Features
-* Example [Edge Workflows](https://~exportplaceholderid-docs-url~/workflows/edge-workflows/) to read and securely transmit Modbus TCP and Modbus RTU data.
+* Example [Edge Workflows](https://docs.losant.com/workflows/edge-workflows/) to read and securely transmit Modbus TCP and Modbus RTU data.
 * Modbus TCP simulation script that can be run on your network to closely represent real devices.
 * Example Modbus RTU workflow that reads data from an off-the-shelf [Modbus RTU Temperature Sensor](https://www.amazon.com/dp/B078NRYBVZ).
 * Dashboards to visualize Modbus TCP and Modbus RTU data.
@@ -25,22 +25,22 @@ To use all features of this template, the following components are required:
 
 ## Gateway Setup
 
-This template works with nearly any gateway capable of running the [Losant Edge Agent](https://~exportplaceholderid-docs-url~/edge-compute/edge-agent-installation/).
+This template works with nearly any gateway capable of running the [Losant Edge Agent](https://docs.losant.com/edge-compute/edge-agent-installation/).
 
 If you purchased the Lanner gateway listed above, it comes with the Losant Edge Agent preinstalled. You can find configuration instructions located on the gateway at `/var/lib/losant-edge-agent/README.txt`.
 
 If you're using a different gateway, you must install the Losant Edge Agent by following the instructions below.
 
-1. [Install Docker and the Losant Edge Agent](https://~exportplaceholderid-docs-url~/edge-compute/edge-agent-installation/)
+1. [Install Docker and the Losant Edge Agent](https://docs.losant.com/edge-compute/edge-agent-installation/)
 1. [Allow Docker to Access Serial Devices](https://www.losant.com/blog/how-to-access-serial-devices-in-docker)
 
 ## Losant Edge Agent Configuration
 
-The minimum [Edge Agent Configuration](https://~exportplaceholderid-docs-url~/edge-compute/edge-agent-usage/) required for this template is a device ID, access key, and access secret.
+The minimum [Edge Agent Configuration](https://docs.losant.com/edge-compute/edge-agent-usage/) required for this template is a device ID, access key, and access secret.
 
-This template automatically adds an [Edge Compute](https://~exportplaceholderid-docs-url~/devices/edge-compute/) device named "Lanner Gateway". You can obtain its device ID by navigating to its device page and clicking the small copy button at the top of the page near the device name.
+This template automatically adds an [Edge Compute](https://docs.losant.com/devices/edge-compute/) device named "Lanner Gateway". You can obtain its device ID by navigating to its device page and clicking the small copy button at the top of the page near the device name.
 
-To create an [Access Key and Secret](https://~exportplaceholderid-docs-url~/applications/access-keys/) for this device, click the **Device Actions** menu on the top left of the screen and select **Create Access Key**.
+To create an [Access Key and Secret](https://docs.losant.com/applications/access-keys/) for this device, click the **Device Actions** menu on the top left of the screen and select **Create Access Key**.
 
 Your final Edge Agent configuration file will look something like the following:
 
@@ -51,7 +51,7 @@ key= 'YOUR_ACCESS_KEY'
 secret = 'YOUR_ACCESS_SECRET'
 ```
 
-You can now run the Edge Agent on your gateway. Monitor the [Device Communication Log](https://~exportplaceholderid-docs-url~/devices/overview/#device-communication-log) to see when it successfully connects to Losant. Once it has successfully connected, you can continue with these instructions.
+You can now run the Edge Agent on your gateway. Monitor the [Device Communication Log](https://docs.losant.com/devices/overview/#device-communication-log) to see when it successfully connects to Losant. Once it has successfully connected, you can continue with these instructions.
 
 ## The Modbus TCP Simulator
 
@@ -62,7 +62,7 @@ The script is written in [Node.js](https://nodejs.org), so you must first instal
 ### How to Install the Modbus TCP Simulator Script
 
 1. Create a new and empty folder on the computer that will run the simulator. The folder can be located wherever you want.
-1. Navigate to this application's [Files](https://~exportplaceholderid-docs-url~/applications/files/) and download `index.js` and `package.json` into the newly created folder.
+1. Navigate to this application's [Files](https://docs.losant.com/applications/files/) and download `index.js` and `package.json` into the newly created folder.
 1. Open a terminal and change the directory to the newly created folder. Next, run the command `npm install`. This command installs all required dependencies for the simulator script.
 
 ### How to Run the Modbus TCP Simulator Script
@@ -74,7 +74,7 @@ Once the simulator is installed, you can run it using the following instructions
 
 ### How to Use the Modbus TCP Simulator
 
-This template creates a [Peripheral](https://~exportplaceholderid-docs-url~/devices/gateways-peripherals/) device named "Modbus TCP Sensor". This is the device that represents the Modbus TCP Simulator.
+This template creates a [Peripheral](https://docs.losant.com/devices/gateways-peripherals/) device named "Modbus TCP Sensor". This is the device that represents the Modbus TCP Simulator.
 
 #### Configure the Modbus TCP Device
 
@@ -92,9 +92,9 @@ Once deployed, this workflow will read the `temp_c`, `humidity`, and `running` r
 
 #### Changing the Modbus TCP Simulator Values
 
-To change the simulator values, you must first enable the "Update Simulator" workflow. [Application Workflows](https://~exportplaceholderid-docs-url~/workflows/application-workflows/) that are created by templates are always disabled by default.
+To change the simulator values, you must first enable the "Update Simulator" workflow. [Application Workflows](https://docs.losant.com/workflows/application-workflows/) that are created by templates are always disabled by default.
 
-This template creates a dashboard named "Modbus TCP". This dashboard contains an [Input Controls Block](https://~exportplaceholderid-docs-url~/dashboards/input-controls/) that can be used to send a command to your gateway that will, in turn, write the `temp_c`, `humidity`, and `running` registers on the Modbus TCP simulator. The updated values will be read on the next read interval (i.e. every 90 seconds).
+This template creates a dashboard named "Modbus TCP". This dashboard contains an [Input Controls Block](https://docs.losant.com/dashboards/input-controls/) that can be used to send a command to your gateway that will, in turn, write the `temp_c`, `humidity`, and `running` registers on the Modbus TCP simulator. The updated values will be read on the next read interval (i.e. every 90 seconds).
 
 #### Automatically Write Modbus Registers with Edge Logic
 
@@ -112,7 +112,7 @@ The Modbus temperature and humidity sensor communicates using RS-485. Although m
 
 To use the Modbus RTU sensor, it needs connected to the USB adapter and 12V DC power supply.
 
-![Modbus RTU Sensor Wiring Diagram](https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~/template/modbus-rtu-wiring-diagram.jpg)
+![Modbus RTU Sensor Wiring Diagram](./modbus-rtu-wiring-diagram.jpg)
 
 1. Remove the sensor board from the white plastic enclosure.
 1. Connect `A+` on the sensor board to `T/R+` on the serial adapter.
@@ -145,7 +145,7 @@ Once deployed, this workflow will read the `temp_c` and `humidity` registers fro
 
 ## Modify for Your Modbus Equipment
 
-The template is designed to demonstrate how Modbus data is read and written using [Edge Workflows](https://~exportplaceholderid-docs-url~/workflows/edge-workflows/). By using a simulator and an off-the-shelf sensor, this template provides a working implementation for pre-defined sources of Modbus data.
+The template is designed to demonstrate how Modbus data is read and written using [Edge Workflows](https://docs.losant.com/workflows/edge-workflows/). By using a simulator and an off-the-shelf sensor, this template provides a working implementation for pre-defined sources of Modbus data.
 
 Every Modbus device is different. To begin interacting with your own Modbus equipment, the first step is to obtain the documentation that describes its various registers and data types. Once you have that information, you can expand and modify this template based on your unique Modbus equipment.
 

@@ -2,7 +2,7 @@
 
 This node provides access to Meridian's Asset Tracking tag details using the [Meridian Asset Tracking API](https://docs.meridianapps.com/hc/en-us/articles/360040165333-Asset-Tracking-REST-API).
 
-Once imported, this node will be available in your application's collection of [Custom Nodes](https://~exportplaceholderid-docs-url~/workflows/custom-nodes/overview/).
+Once imported, this node will be available in your application's collection of [Custom Nodes](https://docs.losant.com/workflows/custom-nodes/overview/).
 
 ## Input Configuration
 
