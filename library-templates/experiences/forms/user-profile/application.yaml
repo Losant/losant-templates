@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Allow Experience Users to update their profile.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryExperiencesFormsUserProfile-0~
+    name: User Profile
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - experience
+      - edit
+      - profile
+      - form
+      - user
+version: 1

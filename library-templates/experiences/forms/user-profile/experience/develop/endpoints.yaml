@@ -1,0 +1,29 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    description: Handles requests for signed-in users to view the Edit Profile page.
+      Users who are not signed in are redirected to /login.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-getTlEditProfile-0~
+    method: get
+    route: /tl-edit-profile
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    description: Handles form submissions from the Edit Profile page. Users who are
+      not signed in are redirected to /login.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-postTlEditProfile-1~
+    method: post
+    route: /tl-edit-profile
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+version: 1

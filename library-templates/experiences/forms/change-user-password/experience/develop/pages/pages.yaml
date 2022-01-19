@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: Created for Endpoint GET /change-password.
+    id: ~exportplaceholderid-experienceView-changePassword-0~
+    localFilename: ./Change_Password.hbs
+    name: Change Password
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

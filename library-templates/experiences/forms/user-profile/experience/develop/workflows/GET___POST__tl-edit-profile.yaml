@@ -1,0 +1,370 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: >-
+      Handles requests to display the Edit Profile page as well as form
+      submissions from that page. For form submissions, this workflow validates
+      the request and updates the user with the new settings.
+
+
+      The workflow also includes global variable defining which user tags to
+      expose to the end user, whether as read-only or as editable values.
+    enabled: true
+    flowId: ~exportplaceholderid-flow-getPostTlEditProfile-0~
+    globals:
+      - json: |-
+          [
+            {
+                "key": "phone",
+                "label": "Phone Number",
+                "type": "tel",
+                "required": true,
+                "pattern": "^[0-9]{10}$"
+            },
+            {
+                "key": "favoriteColor"
+            },
+            {
+              "key": "readOnlyValue",
+              "label": "Cannot Be Edited",
+              "readOnly": true
+            }
+          ]
+        key: exposedUserTags
+    id: ~exportplaceholderid-flowVersion-getPostTlEditProfile-0~
+    name: GET & POST /tl-edit-profile
+    nodes:
+      - config:
+          bodyTemplate: |-
+            {
+                "experienceUser": {{jsonEncode experience.user}}
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 1IpUyasnPt
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 160
+          'y': 560
+        outputIds:
+          - - jmCgM9kHLq
+        type: EndpointReplyNode
+      - config: {}
+        id: xEMDFQMGsw
+        meta:
+          annotationText: >-
+            We use the workflow engine to reply to the GET request so that the
+            `exposedUserTags` global variable is available to the page renderer.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 220
+          x: 140
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          script: >-
+            // first, let's build our schema based on the tags the user defines
+            in the globals
+
+            const requiredTagKeys = [];
+
+            const userTagsProperties = {};
+
+            (payload.globals.exposedUserTags || []).forEach(({ key, pattern,
+            readOnly, required}) => {
+                if (!readOnly) { // don't include readOnly tags in the request schema
+                    const obj = {
+                        type: 'string',
+                        maxLength: 255
+                    };
+                    if (required) {
+                        obj.minLength = 1;
+                        requiredTagKeys.push(key);
+                    }
+                    if (pattern) {
+                        obj.pattern = pattern;
+                    }
+                    userTagsProperties[key] = obj;
+                }
+            });
+
+            if (!payload.working) {
+                payload.working = {};
+            }
+
+            payload.working.schema = {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "minLength": 1,
+                        "maxLength": 1024
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024
+                    },
+                    "userTags": {
+                        "properties": userTagsProperties,
+                        "required": requiredTagKeys,
+                        "additionalProperties": false
+                    }
+                },
+                "additionalProperties": false,
+                "required": ["email", "firstName", "lastName", "userTags"]
+            };
+
+
+            // next, let's turn our submitted data into the appropriate shape.
+            this is what we will validate
+
+            payload.working.shapedRequest = {
+                email: payload.data.body.email,
+                firstName: payload.data.body.firstName,
+                lastName: payload.data.body.lastName,
+                userTags: {}
+            };
+
+            Object.entries(payload.data.body).forEach(([key, value]) => {
+                if (key.startsWith('tag-')) {
+                    payload.working.shapedRequest.userTags[key.replace('tag-', '')] = value;
+                }
+            });
+
+
+            // finally, we need to merge our existing user in with the submitted
+            values.
+
+            // this is necessary to retain the values of any tags not included
+            in the original request
+
+            payload.working.mergedUser = {
+                email: payload.working.shapedRequest.email,
+                firstName: payload.working.shapedRequest.firstName,
+                lastName: payload.working.shapedRequest.lastName,
+                userTags: {
+                    ...payload.experience.user.userTags,
+                    ...payload.working.shapedRequest.userTags
+                }
+            };
+
+            // remove any tags the user did not submit a value for
+
+            Object.entries(payload.working.mergedUser.userTags).forEach(([key,
+            value]) => {
+                if (!value) {
+                    delete payload.working.mergedUser.userTags[key];
+                }
+            });
+        id: EiWMGvXe7t
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 560
+          'y': 160
+        outputIds:
+          - - ojIq6y323q
+        type: RawFunctionNode
+      - config:
+          errorsPath: working.submissionErrors
+          schema: working.schema
+          schemaType: path
+          toValidatePath: working.shapedRequest
+        id: ojIq6y323q
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 560
+          'y': 260
+        outputIds:
+          - - tVnG6Jco2i
+          - - OaP57fhHXg
+        type: ValidatePayloadNode
+      - config:
+          dataMethod: payloadPath
+          emailOrIdTemplate: '{{experience.user.id}}'
+          invalidateExistingTokens: false
+          resultPath: working.updateResult
+          userPayloadPath: working.mergedUser
+        id: OaP57fhHXg
+        meta:
+          category: experience
+          description: ''
+          label: 'User: Update'
+          name: update-experience-user
+          x: 660
+          'y': 360
+        outputIds:
+          - - oAHTnVLRYi
+        type: UpdateExperienceUserNode
+      - config:
+          expression: '{{working.updateResult.id}}'
+        id: oAHTnVLRYi
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 660
+          'y': 460
+        outputIds:
+          - - 6pkdtH6jqp
+          - - JQGsVJ8UWo
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+                "experienceUser": {{jsonEncode working.updateResult}},
+                "updateResult": {
+                    "success": true
+                }
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: JQGsVJ8UWo
+        meta:
+          category: output
+          description: ''
+          label: Success
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 760
+          'y': 560
+        outputIds:
+          - - jmCgM9kHLq
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: |-
+            {
+                "experienceUser": {{jsonEncode working.mergedUser}},
+                "updateResult": {
+                    "errors": {{jsonEncode working.submissionErrors}}
+                }
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: tVnG6Jco2i
+        meta:
+          category: output
+          description: ''
+          label: Invalid Request
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 360
+          'y': 560
+        outputIds:
+          - - jmCgM9kHLq
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: jmCgM9kHLq
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 460
+          'y': 660
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: |-
+            {
+                "experienceUser": {{jsonEncode working.mergedUser}},
+                "updateResult": {
+                    "errors": [{{jsonEncode working.updateResult.error}}]
+                }
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '500'
+          sameSiteTemplate: ''
+        id: 6pkdtH6jqp
+        meta:
+          category: output
+          description: ''
+          label: Update Failed
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 560
+          'y': 560
+        outputIds:
+          - - jmCgM9kHLq
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getTlEditProfile-0~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /tl-edit-profile
+          name: endpoint
+          uiId: Sa_CoNGplv
+          x: 160
+          'y': 460
+        outputIds:
+          - - 1IpUyasnPt
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postTlEditProfile-1~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /tl-edit-profile
+          name: endpoint
+          uiId: Ix3XeRXXoy
+          x: 560
+          'y': 60
+        outputIds:
+          - - EiWMGvXe7t
+        type: endpoint
+    version: develop
+version: 1

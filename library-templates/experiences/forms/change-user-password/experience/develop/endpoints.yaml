@@ -1,0 +1,27 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    description: Displays the Change Password page for signed-in users.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-getTlChangePassword-0~
+    method: get
+    route: /tl-change-password
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    description: Accepts form submissions from the Change Password page.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-postTlChangePassword-1~
+    method: post
+    route: /tl-change-password
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+version: 1

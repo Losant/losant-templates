@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>Edit Profile</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+
+
+{{!
+  PAGE_START: To include this as a page within an existing experience layout,
+  keep everything between PAGE_START and PAGE_END. All other content can be
+  removed since it's provided by the surrounding layout.
+}}
+
+  {{#if pageData.updateResult.success}}
+    <div class="alert alert-success">Profile has been updated.</div>
+  {{/if}}
+  {{#if pageData.updateResult.errors}}
+    <div class="alert alert-danger">
+      Failed to update profile:
+      <ul>
+        {{#each pageData.updateResult.errors}}
+          <li>{{field}} {{message}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+  <form method="post" id="tl-edit-profile" novalidate>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        value="{{pageData.experienceUser.email}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        required
+        value="{{pageData.experienceUser.firstName}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        name="lastName"
+        required
+        value="{{pageData.experienceUser.lastName}}"
+      />
+    </div>
+    {{#each globals.exposedUserTags}}
+      <div class="form-group">
+        <label for="tag-{{this.key}}">{{defaultTo this.label this.key}}</label>
+        <input
+          type="{{defaultTo this.type 'text'}}"
+          class="form-control"
+          id="tag-{{this.key}}"
+          value="{{lookup ../pageData.experienceUser.userTags this.key}}"
+          {{#if this.pattern}}pattern="{{this.pattern}}"{{/if}}
+          {{#if this.required}}required{{/if}}
+          {{#if this.readOnly}}
+            readonly
+          {{else}}
+            name="tag-{{this.key}}"
+          {{/if}}
+        >
+      </div>
+    {{/each}}
+    <button id="tl-edit-profile-submit-btn" class="btn btn-success" type="submit">Update Profile</button>
+  </form>
+  <script>
+    (function() {
+      const form = document.getElementById('tl-edit-profile');
+      form.addEventListener('submit', (event) => {
+        form.classList.add('was-validated');
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+          document.getElementById('tl-edit-profile-submit-btn').disabled = true;
+        }
+      });
+    })();
+  </script>
+
+{{!
+  PAGE END
+}}
+  </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

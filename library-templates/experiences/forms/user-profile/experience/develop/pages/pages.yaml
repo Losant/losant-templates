@@ -1,0 +1,11 @@
+resourceType: ExperienceView
+resources:
+  - description: Displays the Edit Profile form, along with feedback for the user
+      when they submit the form (i.e. whether the update was successful).
+    id: ~exportplaceholderid-experienceView-editProfile-0~
+    localFilename: ./Edit_Profile.hbs
+    name: Edit Profile
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1
