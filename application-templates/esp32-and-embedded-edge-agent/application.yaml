@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Remote monitoring and control for an ESP32's GPIO using the
+      Embedded Edge Agent.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+    name: ESP32 and Embedded Edge Agent
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

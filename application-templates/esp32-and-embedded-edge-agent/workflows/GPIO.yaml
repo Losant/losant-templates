@@ -1,0 +1,1233 @@
+resourceType: Flow
+resources:
+  - description: Reads and controls various digital and analog inputs and outputs.
+    flowClass: embedded
+    globals: []
+    id: ~exportplaceholderid-flow-gpio-0~
+    minimumAgentVersion: 0.0.0
+    name: GPIO
+    nodes:
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '18'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: R_mMiNElU4
+        meta:
+          category: data
+          description: ''
+          label: 18 -> OUTPUT
+          name: registered-function
+          x: 80
+          'y': 880
+        outputIds:
+          - - 1Gj_ZvMVeg
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '21'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: 1Gj_ZvMVeg
+        meta:
+          category: data
+          description: ''
+          label: 21 -> OUTPUT
+          name: registered-function
+          x: 80
+          'y': 960
+        outputIds:
+          - - aBeI_0VaNX
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '23'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: aBeI_0VaNX
+        meta:
+          category: data
+          description: ''
+          label: 23 -> OUTPUT
+          name: registered-function
+          x: 80
+          'y': 1040
+        outputIds:
+          - - 8PsEsb3wrQ
+        type: RegisteredFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: nAjwmTYn6p
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 80
+          'y': 1300
+        outputIds: []
+        type: DebugNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '19'
+            - type: i32
+              valueTemplate: '1'
+          outputs: []
+          resultPath: ''
+        id: GOjtVUYgb7
+        meta:
+          category: data
+          description: ''
+          label: 19 -> INPUT
+          name: registered-function
+          x: 80
+          'y': 1200
+        outputIds:
+          - - nAjwmTYn6p
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '22'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: 8PsEsb3wrQ
+        meta:
+          category: data
+          description: ''
+          label: 22 -> OUTPUT
+          name: registered-function
+          x: 80
+          'y': 1120
+        outputIds:
+          - - GOjtVUYgb7
+        type: RegisteredFunctionNode
+      - config: {}
+        id: KsZeETLuAr
+        meta:
+          annotationText: >-
+            Configure **digital** inputs and outputs. These call the
+            [gpio_set_direction](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv418gpio_set_direction10gpio_num_t11gpio_mode_t)
+            registered function.
+
+
+            **Outputs**  
+
+            0: Onboard RGB LED (red)  
+
+            2: Onboard RGB LED (green)  
+
+            4: Onboard RGB LED (blue)   
+
+            18: Green LED  
+
+            21: Blue LED  
+
+            23: Red LED  
+
+            22: Moisture sensor on/off
+
+
+            **Inputs**  
+
+            19: Magnetic contact switch
+
+
+            **GPIO Direction Values**  
+
+            GPIO_MODE_DISABLE = 0  
+
+            GPIO_MODE_INPUT  = 1  
+
+            GPIO_MODE_OUTPUT = 2  
+
+            GPIO_MODE_OUTPUT_OD = 3  
+
+            GPIO_MODE_INPUT_OUTPUT_OD = 7  
+
+            GPIO_MODE_INPUT_OUTPUT = 6
+          category: annotation
+          height: 500
+          label: Note
+          name: note
+          width: 300
+          x: 20
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          functionName: adc1_config_channel_atten
+          inputs:
+            - type: i32
+              valueTemplate: '6'
+            - type: i32
+              valueTemplate: '3'
+          outputs: []
+          resultPath: ''
+        id: _hitTjNmED
+        meta:
+          category: data
+          description: ''
+          label: CH6 -> 11db
+          name: registered-function
+          x: 400
+          'y': 540
+        outputIds:
+          - - vdoUsuK64a
+        type: RegisteredFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: 4Pc5vqbXg6
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 400
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: kLH7STH6gM
+        meta:
+          annotationText: >-
+            Configure **analog** inputs. These call the
+            [adc1_config_channel_atten](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#_CPPv425adc1_config_channel_atten14adc1_channel_t11adc_atten_t)
+            and
+            [adc1_config_width](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#_CPPv417adc1_config_width16adc_bits_width_t)
+            registered functions.
+
+
+            **Attenuation Values**  
+
+            ADC_ATTEN_DB_0 = 0  
+
+            ADC_ATTEN_DB_2_5 = 1  
+
+            ADC_ATTEN_DB_6 = 2  
+
+            ADC_ATTEN_DB_11 = 3
+
+
+            **Width Values**  
+
+            ADC_WIDTH_BIT_9 = 0  
+
+            ADC_WIDTH_BIT_10 = 1  
+
+            ADC_WIDTH_BIT_11 = 2  
+
+            ADC_WIDTH_BIT_12 = 3
+
+
+            **Inputs**  
+
+            ADC1_CH6: moisture sensor
+          category: annotation
+          height: 400
+          label: Note
+          name: note
+          width: 300
+          x: 340
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          functionName: adc1_config_width
+          inputs:
+            - type: i32
+              valueTemplate: '3'
+          outputs: []
+          resultPath: ''
+        id: vdoUsuK64a
+        meta:
+          category: data
+          description: ''
+          label: 12 bits
+          name: registered-function
+          x: 400
+          'y': 620
+        outputIds:
+          - - 4Pc5vqbXg6
+        type: RegisteredFunctionNode
+      - config:
+          functionName: adc1_get_raw
+          inputs:
+            - type: i32
+              valueTemplate: '6'
+          outputs:
+            - destinationPath: working.ch4
+              type: i32
+          resultPath: ''
+        id: sS4P9rdI5w
+        meta:
+          category: data
+          description: ''
+          label: Read CH6
+          name: registered-function
+          x: 720
+          'y': 680
+        outputIds:
+          - - 14TyipoA9S
+        type: RegisteredFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: OIrMzTxqe6
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 720
+          'y': 1300
+        outputIds: []
+        type: DebugNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '22'
+            - type: i32
+              valueTemplate: '1'
+          outputs: []
+          resultPath: working.gpio18
+        id: QRyOZ14ZHn
+        meta:
+          category: data
+          description: ''
+          label: 22 -> ON
+          name: registered-function
+          x: 720
+          'y': 520
+        outputIds:
+          - - uMOZQFh6br
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '22'
+            - type: i32
+              valueTemplate: '0'
+          outputs: []
+          resultPath: working.gpio18
+        id: 14TyipoA9S
+        meta:
+          category: data
+          description: ''
+          label: 22 -> OFF
+          name: registered-function
+          x: 720
+          'y': 760
+        outputIds:
+          - - N42sTQlCkb
+        type: RegisteredFunctionNode
+      - config:
+          delay: '0.1'
+        id: uMOZQFh6br
+        meta:
+          category: logic
+          description: ''
+          label: Delay 100ms
+          name: delay
+          x: 720
+          'y': 600
+        outputIds:
+          - - sS4P9rdI5w
+        type: DelayNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: moisture
+              valueTemplate: '{{working.ch4}}'
+            - key: red_led
+              valueTemplate: '{{working.red}}'
+            - key: green_led
+              valueTemplate: '{{working.green}}'
+            - key: blue_led
+              valueTemplate: '{{working.blue}}'
+            - key: switch
+              valueTemplate: '{{working.switch}}'
+          resultPath: ''
+          timeSourceType: now
+        id: 0Fy7dCJTrL
+        meta:
+          category: output
+          description: ''
+          label: 'Device: State'
+          name: device-state
+          x: 720
+          'y': 1200
+        outputIds:
+          - - OIrMzTxqe6
+        type: DeviceChangeStateNode
+      - config: {}
+        id: U8K73WBAFm
+        meta:
+          annotationText: >-
+            Each minute:
+
+            1. GPIO22 -> ON: sends power to moisture sensor.
+
+            1. Wait 100ms.
+
+            1. Read ADC1_CH6: reads the moisture sensor analog value (0-4096).
+
+            1. GPIO22 -> OFF: remove power to moisture sensor.
+
+            1. Read the contact switch (pin 19).
+
+            1. Read last known value of each LED.
+
+            1. Report state to platform.
+
+
+            These moisture sensors will corrode quickly if power is always run
+            through them. By turning the power on/off, the sensor's life is
+            greatly extended.
+          category: annotation
+          height: 380
+          label: Note
+          name: note
+          width: 300
+          x: 660
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          functionName: gpio_get_level
+          inputs:
+            - type: i32
+              valueTemplate: '19'
+          outputs:
+            - destinationPath: working.newGPIO19
+              type: i32
+          resultPath: ''
+        id: U4OhTq4IPZ
+        meta:
+          category: data
+          description: ''
+          label: Get GPIO 19
+          name: registered-function
+          x: 1360
+          'y': 280
+        outputIds:
+          - - Iluwgmgj80
+        type: RegisteredFunctionNode
+      - config: {}
+        id: XhVSkuuG1y
+        meta:
+          annotationText: >-
+            Sets the value of one or more digital outputs. To control a digital
+            output via a command, it must first be configured as an output under
+            the EEA: Init Trigger.
+
+
+            Once values are set, immediately reports state of each LED with new
+            value.
+
+
+            Example command:
+
+            ```
+
+            {
+              "name": "set_ouput",
+              "payload": [
+                {
+                  "pin": PIN_NUM,
+                  "value: 0|1
+                },
+                { ... },
+                { ... }
+              ]
+            }
+
+            ```
+          category: annotation
+          height: 480
+          label: Note
+          name: note
+          width: 300
+          x: 980
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: HClzE9H9OI
+        meta:
+          annotationText: >-
+            Every 500ms check the contact switch digital input. If the value
+            changes, report state to the platform.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 300
+          x: 1300
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: gpio19
+          valuePath: working.prevGPIO19
+        id: Iluwgmgj80
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 1360
+          'y': 360
+        outputIds:
+          - - iPB1ehXoum
+        type: GetValueNode
+      - config:
+          expression: '{{working.newGPIO19}} !== {{working.prevGPIO19}}'
+        id: FAdtqgULy1
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1360
+          'y': 540
+        outputIds:
+          - []
+          - - SKi9SGRi4b
+        type: ConditionalNode
+      - config:
+          keyName: gpio19
+          resultPath: ''
+          value: '{{working.newGPIO19}}'
+          valueType: number
+        id: iPB1ehXoum
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 1360
+          'y': 440
+        outputIds:
+          - - FAdtqgULy1
+        type: StoreValueNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: switch
+              valueTemplate: '{{working.newGPIO19}}'
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: SKi9SGRi4b
+        meta:
+          category: output
+          description: ''
+          label: 'Device: State'
+          name: device-state
+          x: 1360
+          'y': 640
+        outputIds:
+          - - Cc3zR4Rvmt
+        type: DeviceChangeStateNode
+      - config:
+          expression: '{{data.name}} === ''set_output'''
+        id: lWGpmvw0SJ
+        meta:
+          category: logic
+          description: ''
+          label: set_output?
+          name: conditional
+          x: 1040
+          'y': 620
+        outputIds:
+          - []
+          - - EWUzw7nqA7
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: NijZf0z1K2
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 1040
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          currentItemPath: working.output
+          loopSourcePath: data.payload
+        id: EWUzw7nqA7
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 220
+          groupStartY: 100
+          label: Loop
+          name: loop
+          x: 1040
+          'y': 720
+        outputIds:
+          - - gxExRfJNCg
+          - - xWjAqfTL2t
+        type: LoopNode
+      - config:
+          loopNodeId: EWUzw7nqA7
+          shouldBreak: false
+        id: AxgSKh8SGx
+        meta:
+          category: loop
+          description: ''
+          groupId: EWUzw7nqA7
+          label: Next
+          name: loop-next
+          x: 220
+          'y': 560
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '{{working.output.value.pin}}'
+            - type: i32
+              valueTemplate: '{{working.output.value.value}}'
+          outputs: []
+          resultPath: working.gpio18
+        id: xWjAqfTL2t
+        meta:
+          category: data
+          description: ''
+          groupId: EWUzw7nqA7
+          label: Set Output
+          name: registered-function
+          x: 220
+          'y': 220
+        outputIds:
+          - - 4eQ6Q6XbdF
+        type: RegisteredFunctionNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: red_led
+              valueTemplate: '{{working.red}}'
+            - key: green_led
+              valueTemplate: '{{working.green}}'
+            - key: blue_led
+              valueTemplate: '{{working.blue}}'
+          resultPath: ''
+          timeSourceType: now
+        id: pcqCsE1bv9
+        meta:
+          category: output
+          description: ''
+          label: 'Device: State'
+          name: device-state
+          x: 1040
+          'y': 1080
+        outputIds:
+          - - NijZf0z1K2
+        type: DeviceChangeStateNode
+      - config:
+          keyName: '{{working.storage_key}}'
+          resultPath: ''
+          value: '{{working.output.value.value}}'
+          valueType: number
+        id: FL9GWUolhI
+        meta:
+          category: data
+          description: ''
+          groupId: EWUzw7nqA7
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 220
+          'y': 460
+        outputIds:
+          - - AxgSKh8SGx
+        type: StoreValueNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: gpio_23
+          valuePath: working.red
+        id: oDVm61rRPc
+        meta:
+          category: data
+          description: ''
+          label: Get Red
+          name: get-value
+          x: 720
+          'y': 940
+        outputIds:
+          - - 4lPAwft50W
+        type: GetValueNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: gpio_18
+          valuePath: working.green
+        id: 4lPAwft50W
+        meta:
+          category: data
+          description: ''
+          label: Get Green
+          name: get-value
+          x: 720
+          'y': 1020
+        outputIds:
+          - - vHEESSvxDi
+        type: GetValueNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: gpio_21
+          valuePath: working.blue
+        id: vHEESSvxDi
+        meta:
+          category: data
+          description: ''
+          label: Get Blue
+          name: get-value
+          x: 720
+          'y': 1100
+        outputIds:
+          - - 0Fy7dCJTrL
+        type: GetValueNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: gpio_23
+          valuePath: working.red
+        id: gxExRfJNCg
+        meta:
+          category: data
+          description: ''
+          label: Get Red
+          name: get-value
+          x: 1040
+          'y': 820
+        outputIds:
+          - - ACjzwm8Idw
+        type: GetValueNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: gpio_18
+          valuePath: working.green
+        id: ACjzwm8Idw
+        meta:
+          category: data
+          description: ''
+          label: Get Green
+          name: get-value
+          x: 1040
+          'y': 900
+        outputIds:
+          - - 3a1HcVb72S
+        type: GetValueNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: gpio_21
+          valuePath: working.blue
+        id: 3a1HcVb72S
+        meta:
+          category: data
+          description: ''
+          label: Get Blue
+          name: get-value
+          x: 1040
+          'y': 980
+        outputIds:
+          - - pcqCsE1bv9
+        type: GetValueNode
+      - config:
+          rules:
+            - destination: working.storage_key
+              type: set
+              valueTemplate: 'gpio_{{working.output.value.pin}}'
+              valueTemplateType: string
+        id: 4eQ6Q6XbdF
+        meta:
+          category: logic
+          description: ''
+          groupId: EWUzw7nqA7
+          label: Make Key
+          name: mutate
+          x: 220
+          'y': 340
+        outputIds:
+          - - FL9GWUolhI
+        type: MutateNode
+      - config:
+          expression: '{{data.name}} === "toggle"'
+        id: DCTv09qaEb
+        meta:
+          category: logic
+          description: ''
+          label: toggle?
+          name: conditional
+          x: 1820
+          'y': 360
+        outputIds:
+          - []
+          - - Q0mRJ2WbPp
+        type: ConditionalNode
+      - config:
+          defaultValue: '0'
+          defaultValueType: json
+          getAll: false
+          keyName: rgb
+          valuePath: working.rgb
+        id: Q0mRJ2WbPp
+        meta:
+          category: data
+          description: ''
+          label: Get Last
+          name: get-value
+          x: 1720
+          'y': 620
+        outputIds:
+          - - sC7rJdQJIJ
+        type: GetValueNode
+      - config:
+          statements:
+            - expression: '({{working.rgb}} + 1) % 2'
+              resultPath: working.value
+        id: sC7rJdQJIJ
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 1720
+          'y': 720
+        outputIds:
+          - - EtN9EGNmZX
+        type: MathNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '0'
+            - type: i32
+              valueTemplate: '{{working.value}}'
+          outputs: []
+          resultPath: working.gpio18
+        id: udEU3_g1B8
+        meta:
+          category: data
+          description: ''
+          label: Set RGB Red
+          name: registered-function
+          x: 1720
+          'y': 920
+        outputIds:
+          - - Fy1yW51QmT
+        type: RegisteredFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: 1JjjP9Uadz
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 1720
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          keyName: rgb
+          resultPath: ''
+          value: '{{working.value}}'
+          valueType: number
+        id: EtN9EGNmZX
+        meta:
+          category: data
+          description: ''
+          label: Set Last
+          name: store-value
+          x: 1720
+          'y': 820
+        outputIds:
+          - - udEU3_g1B8
+        type: StoreValueNode
+      - config:
+          functionName: gpio_get_level
+          inputs:
+            - type: i32
+              valueTemplate: '19'
+          outputs:
+            - destinationPath: working.switch
+              type: i32
+          resultPath: ''
+        id: N42sTQlCkb
+        meta:
+          category: data
+          description: ''
+          label: Read GPIO 19
+          name: registered-function
+          x: 720
+          'y': 840
+        outputIds:
+          - - oDVm61rRPc
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '0'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: riUXdVICSi
+        meta:
+          category: data
+          description: ''
+          label: 0 -> OUTPUT
+          name: registered-function
+          x: 80
+          'y': 640
+        outputIds:
+          - - BCT3ve0lv0
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '2'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: BCT3ve0lv0
+        meta:
+          category: data
+          description: ''
+          label: 2 -> OUTPUT
+          name: registered-function
+          x: 80
+          'y': 720
+        outputIds:
+          - - vY5YW09YW2
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '4'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: vY5YW09YW2
+        meta:
+          category: data
+          description: ''
+          label: 4 -> OUTPUT
+          name: registered-function
+          x: 80
+          'y': 800
+        outputIds:
+          - - R_mMiNElU4
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '2'
+            - type: i32
+              valueTemplate: '{{working.value}}'
+          outputs: []
+          resultPath: working.gpio18
+        id: Fy1yW51QmT
+        meta:
+          category: data
+          description: ''
+          label: Set RGB Green
+          name: registered-function
+          x: 1720
+          'y': 1000
+        outputIds:
+          - - FCVY1rdBqL
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '4'
+            - type: i32
+              valueTemplate: '{{working.value}}'
+          outputs: []
+          resultPath: working.gpio18
+        id: FCVY1rdBqL
+        meta:
+          category: data
+          description: ''
+          label: Set RGB Blue
+          name: registered-function
+          x: 1720
+          'y': 1080
+        outputIds:
+          - - 1JjjP9Uadz
+        type: RegisteredFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: Cc3zR4Rvmt
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 1360
+          'y': 740
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.name}} === "blink"'
+        id: 7ooe7j5J4s
+        meta:
+          category: logic
+          description: ''
+          label: blink?
+          name: conditional
+          x: 2020
+          'y': 360
+        outputIds:
+          - []
+          - - ZLinC_o0TP
+        type: ConditionalNode
+      - config:
+          keyName: blink
+          resultPath: working.index
+          value: data.payload
+          valueType: path
+        id: ZLinC_o0TP
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 2020
+          'y': 460
+        outputIds:
+          - - MI8OjCdxsM
+        type: StoreValueNode
+      - config:
+          message: ''
+          property: ''
+        id: MI8OjCdxsM
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 2020
+          'y': 560
+        outputIds: []
+        type: DebugNode
+      - config:
+          defaultValue: 'true'
+          defaultValueType: json
+          getAll: false
+          keyName: blink
+          valuePath: working.blink
+        id: zcDglKPKq1
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 1620
+          'y': 360
+        outputIds:
+          - - Eqmu84I7hR
+        type: GetValueNode
+      - config:
+          expression: '{{working.blink}}'
+        id: Eqmu84I7hR
+        meta:
+          category: logic
+          description: ''
+          label: blink?
+          name: conditional
+          x: 1620
+          'y': 460
+        outputIds:
+          - []
+          - - Q0mRJ2WbPp
+        type: ConditionalNode
+      - config: {}
+        id: txtVAHEI6Z
+        meta:
+          annotationText: >-
+            If blinking is enabled (defaults to `true`), every second, toggle
+            the digital outputs for the three RGB LEDs (red=0, green=2, blue=4).
+            This calls the
+            [gpio_set_level](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv414gpio_set_level10gpio_num_t8uint32_t)
+            registered function.
+
+
+            Blinking can be enabled or disabled by sending the "blink" command
+            with a payload of either `true` or `false`.
+
+
+            The RGB LED can be manually toggled by sending the "toggle" command
+            with no payload.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 580
+          x: 1620
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: rp_SIxAKzDdLEm_fQ19Yu
+        meta:
+          category: trigger
+          description: ''
+          label: 'EEA: Init'
+          name: eeaInit
+          uiId: J3_CFyUq9z
+          x: 80
+          'y': 540
+        outputIds:
+          - - riUXdVICSi
+        type: onBoot
+      - config: {}
+        key: rp_SIxAKzDdLEm_fQ19Yu
+        meta:
+          category: trigger
+          description: ''
+          label: 'EEA: Init'
+          name: eeaInit
+          uiId: TxhKPiKEwV
+          x: 400
+          'y': 440
+        outputIds:
+          - - _hitTjNmED
+        type: onBoot
+      - config:
+          seconds: 60
+        key: 0SaABT_hOcmHylRBcf3aR
+        meta:
+          category: trigger
+          description: ''
+          label: 1 minute
+          name: timer
+          timerTypeSelect: seconds
+          uiId: b4MiAflhvA
+          x: 720
+          'y': 420
+        outputIds:
+          - - QRyOZ14ZHn
+        type: timer
+      - config:
+          seconds: 0.5
+        key: 0SaABT_hOcmHylRBcf3aR
+        meta:
+          category: trigger
+          description: ''
+          label: 500 ms
+          name: timer
+          timerTypeSelect: seconds
+          uiId: Umw4wpUPsV
+          x: 1360
+          'y': 180
+        outputIds:
+          - - U4OhTq4IPZ
+        type: timer
+      - config: {}
+        key: oTyydRqmFXCWbpKGvLBmm
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: MadBm_LPvz
+          x: 1040
+          'y': 520
+        outputIds:
+          - - lWGpmvw0SJ
+        type: deviceCommand
+      - config: {}
+        key: e6IpiOMS5AE5wDsSFxehf
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: u8xVpoyee0
+          x: 1820
+          'y': 260
+        outputIds:
+          - - DCTv09qaEb
+        type: deviceCommand
+      - config: {}
+        key: e6IpiOMS5AE5wDsSFxehf
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: 7fAXZgDs12
+          x: 2020
+          'y': 260
+        outputIds:
+          - - 7ooe7j5J4s
+        type: deviceCommand
+      - config:
+          seconds: 1
+        key: 7Q5JXpfGQ2fZFUcuecRow
+        meta:
+          category: trigger
+          description: ''
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: ghHgflHQUH
+          x: 1620
+          'y': 260
+        outputIds:
+          - - zcDglKPKq1
+        type: timer
+version: 1

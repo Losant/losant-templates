@@ -1,0 +1,428 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Toggles the ESP-WROVER-KIT's onboard RGB LED either on a timer or using
+      the "toggle" command.
+    flowClass: embedded
+    globals: []
+    id: ~exportplaceholderid-flow-blinkLed-1~
+    minimumAgentVersion: 0.0.0
+    name: Blink LED
+    nodes:
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '0'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: tzFgfAG2Ri
+        meta:
+          category: data
+          description: ''
+          label: Conf. Red
+          name: registered-function
+          x: 120
+          'y': 520
+        outputIds:
+          - - hpBL71nmwx
+        type: RegisteredFunctionNode
+      - config: {}
+        id: Mal1URD2u3
+        meta:
+          annotationText: >-
+            The ESP32-WROVER-KIT's [onboard RGB
+            LED](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit.html#rgb-led)
+            is made up of three separate LEDs on separate digital outputs
+            (red=0, green=2, and blue=4). This calls the
+            [gpio_set_direction](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv418gpio_set_direction10gpio_num_t11gpio_mode_t)
+            registered function on each to configure them as digital outputs.
+
+
+            The direction value of `2` corresponds to
+            [GPIO_MODE_OUTPUT](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv416GPIO_MODE_OUTPUT)
+            as defined by the ESP-IDF.
+
+
+            **GPIO Direction Values**  
+
+            GPIO_MODE_DISABLE = 0  
+
+            GPIO_MODE_INPUT  = 1  
+
+            GPIO_MODE_OUTPUT = 2  
+
+            GPIO_MODE_OUTPUT_OD = 3  
+
+            GPIO_MODE_INPUT_OUTPUT_OD = 7  
+
+            GPIO_MODE_INPUT_OUTPUT = 6
+          category: annotation
+          height: 360
+          label: Note
+          name: note
+          width: 380
+          x: 20
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          message: ''
+          property: ''
+        id: 2OETGQ6PSC
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 120
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          keyName: index
+          resultPath: working.index
+          value: '1'
+          valueType: incr
+        id: GRZfrFKLO3
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 520
+          'y': 640
+        outputIds:
+          - - gIXrFqr__l
+        type: StoreValueNode
+      - config: {}
+        id: KoScfruxUK
+        meta:
+          annotationText: >-
+            If blinking is enabled (defaults to `true`), every second, toggle
+            the digital outputs for the three RGB LEDs (red=0, green=2, blue=4).
+            This calls the
+            [gpio_set_level](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv414gpio_set_level10gpio_num_t8uint32_t)
+            registered function.
+
+
+            Blinking can be enabled or disabled by sending the "blink" command
+            with a payload of either `true` or `false`.
+
+
+            The RGB LED can be manually toggled by sending the "toggle" command
+            with no payload.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 580
+          x: 420
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.name}} === "toggle"'
+        id: W5BR0jJEmE
+        meta:
+          category: logic
+          description: ''
+          label: toggle?
+          name: conditional
+          x: 620
+          'y': 380
+        outputIds:
+          - []
+          - - GRZfrFKLO3
+        type: ConditionalNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '0'
+            - type: i32
+              valueTemplate: '{{working.value}}'
+          outputs: []
+          resultPath: ''
+        id: DlCw0VTQxF
+        meta:
+          category: data
+          description: ''
+          label: Set Red
+          name: registered-function
+          x: 520
+          'y': 800
+        outputIds:
+          - - tQ75E0tEix
+        type: RegisteredFunctionNode
+      - config:
+          statements:
+            - expression: '{{working.index}} % 2'
+              resultPath: working.value
+        id: gIXrFqr__l
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 520
+          'y': 720
+        outputIds:
+          - - DlCw0VTQxF
+        type: MathNode
+      - config:
+          message: ''
+          property: ''
+        id: 1_lc_wz3kC
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 520
+          'y': 1060
+        outputIds: []
+        type: DebugNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '2'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: hpBL71nmwx
+        meta:
+          category: data
+          description: ''
+          label: Conf. Green
+          name: registered-function
+          x: 120
+          'y': 600
+        outputIds:
+          - - goLPdEOjvL
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_direction
+          inputs:
+            - type: i32
+              valueTemplate: '4'
+            - type: i32
+              valueTemplate: '2'
+          outputs: []
+          resultPath: ''
+        id: goLPdEOjvL
+        meta:
+          category: data
+          description: ''
+          label: Conf. Blue
+          name: registered-function
+          x: 120
+          'y': 680
+        outputIds:
+          - - 2OETGQ6PSC
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '2'
+            - type: i32
+              valueTemplate: '{{working.value}}'
+          outputs: []
+          resultPath: ''
+        id: tQ75E0tEix
+        meta:
+          category: data
+          description: ''
+          label: Set Green
+          name: registered-function
+          x: 520
+          'y': 880
+        outputIds:
+          - - h4lpM0Zfbc
+        type: RegisteredFunctionNode
+      - config:
+          functionName: gpio_set_level
+          inputs:
+            - type: i32
+              valueTemplate: '4'
+            - type: i32
+              valueTemplate: '{{working.value}}'
+          outputs: []
+          resultPath: ''
+        id: h4lpM0Zfbc
+        meta:
+          category: data
+          description: ''
+          label: Set Blue
+          name: registered-function
+          x: 520
+          'y': 960
+        outputIds:
+          - - 1_lc_wz3kC
+        type: RegisteredFunctionNode
+      - config: {}
+        id: 9fu3hN4pZU
+        meta:
+          annotationText: >-
+            Increment `index` by `1` and then mod the result by `2`. This
+            results in a value that toggles back and forth between `0` and `1`.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 720
+          'y': 720
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.name}} === "blink"'
+        id: 6xa14Mo4JM
+        meta:
+          category: logic
+          description: ''
+          label: blink?
+          name: conditional
+          x: 820
+          'y': 380
+        outputIds:
+          - []
+          - - 31DLYF2qtG
+        type: ConditionalNode
+      - config:
+          keyName: blink
+          resultPath: working.index
+          value: data.payload
+          valueType: path
+        id: 31DLYF2qtG
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 820
+          'y': 480
+        outputIds:
+          - - BsyJTB3Bxq
+        type: StoreValueNode
+      - config:
+          message: ''
+          property: ''
+        id: BsyJTB3Bxq
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 820
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          defaultValue: 'true'
+          defaultValueType: json
+          getAll: false
+          keyName: blink
+          valuePath: working.blink
+        id: h7rJoOyWgD
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 420
+          'y': 380
+        outputIds:
+          - - drMs64hVy5
+        type: GetValueNode
+      - config:
+          expression: '{{working.blink}}'
+        id: drMs64hVy5
+        meta:
+          category: logic
+          description: ''
+          label: blink?
+          name: conditional
+          x: 420
+          'y': 480
+        outputIds:
+          - []
+          - - GRZfrFKLO3
+        type: ConditionalNode
+      - config: {}
+        id: WJHhW8soGs
+        meta:
+          annotationText: >-
+            Saves the "blink" command payload (`true` or `false`) to workflow
+            storage. This value is then checked on each timer iteration to know
+            whether it should automatically toggle the RGB LED.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 320
+          x: 1020
+          'y': 380
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: rp_SIxAKzDdLEm_fQ19Yu
+        meta:
+          category: trigger
+          description: ''
+          label: 'EEA: Init'
+          name: eeaInit
+          uiId: NP3msx3qGa
+          x: 120
+          'y': 420
+        outputIds:
+          - - tzFgfAG2Ri
+        type: onBoot
+      - config: {}
+        key: e6IpiOMS5AE5wDsSFxehf
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: JKAoUXNySf
+          x: 620
+          'y': 280
+        outputIds:
+          - - W5BR0jJEmE
+        type: deviceCommand
+      - config:
+          seconds: 1
+        key: 7Q5JXpfGQ2fZFUcuecRow
+        meta:
+          category: trigger
+          description: ''
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: ZnKfrk8dzG
+          x: 420
+          'y': 280
+        outputIds:
+          - - h7rJoOyWgD
+        type: timer
+      - config: {}
+        key: e6IpiOMS5AE5wDsSFxehf
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: 53Pfy12D9A
+          x: 820
+          'y': 280
+        outputIds:
+          - - 6xa14Mo4JM
+        type: deviceCommand
+version: 1

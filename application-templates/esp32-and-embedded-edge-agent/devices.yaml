@@ -1,0 +1,33 @@
+resourceType: DeviceTree
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: The raw analog input value (0-4096) representing the current
+          moisture level. ADC1, channel 6.
+        name: moisture
+      - attributeTags: {}
+        dataType: number
+        description: The value of the magnetic contact switch (1=closed, 0=open). Pin 19.
+        name: switch
+      - attributeTags: {}
+        dataType: number
+        description: Pin 23. high=1, low=0.
+        name: red_led
+      - attributeTags: {}
+        dataType: number
+        description: Pin 18. high=1, low=0.
+        name: green_led
+      - attributeTags: {}
+        dataType: number
+        description: Pin 21. high=1, low=0.
+        name: blue_led
+    children: []
+    description: Represents an ESP32 with attributes for various digital and analog values.
+    deviceClass: embedded
+    id: ~exportplaceholderid-device-esp32-0~
+    name: ESP32
+    tags:
+      - key: model
+        value: ESP32-WROVER-E
+version: 1

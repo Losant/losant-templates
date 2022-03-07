@@ -1,0 +1,401 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: input
+        config:
+          controls:
+            - action: command
+              color: 'rgba(40, 79, 255, 1)'
+              commandName: set_output
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              grid:
+                h: 1
+                w: 4
+                x: 0
+                'y': 5
+              id: button-0
+              label: Set LED Values
+              payload: |-
+                [
+                    {
+                        "pin": 18, 
+                        "value": {{#if value-18}}1{{else}}0{{/if}}
+                    },
+                    {
+                        "pin": 21, 
+                        "value": {{#if value-21}}1{{else}}0{{/if}}
+                    },
+                    {
+                        "pin": 23, 
+                        "value": {{#if value-23}}1{{else}}0{{/if}}
+                    }
+                ]
+              templateId: button-0
+              type: button
+            - color: '#8db319'
+              defaultQuery:
+                aggregation: LAST
+                attribute: green_led
+                deviceIds:
+                  - ~exportplaceholderid-device-esp32-0~
+                deviceTags: []
+              defaultValue: false
+              grid:
+                h: 1
+                w: 1
+                x: 1
+                'y': 4
+              id: toggle-0
+              label: Green
+              templateId: value-18
+              type: toggle
+            - color: '#8db319'
+              defaultQuery:
+                aggregation: LAST
+                attribute: blue_led
+                deviceIds:
+                  - ~exportplaceholderid-device-esp32-0~
+                deviceTags: []
+              defaultValue: false
+              grid:
+                h: 1
+                w: 1
+                x: 0
+                'y': 4
+              id: toggle-1
+              label: Blue
+              templateId: value-21
+              type: toggle
+            - color: '#8db319'
+              defaultQuery:
+                aggregation: LAST
+                attribute: red_led
+                deviceIds:
+                  - ~exportplaceholderid-device-esp32-0~
+                deviceTags: []
+              defaultValue: false
+              grid:
+                h: 1
+                w: 1
+                x: 2
+                'y': 4
+              id: toggle-2
+              label: Red
+              templateId: value-23
+              type: toggle
+            - action: command
+              color: 'rgba(130, 91, 255, 1)'
+              commandName: toggle
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              grid:
+                h: 1
+                w: 3
+                x: 1
+                'y': 2
+              id: button-1
+              label: Toggle RGB LED
+              templateId: button-1
+              type: button
+            - color: 'rgba(141, 179, 25, 1)'
+              defaultValue: true
+              grid:
+                h: 1
+                w: 1
+                x: 0
+                'y': 1
+              id: toggle-3
+              label: Blink
+              templateId: blink
+              type: toggle
+            - action: command
+              color: 'rgba(40, 79, 255, 1)'
+              commandName: blink
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              grid:
+                h: 1
+                w: 3
+                x: 1
+                'y': 1
+              id: button-2
+              label: Update Blink
+              payload: '{{blink}}'
+              templateId: button-2
+              type: button
+            - grid:
+                h: 1
+                w: 4
+                x: 0
+                'y': 0
+              help: >-
+                If "Blink" is set to `true`, the onboard RGB LED will
+                automatically blink every one second. If blinking is disabled,
+                you can use the "Toggle RGB LED" button to manually toggle the
+                LED on and off.
+              id: help-0
+              templateId: help-0
+              type: help
+            - grid:
+                h: 1
+                w: 4
+                x: 0
+                'y': 3
+              help: >-
+                Use these controls to individually set the value of each of the
+                three external LEDs.
+              id: help-1
+              templateId: help-1
+              type: help
+          defaultMode: locked
+        height: 2.5
+        id: BHz5g9EUSO
+        startX: 0
+        startY: 0
+        title: GPIO Control
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: green_led
+              color: 'rgba(141, 179, 25, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Green
+              lineType: step
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: LED status
+              yAxisMax: '1'
+              yAxisMin: '0'
+        height: 1
+        id: uaDVnWoJFq
+        startX: 2
+        startY: 0
+        title: Green Status
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: blue_led
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Blue
+              lineType: step
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: LED status
+              yAxisMax: '1'
+              yAxisMin: '0'
+        height: 1
+        id: iwldgZ5igC
+        startX: 1
+        startY: 0
+        title: Blue Status
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: red_led
+              color: '#ff261b'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              dotWeight: 0
+              expression: ''
+              graphType: area
+              label: Red
+              lineType: step
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: LED status
+              yAxisMax: '1'
+              yAxisMin: '0'
+        height: 1
+        id: KPWLVV21TK
+        startX: 3
+        startY: 0
+        title: Red Status
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '{{value-0}} === 1'
+              id: JjE8Efzass
+              label: Closed
+          defaultCondition:
+            color: 'rgba(255, 38, 27, 1)'
+            label: Open
+          duration: 0
+          realTime: true
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: switch
+              detectDataGaps: false
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+        height: 1.5
+        id: NrgTDU5vWI
+        startX: 1
+        startY: 1
+        title: Contact Switch
+        width: 0.5
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: switch
+              color: 'rgba(130, 91, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: 'Switch (0=open,  1=closed)'
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Value
+              yAxisMax: '1'
+              yAxisMin: '0'
+        height: 1.5
+        id: hpVmghqQD7
+        startX: 1.5
+        startY: 1
+        title: Contact Switch
+        width: 2.5
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: graph
+        config:
+          duration: 86400000
+          realTime: false
+          recharts: true
+          resolution: 1200000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: moisture
+              color: 'rgba(141, 179, 25, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - ~exportplaceholderid-device-esp32-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: ADC Reading
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 1.5
+        id: KhGZznXSlF
+        startX: 1
+        startY: 2.5
+        title: Moisture
+        width: 3
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '2000'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: moisture
+            color: '#8db319'
+            deviceIds:
+              - ~exportplaceholderid-device-esp32-0~
+            deviceTags: []
+            label: ''
+        height: 1.5
+        id: heq53UoVLu
+        startX: 0
+        startY: 2.5
+        title: Moisture
+        width: 1
+    contextConfiguration: []
+    defaultTheme: light
+    description: ''
+    id: ~exportplaceholderid-dashboard-esp32Gpio-0~
+    name: ESP32 GPIO
+    public: false
+    refreshRate: 60
+version: 1
