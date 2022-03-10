@@ -60,7 +60,7 @@ This template uses a [JWT token](https://jwt.io/introduction/) as part of the 2F
 
 ## License
 
-Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the MIT license.
 

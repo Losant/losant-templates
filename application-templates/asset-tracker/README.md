@@ -58,6 +58,6 @@ Users can be modified, added, or removed by navigating to the experience's [User
 
 This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/application-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
 
-Copyright (c) 2020 Losant IoT, Inc
+Copyright (c) 2022 Losant IoT, Inc
 
 https://www.losant.com

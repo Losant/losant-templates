@@ -34,7 +34,7 @@ Templates also provide our partners with a seamless method to onboard shared cus
 
 ---
 
-Copyright (c) 2020 Losant IoT, Inc
+Copyright (c) 2022 Losant IoT, Inc
 
 https://www.losant.com
 

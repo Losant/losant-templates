@@ -35,7 +35,7 @@ The table at the top of the dashboard contains a list of every Itron Milli HDK d
 
 ## License
 
-Copyright (c) 2021 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

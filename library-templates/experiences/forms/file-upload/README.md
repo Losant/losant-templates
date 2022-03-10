@@ -59,7 +59,7 @@ Unlike a traditional form submission, this template executes the submission [asy
 
 ## License
 
-Copyright &copy; 2021 Losant IoT, Inc. All rights reserved.
+Copyright &copy; 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

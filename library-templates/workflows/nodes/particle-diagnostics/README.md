@@ -47,7 +47,7 @@ If the request to Particle's API fails, the output contains an `error` object wi
 
 ## License
 
-Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

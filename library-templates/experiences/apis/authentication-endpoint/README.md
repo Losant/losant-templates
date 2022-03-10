@@ -57,7 +57,7 @@ When a valid user session is found within an Experience Workflow, you may access
 
 ## License
 
-Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the MIT license.
 
