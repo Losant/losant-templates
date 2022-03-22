@@ -69,7 +69,7 @@ This creates a race condition, as this workflow and the other matching workflow(
 
 ## License
 
-Copyright (c) 2021 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the MIT license.
 

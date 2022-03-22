@@ -63,7 +63,7 @@ This template includes a **Create Events** workflow that will create [Events](ht
 
 ## License
 
-Copyright (c) 2021 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 
