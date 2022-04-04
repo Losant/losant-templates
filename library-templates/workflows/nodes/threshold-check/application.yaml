@@ -1,0 +1,15 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Checks that a value has met a threshold a consecutive number of times.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesThresholdCheck-0~
+    name: Threshold Check
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - template-keywords
+version: 1

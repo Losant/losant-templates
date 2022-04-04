@@ -1,0 +1,341 @@
+resourceType: Flow
+resources:
+  - customNodeConfig:
+      fields:
+        - description: The incoming value to compare against the threshold.
+          id: value
+          label: Value
+          required: true
+          type: numberTemplate
+        - description: The threshold that must be met.
+          id: threshold
+          label: Threshold
+          required: true
+          type: numberTemplate
+        - defaultValue: greater
+          description: How to compare the threshold against the incoming value.
+          id: comparator
+          label: Comparator
+          options:
+            - label: Greater Than
+              value: greater
+            - label: Less Than
+              value: less
+            - label: Equal To
+              value: equal
+          type: select
+        - description: >-
+            Optional. A unique identifier that allows this node to perform
+            threshold checks for multiple sets of data. A common identifier is a
+            device ID.
+          id: id
+          label: Identifier
+          required: false
+          type: stringTemplate
+        - description: The number of consecutive times the value must meet the threshold.
+          id: count
+          label: Count
+          required: true
+          type: numberTemplate
+          validMin: 1
+      outputCount: 2
+      resultDescription: >-
+        Optionally, provide a payload path where an object with the following
+        fields will be placed:
+
+        * `count`: The number of consecutive occurrences where the value has met
+        the threshold.
+
+        * `comparisonResult`: The boolean result of this single threshold
+        comparison.
+
+        * `wasLatched`: Boolean for if this node was latched prior to this
+        execution.
+
+        * `isLatched`: Boolean for if this node is latched after this execution.
+
+        * `latchBranch`: Boolean for the branch that was taken.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: Checks that a value has met a threshold a consecutive number of times.
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjkuMDkgMTI4Ij48ZGVmcz48c3R5bGU+LmNscy0xLC5jbHMtMntmaWxsOm5vbmU7c3Ryb2tlOiNmZmY7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fS5jbHMtMXtzdHJva2Utd2lkdGg6N3B4O30uY2xzLTJ7c3Ryb2tlLXdpZHRoOjExcHg7fTwvc3R5bGU+PC9kZWZzPjxsaW5lIGNsYXNzPSJjbHMtMSIgeTE9IjY4LjUxIiB4Mj0iMTI5LjA5IiB5Mj0iNjguNTEiLz48bGluZSBjbGFzcz0iY2xzLTIiIHgxPSI4LjEzIiB5MT0iODAuNTMiIHgyPSI4LjEzIiB5Mj0iMTI2LjY1Ii8+PGxpbmUgY2xhc3M9ImNscy0yIiB4MT0iMzAuODgiIHkxPSI3OS4xNSIgeDI9IjMwLjg4IiB5Mj0iMTI2LjY1Ii8+PGxpbmUgY2xhc3M9ImNscy0yIiB4MT0iNTMuNjMiIHkxPSI4My4yMSIgeDI9IjUzLjYzIiB5Mj0iMTI2LjY1Ii8+PGxpbmUgY2xhc3M9ImNscy0yIiB4MT0iNzYuMzgiIHkxPSI1OS4yMiIgeDI9Ijc2LjM4IiB5Mj0iMTI2LjY1Ii8+PGxpbmUgY2xhc3M9ImNscy0yIiB4MT0iOTkuMTQiIHkxPSI0OS4zNSIgeDI9Ijk5LjE0IiB5Mj0iMTI2LjY1Ii8+PGxpbmUgY2xhc3M9ImNscy0yIiB4MT0iMTIxLjg5IiB5MT0iMzEuNjUiIHgyPSIxMjEuODkiIHkyPSIxMjYuNjUiLz48L3N2Zz4=
+    id: ~exportplaceholderid-flow-thresholdCheck-0~
+    name: Threshold Check
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working
+        id: cpDoD4K5yG
+        meta:
+          category: customNodeEnd
+          description: Take the "False" path
+          label: Output False
+          name: custom-node-end-false
+          x: 240
+          'y': 1120
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          branchIndexTemplate: 1
+          resultSourcePath: working
+        id: qd3JUnlsbC
+        meta:
+          category: customNodeEnd
+          description: Take the "True" path
+          label: Output True
+          name: custom-node-end-true
+          x: 440
+          'y': 1120
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: greater
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: less
+              dontBreak: false
+            - caseLabel: ''
+              caseTemplate: equal
+              dontBreak: false
+          switchTemplate: '{{data.comparator}}'
+        id: YzsxCPe60r
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 400
+          'y': 320
+        outputIds:
+          - []
+          - - LFcpPTDE6B
+          - - IRy8FvzEuG
+          - - oj6NdAti0L
+        type: SwitchNode
+      - config:
+          expression: '{{data.value}} > {{data.threshold}}'
+        id: LFcpPTDE6B
+        meta:
+          category: logic
+          description: ''
+          label: '> Threshold ?'
+          name: conditional
+          x: 140
+          'y': 500
+        outputIds:
+          - - sBJVO18Nf0
+          - - XNhqXRZfSK
+        type: ConditionalNode
+      - config:
+          keyName: '{{data.key}}'
+          resultPath: working.count
+          value: '1'
+          valueType: incr
+        id: XNhqXRZfSK
+        meta:
+          category: data
+          description: ''
+          label: Count + 1
+          name: store-value
+          x: 440
+          'y': 660
+        outputIds:
+          - - NbVRDM57fV
+        type: StoreValueNode
+      - config:
+          expression: '{{data.value}} < {{data.threshold}}'
+        id: IRy8FvzEuG
+        meta:
+          category: logic
+          description: ''
+          label: < Threshold ?
+          name: conditional
+          x: 340
+          'y': 500
+        outputIds:
+          - - sBJVO18Nf0
+          - - XNhqXRZfSK
+        type: ConditionalNode
+      - config:
+          expression: '{{data.value}} === {{data.threshold}}'
+        id: oj6NdAti0L
+        meta:
+          category: logic
+          description: ''
+          label: '= Threshold ?'
+          name: conditional
+          x: 540
+          'y': 500
+        outputIds:
+          - - sBJVO18Nf0
+          - - XNhqXRZfSK
+        type: ConditionalNode
+      - config:
+          keyName: '{{data.key}}'
+          resultPath: working.count
+          value: '0'
+          valueType: number
+        id: sBJVO18Nf0
+        meta:
+          category: data
+          description: ''
+          label: Reset
+          name: store-value
+          x: 240
+          'y': 660
+        outputIds:
+          - - NbVRDM57fV
+        type: StoreValueNode
+      - config:
+          branchPath: working.latchBranch
+          isLatchedPath: working.isLatched
+          latchExpression: '{{working.count}} === {{data.count}}'
+          latchIdTemplate: '{{data.key}}'
+          latchResultPath: working.latchResult
+          resetExpression: '{{working.count}} === 0'
+          resetResultPath: ''
+          wasLatchedPath: working.wasLatched
+        id: BUMqQvcUKz
+        meta:
+          category: logic
+          description: ''
+          label: Latch
+          name: latch
+          x: 340
+          'y': 900
+        outputIds:
+          - - 1ryl_2_lFZ
+            - cpDoD4K5yG
+          - - 5TLamfUsxY
+            - qd3JUnlsbC
+        type: LatchNode
+      - config:
+          message: ''
+          property: ''
+        id: 5TLamfUsxY
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 1020
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: 1ryl_2_lFZ
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 1020
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: data.key
+              type: set
+              valueTemplate: >-
+                consecutiveThreshold:{{data.comparator}}:{{data.threshold}}:{{data.count}}:{{defaultTo
+                data.id 'none'}}
+              valueTemplateType: string
+        id: aqFhSX8qCJ
+        meta:
+          category: logic
+          description: ''
+          label: Storage Key
+          name: mutate
+          x: 400
+          'y': 220
+        outputIds:
+          - - YzsxCPe60r
+        type: MutateNode
+      - config: {}
+        id: fLB8CXLM3A
+        meta:
+          annotationText: >-
+            Make a storage key unique to this node's configuration. Allows
+            multiple nodes to be used to check different thresholds against the
+            same identifier.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 320
+          x: 600
+          'y': 220
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: CGx2sZmrs1
+        meta:
+          annotationText: >-
+            If threshhold is met, increment the count in storage. If not, reset
+            the count back to 0.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 320
+          x: 640
+          'y': 660
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 4AMF7NmCeE
+        meta:
+          annotationText: >-
+            Latches once the count has been reached. Resets whenever the value
+            no longer reaches the threshold.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 320
+          x: 540
+          'y': 880
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.comparisonResult
+              type: set
+              valueTemplate: '{{#eq working.count 0}}false{{else}}true{{/eq}}'
+              valueTemplateType: json
+        id: NbVRDM57fV
+        meta:
+          category: logic
+          description: ''
+          label: Add Result
+          name: mutate
+          x: 340
+          'y': 800
+        outputIds:
+          - - BUMqQvcUKz
+        type: MutateNode
+    shortDescription: Consecutive threshold check
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Consecutive Threshold'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 400
+          'y': 40
+        outputIds:
+          - - aqFhSX8qCJ
+        type: customNodeStart
+version: 1
