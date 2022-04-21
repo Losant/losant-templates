@@ -3,3 +3,5 @@ description: Device recipes allow you to quickly create devices with pre-defined
   attributes and tags. Many of these recipes come from Losant technology
   partners, which make it easier to use their sensors and hardware with the
   Losant platform.
+resourceTypes:
+  - DeviceRecipe
