@@ -126,7 +126,7 @@ resources:
         validationEnabled: false
       - applicationId: >-
           ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
-        defaultValue: ~exportplaceholderid-device-exampleDevice1-1~
+        defaultValue: ~exportplaceholderid-device-contextDevice-1~
         name: deviceId
         type: deviceId
         validationConfig:
