@@ -1,0 +1,17 @@
+resourceType: ExperienceView
+resources:
+  - description: >-
+      A general purpose paginator component. Arguments:
+
+
+      currentPage: (Number) The page that should be highlighted as the current page. Values are 1-based.
+
+
+      totalPages: (Number) The total number of pages that are available. This controls the value for the last page link.
+    id: ~exportplaceholderid-experienceView-tlPaginator-1~
+    localFilename: ./tl-paginator.hbs
+    name: tl-paginator
+    version: develop
+    viewTags: {}
+    viewType: component
+version: 1

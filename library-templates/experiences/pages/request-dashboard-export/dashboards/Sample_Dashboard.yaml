@@ -1,0 +1,141 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+        blockType: device-list
+        config:
+          additionalAttributes: []
+          columns:
+            - headerTemplate: Device Name
+              id: PKBLlumgP2
+              rowTemplate: >-
+                {{#eq device.id ctx.deviceId.id}}**{{format device.name}}**
+                (selected){{else}}[{{format
+                device.name}}](/tl-dashboard-report/{{device.id}}){{/eq}}
+              source: Custom
+              type: custom
+          deviceLinkType: default
+          excludeConnectionInfo: false
+          query: |-
+            {
+              "$or": [
+                {
+                  "experienceUserId": {
+                    "$eq": "{{ctx.experienceUser}}"
+                  }
+                }
+              ]
+            }
+          sortDirection: asc
+          sortField: name
+        height: 1.5
+        id: wiLTwOGgB1
+        startX: 0
+        startY: 0
+        title: My Devices
+        width: 4
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+        blockType: custom-html
+        config:
+          configuration:
+            bodyContent: |2-
+
+                    <div class="card">
+                      <div class="card-header">Current Settings</div>
+                      <div class="card-body">
+                        <pre id="blockInput" class="card-text"></pre>
+                      </div>
+                    </div>
+            headContent: >-
+              <meta charset="UTF-8">
+
+              <!--
+
+              You can include any external JavaScript or CSS as needed.
+
+              This example demonstrates including Bootstrap and JQuery
+
+              into your custom HTML page.
+
+              -->
+
+              <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+              <script
+              src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+              <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+              <script
+              src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+              <style>
+                body {
+                  padding: 10px;
+                  background: transparent;
+                }
+              </style>
+
+              <script type="text/javascript">
+                /*
+                  Renders the block input to the page.
+                  This function is simply printing the raw data to the page
+                  for debugging purposes.
+                */
+                function renderBlock(input) {
+                  document.getElementById('blockInput').innerHTML =
+                    JSON.stringify({
+                      'ctx.experienceUser': input.ctx.experienceUser,
+                      'ctx.deviceId': input.ctx.deviceId,
+                      theme: input.dashboard.theme,
+                      time: input.dashboard.time
+                    }, undefined, 2);
+                }
+
+                /*
+                  Add listeners to your required events. These listeners invoke
+                  the functions above so that your code can handle the event
+                  as needed.
+                */
+                DashboardBlock.on('change', renderBlock);
+
+                /*
+                  Render the initial state when the block loads.
+                */
+                $(document).ready(function() {
+                  renderBlock(DashboardBlock.input);
+                });
+              </script>
+          segments: []
+        height: 3
+        id: LbePxmjtTM
+        startX: 0
+        startY: 1.5
+        width: 4
+    contextConfiguration:
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+        defaultValue: ~exportplaceholderid-experienceUser-exampleDomainCom-0~
+        name: experienceUser
+        type: experienceUser
+        validationConfig: {}
+        validationEnabled: false
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+        defaultValue: ~exportplaceholderid-device-exampleDevice1-1~
+        name: deviceId
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    description: ''
+    id: ~exportplaceholderid-dashboard-sampleDashboard-0~
+    name: Sample Dashboard
+    public: true
+    refreshRate: 60
+version: 1

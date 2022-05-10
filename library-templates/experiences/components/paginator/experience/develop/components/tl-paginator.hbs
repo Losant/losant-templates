@@ -1,0 +1,103 @@
+<div
+  id="{{defaultTo @args.id 'tl-paginator'}}"
+  data-current-page="{{@args.currentPage}}"
+  data-total-pages="{{@args.totalPages}}">
+    <div class="btn-group" role="group"></div>
+    <template>
+        <a href="#" class="btn btn-outline-primary" role="button"></a>
+    </template>
+    <script>
+        (() => {
+
+            let container = document.currentScript.parentElement;
+            let paginator = container.querySelector('.btn-group');
+            let totalPages = parseInt(container.dataset.totalPages);
+            let currentPage = parseInt(container.dataset.currentPage);
+
+            let template = container.querySelector('template');
+
+            // Grab the current search params so we can keep what's there
+            // and only set the page param.
+            const searchParams = new URLSearchParams(window.location.search);
+
+            // Inserts an element into the button group.
+            // page (int): the page number for this button.
+            // text (string): optional override if the text is not the page number.
+            const addButton = (page, text) => {
+                let content = text ?? `${page}`;
+                let node = template.content.cloneNode(true).querySelector('a');
+                searchParams.set('page', page);
+                node.setAttribute('href', `?${searchParams.toString()}`);
+                node.textContent = content;
+
+                if(!text && page === currentPage) {
+                    node.classList.remove('btn-outline-primary');
+                    node.classList.add('btn-primary')
+                }
+
+                paginator.appendChild(node);
+            };
+
+            // Always show a max of 11 buttons to keep UI from shifting.
+            // Makes it easier to click the next button over and over.
+            // Possible arrangements:
+            // <<, <, 1, 2, 3, >, >>
+            // <<, <, 1, 2, 3, 4, 5, 6, 7, >, >>
+            // <<, <, 1, ..., 5, 6, 7, ..., 50, >, >>
+            // <<, <, 1, 2, 3, 4, 5, ..., 50, >, >>
+            // <<, <, 1, ... 46, 47, 49, 49, 50, >, >>
+
+            addButton(1, '«');
+            addButton(currentPage - 1 == 0 ? 1 : currentPage - 1, '‹');
+
+            // Page 1 is always displayed.
+            addButton(1);
+
+            if(totalPages < 8) {
+                // <<, <, 1, 2, 3, 4, 5, 6, 7, >, >>
+                for(let i = 2; i < totalPages; i++) {
+                    addButton(i);
+                }
+            }
+            else if(currentPage > 4 && currentPage < totalPages - 3) {
+                // <<, <, 1, ..., 5, 6, 7, ..., 50, >, >>
+                addButton(currentPage - 2, '...');
+                addButton(currentPage - 1);
+                addButton(currentPage);
+                addButton(currentPage + 1);
+                addButton(currentPage + 2, '...');           
+            }
+            else if(currentPage <= 4) {
+                // <<, <, 1, 2, 3, 4, 5, ..., 50, >, >>
+                for(let i = 2; i <= 5; i++) {
+                    if(i < totalPages) {
+                        addButton(i);
+                    }
+                }
+
+                if(totalPages > 5) {
+                    addButton(6, '...');
+                }
+            }
+            else if(currentPage >= totalPages - 3) {
+                // <<, <, 1, ... 46, 47, 49, 49, 50, >, >>
+                if(totalPages - 5 > 1) {
+                    addButton(totalPages - 5, '...');
+                }
+
+                for(let i = totalPages - 4; i < totalPages; i++) {
+                    addButton(i);
+                }
+            }
+
+            // The last page is always displayed, if there's more than one page.
+            if(totalPages > 1) {
+                addButton(totalPages);
+            }
+
+            addButton(currentPage === totalPages ? currentPage : currentPage + 1, '›');
+            addButton(totalPages, '»');
+
+        })();
+    </script>
+</div>

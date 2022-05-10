@@ -1,0 +1,40 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: authenticated
+    description: This endpoint displays the sample Experience Dashboard to the
+      signed-in Experience User after verifying that the user has access to the
+      device passed through as a path param.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-getTlDashboardReportDeviceId-2~
+    method: get
+    route: /tl-dashboard-report/{deviceId}
+    unauthorizedReply:
+      type: redirect
+      value: /login
+    version: develop
+  - access: public
+    description: This is the callback that is hit when the PDF generation is
+      complete. In the workflow handling this request, we verify the JWT that's
+      included as a query param and then send the PDF to the user's inbox.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb-4~
+    method: post
+    route: /tl-dashboard-report-cb
+    version: develop
+  - access: authenticated
+    description: This endpoint handles requests to generate the PDF (by clicking the
+      button at the top of the dashboard's page). It then displays the dashboard
+      to the user again, along with feedback at the top of the page about
+      whether the request succeeded.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportDeviceId-5~
+    method: post
+    route: /tl-dashboard-report/{deviceId}
+    unauthorizedReply:
+      type: redirect
+      value: /login
+    version: develop
+version: 1

@@ -1,0 +1,20 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to allow Experience Users to request an unbranded
+      PDF export of a dashboard.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+    name: Request Dashboard Export
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - dashboard
+      - pdf
+      - export
+      - experience
+      - report
+version: 1

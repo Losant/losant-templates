@@ -1,0 +1,607 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~exportplaceholderid-flow-renderDashboardRequestReport-1~
+    globals:
+      - json: '"ENTER JWT SECRET HERE"'
+        key: JWT_SECRET
+      - json: '"~exportplaceholderid-dashboard-sampleDashboard-0~"'
+        key: dashboardId
+    id: ~exportplaceholderid-flowVersion-renderDashboardRequestReport-1~
+    name: Render Dashboard / Request Report
+    nodes:
+      - config:
+          deviceIdTemplate: '{{data.params.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: JZjJucpE78
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 880
+          'y': 180
+        outputIds:
+          - - BpgmWZHsUl
+          - - 71mXOol5Wi
+        type: VerifyDeviceNode
+      - config:
+          bodyTemplate: |-
+            {
+                "type": "Not Found",
+                "message": "Device not found"
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: BpgmWZHsUl
+        meta:
+          category: output
+          description: ''
+          label: '404'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 780
+          'y': 680
+        outputIds:
+          - - 6iiIBeIBpO
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-dashboardPage-1~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: Ny4Ym0TIE7
+        meta:
+          category: output
+          description: ''
+          label: Render Dashboard
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 680
+        outputIds:
+          - - 6iiIBeIBpO
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: 6iiIBeIBpO
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 880
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.method}} === ''post'''
+        id: 71mXOol5Wi
+        meta:
+          category: logic
+          description: ''
+          label: Report Request?
+          name: conditional
+          x: 980
+          'y': 280
+        outputIds:
+          - - Ny4Ym0TIE7
+          - - u_HkZtK6X3
+        type: ConditionalNode
+      - config:
+          action: sendReport
+          params:
+            - name: dashboardId
+              type: string
+              value: '{{globals.dashboardId}}'
+            - name: reportConfig
+              type: json
+              value: |-
+                {
+                    "callbackUrl": "{{data.headers.x-forwarded-proto}}://{{data.headers.host}}/tl-dashboard-report-cb?jwt={{working.jwt}}",
+                    "branded": false,
+                    "theme": "{{#eq data.query.theme 'dark'}}dark{{else}}light{{/eq}}",
+                    "time": {{defaultTo data.query.t 0}},
+                    "ctx": {{jsonEncode working.reportCtx}}
+                }
+          resource: applicationDashboard
+          responsePath: pageData
+        id: kxPlccGryD
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 1100
+          'y': 580
+        outputIds:
+          - - Ny4Ym0TIE7
+        type: LosantApiNode
+      - config:
+          algorithmTemplate: HS256
+          dataTemplate: '{{jsonEncode working.reportCtx}}'
+          dataTemplateType: json
+          destinationPath: working.jwt
+          expiresIn: 600
+          issuerTemplate: '{{data.headers.host}}'
+          secretTemplate: '{{globals.JWT_SECRET}}'
+        id: sMe6RVYDZk
+        meta:
+          category: logic
+          description: ''
+          isExpRequired: true
+          label: 'JWT: Create'
+          name: jwt-create
+          timeUnit: Minutes
+          x: 1100
+          'y': 480
+        outputIds:
+          - - kxPlccGryD
+        type: JWTCreateNode
+      - config:
+          rules:
+            - destination: working.reportCtx
+              type: set
+              valueTemplate: |-
+                {
+                  "experienceUser": "{{experience.user.id}}",
+                  "deviceId": "{{data.params.deviceId}}"
+                }
+              valueTemplateType: json
+        id: u_HkZtK6X3
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 1100
+          'y': 380
+        outputIds:
+          - - sMe6RVYDZk
+        type: MutateNode
+      - config:
+          message: ''
+          property: ''
+        id: EjGed0u5xs
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 880
+          'y': 1540
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorPath: working.jwtVerifyError
+          issuerTemplate: '{{data.headers.host}}'
+          secretTemplate: '{{globals.JWT_SECRET}}'
+          tokenTemplate: '{{data.query.jwt}}'
+        id: Plp_G1XKYq
+        meta:
+          category: logic
+          description: ''
+          label: 'JWT: Verify'
+          name: jwt-verify
+          x: 880
+          'y': 1040
+        outputIds:
+          - - QVhMTMBL6k
+          - - PPoknMwYYQ
+        type: JWTVerifyNode
+      - config:
+          destinationPath: working.jwtDecoded
+          tokenTemplate: '{{data.query.jwt}}'
+        id: PPoknMwYYQ
+        meta:
+          category: logic
+          description: ''
+          label: 'JWT: Decode'
+          name: jwt-decode
+          x: 980
+          'y': 1140
+        outputIds:
+          - - KlGpwJhcyk
+        type: JWTDecodeNode
+      - config:
+          bodyTemplate: |-
+            {
+                "type": "Bad Request",
+                "message": "Invalid user and/or device"
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: QVhMTMBL6k
+        meta:
+          category: output
+          description: ''
+          label: User / Device Mismatch
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 780
+          'y': 1440
+        outputIds:
+          - - EjGed0u5xs
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: |
+            <!doctype html>
+            <html>
+              <head>
+                <title></title>
+                <meta name="viewport" content="width=device-width" />
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
+              <body>
+                <p>Hello,</p>
+                <p>The report you recently requested can be downloaded at the following URL:</p>
+                <p><a href="{{data.body.downloadUrl}}">{{data.body.downloadUrl}}</a></p>
+              </body>
+            </html>
+          fromTemplate: ''
+          resultPath: working.emailResult
+          subjectTemplate: Your Dashboard Report
+          toAddresses:
+            - '{{working.experienceUser.email}}'
+        id: k2mLpuAsz8
+        meta:
+          category: output
+          description: ''
+          label: Email
+          name: structure-email
+          x: 980
+          'y': 1340
+        outputIds:
+          - - 0_FUWpHbMc
+        type: StructureEmailNode
+      - config:
+          bodyTemplate: |-
+            {
+                "success": true
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 0_FUWpHbMc
+        meta:
+          category: output
+          description: ''
+          label: 200 OK
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 1440
+        outputIds:
+          - - EjGed0u5xs
+        type: EndpointReplyNode
+      - config: {}
+        id: 1Mo0DEddnT
+        meta:
+          annotationText: >-
+            This checks that the device ID passed through the endpoint is
+            associated with the Experience User making the request. If your
+            dashboard does not make use of a device ID context variable, you can
+            remove this check.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 180
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: W4WcL7ljQY
+        meta:
+          annotationText: >-
+            This is a basic 404 response to send to the user if they make an
+            invalid request. If utilizing the device ID check, you will want to
+            update this node to instead return your experience's 404 page.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 260
+          x: 500
+          'y': 620
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: goklUbCqgI
+        meta:
+          annotationText: >-
+            This Mutate Node builds the context object to apply to the dashboard
+            report. You will need to modify this to build your chosen
+            dashboard's context. Currently, it is set up to pass a deviceId
+            variable from the URL and the ID of the Experience User making the
+            request, as those are utilized by the example dashboard included
+            with the template.
+
+
+            This context object is then used to sign the JWT that's included in
+            the callback URL.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 400
+          x: 1300
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: SmquokjrSC
+        meta:
+          annotationText: >-
+            The Losant API Node issues the request for the dashboard report,
+            utilizing ...
+
+
+            - The dashboard ID from your globals object
+
+            - The context object constructed above
+
+            - The theme and time from the request's query parameters
+
+            - The callback URL included in the template, along with the JWT as a
+            query parameter
+
+
+            Feedback as to whether the request succeeded is provided to the user
+            in the response.
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 400
+          x: 1300
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: s7Wst6yue0
+        meta:
+          annotationText: >
+            On receipt of a request to this unauthenticated endpoint, verify the
+            JWT included as a query param and decode it.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 160
+          x: 700
+          'y': 940
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: S_gBMHTg5C
+        meta:
+          annotationText: >-
+            This template uses the Email Node for proving the concent, but we
+            strongly recommend replacing this with a SendGrid Node that utilizes
+            your account.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 400
+          x: 1180
+          'y': 1320
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: n5P3irC6UJ
+        meta:
+          annotationText: >-
+            While this request is not visible to any users, we reply to it
+            anyways to keep the request from hanging and timing out.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 340
+          x: 420
+          'y': 1340
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bccAddresses: []
+          bodyTemplate: |-
+            <!doctype html>
+            <html>
+              <head>
+                <title></title>
+                <meta name="viewport" content="width=device-width" />
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
+              <body>
+                <p>Hello,</p>
+                <p>The report you recently requested can be downloaded at the following URL:</p>
+                <p><a href="{{data.body.downloadUrl}}">{{data.body.downloadUrl}}</a></p>
+              </body>
+            </html>
+          ccAddresses: []
+          fromTemplate: 'noreply@{{data.headers.host}}'
+          replyToTemplate: ''
+          resultPath: working.emailResult
+          sendgridApiKey: '{{globals.sendgridKey}}'
+          subjectTemplate: Your Dashboard Report
+          toAddresses:
+            - '{{working.experienceUser.email}}'
+        id: onPKRKqAMV
+        meta:
+          category: output
+          description: ''
+          label: SendGrid
+          name: sendgrid
+          x: 1280
+          'y': 1420
+        outputIds: []
+        type: SendgridEmailNode
+      - config: {}
+        id: TmC1qpZVGZ
+        meta:
+          annotationText: >-
+            ### Required Global Variables
+
+
+            You must change the following [workflow global
+            variable](https://~exportplaceholderid-docs-url~/workflows/overview/#workflow-globals)
+            values to utilize this template:
+
+
+            - `JWT_SECRET`: Change this value to a long, random, secret string.
+            This is important for signing the callback request. You may use the
+            Virtual Button below to generate one.
+
+            - `dashboardId`: Change this to the ID of the dashboard to display
+            on the template's experience page, which is used to generate the
+            report. This is currently set to the ID of the sample dashboard
+            included in this template.
+          category: annotation
+          height: 320
+          label: Note
+          name: note
+          width: 480
+          x: 40
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          destinationPath: working.generatedString
+          idTypeTemplate: uuidv4
+        id: 1pz1Qx5kJw
+        meta:
+          category: logic
+          description: ''
+          label: Generate ID
+          name: generate-id
+          x: 180
+          'y': 480
+        outputIds:
+          - - _WZJBvwgUb
+        type: GenerateIdNode
+      - config:
+          message: ''
+          property: ''
+        id: _WZJBvwgUb
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 180
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          emailOrIdTemplate: '{{working.jwtDecoded.experienceUser}}'
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: working.experienceUser
+          sortDirection: asc
+          sortField: email
+        id: KlGpwJhcyk
+        meta:
+          category: experience
+          description: ''
+          label: 'User: Get'
+          name: get-experience-user
+          x: 980
+          'y': 1240
+        outputIds:
+          - - k2mLpuAsz8
+        type: GetExperienceUserNode
+    triggers:
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-getTlDashboardReportDeviceId-2~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /tl-dashboard-report/{deviceId}'
+          name: endpoint
+          uiId: lcpKEbuT1W
+          x: 780
+          'y': 80
+        outputIds:
+          - - JZjJucpE78
+        type: endpoint
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-postTlDashboardReportDeviceId-5~
+        meta:
+          category: trigger
+          description: ''
+          label: 'POST /tl-dashboard-report/{deviceId}'
+          name: endpoint
+          uiId: guXHPY75pD
+          x: 980
+          'y': 80
+        outputIds:
+          - - JZjJucpE78
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb-4~
+        meta:
+          category: trigger
+          description: ''
+          label: Report Callback
+          name: endpoint
+          uiId: CV5t2HOx0G
+          x: 880
+          'y': 940
+        outputIds:
+          - - Plp_G1XKYq
+        type: endpoint
+      - config: {}
+        key: >-
+          ~exportplaceholderid-flow-renderDashboardRequestReport-1~-QtjkOrNQFuKWFK_XNfIXA
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: 4xHtmH5n8A
+          x: 180
+          'y': 380
+        outputIds:
+          - - 1pz1Qx5kJw
+        type: virtualButton
+    version: develop
+version: 1

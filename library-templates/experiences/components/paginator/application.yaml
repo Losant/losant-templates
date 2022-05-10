@@ -1,0 +1,18 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: A general-purpose pagination UI component.
+    filesPath: ./files
+    globals:
+      - cloudOnly: false
+        description: ""
+        json: '"pagination,paginator,table,list"'
+        key: keywords
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsPaginator-0~
+    name: Paginator
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1
