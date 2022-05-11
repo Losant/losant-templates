@@ -11,50 +11,6 @@ resources:
     name: Render Dashboard / Request Report
     nodes:
       - config:
-          deviceIdTemplate: '{{data.params.deviceId}}'
-          idTemplate: '{{experience.user.id}}'
-          idTypeTemplate: experienceUser
-        id: JZjJucpE78
-        meta:
-          category: experience
-          description: ''
-          label: 'Device: Verify'
-          name: verify-experience-device
-          x: 880
-          'y': 180
-        outputIds:
-          - - BpgmWZHsUl
-          - - 71mXOol5Wi
-        type: VerifyDeviceNode
-      - config:
-          bodyTemplate: |-
-            {
-                "type": "Not Found",
-                "message": "Device not found"
-            }
-          bodyTemplateType: string
-          cookieInfo: []
-          headerInfo:
-            - keyTemplate: Content-Type
-              valueTemplate: application/json
-          mqttTopicsTemplate: []
-          replyIdPath: ''
-          replyType: custom
-          responseCodeTemplate: '404'
-          sameSiteTemplate: ''
-        id: BpgmWZHsUl
-        meta:
-          category: output
-          description: ''
-          label: '404'
-          mqttTopicsType: []
-          name: endpoint-reply
-          x: 780
-          'y': 680
-        outputIds:
-          - - 6iiIBeIBpO
-        type: EndpointReplyNode
-      - config:
           bodyTemplate: pageData
           bodyTemplateType: path
           cookieInfo: []
@@ -73,8 +29,8 @@ resources:
           label: Render Dashboard
           mqttTopicsType: []
           name: endpoint-reply
-          x: 980
-          'y': 680
+          x: 880
+          'y': 480
         outputIds:
           - - 6iiIBeIBpO
         type: EndpointReplyNode
@@ -88,23 +44,9 @@ resources:
           label: Debug
           name: debug
           x: 880
-          'y': 780
+          'y': 580
         outputIds: []
         type: DebugNode
-      - config:
-          expression: '{{data.method}} === ''post'''
-        id: 71mXOol5Wi
-        meta:
-          category: logic
-          description: ''
-          label: Report Request?
-          name: conditional
-          x: 980
-          'y': 280
-        outputIds:
-          - - Ny4Ym0TIE7
-          - - u_HkZtK6X3
-        type: ConditionalNode
       - config:
           action: sendReport
           params:
@@ -129,8 +71,8 @@ resources:
           description: ''
           label: Losant API
           name: losantapi
-          x: 1100
-          'y': 580
+          x: 980
+          'y': 380
         outputIds:
           - - Ny4Ym0TIE7
         type: LosantApiNode
@@ -150,8 +92,8 @@ resources:
           label: 'JWT: Create'
           name: jwt-create
           timeUnit: Minutes
-          x: 1100
-          'y': 480
+          x: 980
+          'y': 280
         outputIds:
           - - kxPlccGryD
         type: JWTCreateNode
@@ -161,8 +103,7 @@ resources:
               type: set
               valueTemplate: |-
                 {
-                  "experienceUser": "{{experience.user.id}}",
-                  "deviceId": "{{data.params.deviceId}}"
+                  "experienceUser": "{{experience.user.id}}"
                 }
               valueTemplateType: json
         id: u_HkZtK6X3
@@ -171,8 +112,8 @@ resources:
           description: ''
           label: Mutate
           name: mutate
-          x: 1100
-          'y': 380
+          x: 980
+          'y': 180
         outputIds:
           - - sMe6RVYDZk
         type: MutateNode
@@ -185,8 +126,8 @@ resources:
           description: ''
           label: Debug
           name: debug
-          x: 880
-          'y': 1540
+          x: 600
+          'y': 1380
         outputIds: []
         type: DebugNode
       - config:
@@ -200,8 +141,8 @@ resources:
           description: ''
           label: 'JWT: Verify'
           name: jwt-verify
-          x: 880
-          'y': 1040
+          x: 600
+          'y': 880
         outputIds:
           - - QVhMTMBL6k
           - - PPoknMwYYQ
@@ -215,8 +156,8 @@ resources:
           description: ''
           label: 'JWT: Decode'
           name: jwt-decode
-          x: 980
-          'y': 1140
+          x: 700
+          'y': 980
         outputIds:
           - - KlGpwJhcyk
         type: JWTDecodeNode
@@ -243,8 +184,8 @@ resources:
           label: User / Device Mismatch
           mqttTopicsType: []
           name: endpoint-reply
-          x: 780
-          'y': 1440
+          x: 500
+          'y': 1280
         outputIds:
           - - EjGed0u5xs
         type: EndpointReplyNode
@@ -274,8 +215,8 @@ resources:
           description: ''
           label: Email
           name: structure-email
-          x: 980
-          'y': 1340
+          x: 700
+          'y': 1180
         outputIds:
           - - 0_FUWpHbMc
         type: StructureEmailNode
@@ -301,65 +242,30 @@ resources:
           label: 200 OK
           mqttTopicsType: []
           name: endpoint-reply
-          x: 980
-          'y': 1440
+          x: 700
+          'y': 1280
         outputIds:
           - - EjGed0u5xs
         type: EndpointReplyNode
-      - config: {}
-        id: 1Mo0DEddnT
-        meta:
-          annotationText: >-
-            This checks that the device ID passed through the endpoint is
-            associated with the Experience User making the request. If your
-            dashboard does not make use of a device ID context variable, you can
-            remove this check.
-          category: annotation
-          height: 200
-          label: Note
-          name: note
-          width: 260
-          x: 600
-          'y': 180
-        outputIds: []
-        type: AnnotationNode
-      - config: {}
-        id: W4WcL7ljQY
-        meta:
-          annotationText: >-
-            This is a basic 404 response to send to the user if they make an
-            invalid request. If utilizing the device ID check, you will want to
-            update this node to instead return your experience's 404 page.
-          category: annotation
-          height: 200
-          label: Note
-          name: note
-          width: 260
-          x: 500
-          'y': 620
-        outputIds: []
-        type: AnnotationNode
       - config: {}
         id: goklUbCqgI
         meta:
           annotationText: >-
             This Mutate Node builds the context object to apply to the dashboard
             report. You will need to modify this to build your chosen
-            dashboard's context. Currently, it is set up to pass a deviceId
-            variable from the URL and the ID of the Experience User making the
-            request, as those are utilized by the example dashboard included
-            with the template.
+            dashboard's context. Currently, it is set up to pass the Experience
+            User making the request.
 
 
             This context object is then used to sign the JWT that's included in
             the callback URL.
           category: annotation
-          height: 240
+          height: 200
           label: Note
           name: note
           width: 400
-          x: 1300
-          'y': 300
+          x: 1180
+          'y': 140
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -387,8 +293,8 @@ resources:
           label: Note
           name: note
           width: 400
-          x: 1300
-          'y': 580
+          x: 1180
+          'y': 380
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -398,12 +304,12 @@ resources:
             On receipt of a request to this unauthenticated endpoint, verify the
             JWT included as a query param and decode it.
           category: annotation
-          height: 260
+          height: 200
           label: Note
           name: note
           width: 160
-          x: 700
-          'y': 940
+          x: 420
+          'y': 780
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -418,8 +324,8 @@ resources:
           label: Note
           name: note
           width: 400
-          x: 1180
-          'y': 1320
+          x: 900
+          'y': 1160
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -433,8 +339,8 @@ resources:
           label: Note
           name: note
           width: 340
-          x: 420
-          'y': 1340
+          x: 140
+          'y': 1240
         outputIds: []
         type: AnnotationNode
       - config:
@@ -467,8 +373,8 @@ resources:
           description: ''
           label: SendGrid
           name: sendgrid
-          x: 1280
-          'y': 1420
+          x: 1000
+          'y': 1260
         outputIds: []
         type: SendgridEmailNode
       - config: {}
@@ -541,39 +447,37 @@ resources:
           description: ''
           label: 'User: Get'
           name: get-experience-user
-          x: 980
-          'y': 1240
+          x: 700
+          'y': 1080
         outputIds:
           - - k2mLpuAsz8
         type: GetExperienceUserNode
     triggers:
       - config: {}
-        key: >-
-          ~exportplaceholderid-experienceEndpoint-getTlDashboardReportDeviceId-2~
+        key: ~exportplaceholderid-experienceEndpoint-getTlDashboardReport-2~
         meta:
           category: trigger
           description: ''
-          label: 'GET /tl-dashboard-report/{deviceId}'
+          label: GET /tl-dashboard-report
           name: endpoint
           uiId: lcpKEbuT1W
           x: 780
           'y': 80
         outputIds:
-          - - JZjJucpE78
+          - - Ny4Ym0TIE7
         type: endpoint
       - config: {}
-        key: >-
-          ~exportplaceholderid-experienceEndpoint-postTlDashboardReportDeviceId-5~
+        key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReport-5~
         meta:
           category: trigger
           description: ''
-          label: 'POST /tl-dashboard-report/{deviceId}'
+          label: POST /tl-dashboard-report
           name: endpoint
           uiId: guXHPY75pD
           x: 980
           'y': 80
         outputIds:
-          - - JZjJucpE78
+          - - u_HkZtK6X3
         type: endpoint
       - config: {}
         key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb-4~
@@ -583,14 +487,14 @@ resources:
           label: Report Callback
           name: endpoint
           uiId: CV5t2HOx0G
-          x: 880
-          'y': 940
+          x: 600
+          'y': 780
         outputIds:
           - - Plp_G1XKYq
         type: endpoint
       - config: {}
         key: >-
-          ~exportplaceholderid-flow-renderDashboardRequestReport-1~-QtjkOrNQFuKWFK_XNfIXA
+          ~exportplaceholderid-flow-renderDashboardRequestReport-1~-F1EwnjAW152aEtJxUgrjr
         meta:
           category: trigger
           description: ''

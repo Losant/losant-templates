@@ -40,7 +40,6 @@
             dashboardId=globals.dashboardId
             ctx=(obj
                 experienceUser=experience.user.id
-                deviceId=request.params.deviceId
             )
             theme=(template '{{#eq request.query.theme "dark"}}dark{{else}}light{{/eq}}')
             hideHeader=true

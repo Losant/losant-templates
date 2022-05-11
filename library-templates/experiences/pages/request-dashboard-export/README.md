@@ -10,9 +10,8 @@ This template requires no additional dependencies; however, the markup within th
 
 The Request Experience Dashboard template adds the following resources to your application:
 
-- An example [dashboard](https://docs.losant.com/dashboards/overview/) that simply displays a list of devices and the current dashboard settings ([time](https://docs.losant.com/dashboards/overview/#viewing-past-dashboard-states), [theme](https://docs.losant.com/dashboards/overview/#display-settings), and [context variable](https://docs.losant.com/dashboards/context-variables/) values). The dashboard utilizes an [Experience User context variable](https://docs.losant.com/dashboards/context-variables/#experience-users) and a [device ID context variable](https://docs.losant.com/dashboards/context-variables/#device-ids).
-- One [device](https://docs.losant.com/devices/overview/) that serves as the default context variable value for the dashboard.
-- An [Experience Page](https://docs.losant.com/experiences/views/#custom-pages) that displays the dashboard, a button for requesting a dashboard report, and any feedback from the report request. The dashboard's context variables are set through the Experience User making the request and the device ID in the endpoint path. Optionally, the theme and time can be set through query parameters (`theme` and `t` respectively).
+- An example [dashboard](https://docs.losant.com/dashboards/overview/) that simply displays a list of the Experience User's devices and the current dashboard settings ([time](https://docs.losant.com/dashboards/overview/#viewing-past-dashboard-states), [theme](https://docs.losant.com/dashboards/overview/#display-settings), and [context variable](https://docs.losant.com/dashboards/context-variables/) values). The dashboard utilizes an [Experience User context variable](https://docs.losant.com/dashboards/context-variables/#experience-users).
+- An [Experience Page](https://docs.losant.com/experiences/views/#custom-pages) that displays the dashboard, a button for requesting a dashboard report, and any feedback from the report request. The dashboard's context variables are set through the Experience User making the request. Optionally, the theme and time can be set through query parameters (`theme` and `t` respectively).
 - Three [Experience Endpoints](https://docs.losant.com/experiences/endpoints/) for viewing the dashboard, processing the request for a PDF, and handling the callback request when the report generation is complete.
 - One [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/) for handling the endpoint requests, including the generation and delivery of the requested PDF.
 
@@ -47,6 +46,8 @@ This template's Experience Page does not reference a [layout](https://docs.losan
 
 1. Set that layout on the Experience Page.
 2. Delete the `<doctype>`, `<head>`, and closing `</body>` and `</html>` tags from the page. The relevant sections of the page are clearly marked in its content, and everything outside of those sections can be deleted.
+
+Also, as noted above, you may need to edit the page to pass in the proper context variables that your dashboard is expecting – referencing them from path or query parameters or from other values on the render context.
 
 ## License
 
