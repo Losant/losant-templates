@@ -1,11 +1,3 @@
 resourceType: ExperienceUser
-resources:
-  - email: dylan@losant.com
-    experienceGroupIds:
-      - ~exportplaceholderid-experienceGroup-exampleGroup-0~
-    firstName: password is
-    id: ~exportplaceholderid-experienceUser-dylanLosantCom-0~
-    lastName: asdfasdf
-    userTags: {}
-    password: qwerty123
+resources: []
 version: 1

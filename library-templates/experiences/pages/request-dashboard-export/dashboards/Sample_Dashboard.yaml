@@ -119,7 +119,7 @@ resources:
     contextConfiguration:
       - applicationId: >-
           ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
-        defaultValue: ~exportplaceholderid-experienceUser-dylanLosantCom-0~
+        defaultValue: ~exportplaceholderid-experienceUser-exampleDomainCom-0~
         name: experienceUser
         type: experienceUser
         validationConfig: {}

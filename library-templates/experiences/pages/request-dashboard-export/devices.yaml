@@ -1,9 +1,3 @@
 resourceType: DeviceTree
-resources:
-  - attributes: []
-    children: []
-    deviceClass: standalone
-    id: ~exportplaceholderid-device-contextDevice-1~
-    name: Context Device
-    tags: []
+resources: []
 version: 1
