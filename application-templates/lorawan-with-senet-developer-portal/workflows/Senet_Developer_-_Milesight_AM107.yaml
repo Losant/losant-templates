@@ -1,0 +1,343 @@
+resourceType: Flow
+resources:
+  - description: Workflow for a Milesight AM107 on the Senet network.
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-senetDeveloperMilesightAm107-2~
+    name: Senet Developer - Milesight AM107
+    nodes:
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: false
+          includeConnectionStatus: true
+          includeState: true
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: DevEUI
+              valueTemplate: '{{data.body.devEui}}'
+          tagsAsObject: true
+        id: 2e_MUYGJzn
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 420
+          'y': 340
+        outputIds:
+          - - IzBqoze_6C
+        type: GetDeviceNode
+      - config:
+          attributesAsObject: true
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceAttributes: []
+          deviceClassTemplate: standalone
+          deviceTags:
+            - keyTemplate: DevEUI
+              valueTemplate: '{{data.body.devEui}}'
+          nameTemplate: 'Milesight AM107 - {{data.body.devEui}}'
+          parentIdTemplate: ''
+          recipeIdTemplate: >-
+            ~exportplaceholderid-deviceRecipe-milesightAm107AmbienceMonitoringSensor-0~
+          resultPath: working.device
+          tagsAsObject: true
+        id: vLcVM7WSmc
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Create'
+          name: create-device
+          x: 380
+          'y': 760
+        outputIds:
+          - - bq_lJpeJeU
+        type: CreateDeviceNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-am107Decoder-0~
+          customNodeVersion: default
+          fields:
+            - id: body
+              value: data.body
+          isInstance: false
+          resultPath: working.attributes
+        id: bq_lJpeJeU
+        meta:
+          category: customNodeExecute
+          description: ''
+          label: AM107 Decoder
+          name: custom-node-execute-node
+          x: 280
+          'y': 920
+        outputIds:
+          - - QCB40HmZTu
+          - []
+        type: CustomNodeExecuteNode
+      - config:
+          message: ''
+          property: ''
+        id: 4cSnd_x2SF
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 500
+          'y': 1260
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 6hsGGckzAt
+        meta:
+          annotationText: >-
+            The AM107 Webhook in this demonstration is expecting data from the
+            **Senet Data Receiver**, which is included with this template.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 420
+          x: 300
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          script: |
+            payload.working.DeviceTypeValid = false;
+
+            if (typeof(payload.data.body.tags) == 'undefined') {
+                payload.working.DeviceType = 'unknown';
+            } else{
+                // look in tags for DevType_
+                var devtype_key = 'DevType_';
+                
+                var devtype_tag_idx = payload.data.body.tags.search(devtype_key);
+                if (devtype_tag_idx >= 0) {
+                    payload.working.DeviceType = payload.data.body.tags.slice(devtype_tag_idx + devtype_key.length);
+                    var end_idx = payload.working.DeviceType.search(',');
+                    if(end_idx >= 0) payload.working.DeviceType = payload.working.DeviceType.slice(0,end_idx);
+                    payload.working.DeviceType = payload.working.DeviceType.trim();
+                    payload.working.DeviceTypeValid = true;
+                } else {
+                    payload.working.DeviceType = 'unknown';
+                }
+                
+            }
+            //override DeviceType if it is explicitly present
+            if (typeof(payload.data.body.devType) != 'undefined') {
+                payload.working.DeviceType = payload.data.body.devType.trim();
+                payload.working.DeviceTypeValid = true;
+            }
+            // Normalize DeviceType if required (necessary for by-type handling)
+            if(payload.working.DeviceTypeValid === true) {
+                const enertrac = ['Enertrac', '5847', '5910', '5922'];
+                const tabs = ['Tabs','TABS'];
+                if(enertrac.some(word => payload.working.DeviceType.includes(word)) === true ) {
+                    payload.working.DeviceType = 'Enertrac';
+                } else if(tabs.some(word => payload.working.DeviceType.includes(word)) === true) {
+                    payload.working.DeviceType = 'Tabs';
+                }
+            }
+            payload.working.Description = payload.working.DeviceType;
+
+            payload.working.attributes = {
+                
+            };
+        id: IzBqoze_6C
+        meta:
+          category: logic
+          description: >-
+            Extract DeviceType from the uplink devType and tags fields.  Create
+            the working.attributes structure to hold the decode.
+          label: Extract DeviceType Tags
+          name: function
+          x: 420
+          'y': 420
+        outputIds:
+          - - veoAwrIPvl
+        type: RawFunctionNode
+      - config:
+          cases:
+            - caseLabel: AM107
+              caseTemplate: Milesight-AM107
+              dontBreak: false
+          switchTemplate: '{{working.DeviceType}}'
+        id: veoAwrIPvl
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 420
+          'y': 520
+        outputIds:
+          - - QCB40HmZTu
+          - - 1tGnNrvAR7
+        type: SwitchNode
+      - config:
+          expression: '{{working.device}} === null'
+        id: 1tGnNrvAR7
+        meta:
+          category: logic
+          description: ''
+          label: Create Device?
+          name: conditional
+          x: 240
+          'y': 660
+        outputIds:
+          - - bq_lJpeJeU
+          - - vLcVM7WSmc
+        type: ConditionalNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-senetUplinkApiGenericDeviceDecoder-3~
+          customNodeVersion: default
+          fields:
+            - id: body
+              value: data.body
+            - id: attributes
+              value: working.attributes
+            - id: DeviceClass
+              value: '{{working.device.tags.DeviceClass}}'
+          isInstance: false
+          resultPath: working.attributes
+        id: QCB40HmZTu
+        meta:
+          description: ''
+          label: Senet Uplink API Generic Device Decoder
+          name: custom-node-execute-node
+          x: 500
+          'y': 1060
+        outputIds:
+          - - kr8YLlr2Do
+          - []
+        type: CustomNodeExecuteNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.attributes
+          deviceId: working.device.deviceId
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourcePath: data.body.txtime
+          timeSourceType: payloadPath
+        id: kr8YLlr2Do
+        meta:
+          category: output
+          description: Update device attributes
+          label: 'Device: State Update'
+          name: device-state
+          x: 500
+          'y': 1160
+        outputIds:
+          - - 4cSnd_x2SF
+        type: DeviceChangeStateNode
+      - config: {}
+        id: nAYCiXs4rt
+        meta:
+          annotationText: >-
+            This workflow is used once you have purchased a Milesight LoRaWAN
+            AM107 and are ready to see real data in the dashboard from the
+            AM107.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 420
+          x: 300
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 1KgVIxwpfu
+        meta:
+          annotationText: >-
+            Get the device data based on the "DevEUI" tag, then store all of the
+            device attributes locally.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 100
+          'y': 340
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 43PCCxMrbH
+        meta:
+          annotationText: >-
+            Extract the DeviceType to determine which type of device to create
+            or decode.  The DeviceType is assigned as part of the onboarding
+            process on the Senet Network.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 460
+          x: 640
+          'y': 400
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: HBwJuYa3Bp
+        meta:
+          annotationText: >-
+            If the DeviceType is not an AM107, a default Senet Uplink Decoder is
+            called to interpret the data.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 700
+          'y': 740
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: KMJMWHH5Ki
+        meta:
+          annotationText: >-
+            Check to see if  'working.device' exists.  If it doesn't, create a
+            new device.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 240
+          x: 40
+          'y': 760
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: veL5xry_5B
+        meta:
+          annotationText: >-
+            Regardless of DeviceType, decode additional attributes that are
+            common for all devices on the Senet network.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 280
+          x: 200
+          'y': 1060
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-webhook-senetDataReceiver-0~
+        meta:
+          category: trigger
+          description: ''
+          label: AM107 Webhook
+          name: webhook
+          uiId: NsPsQCtJ0d
+          x: 420
+          'y': 240
+        outputIds:
+          - - 2e_MUYGJzn
+        type: webhook
+version: 1

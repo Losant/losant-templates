@@ -1,0 +1,257 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: Temp
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: RH
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: LightLevel
+      - attributeTags:
+          unit: PPM
+        dataType: number
+        description: ""
+        name: CO2
+      - attributeTags:
+          unit: ppb
+        dataType: number
+        description: ""
+        name: TVOC
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: Pressure
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: Battery
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: VisibleInfrared
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: Infrared
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: MotionCount
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: seqno
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: port
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: pdu
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: joinId
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: Location
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: Geocode
+      - attributeTags: {}
+        dataType: boolean
+        description: ""
+        name: ack
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: devClass
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: devEui
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: cfgLocation
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: estLocation
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: channel
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: datarate
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: freq
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rssi
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: snr
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: metadata
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: devProfile
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: fwVersion
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: gwEui
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: txtime
+      - attributeTags: {}
+        dataType: boolean
+        description: ""
+        name: Connected
+      - attributeTags: {}
+        dataType: string
+        name: devType
+    description: |-
+      Milesight AM107 Ambience Monitoring Sensor:
+      https://www.milesight-iot.com/lorawan/sensor/am100/
+    deviceClass: standalone
+    deviceDescription: |-
+      Milesight AM107 Ambience Monitoring Sensor:
+      https://www.milesight-iot.com/lorawan/sensor/am100/
+    deviceName: Milesight AM107 Ambience Monitoring Sensor
+    id: ~exportplaceholderid-deviceRecipe-milesightAm107AmbienceMonitoringSensor-0~
+    name: Milesight AM107 Ambience Monitoring Sensor
+    tags:
+      - key: DeviceClass
+        value: Environmental
+      - key: DeviceType
+        value: Milesight-AM107
+      - key: DevEUI
+        value: xxxxxxxxxx
+  - attributes:
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: txtime
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: seqno
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: port
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: pdu
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: joinId
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: Location
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: Geocode
+      - attributeTags: {}
+        dataType: boolean
+        description: ""
+        name: ack
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: devClass
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: devEui
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: gwEui
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: cfgLocation
+      - attributeTags: {}
+        dataType: gps
+        description: ""
+        name: estLocation
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: channel
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: datarate
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: freq
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: rssi
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: snr
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: metadata
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: devProfile
+      - attributeTags: {}
+        dataType: string
+        description: ""
+        name: fwVersion
+      - attributeTags: {}
+        dataType: boolean
+        description: ""
+        name: Connected
+      - attributeTags: {}
+        dataType: string
+        name: devType
+    description: Recipe that handles the basic attributes of the Senet Uplink API
+    deviceClass: standalone
+    deviceDescription: Default Senet Uplink API auto-created device
+    deviceName: Default Senet Uplink API Device
+    id: ~exportplaceholderid-deviceRecipe-senetUplinkApiDeviceRecipe-1~
+    name: Senet Uplink API Device Recipe
+    tags:
+      - key: DeviceClass
+        value: Unknown
+      - key: DeviceType
+        value: Unknown
+version: 1

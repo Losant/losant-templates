@@ -1,0 +1,468 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: xJGDYV1MAo
+        startX: 0
+        startY: 0
+        title: Device Details
+        width: 4
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: gauge
+        config:
+          conditions:
+            - color: 'rgba(46, 70, 128, 1)'
+              condition: '{{value}} < 50'
+              id: iWnjlSMq_h
+            - color: 'rgba(10, 225, 255, 1)'
+              condition: '{{value}} < 65'
+              id: EG1u2gE_cA
+            - color: 'rgba(165, 39, 17, 1)'
+              condition: '{{value}} > 85'
+              id: V3DWFFThMG
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '{{value}} > 72'
+              id: KtSz36l3CH
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '3'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: LAST
+            attribute: Temp
+            color: 'rgba(141, 179, 25, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags:
+              - key: DeviceType
+                value: Milesight-AM107
+            expression: '{{value}}*9/5 +32'
+            label: Temp(F)
+        height: 1
+        id: YkRyYw6ie0
+        startX: 0
+        startY: 0.5
+        title: Temperature
+        width: 0.5
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: number
+          precision: '3'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: LAST
+            attribute: RH
+            color: 'rgba(49, 182, 59, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags:
+              - key: DeviceType
+                value: Milesight-AM107
+            expression: ''
+            label: '% RH '
+        height: 0.5
+        id: 9I2JHUrxLU
+        startX: 0.5
+        startY: 0.5
+        title: Humidity
+        width: 0.5
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: graph
+        config:
+          duration: 259200000
+          realTime: false
+          recharts: true
+          resolution: 300000
+          segments:
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: TVOC
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+              dotWeight: 0
+              expression: '{{value}}*9/5 +32'
+              graphType: line
+              label: TVOC
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: TVOC
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: CO2
+              color: '#057180'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+              dotWeight: 0
+              expression: ''
+              graphType: line
+              label: CO2
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: CO2
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: MotionCount
+              color: 'rgba(165, 39, 17, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+                - ~exportplaceholderid-device-milesightAm10724E124128B118964-0~
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Motion Count
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: Motion Count
+              yAxisMax: '200'
+              yAxisMin: ''
+        height: 2
+        id: Zq6AAkSxTQ
+        startX: 1
+        startY: 0.5
+        title: Air Quality
+        width: 3
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: '#8db319'
+              condition: '({{value-2}} < 24) && ({{value-5}} < 60)'
+              id: xwfVqBK17F
+              label: >-
+                Temp: {{format (add (divide (multiply value-0 9) 5) 32)
+                ".2r"}}/{{format (add (divide (multiply value-1 9) 5) 32)
+                ".2r"}}/{{format (add (divide (multiply value-2 9) 5) 32)
+                ".2r"}}  
+
+                RH%: {{format value-3 ".2r"}}/{{format value-4 ".2r"}}/{{format
+                value-5 ".2r"}}  
+
+                Motion Count: {{value-6}}
+            - color: 'rgba(255, 154, 37, 1)'
+              condition: '({{value-2}} < 27) && ({{value-5}} < 70)'
+              id: 8m4GfqsFDy
+              label: >-
+                Temp: {{format (add (divide (multiply value-0 9) 5) 32)
+                ".2r"}}/{{format (add (divide (multiply value-1 9) 5) 32)
+                ".2r"}}/{{format (add (divide (multiply value-2 9) 5) 32)
+                ".2r"}}  
+
+                RH%: {{format value-3 ".2r"}}/{{format value-4 ".2r"}}/{{format
+                value-5 ".2r"}}  
+
+                Motion Count: {{value-6}}
+            - color: 'rgba(165, 39, 17, 1)'
+              condition: '({{value-2}} < 30) && ({{value-5}} < 80)'
+              id: yfP9-tXUS5
+              label: >-
+                Temp: {{format (add (divide (multiply value-0 9) 5) 32)
+                ".2r"}}/{{format (add (divide (multiply value-1 9) 5) 32)
+                ".2r"}}/{{format (add (divide (multiply value-2 9) 5) 32)
+                ".2r"}}  
+
+                RH%: {{format value-3 ".2r"}}/{{format value-4 ".2r"}}/{{format
+                value-5 ".2r"}}  
+
+                Motion Count: {{value-6}}
+          defaultCondition:
+            color: 'rgba(255, 38, 27, 1)'
+            label: >-
+              Temp: {{format (add (divide (multiply value-0 9) 5) 32)
+              ".2r"}}/{{format (add (divide (multiply value-1 9) 5) 32)
+              ".2r"}}/{{format (add (divide (multiply value-2 9) 5) 32) ".2r"}}
+
+
+              RH%: {{format value-3 ".2r"}}/{{format value-4 ".2r"}}/{{format
+              value-5 ".2r"}}
+
+
+              Motion Count: {{value-6}}
+          duration: 86400000
+          segments:
+            - aggregation:
+                options: {}
+                type: MIN
+              attribute: Temp
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Temp
+              deviceIds: []
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: Temp
+              deviceIds: []
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+            - aggregation:
+                options: {}
+                type: MIN
+              attribute: RH
+              deviceIds: []
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: RH
+              deviceIds: []
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+            - aggregation:
+                options: {}
+                type: MAX
+              attribute: RH
+              deviceIds: []
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+            - aggregation:
+                options: {}
+                type: SUM
+              attribute: MotionCount
+              deviceIds: []
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+        height: 0.5
+        id: g1Z0bx3Qq0
+        startX: 0.5
+        startY: 1
+        title: '24 Hr [min/mean/max]'
+        width: 0.5
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: indicator
+        config:
+          conditions:
+            - color: 'rgba(141, 179, 25, 1)'
+              condition: '({{value-0}} < 3)'
+              id: 0SHfBo53lP
+              label: Light not detected
+          defaultCondition:
+            color: 'rgba(5, 113, 128, 1)'
+            label: >
+              {{#gt value-0 2}}Light Detected {{formatDateRelative time-0}}
+              {{/gt}}  
+          duration: 0
+          segments:
+            - aggregation:
+                options: {}
+                type: LAST
+              attribute: LightLevel
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+        height: 1
+        id: dISYljNBxI
+        startX: 0
+        startY: 1.5
+        title: 'Current Light Status '
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: G1ffYQwf50
+        startX: 0
+        startY: 2.5
+        title: Office Occupancy
+        width: 4
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: image-overlay
+        config:
+          backgroundColor: 'rgba(255, 255, 255, 0)'
+          defaultZoom: -1.3333
+          imageUrl: >-
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~/office-floorplan.png
+          overlays:
+            - conditions:
+                - color: 'rgba(165, 39, 17, 1)'
+                  condition: '{{Office_MotionCount.value}} > 5'
+                  id: Al4ZN6u_w2
+                  shape: octagon
+                - color: 'rgba(255, 154, 37, 1)'
+                  condition: '{{Office_MotionCount.value}} > 2'
+                  id: X1ZxjNvYYP
+                  shape: circle
+              defaultCondition:
+                color: '#8db319'
+                shape: circle
+              popupTemplate: |-
+                Last Updated {{formatDateRelative date Office_MotionCount.time}}
+                (Activity count: {{Office_MotionCount.value}})
+              position: '610,160'
+              size: small
+              type: indicator
+          segments:
+            - aggregation:
+                options: {}
+                type: SUM
+              attribute: MotionCount
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags:
+                - key: DeviceType
+                  value: Milesight-AM107
+              duration: 3600000
+              id: Office_MotionCount
+              queryType: gauge
+        description: >-
+          This dashboard tracks motion in an office over the period of one
+          hour.   Red stop indicates that there has been motion detected in the
+          office within the past hour.  Green circle indicates that motion has
+          not been detected for the past hour.
+        height: 2
+        id: b9QVAcEbZm
+        startX: 0
+        startY: 3
+        title: 'Office Occupancy '
+        width: 4
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: section-header
+        config: {}
+        height: 0.5
+        id: cKmh8AcEcu
+        startX: 0
+        startY: 5
+        title: Device List & Summary Table
+        width: 4
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        blockType: device-state-table
+        config:
+          attributes:
+            - CO2
+            - RH
+            - TVOC
+            - Temp
+          columns:
+            - headerTemplate: '{{name}}'
+              id: defaultDeviceNameColumn
+              rowTemplate: >-
+                [{{deviceName}}](https://portal.senetco.io/#/devices/details?devEui={{encodeURI
+                deviceName}})
+              type: deviceName
+            - headerTemplate: '{{name}}'
+              id: defaultTimestampColumn
+              rowTemplate: '{{format value "YYYY-MM-DD HH:mm:ss"}}'
+              type: timestamp
+            - attribute: Temp
+              headerTemplate: '{{name}}'
+              id: 6hL5CaiNIk
+              rowTemplate: >-
+                {{#eq (typeof value) "number"}}{{format (add (divide (multiply 9
+                value) 5) 32) "d"}} F{{/eq}}
+              type: attribute
+            - attribute: RH
+              headerTemplate: '{{name}}'
+              id: xpZH1iuv87
+              rowTemplate: '{{format value "d"}}%'
+              type: attribute
+            - attribute: CO2
+              headerTemplate: '{{name}}'
+              id: km8BV6xlgI
+              rowTemplate: '{{format value "d"}}'
+              type: attribute
+            - attribute: TVOC
+              headerTemplate: '{{name}}'
+              id: TfLLp8dffF
+              rowTemplate: '{{format value "d"}}'
+              type: attribute
+          deviceIds: []
+          deviceTags:
+            - key: DeviceType
+              value: Milesight-AM107
+          duration: 0
+        height: 1.5
+        id: VatIo0U99O
+        startX: 0
+        startY: 5.5
+        title: AM107 Summary Table
+        width: 4
+    contextConfiguration:
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+        defaultValue: 62310f7d8046c68cc70790e8
+        name: deviceId
+        type: deviceId
+        validationConfig:
+          deviceIds: []
+          deviceTags:
+            - key: DeviceType
+              value: Milesight-AM107
+          includeFullDevice: true
+        validationEnabled: true
+    defaultTheme: light
+    description: >-
+      Dashboard includes  Device Details, Office Occupancy Overlay,  and Device
+      List & Summary.
+    id: ~exportplaceholderid-dashboard-milesightAm107-0~
+    name: Milesight AM107
+    public: false
+    refreshRate: 60
+    reportConfigs: []
+version: 1

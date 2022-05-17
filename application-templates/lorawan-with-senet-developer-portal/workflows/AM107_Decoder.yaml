@@ -1,0 +1,272 @@
+resourceType: Flow
+resources:
+  - category: logic
+    customNodeConfig:
+      fields:
+        - description: Raw Senet JSON Object.
+          id: body
+          label: Payload Path
+          required: true
+          type: payloadPath
+      outputCount: 1
+      resultMode: required
+    customNodeSupports:
+      - cloud
+    description: Milesight AM107 Payload Decoder
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/png;base64,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
+    id: ~exportplaceholderid-flow-am107Decoder-0~
+    name: AM107 Decoder
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: data.attributes
+        id: mhDvGaj40E
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 260
+          'y': 540
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          script: >-
+            /*-------------------------------------------------------------------------------+
+
+            |   MIT
+            License                                                                 
+            |
+
+            |   Copyright (c) 2021 Senet,
+            Inc.                                               |
+
+            |                                                                               
+            |
+
+            | Permission is hereby granted, free of charge, to any person
+            obtaining a copy   |
+
+            | of this software and associated documentation files (the
+            "Software"), to deal  |
+
+            | in the Software without restriction, including without limitation
+            the rights   |
+
+            | to use, copy, modify, merge, publish, distribute, sublicense,
+            and/or sell      |
+
+            | copies of the Software, and to permit persons to whom the Software
+            is          |
+
+            | furnished to do so, subject to the following
+            conditions:                       |
+
+            |                                                                               
+            |
+
+            | The above copyright notice and this permission notice shall be
+            included in all |
+
+            | copies or substantial portions of the
+            Software.                                |
+
+            | THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+            EXPRESS OR     |
+
+            | IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+            MERCHANTABILITY,       |
+
+            | FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+            SHALL THE    |
+
+            | AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+            OTHER         |
+
+            | LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+            ARISING FROM,  |
+
+            | OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+            DEALINGS IN THE  |
+
+            |
+            SOFTWARE.                                                                     
+            |
+
+            |                                                                               
+            |
+
+            +--------------------------------------------------------------------------------*/
+
+            /*!
+
+            *******************************************************************************
+              \file  milesight_am107_decoder.js
+
+              \brief Milesight/Ursalink AM102 environmental monitor decoder
+
+                     A variation of Cayenne LPP, could be adapted to use the base LPP
+                     decoder in future.
+
+              \par   NOTES:
+                     Based on TTN decoder by DefProc      
+                     https://gist.github.com/DefProc/139948c9236e16c8608e8aa7bb6cf100
+            *******************************************************************************
+              \par   REVISION HISTORY:
+                     2021-02-26  kjend          Initial commit
+                     2021-03-23  kjend          Add Header and attribution
+            *******************************************************************************/
+
+            // verify attributes object exists on the payload
+
+            if (typeof(payload.data.attributes) == 'undefined') {
+                payload.data.attributes = {    };
+            }
+
+            if (typeof(payload.data.body.pdu) != 'undefined') { // sometimes
+            there is no pdu (downlink ACK)
+              // Decode an uplink message from a buffer place in losant device attributes
+              var bytes = Buffer.from(payload.data.body.pdu, 'hex');
+
+              // for Milesight AM100-Series Payload Structure
+              // From: https://resource.milesight-iot.com/milesight/document/am100-series-user-guide-en.pdf
+              for (var i = 0; i < bytes.length;) {
+                // BATTERY (%)
+                if (bytes[i] == 0x01 && bytes[i+1] == 0x75) {
+                    payload.data.attributes.Battery = bytes[i+2];
+                    i += 3;
+                    continue;
+                }
+                // TEMPERATURE (degC)
+                else if (bytes[i] == 0x03 && bytes[i+1] == 0x67) {
+                  // If there's already a reading, ignore
+                  //if (typeof payload.data.attributes.Temp == 'undefined') {
+                    payload.data.attributes.Temp = bytes.readUInt16LE(i+2) / 10;
+                  //}
+                  i += 4;
+                  continue;
+                }
+                // HUMIDITY (% abs)
+                else if (bytes[i] == 0x04 && bytes[i+1] == 0x68) {
+                  // If there's already a reading, ignore
+                  //if (typeof payload.data.attributes.RH == 'undefined') {
+                    payload.data.attributes.RH = bytes[i+2]/2 ;
+                  //}
+                  i += 3;
+                  continue;
+                }
+                // Light levels (lux)
+                else if (bytes[i] == 0x06 && bytes[i+1] == 0x65) {
+                  // If there's already a reading, ignore
+                  //if (typeof payload.data.attributes.LightLevel == 'undefined') {
+                    payload.data.attributes.LightLevel = bytes.readUInt16LE(i+2) ;
+                    payload.data.attributes.VisibleInfrared = bytes.readUInt16LE(i+4) ;
+                    payload.data.attributes.Infrared = bytes.readUInt16LE(i+6) ;
+                  //}
+                  i += 8;
+                  continue;
+                }
+                // PIR Activity (number of events)
+                else if (bytes[i] == 0x05 && bytes[i+1] == 0x6a) {
+                  // If there's already a reading, ignore
+                  //if (typeof payload.data.attributes.MotionCount == 'undefined') {
+                    //payload.data.attributes.MotionCount = bytes.readUInt16LE(i+2) ;
+                    payload.data.attributes.MotionCount = (bytes[i+3] << 8) + bytes[i+2];
+                  //}
+                  i += 4;
+                  continue;
+                }
+                // CO2 concentration (ppm)
+                else if (bytes[i] == 0x07 && bytes[i+1] == 0x7d) {
+                  // If there's already a reading, ignore
+                  //if (typeof payload.data.CO2 == 'undefined') {
+                    //payload.data.CO2 = bytes.readUInt16LE(i+2) ;
+                    payload.data.attributes.CO2 = (bytes[i+3] << 8) + bytes[i+2];
+                    //payload.data.co2_hex = toHexString(bytes.slice(i+2, i+3)) ;
+                  //}
+                  i += 4;
+                  continue;
+                }
+                // TVOC concentration (ppb)
+                else if (bytes[i] == 0x08 && bytes[i+1] == 0x7d) {
+                  // If there's already a reading, ignore
+                  //if (typeof data.working.attributes.TVOC == 'undefined') {
+                    payload.data.attributes.TVOC = (bytes[i+3] << 8) + bytes[i+2];
+                  //}
+                  i += 4;
+                  continue;
+                }
+                // Barometric Pressure (kPa)
+                else if (bytes[i] == 0x09 && bytes[i+1] == 0x73) {
+                  // If there's already a reading, ignore
+                  //if (typeof payload.data.attributes.Pressure == 'undefined') {
+                    payload.data.attributes.Pressure = ((bytes[i+3] << 8) + bytes[i+2]) / 10;
+                  //}
+                  i += 4;
+                  continue;
+                }
+                else {
+                  // nothing matched
+                  i++;
+                }
+              }
+            }
+        id: JKXAov4xPK
+        meta:
+          category: logic
+          description: ''
+          label: Milesight AM107 Decoder
+          name: function
+          x: 260
+          'y': 340
+        outputIds:
+          - - E6c_Bbh3ng
+        type: RawFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: E6c_Bbh3ng
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 440
+        outputIds:
+          - - mhDvGaj40E
+        type: DebugNode
+    shortDescription: Decodes data from a Milesight AM107
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Milesight AM107 Custom Node '
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 180
+        outputIds:
+          - - JKXAov4xPK
+        type: customNodeStart
+      - config: {}
+        key: ~exportplaceholderid-flow-am107Decoder-0~-0HddkrSil4EzCIFx5hMBn
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          label: Virtual Button
+          name: virtualButton
+          payload: "{\"body\":\r\n    {\"txtime\":\"2020-10-16T15:07:29.367Z\",\r\n    \"tags\":\"Location_100Market/Suite302/302_Mailroom\",\r\n    \"seqno\":118,\r\n    \"port\":10,\r\n    \"pdu\":\"0367EB0004683806657B00BE02B600056A0000077DB801087D51000973F326\",\r\n    \"metadata\":\"1951A0404\",\r\n    \"joinId\":1,\r\n    \"gwEui\":\"647FDAFFFE00A970\",\r\n    \"devType\":\"Tektelic-SmartRoom\",\r\n    \"devEui\":\"647FDA00000055D8\",\r\n    \"devClass\":\"A\",\r\n    \"cfgLng\":-70.7581,\r\n    \"cfgLat\":43.07865,\r\n    \"ack\":false}\r\n}"
+          uiId: zHrmVWSzze
+          x: 520
+          'y': 180
+        outputIds:
+          - - JKXAov4xPK
+        type: virtualButton
+version: 1

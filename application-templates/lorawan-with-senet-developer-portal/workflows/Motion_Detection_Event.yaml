@@ -1,0 +1,289 @@
+resourceType: Flow
+resources:
+  - description: >-
+      This workflow creates an event and sends and email when motion is
+      detected.
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-motionDetectionEvent-1~
+    name: Motion Detection Event
+    nodes:
+      - config:
+          expression: '{{data.MotionCount}} > 0'
+        id: nbzRjn5qtA
+        meta:
+          category: logic
+          description: ''
+          label: Motion Detected?
+          name: conditional
+          x: 380
+          'y': 340
+        outputIds:
+          - - W7_ugFLy1h
+          - - C_j5BKyidX
+        type: ConditionalNode
+      - config:
+          message: ''
+          property: ''
+        id: W7_ugFLy1h
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 340
+          'y': 880
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: rQVqXomzt6
+        meta:
+          annotationText: >-
+            If the  Milesight AM107's MotionCount is greater than 0, motion has
+            been detected.  
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 300
+          x: 600
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: yQAUVFrYk3
+        meta:
+          annotationText: >-
+            If the triggering event persists, a count is updated at the event to
+            indicate the number of occurrences.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 280
+          x: 880
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: mCf1smQHxp
+        meta:
+          annotationText: >-
+            This workflow will create an event and send an email when the
+            Milesight LoRaWAN AM107 senses motion.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 340
+          x: 300
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: tD4vth5GXh
+        meta:
+          annotationText: >-
+            If this event has already occurred once, update the event.  If not,
+            create the event.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 300
+          x: 800
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 2pq45O_SkO
+        meta:
+          annotationText: Monitor Milesight AM107 payload for MotionCount attribute.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 340
+          x: 300
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: |
+            <!doctype html>
+            <html>
+              <head>
+                <title></title>
+                <meta name="viewport" content="width=device-width" />
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
+              <body>
+                <div>Motion detected at {{deviceName}}</div>
+              </body>
+            </html>
+          fromTemplate: donotreply@senetco.com
+          resultPath: ''
+          subjectTemplate: Motion Detected
+          toAddresses:
+            - kjendal@outlook.com
+            - cdube@senetco.com
+        id: m2jPkQd286
+        meta:
+          category: output
+          description: ''
+          label: Email
+          name: structure-email
+          x: 460
+          'y': 760
+        outputIds:
+          - - W7_ugFLy1h
+        type: StructureEmailNode
+      - config:
+          dataMethod: individualFields
+          dataSourcePath: device
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags:
+            - keyTemplate: Count
+              valueTemplate: '1'
+            - keyTemplate: eventType
+              valueTemplate: Motion
+          levelTemplate: info
+          messageTemplate: |+
+            Motion Detected at {{deviceName}}
+
+
+
+
+          resultPath: working.event
+          subjectTemplate: Motion Detected
+          timeSourceType: now
+        id: A4iC4yviYn
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Create'
+          name: create-event
+          x: 460
+          'y': 640
+        outputIds:
+          - - m2jPkQd286
+        type: CreateEventNode
+      - config:
+          expression: '{{working.event}}!==null'
+        id: cGlahZJWN8
+        meta:
+          category: logic
+          description: ''
+          label: Event Exists?
+          name: conditional
+          x: 560
+          'y': 540
+        outputIds:
+          - - A4iC4yviYn
+          - - HULrzffz0Y
+        type: ConditionalNode
+      - config:
+          commentTemplate: |+
+            Motion detected,  {{working.NewCount}} times
+
+
+
+
+          dataMethod: individualFields
+          dataSourcePath: ''
+          dataSourceType: payloadPath
+          eventTags:
+            - keyTemplate: Count
+              valueTemplate: '{{working.NewCount}}'
+          resultPath: ''
+          stateTemplate: ''
+          targetEventIdTemplate: '{{working.event.id}}'
+        id: VUVT8mOH6v
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Update'
+          mode: targetEventIdTemplate
+          name: update-event
+          x: 660
+          'y': 760
+        outputIds:
+          - - W7_ugFLy1h
+        type: UpdateEventNode
+      - config:
+          findMetadata: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "deviceId": {
+                    "$eq": "{{device.id}}"
+                  }
+                },
+                {
+                  "eventTags": {
+                    "$eq": {
+                      "$tagKey": "eventType",
+                      "$tagValue": "Motion"
+                    }
+                  }
+                },
+                {
+                  "state": {
+                    "$eq": "new"
+                  }
+                }
+              ]
+            }
+          resultPath: working.event
+          sortDirection: asc
+          sortField: creationDate
+        id: C_j5BKyidX
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Get'
+          mode: queryTemplateSingle
+          name: get-event
+          x: 560
+          'y': 440
+        outputIds:
+          - - cGlahZJWN8
+        type: GetEventNode
+      - config:
+          rules:
+            - destination: working.NewCount
+              type: set
+              valueTemplate: '{{add working.event.eventTags.Count 1}}'
+              valueTemplateType: string
+        id: HULrzffz0Y
+        meta:
+          category: logic
+          description: ''
+          label: Increment Number of Events
+          name: mutate
+          x: 660
+          'y': 640
+        outputIds:
+          - - VUVT8mOH6v
+        type: MutateNode
+    triggers:
+      - config:
+          attributeWhitelist:
+            - MotionCount
+          batchBehavior: each
+          triggerOn: both
+        key: DeviceType/Milesight-AM107
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: State'
+          name: deviceIdsTags
+          uiId: qinRtS7p1I
+          x: 380
+          'y': 220
+        outputIds:
+          - - nbzRjn5qtA
+        type: deviceTag
+version: 1

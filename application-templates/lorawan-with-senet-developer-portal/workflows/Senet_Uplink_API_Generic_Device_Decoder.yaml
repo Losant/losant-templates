@@ -1,0 +1,311 @@
+resourceType: Flow
+resources:
+  - category: logic
+    customNodeConfig:
+      fields:
+        - description: Raw Senet JSON Object.
+          id: body
+          label: Payload Path
+          required: true
+          type: payloadPath
+        - description: Path to any existing attributes already decoded.
+          id: attributes
+          label: Attributes Payload Path
+          required: true
+          type: payloadPath
+        - defaultValue: Unknown
+          description: >-
+            Device's "DeviceClass" tag.  Devices with a DeviceClass tag of
+            "Tracker" will not be updated with estimated location.
+          id: DeviceClass
+          label: DeviceClass Tag
+          required: false
+          type: stringTemplate
+      outputCount: 1
+      resultMode: required
+    customNodeSupports:
+      - cloud
+    description: Generic Senet Payload Decoder
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/png;base64,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
+    id: ~exportplaceholderid-flow-senetUplinkApiGenericDeviceDecoder-3~
+    name: Senet Uplink API Generic Device Decoder
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: data.attributes
+        id: mhDvGaj40E
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 260
+          'y': 540
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          script: >
+            /*-----------------------------------------------------------------------------|
+
+            |MIT
+            License                                                                  
+            |
+
+            |                                                                             
+            |
+
+            |Copyright (c) 2021 Senet,
+            Inc.                                                |
+
+            |                                                                             
+            |
+
+            |Permission is hereby granted, free of charge, to any person
+            obtaining a copy  |
+
+            |of this software and associated documentation files (the
+            "Software"), to deal |
+
+            |in the Software without restriction, including without limitation
+            the rights  |
+
+            |to use, copy, modify, merge, publish, distribute, sublicense,
+            and/or sell     |
+
+            |copies of the Software, and to permit persons to whom the Software
+            is         |
+
+            |furnished to do so, subject to the following
+            conditions:                      |
+
+            |                                                                             
+            |
+
+            |The above copyright notice and this permission notice shall be
+            included in all|
+
+            |copies or substantial portions of the
+            Software.                               |
+
+            |                                                                             
+            |
+
+            |THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+            EXPRESS OR    |
+
+            |IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+            MERCHANTABILITY,      |
+
+            |FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+            SHALL THE   |
+
+            |AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+            OTHER        |
+
+            |LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+            ARISING FROM, |
+
+            |OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+            DEALINGS IN THE |
+
+            |SOFTWARE.                                                                    
+            |
+
+            +-----------------------------------------------------------------------------*/
+
+            /*!
+
+            *******************************************************************************
+              \file  senet_api_decoder.js
+
+              \brief Brief Description.
+
+                     Detailed description.
+
+              \par   NOTES:
+
+            *******************************************************************************
+              \par   REVISION HISTORY:
+                     2021-03-23                 Initial commit
+            *******************************************************************************/
+
+            // verify attributes object exists on the payload
+
+            if (typeof(payload.data.attributes) == 'undefined') {
+                payload.data.attributes = {};
+            }
+
+            // grab any existing attributes and load them in
+
+            if (typeof(payload.data.body.attributes) != 'undefined') {
+                paylod.data.attributes.append(payload.data.body.attributes);
+            }
+
+            // always present and likely needed
+
+            payload.data.attributes.devEui  = payload.data.body.devEui;
+
+            payload.data.attributes.gwEui   = payload.data.body.gwEui;
+
+            // both pdu and port may not always be present
+
+            if (typeof(payload.data.body.pdu) != 'undefined')
+            payload.data.attributes.pdu     = payload.data.body.pdu;
+
+            if (typeof(payload.data.body.port)!= 'undefined')
+            payload.data.attributes.port    = payload.data.body.port;
+
+            // Check for new sessions and missed uplinks (need old device
+            context for this)
+
+            if ((typeof(payload.data.device) !=
+            'undefined')&&(typeof(payload.data.device.compositeState) !=
+            'undefined')) {
+                var seq_delta = (typeof(payload.data.device.compositeState.seqno) != 'undefined') ?
+                                (payload.data.body.seqno - payload.data.device.compositeState.seqno.value):1;
+
+                payload.data.attributes.uplinkCount = (typeof(payload.data.device.compositeState.uplinkCount) != 'undefined') ?
+                                                        (payload.data.device.compositeState.uplinkCount.value + 1) :
+                                                        1;
+                payload.data.attributes.uplinkMissed = (typeof(payload.data.device.compositeState.uplinkMissed) != 'undefined') ?
+                                                        (payload.data.device.compositeState.uplinkMissed.value + (seq_delta-1)):
+                                                        0;
+                if(typeof(payload.data.device.compositeState.sessionCount) != 'undefined') {
+                    if(payload.data.device.compositeState.joinId.value != payload.data.body.joinId) { // new session detected
+                        payload.data.attributes.sessionCount = payload.data.device.compositeState.sessionCount.value + 1;
+                        payload.data.attributes.uplinkCount  = 1; // reset uplinkCount
+                        payload.data.attributes.uplinkMissed = 0; // reset missed uplinks
+                        seq_delta = 1;
+                    }
+                }
+                else { // record session for the first time
+                    payload.data.attributes.sessionCount = 1;
+                    payload.data.attributes.uplinkCount  = 1; // reset uplinkCount
+                    payload.data.attributes.uplinkMissed = 0; // reset missed uplinks
+                    seq_delta = 1;
+                }
+                payload.data.attributes.psr     = ((typeof(payload.data.attributes.uplinkMissed) != 'undefined') && (payload.data.attributes.uplinkMissed > 0))?
+                                                  (payload.data.attributes.uplinkCount/(payload.data.attributes.uplinkCount + payload.data.attributes.uplinkMissed)):1;
+                var avgPeriod = (typeof(payload.data.device.compositeState.avgPeriod) != 'undefined')?
+                                    payload.data.device.compositeState.avgPeriod.value : 
+                                    10; 
+                payload.data.attributes.psrAvg  = (typeof(payload.data.device.compositeState.psrAvg) != 'undefined')?
+                                                      (1-Math.min(1,seq_delta/avgPeriod))*payload.data.device.compositeState.psrAvg.value +
+                                                      (Math.min(1,seq_delta/avgPeriod))*(1/seq_delta) :
+                                                      1;
+            }
+
+            payload.data.attributes.seqno   = payload.data.body.seqno;
+
+            payload.data.attributes.joinId  = payload.data.body.joinId;
+
+            payload.data.attributes.txtime  = payload.data.body.txtime;
+
+            // optional (and maybe not needed) devType, tags, metapayload.data,
+            cfgLat, cfgLng, estLat, estLng
+
+            if (typeof(payload.data.body.ack) != 'undefined')      
+            payload.data.attributes.ack     = payload.data.body.ack;
+
+            if (typeof(payload.data.body.devClass) != 'undefined') 
+            payload.data.attributes.devClass= payload.data.body.devClass;
+
+            if (typeof(payload.data.body.devType) != 'undefined')
+            payload.data.attributes.devType    = payload.data.body.devType;
+
+            // if (typeof(payload.data.body.tags) != 'undefined')   
+            payload.data.attributes.tags       = payload.data.body.tags;
+
+            // if (typeof(payload.data.body.metadata) !=
+            'undefined')payload.data.attributes.metadata   =
+            payload.data.body.metadata;
+
+            if (typeof(payload.data.body.cfgLat) != 'undefined') {
+                if((payload.data.body.cfgLat !== -90)&&(payload.data.body.cfgLng !== -180)) {
+                    payload.data.attributes.cfgLocation = payload.data.body.cfgLat + ', ' + payload.data.body.cfgLng;
+                    if (typeof(payload.data.attributes.Geocode) == 'undefined') payload.data.attributes.Geocode = payload.data.attributes.cfgLocation;
+                }
+            }
+
+            if(payload.data.DeviceClass !== 'Tracker') {
+                if (typeof(payload.data.body.estLat) != 'undefined'){
+                    if((payload.data.body.estLat !== -90)&&(payload.data.body.estLng !== -180)){
+                        payload.data.attributes.estLocation = payload.data.body.estLat + ', ' + payload.data.body.estLng;
+                        if (typeof(payload.data.attributes.Geocode) == 'undefined') payload.data.attributes.Geocode = payload.data.attributes.estLocation;
+                    }
+                } 
+            }
+
+            // optional RF payload.data channel, freq, rssi, snr (if one is
+            present, they all are)
+
+            /*if (typeof(payload.data.body.snr) != 'undefined') {
+                payload.data.attributes.datarate= payload.data.body.datarate;
+                payload.data.attributes.channel = payload.data.body.channel;
+                payload.data.attributes.freq    = payload.data.body.freq;
+                payload.data.attributes.rssi    = payload.data.body.rssi;
+                payload.data.attributes.snr     = payload.data.body.snr;
+            }*/
+
+
+            payload.data.attributes.Connected = true;
+        id: JKXAov4xPK
+        meta:
+          category: logic
+          description: ''
+          label: Basic Senet JSON Decoder
+          name: function
+          x: 260
+          'y': 340
+        outputIds:
+          - - E6c_Bbh3ng
+        type: RawFunctionNode
+      - config:
+          message: ''
+          property: ''
+        id: E6c_Bbh3ng
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 440
+        outputIds:
+          - - mhDvGaj40E
+        type: DebugNode
+    shortDescription: Decodes data that's on every Senet device
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Generic Device'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 180
+        outputIds:
+          - - JKXAov4xPK
+        type: customNodeStart
+      - config: {}
+        key: >-
+          ~exportplaceholderid-flow-senetUplinkApiGenericDeviceDecoder-3~-GY27y-tRwADyJrfjajRXy
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          label: Virtual Button
+          name: virtualButton
+          payload: "{\"body\":\r\n    {\"txtime\":\"2020-10-16T15:07:29.367Z\",\r\n    \"tags\":\"Location_100Market/Suite302/302_Mailroom\",\r\n    \"seqno\":118,\r\n    \"port\":10,\r\n    \"pdu\":\"036700DA0468650D04000000FF0138\",\r\n    \"metadata\":\"1951A0404\",\r\n    \"joinId\":1,\r\n    \"gwEui\":\"647FDAFFFE00A970\",\r\n    \"devType\":\"Tektelic-SmartRoom\",\r\n    \"devEui\":\"647FDA00000055D8\",\r\n    \"devClass\":\"A\",\r\n    \"cfgLng\":-70.7581,\r\n    \"cfgLat\":43.07865,\r\n    \"ack\":false}\r\n}"
+          uiId: zHrmVWSzze
+          x: 520
+          'y': 180
+        outputIds:
+          - - JKXAov4xPK
+        type: virtualButton
+version: 1
