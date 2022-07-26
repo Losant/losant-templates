@@ -1,0 +1,18 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Provides a reference implementation for a paginated table of devices.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryExperiencesPagesPaginatedDeviceTable-0~
+    name: Paginated Device Table
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - paginated
+      - table
+      - list
+      - devices
+version: 1

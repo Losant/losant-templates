@@ -42,7 +42,7 @@ By default, this custom topic is `tl-edge-to-files`; if you wish to use a differ
 
 ## Accessing Uploaded Files
 
-Uploaded files are publicly available at a URL of the form "https://~exportplaceholderid-files-domain~/APPLICATION_ID/UPLOAD_ROOT/DEVICE_ID/FILE_NAME.EXT", where ...
+Uploaded files are publicly available at a URL of the form "https://files.onlosant.com/APPLICATION_ID/UPLOAD_ROOT/DEVICE_ID/FILE_NAME.EXT", where ...
 
 - `APPLICATION_ID` is the ID of the application where you've imported this template.
 - `UPLOAD_ROOT` is the root directory for all device uploads. This can be changed by setting the "uploadsRoot" [workflow global](https://docs.losant.com/workflows/overview/#workflow-globals).
@@ -67,7 +67,7 @@ The act of uploading a file from an edge compute device to the publicly accessib
 
 ## License
 
-Copyright &copy; 2022 Losant IoT, Inc. All rights reserved.
+Copyright &copy; 2021 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

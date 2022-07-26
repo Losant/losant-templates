@@ -1,0 +1,10 @@
+resourceType: ExperienceView
+resources:
+  - description: Created for Endpoint GET /tl-devices.
+    id: ~exportplaceholderid-experienceView-pageGetTlDevices-1~
+    localFilename: ./Page_-_GET__tl-devices.hbs
+    name: Page - GET /tl-devices
+    version: develop
+    viewTags: {}
+    viewType: page
+version: 1

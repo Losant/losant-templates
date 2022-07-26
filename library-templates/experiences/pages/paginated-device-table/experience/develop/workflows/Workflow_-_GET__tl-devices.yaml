@@ -1,0 +1,475 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /tl-devices
+    enabled: true
+    flowId: ~exportplaceholderid-flow-workflowGetTlDevices-1~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-workflowGetTlDevices-0~
+    name: Workflow - GET /tl-devices
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageGetTlDevices-1~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: cqevR92y2b
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 700
+          'y': 1320
+        outputIds:
+          - - ZKF3OLLQUx
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: ZKF3OLLQUx
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 700
+          'y': 1420
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributes:
+            - battery_voltage
+            - location
+          attributesAsObject: true
+          findMetadata: true
+          findMethod: findByAllTags
+          findMultiple: true
+          includeConnectionStatus: true
+          includeState: true
+          resultPath: pageData.devices
+          resultsPage: '{{working.page}}'
+          resultsPerPage: '10'
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: model
+              valueTemplate: ''
+          tagsAsObject: true
+        id: j_0FhomMLB
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 500
+          'y': 740
+        outputIds:
+          - - llZPT9QC7g
+        type: GetDeviceNode
+      - config:
+          errorsPath: working.validateErrors
+          schema: |-
+            {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "string",
+                  "pattern": "^[1-9]+[0-9]*$"
+                }
+              },
+              "required": ["page"]
+            }
+          schemaType: json
+          toValidatePath: data.query
+        id: UAlkarnx6I
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 400
+          'y': 420
+        outputIds:
+          - - hyr62f1Ks0
+          - - 3DsCBKKs2J
+        type: ValidatePayloadNode
+      - config:
+          rules:
+            - destination: data.query.page
+              type: set
+              valueTemplate: '1'
+              valueTemplateType: string
+        id: hyr62f1Ks0
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 300
+          'y': 560
+        outputIds:
+          - - z2Pds9x3c2
+        type: MutateNode
+      - config:
+          bodyTemplate: '{{path}}?{{{queryStringEncode data.query}}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: z2Pds9x3c2
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 300
+          'y': 660
+        outputIds:
+          - - U5sLq5kbIA
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: U5sLq5kbIA
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 300
+          'y': 760
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 8mdp0kmqxq
+        meta:
+          annotationText: >-
+            Validate that the `page` query parameter is set and is a number >=
+            1. If not, redirect the user to the same URL with `page=1` while
+            keeping all other query parameters.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 260
+          x: 20
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          statements:
+            - expression: '{{data.query.page}} - 1'
+              resultPath: working.page
+        id: 3DsCBKKs2J
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 500
+          'y': 560
+        outputIds:
+          - - j_0FhomMLB
+        type: MathNode
+      - config: {}
+        id: JhVC0N5csi
+        meta:
+          annotationText: >-
+            The `page` query parameter is 1-based for human readability. The
+            `page` parameter for the Device: Get Node is 0-based. So need to
+            subtract one from the query parameter.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 700
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          statements:
+            - expression: >-
+                ceil({{pageData.devices.totalCount}} /
+                {{pageData.devices.perPage}})
+              resultPath: pageData.totalPages
+        id: U8qz9vhGLg
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 600
+          'y': 1080
+        outputIds:
+          - - QDM7KLWU7s
+        type: MathNode
+      - config:
+          expression: '{{data.query.page}} <= {{pageData.totalPages}}'
+        id: QDM7KLWU7s
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 600
+          'y': 1180
+        outputIds:
+          - - LHKb9WtnjI
+          - - cqevR92y2b
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '{{path}}?{{{queryStringEncode data.query}}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 1NHo_0EvLV
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 500
+          'y': 1420
+        outputIds:
+          - - hURYQQdxlP
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: hURYQQdxlP
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 500
+          'y': 1520
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: data.query.page
+              type: set
+              valueTemplate: '{{pageData.totalPages}}'
+              valueTemplateType: string
+        id: LHKb9WtnjI
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 500
+          'y': 1320
+        outputIds:
+          - - 1NHo_0EvLV
+        type: MutateNode
+      - config: {}
+        id: ur9skHt9hI
+        meta:
+          annotationText: >-
+            If the user requested a page larger than the total number of pages,
+            redirect them to the last page.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 800
+          'y': 1080
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: Fn2yMsoOZj
+        meta:
+          annotationText: >-
+            Query the requested page of devices.
+
+
+            **TODO**: You'll have to modify this node based on your specific
+            devices and attributes.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 700
+          'y': 740
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{pageData.devices.totalCount}} > 0'
+        id: llZPT9QC7g
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 500
+          'y': 920
+        outputIds:
+          - - U1JNh19cQ6
+          - - U8qz9vhGLg
+        type: ConditionalNode
+      - config: {}
+        id: Pa3azIun_x
+        meta:
+          annotationText: >-
+            If there are no devices, the following page checks can be skipped
+            and we can just render the page.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 700
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageGetTlDevices-1~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: U1JNh19cQ6
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 400
+          'y': 1080
+        outputIds:
+          - - TX9HnSDvmH
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: TX9HnSDvmH
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 400
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.params.deviceId}}'
+        id: A3zOwlP9ss
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 500
+          'y': 120
+        outputIds:
+          - - UAlkarnx6I
+          - - KR0YfLankY
+        type: ConditionalNode
+      - config:
+          bodyTemplate: >-
+            <p>TODO: render the page that contains the details for this
+            device.</p>
+
+
+            <p>This link can be changed by editing the HTML in this template's
+            experience page.</p>
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: KR0YfLankY
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 620
+          'y': 260
+        outputIds:
+          - - esGLPqUNlC
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: esGLPqUNlC
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 620
+          'y': 360
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: qyYZN_A3E8
+        meta:
+          annotationText: >-
+            The device table adds links for each device to
+            `/tl-devices/{deviceId}`. This path catches those endpoints and
+            displays a helpful message.
+
+
+            **TODO:** replace this behavior with your own link, endpoint, and
+            workflow to handle displaying the details for a selected device.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 280
+          x: 820
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getTlDevicesDeviceId-0~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /tl-devices
+          name: endpoint
+          uiId: N9OwksQ2CN
+          x: 500
+          'y': 20
+        outputIds:
+          - - A3zOwlP9ss
+        type: endpoint
+    version: develop
+version: 1
