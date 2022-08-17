@@ -139,7 +139,7 @@ If the request to the Google Maps API fails, the output will contain an `error` 
 
 ## License
 
-Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

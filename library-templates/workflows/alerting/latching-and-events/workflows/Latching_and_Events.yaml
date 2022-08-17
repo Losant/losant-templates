@@ -74,7 +74,6 @@ resources:
           'y': 260
         outputIds:
           - - wNfSlGvMUY
-            - RSjx9kyxXM
         type: GetDeviceNode
       - config:
           rules:
@@ -320,38 +319,6 @@ resources:
           'y': 160
         outputIds: []
         type: AnnotationNode
-      - config:
-          attrDataMethod: individualFields
-          attrInfos:
-            - key: temperature
-              valueTemplate: '70'
-          deviceId: ~exportplaceholderid-device-exampleDevice-0~
-          deviceIdTemplateType: stringTemplate
-          resultPath: ''
-          timeSourceType: payloadTime
-        id: '-An_ItUpeV'
-        meta:
-          category: output
-          description: ''
-          label: 'Device: State'
-          name: device-state
-          x: 940
-          'y': 220
-        outputIds: []
-        type: DeviceChangeStateNode
-      - config:
-          message: ''
-          property: ''
-        id: RSjx9kyxXM
-        meta:
-          category: output
-          description: ''
-          label: Debug
-          name: debug
-          x: 460
-          'y': 340
-        outputIds: []
-        type: DebugNode
     triggers:
       - config: {}
         key: ~exportplaceholderid-flow-latchingAndEvents-0~-lnZCno0M7hhQ6tf-zM8qq
@@ -359,7 +326,6 @@ resources:
           category: trigger
           description: ''
           deviceId: null
-          id: zaVupqff49
           label: Virtual Button
           name: virtualButton
           payload: |-
@@ -382,7 +348,6 @@ resources:
           allowedAttributeType: attributeWhitelist
           category: trigger
           description: ''
-          id: H6447eE4K4
           label: 'Device: State'
           maxAgeToggle: false
           name: deviceIdsTags
@@ -393,18 +358,4 @@ resources:
         outputIds:
           - - hTOxqWh43a
         type: deviceId
-      - config: {}
-        key: ~exportplaceholderid-flow-latchingAndEvents-0~-Hj5c55KtovBnLRBXxZKbQ
-        meta:
-          category: trigger
-          description: ''
-          label: Virtual Button
-          name: virtualButton
-          payload: ''
-          uiId: eLkrodE2PE
-          x: 960
-          'y': 60
-        outputIds:
-          - - '-An_ItUpeV'
-        type: virtualButton
 version: 1

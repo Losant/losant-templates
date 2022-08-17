@@ -18,7 +18,7 @@ After importing the template, in a browser visit the page "/tl-file-upload" on y
 
 ### Accessing Uploaded Files
 
-Uploaded files are publicly available at a URL of the form "https://~exportplaceholderid-files-domain~/APPLICATION\_ID/UPLOAD\_ROOT/USER_ID/FILE_NAME.EXT", where ...
+Uploaded files are publicly available at a URL of the form "https://files.onlosant.com/APPLICATION\_ID/UPLOAD\_ROOT/USER_ID/FILE_NAME.EXT", where ...
 
 - `APPLICATION_ID` is the ID of the application where you've imported this template.
 - `UPLOAD_ROOT` is the root directory for all user uploads. This can be changed by setting the `uploadsRoot` [workflow global](https://docs.losant.com/workflows/overview/#workflow-globals). The default value is "userUploads".
@@ -59,7 +59,7 @@ Unlike a traditional form submission, this template executes the submission [asy
 
 ## License
 
-Copyright &copy; 2022 Losant IoT, Inc. All rights reserved.
+Copyright &copy; 2021 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

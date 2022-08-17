@@ -3,3 +3,4 @@ description: Workflows provide the intelligence or business logic for your
   application. This includes things like data processing, alerting, simulating
   data, and much more. These templates provide pre-built workflows that deliver
   common functionality across a wide variety of application types.
+resourceTypes: null

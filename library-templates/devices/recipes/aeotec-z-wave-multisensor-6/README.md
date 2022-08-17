@@ -1,4 +1,4 @@
-# Aeotec MutliSensor 6
+# Aeotec MultiSensor 6
 This template contains a [Device Recipe](https://docs.losant.com/devices/device-recipes/) for the [Aeotec MultiSensor 6](https://aeotec.com/z-wave-sensor/) smart home sensor.
 
 ![Aeotec MultiSensor 6](./aeotec.png)
@@ -22,7 +22,7 @@ To purchase AeoTec MultiSensor 6 sensors, visit the [Aeotech MultiSensor 6 produ
 
 ## License
 
-Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

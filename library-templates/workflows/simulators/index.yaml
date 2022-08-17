@@ -3,3 +3,4 @@ description: Simulator workflows provide a way to generate sample data during
   your early development or proof-of-concept phases. These are useful when you
   may not have access to actual device data or want to test how your solution
   behaves under specific scenarios.
+resourceTypes: null

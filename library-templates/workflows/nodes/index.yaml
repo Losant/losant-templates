@@ -2,3 +2,4 @@ name: Nodes
 description: These nodes extend the workflow palette with new functionality like
   data filtering or integrations with external services. When imported, these
   nodes will appear in your application's collection of custom nodes.
+resourceTypes: null

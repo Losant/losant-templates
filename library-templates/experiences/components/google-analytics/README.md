@@ -34,7 +34,7 @@ This value will automatically resolve to the experience user's ID if this compon
 
 ## License
 
-Copyright &copy; 2022 Losant IoT, Inc. All rights reserved.
+Copyright &copy; 2021 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

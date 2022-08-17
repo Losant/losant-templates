@@ -54,10 +54,10 @@ Users can be modified, added, or removed by navigating to the experience's [User
 * [Data Tables](https://docs.losant.com/data-tables/overview/)
 * [GPS History Dashboard Block](https://docs.losant.com/dashboards/gps-history/)
 
----
+## License
 
-This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/application-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
+Copyright &copy; 2022 Losant IoT, Inc. All rights reserved.
 
-Copyright (c) 2022 Losant IoT, Inc
+Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 
 https://www.losant.com

@@ -2,3 +2,4 @@ name: Alerting
 description: These workflows demonstrate how to implement alerting within your
   application. They provide best practices around using the Latch Node as well
   as creating and automatically resolving Losant Events.
+resourceTypes: null
