@@ -9,7 +9,7 @@ resources:
         id: Vr39F_FJVK
         startX: 0
         startY: 0
-        title: Overview - All Temperature Sensors
+        title: Overview - All Milli Temperature Sensors
         width: 4
       - applicationId: >-
           ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
@@ -40,7 +40,7 @@ resources:
         id: w-4UBxA0LF
         startX: 0
         startY: 0.5
-        title: Num. of Sensors
+        title: Number of Temp Sensors
         width: 0.5
       - applicationId: >-
           ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
@@ -174,14 +174,18 @@ resources:
         blockType: gauge
         config:
           conditions: []
+          displayAsPercentage: false
           duration: 0
           gaugeMax: '100'
           gaugeMin: '0'
           gaugeType: thermometer
-          precision: 4
+          precision: '4'
           precisionType: significant
           realTime: false
           segment:
+            aggregation:
+              options: {}
+              type: MEAN
             attribute: temperature
             color: 'rgba(141, 179, 25, 1)'
             deviceIds:
@@ -228,15 +232,18 @@ resources:
           ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
+          displayAsPercentage: false
           duration: 604800000
           gaugeMax: '100'
           gaugeMin: '0'
           gaugeType: thermometer
-          precision: 4
+          precision: '4'
           precisionType: significant
           realTime: false
           segment:
-            aggregation: MIN
+            aggregation:
+              options: {}
+              type: MIN
             attribute: temperature
             color: 'rgba(10, 225, 255, 1)'
             deviceIds:
@@ -253,15 +260,18 @@ resources:
           ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
         blockType: gauge
         config:
+          displayAsPercentage: false
           duration: 604800000
           gaugeMax: '100'
           gaugeMin: '0'
           gaugeType: thermometer
-          precision: 4
+          precision: '4'
           precisionType: significant
           realTime: false
           segment:
-            aggregation: MAX
+            aggregation:
+              options: {}
+              type: MAX
             attribute: temperature
             color: 'rgba(255, 38, 27, 1)'
             deviceIds:

@@ -47,7 +47,7 @@ If the request to SIGNL4's API fails, the output will contain an `error` object 
 
 This node is developed and maintained by [SIGNL4](https://www.signl4.com).
 
-Copyright © 2022 Derdack GmbH
+Copyright © 2020 Derdack GmbH
 
 https://www.signl4.com
 

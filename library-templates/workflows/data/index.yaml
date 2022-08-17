@@ -2,3 +2,4 @@ name: Data
 description: This category contains workflows demonstrating how to copy data
   from Losant applications to third-party sources, as well as methods for
   manipulating, aggregating, and analyzing application data.
+resourceTypes: null

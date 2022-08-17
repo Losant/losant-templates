@@ -7,9 +7,11 @@ resources:
     name: Simulate Devices
     nodes:
       - config:
+          attributesAsObject: false
           findMetadata: false
           findMethod: findByAllTags
           findMultiple: true
+          includeConnectionStatus: true
           includeState: true
           resultPath: working.devices
           resultsPage: '0'
@@ -24,7 +26,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: vSEb5NLcQ0
           label: All Devices
           name: get-device
           x: 80
@@ -35,13 +36,14 @@ resources:
       - config:
           currentItemPath: working.device
           loopSourcePath: working.devices
+          mapResultPath: ''
+          parallel: false
         id: TtAlrIdp1v
         meta:
           category: logic
           description: ''
           groupStartX: 980
           groupStartY: 220
-          id: TtAlrIdp1v
           label: Loop
           name: loop
           x: 80
@@ -60,7 +62,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: wmm9qGsu6D
           label: Mutate
           name: mutate
           x: 980
@@ -114,7 +115,6 @@ resources:
           category: output
           description: ''
           groupId: TtAlrIdp1v
-          id: 2_0IkVlgRG
           label: Device State
           name: device-state
           x: 740
@@ -128,7 +128,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: Alsrc_AdRy
           label: Final - Simulated Data
           name: debug
           x: 80
@@ -157,7 +156,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Manifold Temp
           name: random-number
           x: 1360
@@ -172,7 +170,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: u5ZknP8DEH
           label: Running ?
           name: conditional
           x: 980
@@ -190,7 +187,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: RPM
           name: random-number
           x: 1360
@@ -207,7 +203,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Battery Voltage
           name: random-number
           x: 1360
@@ -224,7 +219,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Oil Pressure
           name: random-number
           x: 1360
@@ -241,7 +235,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Output Current
           name: random-number
           x: 1360
@@ -256,7 +249,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 0nPcafARZR
           label: Fuel Level > 5
           name: conditional
           x: 1360
@@ -274,7 +266,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: YCzUz_lapB
           label: Math
           name: math
           x: 1460
@@ -291,7 +282,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Manifold Temp
           name: random-number
           x: 940
@@ -308,7 +298,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: RPM
           name: random-number
           x: 940
@@ -325,7 +314,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Battery Voltage
           name: random-number
           x: 940
@@ -342,7 +330,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Oil Pressure
           name: random-number
           x: 940
@@ -359,7 +346,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Output Current
           name: random-number
           x: 940
@@ -374,7 +360,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 0nPcafARZR
           label: Fuel Level > 5
           name: conditional
           x: 940
@@ -392,7 +377,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: YCzUz_lapB
           label: Math
           name: math
           x: 1040
@@ -409,7 +393,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Running
           name: random-number
           x: 940
@@ -426,7 +409,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Running
           name: random-number
           x: 1360
@@ -443,7 +425,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: '-vMwZSQmZj'
           label: Random Number
           name: random-number
           x: 980
@@ -459,7 +440,6 @@ resources:
           category: output
           description: ''
           groupId: TtAlrIdp1v
-          id: xamEWg56W6
           label: End of Each Loop
           name: debug
           x: 740
@@ -475,7 +455,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 0eiD-BwK2S
           label: Fuel Level
           name: random-number
           x: 840
@@ -492,7 +471,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 0eiD-BwK2S
           label: Fuel Level
           name: random-number
           x: 1260
@@ -509,7 +487,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: u5ZknP8DEH
           label: Stopped ?
           name: conditional
           x: 720
@@ -527,7 +504,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Manifold Temp
           name: random-number
           x: 500
@@ -544,7 +520,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: RPM
           name: random-number
           x: 500
@@ -561,7 +536,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Battery Voltage
           name: random-number
           x: 500
@@ -578,7 +552,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Oil Pressure
           name: random-number
           x: 500
@@ -595,7 +568,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Output Current
           name: random-number
           x: 500
@@ -610,7 +582,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 0nPcafARZR
           label: Fuel Level > 5
           name: conditional
           x: 500
@@ -628,7 +599,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: YCzUz_lapB
           label: Math
           name: math
           x: 600
@@ -645,7 +615,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: zyqx4Dl7eW
           label: Running
           name: random-number
           x: 500
@@ -662,7 +631,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 0eiD-BwK2S
           label: Fuel Level
           name: random-number
           x: 400
@@ -687,7 +655,6 @@ resources:
           category: data
           description: ''
           groupId: TtAlrIdp1v
-          id: qK0cSUG7oC
           label: 'Table: Get Rows'
           name: get-table-rows
           queryMode: $or
@@ -705,7 +672,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: AwgtXfeJvP
           label: Random Number
           name: random-number
           x: 500
@@ -726,7 +692,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 7bUf0Mqs5k
           label: Math
           name: math
           x: 1360
@@ -753,7 +718,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: a7av4JnPuv
           label: Mutate
           name: mutate
           x: 500
@@ -780,7 +744,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: a7av4JnPuv
           label: Mutate
           name: mutate
           x: 940
@@ -807,7 +770,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: a7av4JnPuv
           label: Mutate
           name: mutate
           x: 1360
@@ -824,7 +786,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 7MNkFlBG62
           label: Battery Voltage continued
           name: math
           x: 1360
@@ -841,7 +802,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 7MNkFlBG62
           label: Battery Voltage continued
           name: math
           x: 940
@@ -858,7 +818,6 @@ resources:
           category: logic
           description: ''
           groupId: TtAlrIdp1v
-          id: 7MNkFlBG62
           label: Battery Voltage continued
           name: math
           x: 500
@@ -873,7 +832,6 @@ resources:
         meta:
           category: trigger
           description: ''
-          id: ol2uQJI-bp
           label: Timer
           name: timer
           timerTypeSelect: seconds
@@ -889,7 +847,6 @@ resources:
           category: trigger
           description: ''
           deviceId: null
-          id: _enegVeMbq
           label: Virtual Button
           name: virtualButton
           payload: ''

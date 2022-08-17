@@ -68,7 +68,7 @@ While the data from all selected attributes will appear in the Data Explorer's t
 
 ## License
 
-Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2021 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

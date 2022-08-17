@@ -81,7 +81,7 @@ The template does not provide any method for removing previously imported files 
 
 ## License
 
-Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
 
 Licensed under the MIT license.
 

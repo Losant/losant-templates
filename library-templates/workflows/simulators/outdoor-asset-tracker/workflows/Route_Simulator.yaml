@@ -29,7 +29,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: ZDUXmWVuIz
           label: Fetch Coords
           name: http
           x: 640
@@ -44,7 +43,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: BG8GyP0ggV
           label: Debug
           name: debug
           x: 640
@@ -72,7 +70,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: ZDUXmWVuIz
           label: HTTP
           name: http
           x: 640
@@ -87,7 +84,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: Y5_cPDWy6Y
           label: Debug
           name: debug
           x: 640
@@ -103,7 +99,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: Bw5MAP2RtY
           label: HTML/XML Parser
           name: html-parser
           x: 640
@@ -120,7 +115,6 @@ resources:
           description: ''
           groupStartX: 200
           groupStartY: 200
-          id: tU74GVHBxN
           label: Loop
           name: loop
           x: 640
@@ -137,7 +131,6 @@ resources:
           category: loop
           description: ''
           groupId: tU74GVHBxN
-          id: HRorcx_EM4
           label: Next
           name: loop-next
           x: 200
@@ -158,7 +151,6 @@ resources:
           category: logic
           description: ''
           groupId: tU74GVHBxN
-          id: m-SnxI8gw_
           label: Array
           name: array
           x: 200
@@ -178,7 +170,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: DAiW1tpmbJ
           label: 'File: Create'
           name: file-create
           x: 640
@@ -196,7 +187,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: 5OsP596Y0r
           label: Get Current Point Index
           name: get-value
           x: 640
@@ -214,7 +204,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: 0nLCL_vEDW
           label: Look Up Current Point
           name: array
           x: 640
@@ -231,7 +220,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: HZbqSu93lL
           label: Set Next Point
           name: store-value
           x: 540
@@ -249,7 +237,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: FOVlyrD5OP
           label: Calculate Next Point
           name: math
           x: 540
@@ -270,7 +257,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 72wV0D4tvI
           label: 'Device: State'
           name: device-state
           x: 740
@@ -488,7 +474,6 @@ resources:
         meta:
           category: trigger
           description: ''
-          id: e9a_WYWCH1
           label: Timer
           name: timer
           timerTypeSelect: seconds
@@ -504,7 +489,6 @@ resources:
           category: trigger
           description: ''
           deviceId: null
-          id: MuGszwtynd
           label: Virtual Button
           name: virtualButton
           payload: ''
@@ -520,7 +504,6 @@ resources:
           category: trigger
           description: ''
           deviceId: null
-          id: yzleKsgVj-
           label: Virtual Button
           name: virtualButton
           payload: ''

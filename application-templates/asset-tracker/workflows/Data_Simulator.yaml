@@ -6985,7 +6985,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: Byp2gGEInD
           label: Coordinates Reduced
           name: function
           x: 220
@@ -7021,7 +7020,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: KlplsrvRiy
           label: 'Device: Get'
           name: get-device
           x: 220
@@ -7038,7 +7036,6 @@ resources:
           description: ''
           groupStartX: 200
           groupStartY: 80
-          id: wwvurgpzpw
           label: Devices Loop
           name: loop
           x: 220
@@ -7055,7 +7052,6 @@ resources:
           category: loop
           description: ''
           groupId: wwvurgpzpw
-          id: 3su0y-zAbW
           label: Next
           name: loop-next
           x: 160
@@ -7070,7 +7066,6 @@ resources:
           category: output
           description: ''
           groupId: wwvurgpzpw
-          id: kDgTpRE2EF
           label: Debug
           name: debug
           x: 160
@@ -7089,7 +7084,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: b2DRr8rD6z
           label: Find Current Coord Index
           name: array
           x: 200
@@ -7106,7 +7100,6 @@ resources:
             This will give us an initial starting point if we are unable to
             retrieve a previous value
           groupId: wwvurgpzpw
-          id: aPQ742VrvW
           label: Current Coord Exists?
           name: conditional
           x: 200
@@ -7145,7 +7138,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: aNwK_mqABY
           label: State Defaults
           name: mutate
           x: 200
@@ -7163,7 +7155,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: 2tQuex0jZv
           label: Get Default Coord Index
           name: mutate
           x: 100
@@ -7183,7 +7174,6 @@ resources:
           category: output
           description: ''
           groupId: wwvurgpzpw
-          id: neVEPrhOuy
           label: 'Device: State'
           name: device-state
           x: 160
@@ -7203,7 +7193,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: 2tQuex0jZv
           label: Get Next Coord Index
           name: mutate
           x: 300
@@ -7222,7 +7211,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: Q4fvijunqr
           label: Normalize Next Coord Index
           name: math
           x: 200
@@ -7241,7 +7229,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: b2DRr8rD6z
           label: Set Next location
           name: array
           x: 200
@@ -7258,7 +7245,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: CgY-p7C8By
           label: Random Temp Fluctuation
           name: random-number
           x: 560
@@ -7283,7 +7269,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: P2BmeZ4Zhh
           label: Normalize & Set
           name: math
           x: 560
@@ -7299,7 +7284,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: jd7rbkN8wI
           label: Set new shipment_id
           name: generate-id
           x: 200
@@ -7384,7 +7368,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: Nt8lHt0s9O
           label: shipment_id?
           name: conditional
           x: 200
@@ -7401,7 +7384,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: jd7rbkN8wI
           label: New
           name: generate-id
           x: 100
@@ -7418,7 +7400,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: CgY-p7C8By
           label: Random Orientation Fluctuation
           name: random-number
           x: 560
@@ -7437,7 +7418,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: P2BmeZ4Zhh
           label: Set Next Orientation
           name: math
           x: 560
@@ -7468,7 +7448,6 @@ resources:
           category: logic
           description: We want a 1% chance of a shipment experiencing a significant shock.
           groupId: wwvurgpzpw
-          id: CgY-p7C8By
           label: Random Shock Chance
           name: random-number
           x: 560
@@ -7497,7 +7476,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: sCCKj6vIhp
           label: Shock === 100?
           name: conditional
           x: 560
@@ -7528,7 +7506,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: aNwK_mqABY
           label: Shipment Defaults
           name: mutate
           x: 200
@@ -7546,7 +7523,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: hLtFyURn5H
           label: Maintain shipment_id
           name: mutate
           x: 300
@@ -7563,7 +7539,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: cFpprYDu2F
           label: In Transit?
           name: conditional
           x: 200
@@ -7581,7 +7556,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: cFpprYDu2F
           label: Was Previously in Transit?
           name: conditional
           x: 220
@@ -7599,7 +7573,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: CgY-p7C8By
           label: Random Battery Depletion
           name: random-number
           x: 560
@@ -7618,7 +7591,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: P2BmeZ4Zhh
           label: Set Next Battery
           name: math
           x: 560
@@ -7649,7 +7621,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: b9viKhp_D-
           label: Random Signal Strength
           name: random-number
           x: 200
@@ -7670,7 +7641,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: nKkjwjIgaX
           label: 'Table: Get Rows'
           name: get-table-rows
           x: 220
@@ -7688,7 +7658,6 @@ resources:
           groupId: wwvurgpzpw
           groupStartX: 260
           groupStartY: 200
-          id: GEZE41hssd
           label: Dist Centers Loop
           name: loop
           x: 200
@@ -7705,7 +7674,6 @@ resources:
           category: loop
           description: ''
           groupId: GEZE41hssd
-          id: aCa4QlbVu2
           label: Next
           name: loop-next
           x: 160
@@ -7724,7 +7692,6 @@ resources:
           category: logic
           description: ''
           groupId: GEZE41hssd
-          id: MlALxIbGM4
           label: Within Geofence
           name: geofence
           x: 260
@@ -7741,7 +7708,6 @@ resources:
           category: loop
           description: ''
           groupId: GEZE41hssd
-          id: l5uZ4AA3Li
           label: Break
           name: loop-break
           x: 360
@@ -7758,7 +7724,6 @@ resources:
           category: logic
           description: ''
           groupId: GEZE41hssd
-          id: O8SwY0VGM4
           label: Set Dist Center
           name: mutate
           x: 360
@@ -7791,7 +7756,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: P2BmeZ4Zhh
           label: Normalize & Set
           name: math
           x: 560
@@ -7808,7 +7772,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: OgVovjN1MM
           label: Random Number
           name: random-number
           x: 660
@@ -7825,7 +7788,6 @@ resources:
           category: logic
           description: ''
           groupId: wwvurgpzpw
-          id: OgVovjN1MM
           label: Random Number
           name: random-number
           x: 460
@@ -7840,7 +7802,6 @@ resources:
           category: trigger
           description: ''
           deviceId: null
-          id: DujIF03mZe
           label: Virtual Button
           name: virtualButton
           payload: ''
@@ -7856,7 +7817,6 @@ resources:
         meta:
           category: trigger
           description: ''
-          id: e9a_WYWCH1
           label: Timer
           name: timer
           timerTypeSelect: seconds

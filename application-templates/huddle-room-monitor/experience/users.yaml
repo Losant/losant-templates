@@ -7,7 +7,6 @@ resources:
     lastName: Smith
     userTags:
       role: employee
-    password: qwerty123
   - email: manager@example.com
     experienceGroupIds: []
     firstName: Jane
@@ -15,5 +14,4 @@ resources:
     lastName: Smith
     userTags:
       role: manager
-    password: qwerty123
 version: 1

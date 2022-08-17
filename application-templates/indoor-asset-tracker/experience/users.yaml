@@ -5,12 +5,10 @@ resources:
     id: ~exportplaceholderid-experienceUser-kanarraExampleCom-0~
     userTags:
       pin: "2222"
-    password: qwerty123
   - email: manager@example.com
     experienceGroupIds: []
     id: ~exportplaceholderid-experienceUser-managerExampleCom-1~
     userTags:
       pin: "1111"
       role: manager
-    password: qwerty123
 version: 1

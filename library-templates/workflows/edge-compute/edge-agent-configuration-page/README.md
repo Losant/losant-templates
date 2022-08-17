@@ -43,7 +43,7 @@ For example, to disallow users from changing the broker host, you would remove t
     "title": "Host",
     "type": "string",
     "pattern": "^[a-zA-Z0-9-\\.]+$",
-    "default": "~exportplaceholderid-broker-url~"
+    "default": "broker.losant.com"
 },
 ```
 
@@ -69,7 +69,7 @@ This creates a race condition, as this workflow and the other matching workflow(
 
 ## License
 
-Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2021 Losant IoT, Inc. All rights reserved.
 
 Licensed under the MIT license.
 

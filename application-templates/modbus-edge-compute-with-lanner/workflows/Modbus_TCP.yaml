@@ -4,7 +4,7 @@ resources:
     flowClass: edge
     globals: []
     id: ~exportplaceholderid-flow-modbusTcp-1~
-    minimumAgentVersion: 1.21.0
+    minimumAgentVersion: 1.32.0
     name: Modbus TCP
     nodes:
       - config:
@@ -32,7 +32,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: 5IsLZqPrOn
           label: 'Modbus: Write'
           name: modbus-write
           x: 240
@@ -53,7 +52,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: iE5QfZC4XN
           label: 'Peripheral: Get'
           name: get-peripheral
           x: 140
@@ -72,7 +70,6 @@ resources:
           description: ''
           groupStartX: 80
           groupStartY: 80
-          id: s7aru9eLKe
           label: Loop
           name: loop
           x: 140
@@ -96,7 +93,6 @@ resources:
           category: logic
           description: ''
           groupId: Y6xiTq3OaW
-          id: 8NqKNG1fMt
           label: Math
           name: math
           x: 80
@@ -112,7 +108,6 @@ resources:
           category: output
           description: ''
           groupId: Y6xiTq3OaW
-          id: YDqBinXUUD
           label: Debug
           name: debug
           x: 80
@@ -131,7 +126,6 @@ resources:
           category: output
           description: ''
           groupId: Y6xiTq3OaW
-          id: U5LgWiHWFB
           label: 'Device: State'
           name: device-state
           x: 80
@@ -247,7 +241,6 @@ resources:
           category: data
           description: ''
           groupId: Y6xiTq3OaW
-          id: fu16uziJys
           label: 'Modbus: Read'
           name: modbus-read
           x: 80
@@ -264,7 +257,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: vQoTlxUBV-
           label: Validate Payload
           name: validate-payload
           x: 140
@@ -280,7 +272,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: ymVvJndXLC
           label: Debug
           name: debug
           x: 40
@@ -295,7 +286,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: 5lKMi2sACa
           label: 'Peripheral: Get'
           name: get-peripheral
           x: 240
@@ -310,7 +300,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: AGm2DSPVWg
           label: Debug
           name: debug
           x: 240
@@ -324,7 +313,6 @@ resources:
           category: logic
           description: ''
           groupId: Y6xiTq3OaW
-          id: hoskXFs63K
           label: Temp > 90?
           name: conditional
           x: 80
@@ -351,7 +339,6 @@ resources:
           category: data
           description: ''
           groupId: Y6xiTq3OaW
-          id: 5IsLZqPrOn
           label: 'Modbus: Write'
           name: modbus-write
           x: 180
@@ -425,7 +412,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: mwy_z_H92Q
           label: Is Update?
           name: conditional
           x: 140
@@ -441,7 +427,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: ymVvJndXLC
           label: Debug
           name: debug
           x: 40
@@ -455,7 +440,6 @@ resources:
         meta:
           category: trigger
           description: ''
-          id: 3HW_6zG7jk
           label: Timer
           name: timer
           timerTypeSelect: seconds
@@ -470,7 +454,6 @@ resources:
         meta:
           category: trigger
           description: ''
-          id: 4uSHYL-vIc
           label: 'Device: Command'
           name: deviceCommand
           uiId: 4uSHYL-vIc

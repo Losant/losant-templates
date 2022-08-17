@@ -2,3 +2,4 @@ name: Edge Compute
 description: This category contains Edge Workflows demonstrating edge computing
   concepts that are relevant to many different application types. Edge Workflows
   can only run when deployed to an Edge Compute device.
+resourceTypes: null

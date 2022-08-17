@@ -1,3 +1,4 @@
 name: APIs
 description: These templates provide Experience Endpoints and Experience
   Workflows that deliver common RESTful API functionality.
+resourceTypes: null
