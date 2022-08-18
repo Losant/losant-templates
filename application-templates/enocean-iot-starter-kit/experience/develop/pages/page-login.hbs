@@ -16,15 +16,8 @@
   {{/if}}
 
   <div class="alert alert-info" role="alert">
-      Welcome to the EnOcean IoT Starter Kit application template! <br />
-      <br />
-      You can log in below using the following credentials: <br />
-      Email: test.user@example.com <br />
-      Password: qwerty123 <br />
-      <br />
-      This user can be modified or additional users added through your
-      applications's <a href="https://~exportplaceholderid-docs-url~/experiences/users/" target="_blank">
-      Experience Users.</a>
+    <p>Welcome to the EnOcean IoT Starter Kit application template!</p>
+    <p>To get started, create an <a href="https://~exportplaceholderid-docs-url~/experiences/users/" target="_blank">Experience User</a> within this application and then sign in using the form below.</p>
   </div>
 
   <form method="POST">
@@ -36,7 +29,7 @@
 
     <div class="form-group">
       <label for="passwordField">Password</label>
-      <input type="password" class="form-control" id="passwordField" name="password" required>
+      <input type="password" class="form-control" id="passwordField" name="password" required minlength="8">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

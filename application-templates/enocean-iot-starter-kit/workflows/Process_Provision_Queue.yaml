@@ -303,7 +303,8 @@ resources:
           uiId: DSxJZEHtiK
           x: 40
           'y': 40
-        outputIds: []
+        outputIds:
+          - - gcz6tuA38A
         type: timer
       - config: {}
         key: >-
