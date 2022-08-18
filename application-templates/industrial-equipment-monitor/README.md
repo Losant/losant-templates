@@ -8,7 +8,8 @@ This template illustrates an industrial equipment monitoring solution. This is a
 * Multi-tenant experience with built-in access control based on customer.
 
 ## Setup
-Enable the [Simulate Devices](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/workflows/~exportplaceholderid-flow-simulateDevices-0~/develop) workflow.
+1. Enable the [Simulate Devices](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/workflows/~exportplaceholderid-flow-simulateDevices-0~/develop) workflow.
+2. Set new passwords for the three [Experience Users](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/users) included in this template.
 
 ## Device Simulation
 When the [Simulate Devices](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/workflows/~exportplaceholderid-flow-simulateDevices-0~/develop) workflow is enabled, it will generate random sensor data for all generator devices every two minutes.
@@ -34,13 +35,13 @@ When a user logs in, they are presented an overview dashboard and a list of devi
 To view this experience yourself, navigate to the [Experience Edit](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/versions/develop) page and select the URL at the top of the screen. This takes you directly to the login page where you can log in using one of the users below.
 
 ### Users
-This template includes three users:
+This template includes three Experience Users:
 
-1. `kanarra@example.com`—Admin user who has access to all devices.
-2. `sadler-isberg@example.com`—User assigned to the [Sadler-Isberg](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/groups/~exportplaceholderid-experienceGroup-sadlerIsberg-1~/members) group with access only to those devices.
-3. `tekton-health@example.com`—User is assigned to the [Tekton Health](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/groups/~exportplaceholderid-experienceGroup-tektonHealth-2~/members) group with access only to those devices.
+1. `kanarra@example.com`: Admin user who has access to all devices.
+2. `sadler-isberg@example.com`: User assigned to the [Sadler-Isberg](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/groups/~exportplaceholderid-experienceGroup-sadlerIsberg-1~/members) group with access to only those devices.
+3. `tekton-health@example.com`: User is assigned to the [Tekton Health](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/groups/~exportplaceholderid-experienceGroup-tektonHealth-2~/members) group with access to only those devices.
 
-The password for all users is `qwerty123`. Users can be modified, added, or removed by navigating to this applications's [Users & Groups](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/users) page.
+To sign in to the Experience as any of these users, you must first update their passwords as they are assigned random, irrevocable passwords on import of the template. You can then use each user's email address and new password to authenticate and view the experience.
 
 ## Resources
 The following list contains helpful resources that are related to how this template is implemented:
@@ -55,6 +56,6 @@ The following list contains helpful resources that are related to how this templ
 
 This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/application-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
 
-Copyright (c) 2020 Losant IoT, Inc
+Copyright (c) 2022 Losant IoT, Inc
 
 https://www.losant.com

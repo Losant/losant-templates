@@ -48,11 +48,15 @@ resources:
     method: post
     route: /login
     version: develop
-  - access: public
+  - access: authenticated
     enabled: true
     endpointTags: {}
     id: ~exportplaceholderid-experienceEndpoint-postProvision-1~
     method: post
     route: /provision
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
     version: develop
 version: 1
