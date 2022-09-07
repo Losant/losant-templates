@@ -1,7 +1,10 @@
 # Indoor Asset Tracker Template
-This template illustrates an indoor asset tracking solution, a multi-view application that can be used to monitor and locate assets in a physical environment. This application is designed to simulate movement of beacon-like devices on the campus of an assisted living facility. This template is meant to be used as a learning tool and starting point for your own applications.
 
-This template uses several images to represent various types of equipment, visitors, and residents. Because of that, this template does not fit within the limits of a sandbox account. To learn more about enterprise licenses, which come with greatly increased resource limits, please [contact us](https://www.losant.com/contact-us).
+**Note:** This template uses several images to represent various types of equipment, visitors, and residents. Because of that, this template does not fit within the limits of a sandbox account. To learn more about enterprise licenses, which come with greatly increased resource limits, please [contact us](https://www.losant.com/contact-us).
+
+This template illustrates an indoor asset tracking solution, a multi-view application that can be used to monitor and locate assets in a physical environment. It is meant to be used as a learning tool and starting point for your own applications.
+
+The application simulates movement of beacon-like devices on the campus of an assisted living facility.
 
 ## Key Components
 * Sample devices based on BLE beacons
@@ -11,10 +14,15 @@ This template uses several images to represent various types of equipment, visit
 * Real-time location-based event alerts and monitoring
 
 ## Setup
-To begin using this template, enable the [Device Simulator](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowDeviceSimulator-0~/develop) workflow and the [Event Alerting](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowEventAlerting-3~/develop) workflow.
+To begin using this template ...
+
+1. Enable the [Device Simulator](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowDeviceSimulator-0~/develop) workflow.
+2. Enable the [Event Alerting](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowEventAlerting-3~/develop) workflow.
+3. Update the passwords for the two [Experience Users](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/experience/users) included with the template.
+4. If you wish to make use of the kiosk-based login, you must also set a `pin` tag with a unique numeric value for each Experience User. We recommend the values be at least 4 numbers long.
 
 ## Device Simulation
-This workflow simulates the movement of devices every 15-90 minutes and includes conditional-based logic detailed below.
+This workflow simulates the movement of devices every 15 to 90 minutes and includes the condition-based logic detailed below.
 
 The devices simulated in this template were made to operate similarly and comparably to BLE or UWB devices in the physical space, much like an [Aruba Meridian](https://docs.losant.com/applications/integrations/#meridian) device.
 
@@ -34,7 +42,7 @@ Devices are tagged with a `class` and `type` value. The `class` tag classifies t
 ## Workflows
 
 ### Simulator
-The simulator workflow randomly moves devices through rooms at an interval of every 15-90 minutes. The equipment devices are primarily stored in the `Utility Closet`, which is restricted for devices of class `person`. There are 19 rooms located on the campus, giving a 5% chance of a specific room being chosen.
+The simulator workflow randomly moves devices through rooms at an interval of every 15 to 90 minutes. The equipment devices are primarily stored in the `Utility Closet`, which is restricted for devices of class `person`. There are 19 rooms located on the campus, giving a 5% chance of a specific room being chosen.
 
 At this time, there is a 10% chance that a device will move to a new room once it has been in one for 15 minutes.
 
@@ -52,17 +60,17 @@ The manager view is exclusively accessible by users tagged with the `role=manage
 
 ### Users
 This template includes two users:
-- `manager@example.com`: Manager user with access to the facilities manager view of the application. Password: `qwerty123` and pin: `1111`.
-- `kanarra@example.com`: Regular staff user with access to the kiosk segments of the application. Password: `qwerty123` and pin: `2222`.
+- `manager@example.com`: Manager user with access to the facilities manager view of the application.
+- `kanarra@example.com`: Regular staff user with access to the kiosk segments of the application.
 
 ## Extending the Template
 This template was built with scalability in mind. The dynamic architecture of this application allows for the addition of new devices with just a few configuration requirements. 
 
 ### Users
-All users require an `email`, `password`, and a `pin` tag. `Pin` must be a unique value.
+All users require an `email`, `password`, and a `pin` tag (if using the kiosk login feature). The `pin` tag must be a unique value across all other Experience Users in the application.
 
 ### Device Recipes
-Device Recipes have been created to assist when extending this template:
+Device Recipes have been created to assist with extending this template:
 
 - [Equipment Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/device-recipes/~exportplaceholderid-deviceRecipe-equipmentDevice-0~/properties)
 - [Person Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/device-recipes/~exportplaceholderid-deviceRecipe-personDevice-1~/properties)
@@ -75,10 +83,8 @@ These recipes have been preconfigured with the required tags used to dynamically
 ### Images
 If you do choose to extend this template by adding devices, you will need to also add images for the following cases:
 
-- A new resident is created (in the `/residents` folder).
-- A new device `type` is added (`/images`).
-
-These require additions to Losant Files to render correctly in the experience.
+- A new resident is created (in the `/residents` Application Files directory).
+- A new device `type` is added (in the `/images` Application Files directory).
 
 ## Resources
 The following list contains resources related to this template:
@@ -91,7 +97,7 @@ The following list contains resources related to this template:
 
 ## License
 
-Copyright (c) 2020 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

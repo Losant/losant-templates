@@ -15,7 +15,8 @@ This template illustrates a geolocation asset tracking solution with temperature
 
 ## Setup
 1. Enable the [Data Simulator](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-dataSimulator-0~/develop) workflow.
-2. Enable the [Event Logger](https://app.losant.com/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-eventLogger-1~/develop) workflow.
+2. Enable the [Event Logger](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-eventLogger-1~/develop) workflow.
+3. Create an [Experience User](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/experience/users/new) with a unique email address and password, which is necessary to sign in to the template's End User Experience.
 
 ## Data Simulator
 When the [Data Simulator](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/workflows/~exportplaceholderid-flow-dataSimulator-0~/develop) workflow is enabled, it will simulate the movement of GPS devices between Indianapolis, Columbus, Cincinnati, and Louisville. While in transit, these devices will log fluctuations in temperature, orientation, and signal strength. Battery level will deplete over the course of a trip and shipments are susceptible to random shock events. When a tracker leaves one of the four cities, it will start a new shipment, resetting all of these state properties.
@@ -38,14 +39,7 @@ The [Detail Dashboard](/dashboards/~exportplaceholderid-dashboard-detailDashboar
 The template also includes a [Data Table](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/data-tables/~exportplaceholderid-dataTable-distributionCenters-0~) that includes additional information about each of the distribution centers within the data simulator. The table includes an ID for each center and its geocoordinates, as well as additional information that is not used in the application.
 
 ## Experience
-This template's [Experience](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/experience/versions/develop) provides an authenticated portal where users can view the two dashboards described above, as well as a list of all devices within the application. Events can be updated, for example, marked as "acknowledged" or "resolved," directly from these dashboards.
-
-The experience comes with one experience user for testing purposes:
-
-```
-Email: test.user@example.com
-Password: qwerty123
-```
+This template's [Experience](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/experience/versions/develop) provides an authenticated portal where users can view the two dashboards described above, as well as a list of all devices within the application. Events can be updated — for example, marked as "acknowledged" or "resolved" – directly from these dashboards.
 
 Users can be modified, added, or removed by navigating to the experience's [Users & Groups](/applications/~exportplaceholderid-application-applicationAssetTracker-0~/experience/users) page.
 
@@ -53,6 +47,7 @@ Users can be modified, added, or removed by navigating to the experience's [User
 * [Events](https://docs.losant.com/applications/events/)
 * [Data Tables](https://docs.losant.com/data-tables/overview/)
 * [GPS History Dashboard Block](https://docs.losant.com/dashboards/gps-history/)
+* [Application Experiences Overview](https://docs.losant.com/experiences/overview/)
 
 ## License
 
