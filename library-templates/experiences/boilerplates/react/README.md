@@ -17,26 +17,26 @@ Application Files are not tied to [Experience Versions](https://docs.losant.com/
 Your compiled React bundles must be uploaded to Application Files in the following location:
 
 ```
-react_bundles/<version>
+react-bundles/<version>
 ```
 
 The `<version>` folders must match the names of your [Experience Versions](https://docs.losant.com/experiences/versions/). Your application will always have the special `develop` version, which is the only version of an experience that can be edited. Your very first React bundle, therefore, will likely go in the following folder:
 
 ```
-react_bundles/develop
+react-bundles/develop
 ```
 
 As you continue to build and create additional versions, you will also create additional folders:
 
 ```
-react_bundles/develop
-react_bundles/v1.0.0
-react_bundles/v1.0.1
-react_bundles/v2.0.0
+react-bundles/develop
+react-bundles/v1.0.0
+react-bundles/v1.0.1
+react-bundles/v2.0.0
 ...
 ```
 
-Below is a screenshot of a compiled React bundle in the `react_bundles/develop` folder.
+Below is a screenshot of a compiled React bundle in the `react-bundles/develop` folder.
 
 ![Example React Bundle in Losant Files](./react_bundle.png)
 
@@ -71,13 +71,13 @@ When building your React application, you must define the `PUBLIC_URL` environme
 The value of `PUBLIC_URL` must be set to the full URL of the version folder you previously created in your Application Files. For example, if you're deploying the React application to your experience's `develop` version, the value would be:
 
 ```
-https://files.onlosant.com/YOUR_APP_ID/react_bundles/develop
+https://files.onlosant.com/YOUR_APP_ID/react-bundles/develop
 ```
 
 Therefore, building the resulting React application would use the following command:
 
 ```
-PUBLIC_URL=https://files.onlosant.com/YOUR_APP_ID/react_bundles/develop npm run build
+PUBLIC_URL=https://files.onlosant.com/YOUR_APP_ID/react-bundles/develop npm run build
 ```
 
 This environment variable should **not** be set when running your React application locally.
@@ -104,16 +104,16 @@ You can build and deploy your React application to the `develop` version using t
 
 ```
 npm run build && \
-rm -rf ../losant/files/react_bundles/develop && \
-cp -R ./build ../losant/files/react_bundles/develop && \
+rm -rf ../losant/files/react-bundles/develop && \
+cp -R ./build ../losant/files/react-bundles/develop && \
 losant files upload
 ```
 
 The above command is doing four things:
 
 1. Building the React bundle. This command is assuming the use of `.env` files to set all required environment variables.
-2. Removing the `develop` folder from your `react_bundles` directory locally.
-3. Copying the `build` directory to `react_bundles` and renaming it to `develop`.
+2. Removing the `develop` folder from your `react-bundles` directory locally.
+3. Copying the `build` directory to `react-bundles` and renaming it to `develop`.
 4. Uploading all the changes to the Losant platform.
 
 Once the upload is complete, this React application is immediately available to your users.
