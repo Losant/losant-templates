@@ -1,0 +1,38 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    description: A catch-all route that always renders the React main HTML page.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-getAny-0~
+    method: get
+    route: /{any*}
+    version: develop
+  - access: authenticated
+    description: If a deviceId is provided, returns a JSON object of that device ID.
+      If not, returns a collection of devices and metadata.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-getApiDevicesDeviceId-3~
+    method: get
+    route: /api/devices/{deviceId?}
+    version: develop
+  - access: authenticated
+    description: Returns the current user object.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-getApiMe-2~
+    method: get
+    route: /api/me
+    version: develop
+  - access: public
+    description: Accepts "email" and "password" properties in the request body. If
+      those match an Experience User, returns the user object as well as an auth
+      token.
+    enabled: true
+    endpointTags: {}
+    id: ~exportplaceholderid-experienceEndpoint-postApiAuth-1~
+    method: post
+    route: /api/auth
+    version: develop
+version: 1

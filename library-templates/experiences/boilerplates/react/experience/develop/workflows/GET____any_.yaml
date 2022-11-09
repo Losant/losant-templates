@@ -1,0 +1,173 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /
+    enabled: true
+    flowId: ~exportplaceholderid-flow-getAny-0~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-getAny-0~
+    name: 'GET /{*any}'
+    nodes:
+      - config:
+          bodyTemplate: '{{{working.index.body}}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: text/html
+            - keyTemplate: Cache-Control
+              valueTemplate: '{{working.cacheControl}}'
+            - keyTemplate: Pragma
+              valueTemplate: '{{working.cacheControl}}'
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: Bhn2AaL5Ao
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 120
+          'y': 600
+        outputIds:
+          - - vn7LCqNY4D
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: vn7LCqNY4D
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 120
+          'y': 700
+        outputIds: []
+        type: DebugNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.index
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://~exportplaceholderid-files-domain~/{{applicationId}}/react-bundles/{{experience.version}}/index.html{{#eq
+            experience.version 'develop'}}?t={{currentDateTime 'X'}}{{/eq}}
+        id: KJ31XRbtaB
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 120
+          'y': 140
+        outputIds:
+          - - jtZqidXkFb
+        type: HttpNode
+      - config:
+          expression: '{{experience.version}} === ''develop'''
+        id: jtZqidXkFb
+        meta:
+          category: logic
+          description: ''
+          label: Develop?
+          name: conditional
+          x: 120
+          'y': 320
+        outputIds:
+          - - ZMmaD3r0W6
+          - - nssvEec7FH
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.cacheControl
+              type: set
+              valueTemplate: no-cache
+              valueTemplateType: string
+        id: nssvEec7FH
+        meta:
+          category: logic
+          description: ''
+          label: no-cache
+          name: mutate
+          x: 220
+          'y': 440
+        outputIds:
+          - - Bhn2AaL5Ao
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.cacheControl
+              type: set
+              valueTemplate: max-age=3600
+              valueTemplateType: string
+        id: ZMmaD3r0W6
+        meta:
+          category: logic
+          description: ''
+          label: max-age=3600
+          name: mutate
+          x: 20
+          'y': 440
+        outputIds:
+          - - Bhn2AaL5Ao
+        type: MutateNode
+      - config: {}
+        id: ymbRutsxUo
+        meta:
+          annotationText: >-
+            If we're on the `develop` version, disable caching. For all other
+            versions, set cache to `max-age=3600`. This will speed up production
+            experiences.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 300
+          x: 420
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: U3BIH3DiOk
+        meta:
+          annotationText: >-
+            Download the contents of the `index.html` file that matches the
+            version being requested.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 320
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getAny-0~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /{*any}'
+          name: endpoint
+          uiId: tl0z4eHZyj
+          x: 120
+          'y': 40
+        outputIds:
+          - - KJ31XRbtaB
+        type: endpoint
+    version: develop
+version: 1

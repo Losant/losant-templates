@@ -1,0 +1,62 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /api/me
+    enabled: true
+    flowId: ~exportplaceholderid-flow-getApiMe-2~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-getApiMe-2~
+    name: GET /api/me
+    nodes:
+      - config:
+          bodyTemplate: '{{experience.user}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: JoaPTEGYTX
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 140
+        outputIds:
+          - - QqacchVHXg
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: QqacchVHXg
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 240
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getApiMe-2~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /api/me
+          name: endpoint
+          uiId: pZf3pUENsB
+          x: 40
+          'y': 40
+        outputIds:
+          - - JoaPTEGYTX
+        type: endpoint
+    version: develop
+version: 1

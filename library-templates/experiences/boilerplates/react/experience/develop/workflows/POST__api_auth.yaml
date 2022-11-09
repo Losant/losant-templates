@@ -1,0 +1,192 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Returns an authentication token for an experience user.
+    enabled: true
+    flowId: ~exportplaceholderid-flow-postApiAuth-1~
+    globals:
+      - json: '86400000'
+        key: cookieMaxAgeMs
+    id: ~exportplaceholderid-flowVersion-postApiAuth-1~
+    name: POST /api/auth
+    nodes:
+      - config:
+          bodyTemplate: "{\n\t\"user\": {{jsonEncode working.user}},\n\t\"auth\": {\n\t\t\"token\": {{jsonEncode working.token}},\n\t\t\"maxAgeMs\": {{jsonEncode globals.cookieMaxAgeMs}},\n\t\t\"domain\": {{jsonEncode data.headers.host}}\n\t}\n}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: cFQt82sB51
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 340
+        outputIds:
+          - - io1Lce5A8G
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: io1Lce5A8G
+        meta:
+          category: output
+          description: ''
+          label: Success
+          name: debug
+          x: 540
+          'y': 440
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorsPath: ''
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 1024
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "maxLength": 2048
+                    }
+                },
+                "required": ["email", "password"],
+                "additionalProperties": false
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: M4fNUDwDZ2
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 220
+          'y': 140
+        outputIds:
+          - - vzELOmFSUW
+          - - ua3mvz5tzS
+        type: ValidatePayloadNode
+      - config:
+          emailTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: false
+          passwordTemplate: '{{data.body.password}}'
+          tokenResultPath: working.token
+          ttlTemplate: '{{globals.cookieMaxAgeMs}}'
+          userResultPath: working.user
+        id: ua3mvz5tzS
+        meta:
+          authMode: emailPassword
+          category: experience
+          description: ''
+          label: Authenticate
+          name: experience-user-auth
+          x: 440
+          'y': 240
+        outputIds:
+          - - U_Q2RCNeLZ
+          - - cFQt82sB51
+        type: ExperienceUserAuthNode
+      - config:
+          bodyTemplate: "{\n\t\"success\": false,\n\t\"error\": \"Invalid request. Body must contain valid email and password fields.\"\n}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: vzELOmFSUW
+        meta:
+          category: output
+          description: ''
+          label: Invalid Payload
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 100
+          'y': 240
+        outputIds:
+          - - RBS8epMBi0
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: "{\n\t\"success\": false,\n\t\"error\": \"Invalid credentials.\"\n}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: U_Q2RCNeLZ
+        meta:
+          category: output
+          description: ''
+          label: Invalid Credentials
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 340
+        outputIds:
+          - - 3hFgesu_pq
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: RBS8epMBi0
+        meta:
+          category: output
+          description: ''
+          label: Invalid Payload
+          name: debug
+          x: 100
+          'y': 340
+        outputIds: []
+        type: DebugNode
+      - config:
+          message: ''
+          property: ''
+        id: 3hFgesu_pq
+        meta:
+          category: output
+          description: ''
+          label: Authentication Failed
+          name: debug
+          x: 340
+          'y': 440
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postApiAuth-1~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /api/auth
+          name: endpoint
+          uiId: eN-1noLaX8
+          x: 220
+          'y': 40
+        outputIds:
+          - - M4fNUDwDZ2
+        type: endpoint
+    version: develop
+version: 1

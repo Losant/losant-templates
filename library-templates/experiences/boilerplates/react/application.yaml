@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Provides the recommended architecture when using React.js as the
+      front end for your End User Experiences.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryExperiencesBoilerplatesReact-0~
+    name: React
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - react
+      - spa
+      - front-end
+      - framework
+version: 1

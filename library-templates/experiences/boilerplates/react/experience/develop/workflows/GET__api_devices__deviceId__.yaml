@@ -1,0 +1,177 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: 'Created for Endpoint GET /devices/{deviceId?}'
+    enabled: true
+    flowId: ~exportplaceholderid-flow-getApiDevicesDeviceId-3~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-getApiDevicesDeviceId-3~
+    name: 'GET /api/devices/{deviceId?}'
+    nodes:
+      - config:
+          bodyTemplate: "{{#if working.device}}\n{{jsonEncode working.device}}\n{{else}}\n{\n\t\"error\": {\n\t\t\"type\": \"NotFound\",\n\t\t\"message\": \"Device not found\"\n\t}\n}\n{{/if}}"
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: >-
+            {{#if working.device.id}}200{{else if
+            working.device.error}}400{{else}}404{{/if}}
+          sameSiteTemplate: ''
+        id: ud59qBdnj8
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 520
+          'y': 400
+        outputIds:
+          - - y1mrs9Pc8p
+        type: EndpointReplyNode
+      - config:
+          message: ''
+          property: ''
+        id: y1mrs9Pc8p
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 520
+          'y': 500
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.params.deviceId}}'
+        id: opK21vqpGh
+        meta:
+          category: logic
+          description: ''
+          label: deviceId?
+          name: conditional
+          x: 420
+          'y': 200
+        outputIds:
+          - - zIYpLuaUEs
+          - - eVudIbJjVC
+        type: ConditionalNode
+      - config:
+          attributesAsObject: true
+          findMetadata: true
+          findMethod: experienceUserIdOrEmail
+          findMultiple: true
+          idTemplate: '{{experience.user.id}}'
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: ''
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: true
+        id: zIYpLuaUEs
+        meta:
+          category: data
+          description: ''
+          label: 'Devices: Get'
+          name: get-device
+          x: 320
+          'y': 300
+        outputIds:
+          - - HmKGaHL80V
+        type: GetDeviceNode
+      - config:
+          message: ''
+          property: ''
+        id: 6QYUlKt9Rw
+        meta:
+          category: output
+          description: ''
+          label: Debug
+          name: debug
+          x: 320
+          'y': 500
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: '{{working.devices}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: HmKGaHL80V
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 320
+          'y': 400
+        outputIds:
+          - - 6QYUlKt9Rw
+        type: EndpointReplyNode
+      - config:
+          attributesAsObject: true
+          findMetadata: false
+          findMethod: query
+          findMultiple: false
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "experienceUserId": {
+                    "$eq": "{{experience.user.id}}"
+                  }
+                },
+                {
+                  "id": {
+                    "$eq": "{{data.params.deviceId}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: true
+        id: eVudIbJjVC
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 520
+          'y': 300
+        outputIds:
+          - - ud59qBdnj8
+        type: GetDeviceNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getApiDevicesDeviceId-3~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /api/devices/{deviceId?}'
+          name: endpoint
+          uiId: ifFv0D7ezz
+          x: 420
+          'y': 100
+        outputIds:
+          - - opK21vqpGh
+        type: endpoint
+    version: develop
+version: 1
