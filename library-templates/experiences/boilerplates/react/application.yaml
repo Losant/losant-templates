@@ -16,4 +16,5 @@ resources:
       - spa
       - front-end
       - framework
+      - featured
 version: 1

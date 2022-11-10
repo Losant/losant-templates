@@ -91,11 +91,11 @@ Now that the React application is built, the contents of the `build` folder must
 The easiest way to accomplish this is to use the [Losant CLI](https://docs.losant.com/cli/overview/). Given the following example local folder structure:
 
 ```
-|- Project
-  |- losant
+|- MyProject
+  |- losant-cli
     |- files
     |- ...
-  |- react
+  |- react-project
     |- build
     |- ...
 ```
@@ -104,17 +104,19 @@ You can build and deploy your React application to the `develop` version using t
 
 ```
 npm run build && \
-rm -rf ../losant/files/react-bundles/develop && \
-cp -R ./build ../losant/files/react-bundles/develop && \
+mkdir -p ../losant-cli/files/react-bundles && \
+rm -rf ../losant-cli/files/react-bundles/develop && \
+cp -R ./build ../losant-cli/files/react-bundles/develop && \
 losant files upload
 ```
 
-The above command is doing four things:
+The above command is doing five things:
 
-1. Building the React bundle. This command is assuming the use of `.env` files to set all required environment variables.
-2. Removing the `develop` folder from your `react-bundles` directory locally.
-3. Copying the `build` directory to `react-bundles` and renaming it to `develop`.
-4. Uploading all the changes to the Losant platform.
+1. Builds the React bundle. This command is assuming the use of `.env` files to set all required environment variables.
+1. Creates the `react-bundles` directory locally if it does not already exist.
+1. Removes the `develop` folder from your `react-bundles` directory locally.
+1. Copies the `build` directory to `react-bundles` and renames it to `develop`.
+1. Uploades all the changes to the Losant platform.
 
 Once the upload is complete, this React application is immediately available to your users.
 

@@ -1,11 +1,14 @@
 resourceType: ExperienceFlowVersion
 resources:
-  - description: Created for Endpoint GET /
+  - description: >-
+      Created for Endpoint GET /{any*}. This is a catch-all request to serve the
+      static index.html file for any GET request to an endpoint that does not
+      start with "/api".
     enabled: true
     flowId: ~exportplaceholderid-flow-getAny-0~
     globals: []
     id: ~exportplaceholderid-flowVersion-getAny-0~
-    name: 'GET /{*any}'
+    name: 'GET /{any*}'
     nodes:
       - config:
           bodyTemplate: '{{{working.index.body}}}'
