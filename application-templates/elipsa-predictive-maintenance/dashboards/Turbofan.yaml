@@ -212,26 +212,6 @@ resources:
               yAxisMin: ''
             - aggregation:
                 options: {}
-                type: MAX
-              attribute: prediction
-              color: 'rgba(255, 0, 0, 0.24)'
-              cumulative: false
-              detectDataGaps: false
-              deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
-              deviceTags: []
-              dotWeight: 1
-              expression: ''
-              graphType: bar
-              label: Outlier Predicted
-              lineType: monotone
-              lineWeight: 2
-              yAxisFormat: ''
-              yAxisLabel: Outlier
-              yAxisMax: ''
-              yAxisMin: ''
-            - aggregation:
-                options: {}
                 type: MEAN
               attribute: Ps30
               color: '#057180'
@@ -542,7 +522,7 @@ resources:
               yAxisMin: ''
         height: 2
         id: acOzJaQFRc
-        startX: 2.5
+        startX: 0.5
         startY: 4
         title: Outliers Per Day
         width: 1.5
@@ -576,15 +556,17 @@ resources:
           sortField: creationDate
         height: 2
         id: AyLNiz-Wpn
-        startX: 0.5
+        startX: 2
         startY: 4
         title: Outlier Events
         width: 2
     contextConfiguration: []
     defaultTheme: light
     description: ''
+    duration: 3600000
     id: ~exportplaceholderid-dashboard-turbofan-0~
     name: Turbofan
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

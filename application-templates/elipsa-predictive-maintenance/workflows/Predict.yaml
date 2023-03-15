@@ -13,7 +13,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 7isA8jPMnr
           label: Debug
           name: debug
           x: 260
@@ -45,7 +44,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: fjM6aHmT-7
           label: Elipsa API
           name: http
           x: 160
@@ -115,7 +113,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: H96TFWQJsh
           label: 'Device: State'
           name: device-state
           x: 260
@@ -209,7 +206,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: F_EyQohHkK
           label: 'Event: Create'
           name: create-event
           x: 260
@@ -231,7 +227,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: oujPcJDVce
           label: Latch
           name: latch
           x: 260
@@ -266,7 +261,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: UhhPLWS09z
           label: 200 OK?
           name: conditional
           x: 160
@@ -282,24 +276,42 @@ resources:
         meta:
           category: output
           description: ''
-          id: j38K5Rai7x
           label: Debug
           name: debug
           x: 60
           'y': 540
         outputIds: []
         type: DebugNode
+      - config:
+          ratePerMinute: 2
+          throttleIdTemplate: ''
+          timeSincePath: ''
+        id: LyEzc9Je2j
+        meta:
+          category: logic
+          description: ''
+          label: Throttle
+          name: throttle
+          rateUnit: Minute
+          rateValue: '2'
+          x: 160
+          'y': 160
+        outputIds:
+          - []
+          - - fjM6aHmT-7
+        type: ThrottleNode
     triggers:
       - config:
           attributeBlacklist:
             - anomaly_score
             - prediction
+          batchBehavior: each
+          triggerOn: both
         key: ~exportplaceholderid-device-turbofan-0~
         meta:
           allowedAttributeType: attributeBlacklist
           category: trigger
           description: ''
-          id: BmZEycz2O7
           label: 'Device: State'
           maxAgeToggle: false
           name: deviceIdsTags
@@ -308,6 +320,6 @@ resources:
           x: 160
           'y': 60
         outputIds:
-          - - fjM6aHmT-7
+          - - LyEzc9Je2j
         type: deviceId
 version: 1
