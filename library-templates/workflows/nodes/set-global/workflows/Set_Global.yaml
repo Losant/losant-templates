@@ -1,0 +1,180 @@
+resourceType: Flow
+resources:
+  - category: data
+    customNodeConfig:
+      fields:
+        - description: 'If a global exists with this key, its value will be overridden.'
+          id: key
+          label: Key
+          required: true
+          type: stringTemplate
+        - defaultValue: String
+          description: ''
+          id: type
+          label: Type
+          options:
+            - value: String
+            - value: Number
+            - value: JSON
+          type: select
+        - description: ''
+          id: value
+          label: Value
+          required: true
+          type: stringTemplate
+        - description: ''
+          id: description
+          label: Description
+          required: true
+          type: stringTemplate
+        - defaultValue: false
+          description: ''
+          id: cloud_only
+          label: Do not send to edge workflows
+          type: checkbox
+      outputCount: 1
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: Creates a new or overrides an existing application global.
+    docsUrl: >-
+      https://~exportplaceholderid-docs-url~/applications/overview/#application-globals
+    flowClass: customNode
+    globals: []
+    iconData: >-
+      data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI2LjUuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjQgMjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojRkZGRkZGO30KPC9zdHlsZT4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyLDIxLjdjLTUuMywwLTkuNy00LjMtOS43LTkuN1M2LjcsMi4zLDEyLDIuM3M5LjcsNC4zLDkuNyw5LjdsMCwwQzIxLjcsMTcuMywxNy4zLDIxLjcsMTIsMjEuN3ogTTEyLDMuNAoJYy00LjgsMC04LjYsMy45LTguNiw4LjZzMy45LDguNiw4LjYsOC42czguNi0zLjksOC42LTguNmwwLDBDMjAuNiw3LjIsMTYuOCwzLjQsMTIsMy40QzEyLDMuNCwxMiwzLjQsMTIsMy40eiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMi44LDExLjRoMTguM3YxSDIuOEwyLjgsMTEuNHoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQsMTZIMjB2MUg0TDQsMTZ6Ii8+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00LjEsNi44aDE1Ljh2MUg0LjFMNC4xLDYuOHoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyLDIxLjdjLTMuMSwwLTUuMS03LjItNS4xLTkuN3MyLTkuNyw1LjEtOS43djFjLTIsMC00LjEsNi00LjEsOC42czIuMSw4LjcsNC4xLDguN1YyMS43eiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTEuNSwyLjhoMXYxOC4zaC0xVjIuOHoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyLDIxLjd2LTFjMiwwLDQuMS02LDQuMS04LjZTMTQsMy40LDEyLDMuNHYtMWMzLjEsMCw1LjEsNy4yLDUuMSw5LjdTMTUuMSwyMS43LDEyLDIxLjd6Ii8+Cjwvc3ZnPgo=
+    id: ~exportplaceholderid-flow-setGlobal-0~
+    name: Set Global
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.output
+        id: fPHQhwFi9D
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 260
+          'y': 620
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          action: globals
+          params:
+            - name: globals
+              type: json
+              value: |-
+                [
+                  {
+                    "key": "{{data.key}}",
+                    "description": {{jsonEncode (defaultTo data.description "")}},
+                    {{#eq data.type 'JSON'}}
+                    "json": {{jsonEncode data.value}},
+                    {{/eq}}
+                    {{#eq data.type 'Number'}}
+                    "json": {{jsonEncode data.value}},
+                    {{/eq}}
+                    {{#eq data.type 'String'}}
+                    "json": {{jsonEncode (jsonEncode data.value)}},
+                    {{/eq}}
+                    "cloudOnly": {{data.cloud_only}}
+                  }
+                ]
+          resource: application
+          responsePath: working.result
+        id: Kg1AiO_S5j
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 260
+          'y': 280
+        outputIds:
+          - - f5WBfgYtir
+        type: LosantApiNode
+      - config:
+          expression: '{{ working.result.error }}'
+        id: f5WBfgYtir
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 400
+        outputIds:
+          - - YkU_G0fvow
+          - - oR_diHmWlp
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.output.error
+              type: set
+              valueTemplate: '{{{ working.result.error.message }}} '
+              valueTemplateType: string
+        id: oR_diHmWlp
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 380
+          'y': 500
+        outputIds:
+          - - fPHQhwFi9D
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.output.success
+              type: set
+              valueTemplate: 'true'
+              valueTemplateType: string
+        id: YkU_G0fvow
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 140
+          'y': 500
+        outputIds:
+          - - fPHQhwFi9D
+        type: MutateNode
+    shortDescription: Set an Application Global
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Set Global'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 180
+        outputIds:
+          - - Kg1AiO_S5j
+        type: customNodeStart
+      - config: {}
+        key: ~exportplaceholderid-flow-setGlobal-0~-fZNQ2NRM9umrcjowudrwW
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+                "cloud_only":false,
+                "key":"apiToken",
+                "type":"JSON",
+                "value":"{\"foo\": \"bar\"}"
+            }
+          uiId: 6RCPHhFLWK
+          x: 60
+          'y': 180
+        outputIds:
+          - - Kg1AiO_S5j
+        type: virtualButton
+version: 1

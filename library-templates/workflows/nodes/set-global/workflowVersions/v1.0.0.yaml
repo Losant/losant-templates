@@ -1,0 +1,172 @@
+resourceType: FlowVersion
+resources:
+  - customNodeConfig:
+      fields:
+        - description: 'If a global exists with this key, its value will be overridden.'
+          id: key
+          label: Key
+          required: true
+          type: stringTemplate
+        - defaultValue: String
+          description: ''
+          id: type
+          label: Type
+          options:
+            - value: String
+            - value: Number
+            - value: JSON
+          type: select
+        - description: ''
+          id: value
+          label: Value
+          required: true
+          type: stringTemplate
+        - description: ''
+          id: description
+          label: Description
+          required: true
+          type: stringTemplate
+        - defaultValue: false
+          description: ''
+          id: cloud_only
+          label: Do not send to edge workflows
+          type: checkbox
+      outputCount: 1
+      resultMode: optional
+    enabled: true
+    flowId: ~exportplaceholderid-flow-setGlobal-0~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-v100-0~
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.output
+        id: fPHQhwFi9D
+        meta:
+          category: customNodeEnd
+          description: End the Custom Node run
+          label: Output
+          name: custom-node-end-single
+          x: 260
+          'y': 620
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          action: globals
+          params:
+            - name: globals
+              type: json
+              value: |-
+                [
+                  {
+                    "key": "{{data.key}}",
+                    "description": {{jsonEncode (defaultTo data.description "")}},
+                    {{#eq data.type 'JSON'}}
+                    "json": {{jsonEncode data.value}},
+                    {{/eq}}
+                    {{#eq data.type 'Number'}}
+                    "json": {{jsonEncode data.value}},
+                    {{/eq}}
+                    {{#eq data.type 'String'}}
+                    "json": {{jsonEncode (jsonEncode data.value)}},
+                    {{/eq}}
+                    "cloudOnly": {{data.cloud_only}}
+                  }
+                ]
+          resource: application
+          responsePath: working.result
+        id: Kg1AiO_S5j
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 260
+          'y': 280
+        outputIds:
+          - - f5WBfgYtir
+        type: LosantApiNode
+      - config:
+          expression: '{{ working.result.error }}'
+        id: f5WBfgYtir
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 400
+        outputIds:
+          - - YkU_G0fvow
+          - - oR_diHmWlp
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.output.error
+              type: set
+              valueTemplate: '{{{ working.result.error.message }}} '
+              valueTemplateType: string
+        id: oR_diHmWlp
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 380
+          'y': 500
+        outputIds:
+          - - fPHQhwFi9D
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.output.success
+              type: set
+              valueTemplate: 'true'
+              valueTemplateType: string
+        id: YkU_G0fvow
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 140
+          'y': 500
+        outputIds:
+          - - fPHQhwFi9D
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Set Global'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 260
+          'y': 180
+        outputIds:
+          - - Kg1AiO_S5j
+        type: customNodeStart
+      - config: {}
+        key: ~exportplaceholderid-flow-setGlobal-0~-fZNQ2NRM9umrcjowudrwW
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+                "cloud_only":false,
+                "key":"apiToken",
+                "type":"JSON",
+                "value":"{\"foo\": \"bar\"}"
+            }
+          uiId: 6RCPHhFLWK
+          x: 60
+          'y': 180
+        outputIds:
+          - - Kg1AiO_S5j
+        type: virtualButton
+    version: v1.0.0
+version: 1

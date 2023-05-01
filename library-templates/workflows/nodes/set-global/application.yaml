@@ -1,0 +1,24 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: This node allows you to set or update an application global value.
+    filesPath: ./files
+    globals:
+      - cloudOnly: false
+        json: '"{\"foo\": \"bar\""'
+        key: apiToken
+      - cloudOnly: false
+        description: Blah
+        json: '{ "foo":"bar"}'
+        key: key
+    id: ~exportplaceholderid-application-devLibraryWorkflowsNodesSetGlobal-0~
+    name: Dev / Library / Workflows / Nodes / Set Global
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - global
+      - api
+      - authentication
+version: 1
