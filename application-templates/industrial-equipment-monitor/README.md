@@ -1,17 +1,21 @@
 # Industrial Equipment Monitor
+
 This template illustrates an industrial equipment monitoring solution. This is a multi-tenant application that OEMs, telcos, or any other solution provider can offer to their customers as a way to remotely monitor their equipment. This template is meant to be used as a learning tool and starting point for your own applications.
 
 ## Key Components
-* Sample devices based on industrial power generators.
-* Live and historial overview and device dashboards.
-* Sample fault and maintenance monitoring.
-* Multi-tenant experience with built-in access control based on customer.
+
+- Sample devices based on industrial power generators.
+- Live and historial overview and device dashboards.
+- Sample fault and maintenance monitoring.
+- Multi-tenant experience with built-in access control based on customer.
 
 ## Setup
+
 1. Enable the [Simulate Devices](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/workflows/~exportplaceholderid-flow-simulateDevices-0~/develop) workflow.
 2. Set new passwords for the three [Experience Users](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/users) included in this template.
 
 ## Device Simulation
+
 When the [Simulate Devices](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/workflows/~exportplaceholderid-flow-simulateDevices-0~/develop) workflow is enabled, it will generate random sensor data for all generator devices every two minutes.
 
 The most common state for every device is "Running," however there is a small chance that a generator will also be "Stopped" or "Faulted." When a device is running, the `days_running` and `hours_running` device attributes are incremented appropriately.
@@ -19,15 +23,19 @@ The most common state for every device is "Running," however there is a small ch
 When a device is in the "Faulted" state, the specific fault will be a random item from the [warning_and_alarms](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/data-tables/~exportplaceholderid-dataTable-warningsAndAlarms-0~) data table.
 
 ## Dashboards
+
 This template includes two dashboards. One displays an overview with aggregate data for all devices for the current user. The other displays details for a specific device.
 
 ### Overview Dashboard
+
 The [Overview](/dashboards/~exportplaceholderid-dashboard-overview-1~) dashboard uses an experience user context variable to define which user is viewing this dashboard. All blocks on this dashboard use this context variable to query devices that are only associated with this user. The [page-dashboard-overview](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/versions/develop/pages/~exportplaceholderid-experienceView-pageDashboardOverview-2~/properties) experience page provides this context variable.
 
 ### Generator Details Dashboard
+
 The [Generator Details](/dashboards/~exportplaceholderid-dashboard-generatorDetails-0~) dashboard uses a device context variable to display details for a specific device. The [page-dashboard-device](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/versions/develop/pages/~exportplaceholderid-experienceView-pageDashboardDevice-3~/properties) experience page provides this context variable.
 
 ## Experience
+
 This template includes a multi-tenant experience with two example tenants: "Sadler-Isberg" and "Tekton Health." Each tenant represents a hospital chain that deploys power generators across their facilities. The devices that make up this template are divided between these two tenants.
 
 When a user logs in, they are presented an overview dashboard and a list of devices associated with their tenant. When a device is selected, the user sees a dashboard showing the details for that specific device.
@@ -35,6 +43,7 @@ When a user logs in, they are presented an overview dashboard and a list of devi
 To view this experience yourself, navigate to the [Experience Edit](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~/experience/versions/develop) page and select the URL at the top of the screen. This takes you directly to the login page where you can log in using one of the users below.
 
 ### Users
+
 This template includes three Experience Users:
 
 1. `kanarra@example.com`: Admin user who has access to all devices.
@@ -44,17 +53,18 @@ This template includes three Experience Users:
 To sign in to the Experience as any of these users, you must first update their passwords as they are assigned random, irrevocable passwords on import of the template. You can then use each user's email address and new password to authenticate and view the experience.
 
 ## Resources
+
 The following list contains helpful resources that are related to how this template is implemented:
 
-* [Dashboard Context Variables](https://docs.losant.com/dashboards/context-variables/)
-* [Experience Dashboard Pages](https://docs.losant.com/experiences/views/#dashboard-pages)
-* [Experience Users](https://docs.losant.com/experiences/users/)
-* [Experience Groups](https://docs.losant.com/experiences/groups/)
-* [Nested Experience Groups Webinar](https://www.losant.com/deeper-dive-webinar-series?demo=nested-experience-groups)
+- [Dashboard Context Variables](https://docs.losant.com/dashboards/context-variables/)
+- [Experience Dashboard Pages](https://docs.losant.com/experiences/views/#dashboard-pages)
+- [Experience Users](https://docs.losant.com/experiences/users/)
+- [Experience Groups](https://docs.losant.com/experiences/groups/)
+- [Nested Experience Groups Webinar](https://www.losant.com/deeper-dive-webinar-series?demo=nested-experience-groups)
 
 ---
 
-This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/application-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
+This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/losant-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
 
 Copyright (c) 2022 Losant IoT, Inc
 
