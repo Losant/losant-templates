@@ -5,7 +5,8 @@ resources:
       Users who are not signed in are redirected to /login.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getTlEditProfile-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlEditProfile~
     method: get
     route: /tl-edit-profile
     unauthorizedReply:
@@ -18,7 +19,8 @@ resources:
       not signed in are redirected to /login.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postTlEditProfile-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postTlEditProfile~
     method: post
     route: /tl-edit-profile
     unauthorizedReply:

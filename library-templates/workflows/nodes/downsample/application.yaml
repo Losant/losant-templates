@@ -4,7 +4,7 @@ resources:
     description: Downsamples (or decimates) buckets of data points into a single value.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsNodesDownsample-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesDownsample~
     name: Downsample
     readmePath: ./README.md
     imagePath: ./preview.png

@@ -1,0 +1,11 @@
+resourceType: ExperienceEndpoint
+resources:
+  - access: public
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlEdgeDataDeviceId~
+    method: get
+    route: /tl-edge-data/{deviceId}
+    version: develop
+version: 1

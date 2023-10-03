@@ -3,7 +3,8 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceIdEdit-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceIdEdit~
     method: get
     route: /devices/{deviceId}/edit
     unauthorizedReply:
@@ -14,7 +15,8 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postDevicesDeviceIdEdit-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postDevicesDeviceIdEdit~
     method: post
     route: /devices/{deviceId}/edit
     unauthorizedReply:

@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-workflowGetLogout-2~
+    flowId: ~exportplaceholderid-flow-workflowGetLogout~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowGetLogout-1~
+    id: ~exportplaceholderid-flowVersion-workflowGetLogout~
     name: Workflow - GET /logout
     nodes:
       - config:
@@ -62,7 +62,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getLogout-0~
+        key: ~exportplaceholderid-experienceEndpoint-getLogout~
         meta:
           category: trigger
           description: ''

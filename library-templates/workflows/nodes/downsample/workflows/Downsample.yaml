@@ -44,7 +44,7 @@ resources:
     globals: []
     iconData: >-
       data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iI2ZmZmZmZiIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik0xOSA5aC00VjNIOXY2SDVsNyA3IDctN3pNNSAxOHYyaDE0di0ySDV6Ii8+PC9zdmc+
-    id: ~exportplaceholderid-flow-downsample-0~
+    id: ~exportplaceholderid-flow-downsample~
     name: Downsample
     nodes:
       - config:
@@ -302,7 +302,7 @@ resources:
           - - OVs7TT4rHf
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-downsample-0~-NGMwhySddytPy3X3u_U-e
+        key: ~exportplaceholderid-flow-downsample~-NGMwhySddytPy3X3u_U-e
         meta:
           category: trigger
           description: ''

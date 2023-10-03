@@ -33,7 +33,7 @@ resources:
     description: The Aeotec Z-Wave MultiSensor 6 wireless smart home sensor.
     deviceClass: standalone
     deviceName: Aeotec MultiSensor 6
-    id: ~exportplaceholderid-deviceRecipe-aeotecMultiSensor6-0~
+    id: ~exportplaceholderid-deviceRecipe-aeotecMultiSensor6~
     name: Aeotec MultiSensor 6
     tags: []
 version: 1

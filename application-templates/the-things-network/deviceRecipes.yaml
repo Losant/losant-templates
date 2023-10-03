@@ -18,7 +18,7 @@ resources:
     description: ""
     deviceClass: standalone
     deviceName: Radio Bridge RBS306-VM30
-    id: ~exportplaceholderid-deviceRecipe-radioBridgeRbs306Vm30-0~
+    id: ~exportplaceholderid-deviceRecipe-radioBridgeRbs306Vm30~
     name: Radio Bridge RBS306-VM30
     tags:
       - key: dev_id

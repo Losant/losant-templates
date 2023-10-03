@@ -14,7 +14,7 @@ resources:
           is usually your company URL.
         json: '"example.com"'
         key: tl-jwt-register-issuer
-    id: ~exportplaceholderid-application-libraryDevicesProvisioningDynamicRegistration-0~
+    id: ~exportplaceholderid-application-libraryDevicesProvisioningDynamicRegistration~
     name: Dynamic Registration
     readmePath: ./README.md
     imagePath: ./preview.png

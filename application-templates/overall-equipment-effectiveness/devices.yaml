@@ -122,7 +122,7 @@ resources:
     children: []
     description: A unique paper machine creating toilet paper.
     deviceClass: standalone
-    id: ~exportplaceholderid-device-paperMachine1-0~
+    id: ~exportplaceholderid-device-paperMachine1~
     name: Paper Machine 1
     tags:
       - key: type
@@ -130,9 +130,9 @@ resources:
       - key: sku
         value: "3"
       - key: order
-        value: 28000 tons
+        value: 25200 tons
       - key: scheduledTime
-        value: 1273 min
+        value: 1096 min
       - key: maxRate
         value: "23"
       - key: location
@@ -261,17 +261,17 @@ resources:
     children: []
     description: A unique paper machine creating toilet paper.
     deviceClass: standalone
-    id: ~exportplaceholderid-device-paperMachine2-1~
+    id: ~exportplaceholderid-device-paperMachine2~
     name: Paper Machine 2
     tags:
       - key: type
         value: papermachine
       - key: sku
-        value: "2"
+        value: "3"
       - key: order
-        value: 27000 tons
+        value: 25200 tons
       - key: scheduledTime
-        value: 1688 min
+        value: 1326 min
       - key: maxRate
         value: "23"
       - key: location

@@ -1,13 +1,13 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-componentDeviceList-4~
+    id: ~exportplaceholderid-experienceView-componentDeviceList~
     localFilename: ./component-device-list.hbs
     name: component-device-list
     version: develop
     viewTags: {}
     viewType: component
-  - id: ~exportplaceholderid-experienceView-cssTemplates-5~
+  - id: ~exportplaceholderid-experienceView-cssTemplates~
     localFilename: ./css-templates.hbs
     name: css-templates
     version: develop

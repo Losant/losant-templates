@@ -3,7 +3,8 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getTlDevicesDeviceId-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlDevicesDeviceId~
     method: get
     route: /tl-devices/{deviceId?}
     version: develop

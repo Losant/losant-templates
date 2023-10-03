@@ -19,7 +19,7 @@ resources:
           "sandbox"
         json: '"sandbox"'
         key: solutionName
-    id: ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+    id: ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
     name: Itron Milli HDK Temperature Monitor
     readmePath: ./README.md
     imagePath: ./preview.png

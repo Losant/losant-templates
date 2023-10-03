@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: map
         config:
           additionalAttributes: null
@@ -71,7 +71,7 @@ resources:
         startY: 0
         title: Location
         width: 2
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: indicator
         config:
           conditions:
@@ -102,7 +102,7 @@ resources:
         startY: 0
         title: Shipment Status
         width: 2
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: gauge
         config:
           conditions:
@@ -131,7 +131,7 @@ resources:
         startY: 1
         title: Temperature
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: gauge
         config:
           conditions:
@@ -161,7 +161,7 @@ resources:
         startY: 1
         title: Battery
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: gauge
         config:
           conditions:
@@ -187,7 +187,7 @@ resources:
         startY: 1
         title: Shock
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: gauge
         config:
           gaugeMax: ''
@@ -209,7 +209,7 @@ resources:
         startY: 2
         title: Signal Strength
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: gauge
         config:
           conditions:
@@ -235,7 +235,7 @@ resources:
         startY: 2
         title: Orientation
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: event-list
         config:
           columns:
@@ -279,8 +279,8 @@ resources:
         title: Tracker Events Last 24 Hours
         width: 4
     contextConfiguration:
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
-        defaultValue: ~exportplaceholderid-device-tracker0000-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
+        defaultValue: ~exportplaceholderid-device-tracker0000~
         name: deviceId
         type: deviceId
         validationConfig:
@@ -291,8 +291,11 @@ resources:
         validationEnabled: true
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-detailDashboard-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-detailDashboard~
+    isPasswordProtected: false
     name: Detail Dashboard
     public: false
     refreshRate: 30
+    resolution: 60000
 version: 1

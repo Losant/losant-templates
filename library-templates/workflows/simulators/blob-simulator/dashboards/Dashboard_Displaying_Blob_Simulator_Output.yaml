@@ -2,12 +2,12 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator-0~
+          ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator~
         blockType: image
         config:
           attribute: image
           bgColor: 'rgba(255, 255, 255, 0)'
-          deviceId: ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput-0~
+          deviceId: ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput~
           imageSource: attribute
         height: 2
         id: aiwIPBsHV5
@@ -16,7 +16,7 @@ resources:
         title: Image Block
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator-0~
+          ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator~
         blockType: indicator
         config:
           conditions: []
@@ -31,7 +31,7 @@ resources:
               attribute: image
               deviceIds:
                 - >-
-                  ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput-0~
+                  ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput~
               deviceTags: []
         height: 2
         id: Y1JI62CbUh
@@ -42,8 +42,11 @@ resources:
     contextConfiguration: []
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-dashboardDisplayingBlobSimulatorOutput-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-dashboardDisplayingBlobSimulatorOutput~
+    isPasswordProtected: false
     name: Dashboard Displaying Blob Simulator Output
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

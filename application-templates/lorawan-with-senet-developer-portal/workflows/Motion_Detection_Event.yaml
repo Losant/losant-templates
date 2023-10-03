@@ -5,7 +5,7 @@ resources:
       detected.
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-motionDetectionEvent-1~
+    id: ~exportplaceholderid-flow-motionDetectionEvent~
     name: Motion Detection Event
     nodes:
       - config:

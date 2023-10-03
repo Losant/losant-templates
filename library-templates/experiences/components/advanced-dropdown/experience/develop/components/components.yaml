@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlAdvancedDropdown-1~
+    id: ~exportplaceholderid-experienceView-tlAdvancedDropdown~
     localFilename: ./tl-advanced-dropdown.hbs
     name: tl-advanced-dropdown
     version: develop

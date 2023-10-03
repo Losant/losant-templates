@@ -27,7 +27,7 @@ resources:
         name: wind-speed
     children: []
     deviceClass: standalone
-    id: ~exportplaceholderid-device-weather-0~
+    id: ~exportplaceholderid-device-weather~
     name: Weather
     tags: []
 version: 1

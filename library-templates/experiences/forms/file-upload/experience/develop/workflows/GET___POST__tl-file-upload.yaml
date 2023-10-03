@@ -1,7 +1,7 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-getPostTlFileUpload-0~
+    flowId: ~exportplaceholderid-flow-getPostTlFileUpload~
     globals:
       - json: |-
           [
@@ -13,7 +13,7 @@ resources:
         key: example-accept
       - json: '"userUploads"'
         key: uploadsRoot
-    id: ~exportplaceholderid-flowVersion-getPostTlFileUpload-0~
+    id: ~exportplaceholderid-flowVersion-getPostTlFileUpload~
     name: GET & POST /tl-file-upload
     nodes:
       - config:
@@ -286,7 +286,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-tlFileUpload-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlFileUpload~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -472,7 +472,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postTlFileUpload-0~
+        key: ~exportplaceholderid-experienceEndpoint-postTlFileUpload~
         meta:
           category: trigger
           description: ''
@@ -485,7 +485,7 @@ resources:
           - - obR__Z0YS_
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getTlFileUpload-1~
+        key: ~exportplaceholderid-experienceEndpoint-getTlFileUpload~
         meta:
           category: trigger
           description: ''

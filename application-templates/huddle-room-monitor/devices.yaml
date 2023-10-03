@@ -51,7 +51,7 @@ resources:
                 name: meeting_time
             children: []
             deviceClass: standalone
-            id: ~exportplaceholderid-device-huddleRoom1-2~
+            id: ~exportplaceholderid-device-huddleRoom1~
             name: Huddle Room 1
             tags: []
           - attributes:
@@ -65,7 +65,7 @@ resources:
                 name: meeting_time
             children: []
             deviceClass: standalone
-            id: ~exportplaceholderid-device-huddleRoom2-3~
+            id: ~exportplaceholderid-device-huddleRoom2~
             name: Huddle Room 2
             tags: []
           - attributes:
@@ -79,17 +79,17 @@ resources:
                 name: meeting_time
             children: []
             deviceClass: standalone
-            id: ~exportplaceholderid-device-huddleRoom3-4~
+            id: ~exportplaceholderid-device-huddleRoom3~
             name: Huddle Room 3
             tags: []
         deviceClass: system
-        id: ~exportplaceholderid-device-floor7-1~
+        id: ~exportplaceholderid-device-floor7~
         keepDuplicates: false
         name: Floor 7
         systemInterval: 60
         tags: []
     deviceClass: system
-    id: ~exportplaceholderid-device-buildingA-0~
+    id: ~exportplaceholderid-device-buildingA~
     keepDuplicates: false
     name: Building A
     systemInterval: 60

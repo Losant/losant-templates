@@ -1,9 +1,9 @@
 resourceType: Webhook
 resources:
-  - id: ~exportplaceholderid-webhook-receiveData-0~
+  - id: ~exportplaceholderid-webhook-receiveData~
     name: Receive Data
     responseCode: 200
-    token: ~exportplaceholderid-webhookToken-receiveData-0~
+    token: ~exportplaceholderid-webhookToken-receiveData~
     verificationCode: ''
     verificationType: none
     waitForReply: false

@@ -1,0 +1,124 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: edge
+    globals: []
+    id: ~exportplaceholderid-flow-retrieveEdgeData~
+    minimumAgentVersion: 1.42.0
+    name: Retrieve Edge Data
+    nodes:
+      - config:
+          expression: '{{data.name}} === ''getEdgeData'' && !!{{data.payload.replyId}}'
+        id: f4nAgUg_yk
+        meta:
+          category: logic
+          description: ''
+          label: getEdgeData?
+          name: conditional
+          x: 400
+          'y': 200
+        outputIds:
+          - - WDWWoQzo_Q
+          - - WeXyphBLAl
+        type: ConditionalNode
+      - config:
+          integrationId: losant
+          messageTemplate: |-
+            {
+              "replyId": {{jsonEncode data.payload.replyId}},
+              "data": {
+                "deviceName": {{jsonEncode deviceName}}
+              }
+            }
+          topicTemplate: tl-edge-response
+        id: WeXyphBLAl
+        meta:
+          category: output
+          description: ''
+          label: MQTT
+          name: mqtt
+          x: 500
+          'y': 300
+        outputIds:
+          - - gGwtLHwqPL
+        type: MqttMessageNode
+      - config:
+          level: info
+          message: Reply published to cloud
+          property: ''
+        id: gGwtLHwqPL
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 500
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: Invalid command
+          property: ''
+        id: WDWWoQzo_Q
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 300
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 2RZvAbqxe6
+        meta:
+          annotationText: >-
+            On receipt of a command, ensure that it is a `getEdgeData` command
+            and that a `replyId` is in the payload. Take no action if this is a
+            different command or if the `replyId` is missing.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 240
+          x: 140
+          'y': 80
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: KkqPZTXYJS
+        meta:
+          annotationText: >-
+            The MQTT Node publishes a message on the `tl-edge-response` topic.
+            Ensure the access key your device uses to authenticate has
+            permission to publish to that topic.
+
+
+            The body must include the `replyId`. Anything can go in the `data`
+            property. For this demonstration, we are only publishing the
+            `deviceName`.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 300
+          x: 700
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: deviceCommand
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Command'
+          name: deviceCommand
+          uiId: kgyKObw7lQ
+          x: 400
+          'y': 100
+        outputIds:
+          - - f4nAgUg_yk
+        type: deviceCommand
+version: 1

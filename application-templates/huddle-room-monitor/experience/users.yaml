@@ -3,14 +3,14 @@ resources:
   - email: employee@example.com
     experienceGroupIds: []
     firstName: John
-    id: ~exportplaceholderid-experienceUser-employeeExampleCom-0~
+    id: ~exportplaceholderid-experienceUser-employeeExampleCom~
     lastName: Smith
     userTags:
       role: employee
   - email: manager@example.com
     experienceGroupIds: []
     firstName: Jane
-    id: ~exportplaceholderid-experienceUser-managerExampleCom-1~
+    id: ~exportplaceholderid-experienceUser-managerExampleCom~
     lastName: Smith
     userTags:
       role: manager

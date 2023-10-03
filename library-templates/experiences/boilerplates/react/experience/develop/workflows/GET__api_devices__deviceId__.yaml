@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: 'Created for Endpoint GET /devices/{deviceId?}'
     enabled: true
-    flowId: ~exportplaceholderid-flow-getApiDevicesDeviceId-3~
+    flowId: ~exportplaceholderid-flow-getApiDevicesDeviceId~
     globals: []
-    id: ~exportplaceholderid-flowVersion-getApiDevicesDeviceId-3~
+    id: ~exportplaceholderid-flowVersion-getApiDevicesDeviceId~
     name: 'GET /api/devices/{deviceId?}'
     nodes:
       - config:
@@ -161,7 +161,7 @@ resources:
         type: GetDeviceNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getApiDevicesDeviceId-3~
+        key: ~exportplaceholderid-experienceEndpoint-getApiDevicesDeviceId~
         meta:
           category: trigger
           description: ''

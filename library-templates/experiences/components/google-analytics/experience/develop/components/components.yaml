@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlGoogleAnalytics-0~
+    id: ~exportplaceholderid-experienceView-tlGoogleAnalytics~
     localFilename: ./tl-google-analytics.hbs
     name: tl-google-analytics
     version: develop

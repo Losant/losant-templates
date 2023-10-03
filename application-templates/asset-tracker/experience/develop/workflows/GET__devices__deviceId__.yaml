@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: 'Created for Endpoint GET /devices/{deviceId}'
     enabled: true
-    flowId: ~exportplaceholderid-flow-getDevicesDeviceId-2~
+    flowId: ~exportplaceholderid-flow-getDevicesDeviceId~
     globals: []
-    id: ~exportplaceholderid-flowVersion-getDevicesDeviceId-0~
+    id: ~exportplaceholderid-flowVersion-getDevicesDeviceId~
     name: 'GET /devices/{deviceId?}'
     nodes:
       - config:
@@ -14,7 +14,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardOverview-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardOverview~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -271,7 +271,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardDevice-3~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardDevice~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -340,7 +340,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceId-4~
+        key: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceId~
         meta:
           category: trigger
           description: ''
@@ -353,7 +353,7 @@ resources:
           - - oXwFsRIX0t
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getDevices-2~
+        key: ~exportplaceholderid-experienceEndpoint-getDevices~
         meta:
           category: trigger
           description: ''

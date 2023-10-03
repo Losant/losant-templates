@@ -36,9 +36,9 @@ resources:
         and the raw value will be directly passed through.
       resultMode: optional
     enabled: true
-    flowId: ~exportplaceholderid-flow-downsample-0~
+    flowId: ~exportplaceholderid-flow-downsample~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -295,7 +295,7 @@ resources:
           - - OVs7TT4rHf
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-downsample-0~-5XP71Jmi9Pdl7NzBMGsHx
+        key: ~exportplaceholderid-flow-downsample~-5XP71Jmi9Pdl7NzBMGsHx
         meta:
           category: trigger
           description: ''

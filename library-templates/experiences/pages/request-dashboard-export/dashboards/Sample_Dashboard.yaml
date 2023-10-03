@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport~
         blockType: device-list
         config:
           additionalAttributes: []
@@ -15,7 +15,7 @@ resources:
           deviceLinkNewWindow: true
           deviceLinkType: custom
           deviceLinkUrl: >-
-            https://~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~.~exportplaceholderid-endpoint-domain~/tl-dashboard-report
+            https://~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport~.~exportplaceholderid-endpoint-domain~/tl-dashboard-report
           excludeConnectionInfo: false
           query: |-
             {
@@ -36,7 +36,7 @@ resources:
         title: My Devices
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport~
         blockType: custom-html
         config:
           configuration:
@@ -118,16 +118,19 @@ resources:
         width: 4
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
-        defaultValue: ~exportplaceholderid-experienceUser-exampleDomainCom-0~
+          ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport~
+        defaultValue: ~exportplaceholderid-experienceUser-exampleDomainCom~
         name: experienceUser
         type: experienceUser
         validationConfig: {}
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-sampleDashboard-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-sampleDashboard~
+    isPasswordProtected: false
     name: Sample Dashboard
     public: true
     refreshRate: 60
+    resolution: 60000
 version: 1

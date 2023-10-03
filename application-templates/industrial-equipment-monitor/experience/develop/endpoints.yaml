@@ -1,9 +1,30 @@
 resourceType: ExperienceEndpoint
 resources:
+  - access: public
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogin~
+    method: get
+    route: /login
+    staticReply:
+      statusCode: 200
+      type: page
+      value: ~exportplaceholderid-experienceView-pageLogin~
+    version: develop
+  - access: public
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogout~
+    method: get
+    route: /logout
+    version: develop
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-get-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-get~
     method: get
     route: /
     unauthorizedReply:
@@ -14,25 +35,8 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogin-3~
-    method: get
-    route: /login
-    staticReply:
-      statusCode: 200
-      type: page
-      value: ~exportplaceholderid-experienceView-pageLogin-1~
-    version: develop
-  - access: public
-    enabled: true
-    endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogout-0~
-    method: get
-    route: /logout
-    version: develop
-  - access: public
-    enabled: true
-    endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postLogin-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postLogin~
     method: post
     route: /login
     version: develop

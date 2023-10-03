@@ -11,7 +11,7 @@ resources:
         key: unoccupied_chance
       - json: '5400'
         key: max_occupied_time_seconds
-    id: ~exportplaceholderid-flow-simulateRooms-0~
+    id: ~exportplaceholderid-flow-simulateRooms~
     name: Simulate Rooms
     nodes:
       - config:
@@ -530,7 +530,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-flow-simulateRooms-0~-mU2_NFF8WVFpFVyZGKjA1
+        key: ~exportplaceholderid-flow-simulateRooms~-mU2_NFF8WVFpFVyZGKjA1
         meta:
           category: trigger
           description: ''
@@ -547,7 +547,7 @@ resources:
         type: virtualButton
       - config:
           seconds: 120
-        key: ~exportplaceholderid-flow-simulateRooms-0~-fD-ljzeWTAunUy6P0SECX
+        key: ~exportplaceholderid-flow-simulateRooms~-fD-ljzeWTAunUy6P0SECX
         meta:
           category: trigger
           description: ''

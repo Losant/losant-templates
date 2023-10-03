@@ -9,7 +9,7 @@ resources:
         description: ""
         json: '"https://api.elipsa.ai:9090/graphdb/api/v1.0/ml/scenario/predictions/e9972e98-51c9-11eb-9485-0acec021ad7c"'
         key: elipsa_api
-    id: ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~
+    id: ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance~
     name: Elipsa Predictive Maintenance
     readmePath: ./README.md
     imagePath: ./preview.png

@@ -5,7 +5,7 @@ resources:
       the "toggle" command.
     flowClass: embedded
     globals: []
-    id: ~exportplaceholderid-flow-blinkLed-1~
+    id: ~exportplaceholderid-flow-blinkLed~
     minimumAgentVersion: 0.0.0
     name: Blink LED
     nodes:

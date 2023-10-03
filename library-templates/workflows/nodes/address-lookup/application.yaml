@@ -5,7 +5,7 @@ resources:
       associated address with a location.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsNodesAddressLookup-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesAddressLookup~
     name: Address Lookup
     readmePath: ./README.md
     imagePath: ./preview.png

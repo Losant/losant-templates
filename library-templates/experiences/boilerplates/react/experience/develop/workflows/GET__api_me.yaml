@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /api/me
     enabled: true
-    flowId: ~exportplaceholderid-flow-getApiMe-2~
+    flowId: ~exportplaceholderid-flow-getApiMe~
     globals: []
-    id: ~exportplaceholderid-flowVersion-getApiMe-2~
+    id: ~exportplaceholderid-flowVersion-getApiMe~
     name: GET /api/me
     nodes:
       - config:
@@ -46,7 +46,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getApiMe-2~
+        key: ~exportplaceholderid-experienceEndpoint-getApiMe~
         meta:
           category: trigger
           description: ''

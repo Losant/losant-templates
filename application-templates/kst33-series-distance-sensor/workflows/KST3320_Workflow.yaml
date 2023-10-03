@@ -3,7 +3,7 @@ resources:
   - description: 'Workflow for a KST3320 on Actility, MachineQ or Helium Network.'
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-kst3320Workflow-0~
+    id: ~exportplaceholderid-flow-kst3320Workflow~
     name: KST3320 Workflow
     nodes:
       - config:
@@ -374,7 +374,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-webhook-receiveData-0~
+        key: ~exportplaceholderid-webhook-receiveData~
         meta:
           category: trigger
           description: ''

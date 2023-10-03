@@ -31,9 +31,9 @@ resources:
       resultDescription: A copy of the original object with sensitive values redacted.
       resultMode: required
     enabled: true
-    flowId: ~exportplaceholderid-flow-redactPayload-0~
+    flowId: ~exportplaceholderid-flow-redactPayload~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -141,7 +141,7 @@ resources:
           - - AHWsRWUJkU
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-redactPayload-0~-Ig5cuOUbQq3-ILm9_-PVK
+        key: ~exportplaceholderid-flow-redactPayload~-Ig5cuOUbQq3-ILm9_-PVK
         meta:
           category: trigger
           description: ''

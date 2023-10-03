@@ -5,7 +5,7 @@ resources:
       forwards to Losant.
     flowClass: edge
     globals: []
-    id: ~exportplaceholderid-flow-handleEnOceanData-6~
+    id: ~exportplaceholderid-flow-handleEnOceanData~
     minimumAgentVersion: 1.24.0
     name: Handle EnOcean Data
     nodes:

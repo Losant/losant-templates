@@ -49,9 +49,9 @@ resources:
       resultDescription: Result of Particle device diagnostic call...
       resultMode: optional
     enabled: true
-    flowId: ~exportplaceholderid-flow-particleDiagnostics-0~
+    flowId: ~exportplaceholderid-flow-particleDiagnostics~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -230,7 +230,7 @@ resources:
           - - t89ogktS4H
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-particleDiagnostics-0~-gmIBQDRtvWC5vEbbUFnIs
+        key: ~exportplaceholderid-flow-particleDiagnostics~-gmIBQDRtvWC5vEbbUFnIs
         meta:
           category: trigger
           description: ''

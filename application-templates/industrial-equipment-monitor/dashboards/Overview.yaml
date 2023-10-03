@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: map
         config:
           additionalAttributes:
@@ -46,7 +46,7 @@ resources:
         title: Generators
         width: 3.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: gauge
         config:
           gaugeMax: '1200'
@@ -70,7 +70,7 @@ resources:
         title: Max Temperature
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: gauge
         config:
           gaugeMax: '1200'
@@ -94,7 +94,7 @@ resources:
         title: Min Temperature
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: gauge
         config:
           gaugeMax: '1200'
@@ -118,7 +118,7 @@ resources:
         title: Avg Temperature
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: device-list
         config:
           additionalAttributes:
@@ -175,7 +175,7 @@ resources:
         title: All Devices
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: gauge
         config:
           gaugeMax: '100'
@@ -199,7 +199,7 @@ resources:
         title: Avg Fuel Level
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: gauge
         config:
           gaugeMax: '100'
@@ -223,7 +223,7 @@ resources:
         title: Min Fuel Level
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: graph
         config:
           duration: 86400000
@@ -252,7 +252,7 @@ resources:
         title: Avg Fuel Level
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: gauge
         config:
           gaugeMax: '14'
@@ -276,7 +276,7 @@ resources:
         title: Avg Voltage
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: gauge
         config:
           gaugeMax: '14'
@@ -300,7 +300,7 @@ resources:
         title: Min Voltage
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: graph
         config:
           duration: 86400000
@@ -330,16 +330,19 @@ resources:
         width: 1
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
-        defaultValue: ~exportplaceholderid-experienceUser-kanarraExampleCom-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
+        defaultValue: ~exportplaceholderid-experienceUser-kanarraExampleCom~
         name: experienceUser
         type: experienceUser
         validationConfig: {}
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-overview-1~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-overview~
+    isPasswordProtected: false
     name: Overview
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

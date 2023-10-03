@@ -1,0 +1,160 @@
+resourceType: Flow
+resources:
+  - description: ''
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-processEdgeDataResponses~
+    name: Process Edge Data Responses
+    nodes:
+      - config:
+          destination: data
+          errorBehavior: payloadPath
+          errorPath: working.error
+          source: data
+        id: SHqVtDg1Lv
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 280
+          'y': 300
+        outputIds:
+          - - NndJx9wcTS
+        type: JsonDecodeNode
+      - config:
+          expression: '!{{working.error}} && {{data.data}} && {{data.replyId}}'
+        id: NndJx9wcTS
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 280
+          'y': 400
+        outputIds:
+          - - FyEL6LLwiT
+          - - 04VG_zPZCP
+        type: ConditionalNode
+      - config:
+          bodyTemplate: data.data
+          bodyTemplateType: path
+          cookieInfo: []
+          experienceVersion: develop
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 04VG_zPZCP
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 500
+        outputIds:
+          - - jWU15b_aHB
+        type: EndpointReplyNode
+      - config:
+          level: error
+          message: Invalid message
+          property: ''
+        id: FyEL6LLwiT
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 180
+          'y': 600
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: Response sent to user
+          property: ''
+        id: jWU15b_aHB
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 380
+          'y': 600
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: ldSePCATo0
+        meta:
+          annotationText: >-
+            On receipt of a message on the `tl-edge-response` topic, which is
+            published by the edge workflow ...
+
+
+            **Note:** Verify your devices' access keys have permission to
+            publish to the topic.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 460
+          x: 140
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 7X6lSUq53Z
+        meta:
+          annotationText: >-
+            Parse the stringified payload and ensure it has a `replyId` and
+            `data` object.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 200
+          x: 60
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: UFRrIBzpBp
+        meta:
+          annotationText: >-
+            Respond to the open request at `data.replyId`. This is the default
+            location to find the property ... If `replyId` is at a different
+            payload path, you must add that path in this node's configuration.
+
+
+            The response body is the `data` object published by the edge
+            workflow.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 360
+          x: 580
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: tl-edge-response
+        meta:
+          category: trigger
+          description: ''
+          label: MQTT
+          name: mqtt
+          uiId: 4s7cQNGYpy
+          x: 280
+          'y': 200
+        outputIds:
+          - - SHqVtDg1Lv
+        type: mqttTopic
+version: 1

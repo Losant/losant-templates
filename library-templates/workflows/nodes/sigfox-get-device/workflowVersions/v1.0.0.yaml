@@ -21,9 +21,9 @@ resources:
       resultDescription: Returns device information from Sigfox device.
       resultMode: optional
     enabled: true
-    flowId: ~exportplaceholderid-flow-sigfoxGetDevice-0~
+    flowId: ~exportplaceholderid-flow-sigfoxGetDevice~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -107,7 +107,7 @@ resources:
           - - pd9RVL6wfc
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-sigfoxGetDevice-0~-lbZoGp2PrUyltHCpiT-2L
+        key: ~exportplaceholderid-flow-sigfoxGetDevice~-lbZoGp2PrUyltHCpiT-2L
         meta:
           category: trigger
           description: ''

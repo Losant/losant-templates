@@ -61,7 +61,7 @@ resources:
     description: ''
     flowClass: customNode
     globals: []
-    id: ~exportplaceholderid-flow-tlI18NGetDictionary-1~
+    id: ~exportplaceholderid-flow-tlI18NGetDictionary~
     name: tl-i18n-get-dictionary
     nodes:
       - config:
@@ -130,9 +130,9 @@ resources:
               type: set
               valueTemplate: |-
                 {
-                  "url": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/en.csv",
+                  "url": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization~/tl-i18n-dictionaries/en.csv",
                   "label": "English",
-                  "flagUrl": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-flags/en.png",
+                  "flagUrl": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization~/tl-i18n-flags/en.png",
                   "default": true
                 }
               valueTemplateType: json
@@ -140,18 +140,18 @@ resources:
               type: set
               valueTemplate: |-
                 {
-                  "url": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/es.csv",
+                  "url": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization~/tl-i18n-dictionaries/es.csv",
                   "label": "Español",
-                  "flagUrl": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-flags/es.png"
+                  "flagUrl": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization~/tl-i18n-flags/es.png"
                 }
               valueTemplateType: json
             - destination: result.dictionaries.fr
               type: set
               valueTemplate: |-
                 {
-                  "url": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-dictionaries/fr.csv",
+                  "url": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization~/tl-i18n-dictionaries/fr.csv",
                   "label": "Français",
-                  "flagUrl": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization-0~/tl-i18n-flags/fr.png"
+                  "flagUrl": "https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryExperiencesPagesInternationalization~/tl-i18n-flags/fr.png"
                 }
               valueTemplateType: json
         id: xyDTHUBxIe
@@ -455,7 +455,7 @@ resources:
           - - xyDTHUBxIe
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-tlI18NGetDictionary-1~-kDF-1MeLxGModS4wiYqqB
+        key: ~exportplaceholderid-flow-tlI18NGetDictionary~-kDF-1MeLxGModS4wiYqqB
         meta:
           category: trigger
           description: ''
@@ -475,7 +475,7 @@ resources:
           - - xyDTHUBxIe
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-tlI18NGetDictionary-1~-QPtSk9c1i3
+        key: ~exportplaceholderid-flow-tlI18NGetDictionary~-QPtSk9c1i3
         meta:
           category: trigger
           description: ''

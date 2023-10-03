@@ -4,7 +4,7 @@ resources:
     description: Allow Experience Users to update their profile.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesFormsUserProfile-0~
+    id: ~exportplaceholderid-application-libraryExperiencesFormsUserProfile~
     name: User Profile
     readmePath: ./README.md
     imagePath: ./preview.png

@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlCollapsibleTree-1~
+    id: ~exportplaceholderid-experienceView-tlCollapsibleTree~
     localFilename: ./tl-collapsible-tree.hbs
     name: tl-collapsible-tree
     version: develop

@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: map
         config:
           additionalAttributes: null
@@ -73,7 +73,7 @@ resources:
         startY: 0
         title: Shipments
         width: 4
-      - applicationId: ~exportplaceholderid-application-applicationAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationAssetTracker~
         blockType: event-list
         config:
           allowUpdates: true
@@ -115,8 +115,11 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-overviewDashboard-1~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-overviewDashboard~
+    isPasswordProtected: false
     name: Overview Dashboard
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

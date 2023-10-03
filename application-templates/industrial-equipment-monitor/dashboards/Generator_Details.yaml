@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions:
@@ -50,7 +50,7 @@ resources:
         title: Status
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -71,7 +71,7 @@ resources:
         title: Manifold Temp
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -92,7 +92,7 @@ resources:
         title: Oil Pressure
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -113,7 +113,7 @@ resources:
         title: RPM
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -134,7 +134,7 @@ resources:
         title: Output Current
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -155,7 +155,7 @@ resources:
         title: Battery Voltage
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -176,13 +176,13 @@ resources:
         title: Fuel Level
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: image
         config:
           bgColor: 'rgba(255, 255, 255, 0)'
           imageSource: static
           imageUrl: >-
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~{{ctx.deviceId-0.tags.image.[0]}}
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~{{ctx.deviceId-0.tags.image.[0]}}
         height: 2
         id: x3tDNbqu_s
         startX: 0
@@ -190,7 +190,7 @@ resources:
         title: Device Image
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: graph
         config:
           duration: 21600000
@@ -297,7 +297,7 @@ resources:
         title: Data Points
         width: 3
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: custom-chart
         config:
           configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n\t\"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": {\n    \"type\": \"bar\"\n  },\n  \"config\": {\n    \"axis\": {\n      \"labels\": false,\n      \"domain\": false,\n      \"ticks\": false,\n      \"grid\": false\n    },\n    \"view\": {\n    \t\"fill\": \"transparent\",\n      \"stroke\": \"transparent\"\n    },\n    \"scale\": {\n      \"bandPaddingInner\": 0\n    }\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"axis\": null\n    },\n    \"y\": {\n      \"field\": \"value\",\n      \"type\": \"ordinal\",\n      \"scale\": {\n        \"domain\": []\n      },\n      \"axis\": null\n    },\n    \"color\": {\n      \"field\": \"value\", \"type\": \"ordinal\",\n      \"legend\": null,\n      \"scale\": {\n        \"domain\": [\"Running\",\"Faulted\",\"Stopped\",\"Maintenance\"],\n        \"range\": [\"#22AE78\",\"#FC1526\",\"#FC1526\",\"#0033FF\"]\n      }\n    }\n  }\n}"
@@ -319,7 +319,7 @@ resources:
         title: State Over Last 24 Hours
         width: 3.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -339,7 +339,7 @@ resources:
         title: Running Time
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -360,24 +360,27 @@ resources:
         width: 0.5
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
-        defaultValue: ~exportplaceholderid-device-acz8BpA5Ajz6-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
+        defaultValue: ~exportplaceholderid-device-acz8BpA5Ajz6~
         name: deviceId-0
         type: deviceId
         validationConfig:
           includeFullDevice: true
         validationEnabled: false
       - applicationId: >-
-          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor-0~
-        defaultValue: ~exportplaceholderid-experienceUser-kanarraExampleCom-0~
+          ~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~
+        defaultValue: ~exportplaceholderid-experienceUser-kanarraExampleCom~
         name: experienceUser-0
         type: experienceUser
         validationConfig: {}
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-generatorDetails-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-generatorDetails~
+    isPasswordProtected: false
     name: Generator Details
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

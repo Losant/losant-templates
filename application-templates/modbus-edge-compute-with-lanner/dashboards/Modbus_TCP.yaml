@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: input
         config:
           controls:
@@ -11,7 +11,7 @@ resources:
                 aggregation: LAST
                 attribute: temp_c
                 deviceIds:
-                  - ~exportplaceholderid-device-modbusTcpSensor-2~
+                  - ~exportplaceholderid-device-modbusTcpSensor~
                 deviceTags: []
               defaultValue: 50
               grid:
@@ -31,7 +31,7 @@ resources:
                 aggregation: LAST
                 attribute: humidity
                 deviceIds:
-                  - ~exportplaceholderid-device-modbusTcpSensor-2~
+                  - ~exportplaceholderid-device-modbusTcpSensor~
                 deviceTags: []
               defaultValue: 50
               grid:
@@ -69,7 +69,7 @@ resources:
                 }
               templateId: button-0
               type: button
-              workflowId: ~exportplaceholderid-flow-updateSimulator-2~
+              workflowId: ~exportplaceholderid-flow-updateSimulator~
             - color: '#8db319'
               defaultQuery:
                 aggregation: LAST
@@ -108,7 +108,7 @@ resources:
         title: Simulator Controller
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: graph
         config:
           duration: 86400000
@@ -143,7 +143,7 @@ resources:
         title: Temperature
         width: 2.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -170,7 +170,7 @@ resources:
         title: Temperature
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -197,7 +197,7 @@ resources:
         title: Humidity
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: graph
         config:
           duration: 86400000
@@ -232,7 +232,7 @@ resources:
         title: Humidity
         width: 2.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: indicator
         config:
           conditions:
@@ -262,8 +262,8 @@ resources:
         width: 1
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
-        defaultValue: ~exportplaceholderid-device-modbusTcpSensor-2~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
+        defaultValue: ~exportplaceholderid-device-modbusTcpSensor~
         name: device
         type: deviceId
         validationConfig:
@@ -271,8 +271,11 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-modbusTcp-1~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-modbusTcp~
+    isPasswordProtected: false
     name: Modbus TCP
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

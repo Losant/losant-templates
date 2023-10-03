@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions:
@@ -54,7 +54,7 @@ resources:
         title: Status
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: pie
         config:
           duration: 2592000000
@@ -101,7 +101,7 @@ resources:
         title: 'Machine Run Time [30 days, hours]'
         width: 1.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: section-header
         config: {}
         height: 0.5
@@ -111,7 +111,7 @@ resources:
         title: '### Sheetbreaks [24 hours]'
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: gauge
         config:
           conditions:
@@ -149,7 +149,7 @@ resources:
         title: 'Rate [30 days]'
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: pie
         config:
           duration: 86400000
@@ -196,7 +196,7 @@ resources:
         title: '[minutes]'
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: gauge
         config:
           conditions:
@@ -234,7 +234,7 @@ resources:
         title: 'Rate [Current]'
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -294,7 +294,7 @@ resources:
         title: 'Machine Run Time [30 days]'
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -347,7 +347,7 @@ resources:
         startY: 1.5
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: graph
         config:
           duration: 86400000
@@ -441,7 +441,7 @@ resources:
         startY: 2
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: section-header
         config: {}
         height: 0.5
@@ -451,7 +451,7 @@ resources:
         title: '### OEE [30 days]'
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: section-header
         config: {}
         height: 0.5
@@ -461,7 +461,7 @@ resources:
         title: '### Current Production '
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -484,7 +484,7 @@ resources:
         title: 'OEE [30 days]'
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -508,7 +508,7 @@ resources:
         title: 'Availability [30 Days]'
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -531,7 +531,7 @@ resources:
         title: 'Quality [30 days]'
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -578,7 +578,7 @@ resources:
         startY: 3.5
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions:
@@ -684,7 +684,7 @@ resources:
         startY: 3.5
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -708,7 +708,7 @@ resources:
         title: 'Performance [30 days]'
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: graph
         config:
           duration: 86400000
@@ -803,7 +803,7 @@ resources:
         title: OEE
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: graph
         config:
           duration: 86400000
@@ -898,7 +898,7 @@ resources:
         title: 'Current Production SKU [24 hrs]'
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: section-header
         config: {}
         height: 0.5
@@ -908,7 +908,7 @@ resources:
         title: '### Unplanned Downtime [30 days]'
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: section-header
         config: {}
         height: 0.5
@@ -918,7 +918,7 @@ resources:
         title: '### Planned Downtime [30 days]'
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: pie
         config:
           duration: 2592000000
@@ -987,7 +987,7 @@ resources:
         title: '[minutes]'
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -1063,7 +1063,7 @@ resources:
         startY: 6.5
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: pie
         config:
           duration: 2592000000
@@ -1110,7 +1110,7 @@ resources:
         title: '[minutes]'
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
         blockType: indicator
         config:
           conditions: []
@@ -1162,8 +1162,8 @@ resources:
         width: 1
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
-        defaultValue: ~exportplaceholderid-device-paperMachine1-0~
+          ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
+        defaultValue: ~exportplaceholderid-device-paperMachine1~
         name: deviceId-0
         type: deviceId
         validationConfig:
@@ -1175,9 +1175,12 @@ resources:
         validationEnabled: true
     defaultTheme: light
     description: '### {{ctx.deviceId-0.name}} '
-    id: ~exportplaceholderid-dashboard-paperMachine-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-paperMachine~
+    isPasswordProtected: false
     name: Paper Machine
     public: false
     refreshRate: 60
     reportConfigs: []
+    resolution: 60000
 version: 1

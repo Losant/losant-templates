@@ -2,17 +2,17 @@ resourceType: ExperienceUser
 resources:
   - email: kanarra@example.com
     experienceGroupIds:
-      - ~exportplaceholderid-experienceGroup-kanarra-0~
-    id: ~exportplaceholderid-experienceUser-kanarraExampleCom-0~
+      - ~exportplaceholderid-experienceGroup-kanarra~
+    id: ~exportplaceholderid-experienceUser-kanarraExampleCom~
     userTags: {}
   - email: sadler-isberg@example.com
     experienceGroupIds:
-      - ~exportplaceholderid-experienceGroup-sadlerIsberg-1~
-    id: ~exportplaceholderid-experienceUser-sadlerIsbergExampleCom-1~
+      - ~exportplaceholderid-experienceGroup-sadlerIsberg~
+    id: ~exportplaceholderid-experienceUser-sadlerIsbergExampleCom~
     userTags: {}
   - email: tekton-health@example.com
     experienceGroupIds:
-      - ~exportplaceholderid-experienceGroup-tektonHealth-2~
-    id: ~exportplaceholderid-experienceUser-tektonHealthExampleCom-2~
+      - ~exportplaceholderid-experienceGroup-tektonHealth~
+    id: ~exportplaceholderid-experienceUser-tektonHealthExampleCom~
     userTags: {}
 version: 1

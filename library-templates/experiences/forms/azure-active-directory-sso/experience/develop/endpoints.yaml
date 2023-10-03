@@ -4,25 +4,28 @@ resources:
     description: ""
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getTlLoginSso-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlLoginSso~
     method: get
     route: /tl-login-sso
     staticReply:
       statusCode: 200
       type: page
-      value: ~exportplaceholderid-experienceView-tlPageLoginSso-0~
+      value: ~exportplaceholderid-experienceView-tlPageLoginSso~
     version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postTlLoginSso-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postTlLoginSso~
     method: post
     route: /tl-login-sso
     version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postTlSaml-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postTlSaml~
     method: post
     route: /tl-saml
     version: develop

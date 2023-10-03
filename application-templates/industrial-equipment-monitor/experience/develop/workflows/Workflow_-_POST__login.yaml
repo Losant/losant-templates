@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Starter workflow for building a response to this endpoint
     enabled: true
-    flowId: ~exportplaceholderid-flow-workflowPostLogin-3~
+    flowId: ~exportplaceholderid-flow-workflowPostLogin~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowPostLogin-2~
+    id: ~exportplaceholderid-flowVersion-workflowPostLogin~
     name: Workflow - POST /login
     nodes:
       - config:
@@ -89,7 +89,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postLogin-2~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin~
         meta:
           category: trigger
           description: ''

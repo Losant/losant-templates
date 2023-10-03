@@ -9,7 +9,7 @@ resources:
       The workflow also includes global variable defining which user tags to
       expose to the end user, whether as read-only or as editable values.
     enabled: true
-    flowId: ~exportplaceholderid-flow-getPostTlEditProfile-0~
+    flowId: ~exportplaceholderid-flow-getPostTlEditProfile~
     globals:
       - json: |-
           [
@@ -30,7 +30,7 @@ resources:
             }
           ]
         key: exposedUserTags
-    id: ~exportplaceholderid-flowVersion-getPostTlEditProfile-0~
+    id: ~exportplaceholderid-flowVersion-getPostTlEditProfile~
     name: GET & POST /tl-edit-profile
     nodes:
       - config:
@@ -43,7 +43,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -249,7 +249,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -279,7 +279,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '400'
@@ -322,7 +322,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-editProfile~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '500'
@@ -341,7 +341,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getTlEditProfile-0~
+        key: ~exportplaceholderid-experienceEndpoint-getTlEditProfile~
         meta:
           category: trigger
           description: ''
@@ -354,7 +354,7 @@ resources:
           - - 1IpUyasnPt
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postTlEditProfile-1~
+        key: ~exportplaceholderid-experienceEndpoint-postTlEditProfile~
         meta:
           category: trigger
           description: ''

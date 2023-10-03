@@ -142,7 +142,7 @@ resources:
       Milesight AM107 Ambience Monitoring Sensor:
       https://www.milesight-iot.com/lorawan/sensor/am100/
     deviceName: Milesight AM107 Ambience Monitoring Sensor
-    id: ~exportplaceholderid-deviceRecipe-milesightAm107AmbienceMonitoringSensor-0~
+    id: ~exportplaceholderid-deviceRecipe-milesightAm107AmbienceMonitoringSensor~
     name: Milesight AM107 Ambience Monitoring Sensor
     tags:
       - key: DeviceClass
@@ -247,7 +247,7 @@ resources:
     deviceClass: standalone
     deviceDescription: Default Senet Uplink API auto-created device
     deviceName: Default Senet Uplink API Device
-    id: ~exportplaceholderid-deviceRecipe-senetUplinkApiDeviceRecipe-1~
+    id: ~exportplaceholderid-deviceRecipe-senetUplinkApiDeviceRecipe~
     name: Senet Uplink API Device Recipe
     tags:
       - key: DeviceClass

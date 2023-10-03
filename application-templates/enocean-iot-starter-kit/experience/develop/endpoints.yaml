@@ -1,20 +1,10 @@
 resourceType: ExperienceEndpoint
 resources:
-  - access: authenticated
-    enabled: true
-    endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-get-5~
-    method: get
-    route: /
-    unauthorizedReply:
-      statusCode: 302
-      type: redirect
-      value: /login
-    version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogin-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogin~
     method: get
     route: /login
     version: develop
@@ -22,7 +12,8 @@ resources:
     description: Handles a user's log out request.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogout-3~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogout~
     method: get
     route: /logout
     unauthorizedReply:
@@ -32,9 +23,22 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getProvision-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getProvision~
     method: get
     route: /provision
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-get~
+    method: get
+    route: /
     unauthorizedReply:
       statusCode: 302
       type: redirect
@@ -44,14 +48,16 @@ resources:
     description: Endpoint that accepts and verifies an experience's email and password.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postLogin-4~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postLogin~
     method: post
     route: /login
     version: develop
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postProvision-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postProvision~
     method: post
     route: /provision
     unauthorizedReply:

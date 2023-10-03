@@ -4,18 +4,20 @@ resources:
     description: Endpoint that displays the forgot password form.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getForgotPassword-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getForgotPassword~
     method: get
     route: /forgot-password
     staticReply:
       type: page
-      value: ~exportplaceholderid-experienceView-tlPageForgotPassword-0~
+      value: ~exportplaceholderid-experienceView-tlPageForgotPassword~
     version: develop
   - access: public
     description: Displays the reset password form.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getResetPassword-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getResetPassword~
     method: get
     route: /reset-password
     version: develop
@@ -24,7 +26,8 @@ resources:
       the POST /tl-forgot-password workflow to send a reset email.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postForgotPassword-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postForgotPassword~
     method: post
     route: /forgot-password
     version: develop
@@ -32,7 +35,8 @@ resources:
     description: Accepts a new password to reset the user's previous password.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postResetPassword-3~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postResetPassword~
     method: post
     route: /reset-password
     version: develop

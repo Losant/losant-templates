@@ -2,11 +2,11 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Returns an authentication token for an experience user.
     enabled: true
-    flowId: ~exportplaceholderid-flow-postApiAuth-1~
+    flowId: ~exportplaceholderid-flow-postApiAuth~
     globals:
       - json: '86400000'
         key: cookieMaxAgeMs
-    id: ~exportplaceholderid-flowVersion-postApiAuth-1~
+    id: ~exportplaceholderid-flowVersion-postApiAuth~
     name: POST /api/auth
     nodes:
       - config:
@@ -176,7 +176,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postApiAuth-1~
+        key: ~exportplaceholderid-experienceEndpoint-postApiAuth~
         meta:
           category: trigger
           description: ''

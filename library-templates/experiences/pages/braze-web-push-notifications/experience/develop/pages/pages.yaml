@@ -2,7 +2,7 @@ resourceType: ExperienceView
 resources:
   - description: Test page that demonstrates how to allow users to opt-in to
       notifications and register the service worker.
-    id: ~exportplaceholderid-experienceView-tlPageWebPush-0~
+    id: ~exportplaceholderid-experienceView-tlPageWebPush~
     localFilename: ./tl-page-web-push.hbs
     name: tl-page-web-push
     version: develop

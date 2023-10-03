@@ -5,7 +5,7 @@ resources:
       label, and optional device image. "
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesComponentsDeviceList-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsDeviceList~
     name: Device List
     readmePath: ./README.md
     imagePath: ./preview.png

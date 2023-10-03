@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~
+          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance~
         blockType: graph
         config:
           duration: 10800000
@@ -18,7 +18,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -38,7 +38,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -58,7 +58,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -78,7 +78,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -98,7 +98,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -118,7 +118,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -138,7 +138,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -158,7 +158,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -178,7 +178,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -198,7 +198,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -218,7 +218,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -238,7 +238,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -258,7 +258,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -278,7 +278,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -298,7 +298,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -318,7 +318,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -338,7 +338,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -358,7 +358,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -378,7 +378,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -398,7 +398,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -417,7 +417,7 @@ resources:
         title: Turbofan
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~
+          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance~
         blockType: graph
         config:
           duration: 10800000
@@ -433,7 +433,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -453,7 +453,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -473,7 +473,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -492,7 +492,7 @@ resources:
         title: Outlier Predictions
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~
+          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance~
         blockType: graph
         config:
           duration: 604800000
@@ -508,7 +508,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-turbofan-0~
+                - ~exportplaceholderid-device-turbofan~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -527,7 +527,7 @@ resources:
         title: Outliers Per Day
         width: 1.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~
+          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance~
         blockType: open-event-indicator
         config:
           allowUpdates: true
@@ -539,7 +539,7 @@ resources:
         title: Open Events
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~
+          ~exportplaceholderid-application-applicationElipsaPredictiveMaintenance~
         blockType: event-list
         config:
           columns:
@@ -564,7 +564,8 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
-    id: ~exportplaceholderid-dashboard-turbofan-0~
+    id: ~exportplaceholderid-dashboard-turbofan~
+    isPasswordProtected: false
     name: Turbofan
     public: false
     refreshRate: 60

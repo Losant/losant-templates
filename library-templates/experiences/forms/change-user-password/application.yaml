@@ -4,7 +4,7 @@ resources:
     description: Allow Experience Users to change their passwords.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesFormsChangeUserPassword-0~
+    id: ~exportplaceholderid-application-libraryExperiencesFormsChangeUserPassword~
     name: Change User Password
     readmePath: ./README.md
     imagePath: ./preview.png

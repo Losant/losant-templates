@@ -1,8 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -11,8 +10,7 @@ resources:
         startY: 0
         title: KST3320 Distance Sensor
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -21,8 +19,7 @@ resources:
         startY: 0
         title: Last known statistics / GPS Map
         width: 3
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: device-state-table
         config:
           attributes:
@@ -75,8 +72,7 @@ resources:
         startY: 0.5
         title: ''
         width: 3
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -112,8 +108,7 @@ resources:
         startY: 0.5
         title: Distance in Inches
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -149,8 +144,7 @@ resources:
         startY: 0.5
         title: Fill Percentage
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: map
         config:
           additionalAttributes: []
@@ -189,8 +183,7 @@ resources:
         startX: 1
         startY: 1.5
         width: 3
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -226,8 +219,7 @@ resources:
         startY: 2
         title: Distance in Millimeters
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -266,8 +258,7 @@ resources:
         startY: 2.5
         title: Battery Percentage
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -276,8 +267,7 @@ resources:
         startY: 3.5
         title: 'Historical Distance, Signal Strength & SNR Measurements'
         width: 4
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -311,8 +301,7 @@ resources:
         startY: 4
         title: Historical Distance (Millimeter)
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -346,8 +335,7 @@ resources:
         startY: 4
         title: Historical Signal Strength (RSSI)
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -381,8 +369,7 @@ resources:
         startY: 4
         title: Historical Distance (Inches)
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -417,9 +404,8 @@ resources:
         title: Historical Signal to Noise Ratio (SNR)
         width: 1
     contextConfiguration:
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
-        defaultValue: ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
+        defaultValue: ~exportplaceholderid-device-kst3320SimulatedDevice~
         name: KST3320
         type: deviceId
         validationConfig:
@@ -432,9 +418,12 @@ resources:
       [**KS Technologies**](http://kstechnologies.com) | 
       11580 Black Forest Road, Suite #60 | 
       Colorado Springs, CO. 80908
-    id: ~exportplaceholderid-dashboard-kst3320DashboardDistance-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-kst3320DashboardDistance~
+    isPasswordProtected: false
     name: KST3320 Dashboard (Distance)
     public: false
     refreshRate: 60
     reportConfigs: []
+    resolution: 60000
 version: 1

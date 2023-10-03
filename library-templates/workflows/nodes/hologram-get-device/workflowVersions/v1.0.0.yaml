@@ -19,9 +19,9 @@ resources:
         documentation](https://hologram.io/docs/reference/cloud/http/#/reference/device-management/devices/get-a-device).
       resultMode: required
     enabled: true
-    flowId: ~exportplaceholderid-flow-hologramGetDevice-0~
+    flowId: ~exportplaceholderid-flow-hologramGetDevice~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -103,7 +103,7 @@ resources:
           - - 60XiClM_HL
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-hologramGetDevice-0~-1MwIDeYeeU4lomBHsHu6F
+        key: ~exportplaceholderid-flow-hologramGetDevice~-1MwIDeYeeU4lomBHsHu6F
         meta:
           category: trigger
           description: ''

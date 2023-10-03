@@ -5,7 +5,7 @@ resources:
       front end for your End User Experiences.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesBoilerplatesReact-0~
+    id: ~exportplaceholderid-application-libraryExperiencesBoilerplatesReact~
     name: React
     readmePath: ./README.md
     imagePath: ./preview.png

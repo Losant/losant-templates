@@ -3,7 +3,7 @@ resources:
   - description: KST3320 simulated (no real hardware needed) workflow.
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-simulatedKst3320Workflow-1~
+    id: ~exportplaceholderid-flow-simulatedKst3320Workflow~
     name: Simulated KST3320 Workflow
     nodes:
       - config:
@@ -161,7 +161,7 @@ resources:
               valueTemplate: '{{data.tempF}}'
             - key: vacc
               valueTemplate: '{{data.vacc}}'
-          deviceId: ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+          deviceId: ~exportplaceholderid-device-kst3320SimulatedDevice~
           deviceIdTemplateType: stringTemplate
           resultPath: ''
           timeSourceType: payloadTime
@@ -433,7 +433,7 @@ resources:
       - config:
           seconds: 900
         key: >-
-          ~exportplaceholderid-flow-simulatedKst3320Workflow-1~-HdVX3KwBaOQAAZ6kvwFQN
+          ~exportplaceholderid-flow-simulatedKst3320Workflow~-HdVX3KwBaOQAAZ6kvwFQN
         meta:
           category: trigger
           description: ''

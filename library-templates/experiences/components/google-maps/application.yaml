@@ -5,7 +5,7 @@ resources:
       and info bubbles.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesComponentsGoogleMaps-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsGoogleMaps~
     name: Google Maps
     readmePath: ./README.md
     imagePath: ./preview.png

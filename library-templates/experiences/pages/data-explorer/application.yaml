@@ -5,7 +5,7 @@ resources:
       the in-app Data Explorer.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesPagesDataExplorer-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesDataExplorer~
     name: Data Explorer
     readmePath: ./README.md
     imagePath: ./preview.png

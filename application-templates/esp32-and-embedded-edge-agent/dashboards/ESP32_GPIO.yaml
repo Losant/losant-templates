@@ -1,8 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: input
         config:
           controls:
@@ -10,7 +9,7 @@ resources:
               color: 'rgba(40, 79, 255, 1)'
               commandName: set_output
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               grid:
                 h: 1
@@ -41,7 +40,7 @@ resources:
                 aggregation: LAST
                 attribute: green_led
                 deviceIds:
-                  - ~exportplaceholderid-device-esp32-0~
+                  - ~exportplaceholderid-device-esp32~
                 deviceTags: []
               defaultValue: false
               grid:
@@ -58,7 +57,7 @@ resources:
                 aggregation: LAST
                 attribute: blue_led
                 deviceIds:
-                  - ~exportplaceholderid-device-esp32-0~
+                  - ~exportplaceholderid-device-esp32~
                 deviceTags: []
               defaultValue: false
               grid:
@@ -75,7 +74,7 @@ resources:
                 aggregation: LAST
                 attribute: red_led
                 deviceIds:
-                  - ~exportplaceholderid-device-esp32-0~
+                  - ~exportplaceholderid-device-esp32~
                 deviceTags: []
               defaultValue: false
               grid:
@@ -91,7 +90,7 @@ resources:
               color: 'rgba(130, 91, 255, 1)'
               commandName: toggle
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               grid:
                 h: 1
@@ -117,7 +116,7 @@ resources:
               color: 'rgba(40, 79, 255, 1)'
               commandName: blink
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               grid:
                 h: 1
@@ -160,8 +159,7 @@ resources:
         startY: 0
         title: GPIO Control
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: graph
         config:
           duration: 86400000
@@ -177,7 +175,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               dotWeight: 0
               expression: ''
@@ -195,8 +193,7 @@ resources:
         startY: 0
         title: Green Status
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: graph
         config:
           duration: 86400000
@@ -212,7 +209,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               dotWeight: 0
               expression: ''
@@ -230,8 +227,7 @@ resources:
         startY: 0
         title: Blue Status
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: graph
         config:
           duration: 86400000
@@ -247,7 +243,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               dotWeight: 0
               expression: ''
@@ -265,8 +261,7 @@ resources:
         startY: 0
         title: Red Status
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: indicator
         config:
           conditions:
@@ -286,7 +281,7 @@ resources:
               attribute: switch
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
         height: 1.5
         id: NrgTDU5vWI
@@ -294,8 +289,7 @@ resources:
         startY: 1
         title: Contact Switch
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: graph
         config:
           duration: 86400000
@@ -311,7 +305,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -329,8 +323,7 @@ resources:
         startY: 1
         title: Contact Switch
         width: 2.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: graph
         config:
           duration: 86400000
@@ -346,7 +339,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-esp32-0~
+                - ~exportplaceholderid-device-esp32~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -364,8 +357,7 @@ resources:
         startY: 2.5
         title: Moisture
         width: 3
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+      - applicationId: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -382,7 +374,7 @@ resources:
             attribute: moisture
             color: '#8db319'
             deviceIds:
-              - ~exportplaceholderid-device-esp32-0~
+              - ~exportplaceholderid-device-esp32~
             deviceTags: []
             label: ''
         height: 1.5
@@ -394,8 +386,11 @@ resources:
     contextConfiguration: []
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-esp32Gpio-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-esp32Gpio~
+    isPasswordProtected: false
     name: ESP32 GPIO
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

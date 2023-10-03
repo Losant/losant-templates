@@ -15,7 +15,7 @@ resources:
         key: defaultState
       - json: '"__TRANSIT__"'
         key: transitStatus
-    id: ~exportplaceholderid-flow-dataSimulator-0~
+    id: ~exportplaceholderid-flow-dataSimulator~
     name: Data Simulator
     nodes:
       - config:
@@ -7629,7 +7629,7 @@ resources:
           - - Nt8lHt0s9O
         type: RandomNumberNode
       - config:
-          dataTableIdTemplate: ~exportplaceholderid-dataTable-distributionCenters-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-distributionCenters~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''
@@ -7797,7 +7797,7 @@ resources:
         type: RandomNumberNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-flow-dataSimulator-0~-Xm2Gcy7vz-SQuHblraMJ2
+        key: ~exportplaceholderid-flow-dataSimulator~-Xm2Gcy7vz-SQuHblraMJ2
         meta:
           category: trigger
           description: ''
@@ -7813,7 +7813,7 @@ resources:
         type: virtualButton
       - config:
           seconds: 120
-        key: ~exportplaceholderid-flow-dataSimulator-0~-YsyjYqzFjaWa5sIdqy7gQ
+        key: ~exportplaceholderid-flow-dataSimulator~-YsyjYqzFjaWa5sIdqy7gQ
         meta:
           category: trigger
           description: ''

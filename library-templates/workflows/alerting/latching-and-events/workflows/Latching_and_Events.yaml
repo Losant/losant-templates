@@ -9,7 +9,7 @@ resources:
         key: maxThresholdAttributeTagName
       - json: '"resetThreshold"'
         key: resetThresholdAttributeTagName
-    id: ~exportplaceholderid-flow-latchingAndEvents-0~
+    id: ~exportplaceholderid-flow-latchingAndEvents~
     name: Latching and Events
     nodes:
       - config:
@@ -321,7 +321,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-flow-latchingAndEvents-0~-lnZCno0M7hhQ6tf-zM8qq
+        key: ~exportplaceholderid-flow-latchingAndEvents~-lnZCno0M7hhQ6tf-zM8qq
         meta:
           category: trigger
           description: ''
@@ -343,7 +343,7 @@ resources:
       - config:
           attributeWhitelist:
             - temperature
-        key: ~exportplaceholderid-device-exampleDevice-0~
+        key: ~exportplaceholderid-device-exampleDevice~
         meta:
           allowedAttributeType: attributeWhitelist
           category: trigger

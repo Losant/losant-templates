@@ -3,7 +3,7 @@ resources:
   - description: Workflow for a Milesight AM107 on the Senet network.
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-senetDeveloperMilesightAm107-2~
+    id: ~exportplaceholderid-flow-senetDeveloperMilesightAm107~
     name: Senet Developer - Milesight AM107
     nodes:
       - config:
@@ -43,7 +43,7 @@ resources:
           nameTemplate: 'Milesight AM107 - {{data.body.devEui}}'
           parentIdTemplate: ''
           recipeIdTemplate: >-
-            ~exportplaceholderid-deviceRecipe-milesightAm107AmbienceMonitoringSensor-0~
+            ~exportplaceholderid-deviceRecipe-milesightAm107AmbienceMonitoringSensor~
           resultPath: working.device
           tagsAsObject: true
         id: vLcVM7WSmc
@@ -58,7 +58,7 @@ resources:
           - - bq_lJpeJeU
         type: CreateDeviceNode
       - config:
-          customNodeId: ~exportplaceholderid-flow-am107Decoder-0~
+          customNodeId: ~exportplaceholderid-flow-am107Decoder~
           customNodeVersion: default
           fields:
             - id: body
@@ -193,7 +193,7 @@ resources:
           - - vLcVM7WSmc
         type: ConditionalNode
       - config:
-          customNodeId: ~exportplaceholderid-flow-senetUplinkApiGenericDeviceDecoder-3~
+          customNodeId: ~exportplaceholderid-flow-senetUplinkApiGenericDeviceDecoder~
           customNodeVersion: default
           fields:
             - id: body
@@ -328,7 +328,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-webhook-senetDataReceiver-0~
+        key: ~exportplaceholderid-webhook-senetDataReceiver~
         meta:
           category: trigger
           description: ''

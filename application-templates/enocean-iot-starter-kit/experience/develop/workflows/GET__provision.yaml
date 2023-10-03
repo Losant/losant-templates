@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Displays the list of pending provisions and provision form.
     enabled: true
-    flowId: ~exportplaceholderid-flow-getProvision-0~
+    flowId: ~exportplaceholderid-flow-getProvision~
     globals: []
-    id: ~exportplaceholderid-flowVersion-getProvision-0~
+    id: ~exportplaceholderid-flowVersion-getProvision~
     name: GET /provision
     nodes:
       - config:
@@ -14,7 +14,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageProvision-5~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageProvision~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -45,7 +45,7 @@ resources:
         outputIds: []
         type: DebugNode
       - config:
-          dataTableIdTemplate: ~exportplaceholderid-dataTable-provisionQueue-0~
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-provisionQueue~
           includeFieldsTemplate: ''
           limitTemplate: ''
           offsetTemplate: ''
@@ -81,7 +81,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getProvision-0~
+        key: ~exportplaceholderid-experienceEndpoint-getProvision~
         meta:
           category: trigger
           description: ''

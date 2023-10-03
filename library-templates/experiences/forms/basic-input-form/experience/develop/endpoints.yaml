@@ -3,17 +3,19 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getTlBasicForm-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlBasicForm~
     method: get
     route: /tl-basic-form
     staticReply:
       type: page
-      value: ~exportplaceholderid-experienceView-tlBasicForm-0~
+      value: ~exportplaceholderid-experienceView-tlBasicForm~
     version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postTlBasicForm-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postTlBasicForm~
     method: post
     route: /tl-basic-form
     version: develop

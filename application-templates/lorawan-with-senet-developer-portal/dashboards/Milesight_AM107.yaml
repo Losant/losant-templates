@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: section-header
         config: {}
         height: 0.5
@@ -12,7 +12,7 @@ resources:
         title: Device Details
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: gauge
         config:
           conditions:
@@ -56,7 +56,7 @@ resources:
         title: Temperature
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -87,7 +87,7 @@ resources:
         title: Humidity
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: graph
         config:
           duration: 259200000
@@ -148,7 +148,7 @@ resources:
               detectDataGaps: false
               deviceIds:
                 - '{{ctx.deviceId}}'
-                - ~exportplaceholderid-device-milesightAm10724E124128B118964-0~
+                - ~exportplaceholderid-device-milesightAm10724E124128B118964~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -167,7 +167,7 @@ resources:
         title: Air Quality
         width: 3
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: indicator
         config:
           conditions:
@@ -289,7 +289,7 @@ resources:
         title: '24 Hr [min/mean/max]'
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: indicator
         config:
           conditions:
@@ -320,7 +320,7 @@ resources:
         title: 'Current Light Status '
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: section-header
         config: {}
         height: 0.5
@@ -330,13 +330,13 @@ resources:
         title: Office Occupancy
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: image-overlay
         config:
           backgroundColor: 'rgba(255, 255, 255, 0)'
           defaultZoom: -1.3333
           imageUrl: >-
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~/office-floorplan.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~/office-floorplan.png
           overlays:
             - conditions:
                 - color: 'rgba(165, 39, 17, 1)'
@@ -381,7 +381,7 @@ resources:
         title: 'Office Occupancy '
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: section-header
         config: {}
         height: 0.5
@@ -391,7 +391,7 @@ resources:
         title: Device List & Summary Table
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         blockType: device-state-table
         config:
           attributes:
@@ -445,7 +445,7 @@ resources:
         width: 4
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+          ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
         defaultValue: 62310f7d8046c68cc70790e8
         name: deviceId
         type: deviceId
@@ -460,9 +460,12 @@ resources:
     description: >-
       Dashboard includes  Device Details, Office Occupancy Overlay,  and Device
       List & Summary.
-    id: ~exportplaceholderid-dashboard-milesightAm107-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-milesightAm107~
+    isPasswordProtected: false
     name: Milesight AM107
     public: false
     refreshRate: 60
     reportConfigs: []
+    resolution: 60000
 version: 1

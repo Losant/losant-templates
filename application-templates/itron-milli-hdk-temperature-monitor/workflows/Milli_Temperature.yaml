@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-milliTemperature-0~
+    id: ~exportplaceholderid-flow-milliTemperature~
     name: Milli Temperature
     nodes:
       - config:
@@ -187,7 +187,7 @@ resources:
               valueTemplate: '{{ data.body.tenantId }}'
           nameTemplate: 'Milli HDK {{data.body.eventPayload.macId}}'
           parentIdTemplate: ''
-          recipeIdTemplate: ~exportplaceholderid-deviceRecipe-milliTempSensor-0~
+          recipeIdTemplate: ~exportplaceholderid-deviceRecipe-milliTempSensor~
           resultPath: working.currentDevice
           tagsAsObject: true
         id: 7qoQv6p80Y
@@ -345,7 +345,7 @@ resources:
           params:
             - name: webhookId
               type: string
-              value: ~exportplaceholderid-webhook-milliTemperature-0~
+              value: ~exportplaceholderid-webhook-milliTemperature~
           resource: webhook
           responsePath: working.losantWebhook
         id: bwrHJ5x3bv
@@ -497,7 +497,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-flow-milliTemperature-0~--K2ag1Yi9_KlGAJHrebqv
+        key: ~exportplaceholderid-flow-milliTemperature~--K2ag1Yi9_KlGAJHrebqv
         meta:
           category: trigger
           description: ''
@@ -513,7 +513,7 @@ resources:
           - - bwrHJ5x3bv
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-webhook-milliTemperature-0~
+        key: ~exportplaceholderid-webhook-milliTemperature~
         meta:
           category: trigger
           description: ''

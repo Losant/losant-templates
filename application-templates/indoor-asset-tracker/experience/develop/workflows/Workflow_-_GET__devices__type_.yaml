@@ -4,9 +4,9 @@ resources:
       Renders either a resident or equipment dashboard using the device's type
       tag.
     enabled: true
-    flowId: ~exportplaceholderid-flow-workflowGetDevicesType-5~
+    flowId: ~exportplaceholderid-flow-workflowGetDevicesType~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowGetDevicesType-3~
+    id: ~exportplaceholderid-flowVersion-workflowGetDevicesType~
     name: 'Workflow - GET /devices/{type}'
     nodes:
       - config:
@@ -16,7 +16,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-kioskDashboardEquipment-5~
+          pageIdTemplate: ~exportplaceholderid-experienceView-kioskDashboardEquipment~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -85,7 +85,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-kioskDashboardResident-6~
+          pageIdTemplate: ~exportplaceholderid-experienceView-kioskDashboardResident~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -172,7 +172,7 @@ resources:
         type: MutateNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getDevicesType-5~
+        key: ~exportplaceholderid-experienceEndpoint-getDevicesType~
         meta:
           category: trigger
           description: ''

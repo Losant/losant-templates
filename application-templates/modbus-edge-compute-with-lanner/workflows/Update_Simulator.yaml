@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-updateSimulator-2~
+    id: ~exportplaceholderid-flow-updateSimulator~
     name: Update Simulator
     nodes:
       - config:
@@ -165,7 +165,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-flow-updateSimulator-2~-3Ugqc2GpKxYwu__LmZVfi
+        key: ~exportplaceholderid-flow-updateSimulator~-3Ugqc2GpKxYwu__LmZVfi
         meta:
           category: trigger
           description: ''

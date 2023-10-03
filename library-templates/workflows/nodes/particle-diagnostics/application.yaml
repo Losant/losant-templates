@@ -5,7 +5,7 @@ resources:
       retrieve device information.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsNodesParticleDiagnostics-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesParticleDiagnostics~
     name: Particle Diagnostics
     readmePath: ./README.md
     imagePath: ./preview.png

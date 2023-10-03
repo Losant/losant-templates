@@ -1,8 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -11,8 +10,7 @@ resources:
         startY: 0
         title: KST3320 Distance Sensor
         width: 2
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -21,8 +19,7 @@ resources:
         startY: 0
         title: Last known statistics / GPS Map
         width: 2
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -58,7 +55,7 @@ resources:
             attribute: temp
             color: '#8db319'
             deviceIds:
-              - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+              - ~exportplaceholderid-device-kst3320SimulatedDevice~
             deviceTags: []
             label: C°
         height: 2
@@ -67,8 +64,7 @@ resources:
         startY: 0.5
         title: Temperature in Celsius
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: device-state-table
         config:
           attributes:
@@ -118,7 +114,7 @@ resources:
               rowTemplate: '{{format value}}'
               type: attribute
           deviceIds:
-            - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+            - ~exportplaceholderid-device-kst3320SimulatedDevice~
           deviceTags: []
           duration: 0
         height: 1
@@ -127,8 +123,7 @@ resources:
         startY: 0.5
         title: ''
         width: 2
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -155,7 +150,7 @@ resources:
             attribute: distanceIn
             color: '#8db319'
             deviceIds:
-              - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+              - ~exportplaceholderid-device-kst3320SimulatedDevice~
             deviceTags: []
             label: in
         height: 1.5
@@ -164,8 +159,7 @@ resources:
         startY: 0.5
         title: Distance in Inches
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -201,7 +195,7 @@ resources:
             attribute: tempF
             color: '#8db319'
             deviceIds:
-              - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+              - ~exportplaceholderid-device-kst3320SimulatedDevice~
             deviceTags: []
             label: F°
         height: 2
@@ -210,8 +204,7 @@ resources:
         startY: 0.5
         title: 'Temperature in Fahrenheit '
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -238,7 +231,7 @@ resources:
             attribute: distance
             color: '#8db319'
             deviceIds:
-              - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+              - ~exportplaceholderid-device-kst3320SimulatedDevice~
             deviceTags: []
             label: mm
         height: 1.5
@@ -247,8 +240,7 @@ resources:
         startY: 0.5
         title: Distance in Millimeters
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: device-state-table
         config:
           attributes:
@@ -290,7 +282,7 @@ resources:
               rowTemplate: '{{format value}}%'
               type: attribute
           deviceIds:
-            - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+            - ~exportplaceholderid-device-kst3320SimulatedDevice~
           deviceTags: []
           duration: 0
         height: 0.5
@@ -299,8 +291,7 @@ resources:
         startY: 1.5
         title: ''
         width: 2
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: map
         config:
           additionalAttributes: []
@@ -311,7 +302,7 @@ resources:
           defaultPitch: 0
           defaultZoom: 16
           deviceIds:
-            - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+            - ~exportplaceholderid-device-kst3320SimulatedDevice~
           deviceTags: []
           duration: 0
           endColor: '#8db319'
@@ -339,8 +330,7 @@ resources:
         startX: 2
         startY: 2
         width: 2
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -367,7 +357,7 @@ resources:
             attribute: fillLevel
             color: '#8db319'
             deviceIds:
-              - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+              - ~exportplaceholderid-device-kst3320SimulatedDevice~
             deviceTags: []
             label: ''
         height: 2
@@ -376,8 +366,7 @@ resources:
         startY: 2
         title: Fill Percentage
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           displayAsPercentage: true
@@ -395,7 +384,7 @@ resources:
             attribute: humidity
             color: 'rgba(5, 113, 128, 1)'
             deviceIds:
-              - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+              - ~exportplaceholderid-device-kst3320SimulatedDevice~
             deviceTags: []
             label: ''
         height: 1
@@ -404,8 +393,7 @@ resources:
         startY: 2
         title: Humidity
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 21600000
@@ -421,7 +409,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+                - ~exportplaceholderid-device-kst3320SimulatedDevice~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -441,7 +429,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+                - ~exportplaceholderid-device-kst3320SimulatedDevice~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -461,7 +449,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+                - ~exportplaceholderid-device-kst3320SimulatedDevice~
               deviceTags: []
               dotWeight: 1
               expression: ''
@@ -479,8 +467,7 @@ resources:
         startY: 2.5
         title: Accelerometer
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: gauge
         config:
           conditions:
@@ -510,7 +497,7 @@ resources:
             attribute: battery
             color: '#8db319'
             deviceIds:
-              - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+              - ~exportplaceholderid-device-kst3320SimulatedDevice~
             deviceTags: []
             label: ''
         height: 1
@@ -519,8 +506,7 @@ resources:
         startY: 3
         title: Battery Percentage
         width: 0.5
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -529,8 +515,7 @@ resources:
         startY: 4
         title: 'Historical Distance, Signal Strength & SNR Measurements'
         width: 4
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -546,7 +531,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+                - ~exportplaceholderid-device-kst3320SimulatedDevice~
               deviceTags: []
               dotWeight: 2
               expression: ''
@@ -564,8 +549,7 @@ resources:
         startY: 4.5
         title: Historical Distance (Millimeter)
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -581,7 +565,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+                - ~exportplaceholderid-device-kst3320SimulatedDevice~
               deviceTags: []
               dotWeight: 2
               expression: ''
@@ -599,8 +583,7 @@ resources:
         startY: 4.5
         title: Historical Signal Strength (RSSI)
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -616,7 +599,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+                - ~exportplaceholderid-device-kst3320SimulatedDevice~
               deviceTags: []
               dotWeight: 2
               expression: ''
@@ -634,8 +617,7 @@ resources:
         startY: 4.5
         title: Historical Distance (Inches)
         width: 1
-      - applicationId: >-
-          ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+      - applicationId: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
         blockType: graph
         config:
           duration: 43200000
@@ -651,7 +633,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-kst3320SimulatedDevice-0~
+                - ~exportplaceholderid-device-kst3320SimulatedDevice~
               deviceTags: []
               dotWeight: 2
               expression: ''
@@ -677,9 +659,12 @@ resources:
       [**KS Technologies**](http://kstechnologies.com) | 
       11580 Black Forest Road, Suite #60 | 
       Colorado Springs, CO. 80908
-    id: ~exportplaceholderid-dashboard-simulatedKst3320DashboardAllSensors-1~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-simulatedKst3320DashboardAllSensors~
+    isPasswordProtected: false
     name: Simulated KST3320 Dashboard (All Sensors)
     public: false
     refreshRate: 60
     reportConfigs: []
+    resolution: 60000
 version: 1

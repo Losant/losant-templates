@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -12,7 +12,7 @@ resources:
         title: Overview - All Milli Temperature Sensors
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: indicator
         config:
           conditions:
@@ -22,7 +22,7 @@ resources:
               label: >-
                 There are no Milli Temperature Sensors provisioned yet. Please
                 see the
-                [README](https://~exportplaceholderid-app-url~/applications/~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~).
+                [README](https://~exportplaceholderid-app-url~/applications/~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~).
           defaultCondition:
             color: '#8db319'
             label: '{{value-0}}'
@@ -43,7 +43,7 @@ resources:
         title: Number of Temp Sensors
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: gauge
         config:
           duration: 604800000
@@ -69,7 +69,7 @@ resources:
         title: Min. Temp. (7 days)
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: gauge
         config:
           duration: 604800000
@@ -95,7 +95,7 @@ resources:
         title: Max Temp. (7 days)
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: device-state-table
         config:
           attributes:
@@ -105,7 +105,7 @@ resources:
               id: defaultDeviceNameColumn
               rowTemplate: >-
                 [{{format
-                value}}](https://~exportplaceholderid-app-url~/dashboards/~exportplaceholderid-dashboard-temperatureDashboard-0~?ctx%5BdeviceId-0%5D={{deviceId}})
+                value}}](https://~exportplaceholderid-app-url~/dashboards/~exportplaceholderid-dashboard-temperatureDashboard~?ctx%5BdeviceId-0%5D={{deviceId}})
               type: deviceName
             - headerTemplate: '{{name}}'
               id: defaultTimestampColumn
@@ -132,7 +132,7 @@ resources:
           information
         width: 2
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: gauge
         config:
           duration: 604800000
@@ -158,7 +158,7 @@ resources:
         title: Avg. Temp (7 days)
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -170,7 +170,7 @@ resources:
           details'}}
         width: 4
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: gauge
         config:
           conditions: []
@@ -199,7 +199,7 @@ resources:
         title: Actual Temperature
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: graph
         config:
           duration: 3600000
@@ -229,7 +229,7 @@ resources:
         title: Temperature Trend
         width: 3
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -257,7 +257,7 @@ resources:
         title: Min. Temperature (7 Days)
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -285,7 +285,7 @@ resources:
         title: Max Temperature (7 Days)
         width: 1
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         blockType: device-state-table
         config:
           attributes:
@@ -322,7 +322,7 @@ resources:
         width: 4
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor-0~
+          ~exportplaceholderid-application-applicationItronMilliHdkTemperatureMonitor~
         defaultValue: 5e56c9be91d58f00065efa1e
         name: deviceId-0
         type: deviceId
@@ -331,8 +331,11 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-temperatureDashboard-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-temperatureDashboard~
+    isPasswordProtected: false
     name: Temperature Dashboard
     public: false
     refreshRate: 30
+    resolution: 60000
 version: 1

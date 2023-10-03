@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker~
         blockType: position-chart
         config:
           additionalAttributes:
@@ -20,17 +20,17 @@ resources:
 
             {{#eq deviceTags.type.[0] 'resident'}}
 
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/residents/{{deviceId}}@2x.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker~/residents/{{deviceId}}@2x.png
 
             {{else}}
 
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/images/{{deviceTags.type.[0]}}@2x.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker~/images/{{deviceTags.type.[0]}}@2x.png
 
             {{/eq}}
 
             {{/if}}
           imageUrl: >-
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker~/assistedLiving-dashboardFloorplan-1.png
           includeArrows: false
           includeLines: false
           pinMode: advanced
@@ -53,7 +53,7 @@ resources:
         startY: 0
         title: Floor Plan
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker~
         blockType: indicator
         config:
           conditions:
@@ -80,7 +80,7 @@ resources:
         title: Current Room
         width: 1
     contextConfiguration:
-      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker~
         defaultValue:
           key: type
           value: concentrator
@@ -90,8 +90,11 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-filterByTypeLocation-2~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-filterByTypeLocation~
+    isPasswordProtected: false
     name: Filter by Type Location
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

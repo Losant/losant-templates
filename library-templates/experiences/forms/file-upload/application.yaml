@@ -4,7 +4,7 @@ resources:
     description: Demonstrates how to upload an Experience User's file to Application Files.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesFormsFileUpload-0~
+    id: ~exportplaceholderid-application-libraryExperiencesFormsFileUpload~
     name: File Upload
     readmePath: ./README.md
     imagePath: ./preview.png

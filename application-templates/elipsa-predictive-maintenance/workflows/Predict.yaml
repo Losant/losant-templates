@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-predict-1~
+    id: ~exportplaceholderid-flow-predict~
     name: Predict
     nodes:
       - config:
@@ -105,7 +105,7 @@ resources:
               valueTemplate: ''
             - key: time_in_cycles
               valueTemplate: ''
-          deviceId: ~exportplaceholderid-device-turbofan-0~
+          deviceId: ~exportplaceholderid-device-turbofan~
           deviceIdTemplateType: stringTemplate
           resultPath: ''
           timeSourceType: payloadTime
@@ -307,7 +307,7 @@ resources:
             - prediction
           batchBehavior: each
           triggerOn: both
-        key: ~exportplaceholderid-device-turbofan-0~
+        key: ~exportplaceholderid-device-turbofan~
         meta:
           allowedAttributeType: attributeBlacklist
           category: trigger

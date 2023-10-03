@@ -4,7 +4,7 @@ resources:
     description: Checks that a value has met a threshold a consecutive number of times.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsNodesThresholdCheck-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesThresholdCheck~
     name: Threshold Check
     readmePath: ./README.md
     imagePath: ./preview.png

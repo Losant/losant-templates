@@ -13,7 +13,7 @@ resources:
       - constraint: required
         dataType: string
         name: additional_information
-    id: ~exportplaceholderid-dataTable-warningsAndAlarms-0~
+    id: ~exportplaceholderid-dataTable-warningsAndAlarms~
     localFilename: ./warnings_and_alarms.csv
     name: warnings_and_alarms
 version: 1

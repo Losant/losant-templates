@@ -29,7 +29,7 @@ resources:
             "level": "warning"
           }
         key: orientationEvent
-    id: ~exportplaceholderid-flow-eventLogger-1~
+    id: ~exportplaceholderid-flow-eventLogger~
     name: Event Logger
     nodes:
       - config:
@@ -40,7 +40,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: RsqCOjq2M0
           label: 'Event: Create'
           name: create-event
           x: 280
@@ -54,7 +53,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: pldP6dEhUY
           label: shipment_id?
           name: conditional
           x: 280
@@ -73,7 +71,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: vXpbihJSco
           label: Bad Temperature?
           name: conditional
           x: 80
@@ -88,7 +85,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: vXpbihJSco
           label: Bad Shock?
           name: conditional
           x: 480
@@ -103,7 +99,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: vXpbihJSco
           label: Bad Orientation?
           name: conditional
           x: 280
@@ -142,7 +137,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: DHwAEBaSVj
           label: 'Event: Get'
           mode: queryTemplateSingle
           name: get-event
@@ -163,7 +157,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: SszGWHh_46
           label: 'Type: temperature'
           name: mutate
           x: 80
@@ -183,7 +176,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: SszGWHh_46
           label: 'Type: shock'
           name: mutate
           x: 480
@@ -203,7 +195,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: SszGWHh_46
           label: 'Type: orientation'
           name: mutate
           x: 280
@@ -217,7 +208,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: a3SgYp4iUw
           label: Event Exists?
           name: conditional
           x: 180
@@ -244,7 +234,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: SszGWHh_46
           label: Extend Event Info
           name: mutate
           x: 280
@@ -253,13 +242,13 @@ resources:
           - - RsqCOjq2M0
         type: MutateNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: bbJX73Rruf
         meta:
-          category: output
+          category: debug
           description: ''
-          id: bbJX73Rruf
           label: Debug
           name: debug
           x: 280
@@ -276,11 +265,10 @@ resources:
         meta:
           category: data
           description: ''
-          id: s9SJ0pUl57
           label: 'Event: Delete'
           mode: queryTemplate
           name: delete-event
-          x: 720
+          x: 1020
           'y': 140
         outputIds: []
         type: DeleteEventNode
@@ -306,7 +294,6 @@ resources:
           allowedAttributeType: any
           category: trigger
           description: ''
-          id: p8i2LBCGPh
           label: 'Device: State'
           maxAgeToggle: false
           name: deviceIdsTags
@@ -318,12 +305,11 @@ resources:
           - - pldP6dEhUY
         type: deviceTag
       - config: {}
-        key: ~exportplaceholderid-flow-eventLogger-1~-NfV48s66ILh1erSIoVFKk
+        key: ~exportplaceholderid-flow-eventLogger~-NfV48s66ILh1erSIoVFKk
         meta:
           category: trigger
           description: ''
           deviceId: null
-          id: qaX_Y8rMgB
           label: Delete Events!
           name: virtualButton
           payload: |-
@@ -334,7 +320,7 @@ resources:
               "orientation": -42
             }
           uiId: qaX_Y8rMgB
-          x: 720
+          x: 1020
           'y': 40
         outputIds:
           - - s9SJ0pUl57

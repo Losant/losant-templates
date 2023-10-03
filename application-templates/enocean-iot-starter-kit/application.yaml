@@ -6,37 +6,37 @@ resources:
     globals:
       - cloudOnly: true
         description: ""
-        json: '"~exportplaceholderid-deviceRecipe-f60202-1~"'
+        json: '"~exportplaceholderid-deviceRecipe-f60202~"'
         key: F6-02-02-recipe
       - cloudOnly: true
         description: ""
-        json: '"~exportplaceholderid-dashboard-f60202EdrpuWEoDoubleRockerPad-1~"'
+        json: '"~exportplaceholderid-dashboard-f60202EdrpuWEoDoubleRockerPad~"'
         key: F6-02-02-dashboard
       - cloudOnly: true
         description: ""
-        json: '"~exportplaceholderid-deviceRecipe-a50403-3~"'
+        json: '"~exportplaceholderid-deviceRecipe-a50403~"'
         key: A5-04-03-recipe
       - cloudOnly: true
         description: ""
-        json: '"~exportplaceholderid-dashboard-a50403EhtsuTemperatureAndHumiditySensor-2~"'
+        json: '"~exportplaceholderid-dashboard-a50403EhtsuTemperatureAndHumiditySensor~"'
         key: A5-04-03-dashboard
       - cloudOnly: true
         description: ""
-        json: '"~exportplaceholderid-deviceRecipe-d50001-2~"'
+        json: '"~exportplaceholderid-deviceRecipe-d50001~"'
         key: D5-00-01-recipe
       - cloudOnly: true
         description: ""
-        json: '"~exportplaceholderid-dashboard-d50001EmcsuMagnetContact-3~"'
+        json: '"~exportplaceholderid-dashboard-d50001EmcsuMagnetContact~"'
         key: D5-00-01-dashboard
       - cloudOnly: false
         description: ""
-        json: '"~exportplaceholderid-deviceRecipe-d21441-0~"'
+        json: '"~exportplaceholderid-deviceRecipe-d21441~"'
         key: D2-14-41-recipe
       - cloudOnly: true
         description: ""
-        json: '"~exportplaceholderid-dashboard-d21441EmsiuMultiSensor-0~"'
+        json: '"~exportplaceholderid-dashboard-d21441EmsiuMultiSensor~"'
         key: D2-14-41-dashboard
-    id: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+    id: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
     name: EnOcean IoT Starter Kit
     readmePath: ./README.md
     imagePath: ./preview.png

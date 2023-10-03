@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-historyRoute-1~
+    flowId: ~exportplaceholderid-flow-historyRoute~
     globals: []
-    id: ~exportplaceholderid-flowVersion-historyRoute-0~
+    id: ~exportplaceholderid-flowVersion-historyRoute~
     name: History Route
     nodes:
       - config:
@@ -12,7 +12,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardHistory-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardHistory~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -82,7 +82,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getHistory-2~
+        key: ~exportplaceholderid-experienceEndpoint-getHistory~
         meta:
           category: trigger
           description: ''

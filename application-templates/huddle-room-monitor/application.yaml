@@ -5,7 +5,7 @@ resources:
       providing a real-time space availability and utilization application.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+    id: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
     name: Huddle Room Monitor
     readmePath: ./README.md
     imagePath: ./preview.png

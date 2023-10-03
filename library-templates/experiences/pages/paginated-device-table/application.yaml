@@ -4,7 +4,7 @@ resources:
     description: Provides a reference implementation for a paginated table of devices.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesPagesPaginatedDeviceTable-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesPaginatedDeviceTable~
     name: Paginated Device Table
     readmePath: ./README.md
     imagePath: ./preview.png

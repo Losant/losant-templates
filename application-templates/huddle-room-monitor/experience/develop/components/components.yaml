@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-cssTemplates-4~
+    id: ~exportplaceholderid-experienceView-cssTemplates~
     localFilename: ./css-templates.hbs
     name: css-templates
     version: develop

@@ -5,7 +5,7 @@ resources:
     globals:
       - json: '14'
         key: pointsPerIteration
-    id: ~exportplaceholderid-flow-routeSimulator-0~
+    id: ~exportplaceholderid-flow-routeSimulator~
     name: Route Simulator
     nodes:
       - config:
@@ -470,7 +470,7 @@ resources:
     triggers:
       - config:
           seconds: 60
-        key: ~exportplaceholderid-flow-routeSimulator-0~-b0fQkfPNzlqW-udxz3nTp
+        key: ~exportplaceholderid-flow-routeSimulator~-b0fQkfPNzlqW-udxz3nTp
         meta:
           category: trigger
           description: ''
@@ -484,7 +484,7 @@ resources:
           - - ZDUXmWVuIz
         type: timer
       - config: {}
-        key: ~exportplaceholderid-flow-routeSimulator-0~-Hb1US6xAgmgcoB_JPhy3k
+        key: ~exportplaceholderid-flow-routeSimulator~-Hb1US6xAgmgcoB_JPhy3k
         meta:
           category: trigger
           description: ''
@@ -499,7 +499,7 @@ resources:
           - - ZDUXmWVuIz
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-routeSimulator-0~-5UavJ4etR8901qmbpxKo-
+        key: ~exportplaceholderid-flow-routeSimulator~-5UavJ4etR8901qmbpxKo-
         meta:
           category: trigger
           description: ''

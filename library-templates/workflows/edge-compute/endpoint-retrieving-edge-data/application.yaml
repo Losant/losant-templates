@@ -1,0 +1,21 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to retrieve data on demand from an edge compute
+      device in response to an experience endpoint request.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryWorkflowsEdgeComputeEndpointRetrievingEdgeData~
+    name: Endpoint Retrieving Edge Data
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - edge
+      - experience
+      - mqtt
+      - request
+      - endpoint
+      - topic
+version: 1

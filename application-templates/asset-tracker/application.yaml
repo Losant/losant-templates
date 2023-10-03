@@ -5,7 +5,7 @@ resources:
       asset tracking devices.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-applicationAssetTracker-0~
+    id: ~exportplaceholderid-application-applicationAssetTracker~
     name: Asset Tracker
     readmePath: ./README.md
     imagePath: ./preview.png

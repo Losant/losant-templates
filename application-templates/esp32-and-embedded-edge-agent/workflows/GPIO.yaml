@@ -3,7 +3,7 @@ resources:
   - description: Reads and controls various digital and analog inputs and outputs.
     flowClass: embedded
     globals: []
-    id: ~exportplaceholderid-flow-gpio-0~
+    id: ~exportplaceholderid-flow-gpio~
     minimumAgentVersion: 0.0.0
     name: GPIO
     nodes:

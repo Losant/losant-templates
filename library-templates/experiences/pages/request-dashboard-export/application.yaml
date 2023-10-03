@@ -5,7 +5,7 @@ resources:
       PDF export of a dashboard.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesRequestDashboardExport~
     name: Request Dashboard Export
     readmePath: ./README.md
     imagePath: ./preview.png

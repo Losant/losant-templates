@@ -4,9 +4,9 @@ resources:
       A workflow managing the logout page. Both kiosk and manager users route
       through this logout.
     enabled: true
-    flowId: ~exportplaceholderid-flow-workflowGetLogout-2~
+    flowId: ~exportplaceholderid-flow-workflowGetLogout~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowGetLogout-1~
+    id: ~exportplaceholderid-flowVersion-workflowGetLogout~
     name: Workflow - GET /logout
     nodes:
       - config:
@@ -137,7 +137,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getLogout-3~
+        key: ~exportplaceholderid-experienceEndpoint-getLogout~
         meta:
           category: trigger
           description: 'On a request to the logout route... '

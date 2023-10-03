@@ -22,9 +22,9 @@ resources:
         values are invalid GPS coordinates, the output will be null.
       resultMode: required
     enabled: true
-    flowId: ~exportplaceholderid-flow-gpsDistance-0~
+    flowId: ~exportplaceholderid-flow-gpsDistance~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -116,7 +116,7 @@ resources:
           - - Poax0c~BvO
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-gpsDistance-0~-HzEM3MCNP0LO34kOcvT-d
+        key: ~exportplaceholderid-flow-gpsDistance~-HzEM3MCNP0LO34kOcvT-d
         meta:
           category: trigger
           description: ''

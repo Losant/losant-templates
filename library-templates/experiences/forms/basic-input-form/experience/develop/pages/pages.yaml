@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlBasicForm-0~
+    id: ~exportplaceholderid-experienceView-tlBasicForm~
     localFilename: ./tl-basic-form.hbs
     name: tl-basic-form
     version: develop

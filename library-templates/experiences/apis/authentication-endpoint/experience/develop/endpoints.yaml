@@ -3,7 +3,8 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postApiAuth-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postApiAuth~
     method: post
     route: /api/auth
     version: develop

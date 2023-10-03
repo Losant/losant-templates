@@ -4,7 +4,7 @@ resources:
     description: Includes a set of page layouts for the Bootstrap 4 framework.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryExperiencesBoilerplatesBootstrap4Layouts-0~
+    id: ~exportplaceholderid-application-libraryExperiencesBoilerplatesBootstrap4Layouts~
     name: Bootstrap 4 Layouts
     readmePath: ./README.md
     imagePath: ./preview.png

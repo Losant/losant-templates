@@ -5,7 +5,7 @@ resources:
       on dashboards.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsSimulatorsBlobSimulator~
     name: Blob Simulator
     readmePath: ./README.md
     imagePath: ./preview.png

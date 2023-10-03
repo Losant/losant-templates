@@ -3,14 +3,16 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLanguageTlI18NDemo-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLanguageTlI18NDemo~
     method: get
     route: /{language}/tl-i18n-demo
     version: develop
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getTlI18NDemoSubdomain-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlI18NDemoSubdomain~
     method: get
     route: /tl-i18n-demo-subdomain
     version: develop

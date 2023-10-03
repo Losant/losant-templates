@@ -4,7 +4,7 @@ resources:
     description: The Aeotec Z-Wave MultiSensor 6 wireless smart home sensor.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryDevicesRecipesAeotecZWaveMultiSensor6-0~
+    id: ~exportplaceholderid-application-libraryDevicesRecipesAeotecZWaveMultiSensor6~
     name: Aeotec Z-Wave MultiSensor 6
     readmePath: ./README.md
     imagePath: ./preview.png

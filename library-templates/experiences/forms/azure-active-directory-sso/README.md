@@ -22,9 +22,9 @@ Once this template is imported and configured, you can test the example by:
 
 When complete, you will have imported the following logic:
 
-1. An Experience User navigates to an Experience Endpoint: [`GET /tl-login-sso`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso-0~/experience/versions/develop/endpoints/5f997a064e295d0006f1c493/properties) and makes a request using the form.
-2. The [`POST /tl-login-sso`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso-0~/workflows/~exportplaceholderid-flow-postTlLoginSso-0~/develop) Experience Endpoint triggers an Experience Workflow. This workflow generates an Active Directory SSO URL and redirects the user.
-3. The Experience User can then authenticate to Active Directory. After a successful login, the user is redirected back to a Losant Experience Endpoint: [`POST /tl-saml`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso-0~/workflows/~exportplaceholderid-flow-postTlSaml-1~/develop).
+1. An Experience User navigates to an Experience Endpoint: [`GET /tl-login-sso`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso~/experience/versions/develop/endpoints/5f997a064e295d0006f1c493/properties) and makes a request using the form.
+2. The [`POST /tl-login-sso`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso~/workflows/~exportplaceholderid-flow-postTlLoginSso~/develop) Experience Endpoint triggers an Experience Workflow. This workflow generates an Active Directory SSO URL and redirects the user.
+3. The Experience User can then authenticate to Active Directory. After a successful login, the user is redirected back to a Losant Experience Endpoint: [`POST /tl-saml`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso~/workflows/~exportplaceholderid-flow-postTlSaml~/develop).
 4. The `POST /tl-saml` Experience Endpoint verifies the request and authorizes the user by [setting the authorization cookie](/experiences/endpoints/#passing-authorization-tokens).
 5. Redirect the user to `/` if successful.
 
@@ -87,7 +87,7 @@ Next, you need to acquire an Identity Provider Metadata Template from the identi
 
 It’s best practice to use [application globals](/applications/overview/#application-globals) to store application-wide configuration that may be used across multiple workflows, like phone numbers or API keys. Application globals are a set of key/value pairs that are accessible inside of a workflow.
 
-In this case, you can use them to store the SSO configuration to be used within the SAML Nodes within the [`POST /tl-login-sso`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso-0~/workflows/~exportplaceholderid-flow-postTlLoginSso-0~/develop) and [`POST /tl-saml`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso-0~/workflows/~exportplaceholderid-flow-postTlSaml-1~/develop) Experience Workflows.
+In this case, you can use them to store the SSO configuration to be used within the SAML Nodes within the [`POST /tl-login-sso`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso~/workflows/~exportplaceholderid-flow-postTlLoginSso~/develop) and [`POST /tl-saml`](https://app.losant.com/applications/~exportplaceholderid-application-libraryExperiencesFormsAzureActiveDirectorySso~/workflows/~exportplaceholderid-flow-postTlSaml~/develop) Experience Workflows.
 
 ![Application Globals](./application-globals.png)
 
@@ -121,7 +121,7 @@ Within this template, the email is parsed from the global using the following st
 serviceProviderMetadataTemplate_{{working.emailWithUnderscore}}
 ```
 
-You may find an example of this parsing within a workflow in the [`/tl-login-sso`](https://app.losant.com/applications/5f99a59fc1a0290006995772/workflows/~exportplaceholderid-flow-postTlLoginSso-0~/develop) experience workflow.
+You may find an example of this parsing within a workflow in the [`/tl-login-sso`](https://app.losant.com/applications/5f99a59fc1a0290006995772/workflows/~exportplaceholderid-flow-postTlLoginSso~/develop) experience workflow.
 
 You may also test the templating for this use case using the [Template Test Tool](https://docs.losant.com/template-tester/tool) within the Documentation. Here is an example context and template you can use to understand how the parsing works:
 

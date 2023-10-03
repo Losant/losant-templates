@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker~
         blockType: position-chart
         config:
           additionalAttributes: []
@@ -16,7 +16,7 @@ resources:
           endColor: '#8db319'
           iconTemplate: >-
             {{#if isLastPoint}}
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/residents/{{ctx.deviceId-0.tags.uniqueId.[0]}}@2x.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker~/residents/{{ctx.deviceId-0.tags.uniqueId.[0]}}@2x.png
 
             {{else if isFirstPoint}}
 
@@ -24,7 +24,7 @@ resources:
 
             {{/if}}
           imageUrl: >-
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/assistedLiving-dashboardFloorplan-1.png
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker~/assistedLiving-dashboardFloorplan-1.png
           includeArrows: false
           includeLines: false
           pinMode: advanced
@@ -50,20 +50,20 @@ resources:
         startY: 0
         title: Floor Plan
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker~
         blockType: image
         config:
           bgColor: 'rgba(255, 255, 255, 0)'
           imageSource: static
           imageUrl: >-
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/residents/{{ctx.deviceId-0.tags.uniqueId}}.jpg
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationIndoorAssetTracker~/residents/{{ctx.deviceId-0.tags.uniqueId}}.jpg
         height: 2
         id: lT0XA9nyFw
         startX: 3
         startY: 0
         title: Resident Photo
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker~
         blockType: indicator
         config:
           conditions:
@@ -90,8 +90,8 @@ resources:
         title: Current Location
         width: 1
     contextConfiguration:
-      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker-0~
-        defaultValue: ~exportplaceholderid-device-janeSmith-1~
+      - applicationId: ~exportplaceholderid-application-applicationIndoorAssetTracker~
+        defaultValue: ~exportplaceholderid-device-janeSmith~
         name: deviceId-0
         type: deviceId
         validationConfig:
@@ -99,8 +99,11 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-residentLocation-1~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-residentLocation~
+    isPasswordProtected: false
     name: Resident Location
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

@@ -1,26 +1,12 @@
 resourceType: ExperienceEndpoint
 resources:
   - access: authenticated
-    description: The experience root. If a user is not logged in, they will be
-      redirected to /login.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-get-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceId~
     method: get
-    route: /
-    staticReply:
-      type: redirect
-      value: /devices
-    unauthorizedReply:
-      type: redirect
-      value: /login
-    version: develop
-  - access: authenticated
-    enabled: true
-    endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getDevices-2~
-    method: get
-    route: /devices
+    route: /devices/{deviceId}
     unauthorizedReply:
       statusCode: 302
       type: redirect
@@ -29,9 +15,10 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceId-4~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getDevices~
     method: get
-    route: /devices/{deviceId}
+    route: /devices
     unauthorizedReply:
       statusCode: 302
       type: redirect
@@ -42,7 +29,8 @@ resources:
       logged in will get redirected to the home page (powered by the workflow).
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogin-3~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogin~
     method: get
     route: /login
     version: develop
@@ -51,9 +39,26 @@ resources:
       redirect to the /login endpoint.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogout-5~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogout~
     method: get
     route: /logout
+    version: develop
+  - access: authenticated
+    description: The experience root. If a user is not logged in, they will be
+      redirected to /login.
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-get~
+    method: get
+    route: /
+    staticReply:
+      type: redirect
+      value: /devices
+    unauthorizedReply:
+      type: redirect
+      value: /login
     version: develop
   - access: public
     description: When a user submits login credentials, those credentials hit this
@@ -62,7 +67,8 @@ resources:
       redirected back to the login page with a message about what went wrong.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postLogin-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postLogin~
     method: post
     route: /login
     version: develop

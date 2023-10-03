@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: Created for Endpoint GET /devices/{deviceId}/edit.
-    id: ~exportplaceholderid-experienceView-editDevice-0~
+    id: ~exportplaceholderid-experienceView-editDevice~
     localFilename: ./Edit_Device.hbs
     name: Edit Device
     version: develop

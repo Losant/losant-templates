@@ -21,7 +21,7 @@ resources:
         description: ""
         json: '"YOUR_SECRET"'
         key: TL_VERIFY_SECRET
-    id: ~exportplaceholderid-application-libraryExperiencesPagesTwilioVerify-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesTwilioVerify~
     name: Twilio Verify
     readmePath: ./README.md
     imagePath: ./preview.png

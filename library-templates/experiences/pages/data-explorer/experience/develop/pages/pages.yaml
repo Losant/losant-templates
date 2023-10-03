@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: Created for Endpoint GET /tl-data-explorer/{deviceId}.
-    id: ~exportplaceholderid-experienceView-tlDataExplorer-0~
+    id: ~exportplaceholderid-experienceView-tlDataExplorer~
     localFilename: ./tl-data-explorer.hbs
     name: tl-data-explorer
     version: develop

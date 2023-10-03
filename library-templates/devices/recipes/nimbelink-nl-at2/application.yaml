@@ -4,7 +4,7 @@ resources:
     description: The Nimbelink NL-AT2 GPS asset tracker.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryDevicesRecipesNimbelinkNlAt2-0~
+    id: ~exportplaceholderid-application-libraryDevicesRecipesNimbelinkNlAt2~
     name: Nimbelink NL-AT2
     readmePath: ./README.md
     imagePath: ./preview.png

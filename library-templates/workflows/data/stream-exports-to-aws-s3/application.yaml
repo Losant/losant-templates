@@ -5,7 +5,7 @@ resources:
       an AWS S3 bucket.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsDataStreamExportsToAwsS3-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsDataStreamExportsToAwsS3~
     name: Stream Exports to AWS S3
     readmePath: ./README.md
     imagePath: ./preview.png

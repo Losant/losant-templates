@@ -1,0 +1,295 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    flowId: ~exportplaceholderid-flow-getTlEdgeDataDeviceId~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-getTlEdgeDataDeviceId~
+    name: 'GET /tl-edge-data/{deviceId}'
+    nodes:
+      - config:
+          deviceIdsPath: data.params.deviceId
+          nameTemplate: getEdgeData
+          payloadTemplate: |-
+            {
+                "replyId": {{jsonEncode data.replyId}}
+            }
+          payloadTemplateType: json
+        id: qLSSesPJlu
+        meta:
+          category: output
+          description: ''
+          deviceSelectionType: payload
+          label: 'Device: Command'
+          name: device-command
+          x: 620
+          'y': 680
+        outputIds:
+          - - PsSVI0Bfza
+        type: DeviceSendCommandNode
+      - config:
+          level: verbose
+          message: 'Request sent, awaiting response ...'
+          property: ''
+        id: PsSVI0Bfza
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 620
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.params.deviceId}}'
+          includeConnectionStatus: true
+          includeState: false
+          resultPath: working.device
+          tagsAsObject: false
+        id: okCwVBO6uJ
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 380
+          'y': 280
+        outputIds:
+          - - gdczfYarrX
+        type: GetDeviceNode
+      - config:
+          deviceIdTemplate: '{{data.params.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: nm1aiG2X6m
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 380
+          'y': 480
+        outputIds:
+          - - hEfcOXl57q
+          - - nxymA15MHE
+        type: VerifyDeviceNode
+      - config:
+          expression: '{{working.device.id}}'
+        id: gdczfYarrX
+        meta:
+          category: logic
+          description: ''
+          label: Found?
+          name: conditional
+          x: 380
+          'y': 380
+        outputIds:
+          - - hEfcOXl57q
+          - - nxymA15MHE
+        type: ConditionalNode
+      - config:
+          expression: '{{working.device.connectionInfo.connected}} === 1'
+        id: nxymA15MHE
+        meta:
+          category: logic
+          description: ''
+          label: Connected?
+          name: conditional
+          x: 500
+          'y': 580
+        outputIds:
+          - - Z5WBCsAqm7
+          - - qLSSesPJlu
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            {
+                "type": "NotFound",
+                "message": "Device not found"
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          experienceVersion: develop
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: hEfcOXl57q
+        meta:
+          category: output
+          description: ''
+          label: 404 Not Found
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 140
+          'y': 680
+        outputIds:
+          - - rD9UUKnobO
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: |-
+            {
+                "type": "NotAvailable",
+                "message": "Device is not available"
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          experienceVersion: develop
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '503'
+          sameSiteTemplate: ''
+        id: Z5WBCsAqm7
+        meta:
+          category: output
+          description: ''
+          label: 503 Not Available
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 680
+        outputIds:
+          - - 8c8Q_MIZE_
+        type: EndpointReplyNode
+      - config:
+          level: error
+          message: Device disconnected
+          property: ''
+        id: 8c8Q_MIZE_
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 380
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: error
+          message: Device not found
+          property: ''
+        id: rD9UUKnobO
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 6x5Junuiis
+        meta:
+          annotationText: >-
+            The device was not found, or the user making the request does not
+            have access to the device.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 220
+          x: 120
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 3ZRz_JiMeV
+        meta:
+          annotationText: >-
+            The device is not connected to the broker, so the request cannot be
+            fulfilled.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 220
+          x: 360
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: F4AjDkSCun
+        meta:
+          annotationText: >-
+            Send a command to the device. The command body **must include** the
+            `replyId` so that we can reply to the open request when the device
+            responds.
+
+
+            At this point, the edge workflow takes over.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 360
+          x: 600
+          'y': 860
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 9x1aOEEEny
+        meta:
+          annotationText: >-
+            On receipt of an experience endpoint request ...
+
+
+            Verify the device exists and is connected, and if so, send a command
+            to the device.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 380
+          x: 280
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 9cAmQidizN
+        meta:
+          annotationText: >-
+            If using experience groups for tenancy ...
+
+
+            1. Disconnect the `true` path from the "Found?" Conditional Node.
+
+            2. Connect the `true` path from the "Found?" Conditional Node to the
+            input of the Device: Verify Node.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 360
+          x: 600
+          'y': 360
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getTlEdgeDataDeviceId~
+        meta:
+          category: trigger
+          description: ''
+          label: Endpoint
+          name: endpoint
+          uiId: Ih6xgDcTfH
+          x: 380
+          'y': 180
+        outputIds:
+          - - okCwVBO6uJ
+        type: endpoint
+    version: develop
+version: 1

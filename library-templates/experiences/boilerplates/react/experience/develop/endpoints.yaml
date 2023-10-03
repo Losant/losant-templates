@@ -4,7 +4,8 @@ resources:
     description: A catch-all route that always renders the React main HTML page.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getAny-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getAny~
     method: get
     route: /{any*}
     version: develop
@@ -13,7 +14,8 @@ resources:
       If not, returns a collection of devices and metadata.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getApiDevicesDeviceId-3~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getApiDevicesDeviceId~
     method: get
     route: /api/devices/{deviceId?}
     version: develop
@@ -21,7 +23,8 @@ resources:
     description: Returns the current user object.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getApiMe-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getApiMe~
     method: get
     route: /api/me
     version: develop
@@ -31,7 +34,8 @@ resources:
       token.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postApiAuth-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postApiAuth~
     method: post
     route: /api/auth
     version: develop

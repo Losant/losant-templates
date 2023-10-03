@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -10,7 +10,7 @@ resources:
         startY: 0
         title: Huddle Room 1
         width: 4
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: graph
         config:
           duration: 604800000
@@ -24,7 +24,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1~
               deviceTags: []
               expression: '{{value}} / 60'
               graphType: bar
@@ -36,7 +36,7 @@ resources:
         startY: 0.5
         title: Meeting Durations
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -53,7 +53,7 @@ resources:
             - aggregation: MEAN
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1~
               deviceTags: []
         height: 1
         id: PcIE1iVgrD
@@ -61,7 +61,7 @@ resources:
         startY: 0.5
         title: Average Meeting Duration
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -78,7 +78,7 @@ resources:
             - aggregation: MAX
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1~
               deviceTags: []
         height: 1
         id: iD6Zx-SK4h
@@ -86,7 +86,7 @@ resources:
         startY: 1.5
         title: Longest Meeting
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -103,7 +103,7 @@ resources:
             - aggregation: MIN
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1~
               deviceTags: []
         height: 1
         id: RppUx1HNRA
@@ -111,7 +111,7 @@ resources:
         startY: 1.5
         title: Shortest Meeting
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: custom-chart
         config:
           configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#FFFFFF\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"circle\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"plasma\"\n      }\n    }\n\t}\t\n}"
@@ -119,7 +119,7 @@ resources:
             - aggregation: SUM
               attribute: occupied
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1~
               deviceTags: []
               duration: 604800000
               id: time-series-0
@@ -132,7 +132,7 @@ resources:
         startY: 2
         title: Occupancy Distribution
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions:
@@ -147,7 +147,7 @@ resources:
           segments:
             - attribute: occupied
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom1-2~
+                - ~exportplaceholderid-device-huddleRoom1~
               deviceTags: []
         height: 1
         id: st1MTaCNsD
@@ -155,7 +155,7 @@ resources:
         startY: 2.5
         title: Available
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -164,7 +164,7 @@ resources:
         startY: 3.5
         title: Huddle Room 2
         width: 4
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -181,7 +181,7 @@ resources:
             - aggregation: MEAN
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2~
               deviceTags: []
         height: 1
         id: cygnvc_Cim
@@ -189,7 +189,7 @@ resources:
         startY: 4
         title: Average Meeting Duration
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: graph
         config:
           duration: 604800000
@@ -203,7 +203,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3~
               deviceTags: []
               expression: '{{value}} / 60'
               graphType: bar
@@ -215,7 +215,7 @@ resources:
         startY: 4
         title: Meeting Durations
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -232,7 +232,7 @@ resources:
             - aggregation: MAX
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2~
               deviceTags: []
         height: 1
         id: UGOiwuH6Tx
@@ -240,7 +240,7 @@ resources:
         startY: 5
         title: Longest Meeting
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -257,7 +257,7 @@ resources:
             - aggregation: MIN
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2~
               deviceTags: []
         height: 1
         id: MVKm5CGkta
@@ -265,7 +265,7 @@ resources:
         startY: 5
         title: Shortest Meeting
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: custom-chart
         config:
           configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#FFFFFF\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"circle\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"plasma\"\n      }\n    }\n\t}\t\n}"
@@ -273,7 +273,7 @@ resources:
             - aggregation: SUM
               attribute: occupied
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2~
               deviceTags: []
               duration: 604800000
               id: time-series-0
@@ -286,7 +286,7 @@ resources:
         startY: 5.5
         title: Occupancy Distribution
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions:
@@ -301,7 +301,7 @@ resources:
           segments:
             - attribute: occupied
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2~
               deviceTags: []
         height: 1
         id: ltY3pS-be8
@@ -309,7 +309,7 @@ resources:
         startY: 6
         title: Available
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: section-header
         config: {}
         height: 0.5
@@ -318,7 +318,7 @@ resources:
         startY: 7
         title: Huddle Room 3
         width: 4
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -335,7 +335,7 @@ resources:
             - aggregation: MEAN
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3~
               deviceTags: []
         height: 1
         id: WusY7kyLvJ
@@ -343,7 +343,7 @@ resources:
         startY: 7.5
         title: Average Meeting Duration
         width: 1
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: graph
         config:
           duration: 604800000
@@ -357,7 +357,7 @@ resources:
               cumulative: false
               detectDataGaps: false
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom2-3~
+                - ~exportplaceholderid-device-huddleRoom2~
               deviceTags: []
               expression: '{{value}} / 60'
               graphType: bar
@@ -369,7 +369,7 @@ resources:
         startY: 7.5
         title: Meeting Durations
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -386,7 +386,7 @@ resources:
             - aggregation: MAX
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3~
               deviceTags: []
         height: 1
         id: yREu7lTMXh
@@ -394,7 +394,7 @@ resources:
         startY: 8.5
         title: Longest Meeting
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions: []
@@ -411,7 +411,7 @@ resources:
             - aggregation: MIN
               attribute: meeting_time
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3~
               deviceTags: []
         height: 1
         id: EpM_qaiUZn
@@ -419,7 +419,7 @@ resources:
         startY: 8.5
         title: Shortest Meeting
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: custom-chart
         config:
           configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#FFFFFF\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"circle\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"plasma\"\n      }\n    }\n\t}\t\n}"
@@ -427,7 +427,7 @@ resources:
             - aggregation: SUM
               attribute: occupied
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3~
               deviceTags: []
               duration: 604800000
               id: time-series-0
@@ -440,7 +440,7 @@ resources:
         startY: 9
         title: Occupancy Distribution
         width: 3
-      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor-0~
+      - applicationId: ~exportplaceholderid-application-applicationHuddleRoomMonitor~
         blockType: indicator
         config:
           conditions:
@@ -455,7 +455,7 @@ resources:
           segments:
             - attribute: occupied
               deviceIds:
-                - ~exportplaceholderid-device-huddleRoom3-4~
+                - ~exportplaceholderid-device-huddleRoom3~
               deviceTags: []
         height: 1
         id: 46_2eWFhnl
@@ -466,8 +466,11 @@ resources:
     contextConfiguration: []
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-occupancyHistory-1~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-occupancyHistory~
+    isPasswordProtected: false
     name: Occupancy History
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

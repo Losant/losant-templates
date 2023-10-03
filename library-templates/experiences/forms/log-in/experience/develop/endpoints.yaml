@@ -3,7 +3,8 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogin-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogin~
     method: get
     route: /login
     version: develop
@@ -11,7 +12,8 @@ resources:
     description: Handles a user's log out request.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogout-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogout~
     method: get
     route: /logout
     unauthorizedReply:
@@ -22,7 +24,8 @@ resources:
     description: Endpoint that accepts and verifies an experience's email and password.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postLogin-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postLogin~
     method: post
     route: /login
     version: develop

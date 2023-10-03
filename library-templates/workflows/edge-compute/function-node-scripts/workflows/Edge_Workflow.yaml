@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: edge
     globals: []
-    id: ~exportplaceholderid-flow-edgeWorkflow-0~
+    id: ~exportplaceholderid-flow-edgeWorkflow~
     minimumAgentVersion: 1.19.2
     name: Edge Workflow
     nodes:
@@ -22,7 +22,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: dajSHdWxWu
           label: 'File: Write'
           name: file-write
           x: 160
@@ -37,7 +36,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: IlZYe_ljUs
           label: Debug
           name: debug
           x: 360
@@ -63,7 +61,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: 1WUEyt4zm1
           label: Switch
           name: switch
           x: 680
@@ -96,7 +93,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: OnGQznvxOT
           label: Function
           name: function
           x: 640
@@ -111,7 +107,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 14MuhmHOS6
           label: Debug
           name: debug
           x: 740
@@ -129,7 +124,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: 53CL_w99NC
           label: 'File: Write'
           name: file-write
           x: 360
@@ -155,7 +149,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: f81IIo-X0N
           label: HTTP
           name: http
           x: 360
@@ -174,13 +167,12 @@ resources:
                 const entry = _.find(countriesAndCapitals, { country: payload.data.payload });
                 payload.result = _.get(entry, 'city');
             } catch (e) {
-                payloaod.result = e;
+                payload.result = e;
             }
         id: WwNCPmlN52
         meta:
           category: logic
           description: ''
-          id: OnGQznvxOT
           label: Function
           name: function
           x: 840
@@ -199,7 +191,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: 53CL_w99NC
           label: 'File: Write'
           name: file-write
           x: 560
@@ -221,12 +212,11 @@ resources:
           responsePath: working.countries
           timeoutTemplate: ''
           uriTemplate: >-
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryWorkflowsEdgeComputeFunctionNodeScripts-0~/tl-edge-scripts/countries-and-capitals.json
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-libraryWorkflowsEdgeComputeFunctionNodeScripts~/tl-edge-scripts/countries-and-capitals.json
         id: 5HzmjKvhby
         meta:
           category: data
           description: ''
-          id: f81IIo-X0N
           label: HTTP
           name: http
           x: 560
@@ -244,7 +234,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: KMt3c4xYRB
           label: 'File: Read'
           name: file-read
           x: 160
@@ -262,7 +251,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: KMt3c4xYRB
           label: 'File: Read'
           name: file-read
           x: 360
@@ -280,7 +268,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: KMt3c4xYRB
           label: 'File: Read'
           name: file-read
           x: 560
@@ -295,7 +282,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: BECu2LUS_b
           label: Debug
           name: debug
           x: 360
@@ -397,7 +383,6 @@ resources:
         meta:
           category: trigger
           description: ''
-          id: IwYyG58ex8
           label: 'Device: Command'
           name: deviceCommand
           uiId: IwYyG58ex8
@@ -407,12 +392,11 @@ resources:
           - - 1WUEyt4zm1
         type: deviceCommand
       - config: {}
-        key: ~exportplaceholderid-flow-edgeWorkflow-0~-ohOswPKqdw_xaLKn8X8jM
+        key: ~exportplaceholderid-flow-edgeWorkflow~-ohOswPKqdw_xaLKn8X8jM
         meta:
           category: trigger
           description: ''
           deviceId: ''
-          id: cPcZO0jdgU
           label: Sync Resources
           name: virtualButton
           payload: ''
@@ -425,12 +409,11 @@ resources:
             - 5HzmjKvhby
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-edgeWorkflow-0~-rxpl0FNj45rb5iu9NPuFH
+        key: ~exportplaceholderid-flow-edgeWorkflow~-rxpl0FNj45rb5iu9NPuFH
         meta:
           category: trigger
           description: ''
           deviceId: ''
-          id: WLlGrIOEIt
           label: Virtual Button
           name: virtualButton
           payload: ''
@@ -443,11 +426,10 @@ resources:
             - Pz4NGAT6Pa
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-edgeWorkflow-0~-f9uI0FlFtBDiuMQ_raAH9
+        key: ~exportplaceholderid-flow-edgeWorkflow~-f9uI0FlFtBDiuMQ_raAH9
         meta:
           category: trigger
           description: ''
-          id: s18YDd1AFK
           label: 'Device: Connect'
           name: onConnect
           uiId: s18YDd1AFK
@@ -459,12 +441,11 @@ resources:
             - 5HzmjKvhby
         type: onConnect
       - config: {}
-        key: ~exportplaceholderid-flow-edgeWorkflow-0~-bvZqKdMCH8hhKw3k2sd1P
+        key: ~exportplaceholderid-flow-edgeWorkflow~-bvZqKdMCH8hhKw3k2sd1P
         meta:
           category: trigger
           description: ''
           deviceId: ''
-          id: T6rQF-YgC7
           label: Say Hello
           name: virtualButton
           payload: |-
@@ -479,12 +460,11 @@ resources:
           - - _rn-zTljwp
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-edgeWorkflow-0~-zoEO7ZISjN
+        key: ~exportplaceholderid-flow-edgeWorkflow~-zoEO7ZISjN
         meta:
           category: trigger
           description: ''
           deviceId: ''
-          id: T6rQF-YgC7
           label: Say Goodbye
           name: virtualButton
           payload: |-
@@ -499,12 +479,11 @@ resources:
           - - _rn-zTljwp
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-edgeWorkflow-0~-DXTeyd1KqS
+        key: ~exportplaceholderid-flow-edgeWorkflow~-DXTeyd1KqS
         meta:
           category: trigger
           description: ''
           deviceId: ''
-          id: T6rQF-YgC7
           label: UK Capital
           name: virtualButton
           payload: |-

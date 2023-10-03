@@ -5,7 +5,7 @@ resources:
       an Edge Agent to register itself as a new device.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsEdgeComputeEdgeAgentAutoRegistration-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsEdgeComputeEdgeAgentAutoRegistration~
     name: Edge Agent Auto Registration
     readmePath: ./README.md
     imagePath: ./preview.png

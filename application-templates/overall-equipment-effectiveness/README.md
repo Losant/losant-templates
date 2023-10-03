@@ -7,14 +7,14 @@ Calculating OEE is very specific to each organization's machine types and manufa
 This is a tool to guide your thinking when you implement OEE in your unique solution. It utilizes features of Losant that can be used to perform the OEE calculations.
 
 ## Setup
-1. Enable the [Paper Machine Data Simulator](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-paperMachineDataSimulator-0~/develop) workflow.  
-2. Enable the [OEE Calculations](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-oeeCalculations-1~/develop) workflow.
+1. Enable the [Paper Machine Data Simulator](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~/workflows/~exportplaceholderid-flow-paperMachineDataSimulator~/develop) workflow.  
+2. Enable the [OEE Calculations](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~/workflows/~exportplaceholderid-flow-oeeCalculations~/develop) workflow.
 
 ## Dashboards
-This template includes [one dashboard](https://app.losant.com/dashboards/~exportplaceholderid-dashboard-paperMachine-0~): an OEE overview of a single paper machine. The dashboard is built with [context variables](https://docs.losant.com/dashboards/context-variables/) to allow the user to switch between the different paper machine devices. This template calculates OEE every hour, so OEE calculations will not appear on the dashboard until one hour has elapsed.
+This template includes [one dashboard](https://app.losant.com/dashboards/~exportplaceholderid-dashboard-paperMachine~): an OEE overview of a single paper machine. The dashboard is built with [context variables](https://docs.losant.com/dashboards/context-variables/) to allow the user to switch between the different paper machine devices. This template calculates OEE every hour, so OEE calculations will not appear on the dashboard until one hour has elapsed.
 
 ## OEE Calculation
-This template includes an [OEE Calculations](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-oeeCalculations-1~/develop) workflow, which will calculate the three parts of OEE over the last 30 days and save the results on device attributes.
+This template includes an [OEE Calculations](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~/workflows/~exportplaceholderid-flow-oeeCalculations~/develop) workflow, which will calculate the three parts of OEE over the last 30 days and save the results on device attributes.
 
 ### Availability 
 Availability is calculated using a 30-day [Time At Value](https://docs.losant.com/references/aggregations/#time-at-value) aggregation of the paper machine's status and reason [string attributes](https://docs.losant.com/devices/attributes/#strings).
@@ -47,7 +47,7 @@ tons/totalTons = Quality
 ## Paper Machine Process and Simulation
 OEE is a very process-focused calculation, so we built this template with a paper machine process in mind. This section offers insight into the process so that you can modify the OEE calculations to fit your needs.
 
-When the [Paper Machine Data Simulator](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~/workflows/~exportplaceholderid-flow-paperMachineDataSimulator-0~/develop) workflow is enabled, it will simulate the status of every paper machine as well as the production of paper. 
+When the [Paper Machine Data Simulator](/applications/~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~/workflows/~exportplaceholderid-flow-paperMachineDataSimulator~/develop) workflow is enabled, it will simulate the status of every paper machine as well as the production of paper. 
 
 These paper machines have several different status values. The status of the machine is a string attribute on each device. The values called out below in italics are the string values that are recorded for each state.
 
@@ -81,7 +81,7 @@ Once the issue is addressed and the inspection system indicates that the paper i
 
 ---
 
-This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/application-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
+This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/losant-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
 
 Copyright (c) 2020 Losant IoT, Inc
 

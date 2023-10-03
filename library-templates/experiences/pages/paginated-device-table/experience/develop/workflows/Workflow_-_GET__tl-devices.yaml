@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /tl-devices
     enabled: true
-    flowId: ~exportplaceholderid-flow-workflowGetTlDevices-1~
+    flowId: ~exportplaceholderid-flow-workflowGetTlDevices~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowGetTlDevices-0~
+    id: ~exportplaceholderid-flowVersion-workflowGetTlDevices~
     name: Workflow - GET /tl-devices
     nodes:
       - config:
@@ -14,7 +14,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageGetTlDevices-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageGetTlDevices~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -352,7 +352,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageGetTlDevices-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageGetTlDevices~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -459,7 +459,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getTlDevicesDeviceId-0~
+        key: ~exportplaceholderid-experienceEndpoint-getTlDevicesDeviceId~
         meta:
           category: trigger
           description: ''

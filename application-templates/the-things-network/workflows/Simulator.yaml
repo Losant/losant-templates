@@ -5,7 +5,7 @@ resources:
       TTN.
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-simulator-2~
+    id: ~exportplaceholderid-flow-simulator~
     name: Simulator
     nodes:
       - config:
@@ -253,7 +253,7 @@ resources:
             }
           payloadTemplateType: json
           triggerVirtualButtonId: atoPl_Nrcc
-          triggerWorkflowId: ~exportplaceholderid-flow-ttnReceiver-0~
+          triggerWorkflowId: ~exportplaceholderid-flow-ttnReceiver~
         id: xVlWOS-Mw1
         meta:
           category: output
@@ -303,7 +303,7 @@ resources:
             }
           payloadTemplateType: json
           triggerVirtualButtonId: atoPl_Nrcc
-          triggerWorkflowId: ~exportplaceholderid-flow-ttnReceiver-0~
+          triggerWorkflowId: ~exportplaceholderid-flow-ttnReceiver~
         id: GHAAXiyel-
         meta:
           category: output
@@ -319,7 +319,7 @@ resources:
     triggers:
       - config:
           seconds: 300
-        key: ~exportplaceholderid-flow-simulator-2~-iCNEwNYxqpkP7KgJ3K7z6
+        key: ~exportplaceholderid-flow-simulator~-iCNEwNYxqpkP7KgJ3K7z6
         meta:
           category: trigger
           description: ''
@@ -335,7 +335,7 @@ resources:
             - kOVMtGryZz
         type: timer
       - config: {}
-        key: ~exportplaceholderid-flow-simulator-2~-b4nLciXl3piCfghmSyJPV
+        key: ~exportplaceholderid-flow-simulator~-b4nLciXl3piCfghmSyJPV
         meta:
           category: trigger
           description: ''
@@ -352,7 +352,7 @@ resources:
             - kOVMtGryZz
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-simulator-2~-GLH4IdZUqY
+        key: ~exportplaceholderid-flow-simulator~-GLH4IdZUqY
         meta:
           category: trigger
           description: ''
@@ -368,7 +368,7 @@ resources:
           - - 0wRfpZf-dG
         type: virtualButton
       - config: {}
-        key: ~exportplaceholderid-flow-simulator-2~-Bf6yL8f2GG
+        key: ~exportplaceholderid-flow-simulator~-Bf6yL8f2GG
         meta:
           category: trigger
           description: ''

@@ -2,9 +2,9 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Routes the user to the correct home page.
     enabled: true
-    flowId: ~exportplaceholderid-flow-workflowGet-6~
+    flowId: ~exportplaceholderid-flow-workflowGet~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowGet-4~
+    id: ~exportplaceholderid-flowVersion-workflowGet~
     name: Workflow - GET /
     nodes:
       - config:
@@ -14,7 +14,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-managerDashboardHome-3~
+          pageIdTemplate: ~exportplaceholderid-experienceView-managerDashboardHome~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -96,7 +96,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-managerDashboardDevice-10~
+          pageIdTemplate: ~exportplaceholderid-experienceView-managerDashboardDevice~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -139,7 +139,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-kioskSelectors-4~
+          pageIdTemplate: ~exportplaceholderid-experienceView-kioskSelectors~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -206,7 +206,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-get-0~
+        key: ~exportplaceholderid-experienceEndpoint-get~
         meta:
           category: trigger
           description: ''

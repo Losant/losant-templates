@@ -1,25 +1,14 @@
 resourceType: ExperienceEndpoint
 resources:
   - access: authenticated
-    description: The manager home page. If a user is not logged in, they will be
-      redirected to /login.
-    enabled: true
-    endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-get-0~
-    method: get
-    route: /
-    unauthorizedReply:
-      type: redirect
-      value: /login
-    version: develop
-  - access: authenticated
     description: The endpoint shows a dashboard of equipment device locations, which
       is accessible by any logged-in user. If a user is logged out or
       unauthorized, they will be redirected to the kiosk login
       (/login?path=kiosk).
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getDevicesType-5~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getDevicesType~
     method: get
     route: /devices/{type}
     unauthorizedReply:
@@ -33,7 +22,8 @@ resources:
       (powered by the workflow).
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogin-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogin~
     method: get
     route: /login
     version: develop
@@ -42,7 +32,8 @@ resources:
       redirect to the /login endpoint.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getLogout-3~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getLogout~
     method: get
     route: /logout
     version: develop
@@ -53,13 +44,27 @@ resources:
       (/login?path=kiosk).
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getType-4~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getType~
     method: get
     route: /type
     unauthorizedReply:
       statusCode: 302
       type: redirect
       value: /login?path=kiosk
+    version: develop
+  - access: authenticated
+    description: The manager home page. If a user is not logged in, they will be
+      redirected to /login.
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-get~
+    method: get
+    route: /
+    unauthorizedReply:
+      type: redirect
+      value: /login
     version: develop
   - access: public
     description: When a user submits login credentials, those credentials hit this
@@ -68,7 +73,8 @@ resources:
       redirected back to the login page with a message about what went wrong.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postLogin-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postLogin~
     method: post
     route: /login
     version: develop

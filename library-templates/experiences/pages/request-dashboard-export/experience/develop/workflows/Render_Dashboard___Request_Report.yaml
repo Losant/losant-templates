@@ -1,13 +1,13 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-renderDashboardRequestReport-1~
+    flowId: ~exportplaceholderid-flow-renderDashboardRequestReport~
     globals:
       - json: '"ENTER JWT SECRET HERE"'
         key: JWT_SECRET
-      - json: '"~exportplaceholderid-dashboard-sampleDashboard-0~"'
+      - json: '"~exportplaceholderid-dashboard-sampleDashboard~"'
         key: dashboardId
-    id: ~exportplaceholderid-flowVersion-renderDashboardRequestReport-1~
+    id: ~exportplaceholderid-flowVersion-renderDashboardRequestReport~
     name: Render Dashboard / Request Report
     nodes:
       - config:
@@ -17,7 +17,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-dashboardPage-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-dashboardPage~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -35,11 +35,12 @@ resources:
           - - 6iiIBeIBpO
         type: EndpointReplyNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: 6iiIBeIBpO
         meta:
-          category: output
+          category: debug
           description: ''
           label: Debug
           name: debug
@@ -82,6 +83,7 @@ resources:
           dataTemplateType: json
           destinationPath: working.jwt
           expiresIn: 600
+          headerTemplateType: json
           issuerTemplate: '{{data.headers.host}}'
           secretTemplate: '{{globals.JWT_SECRET}}'
         id: sMe6RVYDZk
@@ -118,11 +120,12 @@ resources:
           - - sMe6RVYDZk
         type: MutateNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: EjGed0u5xs
         meta:
-          category: output
+          category: debug
           description: ''
           label: Debug
           name: debug
@@ -316,7 +319,7 @@ resources:
         id: S_gBMHTg5C
         meta:
           annotationText: >-
-            This template uses the Email Node for proving the concent, but we
+            This template uses the Email Node for proving the concept, but we
             strongly recommend replacing this with a SendGrid Node that utilizes
             your account.
           category: annotation
@@ -421,11 +424,12 @@ resources:
           - - _WZJBvwgUb
         type: GenerateIdNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: _WZJBvwgUb
         meta:
-          category: output
+          category: debug
           description: ''
           label: Debug
           name: debug
@@ -454,7 +458,7 @@ resources:
         type: GetExperienceUserNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getTlDashboardReport-2~
+        key: ~exportplaceholderid-experienceEndpoint-getTlDashboardReport~
         meta:
           category: trigger
           description: ''
@@ -467,7 +471,7 @@ resources:
           - - Ny4Ym0TIE7
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReport-5~
+        key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReport~
         meta:
           category: trigger
           description: ''
@@ -480,7 +484,7 @@ resources:
           - - u_HkZtK6X3
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb-4~
+        key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb~
         meta:
           category: trigger
           description: ''
@@ -494,7 +498,7 @@ resources:
         type: endpoint
       - config: {}
         key: >-
-          ~exportplaceholderid-flow-renderDashboardRequestReport-1~-F1EwnjAW152aEtJxUgrjr
+          ~exportplaceholderid-flow-renderDashboardRequestReport~-F1EwnjAW152aEtJxUgrjr
         meta:
           category: trigger
           description: ''

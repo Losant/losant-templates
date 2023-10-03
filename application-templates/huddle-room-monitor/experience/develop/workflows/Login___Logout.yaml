@@ -4,9 +4,9 @@ resources:
       A workflow managing the login page - both requests to view the page as
       well as submissions of login credentials.
     enabled: true
-    flowId: ~exportplaceholderid-flow-loginLogout-2~
+    flowId: ~exportplaceholderid-flow-loginLogout~
     globals: []
-    id: ~exportplaceholderid-flowVersion-loginLogout-1~
+    id: ~exportplaceholderid-flowVersion-loginLogout~
     name: Login / Logout
     nodes:
       - config:
@@ -144,7 +144,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageLogin-1~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageLogin~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -195,7 +195,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postLogin-3~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin~
         meta:
           category: trigger
           description: When a user submits login credentials ...
@@ -208,7 +208,7 @@ resources:
           - - B1XrON5DTW
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getLogin-1~
+        key: ~exportplaceholderid-experienceEndpoint-getLogin~
         meta:
           category: trigger
           description: When a user visits the login page ...
@@ -221,7 +221,7 @@ resources:
           - - B1XrON5DTW
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getLogout-0~
+        key: ~exportplaceholderid-experienceEndpoint-getLogout~
         meta:
           category: trigger
           description: >-

@@ -4,7 +4,8 @@ resources:
     description: Displays the Change Password page for signed-in users.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getTlChangePassword-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlChangePassword~
     method: get
     route: /tl-change-password
     unauthorizedReply:
@@ -16,7 +17,8 @@ resources:
     description: Accepts form submissions from the Change Password page.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postTlChangePassword-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postTlChangePassword~
     method: post
     route: /tl-change-password
     unauthorizedReply:

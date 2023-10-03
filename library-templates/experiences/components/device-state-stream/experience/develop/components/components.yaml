@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlDeviceStateStream-2~
+    id: ~exportplaceholderid-experienceView-tlDeviceStateStream~
     localFilename: ./tl-device-state-stream.hbs
     name: tl-device-state-stream
     version: develop

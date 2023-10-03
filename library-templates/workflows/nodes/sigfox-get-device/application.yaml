@@ -5,7 +5,7 @@ resources:
       device's information.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsNodesSigfoxGetDevice-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesSigfoxGetDevice~
     name: Sigfox Get Device
     readmePath: ./README.md
     imagePath: ./preview.png

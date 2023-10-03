@@ -15,7 +15,7 @@ resources:
           https://openweathermap.org/api"
         json: '"YOUR_API_KEY"'
         key: api_key
-    id: ~exportplaceholderid-application-applicationWeatherStation-0~
+    id: ~exportplaceholderid-application-applicationWeatherStation~
     name: Weather Station
     readmePath: ./README.md
     imagePath: ./preview.png

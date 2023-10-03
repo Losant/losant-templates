@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlGoogleMap-0~
+    id: ~exportplaceholderid-experienceView-tlGoogleMap~
     localFilename: ./tl-google-map.hbs
     name: tl-google-map
     version: develop

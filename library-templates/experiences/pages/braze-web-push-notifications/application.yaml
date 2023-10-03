@@ -17,7 +17,7 @@ resources:
         description: ""
         json: '"846ba560-560c-4724-80a5-9603e7f2e20c"'
         key: tl-braze-rest-api-key
-    id: ~exportplaceholderid-application-libraryExperiencesPagesBrazeWebPushNotifications-0~
+    id: ~exportplaceholderid-application-libraryExperiencesPagesBrazeWebPushNotifications~
     name: Braze Web Push Notifications
     readmePath: ./README.md
     imagePath: ./preview.png

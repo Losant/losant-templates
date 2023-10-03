@@ -9,7 +9,7 @@ resources:
     description: Itron Milli5 HDK with Adafruit board and HDT-11 temperature sensor
     deviceClass: standalone
     deviceName: Device from recipe MilliTempSensor
-    id: ~exportplaceholderid-deviceRecipe-milliTempSensor-0~
+    id: ~exportplaceholderid-deviceRecipe-milliTempSensor~
     name: MilliTempSensor
     tags:
       - key: device_type

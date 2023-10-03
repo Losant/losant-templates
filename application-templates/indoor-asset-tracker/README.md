@@ -16,9 +16,9 @@ The application simulates movement of beacon-like devices on the campus of an as
 ## Setup
 To begin using this template ...
 
-1. Enable the [Device Simulator](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowDeviceSimulator-0~/develop) workflow.
-2. Enable the [Event Alerting](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/workflows/~exportplaceholderid-flow-workflowEventAlerting-3~/develop) workflow.
-3. Update the passwords for the two [Experience Users](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/experience/users) included with the template.
+1. Enable the [Device Simulator](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker~/workflows/~exportplaceholderid-flow-workflowDeviceSimulator~/develop) workflow.
+2. Enable the [Event Alerting](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker~/workflows/~exportplaceholderid-flow-workflowEventAlerting~/develop) workflow.
+3. Update the passwords for the two [Experience Users](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker~/experience/users) included with the template.
 4. If you wish to make use of the kiosk-based login, you must also set a `pin` tag with a unique numeric value for each Experience User. We recommend the values be at least 4 numbers long.
 
 ## Device Simulation
@@ -72,8 +72,8 @@ All users require an `email`, `password`, and a `pin` tag (if using the kiosk lo
 ### Device Recipes
 Device Recipes have been created to assist with extending this template:
 
-- [Equipment Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/device-recipes/~exportplaceholderid-deviceRecipe-equipmentDevice-0~/properties)
-- [Person Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker-0~/device-recipes/~exportplaceholderid-deviceRecipe-personDevice-1~/properties)
+- [Equipment Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker~/device-recipes/~exportplaceholderid-deviceRecipe-equipmentDevice~/properties)
+- [Person Device Recipe](/applications/~exportplaceholderid-application-applicationIndoorAssetTracker~/device-recipes/~exportplaceholderid-deviceRecipe-personDevice~/properties)
 
 These recipes have been preconfigured with the required tags used to dynamically render values in experiences. These tags are:
 

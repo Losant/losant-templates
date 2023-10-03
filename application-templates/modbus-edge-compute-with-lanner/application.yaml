@@ -33,7 +33,7 @@ resources:
             "additionalProperties": false
           }
         key: update_command_payload_schema
-    id: ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+    id: ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
     name: Modbus Edge Compute with Lanner
     readmePath: ./README.md
     imagePath: ./preview.png

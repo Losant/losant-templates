@@ -2,11 +2,11 @@ resourceType: ExperienceUser
 resources:
   - email: kanarra@example.com
     experienceGroupIds: []
-    id: ~exportplaceholderid-experienceUser-kanarraExampleCom-0~
+    id: ~exportplaceholderid-experienceUser-kanarraExampleCom~
     userTags: {}
   - email: manager@example.com
     experienceGroupIds: []
-    id: ~exportplaceholderid-experienceUser-managerExampleCom-1~
+    id: ~exportplaceholderid-experienceUser-managerExampleCom~
     userTags:
       role: manager
 version: 1

@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-postTlVerifyLogin-0~
+    flowId: ~exportplaceholderid-flow-postTlVerifyLogin~
     globals: []
-    id: ~exportplaceholderid-flowVersion-postTlVerifyLogin-0~
+    id: ~exportplaceholderid-flowVersion-postTlVerifyLogin~
     name: POST /tl-verify-login
     nodes:
       - config:
@@ -39,7 +39,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -264,7 +264,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -329,7 +329,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -415,7 +415,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postTlVerifyLogin-1~
+        key: ~exportplaceholderid-experienceEndpoint-postTlVerifyLogin~
         meta:
           category: trigger
           description: When a user submits login credentials ...

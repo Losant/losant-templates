@@ -3,14 +3,16 @@ resources:
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getProvision-0~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getProvision~
     method: get
     route: /provision
     version: develop
   - access: authenticated
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postProvision-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postProvision~
     method: post
     route: /provision
     version: develop

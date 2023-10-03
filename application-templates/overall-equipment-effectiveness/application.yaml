@@ -4,7 +4,7 @@ resources:
     description: OEE calculations and dashboards for simulated paper machines.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness-0~
+    id: ~exportplaceholderid-application-applicationOverallEquipmentEffectiveness~
     name: Overall Equipment Effectiveness
     readmePath: ./README.md
     imagePath: ./preview.png

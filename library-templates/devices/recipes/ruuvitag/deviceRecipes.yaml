@@ -32,7 +32,7 @@ resources:
     description: Open-source wireless sensor node.
     deviceClass: standalone
     deviceName: RuuviTag
-    id: ~exportplaceholderid-deviceRecipe-ruuviTag-0~
+    id: ~exportplaceholderid-deviceRecipe-ruuviTag~
     name: RuuviTag
     tags:
       - key: mac

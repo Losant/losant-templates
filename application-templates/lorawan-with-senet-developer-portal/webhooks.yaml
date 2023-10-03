@@ -2,10 +2,10 @@ resourceType: Webhook
 resources:
   - basicAuthPassword: ''
     basicAuthUsername: ''
-    id: ~exportplaceholderid-webhook-senetDataReceiver-0~
+    id: ~exportplaceholderid-webhook-senetDataReceiver~
     name: Senet Data Receiver
     responseCode: 200
-    token: ~exportplaceholderid-webhookToken-senetDataReceiver-0~
+    token: ~exportplaceholderid-webhookToken-senetDataReceiver~
     verificationCode: ''
     verificationType: none
     waitForReply: false

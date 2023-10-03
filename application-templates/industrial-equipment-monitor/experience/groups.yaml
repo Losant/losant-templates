@@ -7,22 +7,22 @@ resources:
           - key: group
             value: Sadler Isberg
         groupTags: {}
-        id: ~exportplaceholderid-experienceGroup-sadlerIsberg-1~
+        id: ~exportplaceholderid-experienceGroup-sadlerIsberg~
         name: Sadler-Isberg
-        parentId: ~exportplaceholderid-experienceGroup-kanarra-0~
+        parentId: ~exportplaceholderid-experienceGroup-kanarra~
       - children: []
         deviceIds: []
         deviceTags:
           - key: group
             value: Tekton Health
         groupTags: {}
-        id: ~exportplaceholderid-experienceGroup-tektonHealth-2~
+        id: ~exportplaceholderid-experienceGroup-tektonHealth~
         name: Tekton Health
-        parentId: ~exportplaceholderid-experienceGroup-kanarra-0~
+        parentId: ~exportplaceholderid-experienceGroup-kanarra~
     deviceIds: []
     deviceTags: []
     groupTags: {}
-    id: ~exportplaceholderid-experienceGroup-kanarra-0~
+    id: ~exportplaceholderid-experienceGroup-kanarra~
     name: Kanarra
     parentId: null
 version: 1

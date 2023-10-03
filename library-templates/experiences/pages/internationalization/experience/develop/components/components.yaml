@@ -1,21 +1,21 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlI18NHeadInfo-2~
+    id: ~exportplaceholderid-experienceView-tlI18NHeadInfo~
     localFilename: ./tl-i18n-head-info.hbs
     name: tl-i18n-head-info
     version: develop
     viewTags: {}
     viewType: component
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlI18NLanguageHref-3~
+    id: ~exportplaceholderid-experienceView-tlI18NLanguageHref~
     localFilename: ./tl-i18n-language-href.hbs
     name: tl-i18n-language-href
     version: develop
     viewTags: {}
     viewType: component
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlI18NLanguageSelector-1~
+    id: ~exportplaceholderid-experienceView-tlI18NLanguageSelector~
     localFilename: ./tl-i18n-language-selector.hbs
     name: tl-i18n-language-selector
     version: develop

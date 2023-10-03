@@ -22,7 +22,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
-    id: ~exportplaceholderid-device-floorLift-4~
+    id: ~exportplaceholderid-device-floorLift~
     name: Floor Lift
     tags:
       - key: type
@@ -51,7 +51,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
-    id: ~exportplaceholderid-device-janeSmith-1~
+    id: ~exportplaceholderid-device-janeSmith~
     name: Jane Smith
     tags:
       - key: type
@@ -82,7 +82,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
-    id: ~exportplaceholderid-device-oxygenConcentrator-2~
+    id: ~exportplaceholderid-device-oxygenConcentrator~
     name: Oxygen Concentrator
     tags:
       - key: type
@@ -111,7 +111,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
-    id: ~exportplaceholderid-device-visitor-0~
+    id: ~exportplaceholderid-device-visitor~
     name: Visitor
     tags:
       - key: type
@@ -140,7 +140,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
-    id: ~exportplaceholderid-device-wheelchair-3~
+    id: ~exportplaceholderid-device-wheelchair~
     name: Wheelchair
     tags:
       - key: type

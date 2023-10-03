@@ -201,7 +201,7 @@ resources:
         key: username
       - json: '"admin123"'
         key: password
-    id: ~exportplaceholderid-flow-setAgentConfiguration-0~
+    id: ~exportplaceholderid-flow-setAgentConfiguration~
     minimumAgentVersion: 1.24.0
     name: Set Agent Configuration
     nodes:

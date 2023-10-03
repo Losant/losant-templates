@@ -139,7 +139,7 @@ resources:
       Milesight AM107 Ambience Monitoring Sensor:
       https://www.milesight-iot.com/lorawan/sensor/am100/
     deviceClass: standalone
-    id: ~exportplaceholderid-device-milesightAm10724E124128B118964-0~
+    id: ~exportplaceholderid-device-milesightAm10724E124128B118964~
     name: Milesight AM107 - 24E124128B118964
     tags:
       - key: DevEUI

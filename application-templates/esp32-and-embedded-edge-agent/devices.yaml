@@ -25,7 +25,7 @@ resources:
     children: []
     description: Represents an ESP32 with attributes for various digital and analog values.
     deviceClass: embedded
-    id: ~exportplaceholderid-device-esp32-0~
+    id: ~exportplaceholderid-device-esp32~
     name: ESP32
     tags:
       - key: model

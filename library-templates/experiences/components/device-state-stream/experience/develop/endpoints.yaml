@@ -3,7 +3,8 @@ resources:
   - access: public
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getDeviceStateStreamDeviceId-1~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getDeviceStateStreamDeviceId~
     method: get
     route: /device-state-stream/{deviceId}
     version: develop

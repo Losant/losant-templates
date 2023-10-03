@@ -5,7 +5,7 @@ resources:
       Technologies.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor-0~
+    id: ~exportplaceholderid-application-applicationKst33SeriesDistanceSensor~
     name: KST33 Series Distance Sensor
     readmePath: ./README.md
     imagePath: ./preview.png

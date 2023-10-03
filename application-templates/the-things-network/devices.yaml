@@ -17,7 +17,7 @@ resources:
         name: tamper
     children: []
     deviceClass: standalone
-    id: ~exportplaceholderid-device-radioBridgeRbs306Vm30-1~
+    id: ~exportplaceholderid-device-radioBridgeRbs306Vm30~
     name: Radio Bridge RBS306-VM30
     tags:
       - key: dev_id

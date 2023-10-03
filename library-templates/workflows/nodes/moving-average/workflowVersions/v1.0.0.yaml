@@ -25,9 +25,9 @@ resources:
         not been enough points received.
       resultMode: required
     enabled: true
-    flowId: ~exportplaceholderid-flow-movingAverage-0~
+    flowId: ~exportplaceholderid-flow-movingAverage~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -212,7 +212,7 @@ resources:
           - - BlsM8azqgT
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-movingAverage-0~-kwVCkkhY3TGLKuyaHyOkk
+        key: ~exportplaceholderid-flow-movingAverage~-kwVCkkhY3TGLKuyaHyOkk
         meta:
           category: trigger
           description: ''

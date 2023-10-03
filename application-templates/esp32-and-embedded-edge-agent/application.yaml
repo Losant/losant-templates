@@ -5,7 +5,7 @@ resources:
       Embedded Edge Agent.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent-0~
+    id: ~exportplaceholderid-application-applicationEsp32AndEmbeddedEdgeAgent~
     name: ESP32 and Embedded Edge Agent
     readmePath: ./README.md
     imagePath: ./preview.png

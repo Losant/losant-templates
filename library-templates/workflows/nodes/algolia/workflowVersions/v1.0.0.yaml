@@ -39,9 +39,9 @@ resources:
         property.
       resultMode: optional
     enabled: true
-    flowId: ~exportplaceholderid-flow-algoliaSearch-0~
+    flowId: ~exportplaceholderid-flow-algoliaSearch~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -132,7 +132,7 @@ resources:
           - - ibq0wgl6ie
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-algoliaSearch-0~-69SO-speLoDQN2F8oqzij
+        key: ~exportplaceholderid-flow-algoliaSearch~-69SO-speLoDQN2F8oqzij
         meta:
           category: trigger
           description: ''

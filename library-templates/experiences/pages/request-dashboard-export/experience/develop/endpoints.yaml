@@ -5,22 +5,9 @@ resources:
       signed-in Experience User.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-getTlDashboardReport-2~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-getTlDashboardReport~
     method: get
-    route: /tl-dashboard-report
-    unauthorizedReply:
-      type: redirect
-      value: /login
-    version: develop
-  - access: authenticated
-    description: This endpoint handles requests to generate the PDF (by clicking the
-      button at the top of the dashboard's page). It then displays the dashboard
-      to the user again, along with feedback at the top of the page about
-      whether the request succeeded.
-    enabled: true
-    endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReport-5~
-    method: post
     route: /tl-dashboard-report
     unauthorizedReply:
       type: redirect
@@ -32,8 +19,24 @@ resources:
       included as a query param and then send the PDF to the user's inbox.
     enabled: true
     endpointTags: {}
-    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb-4~
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb~
     method: post
     route: /tl-dashboard-report-cb
+    version: develop
+  - access: authenticated
+    description: This endpoint handles requests to generate the PDF (by clicking the
+      button at the top of the dashboard's page). It then displays the dashboard
+      to the user again, along with feedback at the top of the page about
+      whether the request succeeded.
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReport~
+    method: post
+    route: /tl-dashboard-report
+    unauthorizedReply:
+      type: redirect
+      value: /login
     version: develop
 version: 1

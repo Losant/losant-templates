@@ -3,7 +3,7 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-simulator-0~
+    id: ~exportplaceholderid-flow-simulator~
     name: Simulator
     nodes:
       - config:
@@ -20,7 +20,7 @@ resources:
           responsePath: working.turbineData
           timeoutTemplate: ''
           uriTemplate: >-
-            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationElipsaPredictiveMaintenance-0~/TurbineEngine.csv
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationElipsaPredictiveMaintenance~/TurbineEngine.csv
         id: jjjcclQvn6
         meta:
           category: data
@@ -139,7 +139,7 @@ resources:
       - config:
           attrDataMethod: payloadPath
           attrPayloadPath: working.row
-          deviceId: ~exportplaceholderid-device-turbofan-0~
+          deviceId: ~exportplaceholderid-device-turbofan~
           deviceIdTemplateType: stringTemplate
           resultPath: ''
           timeSourceType: payloadTime
@@ -256,7 +256,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-flow-simulator-0~-IFN8v4xb6NPAwsndCfGKD
+        key: ~exportplaceholderid-flow-simulator~-IFN8v4xb6NPAwsndCfGKD
         meta:
           category: trigger
           description: ''
@@ -272,7 +272,7 @@ resources:
         type: virtualButton
       - config:
           seconds: 60
-        key: ~exportplaceholderid-flow-simulator-0~-WMJIQNcFv863Eo7aZZ0k7
+        key: ~exportplaceholderid-flow-simulator~-WMJIQNcFv863Eo7aZZ0k7
         meta:
           category: trigger
           description: ''

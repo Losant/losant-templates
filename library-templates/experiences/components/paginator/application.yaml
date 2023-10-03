@@ -8,7 +8,7 @@ resources:
         description: ""
         json: '"pagination,paginator,table,list"'
         key: keywords
-    id: ~exportplaceholderid-application-libraryExperiencesComponentsPaginator-0~
+    id: ~exportplaceholderid-application-libraryExperiencesComponentsPaginator~
     name: Paginator
     readmePath: ./README.md
     imagePath: ./preview.png

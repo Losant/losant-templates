@@ -9,7 +9,7 @@ resources:
         description: ""
         json: '"my-secret-token"'
         key: LORA_NETWORK_SERVER_AUTH_TOKEN
-    id: ~exportplaceholderid-application-applicationTheThingsNetwork-0~
+    id: ~exportplaceholderid-application-applicationTheThingsNetwork~
     name: The Things Network
     readmePath: ./README.md
     imagePath: ./preview.png

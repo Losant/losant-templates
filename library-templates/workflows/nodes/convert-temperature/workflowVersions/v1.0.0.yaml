@@ -31,9 +31,9 @@ resources:
         units.
       resultMode: required
     enabled: true
-    flowId: ~exportplaceholderid-flow-convertTemp-0~
+    flowId: ~exportplaceholderid-flow-convertTemp~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -232,7 +232,7 @@ resources:
           - - 2qI2EjZjjG
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-convertTemp-0~-tCZdSj9u72BHuIsGECwi7
+        key: ~exportplaceholderid-flow-convertTemp~-tCZdSj9u72BHuIsGECwi7
         meta:
           category: trigger
           description: ''

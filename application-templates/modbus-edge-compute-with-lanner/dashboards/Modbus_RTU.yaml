@@ -2,7 +2,7 @@ resourceType: Dashboard
 resources:
   - blocks:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: graph
         config:
           duration: 86400000
@@ -37,7 +37,7 @@ resources:
         title: Temperature
         width: 3.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -64,7 +64,7 @@ resources:
         title: Temperature
         width: 0.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: graph
         config:
           duration: 86400000
@@ -99,7 +99,7 @@ resources:
         title: Humidity
         width: 3.5
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -127,8 +127,8 @@ resources:
         width: 0.5
     contextConfiguration:
       - applicationId: >-
-          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner-0~
-        defaultValue: ~exportplaceholderid-device-modbusRtuSensor-1~
+          ~exportplaceholderid-application-applicationModbusEdgeComputeWithLanner~
+        defaultValue: ~exportplaceholderid-device-modbusRtuSensor~
         name: device
         type: deviceId
         validationConfig:
@@ -136,8 +136,11 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-modbusRtu-0~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-modbusRtu~
+    isPasswordProtected: false
     name: Modbus RTU
     public: false
     refreshRate: 60
+    resolution: 60000
 version: 1

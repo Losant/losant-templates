@@ -4,9 +4,9 @@ resources:
       Renders a page with a list of buttons for both resident and equipment
       devices.
     enabled: true
-    flowId: ~exportplaceholderid-flow-workflowGetType-4~
+    flowId: ~exportplaceholderid-flow-workflowGetType~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowGetType-2~
+    id: ~exportplaceholderid-flowVersion-workflowGetType~
     name: Workflow - GET /type
     nodes:
       - config:
@@ -16,7 +16,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-kioskSelectors-4~
+          pageIdTemplate: ~exportplaceholderid-experienceView-kioskSelectors~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -314,7 +314,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-kioskSelectors-4~
+          pageIdTemplate: ~exportplaceholderid-experienceView-kioskSelectors~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -456,7 +456,7 @@ resources:
         type: MutateNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getType-4~
+        key: ~exportplaceholderid-experienceEndpoint-getType~
         meta:
           category: trigger
           description: ''

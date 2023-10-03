@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-logIn-0~
+    flowId: ~exportplaceholderid-flow-logIn~
     globals: []
-    id: ~exportplaceholderid-flowVersion-logIn-0~
+    id: ~exportplaceholderid-flowVersion-logIn~
     name: Log In
     nodes:
       - config:
@@ -21,7 +21,7 @@ resources:
           label: Authenticate
           name: experience-user-auth
           x: 220
-          'y': 920
+          'y': 840
         outputIds:
           - - qwUHUGa0Ft
           - - tg6RCBH6em
@@ -39,7 +39,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '401'
@@ -54,7 +54,7 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 120
-          'y': 1080
+          'y': 940
         outputIds:
           - - KPkzwklSYY
         type: EndpointReplyNode
@@ -82,7 +82,7 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 320
-          'y': 1080
+          'y': 940
         outputIds:
           - - KPkzwklSYY
         type: EndpointReplyNode
@@ -118,22 +118,22 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 320
-          'y': 280
+          'y': 260
         outputIds:
           - - 006buDTbAb
         type: EndpointReplyNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: 006buDTbAb
         meta:
-          category: output
+          category: debug
           description: ''
-          id: 006buDTbAb
           label: Debug
           name: debug
           x: 220
-          'y': 400
+          'y': 360
         outputIds: []
         type: DebugNode
       - config: {}
@@ -148,7 +148,7 @@ resources:
           name: note
           width: 260
           x: 440
-          'y': 160
+          'y': 140
         outputIds: []
         type: AnnotationNode
       - config:
@@ -161,7 +161,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin-0~
+          pageIdTemplate: ~exportplaceholderid-experienceView-tlPageLogin~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: '200'
@@ -174,22 +174,22 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 120
-          'y': 280
+          'y': 260
         outputIds:
           - - 006buDTbAb
         type: EndpointReplyNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: KPkzwklSYY
         meta:
-          category: output
+          category: debug
           description: ''
-          id: KPkzwklSYY
           label: Debug
           name: debug
           x: 220
-          'y': 1240
+          'y': 1040
         outputIds: []
         type: DebugNode
       - config: {}
@@ -237,7 +237,7 @@ resources:
           name: note
           width: 260
           x: 440
-          'y': 640
+          'y': 620
         outputIds: []
         type: AnnotationNode
       - config:
@@ -258,17 +258,17 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 340
-          'y': 780
+          'y': 740
         outputIds:
           - - v3n9Tq6Ae6
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postLogin-1~
+        key: ~exportplaceholderid-experienceEndpoint-postLogin~
         meta:
           category: trigger
           description: When a user submits login credentials ...
-          label: POST Login
+          label: POST /login
           name: endpoint
           uiId: HYVyV1G4gl
           x: 220
@@ -277,11 +277,11 @@ resources:
           - - KwKCZ598oj
         type: endpoint
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getLogin-0~
+        key: ~exportplaceholderid-experienceEndpoint-getLogin~
         meta:
           category: trigger
           description: When a user visits the login page ...
-          label: GET Login
+          label: GET /login
           name: endpoint
           uiId: 1jNeP_bh49
           x: 220

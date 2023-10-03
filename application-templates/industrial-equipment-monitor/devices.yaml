@@ -68,7 +68,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~exportplaceholderid-device-acz8BpA5Ajz6-0~
+    id: ~exportplaceholderid-device-acz8BpA5Ajz6~
     name: acz8bpA5ajz6
     tags:
       - key: DeviceRecipe
@@ -151,7 +151,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~exportplaceholderid-device-bTrMUwapvBsU-1~
+    id: ~exportplaceholderid-device-bTrMUwapvBsU~
     name: bTrMUwapvBsU
     tags:
       - key: DeviceRecipe
@@ -234,7 +234,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~exportplaceholderid-device-fBbha7ZyK233-2~
+    id: ~exportplaceholderid-device-fBbha7ZyK233~
     name: fBBHA7ZyK233
     tags:
       - key: DeviceRecipe
@@ -317,7 +317,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~exportplaceholderid-device-uGkK5MptEfkv-3~
+    id: ~exportplaceholderid-device-uGkK5MptEfkv~
     name: uGkK5mptEFKV
     tags:
       - key: DeviceRecipe
@@ -400,7 +400,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
-    id: ~exportplaceholderid-device-wA4XusQwXpyH-4~
+    id: ~exportplaceholderid-device-wA4XusQwXpyH~
     name: wA4xusQWXpyH
     tags:
       - key: DeviceRecipe

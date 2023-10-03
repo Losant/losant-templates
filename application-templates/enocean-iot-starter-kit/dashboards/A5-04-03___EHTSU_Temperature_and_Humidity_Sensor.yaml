@@ -1,7 +1,7 @@
 resourceType: Dashboard
 resources:
   - blocks:
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -27,7 +27,7 @@ resources:
         startY: 0
         title: Actual Temperature
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -54,7 +54,7 @@ resources:
         startY: 0
         title: Min. Temperature
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -81,7 +81,7 @@ resources:
         startY: 0
         title: Max Temperature
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: graph
         config:
           duration: 10800000
@@ -135,7 +135,7 @@ resources:
         startY: 0
         title: Time Series Graph
         width: 2.5
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -162,7 +162,7 @@ resources:
         startY: 1.5
         title: Max Humidity
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -189,7 +189,7 @@ resources:
         startY: 1.5
         title: Min. Humidity
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: gauge
         config:
           displayAsPercentage: false
@@ -215,7 +215,7 @@ resources:
         startY: 1.5
         title: Actual Humidity
         width: 0.5
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
         blockType: custom-chart
         config:
           configuration: "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v2.json\",\n  \"width\": {{block.width}},\n  \"height\": {{block.height}},\n  \"autosize\": {\n    \"type\": \"fit\",\n    \"contains\": \"padding\"\n  },\n  \"config\": {\n    \"axis\": {\n  \t\t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\",\n      \"domain\": false\n    },\n    \"legend\": {\n    \t\"labelColor\": \"#888c95\",\n      \"titleColor\": \"#888c95\"\n    },\n    \"scale\": {\n      \"bandPaddingInner\": 0,\n      \"round\": false\n    },\n\t\t\"view\": {\n    \t\"fill\": \"#414855\",\n      \"stroke\": \"transparent\"\n    }\n  },\n  \"data\": {\n    \"name\": \"time-series-0\"\n  },\n\t\"mark\": \"rect\",\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"day\",\n      \"sort\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\", \"sat\", \"sun\"]\n    },\n    \"x\": {\n      \"field\": \"time\",\n      \"type\": \"ordinal\",\n      \"timeUnit\": \"hours\"\n    },\n    \"size\": {\n      \"field\": \"value\",\n      \"type\": \"quantitative\",\n      \"aggregate\": \"mean\"\n    },\n    \"color\": {\n      \"field\": \"value\",\n      \"aggregate\": \"mean\",\n      \"type\": \"quantitative\",\n      \"scale\": {\n        \"scheme\": \"LightMulti\"\n      }\n    }\n\t}\t\n}"
@@ -239,8 +239,8 @@ resources:
         title: Temperature Heat Map
         width: 4
     contextConfiguration:
-      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit-0~
-        defaultValue: ~exportplaceholderid-device-edgeCompute-0~
+      - applicationId: ~exportplaceholderid-application-applicationEnOceanIoTStarterKit~
+        defaultValue: ~exportplaceholderid-device-edgeCompute~
         name: device
         type: deviceId
         validationConfig:
@@ -248,9 +248,12 @@ resources:
         validationEnabled: false
     defaultTheme: light
     description: ''
-    id: ~exportplaceholderid-dashboard-a50403EhtsuTemperatureAndHumiditySensor-2~
+    duration: 3600000
+    id: ~exportplaceholderid-dashboard-a50403EhtsuTemperatureAndHumiditySensor~
+    isPasswordProtected: false
     name: A5-04-03 | EHTSU Temperature and Humidity Sensor
     public: false
     refreshRate: 5
     reportConfigs: []
+    resolution: 60000
 version: 1

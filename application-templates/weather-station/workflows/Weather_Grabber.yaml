@@ -5,7 +5,7 @@ resources:
       the result on a device.
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-weatherGrabber-0~
+    id: ~exportplaceholderid-flow-weatherGrabber~
     name: Weather Grabber
     nodes:
       - config:
@@ -27,7 +27,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: CSTa-u6aQ7
           label: HTTP
           name: http
           x: 180
@@ -42,7 +41,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: Gcz_KvFnVX
           label: Debug
           name: debug
           x: 180
@@ -66,7 +64,7 @@ resources:
               valueTemplate: '{{ working.weather.body.visibility }}'
             - key: wind-speed
               valueTemplate: '{{ working.weather.body.wind.speed }}'
-          deviceId: ~exportplaceholderid-device-weather-0~
+          deviceId: ~exportplaceholderid-device-weather~
           deviceIdTemplateType: stringTemplate
           resultPath: ''
           timeSourceType: payloadTime
@@ -74,7 +72,6 @@ resources:
         meta:
           category: output
           description: ''
-          id: 4lgTqZzT0M
           label: 'Device: State'
           name: device-state
           x: 300
@@ -116,7 +113,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: XVgMLKePrL
           label: Conditional
           name: conditional
           x: 180
@@ -135,7 +131,6 @@ resources:
         meta:
           category: logic
           description: ''
-          id: KJ3WtFitaQ
           label: String
           name: string
           x: 180
@@ -159,11 +154,10 @@ resources:
     triggers:
       - config:
           seconds: 120
-        key: ~exportplaceholderid-flow-weatherGrabber-0~-5pfXZf5nyqEFj1X3UFyBC
+        key: ~exportplaceholderid-flow-weatherGrabber~-5pfXZf5nyqEFj1X3UFyBC
         meta:
           category: trigger
           description: ''
-          id: usX5K5X-vU
           label: Timer
           name: timer
           timerTypeSelect: seconds
@@ -174,12 +168,11 @@ resources:
           - - KJ3WtFitaQ
         type: timer
       - config: {}
-        key: ~exportplaceholderid-flow-weatherGrabber-0~-IwWoDau5gmMKIgE9bAe0i
+        key: ~exportplaceholderid-flow-weatherGrabber~-IwWoDau5gmMKIgE9bAe0i
         meta:
           category: trigger
           description: ''
           deviceId: null
-          id: '-SKI2EnOoT'
           label: Virtual Button
           name: virtualButton
           payload: ''

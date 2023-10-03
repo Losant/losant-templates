@@ -4,7 +4,7 @@ resources:
     description: Calculates a moving average over a configurable number of data points.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsNodesMovingAverage-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsNodesMovingAverage~
     name: Moving Average
     readmePath: ./README.md
     imagePath: ./preview.png

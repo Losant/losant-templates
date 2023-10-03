@@ -18,7 +18,7 @@ resources:
         description: ""
         json: '"AK3:UUok1BiAP5YUgGpwy7cUXVrnxtG5BCfUq8hJG9zn"'
         key: SENET_DEMO_API_KEY
-    id: ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal-0~
+    id: ~exportplaceholderid-application-applicationLoRaWanWithSenetDeveloperPortal~
     name: LoRaWAN with Senet Developer Portal
     readmePath: ./README.md
     imagePath: ./preview.png

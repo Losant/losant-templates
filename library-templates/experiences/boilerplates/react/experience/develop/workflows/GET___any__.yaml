@@ -5,9 +5,9 @@ resources:
       static index.html file for any GET request to an endpoint that does not
       start with "/api".
     enabled: true
-    flowId: ~exportplaceholderid-flow-getAny-0~
+    flowId: ~exportplaceholderid-flow-getAny~
     globals: []
-    id: ~exportplaceholderid-flowVersion-getAny-0~
+    id: ~exportplaceholderid-flowVersion-getAny~
     name: 'GET /{any*}'
     nodes:
       - config:
@@ -160,7 +160,7 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getAny-0~
+        key: ~exportplaceholderid-experienceEndpoint-getAny~
         meta:
           category: trigger
           description: ''

@@ -4,7 +4,7 @@ resources:
     description: Allows for setting agent configuration files via a local web interface.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryWorkflowsEdgeComputeEdgeAgentConfigurationPage-0~
+    id: ~exportplaceholderid-application-libraryWorkflowsEdgeComputeEdgeAgentConfigurationPage~
     name: Edge Agent Configuration Page
     readmePath: ./README.md
     imagePath: ./preview.png

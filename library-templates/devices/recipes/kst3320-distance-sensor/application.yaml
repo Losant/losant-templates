@@ -4,7 +4,7 @@ resources:
     description: The KST3320 distance sensor.
     filesPath: ./files
     globals: []
-    id: ~exportplaceholderid-application-libraryDevicesRecipesKst3320DistanceSensor-0~
+    id: ~exportplaceholderid-application-libraryDevicesRecipesKst3320DistanceSensor~
     name: KST3320 Distance Sensor
     readmePath: ./README.md
     imagePath: ./preview.png

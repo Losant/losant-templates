@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-getDeviceStateStreamDeviceId-0~
+    flowId: ~exportplaceholderid-flow-getDeviceStateStreamDeviceId~
     globals: []
-    id: ~exportplaceholderid-flowVersion-getDeviceStateStreamDeviceId-0~
+    id: ~exportplaceholderid-flowVersion-getDeviceStateStreamDeviceId~
     name: 'GET /device-state-stream/{deviceId}'
     nodes:
       - config:
@@ -48,8 +48,7 @@ resources:
         type: DebugNode
     triggers:
       - config: {}
-        key: >-
-          ~exportplaceholderid-experienceEndpoint-getDeviceStateStreamDeviceId-1~
+        key: ~exportplaceholderid-experienceEndpoint-getDeviceStateStreamDeviceId~
         meta:
           category: trigger
           description: ''

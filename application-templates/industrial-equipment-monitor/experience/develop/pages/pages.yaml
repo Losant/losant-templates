@@ -1,22 +1,22 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-pageDashboardDevice-3~
-    layoutId: ~exportplaceholderid-experienceView-layoutDashboardPage-0~
+    id: ~exportplaceholderid-experienceView-pageDashboardDevice~
+    layoutId: ~exportplaceholderid-experienceView-layoutDashboardPage~
     localFilename: ./page-dashboard-device.hbs
     name: page-dashboard-device
     version: develop
     viewTags: {}
     viewType: page
-  - id: ~exportplaceholderid-experienceView-pageDashboardOverview-2~
-    layoutId: ~exportplaceholderid-experienceView-layoutDashboardPage-0~
+  - id: ~exportplaceholderid-experienceView-pageDashboardOverview~
+    layoutId: ~exportplaceholderid-experienceView-layoutDashboardPage~
     localFilename: ./page-dashboard-overview.hbs
     name: page-dashboard-overview
     version: develop
     viewTags: {}
     viewType: page
   - description: ""
-    id: ~exportplaceholderid-experienceView-pageLogin-1~
+    id: ~exportplaceholderid-experienceView-pageLogin~
     localFilename: ./page-login.hbs
     name: page-login
     version: develop

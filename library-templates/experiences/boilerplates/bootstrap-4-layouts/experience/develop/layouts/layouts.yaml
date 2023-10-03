@@ -1,35 +1,35 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-fixedWidthSingleColumn-3~
+    id: ~exportplaceholderid-experienceView-fixedWidthSingleColumn~
     localFilename: ./Fixed_Width__Single_Column.hbs
     name: Fixed Width, Single Column
     version: develop
     viewTags: {}
     viewType: layout
   - description: ""
-    id: ~exportplaceholderid-experienceView-fixedWidthTwoColumns-6~
+    id: ~exportplaceholderid-experienceView-fixedWidthTwoColumns~
     localFilename: ./Fixed_Width__Two_Columns.hbs
     name: Fixed Width, Two Columns
     version: develop
     viewTags: {}
     viewType: layout
   - description: ""
-    id: ~exportplaceholderid-experienceView-fullWidthSingleColumn-0~
+    id: ~exportplaceholderid-experienceView-fullWidthSingleColumn~
     localFilename: ./Full_Width__Single_Column.hbs
     name: Full Width, Single Column
     version: develop
     viewTags: {}
     viewType: layout
   - description: ""
-    id: ~exportplaceholderid-experienceView-fullWidthTwoColumns-5~
+    id: ~exportplaceholderid-experienceView-fullWidthTwoColumns~
     localFilename: ./Full_Width__Two_Columns.hbs
     name: Full Width, Two Columns
     version: develop
     viewTags: {}
     viewType: layout
   - description: ""
-    id: ~exportplaceholderid-experienceView-narrowWidthSingleColumn-4~
+    id: ~exportplaceholderid-experienceView-narrowWidthSingleColumn~
     localFilename: ./Narrow_Width__Single_Column.hbs
     name: Narrow Width, Single Column
     version: develop

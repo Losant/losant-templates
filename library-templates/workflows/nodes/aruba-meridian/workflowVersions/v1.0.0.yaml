@@ -26,9 +26,9 @@ resources:
         specified location ID will be returned (up to 1,000).
       resultMode: optional
     enabled: true
-    flowId: ~exportplaceholderid-flow-meridianAssetTracking-0~
+    flowId: ~exportplaceholderid-flow-meridianAssetTracking~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -151,8 +151,7 @@ resources:
           - - 3odR96xZSS
         type: customNodeStart
       - config: {}
-        key: >-
-          ~exportplaceholderid-flow-meridianAssetTracking-0~-gVJ6g3eZR3K9MObU-ECAn
+        key: ~exportplaceholderid-flow-meridianAssetTracking~-gVJ6g3eZR3K9MObU-ECAn
         meta:
           category: trigger
           description: ''

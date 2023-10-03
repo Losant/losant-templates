@@ -1,9 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
-    flowId: ~exportplaceholderid-flow-workflowGet-1~
+    flowId: ~exportplaceholderid-flow-workflowGet~
     globals: []
-    id: ~exportplaceholderid-flowVersion-workflowGet-0~
+    id: ~exportplaceholderid-flowVersion-workflowGet~
     name: Workflow - GET /
     nodes:
       - config:
@@ -13,7 +13,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardDevice-3~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardDevice~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -185,7 +185,7 @@ resources:
           headerInfo: []
           layoutIdTemplate: ''
           mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardOverview-2~
+          pageIdTemplate: ~exportplaceholderid-experienceView-pageDashboardOverview~
           replyIdPath: ''
           replyType: page
           responseCodeTemplate: ''
@@ -240,7 +240,7 @@ resources:
         type: EndpointReplyNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-get-1~
+        key: ~exportplaceholderid-experienceEndpoint-get~
         meta:
           category: trigger
           description: ''

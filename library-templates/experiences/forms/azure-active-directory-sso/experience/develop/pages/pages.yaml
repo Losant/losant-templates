@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
-    id: ~exportplaceholderid-experienceView-tlPageLoginSso-0~
+    id: ~exportplaceholderid-experienceView-tlPageLoginSso~
     localFilename: ./tl-page-login-sso.hbs
     name: tl-page-login-sso
     version: develop

@@ -26,9 +26,9 @@ resources:
         returned with more details.
       resultMode: optional
     enabled: true
-    flowId: ~exportplaceholderid-flow-gcpOAuth-0~
+    flowId: ~exportplaceholderid-flow-gcpOAuth~
     globals: []
-    id: ~exportplaceholderid-flowVersion-v100-0~
+    id: ~exportplaceholderid-flowVersion-v100~
     nodes:
       - config:
           branchIndexTemplate: 0
@@ -337,7 +337,7 @@ resources:
           - - JnX-c9kub0
         type: customNodeStart
       - config: {}
-        key: ~exportplaceholderid-flow-gcpOAuth-0~-Kx85Ssb_TNVGqaTpVWsns
+        key: ~exportplaceholderid-flow-gcpOAuth~-Kx85Ssb_TNVGqaTpVWsns
         meta:
           category: trigger
           description: ''

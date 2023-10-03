@@ -3,12 +3,13 @@ resources:
   - description: ''
     flowClass: cloud
     globals: []
-    id: ~exportplaceholderid-flow-blobSimulator-0~
+    id: ~exportplaceholderid-flow-blobSimulator~
     name: Blob Simulator
     nodes:
       - config:
           authCredentials: {}
           authType: none
+          bodyType: none
           caCertTemplate: ''
           disableSSLVerification: false
           encodingTemplate: base64
@@ -64,7 +65,7 @@ resources:
           attrInfos:
             - key: image
               valueTemplate: '{{working.image.body}}'
-          deviceId: ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput-0~
+          deviceId: ~exportplaceholderid-device-deviceRecordingBlobSimulatorOutput~
           deviceIdTemplateType: stringTemplate
           resultPath: working.stateResult
           timeSourceType: payloadTime
@@ -136,12 +137,11 @@ resources:
         type: AnnotationNode
     triggers:
       - config: {}
-        key: ~exportplaceholderid-flow-blobSimulator-0~-CT_N_upuQ_dll1r3pk9UO
+        key: ~exportplaceholderid-flow-blobSimulator~-CT_N_upuQ_dll1r3pk9UO
         meta:
           category: trigger
           description: ''
           deviceId: null
-          id: oIuUKBA41m
           label: Virtual Button
           name: virtualButton
           payload: ''
@@ -153,11 +153,10 @@ resources:
         type: virtualButton
       - config:
           seconds: 60
-        key: ~exportplaceholderid-flow-blobSimulator-0~-GefX0qM8XQviY6zPEsFOf
+        key: ~exportplaceholderid-flow-blobSimulator~-GefX0qM8XQviY6zPEsFOf
         meta:
           category: trigger
           description: ''
-          id: pFL0uaJa9y
           label: Timer
           name: timer
           timerTypeSelect: seconds
