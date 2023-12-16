@@ -1,0 +1,554 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationConnectedProductFoundation~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '1000'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: T24
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: ˚C
+        height: 1
+        id: utgazXK7YM
+        startX: 0
+        startY: 0
+        title: T24 (LPC Outlet)
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationConnectedProductFoundation~
+        blockType: graph
+        config:
+          disallowUserSelectedDuration: false
+          duration: 10800000
+          hideLegend: false
+          realTime: false
+          recharts: true
+          resolution: 60000
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: setting_1
+              color: '#ff261b'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Setting 1
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T2
+              color: '#057180'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T2
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T24
+              color: '#0ae1ff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T24
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T30
+              color: '#a52711'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T30
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: T50
+              color: '#ff9a25'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: T50
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: P2
+              color: '#bf731c'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: P2
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: P15
+              color: '#825bff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: P15
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: P30
+              color: '#412e80'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Series 8
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Nf
+              color: '#8db319'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Nf
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Nc
+              color: 'rgba(255, 38, 27, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Nc
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Ps30
+              color: '#057180'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Ps30
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: phi
+              color: '#0ae1ff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: phi
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: NRf
+              color: '#a52711'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: NRf
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: NRc
+              color: '#ff9a25'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: NRc
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: htBleed
+              color: '#bf731c'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: htBleed
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: Nf_dmd
+              color: '#825bff'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: Nf_dmd
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: W31
+              color: '#412e80'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: W31
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: W32
+              color: '#8db319'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: W32
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: TRA
+              color: 'rgba(255, 38, 27, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: TRA
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: PCNfR_dmd
+              color: 'rgba(5, 113, 128, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: line
+              label: PCNfR_dmd
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ''
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 4
+        id: WWiSeLrTiM
+        startX: 1
+        startY: 0
+        title: 'Turbofan {{ctx.deviceId.id}}'
+        width: 3
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationConnectedProductFoundation~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '2000'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: T30
+            color: 'rgba(165, 39, 17, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: ˚C
+        height: 1
+        id: yipjKZyHLd
+        startX: 0
+        startY: 1
+        title: T30 (HPC Outlet)
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationConnectedProductFoundation~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          gaugeMax: '2000'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: T50
+            color: 'rgba(255, 154, 37, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: ˚C
+        height: 1
+        id: F7l6h3ijwI
+        startX: 0
+        startY: 2
+        title: T50 (LPT Outlet)
+        width: 1
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationConnectedProductFoundation~
+        blockType: gauge
+        config:
+          conditions:
+            - color: 'rgba(255, 38, 27, 1)'
+              condition: '{{value}} > 300'
+              id: vYyKBahoMt
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '1000'
+          gaugeMin: '0'
+          gaugeType: thermometer
+          precision: '4'
+          precisionType: significant
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: T2
+            color: '#8db319'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            expression: ''
+            label: ˚C
+        height: 1
+        id: aU1v3NHk4Q
+        startX: 0
+        startY: 3
+        title: T2 (fan inlet)
+        width: 1
+    contextConfiguration:
+      - applicationId: >-
+          ~exportplaceholderid-application-applicationConnectedProductFoundation~
+        defaultValue: 64dd39cf0704d34a7150f58b
+        name: deviceId
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    duration: 3600000
+    exportHash: f2057ec07e17f78e690ed6c4acc727d5eb583aecd63dc2d3a952a23db5dfa40f
+    id: ~exportplaceholderid-dashboard-turbofan~
+    isPasswordProtected: false
+    name: Turbofan
+    public: false
+    refreshRate: 60
+    reportConfigs: []
+    resolution: 60000
+version: 1

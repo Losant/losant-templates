@@ -1,0 +1,20 @@
+id,key,type,template,order,label
+656502af48b16b4cd50fd7bf,connected,native,"{{#if value.connected}}
+  <span class=""material-symbols-outlined cpf-icon-small text-success""
+        data-bs-toggle=""tooltip""
+        title=""Connected since {{value.time}}"">
+    cloud
+  </span>
+ {{else}}
+ <span class=""material-symbols-outlined cpf-icon-small text-danger""
+       data-bs-toggle=""tooltip""
+       title=""{{#if value.time}}Disconnected since {{value.time}}{{else}}Device has never connected{{/if}}"">
+   cloud_off
+  </span>
+{{/if}}",0,Connected
+656502af48b16b4cd50fd7c0,name,native,"<a href=""/devices/{{device.id}}?tab=properties"">{{value}}</a>",1,Name
+656502af48b16b4cd50fd7c1,serial,tag,{{value}},2,Serial
+656502af48b16b4cd50fd7c2,Nf,attribute,{{value}},3,Nf
+656502af48b16b4cd50fd7c3,customer,group,"<a href=""/customers/{{value.id}}"">{{value.name}}</a>",4,Customer
+656502af48b16b4cd50fd7c4,site,group,"<a href=""/sites/{{value.id}}"">{{value.name}}</a>",5,Site
+656502af48b16b4cd50fd7c5,id,native,{{value}},6,ID

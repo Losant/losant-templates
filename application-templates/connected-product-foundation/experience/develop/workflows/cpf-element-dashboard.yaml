@@ -1,0 +1,82 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/dashboard
+    enabled: true
+    exportHash: f249df66ee18ff96e449694dbd7d035ae340e17745d2f21bbf9f0ce0eca19720
+    flowId: ~exportplaceholderid-flow-cpfElementDashboard~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementDashboard~
+    name: cpf-element-dashboard
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementDashboard~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: OM4rL3bWpO
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 240
+        outputIds:
+          - - 8noAuw9zY7
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 8noAuw9zY7
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 340
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: pageData.context
+              source: data.query
+              type: copy
+            - source: pageData.context.dashboardId
+              type: remove
+        id: e2NBC1b_7N
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 40
+          'y': 140
+        outputIds:
+          - - OM4rL3bWpO
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsDashboard~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/dashboard
+          name: endpoint
+          uiId: zRZg9N30zg
+          x: 40
+          'y': 40
+        outputIds:
+          - - e2NBC1b_7N
+        type: endpoint
+    version: develop
+version: 1

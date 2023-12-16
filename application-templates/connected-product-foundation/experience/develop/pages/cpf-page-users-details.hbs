@@ -1,0 +1,190 @@
+{{!-- Stimulus Controller: /components/cpf-js-page-user-details.hbs --}}
+
+<div class="cpf-page" data-controller="cpf-page-user-details">
+
+    <div class="row mb-3">
+      <div class="col-12">
+          {{#if pageData.user}}
+          <h1>User Details</h1> 
+          <p>View and edit the details of this user.</p>
+          {{else}}
+          <h1>Add User</h1>
+          <p>Create a new user and assigns it to a customer and optionally a site.</p>
+          {{/if}}
+      </div>
+    </div>
+
+  <form method="POST" class="cpf-standard-form">
+
+    {{#if request.query.error}}
+    <div class="my-2">
+      <div class="alert alert-danger" role="alert">
+          ERROR: {{decodeURIComponent request.query.error}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if request.query.success}}
+    <div class="my-2">
+      <div class="alert alert-success" role="alert">
+        User details successfully saved.
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if request.query.created}}
+    <div class="my-2">
+      <div class="alert alert-success" role="alert">
+        The user has successfully been created. Please instruct this user to visit the forgot password page to set a password.
+        <br /><br />
+        <strong><a href="https://{{request.headers.host}}/forgot-password">https://{{request.headers.host}}/forgot-password</a></strong>
+        <br /><br />
+        Password reset emails are often marked as junk/spam/quarantine. Make sure the user checks those locations after submitting the form.
+    </div>
+    {{#eq pageData.userLevel 0}}
+    <div class="alert alert-info mb-3" role="alert">
+      <div class="mb-2"><strong>Administrator Tip</strong></div>
+      <div>
+        By default, the password reset email is sent from the platform's built-in
+        <a href="https://docs.losant.com/workflows/outputs/email/" target="_blank">Email Node</a>,
+        which is intended for evaluation purposes only. Emails sent from this node are often marked as spam. For production use cases, it's
+        highly recommended you switch to the <a href="https://docs.losant.com/workflows/outputs/sendgrid/" target="_blank">SendGrid Node</a>
+        using your own SendGrid account.
+      </div>
+    </div>
+    {{/eq}}
+    {{/if}}
+
+    <div class="mb-3">
+      <label for="name">Email *</label>
+      <input id="name" type="text" class="form-control" name="email" placeholder="jane.smith@example.com" value="{{pageData.user.email}}" required autofocus>
+    </div>
+
+    <div class="mb-3">
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" class="form-control" name="firstName" placeholder="Jane" value="{{pageData.user.firstName}}">
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Smith" value="{{pageData.user.lastName}}">
+    </div>
+
+    <div class="mb-3">
+      <label for="title">Title</label>
+      <input id="title" type="text" class="form-control" name="title" placeholder="Engineer II" value="{{pageData.user.userTags.title}}">
+    </div>
+
+    {{!
+      The customer dropdown should only be visible for system admins.
+      If the user is not a system admin, replace the dropdown with a
+      hidden input set to the user's site and parent customer IDs.
+    }}
+    {{#eq pageData.userLevel 0}}
+    <div class="mb-3">
+      <label for="customer">Customer *</label>
+      <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&placeholder=-- Select Customer --&formName=customer&controllerName=cpf-page-user-details&targetName=customerSelect&actionMethod=customerChanged&selectedId={{pageData.customerId}}">
+        <select class="form-select" disabled>
+          <option>Loading...</option>
+        </select>
+      </turbo-frame>
+    </div>
+    {{else}}
+    <input type="hidden" name="customer" value="{{pageData.customerId}}" />
+    {{/eq}}
+
+    {{#lt pageData.userLevel 2}} {{! System admin and customer admins only }}
+    <div class="mb-3">
+      <label for="site">Site</label>
+      <turbo-frame id="cpf-element-group-select" data-cpf-page-user-details-target="siteSelectFrame" src="/cpf/elements/group-select?level=2&placeholder=-- All Sites --&formName=site&controllerName=cpf-page-user-details&targetName=siteSelect&parentId={{pageData.customerId}}&selectedId={{pageData.siteId}}">
+        <select class="form-select" disabled>
+          <option>Loading...</option>
+        </select>
+      </turbo-frame>
+    </div>
+    <div class="form-text my-3 cpf-text-mid">
+      If you choose "--All Sites--", this user will be assigned to the customer instead of a specific site. This will grant them
+      access to all sites and devices that are children of the customer.
+    </div>
+    {{else}}
+    <input type="hidden" name="site" value="{{pageData.siteId}}" />
+    {{/lt}}
+
+    <div class="mb-3">
+      <label class="mb-1">Role</label><br />
+      <div class="form-check form-check-inline">
+        <input {{#eq pageData.user.userTags.cpf_role 'viewer'}}checked{{/eq}} {{#unless pageData.user}}checked{{/unless}} class="form-check-input" type="radio" name="role" id="viewer" value="viewer">
+        <label class="form-check-label" for="viewer">Viewer</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input {{#eq pageData.user.userTags.cpf_role 'editor'}}checked{{/eq}}  class="form-check-input" type="radio" name="role" id="editor" value="editor">
+        <label class="form-check-label" for="editor">Editor</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input {{#eq pageData.user.userTags.cpf_role 'admin'}}checked{{/eq}}  class="form-check-input" type="radio" name="role" id="admin" value="admin">
+        <label class="form-check-label" for="admin">Admin</label>
+      </div>
+
+      <div class="form-text mt-3 cpf-text-mid">
+        <strong>Viewer</strong>: gives the user view-only access to devices under their customer or site.
+        If a user is assigned to a customer and not a specific site, they will have view-only access to
+        all devices in every site under that customer.
+        <br /><br />
+        <strong>Editor</strong>: gives the user permission to view and edit devices under their customer or site.
+        If a user is assigned to a customer and not a specific site, they will have view and edit access
+        to all devices in every site under that customer.
+        <br /><br />
+        <strong>Admin</strong>: gives the user permission to view, edit, and create devices under their customer
+        or site. Admin roles can also view, edit, and create users under their customer or site. If a user is
+        assigned to a customer and not a specific site, they will have view, edit, and creation access for all
+        users and devices for all devices and users in every site under that customer.
+      </div>
+    </div>
+
+    {{#eq pageData.userLevel 0}}
+    <div class="alert alert-info mb-3" role="alert">
+      <div class="mb-2"><strong>Administrator Tip</strong></div>
+      <div>
+        A user is represented by an <a href="https://docs.losant.com/experiences/users/" target="_blank">Experience User</a> in the platform.
+        The email, first name, and last name properties are first-class fields on an experience user. The title and any other custom
+        fields you add are stored on <a href="https://docs.losant.com/experiences/users/#user-tags" target="_blank">User Tags</a>.
+      </div>
+    </div>
+    {{/eq}}
+
+    <div class="edit-nav-card">
+      <div class="card p-3 mt-4 cpf-bg-light">
+        <div class="d-flex flex-row align-items-center">
+          <button id="submit-button" type="submit" class="btn btn-primary">Submit</button>
+          {{#if pageData.user}}
+          <a id="delete-user-button" href="#" class="ms-2 text-danger ms-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete User</a>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="confirmDeleteModalLabel">Confirm Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This action <strong>cannot be undone</strong>.<br /><br />
+        Are you sure you want to delete this user?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="POST" action="/users/{{pageData.user.id}}">
+          <input type="hidden" name="delete" value="true"></input>
+          <button id="confirm-delete-button" type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

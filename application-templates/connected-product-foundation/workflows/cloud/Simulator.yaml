@@ -1,0 +1,365 @@
+resourceType: Flow
+resources:
+  - description: Replays simulated data to Turbofan devices.
+    exportHash: e15b9b224c8e97f3cd0b29e5f0de3fa21be0ce0fb6dc919642c81b5593b4bb1e
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-simulator~
+    name: Simulator
+    nodes:
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: throw
+          errorPath: ''
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.turbineData
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://~exportplaceholderid-files-domain~/~exportplaceholderid-application-applicationConnectedProductFoundation~/TurbineEngine.csv
+        id: jjjcclQvn6
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 180
+          'y': 300
+        outputIds:
+          - - TMtTGnCpkf
+        type: HttpNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: zZSx_Kp2xP
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 280
+          'y': 1200
+        outputIds: []
+        type: DebugNode
+      - config:
+          delimiterTemplate: ''
+          destination: working.turbineData
+          escapeCharTemplate: ''
+          quoteCharTemplate: ''
+          recordDelimiterTemplate: |+
+
+          source: working.turbineData.body
+        id: 6mAkoXmbMi
+        meta:
+          category: logic
+          description: ''
+          label: 'CSV: Decode'
+          name: csv-decode
+          x: 280
+          'y': 660
+        outputIds:
+          - - nlz1tbQ0n9
+        type: CSVDecodeNode
+      - config:
+          expression: '{{working.turbineData.statusCode}} === 200'
+        id: TMtTGnCpkf
+        meta:
+          category: logic
+          description: ''
+          label: 200 OK?
+          name: conditional
+          x: 180
+          'y': 460
+        outputIds:
+          - - eMm_Wwd0Ft
+          - - 6mAkoXmbMi
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: eMm_Wwd0Ft
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 80
+          'y': 660
+        outputIds: []
+        type: DebugNode
+      - config:
+          keyName: index
+          resultPath: working.index
+          value: '1'
+          valueType: incr
+        id: nlz1tbQ0n9
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 280
+          'y': 800
+        outputIds:
+          - - q9sasXwDDj
+        type: StoreValueNode
+      - config: {}
+        id: QBjewj--cK
+        meta:
+          annotationText: >-
+            This simulator is looping over a sample data set that can be found
+            in Files at `TurbineEngine.csv`.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 580
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 1DYpzVCQoo
+        meta:
+          annotationText: Download `TurbineEngine.csv` from files. The csv contains 3756 rows.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 380
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: zzLtwvtIwI
+        meta:
+          annotationText: >-
+            Decode the CSV into an array on the payload at
+            `working.turbineData`.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 660
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: GP0SHKYSG1
+        meta:
+          annotationText: >-
+            Workflow storage holds the current row we're simulating. This is
+            incremented on each iteration.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: sjbKB1SEUB
+        meta:
+          annotationText: Make sure the file downloaded successfully.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 380
+          'y': 460
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: findByAnyTags
+          findMultiple: true
+          includeConnectionStatus: true
+          includeState: false
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: '1000'
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: DeviceRecipe
+              valueTemplate: Turbofan
+          tagsAsObject: true
+        id: q9sasXwDDj
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 280
+          'y': 980
+        outputIds:
+          - - oqhGPjcW0k
+        type: GetDeviceNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: working.devices
+          mapResultPath: ''
+          parallel: true
+        id: oqhGPjcW0k
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 280
+          'y': 1080
+        outputIds:
+          - - zZSx_Kp2xP
+          - - 28oUPMgsZo
+        type: LoopNode
+      - config:
+          loopNodeId: oqhGPjcW0k
+          mapValuePath: ''
+          shouldBreak: false
+        id: kMH_kb_uV4
+        meta:
+          category: loop
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Return
+          name: loop-return
+          x: 200
+          'y': 840
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.row
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: _uV5TvietS
+        meta:
+          category: output
+          description: ''
+          groupId: oqhGPjcW0k
+          label: 'Device: State'
+          name: device-state
+          x: 200
+          'y': 700
+        outputIds:
+          - - kMH_kb_uV4
+        type: DeviceChangeStateNode
+      - config:
+          statements:
+            - expression: >-
+                ({{working.index}} + {{defaultTo
+                working.device.value.tags.simulation_offset.[0] 0}}) % {{length
+                working.turbineData}}
+              resultPath: working.index
+        id: 28oUPMgsZo
+        meta:
+          category: logic
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Math
+          name: math
+          x: 200
+          'y': 360
+        outputIds:
+          - - O1rZcCfamk
+        type: MathNode
+      - config:
+          rules:
+            - destination: working.row
+              type: set
+              valueTemplate: '{{jsonEncode (lookup working.turbineData working.index)}}'
+              valueTemplateType: json
+        id: O1rZcCfamk
+        meta:
+          category: logic
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 520
+        outputIds:
+          - - _uV5TvietS
+        type: MutateNode
+      - config: {}
+        id: IkBTsOPlUB
+        meta:
+          annotationText: >-
+            Using `index % count` lets us continually increment `index` and when
+            we reach the end of the file, this will reset to 0 and our simulator
+            will start over. Every device also has a random offset (0-3000).
+            This offset is added to `index`.
+          category: annotation
+          groupId: oqhGPjcW0k
+          height: 140
+          label: Note
+          name: note
+          width: 380
+          x: 400
+          'y': 360
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: b20_oTEP8_
+        meta:
+          annotationText: Grab the current row we're simulating and record it as device state.
+          category: annotation
+          groupId: oqhGPjcW0k
+          height: 120
+          label: Note
+          name: note
+          width: 380
+          x: 400
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-flow-simulator~-De0vwAxVftS1JhUlfDX5R
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: fDdN-1RGnD
+          x: 180
+          'y': 60
+        outputIds:
+          - - jjjcclQvn6
+        type: virtualButton
+      - config:
+          seconds: 60
+        key: ~exportplaceholderid-flow-simulator~-6mYRiu62tRceTY7iTv0qU
+        meta:
+          category: trigger
+          description: ''
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: 2BHnXMmL5G
+          x: 380
+          'y': 60
+        outputIds:
+          - - jjjcclQvn6
+        type: timer
+version: 1

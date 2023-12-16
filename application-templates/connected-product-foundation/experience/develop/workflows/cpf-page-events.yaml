@@ -1,0 +1,64 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /events
+    enabled: true
+    exportHash: 2c30057b1f8c00aebbd31b4f543a6f98f096548991a039ee3b163cdceff1c67b
+    flowId: ~exportplaceholderid-flow-cpfPageEvents~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageEvents~
+    name: cpf-page-events
+    nodes:
+      - config:
+          bodyTemplate: "{\n\t\"myCustomData\": \"Add custom data here\"\n}"
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageEvents~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: u9mziTCRNx
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 140
+        outputIds:
+          - - x83a1Az_Lk
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: x83a1Az_Lk
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 240
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getEvents~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /events
+          name: endpoint
+          uiId: ORYrie7IUp
+          x: 40
+          'y': 40
+        outputIds:
+          - - u9mziTCRNx
+        type: endpoint
+    version: develop
+version: 1

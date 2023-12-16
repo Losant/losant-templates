@@ -1,0 +1,23 @@
+id,name,value
+656e4d20f9d17d6455229ce6,logo_small,logo_small_1698328270402.png
+656e4d20f9d17d6455229ce7,logo_large,logo_large_1695842869349.png
+656e4d20f9d17d6455229ce8,google_analytics_id,
+656e4d20f9d17d6455229ce9,privacy_policy,https://www.losant.com/legal/privacy-policy
+656e4d20f9d17d6455229cea,tos,https://www.losant.com/legal/terms-of-service
+656e4d20f9d17d6455229ceb,font_family,Open+Sans
+656e4d20f9d17d6455229cec,border,#cfd1d5
+656e4d20f9d17d6455229ced,bg_light,#ffffff
+656e4d20f9d17d6455229cee,bg_mid,#fbfbfb
+656e4d20f9d17d6455229cef,bg_dark,#f3f4f5
+656e4d20f9d17d6455229cf0,text_white,#ffffff
+656e4d20f9d17d6455229cf1,text_light,#a7a0aa
+656e4d20f9d17d6455229cf2,text_mid,#414653
+656e4d20f9d17d6455229cf3,text_dark,#111a29
+656e4d20f9d17d6455229cf4,danger,#bf391d
+656e4d20f9d17d6455229cf5,warning,#d99333
+656e4d20f9d17d6455229cf6,info,#60b1b2
+656e4d20f9d17d6455229cf7,success,#44972f
+656e4d20f9d17d6455229cf8,secondary,#414653
+656e4d20f9d17d6455229cf9,primary,#3c7fe2
+656e4d20f9d17d6455229cfa,title_template,CPF | {{this}}
+656e4d20f9d17d6455229cfb,company_name,"Losant IoT, Inc."

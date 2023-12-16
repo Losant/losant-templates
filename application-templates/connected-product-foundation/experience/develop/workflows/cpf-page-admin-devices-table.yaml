@@ -1,0 +1,460 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /admin/devices-table
+    enabled: true
+    exportHash: 16691d79d348678ee7cb817281990ef84f9eaac42b93cb0df1522ba8d8c34208
+    flowId: ~exportplaceholderid-flow-cpfPageAdminDevicesTable~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageAdminDevicesTable~
+    name: cpf-page-admin-devices-table
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminDevicesTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: C9nVyJ71C6
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 580
+        outputIds:
+          - - khPkHnXkvq
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: khPkHnXkvq
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 240
+          'y': 680
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTableDevices~
+          includeFieldsTemplate: 'id,key,label,order,template,type'
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.tableRows
+          sortColumnTemplate: order
+          sortDirectionTemplate: asc
+        id: rEqUnG2oMr
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 240
+          'y': 380
+        outputIds:
+          - - JZhWeRfN_d
+        type: DataTableQueryNode
+      - config:
+          rules:
+            - destination: pageData.tableColumns
+              source: working.tableRows.items
+              type: move
+        id: JZhWeRfN_d
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 240
+          'y': 480
+        outputIds:
+          - - C9nVyJ71C6
+        type: MutateNode
+      - config:
+          bodyTemplate: /admin/devices-table?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: iMGTQAnlJI
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 800
+          'y': 1000
+        outputIds:
+          - - hWXAWUIFIL
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: hWXAWUIFIL
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 800
+          'y': 1080
+        outputIds: []
+        type: DebugNode
+      - config:
+          destination: working.tableColumns
+          errorBehavior: payloadPath
+          errorPath: working.error
+          source: data.body.tableColumns
+        id: 0v60DD903D
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 780
+          'y': 380
+        outputIds:
+          - - BNM9QIcE2B
+        type: JsonDecodeNode
+      - config:
+          dataMethod: payloadPath
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTableDevices~
+          resultPath: working.insertResult
+          rowPayloadPath: working.tableColumns
+        id: 6xPhhmxcc3
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Insert Rows'
+          name: insert-table-row
+          x: 800
+          'y': 920
+        outputIds:
+          - - iMGTQAnlJI
+        type: DataTableInsertRowNode
+      - config:
+          expression: '{{working.error}}'
+        id: BNM9QIcE2B
+        meta:
+          category: logic
+          description: ''
+          label: JSON Error?
+          name: conditional
+          x: 780
+          'y': 480
+        outputIds:
+          - - 3gYoJ2iGSs
+          - - 61yVsHKXhq
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /admin/devices-table?error=Body is not valid JSON
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 61yVsHKXhq
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 900
+          'y': 620
+        outputIds:
+          - - JG5OXfyKB1
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: JG5OXfyKB1
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 900
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorsPath: working.error
+          schema: |-
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string", "minLength": 1 },
+                  "order": { "type": "number" },
+                  "type": { "enum": ["group", "attribute", "tag", "native"] },
+                  "key": { "type": "string" },
+                  "template": { "type": "string" }
+                },
+                "required": [
+                  "label",
+                  "order",
+                  "type",
+                  "key",
+                  "template"
+                ]
+              }
+            }
+          schemaType: json
+          toValidatePath: working.tableColumns
+        id: 3gYoJ2iGSs
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 700
+          'y': 620
+        outputIds:
+          - - jLJSJiloZg
+          - - OAbRTquGoa
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: /admin/devices-table?error=Column data is not formatted correctly
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: jLJSJiloZg
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 600
+          'y': 840
+        outputIds:
+          - - amg35RthOz
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: amg35RthOz
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 600
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTableDevices~
+          limitTemplate: ''
+          queryTemplate: '{"$or":[]}'
+          resultPath: ''
+        id: OAbRTquGoa
+        meta:
+          category: data
+          description: ''
+          label: Delete Columns
+          name: delete-table-row
+          x: 800
+          'y': 840
+        outputIds:
+          - - 6xPhhmxcc3
+        type: DataTableDeleteRowNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: w8UG2folRG
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 140
+          'y': 140
+        outputIds:
+          - - WFlfYoQD1n
+          - - PWOvcv87Le
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: PWOvcv87Le
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 240
+          'y': 260
+        outputIds:
+          - - WFlfYoQD1n
+          - - rEqUnG2oMr
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: WFlfYoQD1n
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 380
+        outputIds:
+          - - 73wl7H5tTS
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 73wl7H5tTS
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: XKGLFrZixJ
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 680
+          'y': 140
+        outputIds:
+          - - 0ZMhVZ8N6h
+          - - QICUPtRUdH
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: QICUPtRUdH
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 780
+          'y': 260
+        outputIds:
+          - - 0ZMhVZ8N6h
+          - - 0v60DD903D
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 0ZMhVZ8N6h
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 580
+          'y': 380
+        outputIds:
+          - - k4p6eESbDi
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: k4p6eESbDi
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 580
+          'y': 480
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getAdminDevicesTable~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /admin/devices-table
+          name: endpoint
+          uiId: qdK8iBgfWu
+          x: 140
+          'y': 40
+        outputIds:
+          - - w8UG2folRG
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postAdminDevicesTable~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /admin/devices-table
+          name: endpoint
+          uiId: QjNqMU_8aP
+          x: 680
+          'y': 40
+        outputIds:
+          - - XKGLFrZixJ
+        type: endpoint
+    version: develop
+version: 1

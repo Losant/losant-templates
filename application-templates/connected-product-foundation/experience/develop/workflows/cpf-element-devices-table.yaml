@@ -1,0 +1,725 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/devices-table
+    enabled: true
+    exportHash: 6eca26f9b294f506a1af53e1ef724a30e468b765d122586b99ce2f0bc3011266
+    flowId: ~exportplaceholderid-flow-cpfElementDevicesTable~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementDevicesTable~
+    name: cpf-element-devices-table
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementDevicesTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: Gg_07LzyxZ
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 400
+          'y': 1400
+        outputIds:
+          - - i2fmolymXZ
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: i2fmolymXZ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 400
+          'y': 1480
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributes:
+            - '{{working.attributes}}'
+          attributesAsObject: true
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: true
+          includeState: true
+          queryTemplate: '{{{jsonEncode working.query}}}'
+          resultPath: pageData.devices
+          resultsPage: '{{defaultTo data.query.page 0}}'
+          resultsPerPage: '{{defaultTo data.query.perPage 25}}'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: true
+        id: sOWMHR_NEV
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 400
+          'y': 800
+        outputIds:
+          - - 6faMNaaw2i
+        type: GetDeviceNode
+      - config:
+          scopePath: ''
+          script: |-
+            let and = [];
+            let query = { '$and': and };
+
+            // If the user's level is 0, they are a system
+            // user and get every device, so there's
+            // no need to append experience user ID to the query.
+            if(payload.pageData.userLevel > 0) {
+                and.push({
+                    "experienceUserId": {
+                        "$eq": payload.experience.user.id
+                    }
+                });
+            }
+
+            if(payload.data.query.id) {
+                and.push({
+                    'id': {
+                        '$eq': payload.data.query.id
+                    }
+                });
+            }
+
+            if(payload.data.query.customer) {
+                and.push({
+                    'experienceGroupId': {
+                        '$eq': payload.data.query.customer
+                    }
+                });
+            }
+
+            if(payload.data.query.site) {
+                and.push({
+                    'experienceGroupId': {
+                        '$eq': payload.data.query.site
+                    }
+                });
+            }
+
+            if(payload.data.query.name) {
+                and.push({
+                    'name': {
+                        '$contains': payload.data.query.name,
+                        '$ci': true
+                    }
+                });
+            }
+
+            if(payload.data.query.connected === 'connected') {
+                and.push({
+                    'connectionStatus': {
+                        '$eq': 'connected'
+                    }
+                });
+            }
+            else if(payload.data.query.connected === 'disconnected') {
+                and.push({
+                    'connectionStatus': {
+                        '$ne': 'connected'
+                    }
+                });
+            }
+
+            for(const key in payload.data.query) {
+                if(key.startsWith('tag_')) {
+                    and.push({
+                        "tags": {
+                            "$eq": {
+                                "$tagKey": key.split('tag_')[1],
+                                "$tagValue": payload.data.query[key]
+                            }
+                        }
+                    });
+                }
+            }
+
+            let attributes = payload.pageData.tableConfig.items.filter(
+                (c) => { return c.type === 'attribute'; }).map((c) => { return c.key; });
+
+            payload.working = payload.working || {};
+            payload.working.query = query;
+            payload.working.attributes = attributes;
+        id: EPfuN20yFh
+        meta:
+          category: logic
+          description: ''
+          label: Build Query
+          name: function
+          x: 400
+          'y': 720
+        outputIds:
+          - - sOWMHR_NEV
+        type: RawFunctionNode
+      - config:
+          statements:
+            - expression: >-
+                ceil({{pageData.devices.totalCount}} /
+                {{pageData.devices.perPage}})
+              resultPath: pageData.devices.totalPages
+        id: MRT0LiT9eH
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 300
+          'y': 1000
+        outputIds:
+          - - tUmT0pZ_bG
+        type: MathNode
+      - config:
+          resultPath: working.groupSummary
+        id: tUmT0pZ_bG
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Summary'
+          name: group-summary
+          x: 400
+          'y': 1120
+        outputIds:
+          - - N_PnltD6dG
+        type: ExperienceGroupSummaryNode
+      - config:
+          scopePath: ''
+          script: >-
+            // Flatten the group summary hierarchy into an object map.
+
+            // This way group meta data is easily access by group ID.
+
+
+            let groups = payload.working.groupSummary;
+
+            let groupsMap = {};
+
+
+            // Recursively traverses the group hierarchy
+
+            // and builds a map of id:groupObj
+
+            let flatten = (group, level) => {
+                if(group.id !== '(root)') {
+                    group.level = level;
+                    groupsMap[group.id] = group;
+                }
+
+                let lvl = level + 1;;
+                group.children.forEach((child) => {
+                    child.parent = {
+                        id: group.id,
+                        name: group.name
+                    };
+                    
+                    flatten(child, lvl);
+                });
+            };
+
+
+            flatten(payload.working.groupSummary, -1);
+
+
+            // Remove all children arrays from results. This is a bunch of extra
+
+            // data that is not needed.
+
+            Object.values(groupsMap).forEach((group) => {
+                delete group.children;
+            });
+
+
+            // Add the group information to every device.
+
+            payload.pageData.devices.items.forEach((device) => {
+                if(device.tags.cpf_group) {
+                    device.group = groupsMap[device.tags.cpf_group[0]];
+                }
+            });
+
+
+            payload.working.groupsMap = groupsMap;
+
+
+            // If no customer ID was provided, we can use the user's current
+            group ID
+
+            // if they are a member of a customer group.
+
+            payload.pageData.customerId = payload.data.query.customer;
+
+
+            // A customer ID was not provided.
+
+            if(!payload.data.query.customer || payload.data.customer === "") {
+                // The user is a member of a customer group.
+                if(payload.pageData.userLevel === 1) {
+                    // Set the customer ID to the user's group ID.
+                    payload.pageData.customerId = payload.experience.user.experienceGroups[0].id;
+                }
+            }
+
+
+            // If we still don't have a customer ID, we can use the parent
+
+            // if a site was provided.
+
+            if(!payload.pageData.customerId && payload.data?.query?.site) {
+                let site = groupsMap[payload.data.query.site];
+                payload.pageData.customerId = site.parent.id;
+            }
+
+
+            payload.pageData.devicesReshaped =
+            payload.pageData.devices.items.map((d) => {
+                let columns = [];
+
+                payload.pageData.tableConfig.items.forEach((t) => {
+                    if(t.type === 'native' && t.key === 'connected') {
+                        columns.push({
+                            value: {
+                                connected: d.connectionInfo.connected === 1,
+                                time: d.connectionInfo.time
+                            },
+                            template: t.template,
+                            device: d
+                        });
+                    }
+
+                    if(t.type === 'native' && t.key === 'name') {
+                        columns.push({
+                            template: t.template,
+                            value: d.name,
+                            device: d
+                        });
+                    }
+
+                    if(t.type === 'tag') {
+                        columns.push({
+                            template: t.template,
+                            device: d,
+                            value: d.tags?.[t.key]?.[0]
+                        });
+                    }
+
+                    if(t.type === 'attribute') {
+                        columns.push({
+                            template: t.template,
+                            device: d,
+                            value: d.compositeState?.[t.key]?.value
+                        });
+                    }
+
+                    if(t.type === 'group' && t.key === 'customer') {
+                        columns.push({
+                            template: t.template,
+                            device: d,
+                            value: {
+                                name: d?.group?.parent?.name,
+                                id: d?.group?.parent?.id
+                            } 
+                        });
+                    }
+
+                    if(t.type === 'group' && t.key === 'site') {
+                        columns.push({
+                            template: t.template,
+                            device: d,
+                            value: {
+                                name: d?.group?.name,
+                                id: d?.group?.id
+                            } 
+                        });
+                    }
+
+                    if(t.type === 'native' && t.key === 'id') {
+                        columns.push({
+                            template: t.template,
+                            device: d,
+                            value: d.id
+                        });
+                    }
+                });
+
+                return columns;
+            });
+        id: N_PnltD6dG
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 400
+          'y': 1200
+        outputIds:
+          - - Gg_07LzyxZ
+        type: RawFunctionNode
+      - config: {}
+        id: JrCL5HeyEK
+        meta:
+          annotationText: >-
+            Build the device [advanced
+            query](https://~exportplaceholderid-docs-url~/references/advanced-queries/)
+            from the incoming filter fields.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 720
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 2baoDhIFe5
+        meta:
+          annotationText: Calculate the total number of device pages.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 600
+          'y': 880
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: LHMnbBktjs
+        meta:
+          annotationText: >-
+            Query group meta data and append group (site / customer) data to
+            every device. This function node also defaults the customer ID to
+            the user's group if:  
+
+            1. The user is a member of a customer.
+
+            2. No customer ID was provided.
+
+
+            Finally, this reshapes the data to support the custom column
+            templates.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 360
+          x: 600
+          'y': 1120
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: rSqav5jHHq
+        meta:
+          category: data
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 200
+          'y': 160
+        outputIds:
+          - - fcVllW_JoF
+          - - 2olyyuC72J
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "User's group membership is invalid."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: fcVllW_JoF
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 100
+          'y': 280
+        outputIds:
+          - - wDWFDsGWpC
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: wDWFDsGWpC
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 100
+          'y': 360
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTableDevices~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: pageData.tableConfig
+          sortColumnTemplate: order
+          sortDirectionTemplate: asc
+        id: 2olyyuC72J
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 300
+          'y': 280
+        outputIds:
+          - - J4TTdq1sr3
+        type: DataTableQueryNode
+      - config:
+          rules:
+            - inputTemplate: order
+              order: ascending
+              outputPath: pageData.tableConfig.items
+              type: sortBy
+          sourceArrayPath: pageData.tableConfig.items
+        id: J4TTdq1sr3
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 300
+          'y': 360
+        outputIds:
+          - - R83sTKhBWB
+        type: ArrayNode
+      - config: {}
+        id: a0xQY3xZE_
+        meta:
+          annotationText: >-
+            Query the table's configuration and sort the columns by the `order`
+            column. The function node removes columns based on user level (e.g.
+            customers can't see the customer column).
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 320
+          x: 500
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          scopePath: ''
+          script: |-
+            if(payload.pageData.userLevel > 0) {
+                // If the user is a customer or a site, remove the "customer" column.
+                let index = payload.pageData.tableConfig.items.findIndex((c) => { return c.key === 'customer' });
+                payload.pageData.tableConfig.items.splice(index, 1);
+            }
+
+            if(payload.pageData.userLevel > 1) {
+                // If the user is a site, remove the "site" column.
+                let index = payload.pageData.tableConfig.items.findIndex((c) => { return c.key === 'site' });
+                payload.pageData.tableConfig.items.splice(index, 1);
+            }
+
+            payload.pageData.tableConfig.items.forEach((t) => {
+                t.columnId = t.type + '-' + t.key;
+            });
+        id: R83sTKhBWB
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 300
+          'y': 440
+        outputIds:
+          - - U0UhYKEFYK
+        type: RawFunctionNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementDevicesTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: Co5iWShXXn
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 200
+          'y': 800
+        outputIds:
+          - - 1jsCDKWNdV
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 1jsCDKWNdV
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 200
+          'y': 880
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: pageData.devices
+              type: set
+              valueTemplate: |-
+                {
+                  "items": [],
+                  "count": 0,
+                  "page": 0,
+                  "perPage": 25,
+                  "totalPages": 0
+                }
+              valueTemplateType: json
+        id: Y95k3vCTGG
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 720
+        outputIds:
+          - - Co5iWShXXn
+        type: MutateNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyGroups~
+          customNodeVersion: default
+          fields:
+            - id: userId
+              value: '{{experience.user.id}}'
+            - id: customerId
+              value: '{{data.query.customer}}'
+            - id: siteId
+              value: '{{data.query.site}}'
+          isInstance: false
+          resultPath: ''
+        id: U0UhYKEFYK
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Groups'
+          name: custom-node-execute-node
+          x: 300
+          'y': 540
+        outputIds:
+          - - Y95k3vCTGG
+          - - EPfuN20yFh
+        type: CustomNodeExecuteNode
+      - config: {}
+        id: 4cwPtOOf2E
+        meta:
+          annotationText: >-
+            Make sure the incoming site and/or customer query parameters are
+            valid.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 320
+          x: 500
+          'y': 540
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{pageData.devices.error}}'
+        id: 6faMNaaw2i
+        meta:
+          category: logic
+          description: ''
+          label: Error?
+          name: conditional
+          x: 400
+          'y': 880
+        outputIds:
+          - - MRT0LiT9eH
+          - - ezSJKKvgu8
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: pageData.devices
+              type: set
+              valueTemplate: |-
+                {
+                  "totalPages": 1,
+                  "page": 0,
+                  "items": [],
+                  "count": 0,
+                  "perPage": {{defaultTo data.query.perPage 25}},
+                  "totalCount": 0
+                }
+              valueTemplateType: json
+        id: ezSJKKvgu8
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 500
+          'y': 1000
+        outputIds:
+          - - tUmT0pZ_bG
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsDevicesTable~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/devices-table
+          name: endpoint
+          uiId: joqhKz1Dpr
+          x: 200
+          'y': 60
+        outputIds:
+          - - rSqav5jHHq
+        type: endpoint
+    version: develop
+version: 1

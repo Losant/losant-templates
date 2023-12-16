@@ -1,0 +1,23 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: string
+        name: key
+      - constraint: required
+        dataType: string
+        name: type
+      - constraint: required
+        dataType: string
+        name: template
+      - constraint: required
+        dataType: number
+        name: order
+      - constraint: required
+        dataType: string
+        name: label
+    exportHash: 9dfbe080eed384a84d30e3205f09d37deef5664bf68f6bbbaec24228ef4c2862
+    id: ~exportplaceholderid-dataTable-cpfTableDevices~
+    localFilename: ./cpf_table_devices.csv
+    name: cpf_table_devices
+version: 1

@@ -1,0 +1,840 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /admin/whitelabel
+    enabled: true
+    exportHash: 96b1f6359580ce2e70e585ef9aa823aa478fa04c101c3afaff5526bfa36b847d
+    flowId: ~exportplaceholderid-flow-cpfPageAdminWhitelabel~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageAdminWhitelabel~
+    name: cpf-page-admin-whitelabel
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminWhitelabel~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 32F5yJJ12Y
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 680
+        outputIds:
+          - - OIiUs7Y4d4
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: OIiUs7Y4d4
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 240
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTheme~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: '{"$or":[]}'
+          resultPath: working.theme
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: lcmnYarzyj
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 240
+          'y': 480
+        outputIds:
+          - - 1H0pozaES2
+        type: DataTableQueryNode
+      - config:
+          bodyTemplate: /admin/whitelabel?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: f2Fub4Hlbx
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 1560
+        outputIds:
+          - - YzBEmOBJCc
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: YzBEmOBJCc
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 980
+          'y': 1660
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: pageData
+              type: set
+              valueTemplate: |
+                {
+                  "colors": {
+                    "theme": [
+                      {
+                        "name": "primary",
+                        "label": "Primary",
+                        "value": "#3C7FE2"
+                      },
+                      {
+                        "name": "secondary",
+                        "label": "Secondary",
+                        "value": "#414653"
+                      },
+                      {
+                        "name": "success",
+                        "label": "Success",
+                        "value": "#44972F"
+                      },
+                      {
+                        "name": "info",
+                        "label": "Info",
+                        "value": "#60B1B2"
+                      },
+                      {
+                        "name": "warning",
+                        "label": "Warning",
+                        "value": "#D99333"
+                      },
+                      {
+                        "name": "danger",
+                        "label": "Danger",
+                        "value": "#BF391D"
+                      }
+                    ],
+                    "text": [
+                      {
+                        "name": "text_dark",
+                        "label": "Text Dark",
+                        "value": "#111A29"
+                      },
+                      {
+                        "name": "text_mid",
+                        "label": "Text Mid",
+                        "value": "#414653"
+                      },
+                      {
+                        "name": "text_light",
+                        "label": "Text Light",
+                        "value": "#A7A0AA"
+                      },
+                      {
+                        "name": "text_white",
+                        "label": "Text White",
+                        "value": "#FFFFFF"
+                      }
+                    ],
+                    "background": [
+                      {
+                        "name": "bg_dark",
+                        "label": "Background Dark",
+                        "value": "#F3F4F5"
+                      },
+                      {
+                        "name": "bg_mid",
+                        "label": "Background Mid",
+                        "value": "#FBFBFB"
+                      },
+                      {
+                        "name": "bg_light",
+                        "label": "Background Light",
+                        "value": "#FFFFFF"
+                      }
+                    ],
+                   "border":[
+                     {
+                        "name": "border",
+                        "label": "Borders",
+                        "value": "#CFD1D5"
+                     }
+                    ]
+                  }
+                }
+              valueTemplateType: json
+        id: z_lCmmJu6u
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 240
+          'y': 380
+        outputIds:
+          - - lcmnYarzyj
+        type: MutateNode
+      - config:
+          scopePath: ''
+          script: >-
+            let themeColors = payload.pageData.colors.theme;
+
+            let textColors = payload.pageData.colors.text;
+
+            let bgColors = payload.pageData.colors.background;
+
+            let borderColors = payload.pageData.colors.border;
+
+            let allColors =
+            [...themeColors,...textColors,...bgColors,...borderColors];
+
+
+            payload.working.theme.items.forEach((tableRow) => {
+                let color = allColors.find((color) => {
+                    return color.name === tableRow.name;
+                });
+                if (color){
+                    color.value = tableRow.value;
+                }
+            });
+
+
+            let themeMap = {};
+
+
+            payload.working.theme.items.forEach((i) => {
+                themeMap[i.name] = i.value;
+            });
+
+
+            if(themeMap['font_family']) {
+                themeMap['font_family'] = themeMap['font_family'].replaceAll('+', ' ');
+            }
+
+
+            payload.pageData.theme = themeMap;
+        id: 1H0pozaES2
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 240
+          'y': 580
+        outputIds:
+          - - 32F5yJJ12Y
+        type: RawFunctionNode
+      - config:
+          errorsPath: working.error
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                  "bg_light": { "type": "string" },
+                  "bg_mid": { "type": "string" },
+                  "danger": { "type": "string" },
+                  "favicon": { "type": "string" },
+                  "font_family": { "type": "string" },
+                  "info": { "type": "string" },
+                  "logo_large": { "type": "string" },
+                  "logo_small": { "type": "string" },
+                  "primary": { "type": "string" },
+                  "privacy_policy": { "type": "string" },
+                  "secondary": { "type": "string" },
+                  "success": { "type": "string" },
+                  "tos": { "type": "string" },
+                  "customer": { "type": "string" },
+                  "site": { "type": "string" },
+                  "text_dark": { "type": "string" },
+                  "text_light": { "type": "string" },
+                  "text_mid": { "type": "string" },
+                  "text_white": { "type": "string" },
+                  "warning": { "type": "string" },
+                  "border": { "type": "string" }
+                },
+                "required": [
+                    "bg_light",
+                    "bg_mid",
+                    "danger",
+                    "favicon",
+                    "font_family",
+                    "info",
+                    "logo_large",
+                    "logo_small",
+                    "primary",
+                    "privacy_policy",
+                    "secondary",
+                    "success",
+                    "tos",
+                    "text_dark",
+                    "text_light",
+                    "text_mid",
+                    "text_white",
+                    "warning",
+                    "border"
+                ]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: ZQryw9pAtV
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 840
+          'y': 480
+        outputIds:
+          - - TbA1FopNTL
+          - - aGvufoR6fP
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: /admin/whitelabel?error=White label data is not formatted correctly
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: TbA1FopNTL
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 780
+          'y': 600
+        outputIds:
+          - - TJlymxfuOQ
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: TJlymxfuOQ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 780
+          'y': 700
+        outputIds: []
+        type: DebugNode
+      - config:
+          method: replaceAll
+          methodArgs:
+            - ' '
+            - +
+          resultPath: data.body.font_family
+          sourceData: '{{ data.body.font_family }}'
+        id: aGvufoR6fP
+        meta:
+          category: logic
+          description: ''
+          label: String
+          name: string
+          x: 980
+          'y': 600
+        outputIds:
+          - - wMnENRzCb5
+        type: StringNode
+      - config:
+          scopePath: ''
+          script: |+
+            const imageKeys = [ "favicon", "logo_large", "logo_small" ];
+            let themeMap = {};
+
+            payload.working.theme.items.forEach((item) => {
+                themeMap[item.name] = item;
+            })
+
+            let result = Object.keys(payload.data.body).map((k) => {
+                if( !imageKeys.includes(k) ) {
+                    return { name: k, value: payload.data.body[k] };
+                }
+                return undefined;
+            });
+
+            payload.working = payload.working || {};
+            payload.working.rows = result;
+            payload.working.images = {};
+            payload.working.themeMap = themeMap;
+
+            imageKeys.forEach((image) => {
+                let imageContents = payload.data.body[image];
+                if(imageContents && imageContents.length > 0) {
+                    let parts = imageContents.split(',');
+
+                    let contentType = parts[0].split(';')[0].split(':')[1];
+                    let extension = contentType.split('/')[1];
+                    let imageBase64 = parts[1];
+                    let fileName = `${image}_${payload.time.getTime()}.${extension}`;
+                    
+                    payload.working.images[image] = {
+                        name: fileName,
+                        contentType: contentType,
+                        contents: imageBase64
+                    };
+
+                    payload.working.rows.push({name: image, value: fileName});
+                } else {
+                    if(image !== "favicon"){
+                        payload.working.rows.push({name: image, value: themeMap[image].value});
+                    }
+                }
+                
+            });
+
+
+        id: iAwtwPN7WX
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 980
+          'y': 800
+        outputIds:
+          - - JqArQR6Weq
+        type: RawFunctionNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTheme~
+          limitTemplate: ''
+          queryTemplate: '{"$or":[]}'
+          resultPath: ''
+        id: de2ekvXGqp
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Delete Rows'
+          name: delete-table-row
+          x: 980
+          'y': 1360
+        outputIds:
+          - - nBZvR2FcEV
+        type: DataTableDeleteRowNode
+      - config:
+          dataMethod: payloadPath
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTheme~
+          resultPath: working.insertResult
+          rowPayloadPath: working.rows
+        id: nBZvR2FcEV
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Insert Rows'
+          name: insert-table-row
+          x: 980
+          'y': 1460
+        outputIds:
+          - - f2Fub4Hlbx
+        type: DataTableInsertRowNode
+      - config:
+          action: patch
+          params:
+            - name: experienceVersionIdOrName
+              type: string
+              value: '{{experience.version}}'
+            - name: experienceVersion
+              type: path
+              value: working.patch
+          resource: experienceVersion
+          responsePath: working.globalsResult
+        id: SiYUm40Urr
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 980
+          'y': 1260
+        outputIds:
+          - - de2ekvXGqp
+        type: LosantApiNode
+      - config:
+          currentItemPath: working.image
+          loopSourcePath: working.images
+          mapResultPath: working.fileCreateResults
+          parallel: false
+        id: XkHfwbIl0e
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 980
+          'y': 1000
+        outputIds:
+          - - DfZVa11i21
+          - - tP_68jnNEJ
+        type: LoopNode
+      - config:
+          loopNodeId: XkHfwbIl0e
+          mapValuePath: working.imageCreateResult
+          shouldBreak: false
+        id: IELO0TZffX
+        meta:
+          category: loop
+          description: ''
+          groupId: XkHfwbIl0e
+          label: Next
+          name: loop-next
+          x: 200
+          'y': 400
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          contentTypeTemplate: '{{working.image.value.contentType}}'
+          encodingTemplate: base64
+          fileContentsTemplate: '{{working.image.value.contents}}'
+          fileNameTemplate: '{{working.image.value.name}}'
+          parentDirectoryTemplate: /
+          resultPath: working.imageCreateResult
+          shouldOverwrite: false
+        id: tP_68jnNEJ
+        meta:
+          category: data
+          description: ''
+          groupId: XkHfwbIl0e
+          label: 'File: Create'
+          name: file-create
+          x: 200
+          'y': 300
+        outputIds:
+          - - IELO0TZffX
+        type: FileCreateNode
+      - config:
+          destArrayPath: working.rows
+          rules:
+            - type: compact
+          sourceArrayPath: working.rows
+        id: JqArQR6Weq
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 980
+          'y': 900
+        outputIds:
+          - - XkHfwbIl0e
+        type: ArrayNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfTheme~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.theme
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: wMnENRzCb5
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 980
+          'y': 700
+        outputIds:
+          - - iAwtwPN7WX
+        type: DataTableQueryNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: 1YmcCQgM0H
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 740
+          'y': 140
+        outputIds:
+          - - idGRo_T0hO
+          - - KV2D3Yr71t
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: KV2D3Yr71t
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 840
+          'y': 260
+        outputIds:
+          - - idGRo_T0hO
+          - - ZQryw9pAtV
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: idGRo_T0hO
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 640
+          'y': 380
+        outputIds:
+          - - Sax2rAQqLF
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Sax2rAQqLF
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 640
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: yUNpltbEuh
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 140
+          'y': 140
+        outputIds:
+          - - 1os6tLNrgj
+          - - ERVDF9LPaT
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: ERVDF9LPaT
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 240
+          'y': 260
+        outputIds:
+          - - 1os6tLNrgj
+          - - z_lCmmJu6u
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 1os6tLNrgj
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 380
+        outputIds:
+          - - JW5gWBFbQO
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: JW5gWBFbQO
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: h_3fh3eCx1
+        meta:
+          annotationText: >-
+            White label options required in the layout go in Experience Globals.
+            This eliminates the need to query the cpf_theme data table on every
+            page that uses the layout (which is every page). Need to first query
+            existing globals and merge the incoming new ones.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 360
+          x: 1180
+          'y': 1100
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          scopePath: ''
+          script: >-
+            // Start with the existing globals and merge incoming values.
+
+            let patch = { globals:
+            payload.working.existingGlobals.result.items[0].globals };
+
+
+            let newValues = {
+                'favicon': payload.working?.images?.favicon?.name,
+                'title_template': payload.data.body?.title_template,
+                'company_name': payload.data.body?.company_name,
+                'privacy_policy': payload.data.body?.privacy_policy,
+                'tos': payload.data.body?.tos,
+                'font_family': payload.data.body?.font_family
+            };
+
+
+            for (const [key, value] of Object.entries(newValues)) {
+                if(value) {
+                    let existing = patch.globals.find((g) => { return g.key === key });
+                    if(existing) {
+                        existing.json = JSON.stringify(value);
+                    } else {
+                        patch.globals.push({
+                            key: key,
+                            json: JSON.stringify(value)
+                        });
+                    }
+                }
+            }
+
+
+            payload.working.patch = patch;
+        id: EnB29LJT5j
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 980
+          'y': 1180
+        outputIds:
+          - - SiYUm40Urr
+        type: RawFunctionNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: version
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '100'
+            - name: filterField
+              type: string
+              value: version
+            - name: filter
+              type: string
+              value: '{{experience.version}}'
+          resource: experienceVersions
+          responsePath: working.existingGlobals
+        id: DfZVa11i21
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 980
+          'y': 1100
+        outputIds:
+          - - EnB29LJT5j
+        type: LosantApiNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getAdminWhitelabel~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /admin/whitelabel
+          name: endpoint
+          uiId: icyXyzt2zf
+          x: 140
+          'y': 40
+        outputIds:
+          - - yUNpltbEuh
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postAdminWhitelabel~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /admin/whitelabel
+          name: endpoint
+          uiId: mlIuF0GKZe
+          x: 740
+          'y': 40
+        outputIds:
+          - - 1YmcCQgM0H
+        type: endpoint
+    version: develop
+version: 1

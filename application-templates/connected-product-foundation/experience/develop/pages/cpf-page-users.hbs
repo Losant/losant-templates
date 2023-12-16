@@ -1,0 +1,27 @@
+{{!-- Stimulus Controller: /components/cpf-js-page-sites.hbs --}}
+
+<div class="w-100 h-100 overflow-hidden">
+  <div class="d-flex flex-column h-100">
+
+    <div class="mx-5 mb-3 mt-5">
+      <div class="d-flex flex-row">
+        <div class="flex-grow-1">
+          <h1>Users</h1>
+          <p>Summary of your users.</p>
+        </div>
+        <div class="float-end">
+          <a href="/users/new" role="button" class="btn btn-success d-flex align-items-center">
+            <span class="material-symbols-outlined me-1 cpf-text-white">add</span>
+            <span>Add User</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-grow-1 px-2 px-sm-5 pt-5 pb-4 w-100 overflow-hidden full-width-table-container">
+      <turbo-frame id="cpf-element-users-table" src="/cpf/elements/users-table?site={{request.query.site}}&customer={{request.query.customer}}" target="_top">
+        <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+      </turbo-frame>
+    </div>
+  </div>
+</div>

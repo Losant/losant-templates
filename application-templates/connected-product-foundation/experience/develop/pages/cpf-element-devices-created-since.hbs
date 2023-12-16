@@ -1,0 +1,20 @@
+<turbo-frame id="cpf-element-devices-created-since">
+  <div class="mb-4 fw-bold">Devices Created Since</div>
+    {{!-- <img class="cpf-spinner" src="{{file 'spinner.gif'}}"> --}}
+  <div class="cpf-devices-created-since-row">
+      <span>24 hours</span>
+      <span class="float-end">{{pageData.devices24hours}}</span>
+  </div>
+  <div class="cpf-devices-created-since-row">
+      <span>7 days</span>
+      <span class="float-end">{{pageData.devices7days}}</span>
+  </div>
+  <div class="cpf-devices-created-since-row">
+      <span>30 days</span>
+      <span class="float-end">{{pageData.devices30days}}</span>
+  </div>
+  <div class="cpf-devices-created-since-row">
+      <span>90 days</span>
+      <span class="float-end">{{pageData.devices90days}}</span>
+  </div>
+</turbo-frame>

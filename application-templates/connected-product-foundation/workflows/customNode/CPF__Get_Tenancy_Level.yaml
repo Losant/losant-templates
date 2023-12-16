@@ -1,0 +1,229 @@
+resourceType: Flow
+resources:
+  - category: experience
+    customNodeConfig:
+      fields:
+        - description: >-
+            Payload path to the full user object. When used in an experience
+            workflow, this will almost always be `experience.user`.
+          id: user
+          label: Experience User Path
+          required: true
+          type: payloadPath
+      outputCount: 2
+      resultDescription: >-
+        Returns the level (or depth) of the user in the Experience Group
+        hierarchy. Ex: System=0, Customer=1, Site=2. Returns `undefined` if the
+        user is not a member of any group or is a member of multiple groups.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: >-
+      Returns the level (or depth) of a user in the Experience Group hierarchy.
+      Takes the `true` path if the user is member of a single group and returns
+      the level of that group. Takes the `false` path if the user is not a
+      member of any group or if the user is a member of multiple groups.
+    exportHash: dad5a5df324383490c0247cdd9679bff791cae45555c0c25ce36383d773e2b04
+    flowClass: customNode
+    globals: []
+    id: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+    name: 'CPF: Get Tenancy Level'
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: ''
+        id: 7DpYxi4GAn
+        meta:
+          category: customNodeEnd
+          description: Take the "False" path
+          label: Output False
+          name: custom-node-end-false
+          x: 160
+          'y': 800
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          branchIndexTemplate: 1
+          resultSourcePath: working.result
+        id: ZzV76TeT11
+        meta:
+          category: customNodeEnd
+          description: Take the "True" path
+          label: Output True
+          name: custom-node-end-true
+          x: 360
+          'y': 1000
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          emailOrIdTemplate: 64932ffd782eb2be81ab4c46
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: data.user
+          sortDirection: asc
+          sortField: email
+        id: sCbFzgowqz
+        meta:
+          category: experience
+          description: ''
+          label: 'User: Get'
+          name: get-experience-user
+          x: 380
+          'y': 160
+        outputIds:
+          - - xlGsH4fSvG
+        type: GetExperienceUserNode
+      - config:
+          expression: 'length({{data.user.experienceGroups}}) === 1'
+        id: lc4NrVNgGG
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 540
+        outputIds:
+          - - 119Zff3Kcv
+          - - PO_ANBDT1O
+        type: ConditionalNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.user.experienceGroups.[0].id}}'
+          resultPath: working.group
+        id: PO_ANBDT1O
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 360
+          'y': 700
+        outputIds:
+          - - jM4a6KhhQW
+        type: GetExperienceGroupNode
+      - config:
+          rules:
+            - destination: working.result
+              type: set
+              valueTemplate: '{{length working.group.ancestorIds}}'
+              valueTemplateType: json
+        id: jM4a6KhhQW
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 800
+        outputIds:
+          - - VtvWgKRxvT
+        type: MutateNode
+      - config: {}
+        id: equQKOTb4M
+        meta:
+          annotationText: >-
+            The user's level (or depth) is equal to the number of ancestors the
+            user's group has. Ex: if a user is a member of a site, it will have
+            two ancestors (customer, system), therefore the level is 2.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 560
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: B7bj4rMDwx
+        meta:
+          annotationText: Make sure the user is a member of a single group.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 340
+          x: 460
+          'y': 540
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 119Zff3Kcv
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 160
+          'y': 700
+        outputIds:
+          - - 7DpYxi4GAn
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: VtvWgKRxvT
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 360
+          'y': 900
+        outputIds:
+          - - ZzV76TeT11
+        type: DebugNode
+      - config:
+          rules:
+            - destination: working.length
+              type: set
+              valueTemplate: '{{length data.user.experienceGroups}}'
+              valueTemplateType: json
+        id: xlGsH4fSvG
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 380
+          'y': 260
+        outputIds:
+          - - lc4NrVNgGG
+        type: MutateNode
+    shortDescription: Returns the level (or depth) of a user in the Experience Group hierarchy.
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: CPF: Get Tenancy Level'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 160
+          'y': 60
+        outputIds:
+          - - lc4NrVNgGG
+        type: customNodeStart
+      - config: {}
+        key: ~exportplaceholderid-flow-cpfGetTenancyLevel~-l3P_cQX_Q1iglC3DTKtXn
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: ldp3T7tvpU
+          x: 380
+          'y': 60
+        outputIds:
+          - - sCbFzgowqz
+        type: virtualButton
+version: 1

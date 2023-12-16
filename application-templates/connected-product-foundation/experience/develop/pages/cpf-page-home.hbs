@@ -1,0 +1,38 @@
+<div class="container-fluid cpf-page">
+
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1>Dashboard</h1>
+      <p>Summary of your devices and events.</p>
+    </div>
+  </div>
+
+  <div class="row gy-4">
+    <div class="col-12 col-lg-6 col-xl-3">
+      <div class="cpf-block py-4 px-2">
+          <turbo-frame id="cpf-element-device-summary" src="/cpf/elements/device-summary" data-turbo-permanent></turbo-frame>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-3 order-xl-2">
+      <div class="pt-4 px-2 pb-2">
+          <turbo-frame id="cpf-element-devices-created-since" src="/cpf/elements/devices-created-since" data-turbo-permanent></turbo-frame>
+      </div>
+    </div>
+    <div class="col-12 col-lg-12 col-xl-6 order-xl-1">
+      <div class="cpf-block py-4 px-2">
+          <turbo-frame id="cpf-element-device-history-graph" src="/cpf/elements/device-history-graph" data-turbo-permanent></turbo-frame>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-1 row gy-4">
+    <div class="col-12">
+      <div class="pt-4 pb-4 px-4 cpf-bg-light" style="border-radius: 8px; border: 1px solid var(--cpf-border)">
+        <h4 class="mb-3">Events</h4>
+        <turbo-frame id="cpf-element-events-table" src="/cpf/elements/events-table" target="_top">
+          <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+        </turbo-frame>
+      </div>
+    </div>
+  </div>
+</div>

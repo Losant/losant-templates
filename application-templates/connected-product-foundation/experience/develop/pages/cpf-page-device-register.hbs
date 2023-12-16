@@ -1,0 +1,121 @@
+{{!-- Stimulus Controller: /components/cpf-js-page-device-register.hbs --}}
+
+<div class="cpf-page" data-controller="cpf-page-device-register">
+
+    <div class="row mb-3">
+      <div class="col-12">
+          <h1>Register Device</h1>
+          <p>Create a new device.</p>
+      </div>
+    </div>
+
+  <form method="POST" class="cpf-standard-form needs-validation" data-action="submit->cpf-page-device-register#submitForm" data-cpf-page-device-register-target="form" novalidate>
+
+    {{#if request.query.error}}
+    <div class="my-2">
+      <div class="alert alert-danger" role="alert">
+        ERROR: {{request.query.error}}
+      </div>
+    </div>
+    {{/if}}
+
+    <div class="my-2">
+      <div data-cpf-page-device-register-target="formError" class="alert alert-danger d-none" role="alert">
+        Please correct the errors below and try again.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="device-name">Name *</label>
+      <input id="device-name" type="text" class="form-control" name="name" placeholder="My Device Name" required autofocus>
+    </div>
+
+    <div class="mb-3">
+      <label for="device-description">Description</label>
+      <textarea class="form-control form-comment" id="device-description" name="description"></textarea>
+    </div>
+
+    <div class="mb-5">
+      <label class="mb-1">Device Image</label>
+      {{component 'cpf-image-upload' maxSize=128}}
+    </div>
+
+    <div class="mb-3">
+      <h2>Device Details</h2>
+      <p>Select the device recipe and provide tag values for the new device.</p>
+    </div>
+
+    {{#eq pageData.userLevel 0}}
+    <div class="alert alert-info mb-3" role="alert">
+      <div class="mb-2"><strong>Administrator Tip</strong></div>
+      <div>
+        <a href="https://docs.losant.com/devices/device-recipes/" target="_blank">Device Recipes</a>
+        must first be created in the platform before they'll show up below. Once you've created a recipe
+        you can configure which tags are available on the <a href="/admin/device-tags">Device Tags</a> admin page.
+        The dropdown below will show <strong>all</strong> device recipes in your application.
+      </div>
+    </div>
+    {{/eq}}
+
+    <div class="mb-3">
+      <label for="recipe" class="form-label">Device Recipe</label>
+        <select id="recipe"
+                class="form-select"
+                name="recipe"
+                required
+                data-action="cpf-page-device-register#familyChanged">
+          <option value="">-- Choose Device Recipe --</option>
+          {{#each pageData.recipes.result.items}}
+          <option value="{{this.id}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+    </div>
+
+    <div class="mb-2">
+      <label>Device Tags</label>
+    </div>
+
+    <div class="mb-5">
+      <turbo-frame  id="cpf-element-tag-edit-form"
+                    src="/cpf/elements/tag-edit-form"
+                    data-cpf-page-device-register-target="tagEditForm">
+        <small class="ps-3 text-body-secondary"><em>Loading...</em></small>
+      </turbo-frame>
+    </div>
+
+    <div class="mb-3">
+      <h2>Tenancy</h2>
+      <p>Assign this device to a customer tenant and a site. Only this tenant's users will be able to see this device.</p>
+    </div>
+
+    {{#eq pageData.userLevel 0}}
+    <div class="alert alert-info mb-3" role="alert">
+      <div class="mb-2"><strong>Administrator Tip</strong></div>
+      <div>
+        Customers and sites are <a href="https://docs.losant.com/experiences/groups/" target="_blank">Experience Groups</a>
+        with a hierarchy of: System &rarr; Customers &rarr; Sites. Devices always belong to a site.
+        You do not need to create these groups in the platform. All customer, site, and user management can
+        be done directly in the CPF interface.
+      </div>
+    </div>
+    {{/eq}}
+
+    {{!-- Customer dropdown only shows up for system admins --}}
+    {{#lt pageData.userLevel 1}}
+    <div class="mb-3">
+      <label for="tenant" class="form-label">Customer</label>
+      <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&required=true&formName=customer&placeholder=-- Select Customer --&actionMethod=customerChanged&controllerName=cpf-page-device-register" />
+    </div>
+    {{/lt}}
+    {{!-- Site dropdown only shows up for customer or system admins --}}
+    {{#lt pageData.userLevel 2}}
+    <div class="mb-3">
+      <label for="site" class="form-label">Site</label>
+      <turbo-frame data-cpf-page-device-register-target="siteSelectFrame" id="cpf-element-group-select" src="/cpf/elements/group-select?&level=2&required=true&placeholder=-- Select Site --&controllerName=cpf-page-device-register&formName=site{{#eq pageData.userLevel 1}}&parentId={{experience.user.experienceGroups.[0].id}}{{/eq}}" />
+    </div>
+    {{/lt}}
+
+    <button id="submit-button" type="submit" class="mt-5 btn btn-primary">Submit</button>
+  </form>
+</div>
+

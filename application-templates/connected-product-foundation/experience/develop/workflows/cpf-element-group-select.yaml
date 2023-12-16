@@ -1,0 +1,216 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/group-select
+    enabled: true
+    exportHash: 602b57757b75508076f0b88197f15394ed30ec1b9900c1a94d5802a638d63a39
+    flowId: ~exportplaceholderid-flow-cpfElementGroupSelect~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementGroupSelect~
+    name: cpf-element-group-select
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementGroupSelect~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 2jG3HecOfo
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 460
+        outputIds:
+          - - GoCfWJbcD6
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: GoCfWJbcD6
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 560
+        outputIds: []
+        type: DebugNode
+      - config:
+          resultPath: working.groupSummary
+        id: zoIGVMT6KC
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Summary'
+          name: group-summary
+          x: 40
+          'y': 260
+        outputIds:
+          - - wz_4WPThXZ
+        type: ExperienceGroupSummaryNode
+      - config:
+          scopePath: ''
+          script: |-
+            // Flatten the group summary hierarchy into an object map.
+            // This way group meta data is easily access by group ID.
+
+            let groups = payload.working.groupSummary;
+            let groupsMap = {};
+
+            // Recursively traverses the group hierarchy
+            // and builds a map of id:groupObj
+            let flatten = (group, level) => {
+                if(group.id !== '(root)') {
+                    group.level = level;
+                    groupsMap[group.id] = group;
+                }
+
+                let lvl = level + 1;;
+                group.children.forEach((child) => {
+                    child.parent = {
+                        id: group.id,
+                        name: group.name
+                    };
+                    
+                    flatten(child, lvl);
+                });
+            };
+
+            flatten(payload.working.groupSummary, -1);
+
+            // Remove all children arrays from results. This is a bunch of extra
+            // data that is not needed.
+            Object.values(groupsMap).forEach((group) => {
+                delete group.children;
+            });
+
+
+            // Filter results by requested level and optional parentId.
+            let requestedLevel = parseInt(payload.data.query.level);
+            let parentId = payload.data.query.parentId;
+
+            let result = Object.values(groupsMap).filter((g) => {
+                if(g.level !== requestedLevel) {
+                    return false;
+                }
+
+                // If the user requested nested groups and
+                // did not provide a parentId, nothing should match.
+                if(requestedLevel > 1 && !parentId) {
+                    return false;
+                }
+
+                if(parentId && parentId !== g.parent.id) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            payload.pageData = payload.pageData || {};
+            payload.pageData.groups = result;
+            payload.working.groupsMap = groupsMap;
+        id: wz_4WPThXZ
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 40
+          'y': 360
+        outputIds:
+          - - 2jG3HecOfo
+        type: RawFunctionNode
+      - config: {}
+        id: jYmz682OYh
+        meta:
+          annotationText: >-
+            If the user requested a level greater than 1, but did not provide a
+            parent ID, return nothing.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 280
+          x: 440
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{add data.query.level 0}} > 1 && {{data.query.parentId.length}} < 2'
+        id: aSgmLy8Bcy
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 140
+          'y': 140
+        outputIds:
+          - - zoIGVMT6KC
+          - - 7QsRiw1yz_
+        type: ConditionalNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementGroupSelect~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 7QsRiw1yz_
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 260
+        outputIds:
+          - - RPm1Ik08RP
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: RPm1Ik08RP
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 240
+          'y': 360
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsGroupSelect~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/group-select
+          name: endpoint
+          uiId: B6COCFS1gp
+          x: 140
+          'y': 40
+        outputIds:
+          - - aSgmLy8Bcy
+        type: endpoint
+    version: develop
+version: 1

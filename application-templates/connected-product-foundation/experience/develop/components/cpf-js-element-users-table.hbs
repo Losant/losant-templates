@@ -1,0 +1,80 @@
+application.register('cpf-element-users-table', class extends Controller {
+
+  static targets = ['customerSelect', 'siteSelect', "siteSelectFrame"];
+
+  connect() {
+
+    if (document.documentElement.hasAttribute('data-turbo-preview')) {
+      return;
+    }
+
+    console.log('cpf-element-users-table');
+
+  };
+
+  updateFilters(event) {
+
+    event.preventDefault();
+
+    // This debouncing logic will only perform the filter request if the
+    // user has stopped typing for 300ms. This prevents a bunch of requests
+    // from overlapping on every typed character.
+
+    if(this.filterDebounce) {
+      clearTimeout(this.filterDebounce);
+    }
+
+    this.filterDebounce = setTimeout(() => {
+
+      // Find all input elements with the data-filter attribute.
+      let filterFields = this.element.querySelectorAll('[data-filter]');
+
+      // Build array of name=value strings.
+      let queryParams = Array.from(filterFields).map((f) => { return f.value !== '' ? `${f.dataset.filter}=${encodeURIComponent(f.value)}` : null });
+
+      console.log(queryParams);
+
+      // Filter any nulls (there was no value in the input).
+      queryParams = queryParams.filter((q) => { return q !== null });
+
+      // Add customer option.
+      if(this.hasCustomerSelectTarget) {
+        queryParams.push(`customer=${this.customerSelectTarget.value}`);
+      }
+
+      // If the user changed the customer dropdown, need to reload the
+      // sites dropdown with new parent customer selected and reset its value.
+      if(event.params.group === 'customer') {
+
+        let params = new URLSearchParams({
+          level: 2,
+          parentId: this.customerSelectTarget.value,
+          placeholder: '-- All Sites --',
+          actionMethod: 'updateFilters',
+          actionGroupParamValue: 'site',
+          controllerName: 'cpf-element-users-table',
+          targetName: 'siteSelect',
+          formName: 'site'
+        });
+    
+        this.siteSelectFrameTarget.src = `/cpf/elements/group-select?${params.toString()}`;
+        console.log(this.siteSelectFrameTarget.src);
+      }
+      else {
+        // Only add the site option if the customer has not changed.
+        // If the customer changed, this gets reset to blank.
+        queryParams.push(`site=${this.siteSelectTarget.value}`);
+      }
+
+      console.log(event.params);
+
+
+      let newSrc = `/cpf/elements/users-table?${queryParams.join('&')}`;
+      console.log(newSrc);
+
+      // Reload the turbo frame and pass in all input fields on the query string.
+      this.element.parentElement.src = newSrc;
+    }, 300);
+  }
+
+});

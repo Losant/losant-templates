@@ -1,0 +1,88 @@
+<turbo-frame id="cpf-element-sites-table">
+  <div class="cpf-element-sites-table w-100 h-100 d-flex flex-column" data-controller="cpf-element-sites-table">
+    <div class="flex-grow-1 overflow-auto">
+      <table class="cpf-table table">
+        <thead id="cpf-element-sites-table-table-header" data-turbo-permanent>
+          <tr>
+            <th scope="col">
+              <div>
+                <div class="mb-1">Name</div>
+                <div>
+                  <input  type="text" class="form-control" placeholder="Filter..."
+                          data-action="cpf-element-sites-table#updateFilters"
+                          data-filter="name"></input>
+                </div>
+              </div>
+            </th>
+            <th scope="col">
+              <div>
+                <div class="mb-1">Users</div>
+                <div class="text-disabled">
+                  <span data-bs-toggle="tooltip"
+                        title="Cannot filter by user count."
+                        class="text-nowrap">
+                    Filter not available
+                  </span>
+                </div>
+              </div>
+            </th>
+            <th scope="col">
+              <div>
+                <div class="mb-1">Devices</div>
+                <div class="text-disabled">
+                  <span data-bs-toggle="tooltip"
+                        title="Cannot filter by device count."
+                        class="text-nowrap">
+                    Filter not available
+                  </span>
+                </div>
+              </div>
+            </th>
+            <th scope="col">
+              <div>
+                <div class="mb-1">Primary Contact</div>
+                <div>
+                  <input  type="text" class="form-control" placeholder="Filter..."
+                          data-action="cpf-element-sites-table#updateFilters"
+                          data-filter="contact"></input>
+                </div>
+              </div>
+            </th>
+            {{#lt pageData.userLevel 1}} {{! Admins only }}
+            <th scope="col" id="table-header-customer">
+              <div>
+                <div class="mb-1">Customer</div>
+                <div>
+                  <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&placeholder=-- All Customers --&actionMethod=updateFilters&actionGroupParamValue=customer&controllerName=cpf-element-sites-table&targetName=customerSelect&selectedId={{request.query.customer}}">
+                    <select class="form-select" disabled><option>Loading...</option></select>
+                  </turbo-frame>
+                </div>
+              </div>
+            </th>
+            {{/lt}}
+          </tr>
+        </thead>
+        <tbody>
+          {{#each pageData.sites}}
+          <tr>
+            <td><a href="/sites/{{this.id}}">{{this.name}}</a></td>
+            <td><a href="/users?site={{this.id}}">{{length this.experienceUserIds}}</a></td>
+            <td><a href="/devices?site={{this.id}}">{{this.deviceCount}}</a></td>
+            <td><a href="mailto:{{this.groupTags.contact}}">{{this.groupTags.contact}}</a></td>
+            {{#lt @root.pageData.userLevel 1}}
+            <td><a href="/customers/{{this.parent.id}}">{{this.parent.name}}</a></td>
+            {{/lt}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{#unless pageData.sites}}
+      <div class="w-100 mt-4 flex-grow-1 text-center">
+        <div id="no-sites-message" class="alert alert-info" role="alert">
+          No sites found.
+        </div>
+      </div>
+      {{/unless}}
+    </div>
+  </div>
+</turbo-frame>

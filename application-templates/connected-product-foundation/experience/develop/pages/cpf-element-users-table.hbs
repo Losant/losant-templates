@@ -1,0 +1,90 @@
+<turbo-frame id="cpf-element-users-table">
+  <div class="cpf-element-users-table w-100 h-100 d-flex flex-column" data-controller="cpf-element-users-table">
+    <div class="flex-grow-1 overflow-auto">
+      <table class="cpf-table table">
+        <thead id="cpf-element-users-table-table-header" data-turbo-permanent>
+          <tr>
+            <th scope="col" id="table-header-email">
+              <div>
+                <div class="mb-1">Email</div>
+                <div>
+                  <input  type="text" class="form-control" placeholder="Filter..."
+                          data-action="cpf-element-users-table#updateFilters"
+                          data-filter="email"></input>
+                </div>
+              </div>
+            </th>
+            <th scope="col" id="table-header-role">
+              <div>
+                <div class="mb-1">Role</div>
+                <div>
+                  <select data-filter="role"
+                          data-action="cpf-element-users-table#updateFilters"
+                          class="form-select w-auto">
+                    <option value="">Any</option>
+                    <option value="admin">Admin</option>
+                    <option value="editor">Editor</option>
+                    <option value="viewer">Viewer</option>
+                  </select>
+                </div>
+              </div>
+            </th>
+            {{#lt pageData.userLevel 1}} {{! Admins only }}
+            <th scope="col" id="table-header-customer">
+              <div>
+                <div class="mb-1">Customer</div>
+                <div>
+                  <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&placeholder=-- All Customers --&actionMethod=updateFilters&actionGroupParamValue=customer&controllerName=cpf-element-users-table&targetName=customerSelect&selectedId={{request.query.customer}}">
+                    <select class="form-select" disabled><option>Loading...</option></select>
+                  </turbo-frame>
+                </div>
+              </div>
+            </th>
+            {{/lt}}
+            {{#lt pageData.userLevel 2}} {{! Admins and Customers only }}
+            <th scope="col" id="table-header-site">
+              <div>
+                <div class="mb-1">Site</div>
+                <div>
+                  <turbo-frame data-cpf-element-users-table-target="siteSelectFrame" id="cpf-element-group-select" src="/cpf/elements/group-select?level=2&placeholder=-- All Sites --&actionMethod=updateFilters&actionGroupParamValue=site&controllerName=cpf-element-users-table&targetName=siteSelect&selectedId={{request.query.site}}&parentId={{defaultTo pageData.customerId request.query.customer}}">
+                    <select class="form-select" disabled><option>Loading...</option></select>
+                  </turbo-frame>
+                </div>
+              </div>
+            </th>
+            {{/lt}}
+          </tr>
+        </thead>
+        <tbody>
+          {{#each pageData.users}}
+          <tr class="users-table-row">
+            <td><a href="/users/{{this.id}}">{{this.email}}</a></td>
+            <td>{{titleCase this.userTags.cpf_role}}</td>
+            {{#lt @root.pageData.userLevel 1}}
+            {{#if this.customer}}
+            <td><a href="/customers/{{this.customer.id}}">{{this.customer.name}}</a></td>
+            {{else}}
+            <td class="fst-italic">all customers</td>
+            {{/if}}
+            {{/lt}}
+            {{#lt @root.pageData.userLevel 2}}
+            {{#if this.site}}
+            <td><a href="/sites/{{this.site.id}}">{{this.site.name}}</a></td>
+            {{else}}
+            <td class="fst-italic">all sites</td>
+            {{/if}}
+            {{/lt}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{#unless pageData.users}}
+    <div class="w-100 flex-grow-1 text-center">
+      <div id="no-users-message" class="alert alert-info" role="alert">
+        No users found.
+      </div>
+    </div>
+    {{/unless}}
+  </div>
+</turbo-frame>

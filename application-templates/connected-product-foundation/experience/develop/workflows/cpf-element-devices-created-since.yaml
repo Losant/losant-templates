@@ -1,0 +1,581 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/devices-created-since
+    enabled: true
+    exportHash: 40a723b1ac89237177cfac76b0398d8a785666fe3892b86d2a265c3d3f83e5b9
+    flowId: ~exportplaceholderid-flow-cpfElementDevicesCreatedSince~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementDevicesCreatedSince~
+    name: cpf-element-devices-created-since
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementDevicesCreatedSince~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: iZ_SP7MR5R
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 1300
+        outputIds:
+          - - Fn2LG0ot6h
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Fn2LG0ot6h
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 240
+          'y': 1400
+        outputIds: []
+        type: DebugNode
+      - config:
+          numberValue: '24'
+          operation: subtract
+          resultFormatString: x
+          resultPath: working.24hours
+          sourcePath: time
+          timezone: UTC
+          unit: hour
+        id: MncG98JpMU
+        meta:
+          category: logic
+          description: ''
+          label: 24 hours ago
+          name: date-time
+          x: 240
+          'y': 280
+        outputIds:
+          - - iyIMWlCOaJ
+        type: DateTimeNode
+      - config:
+          numberValue: '7'
+          operation: subtract
+          resultFormatString: x
+          resultPath: working.7days
+          sourcePath: time
+          timezone: UTC
+          unit: day
+        id: iyIMWlCOaJ
+        meta:
+          category: logic
+          description: ''
+          label: 7 days ago
+          name: date-time
+          x: 240
+          'y': 360
+        outputIds:
+          - - ORqZiL274q
+        type: DateTimeNode
+      - config:
+          numberValue: '30'
+          operation: subtract
+          resultFormatString: x
+          resultPath: working.30days
+          sourcePath: time
+          timezone: UTC
+          unit: day
+        id: ORqZiL274q
+        meta:
+          category: logic
+          description: ''
+          label: 30 days ago
+          name: date-time
+          x: 240
+          'y': 440
+        outputIds:
+          - - c2ytlyFbBU
+        type: DateTimeNode
+      - config:
+          numberValue: '90'
+          operation: subtract
+          resultFormatString: x
+          resultPath: working.90days
+          sourcePath: time
+          timezone: UTC
+          unit: day
+        id: c2ytlyFbBU
+        meta:
+          category: logic
+          description: ''
+          label: 90 days ago
+          name: date-time
+          x: 240
+          'y': 520
+        outputIds:
+          - - GFGan0DOia
+        type: DateTimeNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.24hours}}"
+                  }
+                },
+                {
+                  "experienceUserId": {
+                    "$eq": "{{experience.user.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices24hours
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: GpigOvg2aj
+        meta:
+          category: data
+          description: ''
+          label: 24 hours
+          name: get-device
+          x: 140
+          'y': 760
+        outputIds:
+          - - P4cuuyF4hG
+        type: GetDeviceNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.7days}}"
+                  }
+                },
+                {
+                  "experienceUserId": {
+                    "$eq": "{{experience.user.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices7days
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: P4cuuyF4hG
+        meta:
+          category: data
+          description: ''
+          label: 7 days
+          name: get-device
+          x: 140
+          'y': 840
+        outputIds:
+          - - x8dT0WLgPm
+        type: GetDeviceNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.30days}}"
+                  }
+                },
+                {
+                  "experienceUserId": {
+                    "$eq": "{{experience.user.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices30days
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: x8dT0WLgPm
+        meta:
+          category: data
+          description: ''
+          label: 30 days
+          name: get-device
+          x: 140
+          'y': 920
+        outputIds:
+          - - zfph2xrRbm
+        type: GetDeviceNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.90days}}"
+                  }
+                },
+                {
+                  "experienceUserId": {
+                    "$eq": "{{experience.user.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices90days
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: zfph2xrRbm
+        meta:
+          category: data
+          description: ''
+          label: 90 days
+          name: get-device
+          x: 140
+          'y': 1000
+        outputIds:
+          - - NvZ_fSJRHU
+        type: GetDeviceNode
+      - config:
+          rules:
+            - destination: pageData.devices24hours
+              source: working.devices24hours.totalCount
+              type: copy
+            - destination: pageData.devices7days
+              source: working.devices7days.totalCount
+              type: copy
+            - destination: pageData.devices30days
+              source: working.devices30days.totalCount
+              type: copy
+            - destination: pageData.devices90days
+              source: working.devices90days.totalCount
+              type: copy
+        id: NvZ_fSJRHU
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 240
+          'y': 1140
+        outputIds:
+          - - iZ_SP7MR5R
+        type: MutateNode
+      - config: {}
+        id: mGf32Ttiol
+        meta:
+          annotationText: Calculate the starting times.
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: ectQxGBKoQ
+        meta:
+          annotationText: >-
+            Query the count of devices created on or after each of the starting
+            times.
+
+
+            If the user is level=0 (system) we don't need to include the
+            experience user ID in the query. This helps prevent the query limit
+            if there are lots of customers/sites.
+          category: annotation
+          height: 300
+          label: Note
+          name: note
+          width: 260
+          x: 540
+          'y': 760
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 4RmrvqLF3f
+        meta:
+          annotationText: >-
+            Move the results to the `pageData` property to send to page for
+            rendering.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 1140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.userLevel}} === 0'
+        id: GFGan0DOia
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 240
+          'y': 640
+        outputIds:
+          - - GpigOvg2aj
+          - - MIuQ1io6Zj
+        type: ConditionalNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: working.userLevel
+        id: pPaF6b3WkB
+        meta:
+          category: data
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 140
+          'y': 160
+        outputIds:
+          - - ZnWDRCqA0y
+          - - MncG98JpMU
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "User's group membership is invalid."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: ZnWDRCqA0y
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 280
+        outputIds:
+          - - 2ZP3pD0AdQ
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 2ZP3pD0AdQ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 380
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.24hours}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices24hours
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: MIuQ1io6Zj
+        meta:
+          category: data
+          description: ''
+          label: 24 hours
+          name: get-device
+          x: 340
+          'y': 760
+        outputIds:
+          - - yBGG02Wit2
+        type: GetDeviceNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.7days}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices7days
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: yBGG02Wit2
+        meta:
+          category: data
+          description: ''
+          label: 7 days
+          name: get-device
+          x: 340
+          'y': 840
+        outputIds:
+          - - CEf5bQ9avl
+        type: GetDeviceNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.30days}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices30days
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: CEf5bQ9avl
+        meta:
+          category: data
+          description: ''
+          label: 30 days
+          name: get-device
+          x: 340
+          'y': 920
+        outputIds:
+          - - MVVcnpuSVz
+        type: GetDeviceNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.90days}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices90days
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: MVVcnpuSVz
+        meta:
+          category: data
+          description: ''
+          label: 90 days
+          name: get-device
+          x: 340
+          'y': 1000
+        outputIds:
+          - - NvZ_fSJRHU
+        type: GetDeviceNode
+    triggers:
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-getCpfElementsDevicesCreatedSince~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/devices-created-since
+          name: endpoint
+          uiId: 1Cjarid55M
+          x: 140
+          'y': 40
+        outputIds:
+          - - pPaF6b3WkB
+        type: endpoint
+    version: develop
+version: 1

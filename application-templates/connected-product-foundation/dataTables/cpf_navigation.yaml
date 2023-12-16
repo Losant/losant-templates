@@ -1,0 +1,37 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: string
+        name: nav_label
+      - constraint: unique
+        dataType: string
+        name: nav_id
+      - constraint: optional
+        dataType: string
+        name: nav_parent
+      - constraint: required
+        dataType: string
+        name: nav_link
+      - constraint: required
+        dataType: number
+        name: nav_order
+      - constraint: optional
+        dataType: string
+        name: nav_icon
+      - constraint: required
+        dataType: number
+        name: nav_access_group_level
+      - constraint: optional
+        dataType: string
+        name: nav_access_user_role
+      - constraint: optional
+        dataType: string
+        defaultValue: top
+        name: nav_location
+    description: ''
+    exportHash: 4c5778f3e9cbd904514315abc37915ae1699ef19335937fb5a6957c244300b12
+    id: ~exportplaceholderid-dataTable-cpfNavigation~
+    localFilename: ./cpf_navigation.csv
+    name: cpf_navigation
+version: 1

@@ -1,0 +1,18 @@
+resourceType: ExperienceView
+resources:
+  - description: Used for pages with no navigation. For example, Log In, 404, 500, etc.
+    exportHash: 3f9cf206aa37ad13eedc18125cd5fd902b185c9d895beedd9aa725c4705ce9d4
+    id: ~exportplaceholderid-experienceView-cpfLayoutNoNav~
+    localFilename: ./cpf-layout-no-nav.hbs
+    name: cpf-layout-no-nav
+    version: develop
+    viewTags: {}
+    viewType: layout
+  - exportHash: aaa7de2bbf94daa4ca57a70577d20ea87e58b9d6e76ad5707e2e5c0f8a81d152
+    id: ~exportplaceholderid-experienceView-cpfLayout~
+    localFilename: ./cpf-layout.hbs
+    name: cpf-layout
+    version: develop
+    viewTags: {}
+    viewType: layout
+version: 1

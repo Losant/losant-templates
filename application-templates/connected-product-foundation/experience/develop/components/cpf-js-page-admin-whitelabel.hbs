@@ -1,0 +1,58 @@
+application.register('cpf-page-admin-whitelabel', class extends Controller {
+
+  static targets = ['fontPreview', 'fontPreviewStylesheet', 'fontInput', 'whitelabelForm'];
+
+  connect() {
+    if (document.documentElement.hasAttribute('data-turbo-preview')) {
+      return;
+    }
+
+    console.log('cpf-page-admin-whitelabel');
+
+    this.isFontValid = true;
+  };
+
+  fontChanged() {
+    this.isFontValid = false;
+  }
+
+  async updateFontPreview(event) {
+    event.preventDefault();
+    const font = this.fontInputTarget.value;
+    let fetched;
+    var previewErrorMessage = document.getElementById("validationPreview");
+    previewErrorMessage.style.display = "none";
+    const href = `https://fonts.googleapis.com/css?family=${font.replaceAll(' ', '+')}:bold,italic,400&display=swap`;
+    try {
+      fetched = await fetch(href);
+      if (fetched.ok) {
+        this.fontPreviewTarget.style.fontFamily = font;
+        this.fontPreviewStylesheetTarget.href = href;
+        this.isFontValid = true;
+        this.fontInputTarget.classList.remove('is-invalid');
+        this.fontInputTarget.classList.add('is-valid');
+      } else {
+        this.fontInputTarget.classList.add('is-invalid');
+        this.isFontValid = false;
+      }
+    } catch (err) {
+      this.fontInputTarget.classList.add('is-invalid');
+      this.isFontValid = false;
+    }
+  }
+
+  submit() {
+
+    if (this.isFontValid) {
+      this.whitelabelFormTarget.submit();
+
+    } else {
+      var previewErrorMessage = document.getElementById("validationPreview");
+      previewErrorMessage.style.display = "block";
+      previewErrorMessage.scrollIntoView();
+
+      console.log('invalid');
+    }
+  }
+
+});

@@ -1,0 +1,330 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/events-table
+    enabled: true
+    exportHash: 7a4750e9b922c52083b0105cb6ae226c21d1cbe9c3af63e791d9123071772c16
+    flowId: ~exportplaceholderid-flow-cpfElementEventsTable~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementEventsTable~
+    name: cpf-element-events-table
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementEventsTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: KQ7l3mbx6d
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 760
+        outputIds:
+          - - 5bJ0zPhCsB
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 5bJ0zPhCsB
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: true
+          findMultiple: true
+          queryTemplate: '{{{jsonEncode working.query}}}'
+          resultPath: pageData.events
+          resultsPage: '{{defaultTo data.query.page 0}}'
+          resultsPerPage: '{{defaultTo data.query.perPage 25}}'
+          sortDirection: desc
+          sortField: creationDate
+        id: gPQ7wTwM0t
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Get'
+          mode: queryTemplateMultiple
+          name: get-event
+          x: 260
+          'y': 400
+        outputIds:
+          - - _4TBGT80fA
+        type: GetEventNode
+      - config:
+          statements:
+            - expression: >-
+                max(ceil({{pageData.events.totalCount}} /
+                {{pageData.events.perPage}}), 1)
+              resultPath: pageData.events.totalPages
+        id: 68Rkoe_kXA
+        meta:
+          category: logic
+          description: ''
+          label: Math
+          name: math
+          x: 160
+          'y': 640
+        outputIds:
+          - - KQ7l3mbx6d
+        type: MathNode
+      - config: {}
+        id: tG7dDwZXJd
+        meta:
+          annotationText: >-
+            Calculate the total number of event pages. If there was an error
+            querying (invalid device ID, etc), just mutate zero events onto
+            pageData.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 280
+          x: 600
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          scopePath: ''
+          script: |-
+            let and = [];
+            let query = { '$and': and };
+
+            // If the user's level is 0, they are a system
+            // user and get every device, so there's
+            // no need to append experience user ID to the query.
+            if(payload.working.userLevel > 0) {
+                and.push({
+                    "experienceUserId": {
+                        "$eq": payload.experience.user.id
+                    }
+                });
+            }
+
+            if(payload.data.query.subject) {
+                and.push({
+                    'subject': {
+                        '$contains': payload.data.query.subject,
+                        '$ci': true
+                    }
+                });
+            }
+
+            if(payload.data.query.state && payload.data.query.state !== 'any') {
+                and.push({
+                    'state': {
+                        '$eq': payload.data.query.state
+                    }
+                });
+            }
+
+            if(payload.data.query.level && payload.data.query.level !== 'any') {
+                and.push({
+                    'level': {
+                        '$eq': payload.data.query.level
+                    }
+                });
+            }
+
+            if(payload.data.query.device) {
+                and.push({
+                    'deviceId': {
+                        '$eq': payload.data.query.device
+                    }
+                });
+            }
+
+            /*
+            if(payload.data.query.connected === 'connected') {
+                and.push({
+                    'connectionStatus': {
+                        '$eq': 'connected'
+                    }
+                });
+            }
+            else if(payload.data.query.connected === 'disconnected') {
+                and.push({
+                    'connectionStatus': {
+                        '$ne': 'connected'
+                    }
+                });
+            }
+
+            for(const key in payload.data.query) {
+                if(key.startsWith('tag_')) {
+                    and.push({
+                        "tags": {
+                            "$eq": {
+                                "$tagKey": key.split('tag_')[1],
+                                "$tagValue": payload.data.query[key]
+                            }
+                        }
+                    });
+                }
+            }
+
+            let attributes = payload.pageData.tableConfig.items.filter(
+                (c) => { return c.type === 'attribute'; }).map((c) => { return c.key; });
+            */
+
+            payload.working = payload.working || {};
+            payload.working.query = query;
+        id: Lg4USsMYxk
+        meta:
+          category: logic
+          description: ''
+          label: Build Query
+          name: function
+          x: 260
+          'y': 280
+        outputIds:
+          - - gPQ7wTwM0t
+        type: RawFunctionNode
+      - config: {}
+        id: M5ePqqBGWn
+        meta:
+          annotationText: >-
+            Build the event [advanced
+            query](https://~exportplaceholderid-docs-url~/references/advanced-queries/)
+            from the incoming filter fields.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 460
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: working.userLevel
+        id: TBpkImoV15
+        meta:
+          category: data
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 160
+          'y': 140
+        outputIds:
+          - - 4ajZYyWnfy
+          - - Lg4USsMYxk
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "User's group membership is invalid."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: 4ajZYyWnfy
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 280
+        outputIds:
+          - - HGhy3Sh4cG
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: HGhy3Sh4cG
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 60
+          'y': 360
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{pageData.events.error}}'
+        id: _4TBGT80fA
+        meta:
+          category: logic
+          description: ''
+          label: Error?
+          name: conditional
+          x: 260
+          'y': 520
+        outputIds:
+          - - 68Rkoe_kXA
+          - - FDS5AVimlB
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: pageData.events
+              type: set
+              valueTemplate: |-
+                {
+                  "totalPages": 1,
+                  "page": 0,
+                  "items": [],
+                  "count": 0,
+                  "perPage": {{defaultTo data.query.perPage 25}},
+                  "totalCount": 0
+                }
+              valueTemplateType: json
+        id: FDS5AVimlB
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 640
+        outputIds:
+          - - KQ7l3mbx6d
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsEventsTable~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/events-table
+          name: endpoint
+          uiId: _ajwKUAVCU
+          x: 160
+          'y': 40
+        outputIds:
+          - - TBpkImoV15
+        type: endpoint
+    version: develop
+version: 1

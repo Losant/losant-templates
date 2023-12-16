@@ -1,0 +1,100 @@
+<div class="cpf-page">
+
+  <div class="row mb-3">
+    <div class="col-12">
+      {{#if pageData.customer}}
+      <h1>Customer Details</h1>
+      <p>View and edit the details for this customer.</p>
+      {{else}}
+      <h1>Add Customer</h1>
+      <p>Create a new customer.</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <form method="POST" class="cpf-standard-form">
+
+    {{#if request.query.error}}
+    <div class="my-2">
+      <div class="alert alert-danger" role="alert">
+          ERROR: {{request.query.error}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if request.query.success}}
+    <div class="my-2">
+      <div class="alert alert-success" role="alert">
+        Customer details successfully saved.
+      </div>
+    </div>
+    {{/if}}
+
+    <div class="mb-3">
+      <label for="name">Name *</label>
+      <input id="name" type="text" class="form-control" name="name" placeholder="ACME Inc" value="{{pageData.customer.name}}" required autofocus>
+    </div>
+
+    <div class="mb-3">
+      <label for="contact">Primary Contact</label>
+      <input id="contact" type="email" class="form-control" name="contact" placeholder="jane.smith@example.com" value="{{pageData.customer.groupTags.contact}}">
+    </div>
+
+    <div class="mb-3">
+      <label for="address">Address</label>
+      <textarea class="form-control form-comment" id="address" name="address">{{pageData.customer.groupTags.address}}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="link">Link</label>
+      <input id="link" type="text" class="form-control" name="link" placeholder="https://www.example.com" aria-describedby="link_help" value="{{pageData.customer.groupTags.link}}">
+      <div id="link_help" class="form-text">
+        This can be a link to the customer's website or a link to your CRM (e.g. Salesforce, Hubspot) with details for this customer.
+      </div>
+    </div>
+
+    <div class="alert alert-info mb-3" role="alert">
+      <div class="mb-2"><strong>Administrator Tip</strong></div>
+      <div>
+        A customer is represented by an <a href="https://docs.losant.com/experiences/groups/">Experience Group</a> in the platform.
+        The primary contact, address, and link are saved on <a href="https://docs.losant.com/experiences/groups/#group-tags">Group Tags</a>.
+        All customers are added as children to CPF's System group.
+      </div>
+    </div>
+
+    <div class="edit-nav-card">
+      <div class="card p-3 mt-4 cpf-bg-light">
+        <div class="d-flex flex-row align-items-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          {{#if pageData.customer}}
+          <a href="#" class="ms-2 text-danger ms-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete Customer</a>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="confirmDeleteModalLabel">Confirm Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This action <strong>cannot be undone</strong>.<br /><br />
+        Are you sure you want to delete this customer?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="POST" action="/customers/{{pageData.customer.id}}">
+          <input type="hidden" name="delete" value="true"></input>
+          <button type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
