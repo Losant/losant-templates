@@ -15,7 +15,7 @@ This template creates a ready-to-use application with example devices, recipes, 
 
 1. Set a password for the CPF's system admin. Navigate to **User and Groups** using the left navigation. Click the `system-admin@example.com` user from the list. Click the **Change Password?** checkbox and provide a secure password.
 1. Enable the **Simulator** and **Check Thresholds** workflows. The simulation workflow replays device data from the `TurbineEngine.csv` file once a minute and records that data to the example Turbofan devices.
-1. Set a secure value for the `cpf-jwt-password-reset-secret` [Application Global](https://docs.losant.com/applications/overview/#application-globals). This secret is used to sign tokens as part of forgot password process.
+1. Set a secure value for the `cpf-jwt-password-reset-secret` [Application Global](https://docs.losant.com/applications/overview/#application-globals). This secret is used to sign tokens as part of the forgot password process.
 
 The CPF can now be accessed using your application’s default [Experience Slug](https://docs.losant.com/experiences/domains/#experience-slugs) (e.g. `<YOUR_APPLICATION_ID>.onlosant.com`). Once you navigate to that URL with your browser, you’ll automatically be redirected to the CPF’s log in page (/login) where you can login using your system admin's email and password.
 
