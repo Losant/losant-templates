@@ -8,8 +8,6 @@ application.register('cpf-element-users-table', class extends Controller {
       return;
     }
 
-    console.log('cpf-element-users-table');
-
   };
 
   updateFilters(event) {
@@ -31,8 +29,6 @@ application.register('cpf-element-users-table', class extends Controller {
 
       // Build array of name=value strings.
       let queryParams = Array.from(filterFields).map((f) => { return f.value !== '' ? `${f.dataset.filter}=${encodeURIComponent(f.value)}` : null });
-
-      console.log(queryParams);
 
       // Filter any nulls (there was no value in the input).
       queryParams = queryParams.filter((q) => { return q !== null });
@@ -58,7 +54,6 @@ application.register('cpf-element-users-table', class extends Controller {
         });
     
         this.siteSelectFrameTarget.src = `/cpf/elements/group-select?${params.toString()}`;
-        console.log(this.siteSelectFrameTarget.src);
       }
       else {
         // Only add the site option if the customer has not changed.
@@ -66,11 +61,7 @@ application.register('cpf-element-users-table', class extends Controller {
         queryParams.push(`site=${this.siteSelectTarget.value}`);
       }
 
-      console.log(event.params);
-
-
       let newSrc = `/cpf/elements/users-table?${queryParams.join('&')}`;
-      console.log(newSrc);
 
       // Reload the turbo frame and pass in all input fields on the query string.
       this.element.parentElement.src = newSrc;

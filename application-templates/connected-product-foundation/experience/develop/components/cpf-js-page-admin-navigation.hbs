@@ -8,14 +8,11 @@ application.register("cpf-page-admin-navigation", class extends Controller {
     if (document.documentElement.hasAttribute("data-turbo-preview")) {
       return;
     }
-
-    console.log('cpf-page-admin-navigation');
   };
 
   cpfElementNavOutletConnected(outlet, element) {
     if (outlet.whichValue === 'top') {
       this.navTop = outlet;
-      console.log(outlet);
       this.navItemClick({
         detail: {
           navItem: outlet.topNavItemsValue[0],
@@ -34,8 +31,6 @@ application.register("cpf-page-admin-navigation", class extends Controller {
   }
 
   navItemClick(e) {
-    console.log(e.detail.navItem);
-
     let controller = e.detail.controller;
     let navItem = e.detail.navItem;
     let navParentSelect = this.navParentTarget;
@@ -132,9 +127,6 @@ application.register("cpf-page-admin-navigation", class extends Controller {
   };
 
   saveChanges() {
-    console.log(this.navTop.navItems);
-    console.log(this.navBottom.navItems);
-
     let navItems = this.navTop.navItems.concat(this.navBottom.navItems);
 
     this.navHiddenInputTarget.value = JSON.stringify(navItems);

@@ -20,8 +20,6 @@ application.register("cpf-page-device-register", class extends Controller {
   };
 
   uploaded(event) {
-    console.log(event);
-
     let file = event.target.files[0];
     let reader = new FileReader();
     let preview = this.previewTarget;
@@ -37,8 +35,6 @@ application.register("cpf-page-device-register", class extends Controller {
   };
 
   familyChanged(event) {
-    console.log(event);
-
     this.tagEditFormTarget.src = `/cpf/elements/tag-edit-form?type=recipe&id=${event.target.value}`
   }
 

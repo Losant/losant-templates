@@ -7,8 +7,6 @@ application.register('cpf-page-admin-whitelabel', class extends Controller {
       return;
     }
 
-    console.log('cpf-page-admin-whitelabel');
-
     this.isFontValid = true;
   };
 
@@ -50,8 +48,6 @@ application.register('cpf-page-admin-whitelabel', class extends Controller {
       var previewErrorMessage = document.getElementById("validationPreview");
       previewErrorMessage.style.display = "block";
       previewErrorMessage.scrollIntoView();
-
-      console.log('invalid');
     }
   }
 

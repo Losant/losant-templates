@@ -119,7 +119,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 906404152b3f230e31515fd6a283298ed02eb48e30f72dc95b6e495ada6f2f69
+  - exportHash: 7258960e5272af34a958b2cd2bf3992d9937c3ec7d3287e4b541685800f12f78
     id: ~exportplaceholderid-experienceView-cpfJsElementSitesTable~
     localFilename: ./cpf-js-element-sites-table.hbs
     name: cpf-js-element-sites-table
@@ -127,7 +127,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: ec8837f4adf3a442a307175754faac1b9e089683fa1ba3c30b1461757a5887be
+  - exportHash: 7d0f0b567d4b4ee299dd3637de1ebbfdb049753f730877551c86f27577f68dcc
     id: ~exportplaceholderid-experienceView-cpfJsElementUsersTable~
     localFilename: ./cpf-js-element-users-table.hbs
     name: cpf-js-element-users-table
@@ -143,7 +143,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: c57368046469540961588df7a67b560417ca62da13fd555c1efa089ddff454cc
+  - exportHash: 3dbd32ebcecf030acf1ecc1abe4b658ff848f63d05bbad2c3c651689267bda96
     id: ~exportplaceholderid-experienceView-cpfJsPageAdminNavigation~
     localFilename: ./cpf-js-page-admin-navigation.hbs
     name: cpf-js-page-admin-navigation
@@ -151,7 +151,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 13cf93b8c51902f12a842007d0906f98ec77f2194a1fa933e21ba76547f22db0
+  - exportHash: dfbfb38fd96fe2e50c79c4875afb730c5b5b8c32f19ba62bee35123b24fb8d6a
     id: ~exportplaceholderid-experienceView-cpfJsPageAdminWhitelabel~
     localFilename: ./cpf-js-page-admin-whitelabel.hbs
     name: cpf-js-page-admin-whitelabel
@@ -159,7 +159,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: d36a4c951e9b72dabab5d23a2655df398fbe9526c74c14fa9d1deb1cad235494
+  - exportHash: 147e54d05acc78d044372e8ccf97fa8b3dc32dbe4b97967af5415fdb4997e4e2
     id: ~exportplaceholderid-experienceView-cpfJsPageDeviceDetails~
     localFilename: ./cpf-js-page-device-details.hbs
     name: cpf-js-page-device-details
@@ -167,7 +167,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 182d3fd981f55e9bbb9db6d2eeecc3d13cc02e02ddb9c67c0ae81fa595811638
+  - exportHash: cc01a697fc7e91dabac27f871f72130b2a477db72966f28759d6e06c21bbc017
     id: ~exportplaceholderid-experienceView-cpfJsPageDeviceRegister~
     localFilename: ./cpf-js-page-device-register.hbs
     name: cpf-js-page-device-register
@@ -175,7 +175,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 7acfa38db3f0a22f6baf68916771efbd285ee2dfebd571b0510e46f85fe3455d
+  - exportHash: 9376b781763803c756ee5fc451530914a1772065b28a021632569dcff936a7d8
     id: ~exportplaceholderid-experienceView-cpfJsPageDevices~
     localFilename: ./cpf-js-page-devices.hbs
     name: cpf-js-page-devices
@@ -192,7 +192,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 4cc0b42981235b461df46d34c1f0d7f9c3aa07f29a2ac90e645ede89b148e58a
+  - exportHash: 2978ce2c39637900dd63ff1b3be3ef5e45e1cf4f5a9ab39b3e7416f9d3503f52
     id: ~exportplaceholderid-experienceView-cpfJsPageUserDetails~
     localFilename: ./cpf-js-page-user-details.hbs
     name: cpf-js-page-user-details

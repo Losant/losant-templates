@@ -44,7 +44,6 @@ application.register("cpf-page-device-details", class extends Controller {
   };
 
   updateDataExplorerFrame({ detail: { queryString }}) {
-    console.log('updateFrame in details');
     const src = `/cpf/elements/device-data-explorer/${this.deviceIdValue}?${queryString}`;
     this.dataExplorerFrameTarget.src = src;
   };
