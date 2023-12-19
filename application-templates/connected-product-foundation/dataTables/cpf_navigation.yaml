@@ -29,8 +29,8 @@ resources:
         dataType: string
         defaultValue: top
         name: nav_location
-    description: ''
-    exportHash: 4c5778f3e9cbd904514315abc37915ae1699ef19335937fb5a6957c244300b12
+    description: Stores the configuration for the left navigation.
+    exportHash: 4fdb4155a1f84d069b417eaa15038268fd670605f30ce370087ab9a6e5273947
     id: ~exportplaceholderid-dataTable-cpfNavigation~
     localFilename: ./cpf_navigation.csv
     name: cpf_navigation

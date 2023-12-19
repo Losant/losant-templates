@@ -16,7 +16,8 @@ resources:
       - constraint: required
         dataType: string
         name: label
-    exportHash: 9dfbe080eed384a84d30e3205f09d37deef5664bf68f6bbbaec24228ef4c2862
+    description: Stores the configuration for the devices table.
+    exportHash: 245ca6b90fb045deb9e0ed25b6a5fc82002dbaca324a09ad020bba7abf7671c4
     id: ~exportplaceholderid-dataTable-cpfTableDevices~
     localFilename: ./cpf_table_devices.csv
     name: cpf_table_devices

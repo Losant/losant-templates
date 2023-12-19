@@ -306,14 +306,6 @@ resources:
     viewTags:
       title: Sites
     viewType: page
-  - description: Created for Endpoint GET /cpf/theme-preview.
-    exportHash: 69e7f83f0d96627c7439911be8580e917c757f37edcd31a882dc866a258aa7a7
-    id: ~exportplaceholderid-experienceView-cpfPageThemePreview~
-    localFilename: ./cpf-page-theme-preview.hbs
-    name: cpf-page-theme-preview
-    version: develop
-    viewTags: {}
-    viewType: page
   - description: Created for Endpoint GET /users/{userid}.
     exportHash: fcd92675c725b1a84e801751e4a17dd074970851aa2e3c894956f1287b5c03dd
     id: ~exportplaceholderid-experienceView-cpfPageUsersDetails~

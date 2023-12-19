@@ -7,8 +7,8 @@ resources:
       - constraint: required
         dataType: string
         name: value
-    description: ''
-    exportHash: 1d8304a9bcf63b1152a3d66458e3ea3fea1bf6d0d98df2dba5a532a8c34a8ebe
+    description: Stores the white label theme.
+    exportHash: eeeba9ee671bdcb85c5223629d39fa787837f4e5c3409e58ede2cf39b9d436d8
     id: ~exportplaceholderid-dataTable-cpfTheme~
     localFilename: ./cpf_theme.csv
     name: cpf_theme

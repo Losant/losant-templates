@@ -28,7 +28,7 @@ resources:
     customNodeSupports:
       - cloud
     description: Verifies a password reset token.
-    exportHash: 5bb26b46091188a574a05f708b65689ee3f1a807b7c9cb72de549a60b8731b4b
+    exportHash: 9f86714bafed5aa5e5c8ddc16bed4488ef12a6bada6d3b1dbad22cabde950892
     flowClass: customNode
     globals: []
     id: ~exportplaceholderid-flow-cpfVerifyResetToken~
@@ -206,6 +206,7 @@ resources:
         outputIds:
           - - WJviMBu_Ev
         type: DebugNode
+    shortDescription: Verifies a password reset token.
     triggers:
       - config: {}
         key: customNodeStart

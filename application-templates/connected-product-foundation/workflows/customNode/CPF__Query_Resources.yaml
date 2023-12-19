@@ -30,7 +30,8 @@ resources:
       resultMode: optional
     customNodeSupports:
       - cloud
-    exportHash: 5852ff11f03f77eb87727b6a0273bcc53b7586eb902689f6570c5dfc092b7b81
+    description: Queries customers and sites.
+    exportHash: 36d97acf56dff2409d24236068d90e46a7b78fadfcadf48039c32929111cb86a
     flowClass: customNode
     globals: []
     id: ~exportplaceholderid-flow-cpfQueryResources~
@@ -591,6 +592,7 @@ resources:
           'y': 1320
         outputIds: []
         type: AnnotationNode
+    shortDescription: Queries customers and sites.
     triggers:
       - config: {}
         key: customNodeStart

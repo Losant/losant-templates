@@ -460,17 +460,17 @@ resources:
             aggregation:
               options: {}
               type: MEAN
-            attribute: T30
-            color: 'rgba(165, 39, 17, 1)'
+            attribute: T50
+            color: 'rgba(255, 154, 37, 1)'
             deviceIds:
               - '{{ctx.deviceId}}'
             deviceTags: []
             label: ˚C
         height: 1
-        id: yipjKZyHLd
+        id: F7l6h3ijwI
         startX: 0
         startY: 1
-        title: T30 (HPC Outlet)
+        title: T50 (LPT Outlet)
         width: 1
       - applicationId: >-
           ~exportplaceholderid-application-applicationConnectedProductFoundation~
@@ -487,17 +487,17 @@ resources:
             aggregation:
               options: {}
               type: MEAN
-            attribute: T50
-            color: 'rgba(255, 154, 37, 1)'
+            attribute: T30
+            color: 'rgba(165, 39, 17, 1)'
             deviceIds:
               - '{{ctx.deviceId}}'
             deviceTags: []
             label: ˚C
         height: 1
-        id: F7l6h3ijwI
+        id: yipjKZyHLd
         startX: 0
         startY: 2
-        title: T50 (LPT Outlet)
+        title: T30 (HPC Outlet)
         width: 1
       - applicationId: >-
           ~exportplaceholderid-application-applicationConnectedProductFoundation~
@@ -543,7 +543,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     duration: 3600000
-    exportHash: f2057ec07e17f78e690ed6c4acc727d5eb583aecd63dc2d3a952a23db5dfa40f
+    exportHash: 536d1175851044e3ae3d19a7d98c6ec48e1d8996b08107e15d7d456d2b514a1e
     id: ~exportplaceholderid-dashboard-turbofan~
     isPasswordProtected: false
     name: Turbofan

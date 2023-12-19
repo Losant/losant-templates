@@ -224,19 +224,6 @@ resources:
     method: get
     route: /cpf/elements/users-table
     version: develop
-  - access: public
-    enabled: true
-    endpointTags: {}
-    experienceGroupIds: []
-    exportHash: 776dde4064a584f76ec8e36fae9eb7220fa128c97bd197777439ff3cf8a9df6e
-    id: ~exportplaceholderid-experienceEndpoint-getCpfThemePreview~
-    method: get
-    route: /cpf/theme-preview
-    staticReply:
-      statusCode: 200
-      type: page
-      value: ~exportplaceholderid-experienceView-cpfPageThemePreview~
-    version: develop
   - access: authenticated
     enabled: true
     endpointTags: {}
