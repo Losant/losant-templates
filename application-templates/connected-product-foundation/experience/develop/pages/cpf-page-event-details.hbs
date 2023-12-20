@@ -54,7 +54,7 @@
               <div class="badge bg-success">Resolved</div>
               {{/eq}}
             </div>
-            <div class="mb-2"><strong>Device</strong> <a href="/device/{{pageData.event.deviceId}}">{{pageData.event.deviceName}}</a></div>
+            <div class="mb-2"><strong>Device</strong> <a href="/devices/{{pageData.event.deviceId}}">{{pageData.event.deviceName}}</a></div>
             <div class="mb-2"><strong>Created:</strong> {{pageData.event.creationDate}}</div>
             {{#if (length pageData.event.eventTags)}} 
             <div class="mb-2"><strong>Additional Tags:</strong></div>

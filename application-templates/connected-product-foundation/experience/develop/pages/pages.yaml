@@ -223,7 +223,7 @@ resources:
       title: Devices
     viewType: page
   - description: Created for Endpoint GET /events/{eventID}.
-    exportHash: 5d97be5ca25e4b70bc7316f3f4a4a9353f36cb32f7e8ed809e9eb54c6fd75a84
+    exportHash: 5b37cc379145101a2abea669d65a93cc080e060db5488e0e85e4ace2dc0e50a0
     id: ~exportplaceholderid-experienceView-cpfPageEventDetails~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-event-details.hbs
