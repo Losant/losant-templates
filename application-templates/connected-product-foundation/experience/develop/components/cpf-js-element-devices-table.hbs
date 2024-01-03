@@ -72,7 +72,11 @@ application.register('cpf-element-devices-table', class extends Controller {
       else {
         // Only add the site option if the customer has not changed.
         // If the customer changed, this gets reset to blank.
-        queryParams.push(`site=${this.siteSelectTarget.value}`);
+        // This dropdown will not exist if the user is assigned to
+        // a site.
+        if(this.hasSiteSelectTarget) {
+          queryParams.push(`site=${this.siteSelectTarget.value}`);
+        }
       }
 
       // If the user clicked "next", "last", "first", "last" icons,

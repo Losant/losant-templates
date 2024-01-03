@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>CPF {{#if experience.page.viewTags.title}}| {{template experience.page.viewTags.title .}}{{/if}}</title>
+    <title>{{template globals.title_template (template experience.page.viewTags.title .)}}</title>
     <link rel="shortcut icon" href="{{file globals.favicon}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{defaultTo globals.font_family 'open+sans'}}:bold,italic,400&display=swap" />
     <link rel="stylesheet" href="{{file 'customTheme.min.css'}}">

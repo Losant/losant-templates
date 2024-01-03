@@ -87,7 +87,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 81851adf866e121b098a305e40f4d1ec833614fc36994f05a32350129d7af79e
+  - exportHash: 4a119dd9f32616ff8fa1b5b406e90424620dd0f7bde8de911e208aac0d6332ca
     id: ~exportplaceholderid-experienceView-cpfJsElementDevicesTable~
     localFilename: ./cpf-js-element-devices-table.hbs
     name: cpf-js-element-devices-table
