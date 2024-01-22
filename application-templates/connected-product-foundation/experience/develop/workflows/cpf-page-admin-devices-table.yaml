@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /admin/devices-table
     enabled: true
-    exportHash: 16691d79d348678ee7cb817281990ef84f9eaac42b93cb0df1522ba8d8c34208
+    exportHash: 64e1064f6a2812803a2db4f401b523fa85cd07becd5700501ea12dadfd309141
     flowId: ~exportplaceholderid-flow-cpfPageAdminDevicesTable~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageAdminDevicesTable~
@@ -71,6 +71,10 @@ resources:
             - destination: pageData.tableColumns
               source: working.tableRows.items
               type: move
+            - destination: pageData.tableColumns
+              type: set
+              valueTemplate: '{{jsonEncode pageData.tableColumns}}'
+              valueTemplateType: string
         id: JZhWeRfN_d
         meta:
           category: logic

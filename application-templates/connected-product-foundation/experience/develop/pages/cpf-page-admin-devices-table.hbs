@@ -1,7 +1,7 @@
 <div
   class="cpf-page"
   data-controller="cpf-page-admin-devices-table"
-  data-cpf-page-admin-devices-table-columns-value='{{jsonEncode pageData.tableColumns}}'
+  data-cpf-page-admin-devices-table-columns-value='{{pageData.tableColumns}}'
   data-cpf-page-admin-devices-table-selected-column-id-value="{{pageData.columns.[0].id}}"
 >
 
@@ -247,7 +247,7 @@
             <input
               type="hidden"
               name="tableColumns"
-              value='{{jsonEncode pageData.tableColumns}}'
+              value='{{pageData.tableColumns}}'
               data-cpf-page-admin-devices-table-target="tableColumnsInput"
             />
           </form>

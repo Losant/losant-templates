@@ -1,22 +1,22 @@
 id,name,value
-6595ad578c095689098903db,company_name,"Losant IoT, Inc."
-6595ad578c095689098903dc,title_template,CPF | {{this}}
-6595ad578c095689098903dd,primary,#3c7fe2
-6595ad578c095689098903de,secondary,#414653
-6595ad578c095689098903df,success,#44972f
-6595ad578c095689098903e0,info,#60b1b2
-6595ad578c095689098903e1,warning,#d99333
-6595ad578c095689098903e2,danger,#bf391d
-6595ad578c095689098903e3,text_dark,#111a29
-6595ad578c095689098903e4,text_mid,#414653
-6595ad578c095689098903e5,text_light,#a7a0aa
-6595ad578c095689098903e6,text_white,#ffffff
-6595ad578c095689098903e7,bg_dark,#f3f4f5
-6595ad578c095689098903e8,bg_mid,#fbfbfb
-6595ad578c095689098903e9,bg_light,#ffffff
-6595ad578c095689098903ea,border,#cfd1d5
-6595ad578c095689098903eb,font_family,Open+Sans
-6595ad578c095689098903ec,tos,https://www.losant.com/legal/terms-of-service
-6595ad578c095689098903ed,privacy_policy,https://www.losant.com/legal/privacy-policy
-6595ad578c095689098903ee,logo_large,logo_large_1695842869349.png
-6595ad578c095689098903ef,logo_small,logo_small_1698328270402.png
+65a593d44f0b4347de1e2eba,company_name,"Losant IoT, Inc."
+65a593d44f0b4347de1e2ebb,title_template,CPF | {{this}}
+65a593d44f0b4347de1e2ebc,primary,#3c7fe2
+65a593d44f0b4347de1e2ebd,secondary,#414653
+65a593d44f0b4347de1e2ebe,success,#44972f
+65a593d44f0b4347de1e2ebf,info,#60b1b2
+65a593d44f0b4347de1e2ec0,warning,#d99333
+65a593d44f0b4347de1e2ec1,danger,#bf391d
+65a593d44f0b4347de1e2ec2,text_dark,#111a29
+65a593d44f0b4347de1e2ec3,text_mid,#414653
+65a593d44f0b4347de1e2ec4,text_light,#a7a0aa
+65a593d44f0b4347de1e2ec5,text_white,#ffffff
+65a593d44f0b4347de1e2ec6,bg_dark,#f3f4f5
+65a593d44f0b4347de1e2ec7,bg_mid,#fbfbfb
+65a593d44f0b4347de1e2ec8,bg_light,#ffffff
+65a593d44f0b4347de1e2ec9,border,#cfd1d5
+65a593d44f0b4347de1e2eca,font_family,Open+Sans
+65a593d44f0b4347de1e2ecb,tos,https://www.losant.com/legal/terms-of-service
+65a593d44f0b4347de1e2ecc,privacy_policy,https://www.losant.com/legal/privacy-policy
+65a593d44f0b4347de1e2ecd,logo_large,logo_large_1695842869349.png
+65a593d44f0b4347de1e2ece,logo_small,logo_small_1698328270402.png

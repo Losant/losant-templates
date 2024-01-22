@@ -147,7 +147,7 @@ resources:
       title: Device Tags
     viewType: page
   - description: Created for Endpoint GET /admin/devices-table.
-    exportHash: d6c927d757fdc4293efe3d251a21498bd24f5df3fe5c465d1b2cf91da6f07f3f
+    exportHash: 63ca3fed1b46d10538de4c3babf1eaad4dcecd535c482280bfd022bc42869a28
     id: ~exportplaceholderid-experienceView-cpfPageAdminDevicesTable~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-admin-devices-table.hbs
