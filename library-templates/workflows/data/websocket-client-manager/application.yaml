@@ -1,0 +1,19 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to manage open WebSocket client connections,
+      ingest messages, and send messages back to clients.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryWorkflowsDataWebSocketClientManager~
+    name: WebSocket Client Manager
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - websocket
+      - client
+      - webhook
+      - workflow
+version: 1

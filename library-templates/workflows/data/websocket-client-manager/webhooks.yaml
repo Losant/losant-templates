@@ -1,0 +1,14 @@
+resourceType: Webhook
+resources:
+  - basicAuthPassword: ''
+    basicAuthUsername: ''
+    exportHash: 7dafe3869d4701a355af3c602e96b2a90dac490b0f16cf365bac991be097a38f
+    id: ~exportplaceholderid-webhook-webSocket~
+    isWebsocket: true
+    name: WebSocket
+    responseCode: 200
+    token: ~exportplaceholderid-webhookToken-webSocket~
+    verificationCode: ''
+    verificationType: none
+    waitForReply: false
+version: 1

@@ -1,0 +1,724 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Handles client connections, messages, and disconnections to the WebSocket
+      webhook. Also includes the ability to fetch currently connected clients
+      and to broadcast a message to all clients.
+    exportHash: 47c13a5248d70e3caf83e4a388fae816538ea8434feb95cac8ec81bf105f411f
+    flowClass: cloud
+    globals:
+      - json: '"ws_client_"'
+        key: clientPrefix
+    id: ~exportplaceholderid-flow-webSocketClientManager~
+    name: WebSocket Client Manager
+    nodes:
+      - config:
+          level: warn
+          message: 'WS: Client disconnected ({{data.replyId}})'
+          property: ''
+        id: HJ7nbKWax
+        meta:
+          category: debug
+          description: ''
+          label: 'WS: Disconnect'
+          name: debug
+          x: 460
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: connect
+            - caseLabel: ''
+              caseTemplate: disconnect
+            - caseLabel: ''
+              caseTemplate: message
+          switchTemplate: '{{data.type}}'
+        id: URdJxhJ4oy
+        meta:
+          category: logic
+          description: ''
+          label: Message Type
+          name: switch
+          x: 660
+          'y': 180
+        outputIds:
+          - - L6AtahL60i
+          - - 0Pk6iYOcL9
+          - - 1xA0ZSqeiL
+          - - cGH_vVPM20
+        type: SwitchNode
+      - config:
+          bodyTemplate: working.response
+          bodyTemplateType: path
+          isWebsocketMessage: true
+          replyIdPath: ''
+        id: I6Vz8AcuTh
+        meta:
+          category: output
+          description: Send a client ID back to the client
+          label: 'Webhook: Reply'
+          name: webhook-reply
+          x: 400
+          'y': 420
+        outputIds:
+          - - zQLm8I9ziB
+        type: WebhookReplyNode
+      - config:
+          rules:
+            - destination: working.response
+              type: set
+              valueTemplate: |-
+                {
+                    "clientId": {{jsonEncode data.replyId}}
+                }
+              valueTemplateType: json
+        id: 0Pk6iYOcL9
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 420
+          'y': 320
+        outputIds:
+          - - I6Vz8AcuTh
+        type: MutateNode
+      - config:
+          level: info
+          message: 'WS: Client connected ({{data.replyId}})'
+          property: ''
+        id: Xxk9gmdGJP
+        meta:
+          category: debug
+          description: ''
+          label: 'WS: Connect'
+          name: debug
+          x: 260
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          destPath: working.clientToUpdate
+          operations:
+            - inputTemplate: |-
+                {
+                    "lastMessageFromClient": {
+                        "type": {{jsonEncode data.type}},
+                        "message": {{jsonEncode data.message}},
+                        "time": {{formatDate time 'x'}}
+                    }
+                }
+              type: mergeDeep
+          sourcePath: working.clientToUpdate
+        id: J9iPtvX2Rw
+        meta:
+          category: logic
+          description: ''
+          label: Object
+          name: object
+          x: 860
+          'y': 520
+        outputIds:
+          - - yKDpiNItrB
+        type: ObjectNode
+      - config:
+          level: verbose
+          message: 'WS: Message from client'
+          property: ''
+        id: kzeVhjUtRW
+        meta:
+          category: debug
+          description: ''
+          label: 'WS: Message'
+          name: debug
+          x: 860
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          defaultValue: '{}'
+          defaultValueType: json
+          getAll: true
+          keyName: connectedClients
+          valuePath: working.storage
+        id: ZAgkbLoCc_
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 640
+          'y': 1260
+        outputIds:
+          - - DERFgUiypF
+        type: GetValueNode
+      - config:
+          currentItemPath: working.thisClient
+          loopSourcePath: working.connectedClients
+          mapResultPath: ''
+          parallel: true
+        id: wFcseKnLkM
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 260
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 440
+          'y': 1600
+        outputIds:
+          - - KsIAPI6UBQ
+          - - cd5dqT1Cm0
+        type: LoopNode
+      - config:
+          loopNodeId: wFcseKnLkM
+          mapValuePath: ''
+          shouldBreak: false
+        id: 3R_5w5JV3n
+        meta:
+          category: loop
+          description: ''
+          groupId: wFcseKnLkM
+          label: Return
+          name: loop-return
+          x: 260
+          'y': 600
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          level: verbose
+          message: Broadcast complete
+          property: ''
+        id: KsIAPI6UBQ
+        meta:
+          category: debug
+          description: ''
+          label: Broadcast
+          name: debug
+          x: 440
+          'y': 1700
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: data.message
+          bodyTemplateType: path
+          isWebsocketMessage: true
+          replyIdPath: working.thisClient.key
+        id: cd5dqT1Cm0
+        meta:
+          category: output
+          description: ''
+          groupId: wFcseKnLkM
+          label: 'Webhook: Reply'
+          name: webhook-reply
+          x: 260
+          'y': 300
+        outputIds:
+          - - SaGo2KYYSZ
+        type: WebhookReplyNode
+      - config:
+          keyName: '{{globals.clientPrefix}}{{working.thisClient.key}}'
+          resultPath: ''
+          value: working.thisClient.value
+          valueType: path
+        id: CLir47RKj0
+        meta:
+          category: data
+          description: ''
+          groupId: wFcseKnLkM
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 260
+          'y': 500
+        outputIds:
+          - - 3R_5w5JV3n
+        type: StoreValueNode
+      - config:
+          destPath: working.thisClient.value
+          operations:
+            - inputTemplate: |-
+                {
+                  "lastMessageToClient": {
+                    "message": {{jsonEncode data}},
+                    "time": {{currentDateTime 'x'}}
+                  }
+                }
+              type: assign
+          sourcePath: working.thisClient.value
+        id: SaGo2KYYSZ
+        meta:
+          category: logic
+          description: ''
+          groupId: wFcseKnLkM
+          label: Object
+          name: object
+          x: 260
+          'y': 400
+        outputIds:
+          - - CLir47RKj0
+        type: ObjectNode
+      - config:
+          level: verbose
+          message: Connected clients
+          property: ''
+        id: T9ksQOV0N7
+        meta:
+          category: debug
+          description: ''
+          label: Clients
+          name: debug
+          x: 640
+          'y': 1700
+        outputIds: []
+        type: DebugNode
+      - config:
+          keyName: '{{globals.clientPrefix}}{{data.replyId}}'
+          resultPath: ''
+          value: |-
+            {
+                "connectedAt": {{formatDate time 'x'}},
+                "lastMessageFromClient": {
+                    "type": {{jsonEncode data.type}},
+                    "message": {{jsonEncode data.message}},
+                    "time": {{formatDate time 'x'}}
+                },
+                "lastMessageToClient": {
+                    "message": {{jsonEncode working.response}},
+                    "time": {{currentDateTime 'x'}}
+                }
+            }
+          valueType: json
+        id: zQLm8I9ziB
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 260
+          'y': 620
+        outputIds:
+          - - Xxk9gmdGJP
+        type: StoreValueNode
+      - config:
+          keyName: '{{globals.clientPrefix}}{{data.replyId}}'
+          resultPath: ''
+          valueType: clear
+        id: 1xA0ZSqeiL
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 460
+          'y': 620
+        outputIds:
+          - - HJ7nbKWax
+        type: StoreValueNode
+      - config:
+          keyName: '{{globals.clientPrefix}}{{data.replyId}}'
+          resultPath: ''
+          value: working.clientToUpdate
+          valueType: path
+        id: yKDpiNItrB
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Set Value'
+          name: store-value
+          x: 860
+          'y': 620
+        outputIds:
+          - - kzeVhjUtRW
+        type: StoreValueNode
+      - config:
+          defaultValue: 'null'
+          defaultValueType: json
+          getAll: false
+          keyName: '{{globals.clientPrefix}}{{data.replyId}}'
+          valuePath: working.clientToUpdate
+        id: cGH_vVPM20
+        meta:
+          category: data
+          description: ''
+          label: 'Storage: Get Value'
+          name: get-value
+          x: 740
+          'y': 320
+        outputIds:
+          - - XXajC3ezXH
+        type: GetValueNode
+      - config:
+          currentItemPath: working.thisStorageItem
+          loopSourcePath: working.storage
+          mapResultPath: ''
+          parallel: false
+        id: DERFgUiypF
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 260
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 640
+          'y': 1360
+        outputIds:
+          - - JruIKiPcDn
+          - - lxI5YlY22y
+        type: LoopNode
+      - config:
+          loopNodeId: DERFgUiypF
+          mapValuePath: working.toReturn
+          shouldBreak: false
+        id: 0llmZxG1mP
+        meta:
+          category: loop
+          description: ''
+          groupId: DERFgUiypF
+          label: Next
+          name: loop-next
+          x: 260
+          'y': 700
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          expression: '{{working.isWsClientKey}}'
+        id: td5h9mPU7p
+        meta:
+          category: logic
+          description: ''
+          groupId: DERFgUiypF
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 400
+        outputIds:
+          - []
+          - - 5CK42st2QC
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.isWsClientKey
+              type: set
+              valueTemplate: >-
+                {{#match working.thisStorageItem.key
+                globals.clientPrefix}}true{{else}}false{{/match}}
+              valueTemplateType: json
+        id: lxI5YlY22y
+        meta:
+          category: logic
+          description: ''
+          groupId: DERFgUiypF
+          label: Mutate
+          name: mutate
+          x: 260
+          'y': 300
+        outputIds:
+          - - td5h9mPU7p
+        type: MutateNode
+      - config:
+          method: replaceFirst
+          methodArgs:
+            - '{{globals.clientPrefix}}'
+            - ''
+          resultPath: working.clientId
+          sourceData: '{{working.thisStorageItem.key}}'
+        id: 5CK42st2QC
+        meta:
+          category: logic
+          description: ''
+          groupId: DERFgUiypF
+          label: String
+          name: string
+          x: 260
+          'y': 500
+        outputIds:
+          - - vab9Js0lEO
+        type: StringNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: broadcast
+            - caseLabel: ''
+              caseTemplate: getClients
+          switchTemplate: '{{data.action}}'
+        id: JruIKiPcDn
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 640
+          'y': 1460
+        outputIds:
+          - []
+          - - wFcseKnLkM
+          - - T9ksQOV0N7
+        type: SwitchNode
+      - config:
+          destPath: working.connectedClients
+          operations:
+            - inputTemplate: |-
+                {
+                    {{jsonEncode working.clientId}}: {{jsonEncode working.thisStorageItem.value}}
+                }
+              type: assign
+          sourcePath: working.connectedClients
+        id: vab9Js0lEO
+        meta:
+          category: logic
+          description: ''
+          groupId: DERFgUiypF
+          label: Object
+          name: object
+          x: 260
+          'y': 600
+        outputIds:
+          - - 0llmZxG1mP
+        type: ObjectNode
+      - config:
+          level: error
+          message: ''
+          property: ''
+        id: L6AtahL60i
+        meta:
+          category: debug
+          description: ''
+          label: Uncaught Type
+          name: debug
+          x: 1060
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: orQCXhpfEf
+        meta:
+          annotationText: 'On receipt of a WebSocket connection, disconnection, or message ...'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 300
+          x: 860
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: KXgfdslRGF
+        meta:
+          annotationText: >-
+            Construct an object containing the `replyId` as the "clientId" and
+            send that to the client.
+
+
+            Then, store this new client in workflow storage.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 180
+          x: 260
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: mYJiD98jyQ
+        meta:
+          annotationText: 'On disconnect, remove the client from workflow storage.'
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 180
+          x: 460
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: uqeKPCHssb
+        meta:
+          annotationText: >-
+            On receipt of a message from a connected client ...
+
+
+            1. Retrieve the client object from workflow storage.
+
+            2. Verify we found the client. (A missing client is most likely to
+            happen if the client disconnects within milliseconds of sending a
+            message.)
+
+            3. Update the object to include the newly received message.
+
+            4. Set the updated client object in workflow storage.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 380
+          x: 660
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: k1NGKiVnIv
+        meta:
+          annotationText: >-
+            This error case will only be hit if the webhook is misconfigured to
+            accept HTTP requests.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 180
+          x: 1060
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: cGEfyEi_Gq
+        meta:
+          annotationText: |-
+            1. Set the "message" property in the Virtual Button.
+            2. Press the Virtual Button.
+            3. The message will be sent to all connected WebSocket clients.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 260
+          'y': 1160
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: EgZ3xJu7sJ
+        meta:
+          annotationText: >-
+            Click here to get a list of currently connected clients. This will
+            place an object at `working.connectedClients`, with keys for each
+            `replyId` and values being objects with information about the client
+            connection.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 300
+          x: 940
+          'y': 1160
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 4cKffrFtGN
+        meta:
+          annotationText: >-
+            This ensures that other values stored in workflow storage are not
+            returned as client connections.
+          category: annotation
+          groupId: DERFgUiypF
+          height: 360
+          label: Note
+          name: note
+          width: 200
+          x: 460
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: F_vVJ73XBh
+        meta:
+          annotationText: |-
+            1. Send the "message" to the client connection.
+            2. Add the message as the "lastMessageToClient".
+            3. Set the updated client in workflow storage.
+          category: annotation
+          groupId: wFcseKnLkM
+          height: 260
+          label: Note
+          name: note
+          width: 240
+          x: 460
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.clientToUpdate}}'
+        id: XXajC3ezXH
+        meta:
+          category: logic
+          description: ''
+          label: Client?
+          name: conditional
+          x: 760
+          'y': 420
+        outputIds:
+          - - Wp7pIdqSrA
+          - - J9iPtvX2Rw
+        type: ConditionalNode
+      - config:
+          level: error
+          message: 'WS: Missing client'
+          property: ''
+        id: Wp7pIdqSrA
+        meta:
+          category: debug
+          description: ''
+          label: 'WS: Missing client'
+          name: debug
+          x: 660
+          'y': 720
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-webhook-webSocket~
+        meta:
+          category: trigger
+          description: ''
+          label: Webhook
+          name: webhook
+          uiId: H1hL0oZhl
+          x: 660
+          'y': 80
+        outputIds:
+          - - URdJxhJ4oy
+        type: webhook
+      - config: {}
+        key: >-
+          ~exportplaceholderid-flow-webSocketClientManager~-W_IZnkRfSqR1HzqMORBdl
+        meta:
+          category: trigger
+          description: ''
+          label: Broadcast
+          name: virtualButton
+          payload: |-
+            {
+                "action": "broadcast",
+                "message": "Hello from Losant!"
+            }
+          uiId: ll3idysQcp
+          x: 540
+          'y': 1160
+        outputIds:
+          - - ZAgkbLoCc_
+        type: virtualButton
+      - config: {}
+        key: ~exportplaceholderid-flow-webSocketClientManager~-iMjaOcP92T
+        meta:
+          category: trigger
+          description: ''
+          label: Get Connected Clients
+          name: virtualButton
+          payload: |-
+            {
+                "action": "getClients"
+            }
+          uiId: mj_sqhuFvg
+          x: 740
+          'y': 1160
+        outputIds:
+          - - ZAgkbLoCc_
+        type: virtualButton
+version: 1
