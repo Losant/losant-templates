@@ -71,7 +71,7 @@ resources:
     version: develop
     viewTags: {}
     viewType: component
-  - exportHash: fdc4f2a5870e01a85529b6e40a5a516393560aeecbc32cd2200dd5cfdb54bf04
+  - exportHash: 24d44fce3f5941a7701b56f539ce513ea5bb84815d38a8f8f2b5280ea688ebfa
     id: ~exportplaceholderid-experienceView-cpfJsElementDeviceDataExplorer~
     localFilename: ./cpf-js-element-device-data-explorer.hbs
     name: cpf-js-element-device-data-explorer

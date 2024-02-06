@@ -121,7 +121,12 @@ application.register("cpf-element-device-data-explorer", class extends Controlle
 
   export(event) {
     event.preventDefault();
-    let csv = this.pointsValue.map((row) => row.map((cell) => JSON.stringify(cell)).join(`,`)).join(`\n`);
+    
+    // The points are base64 encoded.
+    // Need to decode into JSON string and parse.
+    let pointsDecoded = JSON.parse(atob(this.pointsValue));
+
+    let csv = pointsDecoded.map((row) => row.map((cell) => JSON.stringify(cell)).join(`,`)).join(`\n`);
     csv = encodeURI('data:text/csv;charset=utf-8,' + csv);
     // https://stackoverflow.com/a/14966131
     const link = document.createElement("a");

@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/events-table
     enabled: true
-    exportHash: 7a4750e9b922c52083b0105cb6ae226c21d1cbe9c3af63e791d9123071772c16
+    exportHash: cc0e9abc39c47cfe65df0532058a544f2f14bd03a5f01d2d2b61961f88612e82
     flowId: ~exportplaceholderid-flow-cpfElementEventsTable~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementEventsTable~
@@ -149,39 +149,6 @@ resources:
                     }
                 });
             }
-
-            /*
-            if(payload.data.query.connected === 'connected') {
-                and.push({
-                    'connectionStatus': {
-                        '$eq': 'connected'
-                    }
-                });
-            }
-            else if(payload.data.query.connected === 'disconnected') {
-                and.push({
-                    'connectionStatus': {
-                        '$ne': 'connected'
-                    }
-                });
-            }
-
-            for(const key in payload.data.query) {
-                if(key.startsWith('tag_')) {
-                    and.push({
-                        "tags": {
-                            "$eq": {
-                                "$tagKey": key.split('tag_')[1],
-                                "$tagValue": payload.data.query[key]
-                            }
-                        }
-                    });
-                }
-            }
-
-            let attributes = payload.pageData.tableConfig.items.filter(
-                (c) => { return c.type === 'attribute'; }).map((c) => { return c.key; });
-            */
 
             payload.working = payload.working || {};
             payload.working.query = query;
