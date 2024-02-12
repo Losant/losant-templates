@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/device-summary
     enabled: true
-    exportHash: 1badcb2b8774011ba22608dc565bc9c11477513218477d9958cc8faea35b4507
+    exportHash: 41ff78016e25f713f57b9e066eb714749c5b5098d6bf5d7c440a930fb700037c
     flowId: ~exportplaceholderid-flow-cpfElementDeviceSummary~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementDeviceSummary~
@@ -49,9 +49,8 @@ resources:
       - config:
           attributesAsObject: false
           findMetadata: true
-          findMethod: experienceUserIdOrEmail
+          findMethod: findByAllTags
           findMultiple: true
-          idTemplate: '{{experience.user.id}}'
           includeConnectionStatus: false
           includeState: false
           resultPath: working.allDevices
@@ -59,6 +58,9 @@ resources:
           resultsPerPage: '0'
           sortDirection: asc
           sortField: name
+          tags:
+            - keyTemplate: '{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}'
+              valueTemplate: '{{experience.user.experienceGroups.[0].id}}'
           tagsAsObject: false
         id: fthdnppASO
         meta:
@@ -87,8 +89,11 @@ resources:
                   }
                 },
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 }
               ]
@@ -118,11 +123,14 @@ resources:
           includeConnectionStatus: false
           includeState: false
           queryTemplate: |-
-            { 
+            {
               "$and": [
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 },
                 {

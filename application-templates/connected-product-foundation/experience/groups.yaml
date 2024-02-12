@@ -10,7 +10,7 @@ resources:
                   {
                     "tags": {
                       "$eq": {
-                        "$tagKey": "cpf_group",
+                        "$tagKey": "cpf_site",
                         "$tagValue": "~exportplaceholderid-experienceGroup-site11~"
                       }
                     }
@@ -18,7 +18,7 @@ resources:
                 ]
               }
             deviceTags: []
-            exportHash: 6201e71dd21d94bbf2e7c0c588b3a31664bb4683fdaf41ad648ab201afb46a5e
+            exportHash: 13aa48591c42787a5e4a0796d87d16efacdbe1592e8568bc538a6f235cc69d24
             groupTags: {}
             id: ~exportplaceholderid-experienceGroup-site11~
             name: Site 1.1
@@ -30,7 +30,7 @@ resources:
                   {
                     "tags": {
                       "$eq": {
-                        "$tagKey": "cpf_group",
+                        "$tagKey": "cpf_site",
                         "$tagValue": "~exportplaceholderid-experienceGroup-site12~"
                       }
                     }
@@ -38,7 +38,7 @@ resources:
                 ]
               }
             deviceTags: []
-            exportHash: 46b3f08d320de373958fe20f8c011e95ca3a99308c7c08d395be8344afdd215b
+            exportHash: d3160117faf42b48fe13405a5a097ddaf350d6e34b0539a3675ec94af4733912
             groupTags: {}
             id: ~exportplaceholderid-experienceGroup-site12~
             name: Site 1.2
@@ -58,7 +58,7 @@ resources:
                   {
                     "tags": {
                       "$eq": {
-                        "$tagKey": "cpf_group",
+                        "$tagKey": "cpf_site",
                         "$tagValue": "~exportplaceholderid-experienceGroup-site21~"
                       }
                     }
@@ -66,7 +66,7 @@ resources:
                 ]
               }
             deviceTags: []
-            exportHash: a533ac1b1cef5225fb9363d6e25c98121005f92a61d82058b75e465b679335a9
+            exportHash: 906989e74461b4cbb7794c7764d7c15605e40862fff16ca53b165364943c0605
             groupTags: {}
             id: ~exportplaceholderid-experienceGroup-site21~
             name: Site 2.1
@@ -78,7 +78,7 @@ resources:
                   {
                     "tags": {
                       "$eq": {
-                        "$tagKey": "cpf_group",
+                        "$tagKey": "cpf_site",
                         "$tagValue": "~exportplaceholderid-experienceGroup-site22~"
                       }
                     }
@@ -86,7 +86,7 @@ resources:
                 ]
               }
             deviceTags: []
-            exportHash: 14dee203348190bb406d34b40efa4d41f74f2f0e3e0d1855c39b87cc399b4dd2
+            exportHash: c347419bcb2c4616f9f2a6395679c55ab709e9439d728bb9ddf7792cd46b6233
             groupTags: {}
             id: ~exportplaceholderid-experienceGroup-site22~
             name: Site 2.2

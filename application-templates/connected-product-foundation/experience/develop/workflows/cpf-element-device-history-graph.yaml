@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/device-history-graph
     enabled: true
-    exportHash: 19854cfc7724f69f4f30f80a5fb644c78802d1ae8f1de784b1d2ab6a56aa9179
+    exportHash: f8d06d7f16079993050c88101fead54b6c7c4c80aa0660f48f70828db4203cb0
     flowId: ~exportplaceholderid-flow-cpfElementDeviceHistoryGraph~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementDeviceHistoryGraph~
@@ -192,8 +192,11 @@ resources:
                   }
                 },
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 }
               ]
@@ -438,8 +441,11 @@ resources:
                   }
                 },
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 }
               ]

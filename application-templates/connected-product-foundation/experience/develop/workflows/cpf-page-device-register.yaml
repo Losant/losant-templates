@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /devices/register
     enabled: true
-    exportHash: 7bfe4757e0af0fd8fc396d6e7c5c15bf1d99526355d523167667a2915f5db489
+    exportHash: 5ca51b1bd7cfaa19fd5817ba2b89c9686dcfc3c7c85af599d5512d7964111542
     flowId: ~exportplaceholderid-flow-cpfPageDeviceRegister~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageDeviceRegister~
@@ -64,7 +64,7 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 1380
-          'y': 2240
+          'y': 2380
         outputIds:
           - - KF6z_rI18w
         type: EndpointReplyNode
@@ -79,7 +79,7 @@ resources:
           label: Debug
           name: debug
           x: 1480
-          'y': 2360
+          'y': 2500
         outputIds: []
         type: DebugNode
       - config:
@@ -129,7 +129,7 @@ resources:
           x: 1580
           'y': 1700
         outputIds:
-          - - EQxhwZzqh9
+          - - uL6CjHBhys
         type: FileCreateNode
       - config: {}
         id: fSe8SBW3sF
@@ -238,9 +238,9 @@ resources:
               if (key.startsWith("tag_")){
                 let tagName = key.split("tag_")[1];
 
-                // Group and image tags are reserved by CPF.
+                // cpf_site, cpf_customer and cpf_image tags are reserved by CPF.
                 // Any other tags must be configured in the Device Tags admin page.
-                if(tagName !== 'cpf_group' && tagName !== 'cpf_image' && allowedTags.indexOf(tagName) !== -1) {
+                if(tagName !== 'cpf_site' && tagName !== 'cpf_customer' && tagName !== 'cpf_image' && allowedTags.indexOf(tagName) !== -1) {
                   device.tags.push({
                       key: tagName, 
                       value: value
@@ -251,8 +251,14 @@ resources:
 
 
             device.tags.push({
-              key: 'cpf_group',
+              key: 'cpf_site',
               value: payload.data.body.site
+            });
+
+
+            device.tags.push({
+              key: 'cpf_customer',
+              value: payload.working.site.parentId
             });
 
 
@@ -275,7 +281,7 @@ resources:
           label: Function
           name: function
           x: 1480
-          'y': 1920
+          'y': 2060
         outputIds:
           - - rRPn9feRYE
         type: RawFunctionNode
@@ -292,7 +298,7 @@ resources:
           name: note
           width: 340
           x: 1680
-          'y': 1820
+          'y': 1960
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -640,7 +646,7 @@ resources:
           x: 1480
           'y': 1580
         outputIds:
-          - - EQxhwZzqh9
+          - - uL6CjHBhys
           - - Q_KZCxdEaW
         type: ConditionalNode
       - config:
@@ -652,7 +658,7 @@ resources:
           label: Conditional
           name: conditional
           x: 1480
-          'y': 2120
+          'y': 2260
         outputIds:
           - - nBo5M8REq9
           - - tXSx5wrrrk
@@ -675,7 +681,7 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 1580
-          'y': 2240
+          'y': 2380
         outputIds:
           - - KF6z_rI18w
         type: EndpointReplyNode
@@ -695,7 +701,7 @@ resources:
           label: 'Table: Get Rows'
           name: get-table-rows
           x: 1480
-          'y': 1820
+          'y': 1960
         outputIds:
           - - Yj9yrT_PtV
         type: DataTableQueryNode
@@ -867,7 +873,7 @@ resources:
           label: 'Device: Create'
           name: create-device
           x: 1480
-          'y': 2020
+          'y': 2160
         outputIds:
           - - G5H0mpi_CR
         type: CreateDeviceNode
@@ -917,6 +923,37 @@ resources:
         outputIds:
           - - BKkYzup85s
         type: MutateNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.body.site}}'
+          resultPath: working.site
+        id: uL6CjHBhys
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 1480
+          'y': 1820
+        outputIds:
+          - - EQxhwZzqh9
+        type: GetExperienceGroupNode
+      - config: {}
+        id: MMms7D4AOR
+        meta:
+          annotationText: >-
+            Get the full details of the site ID so we can tag the device with
+            both site ID and customer ID (the site's parent group).
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 1680
+          'y': 1820
+        outputIds: []
+        type: AnnotationNode
     triggers:
       - config: {}
         key: ~exportplaceholderid-experienceEndpoint-getDevicesRegister~

@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/devices-table
     enabled: true
-    exportHash: 6eca26f9b294f506a1af53e1ef724a30e468b765d122586b99ce2f0bc3011266
+    exportHash: e6dd8b8f8a1635634ce91c2aef2d6bef57e0b2f62c04d680ed1423c4dba214cc
     flowId: ~exportplaceholderid-flow-cpfElementDevicesTable~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementDevicesTable~
@@ -79,13 +79,23 @@ resources:
             let and = [];
             let query = { '$and': and };
 
-            // If the user's level is 0, they are a system
-            // user and get every device, so there's
-            // no need to append experience user ID to the query.
-            if(payload.pageData.userLevel > 0) {
+            // The ID of the group this user is assigned to.
+            let userGroupId = payload.experience.user.experienceGroups[0].id;
+
+            // The user's level (system=0, customer=1, site=2).
+            let userLevel = payload.pageData.userLevel;
+
+            // If user is customer or site, filter devices
+            // based on the cpf_customer and cpf_site tags.
+            // The value of the tags must match the user's group.
+
+            if(userLevel > 0) { // customer or site
                 and.push({
-                    "experienceUserId": {
-                        "$eq": payload.experience.user.id
+                    "tags": {
+                        "$eq": {
+                            "$tagKey": userLevel === 1 ? 'cpf_customer' : 'cpf_site',
+                            "$tagValue": userGroupId
+                        }
                     }
                 });
             }
@@ -100,16 +110,22 @@ resources:
 
             if(payload.data.query.customer) {
                 and.push({
-                    'experienceGroupId': {
-                        '$eq': payload.data.query.customer
+                    "tags": {
+                        "$eq": {
+                            "$tagKey": 'cpf_customer',
+                            "$tagValue": payload.data.query.customer
+                        }
                     }
                 });
             }
 
             if(payload.data.query.site) {
                 and.push({
-                    'experienceGroupId': {
-                        '$eq': payload.data.query.site
+                    "tags": {
+                        "$eq": {
+                            "$tagKey": 'cpf_site',
+                            "$tagValue": payload.data.query.site
+                        }
                     }
                 });
             }
@@ -248,8 +264,8 @@ resources:
             // Add the group information to every device.
 
             payload.pageData.devices.items.forEach((device) => {
-                if(device.tags.cpf_group) {
-                    device.group = groupsMap[device.tags.cpf_group[0]];
+                if(device.tags.cpf_site) {
+                    device.group = groupsMap[device.tags.cpf_site[0]];
                 }
             });
 

@@ -119,7 +119,7 @@ resources:
     description: Represents the attributes found in the Turbofan dataset from NASA's
       Prognostic Data Repository.
     deviceClass: standalone
-    exportHash: 7c07969aaad5cb6f837e11c3990d06c3f0c8729e1fe58d48317c2cd9b161c44e
+    exportHash: 72d1d19bd6aace03de4943aece54929fa8f9330d453beddcae3de719a9604206
     id: ~exportplaceholderid-device-turbofan~
     name: Turbofan
     tags:
@@ -127,12 +127,14 @@ resources:
         value: 5CsqyHaGDLBn
       - key: location
         value: 39.1081779, -84.5095562
-      - key: cpf_group
-        value: ~exportplaceholderid-experienceGroup-site11~
       - key: another_tag
         value: Example tag that is hidden by Device Tags admin page
       - key: DeviceRecipe
         value: Turbofan
+      - key: cpf_site
+        value: ~exportplaceholderid-experienceGroup-site11~
+      - key: cpf_customer
+        value: ~exportplaceholderid-experienceGroup-customer1~
   - attributes:
       - attributeTags:
           units: rpm
@@ -252,7 +254,7 @@ resources:
     description: Represents the attributes found in the Turbofan dataset from NASA's
       Prognostic Data Repository.
     deviceClass: standalone
-    exportHash: c149258d9e9e4d471cffc2fc24dda7e733c790a124924740b9064a4eea2570fd
+    exportHash: ecddf3b0e01e96868730c6cb4cea049e81598931d1bb0af17e96ed4a4d5ec834
     id: ~exportplaceholderid-device-turbofan-1~
     name: Turbofan
     tags:
@@ -260,12 +262,14 @@ resources:
         value: 5CsqyHaGDLBn
       - key: location
         value: 39.1081779, -84.5095562
-      - key: cpf_group
-        value: ~exportplaceholderid-experienceGroup-site11~
       - key: another_tag
         value: Example tag that is hidden by Device Tags admin page
       - key: DeviceRecipe
         value: Turbofan
+      - key: cpf_site
+        value: ~exportplaceholderid-experienceGroup-site11~
+      - key: cpf_customer
+        value: ~exportplaceholderid-experienceGroup-customer1~
   - attributes:
       - attributeTags:
           units: rpm
@@ -385,7 +389,7 @@ resources:
     description: Represents the attributes found in the Turbofan dataset from NASA's
       Prognostic Data Repository.
     deviceClass: standalone
-    exportHash: 94aad7646f98130867ac4ea26d6921b0aa46c39441a3bffa45eee10126733e2f
+    exportHash: 1e3989e7a03ab0de36324cf9a1978e8650ea9d25688ee79b1a583a9e73d1fce0
     id: ~exportplaceholderid-device-turbofan-2~
     name: Turbofan
     tags:
@@ -393,12 +397,14 @@ resources:
         value: 5CsqyHaGDLBn
       - key: location
         value: 39.1081779, -84.5095562
-      - key: cpf_group
-        value: ~exportplaceholderid-experienceGroup-site21~
       - key: another_tag
         value: Example tag that is hidden by Device Tags admin page
       - key: DeviceRecipe
         value: Turbofan
+      - key: cpf_site
+        value: ~exportplaceholderid-experienceGroup-site21~
+      - key: cpf_customer
+        value: ~exportplaceholderid-experienceGroup-customer2~
   - attributes:
       - attributeTags:
           units: rpm
@@ -518,7 +524,7 @@ resources:
     description: Represents the attributes found in the Turbofan dataset from NASA's
       Prognostic Data Repository.
     deviceClass: standalone
-    exportHash: 538a8a2549bf0c025fad5d4626c7a46f948479e9ecee58029128035d19906bc4
+    exportHash: d583907a59dc1b65f6a978b626a3a16aa9962a46243c3f7cb04c00665e56e1c3
     id: ~exportplaceholderid-device-turbofan-3~
     name: Turbofan
     tags:
@@ -526,10 +532,12 @@ resources:
         value: 5CsqyHaGDLBn
       - key: location
         value: 39.1081779, -84.5095562
-      - key: cpf_group
-        value: ~exportplaceholderid-experienceGroup-site12~
       - key: another_tag
         value: Example tag that is hidden by Device Tags admin page
       - key: DeviceRecipe
         value: Turbofan
+      - key: cpf_site
+        value: ~exportplaceholderid-experienceGroup-site12~
+      - key: cpf_customer
+        value: ~exportplaceholderid-experienceGroup-customer1~
 version: 1

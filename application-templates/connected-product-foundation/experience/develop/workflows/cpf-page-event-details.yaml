@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: 'Created for Endpoint GET /events/{eventID}'
     enabled: true
-    exportHash: 26a6251a610be73d315d676140e342f1989b8c3da83baae03f55ab11ad279315
+    exportHash: e0aa1fadfecc70e6fcc32587627d1b1405bb65000d07bf5ff83d5c0e8cecb447
     flowId: ~exportplaceholderid-flow-cpfPageEventDetails~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageEventDetails~
@@ -287,6 +287,10 @@ resources:
             - destination: pageData.event.updates
               source: pageData.event.updatesWithUsers
               type: move
+            - source: pageData.event.eventTags.cpf_customer
+              type: remove
+            - source: pageData.event.eventTags.cpf_site
+              type: remove
         id: QQ2Sr9Vy3n
         meta:
           category: logic

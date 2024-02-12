@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /sites/new
     enabled: true
-    exportHash: dff9e007a35b58a5fb6e4ab07689e8c9fb57172451d013254996faccb4c4aa6b
+    exportHash: 365c439d6115b0f47abc3dac3221a7f288d22c9d6325e025d131a86a1283b2c5
     flowId: ~exportplaceholderid-flow-cpfPageSiteDetails~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageSiteDetails~
@@ -1131,7 +1131,7 @@ resources:
                 {
                   "tags": {
                     "$eq": {
-                      "$tagKey": "cpf_group",
+                      "$tagKey": "cpf_site",
                       "$tagValue": "{{working.groupResult.id}}"
                     }
                   }

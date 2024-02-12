@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/devices-created-since
     enabled: true
-    exportHash: 40a723b1ac89237177cfac76b0398d8a785666fe3892b86d2a265c3d3f83e5b9
+    exportHash: d860948a832699bb2210ea2eafb763fac820a42300cd776e5b9ac72b0f672005
     flowId: ~exportplaceholderid-flow-cpfElementDevicesCreatedSince~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementDevicesCreatedSince~
@@ -138,8 +138,11 @@ resources:
                   }
                 },
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 }
               ]
@@ -177,8 +180,11 @@ resources:
                   }
                 },
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 }
               ]
@@ -216,8 +222,11 @@ resources:
                   }
                 },
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 }
               ]
@@ -255,8 +264,11 @@ resources:
                   }
                 },
                 {
-                  "experienceUserId": {
-                    "$eq": "{{experience.user.id}}"
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
                   }
                 }
               ]

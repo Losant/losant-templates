@@ -79,7 +79,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 08f695df0c8a36308f36bba03405728fde7848e6f9c338847b210b62fde7dcc3
+  - exportHash: ea162252d629a764e73f9b9aa413808a8d9e901e612b3c861cfb030c5d0a90a3
     id: ~exportplaceholderid-experienceView-cpfJsElementDeviceHistoryGraph~
     localFilename: ./cpf-js-element-device-history-graph.hbs
     name: cpf-js-element-device-history-graph

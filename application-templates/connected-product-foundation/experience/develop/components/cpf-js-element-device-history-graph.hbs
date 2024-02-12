@@ -60,13 +60,13 @@ application.register("cpf-element-device-history-graph", class extends Controlle
 
           return `
             <strong>${moment(new Date(today.axisValue)).format('MMM DD')}</strong><br />
-            Created Today: ${today.value} <br />
+            Created This Day: ${today.value} <br />
             Total: ${total.value}
           `;
         }
       },
       legend: {
-        data: ['Created Today', 'Total Created']
+        data: ['Created This Day', 'Total Created']
       },
       xAxis: {
         type: 'category',

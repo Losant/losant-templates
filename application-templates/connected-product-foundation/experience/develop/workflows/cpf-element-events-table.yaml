@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/events-table
     enabled: true
-    exportHash: cc0e9abc39c47cfe65df0532058a544f2f14bd03a5f01d2d2b61961f88612e82
+    exportHash: c979a36d2236a364c85b95aa476b095f860605853b1081b55c753741e19bd90d
     flowId: ~exportplaceholderid-flow-cpfElementEventsTable~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementEventsTable~
@@ -102,20 +102,34 @@ resources:
         type: AnnotationNode
       - config:
           scopePath: ''
-          script: |-
+          script: >-
             let and = [];
+
             let query = { '$and': and };
 
-            // If the user's level is 0, they are a system
-            // user and get every device, so there's
-            // no need to append experience user ID to the query.
-            if(payload.working.userLevel > 0) {
+            let userLevel = payload.working.userLevel;
+
+            let userGroupId = payload.experience.user.experienceGroups[0].id;
+
+
+            // If the user is a customer (level=1) or site (level=2),
+
+            // filter events by their cpf_customer or cpf_site tags.
+
+            // The value of the tag should match the group in which the user
+            belongs.
+
+            if(userLevel > 0) { // customer or site
                 and.push({
-                    "experienceUserId": {
-                        "$eq": payload.experience.user.id
+                    'eventTags': {
+                        '$eq': {
+                            '$tagKey': userLevel === 1 ? 'cpf_customer' : 'cpf_site',
+                            '$tagValue': userGroupId
+                        }
                     }
                 });
             }
+
 
             if(payload.data.query.subject) {
                 and.push({
@@ -126,6 +140,7 @@ resources:
                 });
             }
 
+
             if(payload.data.query.state && payload.data.query.state !== 'any') {
                 and.push({
                     'state': {
@@ -133,6 +148,7 @@ resources:
                     }
                 });
             }
+
 
             if(payload.data.query.level && payload.data.query.level !== 'any') {
                 and.push({
@@ -142,6 +158,7 @@ resources:
                 });
             }
 
+
             if(payload.data.query.device) {
                 and.push({
                     'deviceId': {
@@ -150,7 +167,9 @@ resources:
                 });
             }
 
+
             payload.working = payload.working || {};
+
             payload.working.query = query;
         id: Lg4USsMYxk
         meta:

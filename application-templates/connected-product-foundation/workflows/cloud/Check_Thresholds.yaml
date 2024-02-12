@@ -1,7 +1,7 @@
 resourceType: Flow
 resources:
   - description: Creates events based on the simulated dataset.
-    exportHash: 7628e6375e530d6d5fd4ecc107a91d06f4ea0137d7625e75dab6dc09c861c28b
+    exportHash: 6549084a229c2718e1d789754d69b2547741f05342d15434f38860b6574ac87f
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-checkThresholds~
@@ -40,7 +40,11 @@ resources:
           dataMethod: individualFields
           dataSourceType: payloadPath
           deviceIdTemplate: '{{device.id}}'
-          eventTags: []
+          eventTags:
+            - keyTemplate: cpf_site
+              valueTemplate: '{{device.tags.cpf_site.[0]}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{device.tags.cpf_customer.[0]}}'
           levelTemplate: critical
           messageTemplate: >-
             T50 value of {{data.T50}} above threshold of 1430 for device
@@ -54,7 +58,7 @@ resources:
           label: 'Event: Create'
           name: create-event
           x: 40
-          'y': 260
+          'y': 320
         outputIds:
           - - fzQ2iO6rLJ
         type: CreateEventNode
@@ -69,9 +73,25 @@ resources:
           label: Debug
           name: debug
           x: 40
-          'y': 380
+          'y': 520
         outputIds: []
         type: DebugNode
+      - config: {}
+        id: wdi1GHZvRB
+        meta:
+          annotationText: >-
+            To be displayed in the CPF interface, the event must be tagged with
+            `cpf_site` and `cpf_customer`. These values should already be in the
+            incoming device tags.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 240
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
     triggers:
       - config:
           attributeWhitelist:

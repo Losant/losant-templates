@@ -305,10 +305,14 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
-    exportHash: 6dc5fe11c59d9118309909764eba21bcad7ecfed6554ffbc9ee9f640a89432c4
+    exportHash: 7d21268b0a049dd67c3629d885ed10a081fcd994272fd6b31ba1f348e34bae0b
     id: ~exportplaceholderid-experienceEndpoint-getEvents~
     method: get
     route: /events
+    staticReply:
+      statusCode: 200
+      type: page
+      value: ~exportplaceholderid-experienceView-cpfPageEvents~
     unauthorizedReply:
       statusCode: 302
       type: redirect

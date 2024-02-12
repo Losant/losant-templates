@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: 'Created for Endpoint GET /devices/{deviceId}'
     enabled: true
-    exportHash: 5bf8247987fe6a53439cbf2cda31a8f834a8e93ceedf56c67c18b3ffb6fba802
+    exportHash: a8837c208a9d1081f0a420faabf7229fd50af59d8228c93adea5d5e7cc9c865e
     flowId: ~exportplaceholderid-flow-cpfPageDeviceDetails~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageDeviceDetails~
@@ -84,7 +84,7 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 1300
-          'y': 1820
+          'y': 2300
         outputIds:
           - - wsh3ZOiOoz
         type: EndpointReplyNode
@@ -164,7 +164,7 @@ resources:
       - config:
           findMetadata: false
           findMethod: id
-          idTemplate: '{{pageData.device.tags.cpf_group.[0]}}'
+          idTemplate: '{{pageData.device.tags.cpf_site.[0]}}'
           resultPath: working.siteGroup
         id: M1vAJ_Ogbh
         meta:
@@ -195,7 +195,7 @@ resources:
       - config:
           rules:
             - destination: pageData.device.siteId
-              source: 'pageData.device.tags.cpf_group.[0]'
+              source: 'pageData.device.tags.cpf_site.[0]'
               type: copy
             - destination: pageData.device.customerId
               source: working.siteGroup.parentId
@@ -377,7 +377,7 @@ resources:
           label: 'Device: Update'
           name: update-device
           x: 1400
-          'y': 1600
+          'y': 1840
         outputIds:
           - - 8as9_qygNZ
         type: UpdateDeviceNode
@@ -682,35 +682,6 @@ resources:
           'y': 1020
         outputIds: []
         type: DebugNode
-      - config:
-          scopePath: ''
-          script: |-
-            // Example value:
-            // data:image/jpeg;base64,/9j/4QAYRXhpZgA...
-
-            let dataURL = payload.data.body.imageContents;
-            if(dataURL && dataURL.startsWith('data:')) {
-                let parts = dataURL.split(',');
-
-                let contentType = parts[0].split(';')[0].split(':')[1];
-                let extension = contentType.split('/')[1];
-                let imageBase64 = parts[1];
-
-                payload.working = payload.working || {};
-                payload.working.contentType = contentType;
-                payload.working.imageBase64 = imageBase64;
-                payload.working.extension = extension;
-            }
-        id: vXGFpLIeBI
-        meta:
-          category: logic
-          description: ''
-          label: Function
-          name: function
-          x: 2180
-          'y': 920
-        outputIds: []
-        type: RawFunctionNode
       - config: {}
         id: 83W3XfJS3t
         meta:
@@ -724,8 +695,8 @@ resources:
           label: Note
           name: note
           width: 340
-          x: 2380
-          'y': 920
+          x: 1600
+          'y': 1220
         outputIds: []
         type: AnnotationNode
       - config:
@@ -743,9 +714,9 @@ resources:
           label: 'File: Create'
           name: file-create
           x: 1500
-          'y': 1380
+          'y': 1480
         outputIds:
-          - - UNx7OhGJsS
+          - - GTcxRAEncQ
         type: FileCreateNode
       - config:
           expression: '{{working.imageBase64}}'
@@ -756,9 +727,9 @@ resources:
           label: Conditional
           name: conditional
           x: 1400
-          'y': 1260
+          'y': 1360
         outputIds:
-          - - UNx7OhGJsS
+          - - GTcxRAEncQ
           - - E4FsFynrMo
         type: ConditionalNode
       - config:
@@ -788,7 +759,7 @@ resources:
           label: Parse Image
           name: function
           x: 1400
-          'y': 1160
+          'y': 1220
         outputIds:
           - - 2U2XHDCz6q
         type: RawFunctionNode
@@ -835,9 +806,8 @@ resources:
               if (key.startsWith("tag_")){
                 let tagName = key.split("tag_")[1];
 
-                // Group is a special tag that is set
-                // with the incoming siteId value.
-                if(tagName !== 'cpf_group' && tagName !== 'cpf_image') {
+                // cpf_site, cpf_customer, cpf_image tags are reserved
+                if(tagName !== 'cpf_site' && tagName !== 'cpf_customer' && tagName !== 'cpf_image') {
 
                   // The tag must exist in the device tags table.
                   // These tags are set using the Device Tags admin page.
@@ -858,23 +828,51 @@ resources:
             }
 
 
-            // The device may or may not have a group tag.
+            // The device may or may not have a site and customer tags
 
-            // Replace the value if it exists, otherwise add the tag.
+            // Replace the values if it exists, otherwise add the tag.
 
-            let groupTag = device.tags.find((t) => {
-              return t.key === 'cpf_group'
+            let siteTag = device.tags.find((t) => {
+              return t.key === 'cpf_site'
             });
 
 
-            if(groupTag) {
-              groupTag.value = payload.data.body.site;
+            let customerTag = device.tags.find((t) => {
+              return t.key === 'cpf_customer'
+            });
+
+
+            if(siteTag) {
+              payload.working.existingSite = siteTag.value
+              siteTag.value = payload.working.site.id;
             } else {
               device.tags.push({
-                key: 'cpf_group',
-                value: payload.data.body.site
+                key: 'cpf_site',
+                value: payload.working.site.id
               });
             }
+
+
+            if(customerTag) {
+              payload.working.existingCustomer = customerTag.value;
+              customerTag.value = payload.working.site.parentId;
+            } else {
+              device.tags.push({
+                key: 'cpf_customer',
+                value: payload.working.site.parentId
+              });
+            }
+
+
+            // Keeping track of the new and existing site/customer.
+
+            // If they change, need to update events for this device
+
+            // to match.
+
+            payload.working.newSite = payload.working.site.id;
+
+            payload.working.newCustomer = payload.working.site.parentId;
 
 
             let image = payload.working.fileResult;
@@ -908,7 +906,7 @@ resources:
           label: Function
           name: function
           x: 1400
-          'y': 1500
+          'y': 1740
         outputIds:
           - - VmKtMPABBO
         type: RawFunctionNode
@@ -923,7 +921,7 @@ resources:
           label: Debug
           name: debug
           x: 1400
-          'y': 1940
+          'y': 2420
         outputIds: []
         type: DebugNode
       - config:
@@ -935,9 +933,9 @@ resources:
           label: Conditional
           name: conditional
           x: 1400
-          'y': 1700
+          'y': 1940
         outputIds:
-          - - hxqB4_RJET
+          - - e4V7y28HXD
           - - bUNQj884xt
         type: ConditionalNode
       - config:
@@ -958,7 +956,7 @@ resources:
           mqttTopicsType: []
           name: endpoint-reply
           x: 1500
-          'y': 1820
+          'y': 2060
         outputIds:
           - - wsh3ZOiOoz
         type: EndpointReplyNode
@@ -1045,6 +1043,119 @@ resources:
         outputIds:
           - - WmYuzPl3jy
         type: RawFunctionNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.body.site}}'
+          resultPath: working.site
+        id: GTcxRAEncQ
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 1400
+          'y': 1600
+        outputIds:
+          - - UNx7OhGJsS
+        type: GetExperienceGroupNode
+      - config: {}
+        id: RLu9hP6pYQ
+        meta:
+          annotationText: >-
+            Get the full details of the site ID so we can tag the device with
+            both site ID and customer ID (the site's parent group).
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 1600
+          'y': 1600
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: z_DVlUZM9I
+        meta:
+          annotationText: |-
+            To delete a device, the POST body contains:
+
+            `{ "delete": "true" }`
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 1680
+          'y': 540
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 3WYVzpLLh3
+        meta:
+          annotationText: >-
+            If the customer or site changed, need to find all events associated
+            with this device and update their customer and site tags to match.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 1000
+          'y': 2020
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: >-
+            {{working.existingSite}} === {{working.newSite}} &&
+            {{working.existingCustomer}} === {{working.newCustomer}}
+        id: e4V7y28HXD
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1300
+          'y': 2060
+        outputIds:
+          - - yTEi9jJiM1
+          - - hxqB4_RJET
+        type: ConditionalNode
+      - config:
+          commentTemplate: ''
+          dataMethod: individualFields
+          dataSourcePath: ''
+          dataSourceType: payloadPath
+          eventTags:
+            - keyTemplate: cpf_site
+              valueTemplate: '{{working.newSite}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{working.newCustomer}}'
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "deviceId": {
+                    "$eq": "{{working.deviceToEdit.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.eventUpdateResult
+          stateTemplate: ''
+          updateMultiple: true
+        id: yTEi9jJiM1
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Update'
+          mode: queryTemplateMultiple
+          name: update-event
+          x: 1180
+          'y': 2180
+        outputIds:
+          - - hxqB4_RJET
+        type: UpdateEventNode
     triggers:
       - config: {}
         key: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceId~
