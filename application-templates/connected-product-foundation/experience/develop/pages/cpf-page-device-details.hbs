@@ -12,7 +12,7 @@
       <p>{{#if pageData.device.connectionInfo.connected}}<span class="material-symbols-outlined cpf-icon-small text-success">
         cloud</span> Connected since 
         <relative-time format="datetime" year="numeric" hour="numeric" minute="numeric" second="numeric"
-          datetime="{{pageData.device.lastUpdated}}"></relative-time>
+          datetime="{{pageData.device.connectionInfo.time}}"></relative-time>
         {{else}} Disconnected
         {{/if}}</p>
     </div>
@@ -212,8 +212,9 @@
             {{#ne pageData.role 'viewer'}}
             <div class="details-save card p-3 my-4 text-bg-dark sticky-bottom">
               <div class="d-flex flex-row align-items-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <a href="#" id="delete-device" class="ms-2 text-danger ms-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete Device</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="#" id="delete-device" class="ms-2 text-danger ms-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete Device</a>
+              </div>
             </div>
             {{/ne}}
           </div>

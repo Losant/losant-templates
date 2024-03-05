@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /devices/register
     enabled: true
-    exportHash: 5ca51b1bd7cfaa19fd5817ba2b89c9686dcfc3c7c85af599d5512d7964111542
+    exportHash: 8629f0eac203f85f35b39ebd800687e6d0114336b01db6718aa2d13d6f3b5d47
     flowId: ~exportplaceholderid-flow-cpfPageDeviceRegister~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageDeviceRegister~
@@ -205,34 +205,25 @@ resources:
         type: AnnotationNode
       - config:
           scopePath: ''
-          script: >+
+          script: |+
             let deviceRecipeName = payload.working.recipe.result.name;
-
             let deviceTagsByRecipe = {};
 
-
             // Make a map of recipe -> tags array to make lookups easier.
-
             payload.working.deviceTagsTable.items.forEach((t) => {
                 deviceTagsByRecipe[t.deviceRecipeName] = JSON.parse(t.deviceTagKeys)
             });
 
-
-            let allowedTags = deviceRecipeName ?
-            deviceTagsByRecipe[deviceRecipeName] : [];
-
+            let allowedTags = deviceTagsByRecipe[deviceRecipeName] ?? [];
             allowedTags = allowedTags.concat(deviceTagsByRecipe['__default__']);
 
-
             let image = payload.working.fileResult;
-
 
             let device = {
                 name: payload.data.body.name,
                 description: payload.data.body.description,
                 tags: []
             };
-
 
             for (const [key, value] of Object.entries(payload.data.body)) {
               if (key.startsWith("tag_")){
@@ -249,18 +240,15 @@ resources:
               }
             }
 
-
             device.tags.push({
               key: 'cpf_site',
               value: payload.data.body.site
             });
 
-
             device.tags.push({
               key: 'cpf_customer',
               value: payload.working.site.parentId
             });
-
 
             if(image) {
               device.tags.push({
@@ -269,9 +257,7 @@ resources:
               });
             }
 
-
             payload.working = payload.working || {};
-
             payload.working.newDevice = device;
 
         id: Yj9yrT_PtV

@@ -195,7 +195,7 @@ resources:
     viewTags:
       title: Customers
     viewType: page
-  - exportHash: 992b637f8fb847312ca795f2b36f19ad13efb45f847d2b36fbad2df107a2879b
+  - exportHash: fd343e690c872f3c7fd54b45d3665af0ceccdf5445a23ff2c02927ce7581a0de
     id: ~exportplaceholderid-experienceView-cpfPageDeviceDetails~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-device-details.hbs
