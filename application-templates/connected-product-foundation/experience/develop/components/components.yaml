@@ -95,7 +95,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 4bffa7d0c460f1be99eb351ad3f6c5d799c63e82b5bbd89a061daf7eabb3cb75
+  - exportHash: df842a29e79fdf74e9c016a3e3f661d76a752380cc15278b52c38925c298617a
     id: ~exportplaceholderid-experienceView-cpfJsElementEventsTable~
     localFilename: ./cpf-js-element-events-table.hbs
     name: cpf-js-element-events-table

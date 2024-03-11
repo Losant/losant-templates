@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/events-table
     enabled: true
-    exportHash: c979a36d2236a364c85b95aa476b095f860605853b1081b55c753741e19bd90d
+    exportHash: 3c1347b4db72e2cd5696222ee50e83ec0179bd125e9bec7abf858a4f7ec56599
     flowId: ~exportplaceholderid-flow-cpfElementEventsTable~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementEventsTable~
@@ -27,8 +27,8 @@ resources:
           label: 'Endpoint: Reply'
           mqttTopicsType: []
           name: endpoint-reply
-          x: 260
-          'y': 760
+          x: 500
+          'y': 1180
         outputIds:
           - - 5bJ0zPhCsB
         type: EndpointReplyNode
@@ -42,8 +42,8 @@ resources:
           description: ''
           label: Debug
           name: debug
-          x: 260
-          'y': 860
+          x: 500
+          'y': 1280
         outputIds: []
         type: DebugNode
       - config:
@@ -62,8 +62,8 @@ resources:
           label: 'Event: Get'
           mode: queryTemplateMultiple
           name: get-event
-          x: 260
-          'y': 400
+          x: 500
+          'y': 640
         outputIds:
           - - _4TBGT80fA
         type: GetEventNode
@@ -79,10 +79,10 @@ resources:
           description: ''
           label: Math
           name: math
-          x: 160
-          'y': 640
+          x: 400
+          'y': 860
         outputIds:
-          - - KQ7l3mbx6d
+          - - yExGjXY6LO
         type: MathNode
       - config: {}
         id: tG7dDwZXJd
@@ -96,8 +96,8 @@ resources:
           label: Note
           name: note
           width: 280
-          x: 600
-          'y': 640
+          x: 800
+          'y': 860
         outputIds: []
         type: AnnotationNode
       - config:
@@ -107,7 +107,7 @@ resources:
 
             let query = { '$and': and };
 
-            let userLevel = payload.working.userLevel;
+            let userLevel = payload.pageData.userLevel;
 
             let userGroupId = payload.experience.user.experienceGroups[0].id;
 
@@ -131,6 +131,30 @@ resources:
             }
 
 
+            if(payload.data.query.customer) {
+                and.push({
+                    "eventTags": {
+                        "$eq": {
+                            "$tagKey": 'cpf_customer',
+                            "$tagValue": payload.data.query.customer
+                        }
+                    }
+                });
+            }
+
+
+            if(payload.data.query.site) {
+                and.push({
+                    "eventTags": {
+                        "$eq": {
+                            "$tagKey": 'cpf_site',
+                            "$tagValue": payload.data.query.site
+                        }
+                    }
+                });
+            }
+
+
             if(payload.data.query.subject) {
                 and.push({
                     'subject': {
@@ -139,6 +163,11 @@ resources:
                     }
                 });
             }
+
+
+            // Default the state to 'new' if not provided.
+
+            payload.data.query.state = payload.data.query.state ?? 'new';
 
 
             if(payload.data.query.state && payload.data.query.state !== 'any') {
@@ -177,8 +206,8 @@ resources:
           description: ''
           label: Build Query
           name: function
-          x: 260
-          'y': 280
+          x: 500
+          'y': 520
         outputIds:
           - - gPQ7wTwM0t
         type: RawFunctionNode
@@ -194,8 +223,8 @@ resources:
           label: Note
           name: note
           width: 260
-          x: 460
-          'y': 280
+          x: 700
+          'y': 520
         outputIds: []
         type: AnnotationNode
       - config:
@@ -205,18 +234,18 @@ resources:
             - id: user
               value: experience.user
           isInstance: false
-          resultPath: working.userLevel
+          resultPath: pageData.userLevel
         id: TBpkImoV15
         meta:
           category: data
           description: ''
           label: 'CPF: Get Tenancy Level'
           name: custom-node-execute-node
-          x: 160
+          x: 300
           'y': 140
         outputIds:
           - - 4ajZYyWnfy
-          - - Lg4USsMYxk
+          - - iG8wOTQ5be
         type: CustomNodeExecuteNode
       - config:
           bodyTemplate: |-
@@ -240,7 +269,7 @@ resources:
           label: 'Endpoint: Reply'
           mqttTopicsType: []
           name: endpoint-reply
-          x: 60
+          x: 200
           'y': 280
         outputIds:
           - - HGhy3Sh4cG
@@ -255,7 +284,7 @@ resources:
           description: ''
           label: Debug
           name: debug
-          x: 60
+          x: 200
           'y': 360
         outputIds: []
         type: DebugNode
@@ -267,8 +296,8 @@ resources:
           description: ''
           label: Error?
           name: conditional
-          x: 260
-          'y': 520
+          x: 500
+          'y': 740
         outputIds:
           - - 68Rkoe_kXA
           - - FDS5AVimlB
@@ -293,11 +322,224 @@ resources:
           description: ''
           label: Mutate
           name: mutate
-          x: 360
-          'y': 640
+          x: 600
+          'y': 860
         outputIds:
           - - KQ7l3mbx6d
         type: MutateNode
+      - config:
+          resultPath: working.groups
+        id: yExGjXY6LO
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Summary'
+          name: group-summary
+          x: 400
+          'y': 960
+        outputIds:
+          - - mRgMIT8Lf6
+        type: ExperienceGroupSummaryNode
+      - config:
+          scopePath: ''
+          script: >-
+            let groupsMap = {};
+
+
+            // Recursively traverses the group hierarchy
+
+            // and builds a map of id:groupObj
+
+            let flatten = (parent, group, level) => {
+                if(group.id !== '(root)') {
+                    group.level = level;
+                    groupsMap[group.id] = group;
+
+                    if(parent) {
+                        group.parent = {
+                            id: parent.id,
+                            name: parent.name
+                        };
+                    }
+                }
+
+                let lvl = level + 1;;
+                group.children.forEach((child) => {
+                    flatten(group, child, lvl);
+                });
+
+                delete group.children;
+            };
+
+
+            flatten(null, payload.working.groups, -1);
+
+
+            payload.pageData.events.items.forEach((e) => {
+                e.customer = groupsMap[e.eventTags.cpf_customer];
+                e.site = groupsMap[e.eventTags.cpf_site];
+            });
+
+
+            // If no customer ID was provided, we can use the user's current
+            group ID
+
+            // if they are a member of a customer group.
+
+            payload.pageData.customerId = payload.data.query.customer;
+
+
+            // A customer ID was not provided.
+
+            if(!payload.pageData.customerId) {
+                // The user is a member of a customer group.
+                if(payload.pageData.userLevel === 1) {
+                    // Set the customer ID to the user's group ID.
+                    payload.pageData.customerId = payload.experience.user.experienceGroups[0].id;
+                }
+            }
+
+
+            // If we still don't have a customer ID, we can use the parent
+
+            // if a site was provided.
+
+            if(!payload.pageData.customerId && payload.data?.query?.site) {
+                let site = groupsMap[payload.data.query.site];
+                payload.pageData.customerId = site.parent.id;
+            }
+
+
+            payload.working.groupsMap = groupsMap;
+        id: mRgMIT8Lf6
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 400
+          'y': 1060
+        outputIds:
+          - - KQ7l3mbx6d
+        type: RawFunctionNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementEventsTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: MIiionzJo9
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 300
+          'y': 600
+        outputIds:
+          - - poozdj3H2T
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: poozdj3H2T
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 300
+          'y': 680
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: pageData.events
+              type: set
+              valueTemplate: |-
+                {
+                  "totalPages": 1,
+                  "page": 0,
+                  "items": [],
+                  "count": 0,
+                  "perPage": {{defaultTo data.query.perPage 25}},
+                  "totalCount": 0
+                }
+              valueTemplateType: json
+        id: _qIhVgk99K
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 300
+          'y': 520
+        outputIds:
+          - - MIiionzJo9
+        type: MutateNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyGroups~
+          customNodeVersion: default
+          fields:
+            - id: userId
+              value: '{{experience.user.id}}'
+            - id: customerId
+              value: '{{data.query.customer}}'
+            - id: siteId
+              value: '{{data.query.site}}'
+          isInstance: false
+          resultPath: ''
+        id: iG8wOTQ5be
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Groups'
+          name: custom-node-execute-node
+          x: 400
+          'y': 360
+        outputIds:
+          - - _qIhVgk99K
+          - - Lg4USsMYxk
+        type: CustomNodeExecuteNode
+      - config: {}
+        id: uICxoNZgR_
+        meta:
+          annotationText: >-
+            Make sure the incoming site and/or customer query parameters are
+            valid.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 320
+          x: 600
+          'y': 360
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: enIFKS2Aoe
+        meta:
+          annotationText: >-
+            Appends the customer and site group information to each event. This
+            function node also defaults the customer ID based on incoming
+            filters and the user's membership.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 360
+          x: 20
+          'y': 1060
+        outputIds: []
+        type: AnnotationNode
     triggers:
       - config: {}
         key: ~exportplaceholderid-experienceEndpoint-getCpfElementsEventsTable~
@@ -307,7 +549,7 @@ resources:
           label: GET /cpf/elements/events-table
           name: endpoint
           uiId: _ajwKUAVCU
-          x: 160
+          x: 300
           'y': 40
         outputIds:
           - - TBpkImoV15

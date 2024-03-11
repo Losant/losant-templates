@@ -40,6 +40,18 @@
             </th>
             <th scope="col">
               <div>
+                <div class="mb-1">Open Events</div>
+                <div class="text-disabled">
+                  <span data-bs-toggle="tooltip"
+                        title="Cannot filter by event count."
+                        class="text-nowrap">
+                    Filter not available
+                  </span>
+                </div>
+              </div>
+            </th>
+            <th scope="col">
+              <div>
                 <div class="mb-1">Primary Contact</div>
                 <div>
                   <input  type="text" class="form-control" placeholder="Filter..."
@@ -68,6 +80,7 @@
             <td><a href="/sites/{{this.id}}">{{this.name}}</a></td>
             <td><a href="/users?site={{this.id}}">{{length this.experienceUserIds}}</a></td>
             <td><a href="/devices?site={{this.id}}">{{this.deviceCount}}</a></td>
+            <td><a href="/events?site={{this.id}}">{{this.events.totalCount}}</a></td>
             <td><a href="mailto:{{this.groupTags.contact}}">{{this.groupTags.contact}}</a></td>
             {{#lt @root.pageData.userLevel 1}}
             <td><a href="/customers/{{this.parent.id}}">{{this.parent.name}}</a></td>

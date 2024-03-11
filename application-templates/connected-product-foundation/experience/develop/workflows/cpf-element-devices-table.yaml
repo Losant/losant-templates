@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /cpf/elements/devices-table
     enabled: true
-    exportHash: e6dd8b8f8a1635634ce91c2aef2d6bef57e0b2f62c04d680ed1423c4dba214cc
+    exportHash: 41f15ff5d95c3291c7651be026384e563cd8a2e317962188f47512b2cfea4c67
     flowId: ~exportplaceholderid-flow-cpfElementDevicesTable~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfElementDevicesTable~
@@ -283,7 +283,7 @@ resources:
 
             // A customer ID was not provided.
 
-            if(!payload.data.query.customer || payload.data.customer === "") {
+            if(!payload.pageData.customerId) {
                 // The user is a member of a customer group.
                 if(payload.pageData.userLevel === 1) {
                     // Set the customer ID to the user's group ID.

@@ -1,10 +1,11 @@
 application.register("cpf-element-events-table", class extends Controller {
 
-  static targets = ['perPage', 'pagination'];
+  static targets = ['perPage', 'pagination', 'customerSelect', 'siteSelect', 'siteSelectFrame'];
 
   static values = {
     page: Number,
-    hideDeviceColumn: { type: Boolean, default: false }
+    hideDeviceColumn: { type: Boolean, default: false },
+    deviceId: String
   };
 
   connect() {
@@ -41,6 +42,11 @@ application.register("cpf-element-events-table", class extends Controller {
       // Add the pagination options.
       queryParams.push(`perPage=${this.perPageTarget.value}`);
 
+      // Add customer option.
+      if(this.hasCustomerSelectTarget) {
+        queryParams.push(`customer=${this.customerSelectTarget.value}`);
+      }
+
       let page = this.pageValue;
 
       // If the user changed per page, set the page back to 0.
@@ -48,6 +54,32 @@ application.register("cpf-element-events-table", class extends Controller {
       // selected page number may be greater than the new number of pages.
       if(event.params.field === 'perPage') {
         page = 0;
+      }
+
+      // If the user changed the customer dropdown, need to reload the
+      // sites dropdown with new parent customer selected and reset its value.
+      if(event.params.group === 'customer') {
+
+        let params = new URLSearchParams({
+          level: 2,
+          parentId: this.customerSelectTarget.value,
+          placeholder: '-- All Sites --',
+          actionMethod: 'updateFilters',
+          actionGroupParamValue: 'site',
+          controllerName: 'cpf-element-events-table',
+          targetName: 'siteSelect'
+        });
+    
+        this.siteSelectFrameTarget.src = `/cpf/elements/group-select?${params.toString()}`;
+      }
+      else {
+        // Only add the site option if the customer has not changed.
+        // If the customer changed, this gets reset to blank.
+        // This dropdown will not exist if the user is assigned to
+        // a site.
+        if(this.hasSiteSelectTarget) {
+          queryParams.push(`site=${this.siteSelectTarget.value}`);
+        }
       }
 
       // If the user clicked "next", "last", "first", "last" icons,
@@ -59,6 +91,10 @@ application.register("cpf-element-events-table", class extends Controller {
 
       queryParams.push(`page=${page}`);
       queryParams.push(`hideDeviceColumn=${this.hideDeviceColumnValue}`);
+
+      if(this.deviceIdValue) {
+        queryParams.push(`device=${this.deviceIdValue}`);
+      }
 
       let newSrc = `/cpf/elements/events-table?${queryParams.join('&')}`;
 

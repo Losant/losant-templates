@@ -7,7 +7,7 @@
     </div>
 
     <div class="flex-grow-1 px-2 px-sm-5 pt-5 pb-4 w-100 overflow-hidden full-width-table-container">
-      <turbo-frame id="cpf-element-events-table" src="/cpf/elements/events-table" target="_top">
+      <turbo-frame id="cpf-element-events-table" src="/cpf/elements/events-table?customer={{request.query.customer}}&site={{request.query.site}}" target="_top">
         <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
       </turbo-frame>
     </div>

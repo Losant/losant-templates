@@ -1,7 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: Created for Endpoint GET /cpf/elements/customers-table.
-    exportHash: 3cd64dd6dadc9ff839366cea3ae7b1d71b83a8e161bcf240d5411825ba977fcb
+    exportHash: 0614ce92b719582ea37766da1e67bfd898b2e474cae2706a5369b27103eb2e1f
     id: ~exportplaceholderid-experienceView-cpfElementCustomersTable~
     localFilename: ./cpf-element-customers-table.hbs
     name: cpf-element-customers-table
@@ -45,14 +45,14 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/devices-table.
-    exportHash: f31cbd9eb78afab879e68b611d04cb85db27704128df62565fe161bbdca92087
+    exportHash: 77015f3436594adff3b309b577642500998ff0e89a07cf07d0f29bc7c7ec5a72
     id: ~exportplaceholderid-experienceView-cpfElementDevicesTable~
     localFilename: ./cpf-element-devices-table.hbs
     name: cpf-element-devices-table
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 3f3493815d54c0b98082f427447c9e7d88adf2f59b4a38155ee6a7f35a8ad3f8
+  - exportHash: 1d07bf7009960ee251bad74511614e9cb6d4d5a0bca771331940771f57525258
     id: ~exportplaceholderid-experienceView-cpfElementEventsTable~
     localFilename: ./cpf-element-events-table.hbs
     name: cpf-element-events-table
@@ -97,7 +97,7 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/sites-table.
-    exportHash: 31d13a25e288300ee5d06fd47254fa1ffd99052b63022b96ce903ffc9a87c2cc
+    exportHash: 0bcc38688163f9199a0fed565fb2265d01cbe76dc62640124af8320747f42982
     id: ~exportplaceholderid-experienceView-cpfElementsSitesTable~
     localFilename: ./cpf-elements-sites-table.hbs
     name: cpf-elements-sites-table
@@ -232,7 +232,7 @@ resources:
     viewTags:
       title: "{{pageData.event.subject}}"
     viewType: page
-  - exportHash: 112902c1c75d08937cc61450ea77f79fb213ae81666e80073fe73cf16e847ef5
+  - exportHash: 524c4426d770384e721e26aeb6d9ccb2ced2ce2b2db9c26cfe1a50151e045da0
     id: ~exportplaceholderid-experienceView-cpfPageEvents~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-events.hbs
@@ -332,7 +332,7 @@ resources:
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 5f20188f65482aa3d9ae61379cfbaa4529d3d3473648d0cfa85fb5449f43a9e7
+  - exportHash: 43a5eabedad12827a14f742996d83b25b5143a43b39df85215c1cd58b2f5cdfb
     id: ~exportplaceholderid-experienceView-cpfStyles~
     localFilename: ./cpf-styles.hbs
     name: cpf-styles

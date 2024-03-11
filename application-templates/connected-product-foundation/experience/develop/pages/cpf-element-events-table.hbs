@@ -2,6 +2,7 @@
   <div class="cpf-element-events-table w-100 h-100 d-flex flex-column"
         data-controller="cpf-element-events-table"
         data-cpf-element-events-table-page-value="{{pageData.events.page}}"
+        data-cpf-element-events-table-device-id-value="{{defaultTo request.query.device ''}}"
         data-cpf-element-events-table-hide-device-column-value="{{defaultTo request.query.hideDeviceColumn 'false'}}">
     <div class="flex-grow-1 overflow-auto">
       <table class="cpf-table table">
@@ -31,7 +32,7 @@
                           data-action="cpf-element-events-table#updateFilters"
                           class="form-select w-auto">
                     <option value="any">Any</option>
-                    <option value="new">New</option>
+                    <option selected value="new">New</option>
                     <option value="acknowledged">Acknowledged</option>
                     <option value="resolved">Resolved</option>
                   </select>
@@ -58,6 +59,8 @@
                     data-filter="subject"></input>
               </div>
             </th>
+
+            {{!-- This is set when viewing events on the dashboard page. Don't need to show device ID, customer, or site dropdowns --}}
             {{#ne request.query.hideDeviceColumn 'true'}}
             <th scope="col">
               <div>
@@ -67,7 +70,36 @@
                     data-filter="device"></input>
               </div>
             </th>
+
+            {{!-- Customer dropdown only shows up for system admins --}}
+            {{#lt pageData.userLevel 1}}
+            <th scope="col">
+              <div>
+                <div class="mb-1">Customer</div>
+                <div>
+                  <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&placeholder=-- All Customers --&actionMethod=updateFilters&actionGroupParamValue=customer&controllerName=cpf-element-events-table&targetName=customerSelect&selectedId={{@root.pageData.customerId}}">
+                    <select class="form-select" disabled><option>Loading...</option></select>
+                  </turbo-frame>
+                </div>
+              </div>
+            </th>
+            {{/lt}}
+
+            {{!-- Site dropdown only shows up for customer or system admins --}}
+            {{#lt pageData.userLevel 2}}
+            <th scope="col">
+              <div>
+                <div class="mb-1">Site</div>
+                <div>
+                  <turbo-frame data-cpf-element-events-table-target="siteSelectFrame" id="cpf-element-group-select" src="/cpf/elements/group-select?level=2&placeholder=-- All Sites --&actionMethod=updateFilters&actionGroupParamValue=site&controllerName=cpf-element-events-table&targetName=siteSelect&selectedId={{@root.request.query.site}}&parentId={{@root.pageData.customerId}}">
+                    <select class="form-select" disabled><option>Loading...</option></select>
+                  </turbo-frame>
+                </div>
+              </div>
+            </th>
+            {{/lt}}
             {{/ne}}
+
           </tr>
         </thead>
         <tbody>
@@ -85,10 +117,18 @@
               {{/eq}}
             </td>
             <td>{{titleCase this.state}}</td>
-            <td class="text-nowrap"><relative-time format="datetime" format-style="short" year="numeric" hour="numeric" minute="numeric" second="numeric" datetime="{{this.creationDate}}"></relative-time></td>
+            <td class="text-nowrap"><relative-time format="datetime" weekday="" format-style="short" year="numeric" hour="numeric" minute="numeric" second="" datetime="{{this.creationDate}}"></relative-time></td>
             <td><a href="/events/{{this.id}}">{{this.subject}}</a></td>
             {{#ne @root.request.query.hideDeviceColumn 'true'}}
             <td><a href="/devices/{{this.deviceId}}">{{this.deviceId}}</a></td>
+            {{!-- Customer only shows up for system admins --}}
+            {{#lt @root.pageData.userLevel 1}}
+            <td><a href="/customers/{{this.customer.id}}">{{this.customer.name}}</a></td>
+            {{/lt}}
+            {{!-- Site only shows up for customer or system admins --}}
+            {{#lt @root.pageData.userLevel 2}}
+            <td><a href="/sites/{{this.site.id}}">{{this.site.name}}</a></td>
+            {{/lt}}
             {{/ne}}
           </tr>
           {{/each}}

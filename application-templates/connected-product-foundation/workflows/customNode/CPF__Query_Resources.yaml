@@ -31,7 +31,7 @@ resources:
     customNodeSupports:
       - cloud
     description: Queries customers and sites.
-    exportHash: 36d97acf56dff2409d24236068d90e46a7b78fadfcadf48039c32929111cb86a
+    exportHash: 4788477a04ba6a1c93bef00eae7a570b493527345a84f25249f1582a27ad60ec
     flowClass: customNode
     globals: []
     id: ~exportplaceholderid-flow-cpfQueryResources~
@@ -347,7 +347,7 @@ resources:
           label: Return
           name: loop-return
           x: 200
-          'y': 980
+          'y': 1160
         outputIds: []
         type: LoopCapNode
       - config:
@@ -451,9 +451,9 @@ resources:
         id: aVCZgfO3S6
         meta:
           annotationText: >-
-            Get all descendants of this group and add up all users from every
-            descendant child. Add the result to the `userCount` field on the
-            group.
+            Get all descendants of this group so we can calculate the total
+            number of users. Summing this up is done in the Function Node
+            outside of this loop.
           category: annotation
           groupId: ji1YnIGT5R
           height: 160
@@ -522,7 +522,7 @@ resources:
           x: 200
           'y': 800
         outputIds:
-          - - g1FGd9jxBc
+          - - cnutJp2dtQ
         type: MutateNode
       - config:
           scopePath: ''
@@ -590,6 +590,61 @@ resources:
           width: 360
           x: 740
           'y': 1320
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          findMetadata: true
+          findMultiple: true
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "state": {
+                    "$ne": "resolved"
+                  }
+                },
+                {
+                  "eventTags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.group.value.level 2}}cpf_site{{else}}cpf_customer{{/eq}}",
+                      "$tagValue": "{{working.group.value.id}}"
+                    }
+                  }
+                }
+              ]
+            }
+          resultPath: working.fullGroup.events
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: desc
+          sortField: creationDate
+        id: cnutJp2dtQ
+        meta:
+          category: data
+          description: ''
+          groupId: ji1YnIGT5R
+          label: 'Event: Get'
+          mode: queryTemplateMultiple
+          name: get-event
+          x: 200
+          'y': 920
+        outputIds:
+          - - g1FGd9jxBc
+        type: GetEventNode
+      - config: {}
+        id: 5QDD2_Ma2S
+        meta:
+          annotationText: >-
+            Get the total number of unresolved events associated with this
+            group. Can query events by their `cpf_site` tag.
+          category: annotation
+          groupId: ji1YnIGT5R
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 400
+          'y': 920
         outputIds: []
         type: AnnotationNode
     shortDescription: Queries customers and sites.
