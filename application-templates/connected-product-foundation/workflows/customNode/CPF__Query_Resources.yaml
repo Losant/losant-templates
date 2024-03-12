@@ -31,7 +31,7 @@ resources:
     customNodeSupports:
       - cloud
     description: Queries customers and sites.
-    exportHash: 4788477a04ba6a1c93bef00eae7a570b493527345a84f25249f1582a27ad60ec
+    exportHash: 00b89d8e34ab14c5fa3e556f437f5aad07b31c3abda0d9d9483ce95c26e983a1
     flowClass: customNode
     globals: []
     id: ~exportplaceholderid-flow-cpfQueryResources~
@@ -300,22 +300,6 @@ resources:
         outputIds:
           - - Z4om7zIo3r
         type: MutateNode
-      - config: {}
-        id: DjpubibRIH
-        meta:
-          annotationText: |-
-            TODOS:
-
-            * Admin check when querying users
-          category: annotation
-          height: 220
-          label: Note
-          name: note
-          width: 260
-          x: 860
-          'y': 40
-        outputIds: []
-        type: AnnotationNode
       - config:
           currentItemPath: working.group
           loopSourcePath: working.result.queryResults
@@ -699,18 +683,5 @@ resources:
           'y': 40
         outputIds:
           - - W0B8X1ZYBE
-        type: virtualButton
-      - config: {}
-        key: ~exportplaceholderid-flow-cpfQueryResources~-k9cA1p7svTBm81ZRZZ34K
-        meta:
-          category: trigger
-          description: ''
-          label: Virtual Button
-          name: virtualButton
-          payload: ''
-          uiId: dIHzuivqCi
-          x: 640
-          'y': 40
-        outputIds: []
         type: virtualButton
 version: 1

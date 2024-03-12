@@ -28,13 +28,13 @@
                 </div>
                 {{else eq this.columnId 'group-customer'}}
                 <div>
-                  <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&placeholder=-- All Customers --&actionMethod=updateFilters&actionGroupParamValue=customer&controllerName=cpf-element-devices-table&targetName=customerSelect">
+                  <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&placeholder=-- All Customers --&actionMethod=updateFilters&actionGroupParamValue=customer&controllerName=cpf-element-devices-table&targetName=customerSelect&selectedId={{@root.pageData.customerId}}">
                     <select class="form-select" disabled><option>Loading...</option></select>
                   </turbo-frame>
                 </div>
                 {{else eq this.columnId 'group-site'}}
                 <div>
-                  <turbo-frame data-cpf-element-devices-table-target="siteSelectFrame" id="cpf-element-group-select" src="/cpf/elements/group-select?level=2&placeholder=-- All Sites --&actionMethod=updateFilters&actionGroupParamValue=site&controllerName=cpf-element-devices-table&targetName=siteSelect&parentId={{@root.pageData.customerId}}">
+                  <turbo-frame data-cpf-element-devices-table-target="siteSelectFrame" id="cpf-element-group-select" src="/cpf/elements/group-select?level=2&placeholder=-- All Sites --&actionMethod=updateFilters&actionGroupParamValue=site&controllerName=cpf-element-devices-table&targetName=siteSelect&selectedId={{@root.request.query.site}}&parentId={{@root.pageData.customerId}}">
                     <select class="form-select" disabled><option>Loading...</option></select>
                   </turbo-frame>
                 </div>

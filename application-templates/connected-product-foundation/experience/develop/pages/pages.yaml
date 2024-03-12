@@ -45,7 +45,7 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/devices-table.
-    exportHash: 77015f3436594adff3b309b577642500998ff0e89a07cf07d0f29bc7c7ec5a72
+    exportHash: f31cbd9eb78afab879e68b611d04cb85db27704128df62565fe161bbdca92087
     id: ~exportplaceholderid-experienceView-cpfElementDevicesTable~
     localFilename: ./cpf-element-devices-table.hbs
     name: cpf-element-devices-table
