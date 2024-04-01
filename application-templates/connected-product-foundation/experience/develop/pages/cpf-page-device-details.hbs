@@ -100,7 +100,9 @@
             loading="lazy"
             src="/cpf/elements/device-data-explorer/{{request.params.deviceId}}?start={{request.query.start}}&end={{request.query.end}}&aggregation={{defaultTo request.query.aggregation 'LAST'}}&resolution={{defaultTo request.query.duration '3600000'}}{{#each request.query.attributes}}&attributes={{this}}{{/each}}"
           >
-            <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+            <div class="p-4">
+              <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+            </div>
           </turbo-frame>
         </div>
       </div>
