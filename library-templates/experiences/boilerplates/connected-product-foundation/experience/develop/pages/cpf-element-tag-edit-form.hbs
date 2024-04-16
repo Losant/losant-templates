@@ -1,0 +1,19 @@
+<turbo-frame id="cpf-element-tag-edit-form">
+
+  {{#if pageData.device}}
+  <div class="ps-2 pt-1" data-turbo-temporary>
+    {{#gt (length pageData.device.tags) 0}}
+    {{#each pageData.device.tags}}
+    <div class="mb-3">
+      <label for="tag_{{this.key}}" class="form-label">{{this.key}}</label>
+      <input type="text" class="form-control tag-input" id="tag_{{this.key}}" name="tag_{{this.key}}" value="{{this.value}}" {{#eq @root.request.query.disabled 'true'}}disabled{{/eq}}>
+    </div>
+    {{/each}}
+    {{else}}
+    <small class="ps-3 cpf-text-mid"><em>Device has no custom properties.</em></small>
+    {{/gt}}
+  </div>
+  {{else}}
+    <small id="nothing-selected-message" class="ps-3 cpf-text-mid"><em>Please select device recipe.</em></small>
+  {{/if}}
+</turbo-frame>

@@ -1,0 +1,69 @@
+application.register("cpf-page-device-register", class extends Controller {
+
+  static get targets() {
+    return [
+      'preview',
+      'imageContents',
+      'tagEditForm',
+      'siteSelectFrame',
+      'formError',
+      'form'
+    ];
+  };
+
+  connect() {
+
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+    
+  };
+
+  uploaded(event) {
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    let preview = this.previewTarget;
+    let imageContents = this.imageContentsTarget;
+
+    reader.onload = (f) => {
+      preview.src = reader.result;
+      imageContents.value = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+
+  };
+
+  familyChanged(event) {
+    this.tagEditFormTarget.src = `/cpf/elements/tag-edit-form?type=recipe&id=${event.target.value}`
+  }
+
+  customerChanged(event) {
+
+    let params = new URLSearchParams({
+      level: 2,
+      parentId: event.target.value,
+      placeholder: '-- Select Site --',
+      controllerName: 'cpf-page-device-register',
+      formName: 'site',
+      required: true
+    });
+
+    this.siteSelectFrameTarget.src = `/cpf/elements/group-select?${params.toString()}`;
+  }
+
+  submitForm(event) {
+    let form = this.formTarget;
+
+    if(!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.element.scrollTo(0,0);
+
+      this.formErrorTarget.classList.remove('d-none');
+    }
+
+    form.classList.add('was-validated');
+  }
+
+});

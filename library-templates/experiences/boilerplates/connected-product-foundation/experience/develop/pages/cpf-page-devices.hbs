@@ -1,0 +1,13 @@
+<div class="w-100 h-100 overflow-hidden" data-controller="cpf-page-devices">
+  <div class="d-flex flex-column h-100">
+
+    <div class="ms-5 mb-3 mt-5">
+      <h1>Devices</h1>
+      <p>Summary of your devices.</p>
+    </div>
+
+    <div class="flex-grow-1 px-2 px-sm-5 pt-5 pb-4 w-100 overflow-hidden full-width-table-container">
+      <turbo-frame id="cpf-element-device-list" src="/cpf/elements/devices-table?customer={{request.query.customer}}&site={{request.query.site}}" target="_top" data-turbo-permanent></turbo-frame>
+    </div>
+  </div>
+</div>

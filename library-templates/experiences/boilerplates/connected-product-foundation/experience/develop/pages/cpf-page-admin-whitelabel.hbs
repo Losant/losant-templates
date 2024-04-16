@@ -1,0 +1,193 @@
+<div class="container-fluid cpf-page" data-controller="cpf-page-admin-whitelabel">
+  <div class="row mt-4 mb-2">
+    <div class="col-auto me-auto">
+      <h1>White Label</h1>
+      <p>Change the look and feel of this application through custom logos, colors, and fonts.</p>
+    </div>
+  </div>
+  <div class="row mt-4 mb-2">
+    <div class="col-12 col-lg-6">
+      {{#if request.query.error}}
+      <div class="my-2">
+        <div class="alert alert-danger" role="alert">
+          ERROR: {{request.query.error}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if request.query.success}}
+      <div class="my-2">
+        <div class="alert alert-success" role="alert">
+          White label changes have been saved.<br /><br />
+          Some resources, like logos and fonts, may remain cached by your browser.
+          A browser refresh may be required to see all changes.
+        </div>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+  <form data-cpf-page-admin-whitelabel-target="whitelabelForm" method="POST">
+
+  {{!-- Logos --}}
+  <div class="row mt-4 mb-2">
+    <div class="col-auto me-auto">
+      <h2>Logos</h2>
+      <p>The large logo appears on the log in page. The small logo appears in the top-left corner.</p>
+    </div>
+  </div>
+  <div class="d-flex flex-row flex-wrap">
+    <div class="p-2">
+      <label>Logo Large</label>
+      {{component 'cpf-image-upload' formName="logo_large" maxSize=64 imageURL=(file pageData.theme.logo_large)}}
+    </div>
+    <div class="p-2">
+      <label>Logo Small</label>
+      {{component 'cpf-image-upload' formName="logo_small" maxSize=32 imageURL=(file pageData.theme.logo_small)}}
+    </div>
+    <div class="p-2">
+      <label>Favicon</label>
+      {{component 'cpf-image-upload' formName="favicon" maxSize=32 imageURL=(file globals.favicon)}}
+    </div>
+  </div>
+
+  {{!-- Company Name --}}
+  <div class="row mt-5 mb-2">
+    <div class="col-12 col-lg-6">
+      <div class="col-auto me-auto">
+        <h2>Company Name</h2>
+        <p>Control how your company name appears throughout the application.</p>
+      </div>
+      <div class="mb-3">
+        <label for="company_name">Full Company Name</label>
+        <input type="text" class="form-control" name="company_name" id="company_name" placeholder="ACME, Inc." value="{{pageData.theme.company_name}}" aria-describedby="company_name_help">
+        <div id="company_name_help" class="form-text">
+          The full legal name of your company. This is displayed next the copyright statement on the log in page.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="title_template">Page Title Template</label>
+        <input type="text" class="form-control" name="title_template" id="title_template" value="{{defaultTo pageData.theme.title_template 'CPF | {{this}}'}}" aria-describedby="title_template_help">
+        <div id="title_template_help" class="form-text">
+          The template for your page titles. This controls what's displayed in the browser tab for each page. The "this" parameter
+          is set to the value of the "title" <a href="https://docs.losant.com/experiences/views/#page-configuration" target="_blank">Page Tag</a>
+          on each of your <a href="https://docs.losant.com/experiences/views/#pages" target="_blank">Experience Pages</a>. The "title" tag
+          can also be a template to render titles based on your page's context.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {{!-- Colors --}}
+  <div class="row mt-5 mb-4">
+    <div class="col-auto me-auto">
+      <h2>Colors</h2>
+      <p>Modify the colors used throughout the application. Click each square to change the color.</p>
+    </div>
+  </div>
+  <div class="d-flex flex-row flex-wrap">
+    {{#each pageData.colors.theme}}
+    <div class="p-2">
+        <label for="{{name}}">{{label}}</label>
+        <div class="cpf-element-image-upload-preview mb-2">
+          <input type="color" name="{{name}}" id="{{name}}" value="{{value}}" class="w-100 h-100">
+        </div>
+    </div>
+    {{/each}}
+  </div>
+  <div class="d-flex flex-row flex-wrap">
+    {{#each pageData.colors.text}}
+    <div class="p-2">
+      <label for="{{name}}">{{label}}</label>
+      <div class="cpf-element-image-upload-preview mb-2">
+        <input type="color" name="{{name}}" id="{{name}}" value="{{value}}" class="w-100 h-100">
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <div class="d-flex flex-row flex-wrap">
+    {{#each pageData.colors.background}}
+    <div class="p-2">
+      <label for="{{name}}">{{label}}</label>
+      <div class="cpf-element-image-upload-preview mb-2">
+        <input type="color" name="{{name}}" id="{{name}}" value="{{value}}" class="w-100 h-100">
+      </div>
+    </div>
+    {{/each}}
+    {{#each pageData.colors.border}}
+    <div class="p-2">
+      <label for="{{name}}">{{label}}</label>
+      <div class="cpf-element-image-upload-preview mb-2">
+        <input type="color" name="{{name}}" id="{{name}}" value="{{value}}" class="w-100 h-100">
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <div class="row mt-4 mb-2">
+    <div class="col-12 col-lg-6">
+      <div class="col-auto me-auto">
+        <h2>Font</h2>
+        <p>
+          This application supports fonts from the <a href="https://fonts.google.com/" target="_blank">Google Fonts</a> collection.
+          <a href="https://fonts.google.com/noto" target="_blank">Noto</a> fonts are not supported (any font that start with "Noto").
+        </p>
+      </div>
+      <div class="mb-3">
+        <label for="fontInput">Font Name</label>
+        <input
+          type="text"
+          data-action="cpf-page-admin-whitelabel#fontChanged"
+          data-cpf-page-admin-whitelabel-target="fontInput"
+          aria-describedby="font_help"
+          name="font_family"
+          class="form-control"
+          id="fontInput"
+          value="{{defaultTo pageData.theme.font_family 'Open Sans'}}">
+        <div id="font_help" class="form-text">
+          The name of the font as displayed in the Google Fonts portal (e.g. Roboto, Dancing Script, VT323).
+        </div>
+        <div id="validationFont" class="alert alert-danger invalid-feedback mt-2">
+          Error: Failed to load Google Font. Please check that the name you've entered is valid.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label>Preview</label>
+        <div>
+          <link blocking="render" data-action="error->cpf-page-admin-whitelabel#handleFontPreviewError" href="" rel="stylesheet" data-cpf-page-admin-whitelabel-target="fontPreviewStylesheet">
+          <div class="p-3 font-preview" data-cpf-page-admin-whitelabel-target="fontPreview">
+            <div class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div>
+            <div class="mb-3"><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</em></div>
+            <div><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</strong></div>
+          </div>
+        </div>
+        <div id="validationPreview" class="justify-content-start mt-2">
+          Error: Preview your chosen font before submitting the form.
+        </div>
+        <div class="justify-content-end mt-2 d-grid col">
+          <button class="btn btn-primary checkPreview" type="button" data-action="click->cpf-page-admin-whitelabel#updateFontPreview">Preview Font</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Links --}}
+  <div class="col-12 col-lg-6">
+    <div class="row mt-4 mb-2">
+      <div class="col-auto me-auto">
+        <h2>Links</h2>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="tos">Terms of Service</label>
+      <input type="text" class="form-control" name="tos" id="tos" placeholder="https://example.com/company/terms-of-service" value="{{pageData.theme.tos}}">
+    </div>
+    <div class="mb-3">
+      <label for="privacy_policy">Privacy Policy</label>
+      <input type="text" class="form-control" name="privacy_policy" id="privacy_policy" placeholder="https://example.com/company/privacy-policy" value="{{pageData.theme.privacy_policy}}">
+    </div>
+  </div>
+
+  <div class="card col-12 col-lg-6 p-3 my-4 cpf-bg-mid">
+    <button type="button" data-action="cpf-page-admin-whitelabel#submit" class="btn btn-primary w-25">Submit</button>
+  </div>
+  </form>
+</div>

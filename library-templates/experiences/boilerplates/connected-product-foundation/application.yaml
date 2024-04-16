@@ -1,0 +1,21 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Prebuilt and production-ready template that significantly reduces
+      the development time and complexity for your applications.
+    filesPath: ./files
+    globals:
+      - cloudOnly: true
+        json: '"a super secret value"'
+        key: cpf-jwt-password-reset-secret
+    id: ~exportplaceholderid-application-applicationConnectedProductFoundation~
+    name: Connected Product Foundation
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - cpf
+      - starter
+      - bootstrap
+version: 1

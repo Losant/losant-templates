@@ -1,0 +1,303 @@
+application.register("cpf-element-device-data-explorer", class extends Controller {
+  
+  static values = {
+    points: { type: String },
+    attributes: { type: String },
+    device: { type: String }
+  }
+
+  static targets = ['tableWrap']
+
+  connect() {
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+    if (this.hasTableWrapTarget) {
+      const table = document.createElement('table');
+      table.classList.add('cpf-table', 'table');
+      table.createTHead();
+      const theadRow = table.tHead.insertRow();
+      const timeTh = document.createElement('th');
+      timeTh.appendChild(document.createTextNode('Time'));
+      theadRow.appendChild(timeTh);
+      let attributesParsed, deviceParsed, pointsParsed;
+      try {
+        attributesParsed = JSON.parse(atob(this.attributesValue));
+        deviceParsed = JSON.parse(atob(this.deviceValue));
+        pointsParsed = JSON.parse(atob(this.pointsValue));
+      } catch (e) {
+        console.log('error parsing', e);
+      }
+      const selectedAttributeDataTypes = [];
+      attributesParsed.forEach((attr, i) => {
+        const th = document.createElement('th');
+        selectedAttributeDataTypes.push(deviceParsed.attributes[attr]?.dataType || 'unknown');
+        if (selectedAttributeDataTypes[i] === 'number') {
+          th.classList.add('text-end');
+        }
+        th.appendChild(document.createTextNode(attr));
+        theadRow.appendChild(th);
+      });
+
+      const tBody = table.createTBody();
+      pointsParsed.forEach((pt, i) => {
+        if (i !== 0) { // header row
+          const row = tBody.insertRow();
+          pt.forEach((dt, j) => {
+            const td = row.insertCell();
+            if (j === 0) { // time
+              const relTime = document.createElement('relative-time');
+              relTime.setAttribute('format', 'datetime');
+              relTime.setAttribute('format-style', 'short');
+              relTime.setAttribute('year', 'numeric');
+              relTime.setAttribute('hour', 'numeric');
+              relTime.setAttribute('minute', 'numeric');
+              relTime.setAttribute('second', 'numeric');
+              relTime.setAttribute('datetime', dt);
+              relTime.appendChild(document.createTextNode(dt));
+              td.appendChild(relTime);
+            } else {
+              switch (selectedAttributeDataTypes[j - 1]) {
+                case 'number':
+                  td.classList.add('text-end');
+                  td.appendChild(document.createTextNode(dt));
+                  break;
+                case 'gps':
+                  // TO DO: convert to a Google Maps link
+                  // requires the point being in the correct format
+                  td.appendChild(document.createTextNode(dt));
+                  // const gpsLink = document.createElement('a');
+                  // gpsLink.setAttribute('href', dt);
+                  // gpsLink.setAttribute('title', dt);
+                  // gpsLink.appendChild(document.createTextNode('(Download File)'));
+                  // td.appendChild(gpsLink);
+                  break;
+                case 'blob':
+                  const blobLink = document.createElement('a');
+                  blobLink.setAttribute('href', dt);
+                  blobLink.setAttribute('title', dt);
+                  blobLink.appendChild(document.createTextNode('(Download File)'));
+                  td.appendChild(blobLink);
+                  break;
+                default:
+                  td.appendChild(document.createTextNode(dt));
+                  break;
+              }
+            }
+          });
+        }
+      });
+
+/*
+              <tbody>
+                {{#each pageData.data as |row|}}
+                  {{#ne @index 0}}
+                    <tr>
+                      {{#each row as |cell|}}
+                        <td {{#eq (lookup (lookup @root.pageData.device.attributes (lookup @root.pageData.selectedAttributes (subtract @index 1))) 'dataType') 'number'}}class="text-end"{{/eq}}>
+                          {{#eq @index 0}}
+                            <relative-time format="datetime" format-style="short" year="numeric" hour="numeric" minute="numeric" second="numeric" datetime="{{cell}}">{{cell}}</relative-time>
+                          {{else}}
+                            {{#ne (typeof cell) 'undefined'}}
+                              {{#eq (lookup (lookup @root.pageData.device.attributes (lookup @root.pageData.selectedAttributes (subtract @index 1))) 'dataType') 'blob'}}
+                                <a href="{{cell}}" title="{{cell}}">(Download File)</a>
+                              {{else eq (lookup (lookup @root.pageData.device.attributes (lookup @root.pageData.selectedAttributes (subtract @index 1))) 'dataType') 'gps'}}
+                                <a href="https://www.google.com/maps/place/{{formatGps cell 'decimal'}}" target="_blank" title="{{formatGps cell 'decimal'}}">{{formatGps cell 'decimal' 4}}</a>
+                              {{else}}
+                                {{cell}}
+                              {{/eq}}
+                            {{/ne}}
+                          {{/eq}}
+                        </td>
+                      {{/each}}
+                    </tr>
+                  {{/ne}}
+                {{/each}}
+              </tbody>
+*/
+      this.tableWrapTarget.appendChild(table);
+    }
+  }
+
+  export(event) {
+    event.preventDefault();
+    
+    // The points are base64 encoded.
+    // Need to decode into JSON string and parse.
+    let pointsDecoded = JSON.parse(atob(this.pointsValue));
+
+    let csv = pointsDecoded.map((row) => row.map((cell) => JSON.stringify(cell)).join(`,`)).join(`\n`);
+    csv = encodeURI('data:text/csv;charset=utf-8,' + csv);
+    // https://stackoverflow.com/a/14966131
+    const link = document.createElement("a");
+    link.setAttribute("href", csv);
+    link.setAttribute("download", `data-export.csv`);
+    document.body.appendChild(link); // Required for FF
+    link.click();
+    link.remove();
+  }
+
+});
+
+application.register("cpf-element-device-data-explorer-form", class extends Controller {
+
+  static targets = [
+    'startInput',
+    'endInput',
+    'resolutionInput'
+  ]
+
+  connect() {
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+    if(!this.endInputTarget.value) {
+      this.endInputTarget.value = this.dateObjToInputString(new Date());
+    }
+    if (!this.startInputTarget.value) {
+      let startDate = new Date(this.endInputTarget.value);
+      startDate.setDate(startDate.getDate() - 1);
+      this.startInputTarget.value = this.dateObjToInputString(startDate);
+    }
+    const maxDate = new Date();
+    maxDate.setHours(23,59,59,0);
+    const minDate = new Date(maxDate);
+    minDate.setHours(0,0,0,0);
+    minDate.setDate(minDate.getDate() - 180);
+    [this.startInputTarget, this.endInputTarget].forEach((el) => {
+      el.setAttribute('max', this.dateObjToInputString(maxDate));
+      el.setAttribute('min', this.dateObjToInputString(minDate));
+    });
+  };
+
+  dateObjToInputString(date) {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+
+  onSubmit(event) {
+    document.querySelectorAll('.tl-needs-validation').forEach((el) => {
+      el.classList.add('was-validated');
+    });
+    event.preventDefault();
+    const data = new FormData(event.target);
+    if (!data.get('attributes')) {
+      return window.alert('Please select at least one attribute.');
+    }
+    const tzOffset = -(new Date().getTimezoneOffset());
+    data.set('offset', `${tzOffset >= 0 ? '+' : '-'}${(Math.abs(tzOffset / 60)).toString().padStart(2, '0')}${(Math.abs(tzOffset % 60)).toString().padStart(2, '0')}`);
+    const qString = new URLSearchParams(data).toString();
+    return this.updateFrame(qString);
+
+  }
+
+  updateFrame(queryString) {
+    this.dispatch("updateDataExplorerFrame", { detail: { queryString } })
+  }
+
+  onDateChange(event) {
+    if (event.target.name === 'end') {
+      this.startInputTarget.max = event.target.value;
+      if (this.startInputTarget.value > event.target.value) {
+        this.startInputTarget.value = event.target.value;
+      }
+    } else { // start
+      this.endInputTarget.min = event.target.value;
+      if (this.endInputTarget.value < event.target.value) {
+        this.endInputTarget.value = event.target.value;
+      }
+    }
+  }
+
+});
+
+
+
+
+
+application.register('cpf-element-device-data-explorer-graph', class extends Controller {
+
+  static values = {
+    attribute: String,
+    attributeIndex: Number,
+    color: String,
+    style: String
+  }
+
+  connect() {
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+    const otherController = this.application.getControllerForElementAndIdentifier(document.getElementById('cpf-data-explorer-wrap'), 'cpf-element-device-data-explorer');
+    this.points = [];
+    try {
+      this.points = JSON.parse(atob(otherController.pointsValue));
+    } catch (e) {
+      console.log('parsing error', e);
+    }
+    // Because Turbo removes the element from the DOM,
+    // it loses registered event handlers. If the element has this
+    // attribute, echarts will think it's already initialized.
+    // Need to remove this attribute and clear the element so
+    // echarts completely rebuilds the graph.
+    this.element.removeAttribute('_echarts_instance_');
+    this.element.innerHTML = '';
+
+    this.chart = echarts.init(this.element, null, { renderer: 'svg', height: 400 });
+    this.chart.setOption({
+      dataset: {
+        source: this.points
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      yAxis: {},
+      grid: {
+        containLabel: true
+      },
+      xAxis: {
+        type: 'time',
+        splitNumber: 3,
+        axisTick: {
+          show: false
+        }
+      },
+      color: this.colorValue || getComputedStyle(document.documentElement).getPropertyValue('--cpf-primary'),
+      series: [
+        {
+          type: this.style === 'bar' ? 'bar' : 'line',
+          areaStyle: this.style === 'area' ? {} : null,
+          symbolSize: 2,
+          encode: {
+            x: 0,
+            y: this.attributeIndexValue + 1
+          }
+        }
+      ]
+    });
+
+    this.chart.group = '__grp__';
+    echarts.connect('__grp__');
+
+
+    this.resizeObserver = new ResizeObserver(this.resizeGraph.bind(this));
+    this.resizeObserver.observe(this.element);
+
+  }
+
+  disconnect() {
+    // This will be undefined when Turbo shows a preview.
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  };
+
+  resizeGraph() {
+    this.chart.resize();
+  };
+
+});

@@ -1,0 +1,79 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /logout
+    enabled: true
+    exportHash: 0807001fa145f464590d738455e5d70596e23f25a849bdb6c26ed42624f05df4
+    flowId: ~exportplaceholderid-flow-cpfPageLogout~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageLogout~
+    name: cpf-page-logout
+    nodes:
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 6fjW1VjE_n
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 240
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /login
+          bodyTemplateType: string
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 8qjuoRvLiP
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 140
+        outputIds:
+          - - 6fjW1VjE_n
+        type: EndpointReplyNode
+      - config: {}
+        id: UlkGvCnvDb
+        meta:
+          annotationText: >-
+            Remove the authorization cookie and redirect the user back to
+            `/login`.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 240
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getLogout~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /logout
+          name: endpoint
+          uiId: N2Nal8CNIo
+          x: 40
+          'y': 40
+        outputIds:
+          - - 8qjuoRvLiP
+        type: endpoint
+    version: develop
+version: 1

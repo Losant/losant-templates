@@ -1,0 +1,10 @@
+application.register("cpf-page-devices", class extends Controller {
+
+  connect() {
+
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+  };
+
+});

@@ -1,0 +1,31 @@
+<div class="d-flex">
+  <div class='cpf-image-upload' data-controller="cpf-element-image-upload" data-cpf-element-image-upload-max-size-value="{{@args.maxSize}}" data-turbo-temporary>
+    <div class="mb-2">
+      <div class="cpf-element-image-upload-preview">
+        <div class="w-100 h-100 position-absolute">
+          <img data-cpf-element-image-upload-target="preview" class="object-fit-contain w-100 h-100 {{#unless @args.imageURL}}d-none{{/unless}}" src="{{@args.imageURL}}">
+          </img>
+        </div>
+        <div class="w-100 h-100 position-absolute text-center {{#if @args.imageURL}}d-none{{/if}}">
+          <span class="material-symbols-outlined cpf-icon-large primary-icon" data-cpf-element-image-upload-target="placeholder" style="line-height:130px;">memory</span>
+        </div>
+      </div>
+    </div>
+    {{#ne @args.role 'viewer'}}
+    <div>
+      <div class="d-flex justify-content-center">
+        <label>
+          <input id="image" type="file" data-action="cpf-element-image-upload#uploaded" data-cpf-element-image-upload-target="fileInput" class="d-none" accept="image/png, image/jpeg, image/x-icon">
+          <span class="btn btn-primary cpf-element-image-upload-button">Upload</span>
+        </label>
+        <input type="hidden" name="{{defaultTo @args.formName 'imageContents'}}" data-cpf-element-image-upload-target="imageContents" />
+      </div>
+      {{#if @args.maxSize}}
+      <div class="cpf-text-mid text-center"><small><em>Max size: {{@args.maxSize}}kb</em></small></div>
+      {{/if}}
+      <div data-cpf-element-image-upload-target="tooLargeMessage" class="d-none text-danger text-center"><small>Too large</small></div>
+    </div>
+    {{/ne}}
+  </div>
+
+</div>

@@ -1,0 +1,311 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /login
+    enabled: true
+    exportHash: e1332538cd6ec273bbd9615125031ed4dd976e589d96e24e1aaca22deb9fd6c5
+    flowId: ~exportplaceholderid-flow-cpfPageLogin~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageLogin~
+    name: cpf-page-login
+    nodes:
+      - config:
+          expression: '{{ experience.user }}'
+        id: 0KARTUL8oU
+        meta:
+          category: logic
+          description: Is the user logged in already?
+          label: Logged in?
+          name: conditional
+          x: 140
+          'y': 140
+        outputIds:
+          - - hZoJQGSOY7
+          - - V0LFvo_m7D
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: V0LFvo_m7D
+        meta:
+          category: output
+          description: User is already logged in. Redirect them to the home page.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 240
+        outputIds:
+          - - NXBQKNiJZi
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: NXBQKNiJZi
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 340
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: GxXzJL1MAy
+        meta:
+          annotationText: >-
+            If the user is already logged in, redirect them to the home page
+            (`/`).
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 360
+          'y': 120
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": false
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageLogin~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: hZoJQGSOY7
+        meta:
+          category: output
+          description: Render the login page for the user.
+          label: Render Login
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 240
+        outputIds:
+          - - NXBQKNiJZi
+        type: EndpointReplyNode
+      - config:
+          emailTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: false
+          passwordTemplate: '{{data.body.password}}'
+          tokenResultPath: working.token
+          ttlTemplate: ''
+          userResultPath: ''
+        id: o863Oxo5hN
+        meta:
+          authMode: emailPassword
+          category: experience
+          description: Do these credentials match an experience user?
+          label: Authenticate
+          name: experience-user-auth
+          x: 140
+          'y': 960
+        outputIds:
+          - - BWI8gJo3lY
+          - - FkPqnqxiGM
+        type: ExperienceUserAuthNode
+      - config:
+          bodyTemplate: |-
+            {
+              "loginFailure": true,
+              "email": {{jsonEncode data.body.email}}
+            }
+          bodyTemplateType: json
+          cookieInfo:
+            - nameTemplate: authorization
+              pathTemplate: ''
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageLogin~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: BWI8gJo3lY
+        meta:
+          category: output
+          description: >-
+            Invalid credentials. Return the user to the login page and alert
+            them of the error.
+          label: Login Failure
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 1060
+        outputIds:
+          - - 0WtvsFUOPc
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: ''
+              valueTemplate: '{{working.token}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: FkPqnqxiGM
+        meta:
+          category: output
+          description: >-
+            Successful login. Redirect the user to the home page and set the
+            auth cookie for future requests.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 1060
+        outputIds:
+          - - 0WtvsFUOPc
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 0WtvsFUOPc
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 1160
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: tZQNswHVQK
+        meta:
+          annotationText: >-
+            If authentication succeeds, set the `authorization` cookie and
+            redirect the user to the home page (`/`).
+
+
+            If the authentication fails, redirect the user back to the log in
+            page with `loginFailure` set to `true`.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 1040
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{ experience.user }}'
+        id: BLNTxjTX_k
+        meta:
+          category: logic
+          description: Is the user logged in already?
+          label: Logged in?
+          name: conditional
+          x: 140
+          'y': 760
+        outputIds:
+          - - o863Oxo5hN
+          - - nnwaj_Berc
+        type: ConditionalNode
+      - config: {}
+        id: 20TE54TZ0y
+        meta:
+          annotationText: >-
+            If the user is already logged in, redirect them to the home page
+            (`/`).
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 360
+          'y': 740
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: nnwaj_Berc
+        meta:
+          category: output
+          description: User is already logged in. Redirect them to the home page.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 860
+        outputIds:
+          - - o863Oxo5hN
+        type: EndpointReplyNode
+      - config:
+          rules:
+            - destination: working.foo
+              source: data.body.password
+              type: copy
+        id: MgsCI2GM8a
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 140
+          'y': 600
+        outputIds:
+          - - BLNTxjTX_k
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getLogin~
+        meta:
+          category: trigger
+          description: When a user visits the login page ...
+          label: GET /login
+          name: endpoint
+          uiId: YvX13fWiTI
+          x: 140
+          'y': 40
+        outputIds:
+          - - 0KARTUL8oU
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postLogin~
+        meta:
+          category: trigger
+          description: When a user submits login credentials ...
+          label: POST /login
+          name: endpoint
+          uiId: 4KknUglIFm
+          x: 140
+          'y': 460
+        outputIds:
+          - - MgsCI2GM8a
+        type: endpoint
+    version: develop
+version: 1

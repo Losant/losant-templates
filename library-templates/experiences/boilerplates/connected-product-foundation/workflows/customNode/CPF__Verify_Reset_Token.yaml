@@ -1,0 +1,224 @@
+resourceType: Flow
+resources:
+  - category: experience
+    customNodeConfig:
+      fields:
+        - description: >-
+            The reset JWT token, which contains the password reset details to
+            verify.
+          id: token
+          label: JWT Token
+          required: false
+          type: stringTemplate
+        - description: The JWT secret used to validate the token's signature.
+          id: jwtSecret
+          label: JWT Secret
+          required: false
+          type: stringTemplate
+        - description: The value of the expected issuer on the token.
+          id: jwtIssuer
+          label: JWT Issuer
+          required: false
+          type: stringTemplate
+      outputCount: 2
+      resultDescription: >-
+        If successful, this node returns the decoded token. Otherwise this node
+        returns `undefined`.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: Verifies a password reset token.
+    exportHash: 9f86714bafed5aa5e5c8ddc16bed4488ef12a6bada6d3b1dbad22cabde950892
+    flowClass: customNode
+    globals: []
+    id: ~exportplaceholderid-flow-cpfVerifyResetToken~
+    name: 'CPF: Verify Reset Token'
+    nodes:
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.thisIsUndefined
+        id: WJviMBu_Ev
+        meta:
+          category: customNodeEnd
+          description: Take the "False" path
+          label: Output False
+          name: custom-node-end-false
+          x: 140
+          'y': 920
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          branchIndexTemplate: 1
+          resultSourcePath: working.decoded
+        id: t6vzkZMjJl
+        meta:
+          category: customNodeEnd
+          description: Take the "True" path
+          label: Output True
+          name: custom-node-end-true
+          x: 560
+          'y': 920
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          errorPath: ''
+          issuerTemplate: '{{data.jwtIssuer}}'
+          secretTemplate: '{{data.jwtSecret}}'
+          tokenTemplate: '{{data.token}}'
+        id: x24kP8OXfv
+        meta:
+          category: logic
+          description: ''
+          label: 'JWT: Verify'
+          name: jwt-verify
+          x: 140
+          'y': 180
+        outputIds:
+          - - ilIDPd45DE
+          - - 5GGFlGI2Sr
+        type: JWTVerifyNode
+      - config:
+          expression: '{{working.user}} !== null'
+        id: gKpw_9x6Z3
+        meta:
+          category: logic
+          description: Check to make sure we found a user by that ID.
+          label: User exists?
+          name: conditional
+          x: 260
+          'y': 520
+        outputIds:
+          - - ilIDPd45DE
+          - - EaMa_fNOoP
+        type: ConditionalNode
+      - config:
+          destinationPath: working.decoded
+          tokenTemplate: '{{data.token}}'
+        id: 5GGFlGI2Sr
+        meta:
+          category: logic
+          description: Decode the token and store the result on the payload.
+          label: 'JWT: Decode'
+          name: jwt-decode
+          x: 260
+          'y': 320
+        outputIds:
+          - - EJnkAysAo4
+        type: JWTDecodeNode
+      - config:
+          emailOrIdTemplate: '{{working.decoded.id}}'
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: working.user
+          sortDirection: asc
+          sortField: email
+        id: EJnkAysAo4
+        meta:
+          category: experience
+          description: Get the user by the ID found in the token.
+          label: Get User
+          name: get-experience-user
+          x: 260
+          'y': 420
+        outputIds:
+          - - gKpw_9x6Z3
+        type: GetExperienceUserNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 36VTApt5-X
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 560
+          'y': 820
+        outputIds:
+          - - t6vzkZMjJl
+        type: DebugNode
+      - config:
+          expression: '{{working.user.email}} === {{working.decoded.email}}'
+        id: EaMa_fNOoP
+        meta:
+          category: logic
+          description: >-
+            Check to make sure the email in the token matches the email on the
+            user. If not, something is fishy and we should bail.
+          label: Token / User Match?
+          name: conditional
+          x: 360
+          'y': 620
+        outputIds:
+          - - ilIDPd45DE
+          - - gpVJDpxvyD
+        type: ConditionalNode
+      - config:
+          expression: >-
+            {{formatDate (defaultTo working.user.passwordLastUpdated 0) 'X'}} <
+            {{add working.decoded.iat 10}}
+        id: gpVJDpxvyD
+        meta:
+          category: logic
+          description: >-
+            Check the token's issue time against the last time the user's
+            password was reset. If reset happened after the issue date, don't
+            honor the token.
+          label: Password not reset yet?
+          name: conditional
+          x: 460
+          'y': 720
+        outputIds:
+          - - ilIDPd45DE
+          - - 36VTApt5-X
+        type: ConditionalNode
+      - config: {}
+        id: r7U_qCGEJ9
+        meta:
+          annotationText: |-
+            Verifying:  
+            1. The user exists.  
+            2. The user's email matches the email in the token.  
+            3. The password has not been reset since the token was created.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 260
+          x: 660
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: ilIDPd45DE
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 820
+        outputIds:
+          - - WJviMBu_Ev
+        type: DebugNode
+    shortDescription: Verifies a password reset token.
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: TL Verify Reset Token'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 140
+          'y': 60
+        outputIds:
+          - - x24kP8OXfv
+        type: customNodeStart
+version: 1
