@@ -1,14 +1,15 @@
 resourceType: ExperienceEndpoint
 resources:
   - access: authenticated
-    description: This endpoint displays the sample Experience Dashboard to the
-      signed-in Experience User.
+    description: This endpoint displays the dashboard provided in the request param
+      to the signed-in Experience User.
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
-    id: ~exportplaceholderid-experienceEndpoint-getTlDashboardReport~
+    exportHash: 621391aa5fa3cf4d0cb22b4921d7f3e5dc60c304d90aad1c223a98648a140364
+    id: ~exportplaceholderid-experienceEndpoint-getTlDashboardReportDashboardId~
     method: get
-    route: /tl-dashboard-report
+    route: /tl-dashboard-report/{dashboardId}
     unauthorizedReply:
       type: redirect
       value: /login
@@ -20,6 +21,7 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: fd7fca5084be6b838b4300edc5a8513718bc8cc8c61f4e4cc993b69c62ace71d
     id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb~
     method: post
     route: /tl-dashboard-report-cb
@@ -32,9 +34,10 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
-    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReport~
+    exportHash: a2525365bffbb529feded716a333382d78675f1ddf433deb3649dd2cb39fb04c
+    id: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportDashboardId~
     method: post
-    route: /tl-dashboard-report
+    route: /tl-dashboard-report/{dashboardId}
     unauthorizedReply:
       type: redirect
       value: /login

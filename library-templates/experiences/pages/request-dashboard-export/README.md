@@ -10,35 +10,43 @@ This template requires no additional dependencies; however, the markup within th
 
 The Request Experience Dashboard template adds the following resources to your application:
 
-- An example [dashboard](https://docs.losant.com/dashboards/overview/) that simply displays a list of the Experience User's devices and the current dashboard settings ([time](https://docs.losant.com/dashboards/overview/#viewing-past-dashboard-states), [theme](https://docs.losant.com/dashboards/overview/#display-settings), and [context variable](https://docs.losant.com/dashboards/context-variables/) values). The dashboard utilizes an [Experience User context variable](https://docs.losant.com/dashboards/context-variables/#experience-users).
-- An [Experience Page](https://docs.losant.com/experiences/views/#custom-pages) that displays the dashboard, a button for requesting a dashboard report, and any feedback from the report request. The dashboard's context variables are set through the Experience User making the request. Optionally, the theme and time can be set through query parameters (`theme` and `t` respectively).
-- Three [Experience Endpoints](https://docs.losant.com/experiences/endpoints/) for viewing the dashboard, processing the request for a PDF, and handling the callback request when the report generation is complete.
-- One [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/) for handling the endpoint requests, including the generation and delivery of the requested PDF.
+- Three [Experience Endpoints](https://docs.losant.com/experiences/endpoints/) for viewing a dashboard, processing the request for a PDF, and handling the callback request when the report generation is complete. The first two require a dashboard ID to be passed in the request as a path parameter.
+- An [Experience Page](https://docs.losant.com/experiences/views/#custom-pages) that displays the dashboard, a button for requesting a dashboard report, and any feedback from the report request. Optionally, the theme and time can be set through query parameters (`theme` and `t` respectively).
+- One [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/) for handling the endpoint requests, including the generation and delivery of the requested PDF, as well as simple responses for `404` errors (dashboard not found) and `500` errors (uncaught exceptions).
 
 ## Usage
 
 The template assumes that the request for a PDF is being made by an authenticated Experience User, and it utilizes that user's email address as the destination for the PDF report.
 
-While the template works as a proof of concept out of the box, there are a number of recommended changes before using in a production setting.
+### Create JWT Service Credential
 
-### Workflow Globals Updates
+Before using this template, you **must create a [JWT Service Credential](https://docs.losant.com/applications/credentials/#json-web-tokens-jwt) named "Sign Dashboard Export"**. This credential is used to sign and then verify the token that is passed through the dashboard export request callback URL.
 
-First, there are two [workflow global variables](https://docs.losant.com/workflows/overview/#workflow-globals) that must be changed: 
+### Workflow Updates
 
-- `JWT_SECRET`: This must be changed to a long, random, secret string that will be used to sign and verify the JWT that's included in the PDF export request. The template's workflow includes a [Virtual Button](https://docs.losant.com/workflows/triggers/virtual-button/) and a [Generate ID Node](https://docs.losant.com/workflows/logic/generate-id/) that can create this for you; simply copy the output of the operation from the [debug log](https://docs.losant.com/workflows/debugging-workflows/#viewing-debug-output) and use that as the value of the global.
-- `dashboardId`: By default, this is set to the ID of the dashboard included with this template. This should be changed to the ID of the dashboard you would like to display and export as a PDF.
+There are a few points that may need attention in the provided workflow.
 
-### Dashboard Configuration Updates
+#### Building Dashboard Context
 
-For the dashboard ID, the workflow can be modified to pull this value dynamically from the request path if it is included there, in which case you must edit the [Losant API Node](https://docs.losant.com/workflows/data/losant-api/) (and the included [Experience Page](https://docs.losant.com/experiences/views/#pages)) to pull the "dashboardId" value from the correct spot on the payload.
+The "Build Context" [Mutate Node](https://docs.losant.com/workflows/logic/mutate/) creates an object that is passed as [context](https://docs.losant.com/dashboards/context-variables/) to the requested dashboard. By default, this sets one context variable - an Experience User type variable named `experienceUser` with a default value of the ID of the user making the request.
 
-Depending on the chosen dashboard, you may also need to adjust the context variables that are passed through the Experience Page and the request for the PDF (in the workflow's [Mutate Node](https://docs.losant.com/workflows/logic/mutate/)) and in the page's Handlebars helper that renders the dashboard.
+Depending on the dashboard being viewed, this node will need to be adjusted to build the proper context object from the data provided in the request - i.e. from the requesting user object, path and query parameters, or global values.
 
-Next, if you are allowing users to set the dashboard time and theme, you must pass those values through the request to export the dashboard if you are setting those values through some means other than the query string as described above in both the Losant API Node and the Experience Page. If the values are not set, the dashboard will export with data from the current time and in the light theme.
+You may also disconnect the node and reconnect its input and output nodes to bypass the setting of context.
 
-### SendGrid Node
+#### Dashboard Existence Check
+
+The "Find Dashboard" [Losant API Node](https://docs.losant.com/workflows/data/losant-api/) checks if the provided dashboard ID exists in the application. It **does not** determine whether the user making the request **should have access** to the dashboard. Additional nodes may be needed to validate the request for a given dashboard.
+
+#### Error Pages
+
+This workflow includes error handling for dashboards that are not found (404 errors) and for uncaught exceptions (500 errors), returning basic pages to the user. If your experience has its own custom 404 and 500 error pages, you will want to swap out the default responses to use those pages instead.
+
+#### SendGrid Node
 
 This template includes an [Email Node](https://docs.losant.com/workflows/outputs/email/) for sending the actual PDF. In production settings, we strongly recommend using the [SendGrid Node](https://docs.losant.com/workflows/outputs/sendgrid/) tied to your own [SendGrid](https://sendgrid.com/) account instead. A pre-configured version of the SendGrid Node is included in this template and, once your API key is in place, it can easily be swapped with the Email Node.
+
+We recommend storing your API key in a [SendGrid Service Credential](https://docs.losant.com/applications/credentials/#sendgrid) if using this node.
 
 ### Experience Page Updates
 
@@ -51,7 +59,7 @@ Also, as noted above, you may need to edit the page to pass in the proper contex
 
 ## License
 
-Copyright (c) 2022 Losant IoT, Inc. All rights reserved.
+Copyright (c) 2024 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 

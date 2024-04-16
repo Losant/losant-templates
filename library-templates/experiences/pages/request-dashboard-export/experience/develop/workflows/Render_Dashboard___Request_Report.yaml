@@ -1,12 +1,9 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
+    exportHash: fd2686c5c7964598427d9c42d5c2ed83ece21662ff665969ac4de73e8ca0bc4e
     flowId: ~exportplaceholderid-flow-renderDashboardRequestReport~
-    globals:
-      - json: '"ENTER JWT SECRET HERE"'
-        key: JWT_SECRET
-      - json: '"~exportplaceholderid-dashboard-sampleDashboard~"'
-        key: dashboardId
+    globals: []
     id: ~exportplaceholderid-flowVersion-renderDashboardRequestReport~
     name: Render Dashboard / Request Report
     nodes:
@@ -29,8 +26,8 @@ resources:
           label: Render Dashboard
           mqttTopicsType: []
           name: endpoint-reply
-          x: 880
-          'y': 480
+          x: 640
+          'y': 760
         outputIds:
           - - 6iiIBeIBpO
         type: EndpointReplyNode
@@ -44,8 +41,8 @@ resources:
           description: ''
           label: Debug
           name: debug
-          x: 880
-          'y': 580
+          x: 540
+          'y': 860
         outputIds: []
         type: DebugNode
       - config:
@@ -53,16 +50,16 @@ resources:
           params:
             - name: dashboardId
               type: string
-              value: '{{globals.dashboardId}}'
+              value: '{{data.params.dashboardId}}'
             - name: reportConfig
               type: json
               value: |-
                 {
+                    {{#if working.reportCtx}}"ctx": {{jsonEncode working.reportCtx}},{{/if}}
                     "callbackUrl": "{{data.headers.x-forwarded-proto}}://{{data.headers.host}}/tl-dashboard-report-cb?jwt={{working.jwt}}",
                     "branded": false,
                     "theme": "{{#eq data.query.theme 'dark'}}dark{{else}}light{{/eq}}",
-                    "time": {{defaultTo data.query.t 0}},
-                    "ctx": {{jsonEncode working.reportCtx}}
+                    "time": {{defaultTo data.query.t 0}}
                 }
           resource: applicationDashboard
           responsePath: pageData
@@ -70,22 +67,24 @@ resources:
         meta:
           category: data
           description: ''
-          label: Losant API
+          label: Request Export
           name: losantapi
-          x: 980
-          'y': 380
+          x: 740
+          'y': 660
         outputIds:
           - - Ny4Ym0TIE7
         type: LosantApiNode
       - config:
-          algorithmTemplate: HS256
-          dataTemplate: '{{jsonEncode working.reportCtx}}'
+          credentialNameTemplate: Sign Dashboard Export
+          dataTemplate: |-
+            {
+              "expUserId": "{{experience.user.id}}" 
+            }
           dataTemplateType: json
           destinationPath: working.jwt
           expiresIn: 600
+          headerTemplate: ''
           headerTemplateType: json
-          issuerTemplate: '{{data.headers.host}}'
-          secretTemplate: '{{globals.JWT_SECRET}}'
         id: sMe6RVYDZk
         meta:
           category: logic
@@ -94,31 +93,11 @@ resources:
           label: 'JWT: Create'
           name: jwt-create
           timeUnit: Minutes
-          x: 980
-          'y': 280
+          x: 740
+          'y': 560
         outputIds:
           - - kxPlccGryD
         type: JWTCreateNode
-      - config:
-          rules:
-            - destination: working.reportCtx
-              type: set
-              valueTemplate: |-
-                {
-                  "experienceUser": "{{experience.user.id}}"
-                }
-              valueTemplateType: json
-        id: u_HkZtK6X3
-        meta:
-          category: logic
-          description: ''
-          label: Mutate
-          name: mutate
-          x: 980
-          'y': 180
-        outputIds:
-          - - sMe6RVYDZk
-        type: MutateNode
       - config:
           level: verbose
           message: ''
@@ -129,14 +108,13 @@ resources:
           description: ''
           label: Debug
           name: debug
-          x: 600
-          'y': 1380
+          x: 540
+          'y': 1660
         outputIds: []
         type: DebugNode
       - config:
+          credentialNameTemplate: Sign Dashboard Export
           errorPath: working.jwtVerifyError
-          issuerTemplate: '{{data.headers.host}}'
-          secretTemplate: '{{globals.JWT_SECRET}}'
           tokenTemplate: '{{data.query.jwt}}'
         id: Plp_G1XKYq
         meta:
@@ -144,13 +122,14 @@ resources:
           description: ''
           label: 'JWT: Verify'
           name: jwt-verify
-          x: 600
-          'y': 880
+          x: 540
+          'y': 1160
         outputIds:
           - - QVhMTMBL6k
           - - PPoknMwYYQ
         type: JWTVerifyNode
       - config:
+          complete: false
           destinationPath: working.jwtDecoded
           tokenTemplate: '{{data.query.jwt}}'
         id: PPoknMwYYQ
@@ -159,8 +138,8 @@ resources:
           description: ''
           label: 'JWT: Decode'
           name: jwt-decode
-          x: 700
-          'y': 980
+          x: 640
+          'y': 1260
         outputIds:
           - - KlGpwJhcyk
         type: JWTDecodeNode
@@ -187,8 +166,8 @@ resources:
           label: User / Device Mismatch
           mqttTopicsType: []
           name: endpoint-reply
-          x: 500
-          'y': 1280
+          x: 440
+          'y': 1560
         outputIds:
           - - EjGed0u5xs
         type: EndpointReplyNode
@@ -218,8 +197,8 @@ resources:
           description: ''
           label: Email
           name: structure-email
-          x: 700
-          'y': 1180
+          x: 640
+          'y': 1460
         outputIds:
           - - 0_FUWpHbMc
         type: StructureEmailNode
@@ -245,8 +224,8 @@ resources:
           label: 200 OK
           mqttTopicsType: []
           name: endpoint-reply
-          x: 700
-          'y': 1280
+          x: 640
+          'y': 1560
         outputIds:
           - - EjGed0u5xs
         type: EndpointReplyNode
@@ -254,21 +233,23 @@ resources:
         id: goklUbCqgI
         meta:
           annotationText: >-
-            This Mutate Node builds the context object to apply to the dashboard
-            report. You will need to modify this to build your chosen
-            dashboard's context. Currently, it is set up to pass the Experience
-            User making the request.
+            Use this Mutate Node to build the context object to apply to the
+            dashboard report. You will need to modify this to build your chosen
+            dashboard's context, which **could change depending on the dashboard
+            being requested**. Currently, it is set up to pass the user making
+            the request through an Experience User-type variable called
+            `experienceUser`.
 
 
-            This context object is then used to sign the JWT that's included in
-            the callback URL.
+            This context object is then applied to the dashboard being generated
+            for the user report.
           category: annotation
           height: 200
           label: Note
           name: note
-          width: 400
-          x: 1180
-          'y': 140
+          width: 600
+          x: 900
+          'y': 280
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -279,25 +260,25 @@ resources:
             utilizing ...
 
 
-            - The dashboard ID from your globals object
+            - The dashboard ID of the dashboard included in this template.
 
-            - The context object constructed above
+            - The context object constructed above. 
 
-            - The theme and time from the request's query parameters
+            - The theme and time from the request's query parameters.
 
             - The callback URL included in the template, along with the JWT as a
-            query parameter
+            query parameter.
 
 
             Feedback as to whether the request succeeded is provided to the user
             in the response.
           category: annotation
-          height: 300
+          height: 220
           label: Note
           name: note
-          width: 400
-          x: 1180
-          'y': 380
+          width: 600
+          x: 900
+          'y': 680
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -307,12 +288,12 @@ resources:
             On receipt of a request to this unauthenticated endpoint, verify the
             JWT included as a query param and decode it.
           category: annotation
-          height: 200
+          height: 100
           label: Note
           name: note
-          width: 160
-          x: 420
-          'y': 780
+          width: 600
+          x: 240
+          'y': 980
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -328,7 +309,7 @@ resources:
           name: note
           width: 400
           x: 900
-          'y': 1160
+          'y': 1360
         outputIds: []
         type: AnnotationNode
       - config: {}
@@ -338,15 +319,16 @@ resources:
             While this request is not visible to any users, we reply to it
             anyways to keep the request from hanging and timing out.
           category: annotation
-          height: 120
+          height: 140
           label: Note
           name: note
-          width: 340
-          x: 140
-          'y': 1240
+          width: 280
+          x: 220
+          'y': 1460
         outputIds: []
         type: AnnotationNode
       - config:
+          attachments: []
           bccAddresses: []
           bodyTemplate: |-
             <!doctype html>
@@ -376,69 +358,12 @@ resources:
           description: ''
           label: SendGrid
           name: sendgrid
-          x: 1000
-          'y': 1260
+          x: 860
+          'y': 1460
         outputIds: []
         type: SendgridEmailNode
-      - config: {}
-        id: TmC1qpZVGZ
-        meta:
-          annotationText: >-
-            ### Required Global Variables
-
-
-            You must change the following [workflow global
-            variable](https://~exportplaceholderid-docs-url~/workflows/overview/#workflow-globals)
-            values to utilize this template:
-
-
-            - `JWT_SECRET`: Change this value to a long, random, secret string.
-            This is important for signing the callback request. You may use the
-            Virtual Button below to generate one.
-
-            - `dashboardId`: Change this to the ID of the dashboard to display
-            on the template's experience page, which is used to generate the
-            report. This is currently set to the ID of the sample dashboard
-            included in this template.
-          category: annotation
-          height: 320
-          label: Note
-          name: note
-          width: 480
-          x: 40
-          'y': 40
-        outputIds: []
-        type: AnnotationNode
       - config:
-          destinationPath: working.generatedString
-          idTypeTemplate: uuidv4
-        id: 1pz1Qx5kJw
-        meta:
-          category: logic
-          description: ''
-          label: Generate ID
-          name: generate-id
-          x: 180
-          'y': 480
-        outputIds:
-          - - _WZJBvwgUb
-        type: GenerateIdNode
-      - config:
-          level: verbose
-          message: ''
-          property: ''
-        id: _WZJBvwgUb
-        meta:
-          category: debug
-          description: ''
-          label: Debug
-          name: debug
-          x: 180
-          'y': 580
-        outputIds: []
-        type: DebugNode
-      - config:
-          emailOrIdTemplate: '{{working.jwtDecoded.experienceUser}}'
+          emailOrIdTemplate: '{{working.jwtDecoded.expUserId}}'
           findMetadata: false
           findMethod: emailOrId
           findMultiple: false
@@ -451,37 +376,268 @@ resources:
           description: ''
           label: 'User: Get'
           name: get-experience-user
-          x: 700
-          'y': 1080
+          x: 640
+          'y': 1360
         outputIds:
           - - k2mLpuAsz8
         type: GetExperienceUserNode
-    triggers:
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-getTlDashboardReport~
+        id: mMhkqFw7OK
         meta:
-          category: trigger
+          annotationText: >-
+            You **must** [create a JWT service
+            credential](/applications/recent/credentials/new/jwt) named "Sign
+            Dashboard Export" to sign and then verify this request.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 600
+          x: 200
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          action: get
+          params:
+            - name: dashboardId
+              type: string
+              value: '{{data.params.dashboardId}}'
+          resource: applicationDashboard
+          responsePath: working.requestedDashboard
+        id: ZlRQscyBFY
+        meta:
+          category: data
           description: ''
-          label: GET /tl-dashboard-report
-          name: endpoint
-          uiId: lcpKEbuT1W
-          x: 780
-          'y': 80
+          label: Find Dashboard
+          name: losantapi
+          x: 540
+          'y': 160
+        outputIds:
+          - - R5DxbdXx4m
+        type: LosantApiNode
+      - config:
+          expression: '{{working.requestedDashboard.result.id}}'
+        id: R5DxbdXx4m
+        meta:
+          category: logic
+          description: ''
+          label: Found?
+          name: conditional
+          x: 540
+          'y': 260
+        outputIds:
+          - - YC0svF2sWS
+          - - j2YKsXJCie
+        type: ConditionalNode
+      - config:
+          expression: '{{data.method}} === ''post'''
+        id: j2YKsXJCie
+        meta:
+          category: logic
+          description: ''
+          label: POST?
+          name: conditional
+          x: 640
+          'y': 360
         outputIds:
           - - Ny4Ym0TIE7
-        type: endpoint
+          - - zxwW_HnbDt
+        type: ConditionalNode
+      - config:
+          bodyTemplate: |-
+            <!doctype html>
+            <html lang="en" data-bs-theme="auto">
+              <head>
+                <meta charset="utf-8">
+                <title>404 - Dashboard Not Found</title>
+              </head>
+              <body>
+                <h1>404 - Dashboard Not Found</h1>
+              </body>
+            </html>
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: text/html
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: YC0svF2sWS
+        meta:
+          category: output
+          description: ''
+          label: '404'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 440
+          'y': 760
+        outputIds:
+          - - 6iiIBeIBpO
+        type: EndpointReplyNode
       - config: {}
-        key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReport~
+        id: 1cJuOaA64o
+        meta:
+          annotationText: >-
+            Verify that the dashboardId passed in the URL resolves to a
+            dashboard from your application. This only checks that the dashboard
+            exists; it **does not check** if the Experience User making the
+            request **should have access** to the dashboard.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 380
+          x: 140
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: l12r534qBP
+        meta:
+          annotationText: >-
+            If the dashboard is not found, render a 404 response. Replace this
+            with your existing 404 page if you have one.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 300
+          x: 180
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.reportCtx
+              type: set
+              valueTemplate: |-
+                {
+                  "experienceUser": "{{experience.user.id}}"
+                }
+              valueTemplateType: json
+        id: zxwW_HnbDt
+        meta:
+          category: logic
+          description: ''
+          label: Build Context
+          name: mutate
+          x: 860
+          'y': 460
+        outputIds:
+          - - sMe6RVYDZk
+        type: MutateNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": {
+                "message": "Failed to generate report: {{defaultTo data.errorInfo.error.message 'An unknown error occurred'}}"
+              }
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-dashboardPage~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '500'
+          sameSiteTemplate: ''
+        id: Asq7tivJHa
+        meta:
+          category: output
+          description: ''
+          label: 500 Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 1920
+        outputIds:
+          - - IDi51pOCRl
+        type: EndpointReplyNode
+      - config:
+          level: error
+          message: ''
+          property: ''
+        id: IDi51pOCRl
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 2020
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: x9C3VUX7st
+        meta:
+          annotationText: >-
+            Return a 500 response if an uncaught exception occurs. This will
+            most likely happen when the Service Credential for signing the JWT
+            has not been created.
+
+
+            You **must** [create a JWT service
+            credential](/applications/recent/credentials/new/jwt) named "Sign
+            Dashboard Export" to sign and then verify this request.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 320
+          x: 740
+          'y': 1820
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: hI9EvqbhT6
+        meta:
+          annotationText: >-
+            You **must** [create a JWT service
+            credential](/applications/recent/credentials/new/jwt) named "Sign
+            Dashboard Export" to sign and then verify this request.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 280
+          x: 280
+          'y': 1140
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-getTlDashboardReportDashboardId~
         meta:
           category: trigger
           description: ''
-          label: POST /tl-dashboard-report
+          label: 'GET /tl-dashboard-report/{dashboardId}'
+          name: endpoint
+          uiId: lcpKEbuT1W
+          x: 440
+          'y': 60
+        outputIds:
+          - - ZlRQscyBFY
+        type: endpoint
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-postTlDashboardReportDashboardId~
+        meta:
+          category: trigger
+          description: ''
+          label: 'POST /tl-dashboard-report/{dashboardId}'
           name: endpoint
           uiId: guXHPY75pD
-          x: 980
-          'y': 80
+          x: 640
+          'y': 60
         outputIds:
-          - - u_HkZtK6X3
+          - - ZlRQscyBFY
         type: endpoint
       - config: {}
         key: ~exportplaceholderid-experienceEndpoint-postTlDashboardReportCb~
@@ -491,25 +647,24 @@ resources:
           label: Report Callback
           name: endpoint
           uiId: CV5t2HOx0G
-          x: 600
-          'y': 780
+          x: 540
+          'y': 1060
         outputIds:
           - - Plp_G1XKYq
         type: endpoint
-      - config: {}
-        key: >-
-          ~exportplaceholderid-flow-renderDashboardRequestReport~-F1EwnjAW152aEtJxUgrjr
+      - config:
+          scope: local
+        key: ~exportplaceholderid-flow-renderDashboardRequestReport~-flowError
         meta:
           category: trigger
           description: ''
-          label: Virtual Button
-          name: virtualButton
-          payload: ''
-          uiId: 4xHtmH5n8A
-          x: 180
-          'y': 380
+          label: Workflow Error
+          name: flowError
+          uiId: D4h8239fpN
+          x: 540
+          'y': 1820
         outputIds:
-          - - 1pz1Qx5kJw
-        type: virtualButton
+          - - Asq7tivJHa
+        type: flowError
     version: develop
 version: 1
