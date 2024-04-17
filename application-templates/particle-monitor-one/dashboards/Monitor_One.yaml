@@ -238,7 +238,7 @@ resources:
         width: 0.5
     contextConfiguration:
       - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
-        defaultValue: ~exportplaceholderid-device-exampleMonitorOne~
+        defaultValue: ~exportplaceholderid-device-simulatedMonitorOne~
         name: deviceId
         type: deviceId
         validationConfig:
@@ -246,7 +246,7 @@ resources:
         validationEnabled: false
     defaultTheme: light
     duration: 86400000
-    exportHash: 11ea8c9afc292ca220fff6504d2e8d7659225da4d3824b88d2aeb984b76dc408
+    exportHash: 192e3f726048b6c934905354acd615f0a0b4c48f50266f70cf28af44b88d9fb9
     id: ~exportplaceholderid-dashboard-monitorOne~
     isPasswordProtected: false
     name: Monitor One
