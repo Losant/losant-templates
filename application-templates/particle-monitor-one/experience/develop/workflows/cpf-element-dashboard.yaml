@@ -1,0 +1,120 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/dashboard
+    enabled: true
+    exportHash: e29fc5e39c476eea27b09720579ccb5646fb111c16c719c0342b9afe2474d989
+    flowId: ~exportplaceholderid-flow-cpfElementDashboard~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementDashboard~
+    name: cpf-element-dashboard
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementDashboard~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: OM4rL3bWpO
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 220
+          'y': 400
+        outputIds:
+          - - 8noAuw9zY7
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 8noAuw9zY7
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 120
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: pageData.context
+              source: data.query
+              type: copy
+            - source: pageData.context.dashboardId
+              type: remove
+        id: e2NBC1b_7N
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 220
+          'y': 300
+        outputIds:
+          - - OM4rL3bWpO
+        type: MutateNode
+      - config:
+          deviceIdTemplate: '{{data.query.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: fB07dPjIYU
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 120
+          'y': 180
+        outputIds:
+          - - VdEY0QVeAK
+          - - e2NBC1b_7N
+        type: VerifyDeviceNode
+      - config:
+          bodyTemplate: Access Denied
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: VdEY0QVeAK
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 20
+          'y': 400
+        outputIds:
+          - - 8noAuw9zY7
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsDashboard~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/dashboard
+          name: endpoint
+          uiId: zRZg9N30zg
+          x: 120
+          'y': 60
+        outputIds:
+          - - fB07dPjIYU
+        type: endpoint
+    version: develop
+version: 1

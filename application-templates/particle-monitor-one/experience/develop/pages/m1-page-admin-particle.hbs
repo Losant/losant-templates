@@ -1,0 +1,67 @@
+<div class="w-100 h-100 overflow-hidden">
+  <div class="d-flex flex-column h-100">
+
+    <div class="mx-5 mb-3 mt-5">
+      <h1>Particle</h1>
+      <p>Provide a Particle API token for device configuration.</p>
+
+      {{#if request.query.success}}
+      <div class="my-2">
+        <div class="alert alert-success" role="alert">
+          Particle configuration successfully saved.
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if request.query.error}}
+      <div class="my-2">
+        <div class="alert alert-danger" role="alert">
+          ERROR: {{request.query.error}}
+        </div>
+      </div>
+      {{/if}}
+
+      <div class="alert alert-info mb-4 mt-3" role="alert">
+        <div class="mb-2"><strong>Administrator Tip</strong></div>
+        <div>
+          This application uses Particle's API to configure devices. You must provide an access token with
+          at least <strong>configuration:get</strong> and <strong>configuration:update</strong> permissions.
+          We recommend creating an
+          <a href="https://docs.particle.io/reference/cloud-apis/access-tokens/#getting-an-api-user-token" target="_blank">
+          API User Token</a> for this purpose. The token is stored in a
+          <a href="https://docs.losant.com/applications/credentials/#http" target="_blank">Service Credential</a>,
+          which means it can never be directly retrieved once it's set. Providing new values will overwrite
+          any previously stored values.
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <form method="POST">
+
+          <div class="mb-3">
+            <label for="particle_product_id">Particle Product ID</label>
+            <input type="text" class="form-control" value="{{globals.particle_product_id}}" name="particle_product_id" id="particle_product_id" placeholder="e.g. 12345" aria-describedby="particle_product_id_help" required>
+            <div id="particle_product_id_help" class="form-text">
+              The Particle <a href="https://docs.particle.io/getting-started/products/introduction-to-products/#products" target="_blank">
+              Product ID</a> that contains this application's devices.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="particle_token">Particle Access Token</label>
+            <input type="text" class="form-control" name="particle_token" id="particle_token" placeholder="(Redacted)" aria-describedby="particle_token_help" required>
+            <div id="particle_token_help" class="form-text">
+              Particle access token with at least configure:get and configuration:update permissions.
+            </div>
+          </div>
+
+          <div class="card p-3 my-4 cpf-bg-mid">
+            <button type="submit" class="btn btn-primary w-25">Submit</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

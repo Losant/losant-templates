@@ -1,0 +1,33 @@
+<turbo-frame id="cpf-element-nav">
+   <div  {{#unless request.query.preview}}id="cpf-navbar-collapse"{{/unless}}
+         class="cpf-element-nav d-md-flex cpf-nav overflow-y-auto {{#unless request.query.preview}}collapse{{/unless}} flex-column flex-shrink-0 p-3 justify-content-between {{#if request.query.preview}}cpf-nav-preview{{/if}}"
+         data-controller="cpf-element-nav"
+         data-action="turbo:visit@document->cpf-element-nav#onTurboVisit"
+         data-cpf-element-nav-which-value="{{request.query.which}}"
+         data-cpf-element-nav-preview-value="{{request.query.preview}}"
+         data-cpf-element-nav-top-nav-items-value="{{pageData.navItemsTop}}"
+         data-cpf-element-nav-bottom-nav-items-value="{{pageData.navItemsBottom}}">
+
+      <!-- Template for each nav item. Rendered in cpf-element-nav controller. -->
+      <template>
+         <li class="nav-item">
+            <a href=""
+               class="nav-link"
+               data-action="click->cpf-element-nav#navItemClicked">
+               <div class="align-middle">
+                  <span class="align-middle me-1 material-symbols-outlined cpf-text-dark cpf-icon-small"></span>
+                  <span class="cpf-element-nav-label"></span>
+               </div>
+            </a>
+         </li>
+      </template>
+
+      <ul class="nav nav-pills flex-column cpf-element-nav-top"></ul>
+
+      <ul class="nav nav-pills flex-column cpf-element-nav-bottom"></ul>
+
+      {{#if request.query.preview}}
+      <button type="button" class="mt-2 btn btn-outline-success" data-action="cpf-element-nav#addItem">Add Item</button>
+      {{/if}}
+   </div>
+</turbo-frame>

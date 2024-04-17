@@ -1,0 +1,896 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /m1/elements/gateway-settings
+    enabled: true
+    exportHash: 8a15a4d60c5e699b4f56434ab279cdf8c0e99eab49610c49ca1ec0319cf9f370
+    flowId: ~exportplaceholderid-flow-m1ElementGatewaySettings~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-m1ElementGatewaySettings~
+    name: m1-element-gateway-settings
+    nodes:
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: mzjAtCrQBj
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 380
+          'y': 1240
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: CHne24dZoL
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1280
+          'y': 1540
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.device}}?tab=gateway-settings&particle_success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: NRtmPbrOba
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1280
+          'y': 1440
+        outputIds:
+          - - CHne24dZoL
+        type: EndpointReplyNode
+      - config: {}
+        id: yvVwe8qXhG
+        meta:
+          annotationText: Fields are POSTed as strings. Need to convert to numbers.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 1380
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          errorsPath: working.error
+          schema: |-
+            {
+              "type": "object",
+              "properties": {  
+                "gateway_settings_location_interval": { "type": "number", "minimum": 0 } ,
+                "gateway_settings_modbus1_interval": { "type": "number", "minimum": 0 },
+                "gateway_settings_modbus2_interval": { "type": "number", "minimum": 0 },
+                "gateway_settings_modbus1_server_id": {"type": "number", "minimum": 1, "maximum": 255 },
+                "gateway_settings_modbus2_server_id": {"type": "number", "minimum": 1, "maximum": 255 }
+              },
+              "required": [
+                "gateway_settings_location_interval",
+                "gateway_settings_modbus1_interval",
+                "gateway_settings_modbus2_interval",
+                "gateway_settings_modbus1_server_id",
+                "gateway_settings_modbus2_server_id"
+              ]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: kAFWDcdExT
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 1180
+          'y': 680
+        outputIds:
+          - - Mu2RxhfWU0
+          - - PycHOSSvVO
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.device}}?tab=gateway-settings&particle_error={{encodeURI
+            'Invalid or missing fields'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: Mu2RxhfWU0
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 800
+        outputIds:
+          - - 9Co6BLzKYs
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 9Co6BLzKYs
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 980
+          'y': 900
+        outputIds: []
+        type: DebugNode
+      - config:
+          authCredentials: {}
+          authType: credential
+          bodyType: none
+          caCertTemplate: ''
+          credentialNameTemplate: particle
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.particle
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.particle
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.particle.io/v1/products/{{globals.particle_product_id}}/config/{{working.device.tags.particle_id.[0]}}
+        id: bOXwamWfQM
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 1180
+          'y': 900
+        outputIds:
+          - - aaSkYJcJlr
+        type: HttpNode
+      - config:
+          expression: '{{working.particle.statusCode}} == 200'
+        id: aaSkYJcJlr
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1180
+          'y': 1000
+        outputIds:
+          - - cUk1oVZZfY
+          - - etEjsGF2x4
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 0lhf5GHu4C
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 980
+          'y': 1220
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.query.device}}'
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: working.device
+          tagsAsObject: true
+        id: PycHOSSvVO
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 1180
+          'y': 800
+        outputIds:
+          - - bOXwamWfQM
+        type: GetDeviceNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.device}}?tab=gateway-settings&particle_error={{encodeURI
+            'Failed to retrieve Particle device configuration.'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: cUk1oVZZfY
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 1120
+        outputIds:
+          - - 0lhf5GHu4C
+        type: EndpointReplyNode
+      - config:
+          rules:
+            - destination: working.particle.body.configuration.current.modbus1.poll
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus1_interval}}'
+              valueTemplateType: json
+            - destination: working.particle.body.configuration.current.modbus2.poll
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus2_interval}}'
+              valueTemplateType: string
+            - destination: >-
+                working.particle.body.configuration.current.location.interval_max
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_location_interval}}'
+              valueTemplateType: json
+            - destination: working.particle.body.configuration.current.modbus1.id
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus1_server_id}}'
+              valueTemplateType: string
+            - destination: working.particle.body.configuration.current.modbus2.id
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus2_server_id}}'
+              valueTemplateType: string
+        id: etEjsGF2x4
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 1180
+          'y': 1120
+        outputIds:
+          - - ZdMNuI0miD
+        type: MutateNode
+      - config: {}
+        id: k5ATIemvpP
+        meta:
+          annotationText: >-
+            Updating the existing values with the new values and PUT the changes
+            to Particle API.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 1380
+          'y': 1120
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          authCredentials: {}
+          authType: credential
+          bodyTemplate: '{{jsonEncode working.particle.body.configuration.current}}'
+          bodyType: string
+          caCertTemplate: ''
+          credentialNameTemplate: particle
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.particleUpdate
+          headerInfo:
+            - key: Content-Type
+              valueTemplate: application/json
+          method: PUT
+          requestEncodingTemplate: utf8
+          responsePath: working.particleUpdate
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.particle.io/v1/products/{{globals.particle_product_id}}/config/{{working.device.tags.particle_id.[0]}}
+        id: ZdMNuI0miD
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 1180
+          'y': 1220
+        outputIds:
+          - - IS64PnB_qY
+        type: HttpNode
+      - config:
+          expression: '{{working.particleUpdate.statusCode}} == 200'
+        id: IS64PnB_qY
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1180
+          'y': 1320
+        outputIds:
+          - - dElvJ31sLh
+          - - NRtmPbrOba
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 2_F9Ir8_Iz
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1080
+          'y': 1540
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.device}}?tab=gateway-settings&particle_error={{encodeURI
+            'Failed to update Particle device configuration.'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: dElvJ31sLh
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1080
+          'y': 1440
+        outputIds:
+          - - 2_F9Ir8_Iz
+        type: EndpointReplyNode
+      - config:
+          rules:
+            - destination: data.body.gateway_settings_location_interval
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_location_interval}}'
+              valueTemplateType: json
+            - destination: data.body.gateway_settings_modbus1_interval
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus1_interval}}'
+              valueTemplateType: json
+            - destination: data.body.gateway_settings_modbus2_interval
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus2_interval}}'
+              valueTemplateType: json
+            - destination: data.body.gateway_settings_modbus1_server_id
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus1_server_id}}'
+              valueTemplateType: json
+            - destination: data.body.gateway_settings_modbus2_server_id
+              type: set
+              valueTemplate: '{{data.body.gateway_settings_modbus2_server_id}}'
+              valueTemplateType: json
+        id: 0Ks_7WShUu
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 1180
+          'y': 580
+        outputIds:
+          - - kAFWDcdExT
+        type: MutateNode
+      - config:
+          authCredentials: {}
+          authType: credential
+          bodyType: none
+          caCertTemplate: ''
+          credentialNameTemplate: particle
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.particle
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.particle
+          timeoutTemplate: ''
+          uriTemplate: >-
+            https://api.particle.io/v1/products/{{globals.particle_product_id}}/config/{{pageData.device.tags.particle_id.[0]}}
+        id: NaQuUOwsX3
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 380
+          'y': 800
+        outputIds:
+          - - qafMN3E_Y4
+        type: HttpNode
+      - config: {}
+        id: ZrpbZ0B2lV
+        meta:
+          annotationText: Query the Particle API for the current device configuration.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 580
+          'y': 800
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.particle.statusCode}} == 200'
+        id: qafMN3E_Y4
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 380
+          'y': 900
+        outputIds:
+          - - UdV5HygLH_
+          - - D2gBNDqvuF
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: pageData.particle
+              source: working.particle.body
+              type: copy
+        id: D2gBNDqvuF
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 480
+          'y': 1020
+        outputIds:
+          - - o30l6kWPxY
+        type: MutateNode
+      - config:
+          rules:
+            - destination: pageData.particleError
+              type: set
+              valueTemplate: >-
+                Failed to retrieve Particle device configuration with the
+                following error: {{working.particle.body.error_description}}
+                Please contact your system administrator and ensure the Particle
+                authentication details have been properly configured.
+              valueTemplateType: string
+        id: UdV5HygLH_
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 280
+          'y': 1020
+        outputIds:
+          - - o30l6kWPxY
+        type: MutateNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-m1ElementGatewaySettings~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: o30l6kWPxY
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 1140
+        outputIds:
+          - - mzjAtCrQBj
+        type: EndpointReplyNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.query.device}}'
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: pageData.device
+          tagsAsObject: true
+        id: ebV8saQaEm
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 280
+          'y': 480
+        outputIds:
+          - - ATkQM6nsZ_
+        type: GetDeviceNode
+      - config:
+          expression: '{{pageData.device}} && {{pageData.device.tags.particle_id.[0]}}'
+        id: ATkQM6nsZ_
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 280
+          'y': 580
+        outputIds:
+          - - SEcSIgYVz1
+          - - OlIszYd7vF
+        type: ConditionalNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-m1ElementGatewaySettings~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: RkUyerFs1j
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 180
+          'y': 800
+        outputIds:
+          - - DxC6fzK6Fo
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: DxC6fzK6Fo
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 180
+          'y': 900
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: nJ51trTaF9
+        meta:
+          annotationText: Request the current configuration from the Particle API.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 1380
+          'y': 900
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: pageData.error
+              type: set
+              valueTemplate: >-
+                Device not found or device does not have Particle identifier
+                configured.
+              valueTemplateType: string
+        id: SEcSIgYVz1
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 180
+          'y': 700
+        outputIds:
+          - - RkUyerFs1j
+        type: MutateNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: 2P1H4Ed3hV
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 80
+          'y': 140
+        outputIds:
+          - - aJmKBsHmOG
+          - - DgXAq1z7cI
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Permission denied."
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-m1ElementGatewaySettings~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: aJmKBsHmOG
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 80
+          'y': 380
+        outputIds:
+          - - ifnxARVB5M
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: ifnxARVB5M
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 80
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          deviceIdTemplate: '{{data.query.device}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: DgXAq1z7cI
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 180
+          'y': 260
+        outputIds:
+          - - aJmKBsHmOG
+          - - ebV8saQaEm
+        type: VerifyDeviceNode
+      - config: {}
+        id: VwgagvFIqw
+        meta:
+          annotationText: >-
+            Does the device exist and does the device contain a `particle_id`
+            tag.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 480
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          deviceIdTemplate: '{{data.query.device}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: JL9zKJZE37
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 980
+          'y': 140
+        outputIds:
+          - - T0BkDJUob1
+          - - 5kQboaMiM4
+        type: VerifyDeviceNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.device}}?tab=gateway-settings&particle_error={{encodeURI
+            'Device not found.'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: T0BkDJUob1
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 880
+          'y': 260
+        outputIds:
+          - - hNFRXPcC5x
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: hNFRXPcC5x
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 880
+          'y': 360
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyRole~
+          customNodeVersion: default
+          fields:
+            - id: requiredRole
+              value: editor
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: ''
+        id: 5kQboaMiM4
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Role'
+          name: custom-node-execute-node
+          x: 1080
+          'y': 360
+        outputIds:
+          - - zC7zUMqAGY
+          - - 0Ks_7WShUu
+        type: CustomNodeExecuteNode
+      - config: {}
+        id: wb2QjEy2b7
+        meta:
+          annotationText: Must be an `editor` to update gateway settings.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 1280
+          'y': 360
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.device}}?tab=gateway-settings&particle_error={{encodeURI
+            'Permission denied. Must be editor role.'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: zC7zUMqAGY
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 480
+        outputIds:
+          - - rWu3h5DmQN
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: rWu3h5DmQN
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 980
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: pageData.role
+              type: set
+              valueTemplate: '{{defaultTo experience.user.userTags.cpf_role ''viewer''}}'
+              valueTemplateType: string
+        id: OlIszYd7vF
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 380
+          'y': 700
+        outputIds:
+          - - NaQuUOwsX3
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getM1ElementsGatewaySettings~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /m1/elements/gateway-settings
+          name: endpoint
+          uiId: YT70pI6O48
+          x: 80
+          'y': 40
+        outputIds:
+          - - 2P1H4Ed3hV
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postM1ElementsGatewaySettings~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /m1/elements/gateway-settings
+          name: endpoint
+          uiId: ekFNnTms8d
+          x: 980
+          'y': 40
+        outputIds:
+          - - JL9zKJZE37
+        type: endpoint
+    version: develop
+version: 1

@@ -1,0 +1,448 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /admin/navigation
+    enabled: true
+    exportHash: 08bbfdd1a7040c6a199bbb1f40e4192b1d4870a1bfb07acb08adf7a84eb9ae33
+    flowId: ~exportplaceholderid-flow-cpfPageAdminNavigation~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageAdminNavigation~
+    name: cpf-page-admin-navigation
+    nodes:
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminNavigation~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: ez7UsRO6U2
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 380
+        outputIds:
+          - - rXhiqr0Yd8
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: rXhiqr0Yd8
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 240
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /admin/navigation?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: g_QzTXxsFu
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 880
+          'y': 1180
+        outputIds:
+          - - gftsi7vzir
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: gftsi7vzir
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 880
+          'y': 1260
+        outputIds: []
+        type: DebugNode
+      - config:
+          destination: working.nav
+          errorBehavior: payloadPath
+          errorPath: working.error
+          source: data.body.nav
+        id: 4beFkJoXoy
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 860
+          'y': 560
+        outputIds:
+          - - dOsreW58rg
+        type: JsonDecodeNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfNavigation~
+          limitTemplate: ''
+          queryTemplate: '{"$or":[]}'
+          resultPath: ''
+        id: bvT5VEwMUG
+        meta:
+          category: data
+          description: ''
+          label: Delete Nav
+          name: delete-table-row
+          x: 880
+          'y': 1020
+        outputIds:
+          - - LzrnVgbNR3
+        type: DataTableDeleteRowNode
+      - config:
+          dataMethod: payloadPath
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfNavigation~
+          resultPath: working.insertResult
+          rowPayloadPath: working.nav
+        id: LzrnVgbNR3
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Insert Rows'
+          name: insert-table-row
+          x: 880
+          'y': 1100
+        outputIds:
+          - - g_QzTXxsFu
+        type: DataTableInsertRowNode
+      - config:
+          expression: '{{working.error}}'
+        id: dOsreW58rg
+        meta:
+          category: logic
+          description: ''
+          label: JSON Error?
+          name: conditional
+          x: 860
+          'y': 660
+        outputIds:
+          - - SqVeY4mncG
+          - - 3u2osHRH0b
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /admin/navigation?error=Body was not valid JSON
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 3u2osHRH0b
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 800
+        outputIds:
+          - - dqhwU0PpNs
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: dqhwU0PpNs
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 980
+          'y': 880
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorsPath: working.error
+          schema: |-
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nav_label": { "type": "string" },
+                  "nav_icon": { "type": "string" },
+                  "nav_id": { "type": "string" },
+                  "nav_link": { "type": "string" }, 
+                  "nav_access_group_level": { "type": "number" },
+                  "nav_access_user_role": { "enum": ["", "viewer", "editor", "admin"] },
+                  "nav_location": { "enum": ["top", "bottom"] },
+                  "nav_order": { "type": "number" },
+                  "nav_parent": { "type": "string" }
+                },
+                "required": [
+                  "nav_label",
+                  "nav_icon",
+                  "nav_id",
+                  "nav_link",
+                  "nav_location",
+                  "nav_order",
+                  "nav_access_group_level",
+                  "nav_access_user_role",
+                  "nav_parent"
+                ]
+              }
+            }
+          schemaType: json
+          toValidatePath: working.nav
+        id: SqVeY4mncG
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 780
+          'y': 800
+        outputIds:
+          - - 6hirhTqqxv
+          - - bvT5VEwMUG
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: /admin/navigation?error=Nav data is not formatted correctly
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 6hirhTqqxv
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 680
+          'y': 1020
+        outputIds:
+          - - mCdf_HKJjU
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: mCdf_HKJjU
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 680
+          'y': 1100
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: N3pzTbnGq0
+        meta:
+          annotationText: >-
+            Expects the entire contents of the nav as a JSON string. Decodes,
+            validates, and overwrites the
+            [cpf_navigation](https://~exportplaceholderid-app-url~/applications/~exportplaceholderid-application-applicationParticleMonitorOne~/data-tables/~exportplaceholderid-dataTable-cpfNavigation~)
+            data table with the received values.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 300
+          x: 700
+          'y': 40
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: YuLg1NZPcv
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 140
+          'y': 140
+        outputIds:
+          - - 6omuDdBdfB
+          - - f1OK77rpD8
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: f1OK77rpD8
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 240
+          'y': 260
+        outputIds:
+          - - 6omuDdBdfB
+          - - ez7UsRO6U2
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 6omuDdBdfB
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 380
+        outputIds:
+          - - aWR5NEqbjk
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: aWR5NEqbjk
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: BXC2sCTSlp
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 760
+          'y': 320
+        outputIds:
+          - - iKHMJoL_N0
+          - - jiuhL1g3TM
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: jiuhL1g3TM
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 860
+          'y': 440
+        outputIds:
+          - - iKHMJoL_N0
+          - - 4beFkJoXoy
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: iKHMJoL_N0
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 660
+          'y': 560
+        outputIds:
+          - - sm3VbNMoEx
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: sm3VbNMoEx
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 660
+          'y': 660
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getAdminNavigation~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /admin/navigation
+          name: endpoint
+          uiId: SMmzrbn0BI
+          x: 140
+          'y': 40
+        outputIds:
+          - - YuLg1NZPcv
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postAdminNavigation~
+        meta:
+          category: trigger
+          description: ''
+          label: Endpoint
+          name: endpoint
+          uiId: s1XKUJc7TH
+          x: 760
+          'y': 220
+        outputIds:
+          - - BXC2sCTSlp
+        type: endpoint
+    version: develop
+version: 1

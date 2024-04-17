@@ -1,0 +1,19 @@
+id,key,type,template,order,label
+660c6a711df77e3efdfef134,connected,native,"{{#if value.connected}}
+  <span class=""material-symbols-outlined cpf-icon-small text-success""
+        data-bs-toggle=""tooltip""
+        title=""Connected since {{value.time}}"">
+    cloud
+  </span>
+ {{else}}
+ <span class=""material-symbols-outlined cpf-icon-small text-danger""
+       data-bs-toggle=""tooltip""
+       title=""{{#if value.time}}Disconnected since {{value.time}}{{else}}Device has never connected{{/if}}"">
+   cloud_off
+  </span>
+{{/if}}",0,Connected
+660c6a711df77e3efdfef135,name,native,"<a href=""/devices/{{device.id}}?tab=properties"">{{value}}</a>",1,Name
+660c6a711df77e3efdfef136,particle_id,tag,{{value}},2,Particle ID
+660c6a711df77e3efdfef137,temperature,attribute,{{value}},3,Temperature
+660c6a711df77e3efdfef138,customer,group,"<a href=""/customers/{{value.id}}"">{{value.name}}</a>",4,Customer
+660c6a711df77e3efdfef139,site,group,"<a href=""/sites/{{value.id}}"">{{value.name}}</a>",5,Site

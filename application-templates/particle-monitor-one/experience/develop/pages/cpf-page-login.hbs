@@ -1,0 +1,22 @@
+<h1 class="h3 text-center mb-3">Sign In</h3>
+<form method="POST">
+  {{#if pageData.loginFailure}}
+  <div class="alert alert-danger mb-3" role="alert">
+    Invalid email or password.
+  </div>
+  {{/if}}
+  <div class="mb-3">
+    <label for="email" class="form-label" >Email *</label>
+    <input type="email" class="form-control" id="email" name="email" value="{{pageData.email}}" placeholder="name@example.com" {{#unless pageData.email}}autofocus{{/unless}}>
+  </div>
+  <div class="mb-5">
+    <label for="password" class="form-label">Password *</label>
+    <input type="password" class="form-control" id="password" name="password" {{#if pageData.email}}autofocus{{/if}}>
+  </div>
+  <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
+  {{#if globals.cpf-jwt-password-reset-secret}}
+  <div class="text-center">
+    <a href="/forgot-password{{#if pageData.email}}?email={{pageData.email}}{{/if}}"><small>Forgot Password?</small></a>
+  </div>
+  {{/if}}
+</form>

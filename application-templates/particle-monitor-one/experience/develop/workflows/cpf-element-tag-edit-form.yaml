@@ -1,0 +1,422 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/tag-edit-form
+    enabled: true
+    exportHash: 80d2a5f398070325b7265e9b290a0ad777dbe2ea82269b27cb3768b980f8a72e
+    flowId: ~exportplaceholderid-flow-cpfElementTagEditForm~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementTagEditForm~
+    name: cpf-element-tag-edit-form
+    nodes:
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: recipe
+            - caseLabel: ''
+              caseTemplate: device
+          switchTemplate: '{{data.query.type}}'
+        id: vcgQUEp9U_
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 460
+          'y': 440
+        outputIds:
+          - - As6duHSJqL
+          - - L5DPOHo6w5
+          - - T7ugXCR5nx
+        type: SwitchNode
+      - config:
+          action: get
+          params:
+            - name: deviceRecipeId
+              type: string
+              value: '{{data.query.id}}'
+            - name: tagsAsObject
+              type: string
+              value: ''
+            - name: attributesAsObject
+              type: string
+              value: ''
+          resource: deviceRecipe
+          responsePath: pageData.device
+        id: L5DPOHo6w5
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 180
+          'y': 840
+        outputIds:
+          - - eW9EH1UfmN
+        type: LosantApiNode
+      - config:
+          rules:
+            - destination: pageData.device
+              source: pageData.device.result
+              type: move
+        id: eW9EH1UfmN
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 180
+          'y': 940
+        outputIds:
+          - - bSqnnSKMOL
+        type: MutateNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.query.id}}'
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: pageData.device
+          tagsAsObject: false
+        id: MARYTs7tvP
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 580
+          'y': 940
+        outputIds:
+          - - bSqnnSKMOL
+        type: GetDeviceNode
+      - config:
+          expression: '{{data.query.id}} !== undefined && {{data.query.id}} !== ""'
+        id: TgEDZ3Sx0K
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 360
+          'y': 260
+        outputIds:
+          - - 2eDm4patxs
+          - - vcgQUEp9U_
+        type: ConditionalNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementTagEditForm~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 2eDm4patxs
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 160
+          'y': 380
+        outputIds:
+          - - G1Ys1iv6ql
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: G1Ys1iv6ql
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 160
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: wHaTruXRAE
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 260
+          'y': 140
+        outputIds:
+          - - 2eDm4patxs
+          - - TgEDZ3Sx0K
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: T7ugXCR5nx
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 560
+          'y': 600
+        outputIds:
+          - - Hvq20u9xfA
+          - - MARYTs7tvP
+        type: ConditionalNode
+      - config:
+          deviceIdTemplate: '{{data.query.id}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: Hvq20u9xfA
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 460
+          'y': 720
+        outputIds:
+          - - ti2OCVO8yu
+          - - MARYTs7tvP
+        type: VerifyDeviceNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementTagEditForm~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: As6duHSJqL
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 760
+          'y': 600
+        outputIds:
+          - - OfzSWHasiZ
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: OfzSWHasiZ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 760
+          'y': 700
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementTagEditForm~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: ti2OCVO8yu
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 840
+        outputIds:
+          - - 2pkHMPfsEf
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 2pkHMPfsEf
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 380
+          'y': 940
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementTagEditForm~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: ydc1X0J6bd
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 380
+          'y': 1260
+        outputIds:
+          - - uI0ychc1LW
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: uI0ychc1LW
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 380
+          'y': 1360
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: frIYc6bxju
+        meta:
+          annotationText: >-
+            Remove all tags that aren't configured. Tags are opt-in and
+            configured from the **Device Tags** admin page.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 580
+          'y': 1060
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfDeviceTags~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.tagsToShow
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: bSqnnSKMOL
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 380
+          'y': 1060
+        outputIds:
+          - - GSgVdAr4R0
+        type: DataTableQueryNode
+      - config:
+          scopePath: ''
+          script: >-
+            let tagsToShow = payload.working.tagsToShow.items;
+
+            let deviceTags = payload.pageData.device.tags;
+
+
+            let deviceRecipe = null;
+
+
+            // If this is displaying tags for a recipe, this is just the name
+
+            // of the recipe. Otherwise, need to find the name of the recipe
+
+            // using the DeviceRecipe device tag.
+
+            if(payload.data.query.type === 'recipe') {
+                deviceRecipe = payload.pageData.device.name;
+            } else {
+                let deviceRecipeTag = deviceTags.find((t) => { return t.key === 'DeviceRecipe'});
+                deviceRecipe = deviceRecipeTag ? deviceRecipeTag.value : null;
+            }
+
+
+            let tagsToShowMap = {};
+
+            tagsToShow.forEach((t) => {
+                tagsToShowMap[t.deviceRecipeName] = JSON.parse(t.deviceTagKeys)
+            });
+
+
+            payload.working.deviceRecipeName = deviceRecipe;
+
+            payload.working.tagsToShowMap = tagsToShowMap;
+
+
+            let tagsForThisRecipe = deviceRecipe ? tagsToShowMap[deviceRecipe] :
+            [];
+
+            tagsForThisRecipe = tagsForThisRecipe || [];
+
+
+            tagsForThisRecipe =
+            tagsForThisRecipe.concat(tagsToShowMap['__default__']);
+
+
+            payload.working.tagsForThisRecipe = tagsForThisRecipe;
+
+
+            // Remove all non-matching tags from the device/recipe.
+
+            payload.pageData.device.tags =
+            payload.pageData.device.tags.filter((t) => {
+                return tagsForThisRecipe.indexOf(t.key) !== -1;
+            });
+        id: GSgVdAr4R0
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 380
+          'y': 1160
+        outputIds:
+          - - ydc1X0J6bd
+        type: RawFunctionNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsTagEditForm~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/tag-edit-form
+          name: endpoint
+          uiId: eDEOz4_7_m
+          x: 260
+          'y': 40
+        outputIds:
+          - - wHaTruXRAE
+        type: endpoint
+    version: develop
+version: 1

@@ -1,0 +1,216 @@
+resourceType: Flow
+resources:
+  - description: Parses incoming Particle device data and saves to device attributes.
+    exportHash: 261b0accef82f0f937d866c5c35e692ed58f65ae0380e10ee6f693507ad67ee6
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-handleParticleData~
+    name: Handle Particle Data
+    nodes:
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: nuKDNHuhsK
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          destination: data.body.data
+          errorBehavior: throw
+          errorPath: ''
+          source: data.body.data
+        id: r30kbtbeOD
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 240
+          'y': 160
+        outputIds:
+          - - DHOqLbdx6b
+        type: JsonDecodeNode
+      - config:
+          cases:
+            - caseLabel: ''
+              caseTemplate: modbus
+            - caseLabel: ''
+              caseTemplate: loc
+          switchTemplate: '{{data.body.event}}'
+        id: SRgyAPqwvm
+        meta:
+          category: logic
+          description: ''
+          label: Switch
+          name: switch
+          x: 340
+          'y': 560
+        outputIds:
+          - - nuKDNHuhsK
+          - - mep7uxSX3Q
+          - - TLHICsS_08
+        type: SwitchNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Hg7UoaBzQS
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 340
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: eG07m4CLYU
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - inputTemplate: name
+              outputPath: working.modbus
+              type: groupBy
+          sourceArrayPath: data.body.data.modbus
+        id: mep7uxSX3Q
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 140
+          'y': 720
+        outputIds:
+          - - RKFPbE7OlB
+        type: ArrayNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: temperature
+              valueTemplate: '{{working.modbus.modbus2.[0].value}}'
+            - key: humidity
+              valueTemplate: '{{working.modbus.modbus1.[0].value}}'
+          deviceId: working.device.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: RKFPbE7OlB
+        meta:
+          category: output
+          description: ''
+          label: 'Device: State'
+          name: device-state
+          x: 140
+          'y': 820
+        outputIds:
+          - - eG07m4CLYU
+        type: DeviceChangeStateNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: findByAllTags
+          findMultiple: false
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: particle_id
+              valueTemplate: '{{data.body.coreid}}'
+          tagsAsObject: true
+        id: DHOqLbdx6b
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 240
+          'y': 260
+        outputIds:
+          - - TeNNa8ysWO
+        type: GetDeviceNode
+      - config:
+          expression: '{{working.device}}'
+        id: TeNNa8ysWO
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 240
+          'y': 360
+        outputIds:
+          - - ERxEQ5Q6wt
+          - - SRgyAPqwvm
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: ERxEQ5Q6wt
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          attrDataMethod: individualFields
+          attrInfos:
+            - key: battery
+              valueTemplate: '{{data.body.data.loc.batt}}'
+            - key: location
+              valueTemplate: '{{data.body.data.loc.lat}},{{data.body.data.loc.lon}}'
+          deviceId: working.device.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: TLHICsS_08
+        meta:
+          category: output
+          description: ''
+          label: 'Device: State'
+          name: device-state
+          x: 340
+          'y': 820
+        outputIds:
+          - - Hg7UoaBzQS
+        type: DeviceChangeStateNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-webhook-particle~
+        meta:
+          category: trigger
+          description: ''
+          label: Webhook
+          name: webhook
+          uiId: OsNX9YxAGF
+          x: 240
+          'y': 60
+        outputIds:
+          - - r30kbtbeOD
+        type: webhook
+version: 1

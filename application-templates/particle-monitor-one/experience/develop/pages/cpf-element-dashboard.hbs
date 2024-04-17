@@ -1,0 +1,18 @@
+<turbo-frame id="cpf-element-dashboard">
+  <style>
+    #los-root {
+      background-color: transparent !important;
+    }
+
+    .is-dashboard {
+      background: transparent !important;
+    }
+
+    .is-dashboard > div {
+      background: transparent !important;
+    }
+  </style>
+  <div>
+    {{element 'dashboard' theme='dark' dashboardId=request.query.dashboardId ctx=pageData.context}}
+  </div>
+</turbo-frame>

@@ -1,0 +1,226 @@
+<turbo-frame id="cpf-element-events-table">
+  <div class="cpf-element-events-table w-100 h-100 d-flex flex-column"
+        data-controller="cpf-element-events-table"
+        data-cpf-element-events-table-page-value="{{pageData.events.page}}"
+        data-cpf-element-events-table-device-id-value="{{defaultTo request.query.device ''}}"
+        data-cpf-element-events-table-hide-device-column-value="{{defaultTo request.query.hideDeviceColumn 'false'}}">
+    <div class="flex-grow-1 overflow-auto">
+      <table class="cpf-table table">
+        <thead id="cpf-element-events-table-table-header" data-turbo-permanent>
+          <tr>
+            <th scope="col">
+              <div>
+                <div class="mb-1">Level</div>
+                <div>
+                  <select data-filter="level"
+                          data-action="cpf-element-events-table#updateFilters"
+                          class="form-select w-auto">
+                    <option value="any">Any</option>
+                    <option value="critical">Critical</option>
+                    <option value="error">Error</option>
+                    <option value="warning">Warning</option>
+                    <option value="info">Info</option>
+                  </select>
+                </div>
+              </div>
+            </th>
+            <th scope="col">
+              <div>
+                <div class="mb-1">State</div>
+                <div>
+                  <select data-filter="state"
+                          data-action="cpf-element-events-table#updateFilters"
+                          class="form-select w-auto">
+                    <option value="any">Any</option>
+                    <option selected value="new">New</option>
+                    <option value="acknowledged">Acknowledged</option>
+                    <option value="resolved">Resolved</option>
+                  </select>
+                </div>
+              </div>
+            </th>
+            <th scope="col">
+              <div>
+                <div class="mb-1">Created At</div>
+                <div class="text-disabled">
+                  <span data-bs-toggle="tooltip"
+                        title="Cannot filter by created date."
+                        class="text-nowrap">
+                    Filter not available
+                  </span>
+                </div>
+              </div>
+            </th>
+            <th scope="col">
+              <div>
+                <div class="mb-1">Subject</div>
+                <input  type="text" class="form-control" placeholder="Filter..."
+                    data-action="cpf-element-events-table#updateFilters"
+                    data-filter="subject"></input>
+              </div>
+            </th>
+
+            {{!-- This is set when viewing events on the dashboard page. Don't need to show device ID, customer, or site dropdowns --}}
+            {{#ne request.query.hideDeviceColumn 'true'}}
+            <th scope="col">
+              <div>
+                <div class="mb-1">Device</div>
+                <input  type="text" class="form-control" placeholder="Device ID..."
+                    data-action="cpf-element-events-table#updateFilters"
+                    data-filter="device"></input>
+              </div>
+            </th>
+
+            {{!-- Customer dropdown only shows up for system admins --}}
+            {{#lt pageData.userLevel 1}}
+            <th scope="col">
+              <div>
+                <div class="mb-1">Customer</div>
+                <div>
+                  <turbo-frame id="cpf-element-group-select" src="/cpf/elements/group-select?level=1&placeholder=-- All Customers --&actionMethod=updateFilters&actionGroupParamValue=customer&controllerName=cpf-element-events-table&targetName=customerSelect&selectedId={{@root.pageData.customerId}}">
+                    <select class="form-select" disabled><option>Loading...</option></select>
+                  </turbo-frame>
+                </div>
+              </div>
+            </th>
+            {{/lt}}
+
+            {{!-- Site dropdown only shows up for customer or system admins --}}
+            {{#lt pageData.userLevel 2}}
+            <th scope="col">
+              <div>
+                <div class="mb-1">Site</div>
+                <div>
+                  <turbo-frame data-cpf-element-events-table-target="siteSelectFrame" id="cpf-element-group-select" src="/cpf/elements/group-select?level=2&placeholder=-- All Sites --&actionMethod=updateFilters&actionGroupParamValue=site&controllerName=cpf-element-events-table&targetName=siteSelect&selectedId={{@root.request.query.site}}&parentId={{@root.pageData.customerId}}">
+                    <select class="form-select" disabled><option>Loading...</option></select>
+                  </turbo-frame>
+                </div>
+              </div>
+            </th>
+            {{/lt}}
+            {{/ne}}
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each pageData.events.items}}
+          <tr>
+            <td class="text-nowrap material-symbols-outlined cpf-icon-{{this.level}} cpf-icon-small" data-bs-toggle="tooltip" title="{{this.level}}">
+              {{#eq this.level 'warning'}}
+              warning
+              {{/eq}}
+              {{#eq this.level 'critical'}}
+              explosion
+              {{/eq}}
+              {{#eq this.level 'error'}}
+              error
+              {{/eq}}
+            </td>
+            <td>{{titleCase this.state}}</td>
+            <td class="text-nowrap"><relative-time format="datetime" weekday="" format-style="short" year="numeric" hour="numeric" minute="numeric" second="" datetime="{{this.creationDate}}"></relative-time></td>
+            <td><a href="/events/{{this.id}}">{{this.subject}}</a></td>
+            {{#ne @root.request.query.hideDeviceColumn 'true'}}
+            <td><a href="/devices/{{this.deviceId}}">{{this.deviceId}}</a></td>
+            {{!-- Customer only shows up for system admins --}}
+            {{#lt @root.pageData.userLevel 1}}
+            <td><a href="/customers/{{this.customer.id}}">{{this.customer.name}}</a></td>
+            {{/lt}}
+            {{!-- Site only shows up for customer or system admins --}}
+            {{#lt @root.pageData.userLevel 2}}
+            <td><a href="/sites/{{this.site.id}}">{{this.site.name}}</a></td>
+            {{/lt}}
+            {{/ne}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{#eq pageData.events.count 0}}
+      <div class="w-100 my-3 flex-grow-1 text-center">
+        <div id="no-events-message" class="alert alert-info" role="alert">
+          No events found.
+        </div>
+      </div>
+      {{/eq}}
+    </div>
+    <div class="container-fluid">
+      <div class="row mt-1 pt-3 paginate-container" data-cpf-element-events-table-target="pagination">
+        <div class="col-lg-3 col-md-12 mb-1 text-lg-start text-center">
+          <select class="form-select w-auto d-inline"
+                  data-action="cpf-element-events-table#updateFilters"
+                  data-cpf-element-events-table-field-param="perPage"
+                  data-cpf-element-events-table-target="perPage">
+            <option {{#eq pageData.events.perPage 25}}selected{{/eq}} value="25">25 per page</option>
+            <option {{#eq pageData.events.perPage 50}}selected{{/eq}} value="50">50 per page</option>
+            <option {{#eq pageData.events.perPage 100}}selected{{/eq}} value="100">100 per page</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-md-12 mb-1 text-center">
+          {{!-- First page --}}
+          <span class="material-symbols-outlined align-middle"
+                data-bs-toggle="tooltip"
+                title="First Page">
+            <a  href="#"
+                data-action="cpf-element-events-table#updateFilters"
+                data-cpf-element-events-table-page-param="0"
+                {{#eq pageData.events.page 0}}class="disabled"{{/eq}}>
+              first_page
+            </a>
+          </span>
+          {{!-- Previous page --}}
+          <span class="material-symbols-outlined align-middle"
+                data-bs-toggle="tooltip"
+                title="Previous Page">
+            <a  href="#"
+                data-action="cpf-element-events-table#updateFilters"
+                data-cpf-element-events-table-page-param="{{subtract pageData.events.page 1}}"
+                {{#eq pageData.events.page 0}}class="disabled"{{/eq}}>
+              chevron_left
+            </a>
+          </span>
+          {{!-- Show selected page page --}}
+          <span>{{add pageData.events.page 1}} of {{pageData.events.totalPages}} pages</span>
+          {{!-- Next page --}}
+          <span class="material-symbols-outlined align-middle"
+                data-bs-toggle="tooltip"
+                title="Next Page">
+              <a  href="#"
+                  data-action="cpf-element-events-table#updateFilters"
+                  data-cpf-element-events-table-page-param="{{add pageData.events.page 1}}"
+                  {{#eq (add pageData.events.page 1) pageData.events.totalPages}}class="disabled"{{/eq}}>
+                chevron_right
+              </a>
+            </span>
+
+          {{!-- Last page --}}
+          <span class="material-symbols-outlined align-middle"
+                data-bs-toggle="tooltip"
+                title="Last Page">
+              <a  href="#"
+                data-action="cpf-element-events-table#updateFilters"
+                data-cpf-element-events-table-page-param="{{subtract pageData.events.totalPages 1}}"
+                {{#eq (add pageData.events.page 1) pageData.events.totalPages}}class="disabled"{{/eq}}>
+              last_page
+            </a>
+          </span>
+
+        </div>
+        <div class="col-lg-3 col-md-12 mb-1 mb-sm-0 d-table text-lg-end text-center">
+          <div class="d-table-cell align-middle text-nowrap">
+            {{#gt pageData.events.count 0}}
+            {{add (multiply pageData.events.page pageData.events.perPage) 1}}
+            -
+            {{#eq (add pageData.events.page 1) pageData.events.totalPages}}
+            {{pageData.events.totalCount}}
+            {{else}}
+            {{multiply (add pageData.events.page 1) pageData.events.perPage}}
+            {{/eq}}
+            {{else}}
+            0
+            {{/gt}}
+            of {{pageData.events.totalCount}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

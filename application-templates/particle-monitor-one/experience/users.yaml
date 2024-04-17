@@ -1,0 +1,24 @@
+resourceType: ExperienceUser
+resources:
+  - email: customer-1-admin@example.com
+    experienceGroupIds:
+      - ~exportplaceholderid-experienceGroup-customer1~
+    exportHash: 216c89aa3412d606494bf6b13a4bbdbf3992e2903ae913479a073905ce336d1b
+    id: ~exportplaceholderid-experienceUser-customer1AdminExampleCom~
+    userTags:
+      cpf_role: admin
+  - email: site-1-viewer@example.com
+    experienceGroupIds:
+      - ~exportplaceholderid-experienceGroup-site11~
+    exportHash: 5945e94425a60cb70aa783ad8f24d29f2a1c6b1337873867df359508aaaf37a6
+    id: ~exportplaceholderid-experienceUser-site1ViewerExampleCom~
+    userTags:
+      cpf_role: viewer
+  - email: system-admin@example.com
+    experienceGroupIds:
+      - ~exportplaceholderid-experienceGroup-system~
+    exportHash: 5751a293ed6c63afbff54cdf970ed1896589853901e6e8608018033a1b36bf9f
+    id: ~exportplaceholderid-experienceUser-systemAdminExampleCom~
+    userTags:
+      cpf_role: admin
+version: 1

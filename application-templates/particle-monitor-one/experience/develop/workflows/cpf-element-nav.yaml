@@ -1,0 +1,308 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/nav
+    enabled: true
+    exportHash: eebc340ee6d2995cf90227d18a2f1e1e02b3b1042c8339645ff989ac67ec5852
+    flowId: ~exportplaceholderid-flow-cpfElementNav~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementNav~
+    name: cpf-element-nav
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementNav~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: nHLz1YE3An
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 700
+        outputIds:
+          - - vQPBWHiIGC
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: vQPBWHiIGC
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 240
+          'y': 800
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfNavigation~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: pageData.navItems
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: d0Kfll0JPZ
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 240
+          'y': 420
+        outputIds:
+          - - HHqRrKlhwb
+        type: DataTableQueryNode
+      - config:
+          scopePath: ''
+          script: >-
+            let items = payload.pageData.navItems.items;
+
+            let userLevel = payload.working.userLevel;
+
+            let userRole = payload.experience.user.userTags.cpf_role ||
+            'viewer';
+
+            const allRoles = ['viewer', 'editor', 'admin'];
+
+
+            let itemsMap = {};
+
+            let itemsHierarchy = [];
+
+            let itemsFlattened = [];
+
+
+            items.forEach((i) => {
+                itemsMap[i.nav_id] = i;
+                i.visible = true;
+                i.children = [];
+                if(i.nav_parent === null || i.nav_parent === '') {
+                    itemsHierarchy.push(i);
+                }
+            });
+
+
+            items.forEach((i) => {
+                if(i.nav_parent !== null && i.nav_parent !== '') {
+                    itemsMap[i.nav_parent].children.push(i)
+                }
+            });
+
+
+            let setLevel = (i, level) => {
+                i.nav_level = level;
+                i.children.forEach((c) => { setLevel(c, level + 1); });
+            };
+
+
+            itemsHierarchy.forEach((i) => { setLevel(i, 0); });
+
+
+            /*
+              Compares nav_access_group_level to the current user's
+              group level. If the user's level is > access level,
+              the nav should not be visible. Also compares
+              nav_access_user_role to the user's role.
+            */
+
+            let setVisibility = (i) => {
+
+                let visible = true;
+
+                if(i.nav_access_group_level !== -1 && userLevel > i.nav_access_group_level) {
+                    visible = false;
+                    setChildVisibility(i, false);
+                }
+
+                if(visible) {
+                    if(allRoles.includes(i.nav_access_user_role)) {
+
+                        // User roles "greater than or equal" to the configured
+                        // role can view this nav item (admin > editor > viewer).
+                        // Ex: if a nav item is set to viewer, editors and admins
+                        // will also be able to see the nav item.
+                        if(allRoles.indexOf(userRole) < allRoles.indexOf(i.nav_access_user_role)) {
+                            visible = false;
+                            setChildVisibility(i, false);
+                        }
+                    }
+                }
+
+                i.children.forEach(setVisibility);
+            };
+
+
+            let setChildVisibility = (i, visible) => {
+                i.visible = visible;
+                i.children.forEach((c) => { setChildVisibility(c, visible) });
+            };
+
+
+            let sortAndFlatten = (i) => {
+                itemsFlattened.push(i);
+                i.children.sort((a, b) => { return a.nav_order - b.nav_order });
+                i.children.forEach(sortAndFlatten);
+            };
+
+
+            itemsHierarchy.sort((a, b) => { return a.nav_order - b.nav_order });
+
+            itemsHierarchy.forEach(sortAndFlatten);
+
+
+            if(userLevel) {
+                itemsHierarchy.forEach(setVisibility);
+            }
+
+
+            payload.pageData.navItemsTop = itemsFlattened.filter((i) => { return
+            i.nav_location !== 'bottom' });
+
+            payload.pageData.navItemsBottom = itemsFlattened.filter((i) => {
+            return i.nav_location === 'bottom' });
+
+
+            payload.pageData.navItemsTop =
+            JSON.stringify(payload.pageData.navItemsTop);
+
+            payload.pageData.navItemsBottom =
+            JSON.stringify(payload.pageData.navItemsBottom);
+        id: HHqRrKlhwb
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 240
+          'y': 520
+        outputIds:
+          - - nHLz1YE3An
+        type: RawFunctionNode
+      - config: {}
+        id: LDv2VO8k57
+        meta:
+          annotationText: >-
+            Organizes, sorts, and reshapes the collection of nav items for
+            rendering. The result is a flat array of nav items in the correct
+            order. A `nav_level` property is added to each item that represents
+            its indentation.
+
+
+            Also adds a `visible` property to each item based on the user's
+            group level and roles.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 560
+          x: 440
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: zzmFSSLqYU
+        meta:
+          annotationText: >-
+            Find the user's level in the group hierarchy. Some nav items are
+            hidden based on the user's depth. For example, Customers (level 1)
+            does not show up if the user is assigned to a Site (level 2).
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 340
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: working.userLevel
+        id: PsnACyD9dO
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 140
+          'y': 160
+        outputIds:
+          - - ouIiUdKu3K
+          - - d0Kfll0JPZ
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "User's group membership is invalid."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: ouIiUdKu3K
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 320
+        outputIds:
+          - - x7pMYy1QA_
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: x7pMYy1QA_
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 420
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsNav~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/nav
+          name: endpoint
+          uiId: mdK7EO26oS
+          x: 140
+          'y': 60
+        outputIds:
+          - - PsnACyD9dO
+        type: endpoint
+    version: develop
+version: 1

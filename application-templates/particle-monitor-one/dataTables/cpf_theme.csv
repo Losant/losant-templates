@@ -1,0 +1,23 @@
+id,name,value
+65d8ffc21dfeb844e2082a33,company_name,"Particle, Inc."
+65d8ffc21dfeb844e2082a34,title_template,Particle Monitor One | {{this}}
+65d8ffc21dfeb844e2082a35,primary,#9ccae6
+65d8ffc21dfeb844e2082a36,secondary,#414653
+65d8ffc21dfeb844e2082a37,success,#5cc85e
+65d8ffc21dfeb844e2082a38,info,#66defb
+65d8ffc21dfeb844e2082a39,warning,#d99333
+65d8ffc21dfeb844e2082a3a,danger,#dc4542
+65d8ffc21dfeb844e2082a3b,text_dark,#ffffff
+65d8ffc21dfeb844e2082a3c,text_mid,#939393
+65d8ffc21dfeb844e2082a3d,text_light,#afafaf
+65d8ffc21dfeb844e2082a3e,text_white,#061a2a
+65d8ffc21dfeb844e2082a3f,bg_dark,#061a2a
+65d8ffc21dfeb844e2082a40,bg_mid,#0c283d
+65d8ffc21dfeb844e2082a41,bg_light,#092034
+65d8ffc21dfeb844e2082a42,border,#215484
+65d8ffc21dfeb844e2082a43,font_family,Open+Sans
+65d8ffc21dfeb844e2082a44,tos,https://www.losant.com/legal/terms-of-service
+65d8ffc21dfeb844e2082a45,privacy_policy,https://www.losant.com/legal/privacy-policy
+65d8ffc21dfeb844e2082a46,favicon,favicon_1708720065519.png
+65d8ffc21dfeb844e2082a47,logo_large,logo_large_1708720065519.png
+65d8ffc21dfeb844e2082a48,logo_small,logo_small_1708720065519.png

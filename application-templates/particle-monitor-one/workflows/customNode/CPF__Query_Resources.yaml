@@ -1,0 +1,687 @@
+resourceType: Flow
+resources:
+  - category: experience
+    customNodeConfig:
+      fields:
+        - description: >-
+            The level in the groups hierarchy to return (e.g. 0 = system, 1 =
+            customers).
+          id: level
+          label: Group Level
+          required: true
+          type: stringTemplate
+        - description: The parent ID to filter results.
+          id: parent
+          label: Parent ID
+          required: false
+          type: stringTemplate
+        - description: >-
+            The payload path to the full experience user object as provided by
+            the Endpoint trigger. Typically `experience.user`.
+          id: user
+          label: User
+          required: true
+          type: payloadPath
+      outputCount: 2
+      resultDescription: >-
+        Returns an array of requested resources. If there's an error, the
+        workflow branches left and returns an object with an `error` property
+        containing a string message.
+      resultMode: optional
+    customNodeSupports:
+      - cloud
+    description: Queries customers and sites.
+    exportHash: de3945a0cffab3e8bab8f675a74ff5b9c0c594b88d678b0555f145dd0890637a
+    flowClass: customNode
+    globals: []
+    id: ~exportplaceholderid-flow-cpfQueryResources~
+    name: 'CPF: Query Resources'
+    nodes:
+      - config:
+          branchIndexTemplate: 1
+          resultSourcePath: working.result
+        id: lfUS286giK
+        meta:
+          category: customNodeEnd
+          description: ''
+          label: Output True
+          name: custom-node-end-true
+          x: 540
+          'y': 1500
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          resultPath: working.result.groupSummary
+        id: L6kzBy_tBZ
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Summary'
+          name: group-summary
+          x: 440
+          'y': 440
+        outputIds:
+          - - uxzcz5MWPw
+        type: ExperienceGroupSummaryNode
+      - config:
+          scopePath: ''
+          script: |-
+            let groups = payload.working.result.groupSummary;
+            let groupsMap = {};
+            let parentFilter = payload.data.parent;
+            let requestedLevel = parseInt(payload.data.level);
+
+            // Recursively traverses the group hierarchy
+            // and builds a map of id:groupObj
+            let flatten = (parent, group, level) => {
+                if(group.id !== '(root)') {
+                    group.level = level;
+                    groupsMap[group.id] = group;
+
+                    if(parent) {
+                        group.parent = {
+                            id: parent.id,
+                            name: parent.name
+                        };
+                    }
+                }
+
+                let lvl = level + 1;;
+                group.children.forEach((child) => {
+                    flatten(group, child, lvl);
+                });
+            };
+
+            // Flatten a copy of the tree. Need a copy since
+            // nested groups will be removed.
+            flatten(null, payload.working.groupSummaryClone, -1);
+
+            let myGroups = payload.data.user.experienceGroups.map((g) => {
+                return JSON.parse(JSON.stringify(groupsMap[g.id]))
+            });
+
+            let userLevel = myGroups[0].level;
+
+            payload.working.result.user ??= {};
+            payload.working.result.user.groups = myGroups;
+            payload.working.result.user.level = userLevel;
+
+            // How many levels into the tree (from the user's current level)
+            // the resources are. So, 2 levels would be the current
+            // group's children's children.
+            let resourceDepth = requestedLevel - userLevel;
+
+            let queryResults = [];
+
+            let findResources = (group, level) => {
+                if(level === resourceDepth) {
+                    if(!parentFilter || group.id === parentFilter) {
+                        queryResults = queryResults.concat(group.children);
+                    }
+                    return;
+                }
+
+                let lvl = level + 1;
+                group.children.forEach((g) => { findResources(g, lvl) });
+            };
+
+            // Make sure the user is not attempting to request resources
+            // at the current or higher level tier. Can only request
+            // child resources.
+            if(requestedLevel > myGroups[0].level) {
+                myGroups.forEach((g) => { findResources(g, 1)});
+            } else {
+                payload.working.result.error = 
+                    'Attempting to request resources higher than user tier.'
+            }
+
+
+
+            // Remove nested children from group map.
+            // This is lots of duplicate data that doesn't need to exist.
+            for (const [key, value] of Object.entries(groupsMap)) {
+                if(value.children) {
+                    value.children.forEach((c) => {
+                        delete c.children;
+                        return c;
+                    });
+                }
+            };
+
+            payload.working.result.groupsMap = groupsMap;
+            payload.working.result.queryResults = queryResults;
+        id: bubvwchm2z
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 440
+          'y': 640
+        outputIds:
+          - - EVdg_NkO7h
+        type: RawFunctionNode
+      - config:
+          expression: '{{working.result.error}} === undefined'
+        id: EVdg_NkO7h
+        meta:
+          category: logic
+          description: ''
+          label: No Error?
+          name: conditional
+          x: 440
+          'y': 920
+        outputIds:
+          - - aa0coMt5nZ
+          - - 2fVkFA3v76
+        type: ConditionalNode
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: O22gvo1y1U
+        meta:
+          category: customNodeEnd
+          description: ''
+          label: Output False
+          name: custom-node-end-false
+          x: 340
+          'y': 1140
+        outputIds: []
+        type: CustomNodeCapNode
+      - config: {}
+        id: nJcdalKohC
+        meta:
+          annotationText: >-
+            Finds all the requested resources. Makes assumptions on resource
+            type by their depth in the group tree:
+
+
+            0: System  
+
+            1: Customer  
+
+            2: Site
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 360
+          x: 640
+          'y': 640
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{length data.user.experienceGroups}} > 0'
+        id: 1ueEB93aLG
+        meta:
+          category: logic
+          description: ''
+          label: In Groups?
+          name: conditional
+          x: 240
+          'y': 220
+        outputIds:
+          - - J7wkrTlEct
+          - - L6kzBy_tBZ
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: working.result.error
+              type: set
+              valueTemplate: User is not a member of any group.
+              valueTemplateType: string
+        id: J7wkrTlEct
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 140
+          'y': 340
+        outputIds:
+          - - AXpbzxi0tH
+        type: MutateNode
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: working.result
+        id: cmwtJBwWpW
+        meta:
+          category: customNodeEnd
+          description: ''
+          label: Output False
+          name: custom-node-end-false
+          x: 140
+          'y': 540
+        outputIds: []
+        type: CustomNodeCapNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: AXpbzxi0tH
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 440
+        outputIds:
+          - - cmwtJBwWpW
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: aa0coMt5nZ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 340
+          'y': 1040
+        outputIds:
+          - - O22gvo1y1U
+        type: DebugNode
+      - config:
+          rules:
+            - destination: working.groupSummaryClone
+              source: working.result.groupSummary
+              type: copy
+        id: uxzcz5MWPw
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 440
+          'y': 540
+        outputIds:
+          - - bubvwchm2z
+        type: MutateNode
+      - config:
+          currentItemPath: working.group
+          loopSourcePath: working.result.queryResults
+          mapResultPath: working.result.queryResultsWithTags
+          parallel: true
+        id: 2fVkFA3v76
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 540
+          'y': 1040
+        outputIds:
+          - - Fc5eBxLJ6h
+          - - ZSfNhjp3VF
+        type: LoopNode
+      - config:
+          loopNodeId: 2fVkFA3v76
+          mapValuePath: working.fullGroup
+          shouldBreak: false
+        id: OiIifPr4aC
+        meta:
+          category: loop
+          description: ''
+          groupId: 2fVkFA3v76
+          label: Return
+          name: loop-return
+          x: 200
+          'y': 1160
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{working.group.value.id}}'
+          resultPath: working.fullGroup
+        id: ZSfNhjp3VF
+        meta:
+          category: experience
+          description: ''
+          groupId: 2fVkFA3v76
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 200
+          'y': 300
+        outputIds:
+          - - 84Dshn9mNh
+        type: GetExperienceGroupNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Fc5eBxLJ6h
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 1220
+        outputIds:
+          - - nwP0T5ir7r
+        type: DebugNode
+      - config:
+          rules:
+            - destination: working.fullGroup.children
+              source: working.group.value.children
+              type: copy
+        id: 84Dshn9mNh
+        meta:
+          category: logic
+          description: ''
+          groupId: 2fVkFA3v76
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 400
+        outputIds:
+          - - yR_ODU08wL
+        type: MutateNode
+      - config:
+          findMetadata: false
+          findMethod: query
+          findMultiple: true
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "ancestorId": {
+                    "$eq": "{{working.group.value.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.fullGroup.descendants
+          resultsPage: ''
+          resultsPerPage: '1000'
+          sortDirection: asc
+          sortField: name
+        id: yR_ODU08wL
+        meta:
+          category: experience
+          description: ''
+          groupId: 2fVkFA3v76
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 200
+          'y': 500
+        outputIds:
+          - - 87r_8UPWJq
+        type: GetExperienceGroupNode
+      - config: {}
+        id: 4yv_E9IoHJ
+        meta:
+          annotationText: >-
+            Get the full group details for access to group tags. Move the
+            children array from the original Group Summary request to the full
+            group.
+          category: annotation
+          groupId: 2fVkFA3v76
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 400
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: P9nbsVyxok
+        meta:
+          annotationText: >-
+            Get all descendants of this group so we can calculate the total
+            number of users. Summing this up is done in the Function Node
+            outside of this loop.
+          category: annotation
+          groupId: 2fVkFA3v76
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 400
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: experienceGroupId
+          findMultiple: true
+          idTemplate: '{{working.group.value.id}}'
+          includeConnectionStatus: true
+          includeState: false
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: 87r_8UPWJq
+        meta:
+          category: data
+          description: ''
+          groupId: 2fVkFA3v76
+          label: 'Device: Get'
+          name: get-device
+          x: 200
+          'y': 700
+        outputIds:
+          - - EfU5azhgwY
+        type: GetDeviceNode
+      - config: {}
+        id: elUTPAQZ0D
+        meta:
+          annotationText: >-
+            Get the count of devices associated with this group. This will
+            automatically add devices from any descendant groups, which is what
+            we want. Add the count to the `deviceCount` field on the group.
+          category: annotation
+          groupId: 2fVkFA3v76
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 400
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.fullGroup.deviceCount
+              source: working.devices.totalCount
+              type: copy
+        id: EfU5azhgwY
+        meta:
+          category: logic
+          description: ''
+          groupId: 2fVkFA3v76
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 800
+        outputIds:
+          - - 0WiVu_Oltc
+        type: MutateNode
+      - config:
+          scopePath: ''
+          script: |+
+
+            let groups = payload.working.result.queryResultsWithTags;
+            groups.forEach((group) => {
+
+                /**
+                 * Find the total users that below to this group
+                 * and all of its descendants.
+                 */
+                group.userCount = group.experienceUserIds.length;
+                group.descendants.forEach((d) => {
+                    group.userCount += d.experienceUserIds.length;
+                });
+
+                /**
+                 * Add a parent property that contains summary
+                 * information for this group's parentId. E.g.
+                 * this allows a site table to show the name of its
+                 * parent customer.
+                 */
+
+                group.parent = payload.working.result.groupsMap[group.parentId];
+            });
+
+        id: nwP0T5ir7r
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 540
+          'y': 1320
+        outputIds:
+          - - lfUS286giK
+        type: RawFunctionNode
+      - config: {}
+        id: 7iN1W2b6Mg
+        meta:
+          annotationText: >-
+            Loops through every group to query the additional metadata: device
+            count, user count, group's tags, etc.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 360
+          x: 740
+          'y': 1040
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: pk27G_AR1C
+        meta:
+          annotationText: >-
+            Post-loop function node to process the data queried by the loop.
+            Function nodes inside loops are inefficient, so this is moved after
+            the loop to process all data once vs. on each iteration.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 360
+          x: 740
+          'y': 1320
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          findMetadata: true
+          findMultiple: true
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "state": {
+                    "$ne": "resolved"
+                  }
+                },
+                {
+                  "eventTags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.group.value.level 2}}cpf_site{{else}}cpf_customer{{/eq}}",
+                      "$tagValue": "{{working.group.value.id}}"
+                    }
+                  }
+                }
+              ]
+            }
+          resultPath: working.fullGroup.events
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: desc
+          sortField: creationDate
+        id: 0WiVu_Oltc
+        meta:
+          category: data
+          description: ''
+          groupId: 2fVkFA3v76
+          label: 'Event: Get'
+          mode: queryTemplateMultiple
+          name: get-event
+          x: 200
+          'y': 920
+        outputIds:
+          - - OiIifPr4aC
+        type: GetEventNode
+      - config: {}
+        id: NRtwAXSd_f
+        meta:
+          annotationText: >-
+            Get the total number of unresolved events associated with this
+            group. Can query events by their `cpf_site` tag.
+          category: annotation
+          groupId: 2fVkFA3v76
+          height: 160
+          label: Note
+          name: note
+          width: 340
+          x: 400
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+    shortDescription: Queries customers and sites.
+    triggers:
+      - config: {}
+        key: customNodeStart
+        meta:
+          category: trigger
+          description: The Custom Node fires here ...
+          label: 'Start: Query Resources'
+          name: customNodeStart
+          uiId: SywHdN5P6W
+          x: 240
+          'y': 40
+        outputIds:
+          - - 1ueEB93aLG
+        type: customNodeStart
+      - config: {}
+        key: ~exportplaceholderid-flow-cpfQueryResources~-0teBa51_yZl6G__TBED__
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: |-
+            {
+                "level": "2",
+                "user": {
+                    "applicationId": "638fb1ae908134ba336eeb92",
+                    "avatarUrl": "https://secure.gravatar.com/avatar/4345e49fcf2ccab8407dacd2c2e93085?d=retro&s=240",
+                    "creationDate": "2022-12-08T20:37:49.614Z",
+                    "email": "system@example.com",
+                    "experienceGroups": [
+                    {
+                        "id": "649b4ae9a41a27a4c9f4457a",
+                        "name": "System",
+                        "parentId": null
+                    }
+                    ],
+                    "experienceUserId": "63924b1db63052d7622af8ec",
+                    "id": "63c0547428d7d1ed6b653e39",
+                    "lastLogin": "2022-12-08T20:41:17.497Z",
+                    "lastUpdated": "2022-12-08T20:41:18.441Z",
+                    "passwordLastUpdated": "2022-12-08T20:37:49.898Z",
+                    "userTags": {
+                        "role": "admin"
+                    }
+                }
+            }
+          uiId: ELfpFwc2bY
+          x: 440
+          'y': 40
+        outputIds:
+          - - 1ueEB93aLG
+        type: virtualButton
+version: 1

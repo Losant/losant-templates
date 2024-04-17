@@ -1,0 +1,572 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /admin/dashboards
+    enabled: true
+    exportHash: 54542aea30de116b34bfeef278e74c8779be56e7f8beac175f9eff99a683bd9c
+    flowId: ~exportplaceholderid-flow-cpfPageAdminDashboards~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageAdminDashboards~
+    name: cpf-page-admin-dashboards
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminDashboards~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: 0wEabscFe5
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 300
+          'y': 1200
+        outputIds:
+          - - H4jfSyec8W
+        type: EndpointReplyNode
+      - config:
+          level: info
+          message: ''
+          property: ''
+        id: H4jfSyec8W
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 300
+          'y': 1300
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: name
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1000'
+            - name: filterField
+              type: string
+              value: ''
+            - name: filter
+              type: string
+              value: ''
+            - name: tagsAsObject
+              type: string
+              value: ''
+            - name: attributesAsObject
+              type: string
+              value: ''
+          resource: deviceRecipes
+          responsePath: working.deviceRecipes
+        id: 9TJjO49ajO
+        meta:
+          category: data
+          description: ''
+          label: Get Recipes
+          name: losantapi
+          x: 300
+          'y': 600
+        outputIds:
+          - - veQCPYg212
+        type: LosantApiNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: name
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1000'
+            - name: filterField
+              type: string
+              value: ''
+            - name: filter
+              type: string
+              value: ''
+          resource: applicationDashboards
+          responsePath: working.dashboards
+        id: qGbnB5sATF
+        meta:
+          category: data
+          description: ''
+          label: Get Dashboards
+          name: losantapi
+          x: 300
+          'y': 500
+        outputIds:
+          - - 9TJjO49ajO
+        type: LosantApiNode
+      - config:
+          rules:
+            - destination: pageData.deviceRecipes
+              type: set
+              valueTemplate: |-
+                [
+                  {
+                    "name": "__default__",
+                    "id": "__default__"
+                  }
+                ]
+              valueTemplateType: json
+            - destination: pageData.dashboards
+              source: working.dashboards.result.items
+              type: move
+        id: 0_83q5RMXU
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 300
+          'y': 900
+        outputIds:
+          - - BH9t4zC5EE
+        type: MutateNode
+      - config:
+          level: info
+          message: ''
+          property: ''
+        id: helN6CD3jG
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1040
+          'y': 680
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /admin/dashboards?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: fycx9Qqim5
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1040
+          'y': 580
+        outputIds:
+          - - helN6CD3jG
+        type: EndpointReplyNode
+      - config:
+          currentItemPath: working.thisEntry
+          loopSourcePath: data.body
+          mapResultPath: ''
+          parallel: true
+        id: HJzWgD7WZ_
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 1040
+          'y': 480
+        outputIds:
+          - - fycx9Qqim5
+          - - DUfwj7juHK
+        type: LoopNode
+      - config:
+          loopNodeId: HJzWgD7WZ_
+          mapValuePath: ''
+          shouldBreak: false
+        id: CWul_caTl0
+        meta:
+          category: loop
+          description: ''
+          groupId: HJzWgD7WZ_
+          label: Return
+          name: loop-return
+          x: 200
+          'y': 500
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          dataMethod: jsonTemplate
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfDashboards~
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "deviceRecipeName": {
+                    "$eq": "{{working.thisEntry.key}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.thisResult
+          rowJsonTemplate: |-
+            {
+              "dashboardId": "{{working.thisEntry.value}}",
+              "deviceRecipeName": "{{working.thisEntry.key}}"
+            }
+          rowSelectType: query
+          upsertCheck: true
+        id: DUfwj7juHK
+        meta:
+          category: data
+          description: ''
+          groupId: HJzWgD7WZ_
+          label: 'Table: Update Row'
+          name: update-table-row
+          x: 200
+          'y': 300
+        outputIds:
+          - - DAOgr5uTEi
+        type: DataTableUpdateRowNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: DAOgr5uTEi
+        meta:
+          category: debug
+          description: ''
+          groupId: HJzWgD7WZ_
+          label: Debug
+          name: debug
+          x: 200
+          'y': 400
+        outputIds:
+          - - CWul_caTl0
+        type: DebugNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfDashboards~
+          includeFieldsTemplate: 'deviceRecipeName,dashboardId'
+          limitTemplate: '1000'
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.tableRows
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: veQCPYg212
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 300
+          'y': 700
+        outputIds:
+          - - mRt9h_5fVD
+        type: DataTableQueryNode
+      - config:
+          currentItemPath: working.thisRecipe
+          loopSourcePath: pageData.deviceRecipes
+          mapResultPath: pageData.deviceRecipes
+          parallel: true
+        id: khjA3F1m5T
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 300
+          'y': 1100
+        outputIds:
+          - - 0wEabscFe5
+          - - B7yf3saASk
+        type: LoopNode
+      - config:
+          loopNodeId: khjA3F1m5T
+          mapValuePath: working.thisRecipe.value
+          shouldBreak: false
+        id: BrNUR4lm1d
+        meta:
+          category: loop
+          description: ''
+          groupId: khjA3F1m5T
+          label: Return
+          name: loop-return
+          x: 200
+          'y': 400
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          destArrayPath: pageData.deviceRecipes
+          rules:
+            - inputTemplate: '{{working.deviceRecipes.result.items}}'
+              type: concat
+          sourceArrayPath: pageData.deviceRecipes
+        id: BH9t4zC5EE
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 300
+          'y': 1000
+        outputIds:
+          - - khjA3F1m5T
+        type: ArrayNode
+      - config:
+          rules:
+            - inputTemplate: deviceRecipeName
+              outputPath: working.tableRows
+              type: keyBy
+          sourceArrayPath: working.tableRows.items
+        id: mRt9h_5fVD
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 300
+          'y': 800
+        outputIds:
+          - - 0_83q5RMXU
+        type: ArrayNode
+      - config:
+          rules:
+            - destination: working.thisRecipe.value.dashboardId
+              type: set
+              valueTemplate: >-
+                {{lookup (lookup working.tableRows
+                working.thisRecipe.value.name) 'dashboardId'}}
+              valueTemplateType: string
+        id: B7yf3saASk
+        meta:
+          category: logic
+          description: ''
+          groupId: khjA3F1m5T
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 300
+        outputIds:
+          - - BrNUR4lm1d
+        type: MutateNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: bDP9CSZW9R
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 100
+          'y': 180
+        outputIds:
+          - - yCaWAX_mQ8
+          - - SHztukstkI
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: yCaWAX_mQ8
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 100
+          'y': 500
+        outputIds:
+          - - Ij02ARVA6e
+        type: EndpointReplyNode
+      - config:
+          level: info
+          message: ''
+          property: ''
+        id: Ij02ARVA6e
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 100
+          'y': 600
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: SHztukstkI
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 200
+          'y': 300
+        outputIds:
+          - - yCaWAX_mQ8
+          - - qGbnB5sATF
+        type: ConditionalNode
+      - config: {}
+        id: V8cPwlRiG_
+        meta:
+          annotationText: Only the system admin can access this page.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 180
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: kyNtR7jY9J
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 840
+          'y': 160
+        outputIds:
+          - - U6jDOKDDF4
+          - - UZ8CdrUr9j
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: U6jDOKDDF4
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 840
+          'y': 480
+        outputIds:
+          - - xULxXbnkCu
+        type: EndpointReplyNode
+      - config:
+          level: info
+          message: ''
+          property: ''
+        id: xULxXbnkCu
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 840
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: UZ8CdrUr9j
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 940
+          'y': 280
+        outputIds:
+          - - U6jDOKDDF4
+          - - HJzWgD7WZ_
+        type: ConditionalNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getAdminDashboards~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /admin/dashboards
+          name: endpoint
+          uiId: HmqzS9JfWG
+          x: 100
+          'y': 60
+        outputIds:
+          - - bDP9CSZW9R
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postAdminDashboards~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /admin/dashboards
+          name: endpoint
+          uiId: 9YFG_uE1SI
+          x: 840
+          'y': 60
+        outputIds:
+          - - kyNtR7jY9J
+        type: endpoint
+      - config: {}
+        key: >-
+          ~exportplaceholderid-flow-cpfPageAdminDashboards~-_2hLSWRoA13Tg9SoigAtE
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: I7BPHKFbiM
+          x: 300
+          'y': 60
+        outputIds:
+          - - bDP9CSZW9R
+        type: virtualButton
+    version: develop
+version: 1

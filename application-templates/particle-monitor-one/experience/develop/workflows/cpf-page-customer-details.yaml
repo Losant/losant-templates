@@ -1,0 +1,1075 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: 'Created for Endpoint GET /customers/{customerId}'
+    enabled: true
+    exportHash: d12282b9aa60300ac82b797258fd2ca3934fe24bc5ff2637e3e1106ff0af4f46
+    flowId: ~exportplaceholderid-flow-cpfPageCustomerDetails~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageCustomerDetails~
+    name: cpf-page-customer-details
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageCustomerDetails~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: uwwE6Yecba
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 560
+          'y': 860
+        outputIds:
+          - - RkQ7iJpcy2
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: RkQ7iJpcy2
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 460
+          'y': 980
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: WPbxbNItuI
+        meta:
+          annotationText: >-
+            User must be a system admin (level 0) to view, create, or edit
+            customers.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 440
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.params.customerId}} !== "new"'
+        id: 7o6mDNrDMr
+        meta:
+          category: logic
+          description: ''
+          label: Existing?
+          name: conditional
+          x: 360
+          'y': 520
+        outputIds:
+          - - mClSwnBqfD
+          - - zbsn15Slec
+        type: ConditionalNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.params.customerId}}'
+          resultPath: pageData.customer
+        id: zbsn15Slec
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 460
+          'y': 640
+        outputIds:
+          - - FhtmVVmhGI
+        type: GetExperienceGroupNode
+      - config:
+          expression: >-
+            {{pageData.customer}} && length({{pageData.customer.ancestorIds}})
+            === 1
+        id: FhtmVVmhGI
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 460
+          'y': 740
+        outputIds:
+          - - aOmMVQX9Fo
+          - - uwwE6Yecba
+        type: ConditionalNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPage404~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: aOmMVQX9Fo
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 360
+          'y': 860
+        outputIds:
+          - - RkQ7iJpcy2
+        type: EndpointReplyNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageCustomerDetails~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: mClSwnBqfD
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 640
+        outputIds:
+          - - t9xX7oRHB_
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: t9xX7oRHB_
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 740
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 4hV6zH3V3i
+        meta:
+          annotationText: >-
+            This `GET` handles both viewing an existing customer or creating a
+            new one. When creating a new cutomer, the `customerId` path
+            parameter will be "new" (i.e. "/cutomers/new" vs.
+            "/customers/customerId").
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 340
+          x: 80
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: '/customers/{{working.groupResult.id}}?success=true'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: Hkn7_SlPAS
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1200
+          'y': 1320
+        outputIds:
+          - - Tm7BrKlq3r
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Tm7BrKlq3r
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1300
+          'y': 1440
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceQueryJsonTemplate: '{"$nor":[]}'
+          groupTagTemplates:
+            - keyTemplate: address
+              valueTemplate: '{{{data.body.address}}}'
+            - keyTemplate: contact
+              valueTemplate: '{{{data.body.contact}}}'
+            - keyTemplate: link
+              valueTemplate: '{{{data.body.link}}}'
+          nameTemplate: '{{{data.body.name}}}'
+          parentIdTemplate: ~exportplaceholderid-experienceGroup-system~
+          resultPath: working.groupResult
+        id: w7ygpt6xzT
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Create'
+          name: create-experience-group
+          x: 1300
+          'y': 1100
+        outputIds:
+          - - H8TMzTJ_m8
+        type: CreateExperienceGroupNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: working.userLevel
+        id: _PaLW17K20
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 1040
+          'y': 160
+        outputIds:
+          - - UL8Zpebudq
+          - - 1ctvzhIZP8
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: /login
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: UL8Zpebudq
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 940
+          'y': 420
+        outputIds:
+          - - uPRzwvAQEW
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: uPRzwvAQEW
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 940
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: sTB5bvO8fA
+        meta:
+          annotationText: User must be level 0 (System) to create customers.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 1340
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.userLevel}} == 0'
+        id: 1ctvzhIZP8
+        meta:
+          category: logic
+          description: ''
+          label: Valid Level?
+          name: conditional
+          x: 1140
+          'y': 280
+        outputIds:
+          - - UL8Zpebudq
+          - - 3cnWqQtFAp
+        type: ConditionalNode
+      - config:
+          errorsPath: working.error
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "contact": {"type": "string"},
+                    "address": {"type": "string"},
+                    "link": {"type": "string"}
+                },
+                "required": ["name"]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: p_O_YRURSi
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 1100
+          'y': 620
+        outputIds:
+          - - fIKfMqWo5l
+          - - XnrIqNwx6j
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: /customers/new?error=Missing or invalid customer fields.
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: fIKfMqWo5l
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 980
+          'y': 740
+        outputIds:
+          - - StfPwpJPxv
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: StfPwpJPxv
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 980
+          'y': 840
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{working.groupResult.error}}'
+        id: H8TMzTJ_m8
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1300
+          'y': 1200
+        outputIds:
+          - - Hkn7_SlPAS
+          - - hUoAK68znc
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '/customers/new?error={{{working.groupResult.error.message}}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: hUoAK68znc
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1400
+          'y': 1320
+        outputIds:
+          - - Tm7BrKlq3r
+        type: EndpointReplyNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: working.userLevel
+        id: vRqCFsX4gL
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 160
+          'y': 280
+        outputIds:
+          - - 6CX12ZYGcY
+          - - RntPSAGnPT
+        type: CustomNodeExecuteNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: WT56VF6vxO
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 60
+          'y': 620
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /login
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 6CX12ZYGcY
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 520
+        outputIds:
+          - - WT56VF6vxO
+        type: EndpointReplyNode
+      - config:
+          expression: '{{working.userLevel}} === 0'
+        id: RntPSAGnPT
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 260
+          'y': 400
+        outputIds:
+          - - 6CX12ZYGcY
+          - - 7o6mDNrDMr
+        type: ConditionalNode
+      - config: {}
+        id: c9aAWoPlOA
+        meta:
+          annotationText: Make sure the group exists and the group represents a customer.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 660
+          'y': 740
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{data.params.customerId}} === "new"'
+        id: XnrIqNwx6j
+        meta:
+          category: logic
+          description: ''
+          label: New Customer?
+          name: conditional
+          x: 1100
+          'y': 980
+        outputIds:
+          - - Fm7wnO7ezt
+          - - w7ygpt6xzT
+        type: ConditionalNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.params.customerId}}'
+          resultPath: working.customer
+        id: Fm7wnO7ezt
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 900
+          'y': 1100
+        outputIds:
+          - - fUFxWWh6Qe
+        type: GetExperienceGroupNode
+      - config:
+          expression: >-
+            {{working.customer}} && length({{working.customer.ancestorIds}}) ===
+            1
+        id: fUFxWWh6Qe
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 900
+          'y': 1200
+        outputIds:
+          - - gkBAsPdtob
+          - - gnR1QnSpnZ
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '{{data.path}}?error=Customer not found.'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: gkBAsPdtob
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 800
+          'y': 1320
+        outputIds:
+          - - z8V_0hbeNZ
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: z8V_0hbeNZ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 800
+          'y': 1420
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataMethod: individualFields
+          descriptionTemplate: ''
+          deviceQueryJsonTemplate: ''
+          groupIdTemplate: '{{working.customer.id}}'
+          groupTags:
+            - keyTemplate: address
+              valueTemplate: '{{{data.body.address}}}'
+            - keyTemplate: contact
+              valueTemplate: '{{{data.body.contact}}}'
+            - keyTemplate: link
+              valueTemplate: '{{{data.body.link}}}'
+          nameTemplate: '{{data.body.name}}'
+          resultPath: working.groupResult
+        id: gnR1QnSpnZ
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Update'
+          name: update-experience-group
+          x: 1000
+          'y': 1320
+        outputIds:
+          - - GKwqUiBbtd
+        type: UpdateExperienceGroupNode
+      - config:
+          bodyTemplate: '/customers/{{working.groupResult.id}}?success=true'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: KTzIscPV7B
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 900
+          'y': 1540
+        outputIds:
+          - - huqGURWJwI
+        type: EndpointReplyNode
+      - config:
+          expression: '{{working.groupResult.error}}'
+        id: GKwqUiBbtd
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1000
+          'y': 1420
+        outputIds:
+          - - KTzIscPV7B
+          - - sVOmLoCR1e
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '/customers/new?error={{{working.groupResult.error.message}}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: sVOmLoCR1e
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1100
+          'y': 1540
+        outputIds:
+          - - huqGURWJwI
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: huqGURWJwI
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1000
+          'y': 1640
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.body.delete}} === "true"'
+        id: 3cnWqQtFAp
+        meta:
+          category: logic
+          description: ''
+          label: Delete?
+          name: conditional
+          x: 1240
+          'y': 420
+        outputIds:
+          - - p_O_YRURSi
+          - - 5cR4P8s4Hs
+        type: ConditionalNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.params.customerId}}'
+          resultPath: working.customer
+        id: 5cR4P8s4Hs
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 1580
+          'y': 620
+        outputIds:
+          - - s0x2pcgLAb
+        type: GetExperienceGroupNode
+      - config:
+          expression: >-
+            {{working.customer}} && length({{working.customer.ancestorIds}}) ===
+            1
+        id: s0x2pcgLAb
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1580
+          'y': 720
+        outputIds:
+          - - uVz0rADRV2
+          - - C0nZRbInoe
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '{{data.path}}?error={{{encodeURI ''Customer not found.''}}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: uVz0rADRV2
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1480
+          'y': 820
+        outputIds:
+          - - xEyu1TovRn
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: xEyu1TovRn
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1480
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "parentId": {
+                    "$eq": "{{data.params.customerId}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.sites
+          resultsPage: '0'
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+        id: C0nZRbInoe
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 1680
+          'y': 820
+        outputIds:
+          - - GLD3MTWOth
+        type: GetExperienceGroupNode
+      - config:
+          bodyTemplate: /customers
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: cUO4eHglyb
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1880
+          'y': 1360
+        outputIds:
+          - - U1qBk_F0yr
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: U1qBk_F0yr
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1880
+          'y': 1460
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: WRnV8Y93Ga
+        meta:
+          annotationText: Cannot delete a customer with sites.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 1900
+          'y': 820
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          action: delete
+          params:
+            - name: experienceGroupId
+              type: string
+              value: '{{data.params.customerId}}'
+          resource: experienceGroup
+          responsePath: working.deleteResult
+        id: xQUcMge2Fj
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 1880
+          'y': 1260
+        outputIds:
+          - - cUO4eHglyb
+        type: LosantApiNode
+      - config: {}
+        id: u5VuNpwHGs
+        meta:
+          annotationText: >-
+            If a customer is to be deleted, the form submits a "deleted=true"
+            field.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 1600
+          'y': 420
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.sites.totalCount}} === 0'
+        id: GLD3MTWOth
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1680
+          'y': 920
+        outputIds:
+          - - FvcasEIAX4
+          - - nISdLMs5Bm
+        type: ConditionalNode
+      - config:
+          bodyTemplate: >-
+            {{data.path}}?error={{{encodeURI 'This customer has sites and cannot
+            be deleted. All sites that belong to this customer must first be
+            removed or reassigned.'}}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: FvcasEIAX4
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1580
+          'y': 1040
+        outputIds:
+          - - D0Daby1_bE
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: D0Daby1_bE
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1580
+          'y': 1140
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: mFECAQ2VbS
+        meta:
+          annotationText: Cannot delete a site that has users.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 1980
+          'y': 1040
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: email
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1000'
+            - name: filterField
+              type: string
+              value: ''
+            - name: filter
+              type: string
+              value: ''
+            - name: experienceGroupId
+              type: string
+              value: '{{data.params.customerId}}'
+            - name: includeAncestorGroups
+              type: string
+              value: ''
+          resource: experienceUsers
+          responsePath: working.users
+        id: nISdLMs5Bm
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 1780
+          'y': 1040
+        outputIds:
+          - - KgCsjBYizb
+        type: LosantApiNode
+      - config:
+          expression: '{{working.users.result.count}} === 0'
+        id: KgCsjBYizb
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1780
+          'y': 1140
+        outputIds:
+          - - VEVxOB2FNm
+          - - xQUcMge2Fj
+        type: ConditionalNode
+      - config:
+          bodyTemplate: >-
+            {{data.path}}?error={{{encodeURI 'This customer has users and cannot
+            be deleted. All users that belong to this customer must first be
+            removed or reassigned.'}}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: VEVxOB2FNm
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1680
+          'y': 1260
+        outputIds:
+          - - fHurw1NVif
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: fHurw1NVif
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1680
+          'y': 1360
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCustomersCustomerId~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /customers/{customerId}'
+          name: endpoint
+          uiId: Q7u2q6sXN5
+          x: 160
+          'y': 180
+        outputIds:
+          - - vRqCFsX4gL
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postCustomersCustomerId~
+        meta:
+          category: trigger
+          description: ''
+          label: 'POST /customers/{customerId}'
+          name: endpoint
+          uiId: dm63r2xlTn
+          x: 1040
+          'y': 60
+        outputIds:
+          - - _PaLW17K20
+        type: endpoint
+    version: develop
+version: 1

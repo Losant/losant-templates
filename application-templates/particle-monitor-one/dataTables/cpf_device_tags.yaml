@@ -1,0 +1,17 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: string
+        name: deviceTagKeys
+      - constraint: unique
+        dataType: string
+        name: deviceRecipeName
+    description: >-
+      Stores which device tags should be displayed based on the recipe used to
+      create the device.
+    exportHash: a8d435f793a2f235ae48bc643af5ff495ef841880e8276b48be5463c9a4df603
+    id: ~exportplaceholderid-dataTable-cpfDeviceTags~
+    localFilename: ./cpf_device_tags.csv
+    name: cpf_device_tags
+version: 1

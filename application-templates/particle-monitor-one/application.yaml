@@ -1,0 +1,22 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Demonstrates how to receive and visualize data from Particle
+      Monitor One gateways.
+    filesPath: ./files
+    globals:
+      - cloudOnly: true
+        json: '"a super secret value"'
+        key: cpf-jwt-password-reset-secret
+      - cloudOnly: true
+        description: Particle Product ID
+        json: "27443"
+        key: particle_product_id
+    id: ~exportplaceholderid-application-applicationParticleMonitorOne~
+    name: Particle Monitor One
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords: []
+version: 1

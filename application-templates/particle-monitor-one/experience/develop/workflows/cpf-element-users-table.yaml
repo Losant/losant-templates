@@ -1,0 +1,480 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/users-table
+    enabled: true
+    exportHash: 0f6db0571ed84d33212803fb4de8505a954ed1ae1b2bcd36b29b317b0cfe471a
+    flowId: ~exportplaceholderid-flow-cpfElementUsersTable~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementUsersTable~
+    name: cpf-element-users-table
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementUsersTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: HG8FVMtTK4
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 460
+          'y': 1760
+        outputIds:
+          - - WA9XI7tQsu
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: WA9XI7tQsu
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 460
+          'y': 1860
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: email
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1000'
+            - name: filterField
+              type: string
+              value: ''
+            - name: filter
+              type: string
+              value: ''
+            - name: experienceGroupId
+              type: string
+              value: ''
+            - name: includeAncestorGroups
+              type: string
+              value: ''
+          resource: experienceUsers
+          responsePath: working.users
+        id: CzDdFwyNLn
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 300
+          'y': 1420
+        outputIds:
+          - - dkZ9EO3Vmq
+        type: LosantApiNode
+      - config:
+          rules:
+            - destination: pageData.users
+              source: working.users.result.items
+              type: copy
+        id: JADi_4cjPm
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 300
+          'y': 1620
+        outputIds:
+          - - HG8FVMtTK4
+        type: MutateNode
+      - config:
+          resultPath: working.groups
+        id: 0ksP98lHkk
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Summary'
+          name: group-summary
+          x: 300
+          'y': 1320
+        outputIds:
+          - - CzDdFwyNLn
+        type: ExperienceGroupSummaryNode
+      - config:
+          scopePath: ''
+          script: |-
+            let groups = payload.working.groups;
+            let users = payload.working.users.result.items;
+            let groupsMap = {};
+
+
+            let filters = {
+                email: payload.data.query.email,
+                role: payload.data.query.role,
+                site: payload.data.query.site,
+                customer: payload.data.query.customer
+            }
+
+            // Recursively traverses the group hierarchy
+            // and builds a map of id:groupObj
+            let flatten = (group, level) => {
+                if(group.id !== '(root)') {
+                    group.level = level;
+                    groupsMap[group.id] = group;
+                }
+
+                let lvl = level + 1;;
+                group.children.forEach((child) => {
+                    flatten(child, lvl);
+                });
+            };
+
+            // Flatten a copy of the tree. Need a copy since
+            // nested groups will be removed.
+            flatten(groups, -1);
+
+            // Remove users that are not a member of any group.
+            users = users.filter((u) => {
+                return u.experienceGroups.length > 0;
+            });
+
+            // Filter users by email.
+            if(filters.email) {
+                users = users.filter((u) => {
+                    return u.email.toLowerCase().includes(filters.email.toLowerCase());
+                });
+            }
+
+            // Filter users by role.
+            if(filters.role) {
+                users = users.filter((u) => {
+                    return u.userTags.cpf_role === filters.role;
+                });
+            }
+
+            // Using the group information above, find
+            // the customer and/or site that the user
+            // is a member of.
+            users.forEach((u) => {
+                let group = groupsMap[u.experienceGroups[0].id];
+
+                if(group.level == 1) { // User is a member of a customer.
+                    u.customer = group;
+                } else if (group.level === 2) { // User is a member of a site.
+                    u.site = groupsMap[u.experienceGroups[0].id];
+                    u.customer = groupsMap[u.experienceGroups[0].parentId];
+                }
+            });
+
+            // Filter users by site id.
+            if(filters.site) {
+                users = users.filter((u) => {
+                    if(!u.site) { return false; }
+                    return u.site.id === filters.site;
+                });
+            }
+
+            // Filter users by customer id.
+            // This only applies if a site was not provided.
+            if(filters.customer && !filters.site) {
+                users = users.filter((u) => {
+                    return u.customer && (u.customer.id === filters.customer);
+                });
+            }
+
+
+            payload.working.users.result.items = users;
+            payload.working.filters = filters;
+        id: dkZ9EO3Vmq
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 300
+          'y': 1520
+        outputIds:
+          - - JADi_4cjPm
+        type: RawFunctionNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: tT3uhucBtO
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 320
+          'y': 320
+        outputIds:
+          - - jdqTWzIBqA
+          - - CVybYEpCiI
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "Access denied."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: jdqTWzIBqA
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 120
+          'y': 440
+        outputIds:
+          - - B2PLayjaK0
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: B2PLayjaK0
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 120
+          'y': 540
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{pageData.userLevel}} == 2'
+        id: CVybYEpCiI
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 320
+          'y': 440
+        outputIds:
+          - - Q8UbAo1DNa
+          - - ClXajRJ5ak
+        type: ConditionalNode
+      - config: {}
+        id: F7SnOeniss
+        meta:
+          annotationText: >-
+            If the user belongs to a site, override the site query parameter
+            with their own site ID.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 560
+          'y': 440
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: data.query.site
+              type: set
+              valueTemplate: '{{experience.user.experienceGroups.[0].id}}'
+              valueTemplateType: string
+        id: ClXajRJ5ak
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 420
+          'y': 560
+        outputIds:
+          - - Q8UbAo1DNa
+        type: MutateNode
+      - config:
+          expression: '{{pageData.userLevel}} == 1'
+        id: Q8UbAo1DNa
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 320
+          'y': 680
+        outputIds:
+          - - 0ksP98lHkk
+          - - JzldJ1fJuf
+        type: ConditionalNode
+      - config: {}
+        id: e9OvXPSppt
+        meta:
+          annotationText: >-
+            If the user belongs to a customer, override the customer query
+            parameter with their own customer ID.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 560
+          'y': 660
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: data.query.customer
+              type: set
+              valueTemplate: '{{experience.user.experienceGroups.[0].id}}'
+              valueTemplateType: string
+            - destination: pageData.customerId
+              type: set
+              valueTemplate: '{{experience.user.experienceGroups.[0].id}}'
+              valueTemplateType: string
+        id: JzldJ1fJuf
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 420
+          'y': 800
+        outputIds:
+          - - DvbxsWZD6b
+        type: MutateNode
+      - config:
+          expression: '{{data.query.site}}'
+        id: DvbxsWZD6b
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 420
+          'y': 900
+        outputIds:
+          - - 0ksP98lHkk
+          - - 5wxXZ3Ebzo
+        type: ConditionalNode
+      - config: {}
+        id: hASD1pCBCE
+        meta:
+          annotationText: 'If a site is provided, verify the user has access to the site.'
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 620
+          'y': 880
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          emailOrIdTemplate: '{{experience.user.id}}'
+          groupIdTemplate: '{{data.query.site}}'
+        id: 5wxXZ3Ebzo
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Verify'
+          name: verify-experience-group
+          x: 520
+          'y': 1020
+        outputIds:
+          - - B4fdJXOHPz
+          - - 0ksP98lHkk
+        type: VerifyExperienceGroupNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyRole~
+          customNodeVersion: default
+          fields:
+            - id: requiredRole
+              value: admin
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: ''
+        id: IpgVPpV67q
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Role'
+          name: custom-node-execute-node
+          x: 220
+          'y': 200
+        outputIds:
+          - - jdqTWzIBqA
+          - - tT3uhucBtO
+        type: CustomNodeExecuteNode
+      - config:
+          rules:
+            - destination: pageData.users
+              type: set
+              valueTemplate: '[]'
+              valueTemplateType: json
+        id: B4fdJXOHPz
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 620
+          'y': 1180
+        outputIds:
+          - - HG8FVMtTK4
+        type: MutateNode
+      - config: {}
+        id: vRoAlHIAl3
+        meta:
+          annotationText: >-
+            If the user can't see this site, add an empty array to the payload.
+            The UI will just display "No sites found" message.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 820
+          'y': 1180
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsUsersTable~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/users-table
+          name: endpoint
+          uiId: HHXULPstOa
+          x: 220
+          'y': 100
+        outputIds:
+          - - IpgVPpV67q
+        type: endpoint
+    version: develop
+version: 1

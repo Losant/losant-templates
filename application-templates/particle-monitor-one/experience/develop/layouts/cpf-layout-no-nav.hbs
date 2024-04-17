@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{template globals.title_template (template experience.page.viewTags.title .)}}</title>
+    <link rel="shortcut icon" href="{{file globals.favicon}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{defaultTo globals.font_family 'open+sans'}}:bold,italic,400&display=swap" />
+    <link rel="stylesheet" href="{{file 'customTheme.min.css'}}">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="cpf-layout-no-nav">
+    <div class="container-fluid min-vh-100 d-flex flex-column">
+      <div class="row flex-grow-1 d-flex align-items-center justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-5">
+          <div class="text-center my-5">
+            <div class="cpf-logo-large"></div>
+          </div>
+          {{page}}
+        </div>
+      </div>
+      <footer class="row">
+        <div class="col-12">
+          <hr class="my-5" />
+          <div class="text-center">
+            <small>Copyright &copy; {{formatDate time 'YYYY'}} {{globals.company_name}}{{#ne (last globals.company_name) '.'}}.{{/ne}} All rights reserved.</small>
+          </div>
+          <div class="text-center mt-1 mb-5">
+            <small><a href="{{globals.privacy_policy}}">Privacy Policy</a> | <a href="{{globals.tos}}">Terms of Service</a></small>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<div class="container-fluid cpf-page" data-controller="cpf-page-profile">
+
+  <div class="row mb-3">
+      <div class="col-12">
+          <h1>Your Profile</h1>
+          <p>View and modify your user details.</p>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-9 col-xl-7 col-xxl-6">
+      {{#if request.query.error}}
+      <div class="my-2">
+        <div class="alert alert-danger" role="alert">
+          ERROR: {{request.query.error}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if request.query.success}}
+      <div class="my-2">
+        <div class="alert alert-success" role="alert">
+          Profile has been updated.
+        </div>
+      </div>
+      {{/if}}
+      <div class="card mb-4">
+        <div class="card-header">
+          Email Address
+        </div>
+        <div class="card-body">
+          <form method="POST" id="updateEmail">
+            <input type="hidden" name="user-action" value="email">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" required class="form-control" id="email" name="email" value="{{experience.user.email}}">
+            <button type="submit" class="btn btn-primary float-end mt-3">Update Email</button>
+          </form>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          Password
+        </div>
+        <div class="card-body">
+          <form method="POST" id="updatePassword" data-action="cpf-page-profile#onPasswordSubmit">
+            <input type="hidden" name="user-action" value="password">
+            <div class="mb-3">
+              <label for="current_password" class="form-label">Current Password</label>
+              <input type="password" required minlength="8" class="form-control" id="current_password"
+                name="current_password">
+            </div>
+            <div class="mb-3">
+              <label for="new_password" class="form-label">New Password</label>
+              <input type="password" required minlength="8" class="form-control" id="new_password"
+                data-action="cpf-page-profile#onNewPasswordChange" name="new_password">
+            </div>
+            <div class="mb-3">
+              <label for="confirm_password" class="form-label">Confirm Password</label>
+              <input type="password" required minlength="8" class="form-control" id="confirm_password"
+                data-action="cpf-page-profile#onNewPasswordChange" name="confirm_password">
+            </div>
+            <button type="submit" class="btn btn-primary float-end">Update Password</button>
+          </form>
+        </div>
+      </div>
+
+      {{#eq pageData.userLevel 0}}
+      <div class="alert alert-info mb-3" role="alert">
+        <div class="mb-2"><strong>Administrator Tip</strong></div>
+        <div>
+          First Name and Last Name are built-in fields for <a href="https://docs.losant.com/experiences/users/"
+            target="_blank">Experience Users</a>.
+          All other profile fields are stored on <a href="https://docs.losant.com/experiences/users/#user-tags"
+            target="_blank">User Tags</a>.
+        </div>
+      </div>
+      {{/eq}}
+
+      <div class="card">
+        <div class="card-header">
+          Profile
+        </div>
+        <div class="card-body">
+          <form method="POST" id="updateProfile">
+            <input type="hidden" name="user-action" value="profile">
+            <div class="mb-3">
+              <label for="first_name" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="first_name" name="first_name"
+                value="{{experience.user.firstName}}">
+            </div>
+            <div class="mb-3">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="last_name" name="last_name"
+                value="{{experience.user.lastName}}" }>
+            </div>
+            <div class="mb-3">
+              <label for="company" class="form-label">Company</label>
+              <input type="text" class="form-control" id="company" name="company"
+                value="{{experience.user.userTags.company}}">
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" name="title"
+                value="{{experience.user.userTags.title}}">
+            </div>
+            <div class="mb-3">
+              <label for="location" class="form-label">Location</label>
+              <input type="text" class="form-control" id="location" name="location"
+                value="{{experience.user.userTags.location}}">
+            </div>
+
+            <button type="submit" class="btn btn-primary float-end">Update Profile</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

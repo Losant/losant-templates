@@ -1,0 +1,158 @@
+<div  class="cpf-page"
+      data-controller="cpf-page-admin-navigation"
+      data-cpf-page-admin-navigation-cpf-element-nav-outlet=".cpf-nav-preview"
+      data-turbo-temporary>
+      
+  <div class="mb-5">
+    <div>
+      <h1>Navigation</h1>
+    </div>
+    <div class="col">
+      Customize your application's left navigation menu.
+    </div>
+  </div>
+
+  {{#if request.query.error}}
+  <div class="my-2">
+    <div class="alert alert-danger" role="alert">
+      ERROR: {{request.query.error}}
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if request.query.success}}
+  <div class="my-2">
+    <div class="alert alert-success" role="alert">
+      Navigation changes have been saved.
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="cpf-admin-form-wrapper">
+
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <div class="mb-4">
+          <label class="mb-1">Top Nav Items</label>
+          <turbo-frame id="cpf-element-nav" src="/cpf/elements/nav?which=top&preview=true"></turbo-frame>
+        </div>
+        <div class="mb-4">
+          <label class="mb-1">Bottom Nav Items</label> 
+          <turbo-frame id="cpf-element-nav" src="/cpf/elements/nav?which=bottom&preview=true"></turbo-frame>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-8 mt-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Edit Nav Item
+          </div>
+          <div class="card-body">
+            <div data-cpf-page-admin-navigation-target="selectItemAlert" class="alert alert-info d-none" role="alert">
+              Add or select a nav item.
+            </div>
+            <div data-cpf-page-admin-navigation-target="formContainer">
+              <form method="POST">
+                <div class="mb-3">
+                  <label for="nav_item_label" class="form-label">Display Label</label>
+                  <input type="text" class="form-control" id="nav_item_label" name="label"
+                    data-cpf-page-admin-navigation-target="navLabel" data-action="cpf-page-admin-navigation#updateNavPreview">
+                </div>
+
+                <div class="mb-3">
+                  <label for="nav_item_parent" class="form-label">Parent</label>
+                  <select class="form-select" id="nav_item_parent" name="parent"
+                    data-cpf-page-admin-navigation-target="navParent" data-action="cpf-page-admin-navigation#updateNavPreview">
+                    <option value="">-- No Parent --</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nav_item_icon" class="form-label">Icon (optional)</label>
+                  <input type="text" class="form-control" id="nav_item_icon" name="icon"
+                    data-cpf-page-admin-navigation-target="navIcon"
+                    data-action="cpf-page-admin-navigation#updateNavPreview"
+                    aria-describedby="nav_item_icon_help">
+                    <div id="nav_item_icon_help" class="form-text">
+                      The <a href="https://fonts.google.com/icons" target="_blank">Material Icons</a>
+                      name for this icon. Can be found by selecting the
+                      desired icon in Material Icons and viewing the "Inserting the Icon"
+                      section in the resulting panel.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nav_item_url" class="form-label">URL</label>
+                  <input type="text" class="form-control" id="nav_item_url" name="url"
+                    data-action="cpf-page-admin-navigation#updateNavPreview"
+                    data-cpf-page-admin-navigation-target="navURL">
+                </div>
+
+                <div class="mb-3">
+                  <label for="nav_item_order" class="form-label">Order</label>
+                  <input type="number" class="form-control" id="nav_item_order" name="order"
+                    data-cpf-page-admin-navigation-target="navOrder"
+                    data-action="cpf-page-admin-navigation#updateNavPreview"
+                    aria-describedby="nav_item_order_help">
+                    <div id="nav_item_order_help" class="form-text">
+                      This number controls the order of nav items under the same parent.
+                      This can be any numerical value and nav items will be sorted,
+                      lowest first, by this value.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nav_item_tenancy" class="form-label">Required Tenancy Level (optional)</label>
+                  <input type="number" min="0" class="form-control" id="nav_item_tenancy" name="tenancy_level"
+                    data-action="cpf-page-admin-navigation#updateNavPreview"
+                    data-cpf-page-admin-navigation-target="navTenancyLevel"
+                    aria-describedby="nav_item_tenancy_help">
+                    <div id="nav_item_tenancy_help" class="form-text">
+                      Hides this nav item if the user's level in the tenancy hierarchy is
+                      <strong>greater</strong> than this value. For example, with a tenancy hierarchy of
+                      System (level=0) / Customers (level=1) / Sites (level=2),
+                      setting this value to 1 will not allow any users assigned to
+                      Sites (level=2) to see this nav item.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nav_item_role" class="form-label">Required Role (optional)</label>
+                  <select class="form-select" id="nav_item_role" name="role"
+                          data-action="cpf-page-admin-navigation#updateNavPreview"
+                          data-cpf-page-admin-navigation-target="navRole"
+                          aria-describedby="nav_item_tenancy_help">
+                    <option value="">-- All Roles --</option>
+                    <option value="viewer">Viewer</option>
+                    <option value="editor">Editor</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                  <div id="nav_item_role_help" class="form-text">
+                      Hides this nav item if the user's role is <strong>less</strong> than this value.
+                      For example, with the roles Viewer / Editor / Admin, setting this value to
+                      Admin will not allow any user with the Editor or Viewer role to see this item.
+                      Setting this value to Editor will allow the Editor and Admin roles
+                      while disallowing the Viewer role.
+                    </div>
+                </div>
+
+                <div class="mb-2 mt-4 float-end">
+                  <a href="." class="text-danger" data-action="cpf-page-admin-navigation#removeNavItem">Remove Item</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="edit-nav-card mt-4">
+          <div class="card p-3 cpf-bg-mid">
+            <form method="post" data-cpf-page-admin-navigation-target="navForm">
+              <input type="hidden" name="nav" data-cpf-page-admin-navigation-target="navHiddenInput" />
+              <button type="button" class="btn btn-primary" data-action="cpf-page-admin-navigation#saveChanges">Save Changes</button>
+              <a href="." data-action="cpf-page-admin-navigation#cancelChanges" class="ms-2 cpf-text-mid">Discard Changes</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

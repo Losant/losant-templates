@@ -1,0 +1,14 @@
+resourceType: Webhook
+resources:
+  - basicAuthPassword: ''
+    basicAuthUsername: ''
+    exportHash: 40839fcf96c576f73aa9993271ad98093a12704a915990bcc82623fbc40c9654
+    id: ~exportplaceholderid-webhook-particle~
+    isWebsocket: false
+    name: Particle
+    responseCode: 200
+    token: ~exportplaceholderid-webhookToken-particle~
+    verificationCode: ''
+    verificationType: none
+    waitForReply: false
+version: 1

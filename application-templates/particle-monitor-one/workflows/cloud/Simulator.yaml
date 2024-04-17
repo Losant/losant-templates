@@ -1,0 +1,265 @@
+resourceType: Flow
+resources:
+  - description: 'Generates random temperature, humidity, location, and battery data.'
+    exportHash: 6e758a5552b95f7f5941aaecde364d7aeb4c9479399f2f047a08b947d929ab9b
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-simulator~
+    name: Simulator
+    nodes:
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: zZSx_Kp2xP
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 280
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: findByAnyTags
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: '1000'
+          sortDirection: asc
+          sortField: name
+          tags:
+            - keyTemplate: particle_id
+              valueTemplate: simulated
+          tagsAsObject: true
+        id: q9sasXwDDj
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 280
+          'y': 180
+        outputIds:
+          - - oqhGPjcW0k
+        type: GetDeviceNode
+      - config:
+          currentItemPath: working.device
+          loopSourcePath: working.devices
+          mapResultPath: ''
+          parallel: true
+        id: oqhGPjcW0k
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 280
+          'y': 280
+        outputIds:
+          - - zZSx_Kp2xP
+          - - XOv3ihchxY
+        type: LoopNode
+      - config:
+          loopNodeId: oqhGPjcW0k
+          mapValuePath: ''
+          shouldBreak: false
+        id: kMH_kb_uV4
+        meta:
+          category: loop
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Return
+          name: loop-return
+          x: 200
+          'y': 920
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          attrDataMethod: payloadPath
+          attrPayloadPath: working.state
+          deviceId: working.device.value.id
+          deviceIdTemplateType: jsonPath
+          resultPath: ''
+          timeSourceType: payloadTime
+        id: _uV5TvietS
+        meta:
+          category: output
+          description: ''
+          groupId: oqhGPjcW0k
+          label: 'Device: State'
+          name: device-state
+          x: 200
+          'y': 820
+        outputIds:
+          - - kMH_kb_uV4
+        type: DeviceChangeStateNode
+      - config:
+          max: 250
+          min: 200
+          resultPath: working.state.temperature
+        id: XOv3ihchxY
+        meta:
+          category: logic
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Random Temp
+          name: random-number
+          x: 200
+          'y': 320
+        outputIds:
+          - - 3w39Z4nXyA
+        type: RandomNumberNode
+      - config:
+          max: 500
+          min: 400
+          resultPath: working.state.humidity
+        id: 3w39Z4nXyA
+        meta:
+          category: logic
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Random Humidity
+          name: random-number
+          x: 200
+          'y': 400
+        outputIds:
+          - - Ay5EozloPU
+        type: RandomNumberNode
+      - config:
+          statements:
+            - expression: '{{divide working.state.temperature 10}}'
+              resultPath: working.state.temperature
+            - expression: '{{divide working.state.humidity 10}}'
+              resultPath: working.state.humidity
+            - expression: '{{divide working.state.battery 10}}'
+              resultPath: working.state.battery
+        id: lexgBMEheq
+        meta:
+          category: logic
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Math
+          name: math
+          x: 200
+          'y': 580
+        outputIds:
+          - - ToGCYLBg9T
+        type: MathNode
+      - config:
+          max: 1000
+          min: 900
+          resultPath: working.state.battery
+        id: Ay5EozloPU
+        meta:
+          category: logic
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Random Battery
+          name: random-number
+          x: 200
+          'y': 480
+        outputIds:
+          - - lexgBMEheq
+        type: RandomNumberNode
+      - config: {}
+        id: cep5JtqdI7
+        meta:
+          annotationText: 'Pick random numbers for temperature, humidity, battery.'
+          category: annotation
+          groupId: oqhGPjcW0k
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: XVporlDka5
+        meta:
+          annotationText: >-
+            Divide the random numbers above by 10 to get 1 decimal place of
+            precision.
+          category: annotation
+          groupId: oqhGPjcW0k
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.state.location
+              type: set
+              valueTemplate: '39.1082278,-84.5096191'
+              valueTemplateType: string
+        id: ToGCYLBg9T
+        meta:
+          category: logic
+          description: ''
+          groupId: oqhGPjcW0k
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 700
+        outputIds:
+          - - _uV5TvietS
+        type: MutateNode
+      - config: {}
+        id: Y8ZxRR8XPx
+        meta:
+          annotationText: Add fixed GPS location to state.
+          category: annotation
+          groupId: oqhGPjcW0k
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 400
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-flow-simulator~-De0vwAxVftS1JhUlfDX5R
+        meta:
+          category: trigger
+          description: ''
+          deviceId: null
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: fDdN-1RGnD
+          x: 180
+          'y': 60
+        outputIds:
+          - - q9sasXwDDj
+        type: virtualButton
+      - config:
+          seconds: 120
+        key: ~exportplaceholderid-flow-simulator~-6mYRiu62tRceTY7iTv0qU
+        meta:
+          category: trigger
+          description: ''
+          label: Timer
+          name: timer
+          timerTypeSelect: seconds
+          uiId: 2BHnXMmL5G
+          x: 380
+          'y': 60
+        outputIds:
+          - - q9sasXwDDj
+        type: timer
+version: 1

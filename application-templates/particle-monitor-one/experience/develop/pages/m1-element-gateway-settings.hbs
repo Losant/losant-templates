@@ -1,0 +1,116 @@
+{{!--
+
+This turbo frame contains the gateway settings form. To change which fields
+are present based on your specific gateway schema, you can add and
+remove input fields as needed from the form below.
+
+To handle new form fields and pass them to Particle's API, you must also
+modify the m1-element-gateway-settings workflow.
+
+--}}
+<turbo-frame id="m1-element-gateway-settings">
+  <form method="POST"
+        action="/m1/elements/gateway-settings?device={{request.query.device}}"
+        class="device-property-form">
+    <div class="m-4">
+
+      {{#if request.query.error}}
+      <div class="my-2">
+        <div class="alert alert-danger" role="alert">
+          ERROR: {{request.query.error}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if request.query.success}}
+      <div class="my-2">
+        <div class="alert alert-success" role="alert">
+          Gateway settings have successfully been updated.
+        </div>
+      </div>
+      {{/if}}
+
+      {{!--
+      This error will be set if something failed while rendering the element. Usually permissions
+      or failure to retrieve current device configuration from the Particle API.
+      --}}
+      {{#if pageData.error}}
+      <div class="my-2">
+        <div class="alert alert-danger" role="alert">
+          {{pageData.error}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{#eq pageData.userLevel 0}}
+      <div class="alert alert-info mb-4 mt-3" role="alert">
+        <div class="mb-2"><strong>Administrator Tip</strong></div>
+        <div>
+          These values are retrieved and updated using the
+          <a href="https://docs.particle.io/reference/tracker/tracker-configuration/#setting-configuration" target="_blank">Particle API</a>.
+          Changing these fields to match your specific schema can be done by editing the <code>m1-element-gateway-settings</code>
+          Experience Page and Experience Workflow.
+        </div>
+      </div>
+      {{/eq}}
+
+      <p>
+        <a href="https://console.particle.io/devices/{{pageData.device.tags.particle_id.[0]}}" target="_blank">
+          View in Particle Console
+        </a>
+      </p>
+
+      {{!-- Don't show any of the fields if there was an error --}}
+      {{#unless pageData.error}}
+
+      <div class="mb-3">
+        <label for="gateway_settings_modbus1_server_id">Modbus 1 Server ID</label>
+        <input id="gateway_settings_modbus1_server_id" type="number" min="1" max="255" class="form-control" name="gateway_settings_modbus1_server_id" value="{{pageData.particle.configuration.current.modbus1.id}}" aria-describedby="gateway_settings_modbus1_server_id_help" required {{#eq pageData.role 'viewer'}}disabled{{/eq}}>
+        <div id="gateway_settings_modbus1_server_id_help" class="form-text">
+            The remote device server ID (also known as slave ID). Range: 1-255.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="gateway_settings_modbus1_interval">Modbus 1 (Humidity) Polling Interval (seconds)</label>
+        <input id="gateway_settings_modbus1_interval" type="number" min="0" class="form-control" name="gateway_settings_modbus1_interval" value="{{pageData.particle.configuration.current.modbus1.poll}}" aria-describedby="gateway_settings_modbus1_interval_help" required {{#eq pageData.role 'viewer'}}disabled{{/eq}}>
+        <div id="gateway_settings_modbus1_interval_help" class="form-text">
+            Defines the frequency (in seconds) in which the register will be polled and results published.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="gateway_settings_modbus2_server_id">Modbus 2 Server ID</label>
+        <input id="gateway_settings_modbus2_server_id" type="number" min="1" max="255" class="form-control" name="gateway_settings_modbus2_server_id" value="{{pageData.particle.configuration.current.modbus2.id}}" aria-describedby="gateway_settings_modbus2_server_id_help" required {{#eq pageData.role 'viewer'}}disabled{{/eq}}>
+        <div id="gateway_settings_modbus2_server_id_help" class="form-text">
+            The remote device server ID (also known as slave ID). Range: 1-255.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="gateway_settings_modbus2_interval">Modbus 2 (Temperature) Polling Interval (seconds)</label>
+        <input id="gateway_settings_modbus2_interval" type="number" min="0" class="form-control" name="gateway_settings_modbus2_interval" value="{{pageData.particle.configuration.current.modbus2.poll}}" aria-describedby="gateway_settings_modbus2_interval_help" required {{#eq pageData.role 'viewer'}}disabled{{/eq}}>
+        <div id="gateway_settings_modbus2_interval_help" class="form-text">
+            Defines the frequency (in seconds) in which the register will be polled and results published.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="gateway_settings_location_interval">Location Polling Interval (seconds)</label>
+        <input id="gateway_settings_location_interval" type="number" min="0" class="form-control" name="gateway_settings_location_interval" value="{{pageData.particle.configuration.current.location.interval_max}}" aria-describedby="gateway_settings_location_interval_help" required {{#eq pageData.role 'viewer'}}disabled{{/eq}}>
+        <div id="gateway_settings_location_interval_help" class="form-text">
+            Always publish location, when possible, this often.
+        </div>
+      </div>
+
+      {{#ne pageData.role 'viewer'}}
+      <div class="details-save card p-3 my-4 text-bg-dark sticky-bottom">
+        <div class="d-flex flex-row align-items-center">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+      {{/ne}}
+      {{/unless}}
+
+    </div>
+  </form>
+</turbo-frame>

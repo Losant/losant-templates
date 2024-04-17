@@ -1,0 +1,202 @@
+resourceType: ExperienceView
+resources:
+  - exportHash: fc89da1c3b46ca024b06177ecde4174a58a90a36c4933178dc382128a2fce036
+    id: ~exportplaceholderid-experienceView-cpfCssElementCustomersTable~
+    localFilename: ./cpf-css-element-customers-table.hbs
+    name: cpf-css-element-customers-table
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: e4a553d40e41c0211260176911aa726aea01077cf03dfa180063df3f666eaa29
+    id: ~exportplaceholderid-experienceView-cpfCssElementDashboard~
+    localFilename: ./cpf-css-element-dashboard.hbs
+    name: cpf-css-element-dashboard
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: 6631d1da467120438727c180d043a5122df521ad24ef9f86b399ed604b213928
+    id: ~exportplaceholderid-experienceView-cpfCssElementDeviceList~
+    localFilename: ./cpf-css-element-device-list.hbs
+    name: cpf-css-element-device-list
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: cf821965b77045fa57bd19d3af7b0901d2485f740f3dcbcc6f29e62d2b55c864
+    id: ~exportplaceholderid-experienceView-cpfCssElementEventsTable~
+    localFilename: ./cpf-css-element-events-table.hbs
+    name: cpf-css-element-events-table
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: f3928d33637c368344b3e3d4bb84abf922965956615cd5dcdfff3ba39f1d15b0
+    id: ~exportplaceholderid-experienceView-cpfCssElementImageUpload~
+    localFilename: ./cpf-css-element-image-upload.hbs
+    name: cpf-css-element-image-upload
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: 708e32a878b46c793419949b8425d40023c88c35addb363c856b07ee5162b971
+    id: ~exportplaceholderid-experienceView-cpfCssElementSitesTable~
+    localFilename: ./cpf-css-element-sites-table.hbs
+    name: cpf-css-element-sites-table
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: 7af96591736efd101542dc444d1f2990ed48719bb5b1f7834e8280e28f99410f
+    id: ~exportplaceholderid-experienceView-cpfCssElementUsersTable~
+    localFilename: ./cpf-css-element-users-table.hbs
+    name: cpf-css-element-users-table
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: 1be5851738ad095d4754e567ffd51f6af8671ed4bfb6c0c3f6da5149e21ac818
+    id: ~exportplaceholderid-experienceView-cpfCssTheme~
+    localFilename: ./cpf-css-theme.hbs
+    name: cpf-css-theme
+    version: develop
+    viewTags:
+      content-type: text/css
+    viewType: component
+  - exportHash: 950c57f82eeb599c6a04c05b5807598b7c2f2d3c436a6c21a6e368764df9a0f0
+    id: ~exportplaceholderid-experienceView-cpfImageUpload~
+    localFilename: ./cpf-image-upload.hbs
+    name: cpf-image-upload
+    version: develop
+    viewTags: {}
+    viewType: component
+  - exportHash: 9a8519ce538404bb4c48a57096eafeb799d07eff36fb2950bf92b5fd5c084a79
+    id: ~exportplaceholderid-experienceView-cpfJsElementDeviceDataExplorer~
+    localFilename: ./cpf-js-element-device-data-explorer.hbs
+    name: cpf-js-element-device-data-explorer
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 8bf14aa23b966bca0747c3efc727c525b21cdb546975b60575f6e074e2a23076
+    id: ~exportplaceholderid-experienceView-cpfJsElementDeviceHistoryGraph~
+    localFilename: ./cpf-js-element-device-history-graph.hbs
+    name: cpf-js-element-device-history-graph
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 712d1bfe747cc7bd16d7d8e5fe0fae4d9e720a6b18a45af107bb7d654e3979ff
+    id: ~exportplaceholderid-experienceView-cpfJsElementDevicesTable~
+    localFilename: ./cpf-js-element-devices-table.hbs
+    name: cpf-js-element-devices-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 4744638b9209da231e04a94ca7f33aaedda314bbf07200dbb9db9e850d99236c
+    id: ~exportplaceholderid-experienceView-cpfJsElementEventsTable~
+    localFilename: ./cpf-js-element-events-table.hbs
+    name: cpf-js-element-events-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 3a4f1c577fda6cc158c52f529df75a8fddb35d953ad819bdef69ffdc09c77e45
+    id: ~exportplaceholderid-experienceView-cpfJsElementImageUpload~
+    localFilename: ./cpf-js-element-image-upload.hbs
+    name: cpf-js-element-image-upload
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 4ae03ca1a019a3205d33ecfc72183da9e48b707c11d40204deccb6e60eec61ff
+    id: ~exportplaceholderid-experienceView-cpfJsElementNav~
+    localFilename: ./cpf-js-element-nav.hbs
+    name: cpf-js-element-nav
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: edffc080a02bedfe50fec5f301e8a1d2faec70a11e256cf20e37cf64401021a4
+    id: ~exportplaceholderid-experienceView-cpfJsElementSitesTable~
+    localFilename: ./cpf-js-element-sites-table.hbs
+    name: cpf-js-element-sites-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 13067a79b111e6d3da79589eacbe81a32bab590218553dfc4ec8bc174216dc57
+    id: ~exportplaceholderid-experienceView-cpfJsElementUsersTable~
+    localFilename: ./cpf-js-element-users-table.hbs
+    name: cpf-js-element-users-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: e7ed54ee6a8205a927f95eefa99927846b0496c31fa9d9d319d29565e4de15e5
+    id: ~exportplaceholderid-experienceView-cpfJsPageAdminDevicesTable~
+    localFilename: ./cpf-js-page-admin-devices-table.hbs
+    name: cpf-js-page-admin-devices-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: cf9e0d84d6f6d33b5f416775d8fd43b372970df556fab01e1d01fe5eaa04696e
+    id: ~exportplaceholderid-experienceView-cpfJsPageAdminNavigation~
+    localFilename: ./cpf-js-page-admin-navigation.hbs
+    name: cpf-js-page-admin-navigation
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: f4c63cee0f000bb3ef913101657b3c69c6e1b6fc904e743ef46076d961deb980
+    id: ~exportplaceholderid-experienceView-cpfJsPageAdminWhitelabel~
+    localFilename: ./cpf-js-page-admin-whitelabel.hbs
+    name: cpf-js-page-admin-whitelabel
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 2e079f5c915743ed8920ab34bbeced64f4148598c708077da106a9f7602c3e92
+    id: ~exportplaceholderid-experienceView-cpfJsPageDeviceDetails~
+    localFilename: ./cpf-js-page-device-details.hbs
+    name: cpf-js-page-device-details
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 6131d9cec25cb2f848c56d47d5e2cf070bde1d507d0ba20d4acf581587653712
+    id: ~exportplaceholderid-experienceView-cpfJsPageDeviceRegister~
+    localFilename: ./cpf-js-page-device-register.hbs
+    name: cpf-js-page-device-register
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: d8b1132ee285ef0921c27d15854dc3f3d5fa508d39229bea843428cdaeb4a7ee
+    id: ~exportplaceholderid-experienceView-cpfJsPageDevices~
+    localFilename: ./cpf-js-page-devices.hbs
+    name: cpf-js-page-devices
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: f7995e8b6e096bdbabc64225648cb59bb541b6bfcc195947ed8a249e73d9556a
+    id: ~exportplaceholderid-experienceView-cpfJsPageProfile~
+    localFilename: ./cpf-js-page-profile.hbs
+    name: cpf-js-page-profile
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: db5237af050cbfbbc6ea24fb3f177dff3afc28332e9c97d05a055c13cf5e7d09
+    id: ~exportplaceholderid-experienceView-cpfJsPageUserDetails~
+    localFilename: ./cpf-js-page-user-details.hbs
+    name: cpf-js-page-user-details
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+version: 1

@@ -1,0 +1,128 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /script.js
+    enabled: true
+    exportHash: 6a2fceedcb20d6259661b5ee98f9f69fbc3336f68678f39692a9a066a232dc02
+    flowId: ~exportplaceholderid-flow-cpfScripts~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfScripts~
+    name: cpf-scripts
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: text/javascript
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfScript~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: JhZz9H1V7o
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 380
+        outputIds:
+          - - VL1l8uiMTP
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: VL1l8uiMTP
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: name
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1000'
+            - name: filterField
+              type: string
+              value: ''
+            - name: filter
+              type: string
+              value: ''
+            - name: viewType
+              type: string
+              value: component
+            - name: version
+              type: string
+              value: '{{experience.version}}'
+          resource: experienceViews
+          responsePath: working.allComponents
+        id: bN5Ppi3sCX
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 40
+          'y': 140
+        outputIds:
+          - - HE12JmjAIh
+        type: LosantApiNode
+      - config:
+          scopePath: ''
+          script: >-
+            let allComponents = payload.working.allComponents.result.items;
+
+
+            let filtered = allComponents.filter((c) => { return
+            c.viewTags['content-type'] === 'text/javascript' });
+
+
+            payload.pageData = { scripts: filtered };
+        id: HE12JmjAIh
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 40
+          'y': 240
+        outputIds:
+          - - JhZz9H1V7o
+        type: RawFunctionNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getScriptJs~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /script.js
+          name: endpoint
+          uiId: adGu8NxTTk
+          x: 40
+          'y': 40
+        outputIds:
+          - - bN5Ppi3sCX
+        type: endpoint
+    version: develop
+version: 1

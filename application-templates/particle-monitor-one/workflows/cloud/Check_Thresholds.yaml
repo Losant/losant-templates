@@ -1,0 +1,305 @@
+resourceType: Flow
+resources:
+  - description: >-
+      Compares incoming data to threshold device tags. If a threshold is
+      exceeded, an Event is created.
+    exportHash: fbc17dca194d232fdc2e8edb0ad1f3270d67be537def3f48af5566e5b213fd19
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-checkThresholds~
+    name: Check Thresholds
+    nodes:
+      - config: {}
+        id: wdi1GHZvRB
+        meta:
+          annotationText: >-
+            To be displayed in the CPF interface, the event must be tagged with
+            `cpf_site` and `cpf_customer`. These values should already be in the
+            incoming device tags.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 260
+          x: 860
+          'y': 520
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: iaWTEn8_8I
+        meta:
+          annotationText: >-
+            This workflow compares incoming data to the
+            `threshold_temperature_high`, `threshold_temperature_low`,
+            `threshold_humidity_high`, and `threshold_humidity_low` device tags.
+            If the incoming value exceeds or matches a threshold value, an
+            [Event](https://~exportplaceholderid-docs-url~/applications/events/)
+            is created.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 400
+          x: 260
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: kLQrP5CPo_
+        meta:
+          annotationText: >-
+            Trigger whenever a device with the `DeviceRecipe=Monitor One` tag
+            reports state.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 560
+          'y': 240
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: HhJ_MyYiy9
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 560
+          'y': 740
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.humidity}} !== undefined'
+        id: gjentPRsL1
+        meta:
+          category: logic
+          description: ''
+          label: Humidity?
+          name: conditional
+          x: 160
+          'y': 400
+        outputIds:
+          - []
+          - - B9BPvbcDPU
+            - fH8u2fd2EC
+        type: ConditionalNode
+      - config:
+          expression: '{{data.temperature}} !== undefined'
+        id: P2cYRfB8_f
+        meta:
+          category: logic
+          description: ''
+          label: Temperature?
+          name: conditional
+          x: 560
+          'y': 400
+        outputIds:
+          - []
+          - - 5hXiFXyXBz
+            - Ah5i_YLeRF
+        type: ConditionalNode
+      - config:
+          expression: >-
+            {{data.temperature}} >=
+            {{deviceTags.threshold_temperature_high.[0]}}
+        id: 5hXiFXyXBz
+        meta:
+          category: logic
+          description: ''
+          label: '>= High?'
+          name: conditional
+          x: 460
+          'y': 520
+        outputIds:
+          - []
+          - - hTZ1cueQe3
+        type: ConditionalNode
+      - config:
+          expression: '{{data.temperature}} <= {{deviceTags.threshold_temperature_low.[0]}}'
+        id: Ah5i_YLeRF
+        meta:
+          category: logic
+          description: ''
+          label: <= Low?
+          name: conditional
+          x: 660
+          'y': 520
+        outputIds:
+          - []
+          - - BSZAfIlbFS
+        type: ConditionalNode
+      - config:
+          expression: '{{data.humidity}} >= {{deviceTags.threshold_humidity_high.[0]}}'
+        id: fH8u2fd2EC
+        meta:
+          category: logic
+          description: ''
+          label: '>= High?'
+          name: conditional
+          x: 60
+          'y': 520
+        outputIds:
+          - []
+          - - B6fvb6KB1d
+        type: ConditionalNode
+      - config:
+          expression: '{{data.humidity}} <= {{deviceTags.threshold_humidity_low.[0]}}'
+        id: B9BPvbcDPU
+        meta:
+          category: logic
+          description: ''
+          label: <= Low?
+          name: conditional
+          x: 260
+          'y': 520
+        outputIds:
+          - []
+          - - 8CghaHLsww
+        type: ConditionalNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags:
+            - keyTemplate: cpf_site
+              valueTemplate: '{{device.tags.cpf_site.[0]}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{device.tags.cpf_customer.[0]}}'
+          levelTemplate: critical
+          messageTemplate: >-
+            Temperature value of {{data.temperature}} above threshold of
+            {{device.tags.threshold_temperature_high.[0]}} for device
+            {{device.id}}.
+          subjectTemplate: Temperature Above Threshold
+          timeSourceType: now
+        id: hTZ1cueQe3
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Create'
+          name: create-event
+          x: 460
+          'y': 620
+        outputIds:
+          - - HhJ_MyYiy9
+        type: CreateEventNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags:
+            - keyTemplate: cpf_site
+              valueTemplate: '{{device.tags.cpf_site.[0]}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{device.tags.cpf_customer.[0]}}'
+          levelTemplate: critical
+          messageTemplate: >-
+            Temperature value of {{data.temperature}} below threshold of
+            {{device.tags.threshold_temperature_low.[0]}} for device
+            {{device.id}}.
+          subjectTemplate: Temperature Below Threshold
+          timeSourceType: now
+        id: BSZAfIlbFS
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Create'
+          name: create-event
+          x: 660
+          'y': 620
+        outputIds:
+          - - HhJ_MyYiy9
+        type: CreateEventNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 81q8tIVbJl
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 160
+          'y': 740
+        outputIds: []
+        type: DebugNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags:
+            - keyTemplate: cpf_site
+              valueTemplate: '{{device.tags.cpf_site.[0]}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{device.tags.cpf_customer.[0]}}'
+          levelTemplate: critical
+          messageTemplate: >-
+            Humidity value of {{data.humidity}} above threshold of
+            {{device.tags.threshold_humidity_high.[0]}} for device
+            {{device.id}}.
+          subjectTemplate: Humidity Above Threshold
+          timeSourceType: now
+        id: B6fvb6KB1d
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Create'
+          name: create-event
+          x: 60
+          'y': 620
+        outputIds:
+          - - 81q8tIVbJl
+        type: CreateEventNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags:
+            - keyTemplate: cpf_site
+              valueTemplate: '{{device.tags.cpf_site.[0]}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{device.tags.cpf_customer.[0]}}'
+          levelTemplate: critical
+          messageTemplate: >-
+            Humidity value of {{data.humidity}} below threshold of
+            {{device.tags.threshold_humidity_low.[0]}} for device {{device.id}}.
+          subjectTemplate: Humidity Below Threshold
+          timeSourceType: now
+        id: 8CghaHLsww
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Create'
+          name: create-event
+          x: 260
+          'y': 620
+        outputIds:
+          - - 81q8tIVbJl
+        type: CreateEventNode
+    triggers:
+      - config:
+          attributeWhitelist:
+            - humidity
+            - temperature
+          batchBehavior: each
+          triggerOn: both
+        key: DeviceRecipe/Monitor One
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: State'
+          name: deviceIdsTags
+          uiId: BeInekTq2v
+          x: 360
+          'y': 240
+        outputIds:
+          - - gjentPRsL1
+            - P2cYRfB8_f
+        type: deviceTag
+version: 1

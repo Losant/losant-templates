@@ -1,0 +1,290 @@
+<div
+  class="container-fluid cpf-page overflow-hidden d-flex flex-column w-100"
+  data-controller="cpf-page-device-details"
+  data-action="popstate@window->cpf-page-device-details#historyPopstate"
+  data-cpf-page-device-details-device-id-value="{{request.params.deviceId}}"
+  data-cpf-page-device-details-site-id-value="{{pageData.device.siteId}}"
+  data-cpf-page-device-details-customer-id-value="{{pageData.device.customerId}}"
+>
+  <div class="row mb-3">
+    <div class="col-auto me-auto">
+      <h1>{{pageData.device.name}}</h1>
+      <p>{{#if pageData.device.connectionInfo.connected}}<span class="material-symbols-outlined cpf-icon-small text-success">
+        cloud</span> Connected since 
+        <relative-time format="datetime" year="numeric" hour="numeric" minute="numeric" second="numeric"
+          datetime="{{pageData.device.connectionInfo.time}}"></relative-time>
+        {{else}} Disconnected
+        {{/if}}</p>
+    </div>
+  </div>
+  <div class="d-flex flex-column device-summary flex-grow-1 overflow-hidden">
+    <ul class="nav nav-tabs" id="cpf-device-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        {{!-- Default to this tab if request.query.tab is not set --}}
+        <button class="nav-link {{#unless request.query.tab}}active{{/unless}}{{#eq request.query.tab 'dashboard'}}active{{/eq}}"
+                data-cpf-page-device-details-tab-param="dashboard"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-dashboard-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-dashboard-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="cpf-device-dashboard-tab-pane"
+                aria-selected="true">Dashboard</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link {{#eq request.query.tab 'explorer'}}active{{/eq}}"
+                data-cpf-page-device-details-tab-param="explorer"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-data-explorer-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-data-explorer-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="cpf-device-data-explorer-tab-pane"
+                aria-selected="true">Data Explorer</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link {{#eq request.query.tab 'events'}}active{{/eq}}"
+                data-cpf-page-device-details-tab-param="events"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-events-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-events-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="cpf-device-events-tab-pane"
+                aria-selected="true">Events</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link {{#eq request.query.tab 'properties'}}active{{/eq}}"
+                data-cpf-page-device-details-tab-param="properties"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-properties-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-properties-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="cpf-device-properties-tab-pane"
+                aria-selected="true">Properties</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link {{#eq request.query.tab 'gateway-settings'}}active{{/eq}}"
+                data-cpf-page-device-details-tab-param="gateway-settings"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-gateway-settings-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-gateway-settings-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="cpf-device-gateway-settings-tab-pane"
+                aria-selected="true">Gateway Settings</button>
+      </li>
+    </ul>
+
+    <div class="tab-content overflow-auto flex-grow-1" id="cpf-device-tabs-content">
+
+      {{!-- Dashboard Tab --}}
+      <div class="h-100 w-100 tab-pane fade {{#unless request.query.tab}}show active{{/unless}}{{#eq request.query.tab 'dashboard'}}show active{{/eq}}" id="cpf-device-dashboard-tab-pane" role="tabpanel" aria-labelledby="cpf-device-dashboard-tab" tabindex="0">
+        {{#if pageData.dashboardId}}
+        {{!--
+        The dashboard is an iframe instead of a turboframe because
+        dashboards insert content into the HEAD and BODY of the page.
+        This doesn't work well with Turbo since it clears those
+        when it loads new content.
+        --}}
+        <iframe loading="lazy" class="h-100 w-100" src="/cpf/elements/dashboard?dashboardId={{pageData.dashboardId}}&deviceId={{request.params.deviceId}}"></iframe>
+        {{else}}
+        <div id="no-dashboard-message" class="alert alert-info" role="alert">
+          No dashboard is configured for this device.<br /><br />
+          {{#eq pageData.userLevel 0}}
+          Navigate to the <a href="/admin/dashboards">Dashboards</a> admin page to configure which
+          dashboard should display for this device's recipe.
+          {{/eq}}
+        </div>
+        {{/if}}
+      </div>
+
+      {{!-- Data Explorer Tab --}}
+      <div class="tab-pane fade {{#eq request.query.tab 'explorer'}}show active{{/eq}}" id="cpf-device-data-explorer-tab-pane" role="tabpanel" aria-labelledby="cpf-device-data-explorer-tab" tabindex="1">
+        <div class="p-2">
+          <turbo-frame
+            id="cpf-element-data-explorer"
+            data-cpf-page-device-details-target="dataExplorerFrame"
+            loading="lazy"
+            src="/cpf/elements/device-data-explorer/{{request.params.deviceId}}?start={{request.query.start}}&end={{request.query.end}}&aggregation={{defaultTo request.query.aggregation 'LAST'}}&resolution={{defaultTo request.query.duration '3600000'}}{{#each request.query.attributes}}&attributes={{this}}{{/each}}"
+          >
+            <div class="p-4">
+              <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+            </div>
+          </turbo-frame>
+        </div>
+      </div>
+
+      {{!-- Events Tab --}}
+      <div class="tab-pane fade {{#eq request.query.tab 'events'}}show active{{/eq}}" id="cpf-device-events-tab-pane" role="tabpanel" aria-labelledby="cpf-device-events-tab" tabindex="1">
+        <div class="p-4">
+          <turbo-frame
+            id="cpf-element-events-table"
+            src="/cpf/elements/events-table?hideDeviceColumn=true&device={{request.params.deviceId}}"
+            target="_top"
+            loading="lazy">
+            <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+          </turbo-frame>
+        </div>
+      </div>
+
+      {{!-- Properties Tab --}}
+      <div  class="tab-pane fade {{#eq request.query.tab 'properties'}}show active{{/eq}}"
+            id="cpf-device-properties-tab-pane"
+            role="tabpanel"
+            aria-labelledby="cpf-device-properties-tab"
+            tabindex="1"
+            data-cpf-page-device-details-target="propertiesTab">
+        <form method="POST"
+              class="device-property-form"
+              data-action="submit->cpf-page-device-details#submitForm"
+              data-cpf-page-device-details-target="propertiesForm"
+              novalidate>
+          <div class="m-4">
+
+            {{#if request.query.error}}
+            <div class="my-2" data-cpf-page-device-details-target="serverSideErrorMessage">
+              <div class="alert alert-danger" role="alert">
+                ERROR: {{request.query.error}}
+              </div>
+            </div>
+            {{/if}}
+            {{#if request.query.success}}
+            <div class="my-2">
+              <div data-cpf-page-device-details-target="successMessage" class="alert alert-success" role="alert">
+                Device properties changes have been saved.
+              </div>
+            </div>
+            {{/if}}
+
+            <div class="my-2">
+              <div data-cpf-page-device-details-target="clientSideErrorMessage" class="alert alert-danger d-none" role="alert">
+                Please correct the errors below and try again.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control mt-1" name="name" value="{{pageData.device.name}}" required {{#eq pageData.role 'viewer'}}disabled{{/eq}}>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Losant ID</label>
+              <input type="text" class="form-control mt-1" name="id" value="{{pageData.device.id}}" disabled>
+            </div>
+            <div class="mb-3">
+              <label for="particle_id">Particle ID</label>
+              <input id="particle_id" type="text" class="form-control" name="particle_id" value="{{pageData.device.tags.particle_id.[0]}}" aria-describedby="particle_id_help" required {{#eq pageData.role 'viewer'}}disabled{{/eq}} minlength="24" maxlength="24">
+              <div id="particle_id_help" class="form-text">
+                  The 24-character Particle ID for this device. This can be found in Particle's console.
+                </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Description</label>
+              <textarea type="text" class="form-control mt-1" name="description" {{#eq pageData.role 'viewer'}}disabled{{/eq}}>{{pageData.device.description}}</textarea>
+            </div>
+            <div class="mb-4">
+              <label class="mb-1">Device Image</label>
+              {{#if pageData.device.tags.cpf_image.[0]}}
+                {{component 'cpf-image-upload' maxSize=128 imageURL=(file pageData.device.tags.cpf_image.[0]) role=pageData.role}}
+              {{else}}
+                {{component 'cpf-image-upload' maxSize=128 role=pageData.role}}
+              {{/if}}
+            </div>
+            <div class="mb-4 d-flex">
+              {{#eq pageData.userLevel 0}} {{!-- System admin only --}}
+              <div class="me-2 flex-column w-50">
+                <label for="tenant" class="form-label">Customer</label>
+                <turbo-frame id="cpf-element-group-select"
+                  src="/cpf/elements/group-select?level=1&required=true&placeholder=-- Select Customer --&formName=customerId&selectedId={{pageData.device.customerId}}&actionMethod=customerChanged&controllerName=cpf-page-device-details&targetName=customerSelect" />
+              </div>
+              {{else}}
+              <input type="hidden" value="{{pageData.device.customerId}}">
+              {{/eq}}
+              {{#lt pageData.userLevel 2}} {{!-- Customer / System users only --}}
+              <div class="flex-column w-50">
+                <label for="site" class="form-label">Site</label>
+                <turbo-frame data-cpf-page-device-details-target="siteSelectFrame" id="cpf-element-group-select"
+                  src="/cpf/elements/group-select?level=2&required=true&placeholder=-- Select Site --&formName=site&parentId={{pageData.device.customerId}}&selectedId={{pageData.device.siteId}}&controllerName=cpf-page-device-details" />
+              </div>
+              {{else}}
+              <input type="hidden" value="{{pageData.device.siteId}}">
+              {{/lt}}
+            </div>
+
+            <div class="alert alert-info mb-3" role="alert">
+              <div class="mb-2"><strong>Administrator Tip</strong></div>
+              <div>
+                You can configure which tags are available for users to view and edit on the <a href="/admin/device-tags">Device Tags</a> admin page.
+                For security best practices, tags are opt in, which means no tags will be displayed until they are configured.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label>Device Tags</label>
+              <turbo-frame id="cpf-element-tag-edit-form" src="/cpf/elements/tag-edit-form?type=device&id={{pageData.device.id}}&{{#eq pageData.role 'viewer'}}disabled=true{{/eq}}"
+                data-cpf-device-register-target="tagEditForm">
+                <small class="ps-3 text-body-secondary"><em>Loading...</em></small>
+              </turbo-frame>
+            </div>
+            {{#ne pageData.role 'viewer'}}
+            <div class="details-save card p-3 my-4 text-bg-dark sticky-bottom">
+              <div class="d-flex flex-row align-items-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="#" id="delete-device" class="ms-2 text-danger ms-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete Device</a>
+              </div>
+            </div>
+            {{/ne}}
+          </div>
+        </form>
+      </div>
+
+      {{!-- Gateway Settings Tab --}}
+      <div class="tab-pane fade {{#eq request.query.tab 'gateway-settings'}}show active{{/eq}}"
+            id="cpf-device-gateway-settings-tab-pane"
+            role="tabpanel"
+            aria-labelledby="cpf-device-gateway-settings-tab"
+            tabindex="1"
+            data-cpf-page-device-details-target="gatewayTab">
+        <turbo-frame
+            id="m1-element-gateway-settings"
+            src="/m1/elements/gateway-settings?device={{request.params.deviceId}}&error={{request.query.particle_error}}&success={{request.query.particle_success}}"
+            target="_top"
+            loading="lazy">
+          <div class="p-4">
+            Loading...
+          </div>
+        </turbo-frame>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="confirmDeleteModalLabel">Confirm Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Deleting a device <strong>permanently deletes</strong> the device's telemetry data.<br /><br />
+        This action <strong>cannot be undone</strong>.<br /><br />
+        Are you sure you want to delete this device?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="POST" action="/devices/{{pageData.device.id}}">
+          <input type="hidden" name="delete" value="true"></input>
+          <button id="confirm-delete" type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

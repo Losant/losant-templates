@@ -1,0 +1,216 @@
+{{#if this.theme}}
+:root {
+  {{#each this.theme}}
+  --cpf-{{@key}}: {{this}};
+  {{/each}}
+
+  --bs-body-bg: transparent;
+  --bs-border-color: var(--cpf-border);
+  --bs-body-color: var(--cpf-text_dark);
+  --bs-code-color: var(--cpf-text_mid);
+  --cpf-border-color: var(--cpf-border);
+  --cpf-bg-light: var(--cpf-bg_light);
+  --cpf-bg-mid: var(--cpf-bg_mid);
+  --cpf-body-color: var(--cpf-text_dark);
+  --cpf-mid: var(--cpf-text_mid);
+  --cpf-light: var(--cpf-text_mid);
+  --cpf-font-sans-serif: '{{this.theme.font_family}}','Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
+.cpf-logo-large {
+  width: 100%;
+  height: 120px;
+  background: url('{{file this.theme.logo_large}}');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.form-control::placeholder {
+  color:var(--cpf-text_mid) !important;
+  opacity:0.5 !important;
+}
+
+{{#each this.colors}}
+
+.cpf-border-{{this}} {
+  border: 1px solid var(--cpf-{{this}});
+}
+
+.alert-{{this}} {
+  background-color: color-mix(in srgb, var(--cpf-{{this}}) 20%, var(--cpf-bg_light)) !important;
+  color: var(--cpf-text_dark) !important;
+  border-color: color-mix(in srgb, var(--cpf-{{this}}) 60%, var(--cpf-bg_light)) !important;
+}
+
+.btn-{{this}} {
+  background-color: var(--cpf-{{this}}) !important;
+  color: var(--cpf-text_white) !important;
+}
+
+.btn-{{this}}:hover {
+  filter: brightness(0.9);
+  border-color: var(--cpf-{{this}}) !important;
+}
+
+.btn-{{this}}:active {
+  filter: brightness(0.9);
+  border-color: var(--cpf-{{this}}) !important;
+}
+
+.btn-{{this}}:disabled {
+  filter: brightness(0.5) !important;
+  border-color: transparent !important;
+  background-color: var(--cpf-{{this}}) !important;
+}
+
+.text-{{this}} {
+  color: var(--cpf-{{this}}) !important;
+}
+
+.bg-{{this}} {
+  background-color: var(--cpf-{{this}}) !important;
+}
+
+.btn-outline-{{this}} {
+  --bs-btn-color: var(--cpf-{{this}});
+  --bs-btn-active-bg: var(--cpf-{{this}});
+}
+
+{{/each}}
+{{/if}}
+
+a:hover:not(.btn):not(.nav-link) {
+  filter: brightness(0.9) !important;
+}
+
+a:hover:not(.btn) {
+  color: var(--cpf-primary) !important;
+}
+
+a:hover .btn {
+  filter: brightness(0.9) !important;
+  color: var(--cpf-text_white);
+}
+
+.cpf-text-white {
+  color: var(--cpf-text_white) !important;
+}
+
+.cpf-text-light {
+  color: var(--cpf-text_light);
+}
+
+.cpf-text-mid {
+  color: var(--cpf-text_mid);
+}
+
+.cpf-text-dark {
+  color: var(--cpf-text_dark);
+}
+
+.cpf-bg-light {
+  background-color: var(--cpf-bg_light);
+}
+
+.cpf-bg-mid {
+  background-color: var(--cpf-bg_mid);
+}
+
+.cpf-bg-dark {
+  background-color: var(--cpf-bg_dark);
+}
+
+.nav-pills .nav-link.active {
+  background-color: var(--cpf-bg_dark) !important;
+  border: 1px solid var(--cpf-border);
+}
+
+.form-select {
+  background-color: var(--cpf-bg_light) !important;
+}
+
+.form-control:disabled {
+  background-color: var(--cpf-bg_dark) !important;
+  color: var(--cpf-text_mid) !important;
+}
+
+.form-select:disabled {
+  background-color: var(--cpf-bg_dark) !important;
+  color: var(--cpf-text_mid) !important;
+}
+
+.form-control:focus {
+  background-color: var(--cpf-bg_light) !important;
+}
+
+.form-select:focus {
+  background-color: var(--cpf-bg_light) !important;
+}
+
+.form-check-input {
+  background-color: var(--cpf-bg_light) !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--cpf-primary) !important;
+  border-color: var(--cpf-primary) !important;
+}
+
+.card-body {
+  background-color: var(--cpf-bg_light) !important;
+}
+
+hr {
+  border-top: 1px solid var(--cpf-border) !important;
+  opacity: 1 !important;
+}
+
+.bg-light {
+  background-color: var(--cpf-bg_light) !important;
+}
+
+.nav-link {
+  color: var(--cpf-text_dark) !important;
+}
+
+.was-validated .form-control:invalid {
+  border-color: var(--cpf-danger) !important;
+}
+
+.was-validated .form-control:valid {
+  border-color: var(--cpf-success) !important;
+}
+
+.was-validated .form-select:invalid {
+  border-color: var(--cpf-danger) !important;
+}
+
+.was-validated .form-select:valid {
+  border-color: var(--cpf-success) !important;
+}
+
+.text-muted {
+  color: var(--cpf-text_mid) !important;
+}
+
+.card {
+  border: 1px solid var(--cpf-border) !important;
+}
+
+.card-body {
+  border-radius: 0px 0px 4px 4px !important;
+}
+
+.card-header {
+  border-bottom: 1px solid var(--cpf-border) !important;
+}
+
+.modal-content {
+  background-color: var(--cpf-bg_light) !important;
+  border-color: var(--cpf-border) !important;
+}
+
+.form-text {
+  color: var(--cpf-text_mid) !important;
+}

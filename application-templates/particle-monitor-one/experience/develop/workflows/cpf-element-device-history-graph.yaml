@@ -1,0 +1,539 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/device-history-graph
+    enabled: true
+    exportHash: 06fd93ad21079715f6e538a44c050508c05a77af77f0397d6770e0d81922e5e4
+    flowId: ~exportplaceholderid-flow-cpfElementDeviceHistoryGraph~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementDeviceHistoryGraph~
+    name: cpf-element-device-history-graph
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementDeviceHistoryGraph~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: EmxldWGTtF
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 220
+          'y': 800
+        outputIds:
+          - - fnbU0V1xzF
+        type: EndpointReplyNode
+      - config:
+          rules:
+            - destination: working.days
+              type: set
+              valueTemplate: '30'
+              valueTemplateType: json
+        id: Xl51DVCwfL
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 220
+          'y': 300
+        outputIds:
+          - - dg6jGueNXy
+        type: MutateNode
+      - config:
+          currentItemPath: working.day
+          loopSourcePath: working.days
+          mapResultPath: pageData.counts
+          parallel: true
+        id: A3vPhZ6hUQ
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 100
+          label: Loop
+          name: loop
+          x: 220
+          'y': 580
+        outputIds:
+          - - ZDnT7gGbVM
+          - - ChLZOnZ4Ed
+        type: LoopNode
+      - config:
+          loopNodeId: A3vPhZ6hUQ
+          mapValuePath: working.point
+          shouldBreak: false
+        id: clrxss_OOw
+        meta:
+          category: loop
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: Return
+          name: loop-return
+          x: 200
+          'y': 820
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          operation: startOfTime
+          resultPath: working.now
+          sourcePath: working.now
+          timezone: UTC
+          unit: day
+        id: r1L642kIJT
+        meta:
+          category: logic
+          description: ''
+          label: Date/Time
+          name: date-time
+          x: 220
+          'y': 480
+        outputIds:
+          - - A3vPhZ6hUQ
+        type: DateTimeNode
+      - config: {}
+        id: C4KarKflGg
+        meta:
+          annotationText: >-
+            The last data point should be the end of the current day. So need to
+            add 1 day to "now" and reset the day using "Start of Time".
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 320
+          x: 420
+          'y': 400
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          numberValue: '1'
+          operation: add
+          resultPath: working.now
+          sourcePath: time
+          timezone: UTC
+          unit: day
+        id: dg6jGueNXy
+        meta:
+          category: logic
+          description: ''
+          label: Date/Time
+          name: date-time
+          x: 220
+          'y': 400
+        outputIds:
+          - - r1L642kIJT
+        type: DateTimeNode
+      - config:
+          numberValue: '-{{add working.day.value 1}}'
+          operation: add
+          resultPath: working.start
+          sourcePath: working.now
+          timezone: UTC
+          unit: day
+        id: ChLZOnZ4Ed
+        meta:
+          category: logic
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: Start
+          name: date-time
+          x: 200
+          'y': 180
+        outputIds:
+          - - EN4VRzOQLc
+        type: DateTimeNode
+      - config:
+          numberValue: '-{{working.day.value}}'
+          operation: add
+          resultPath: working.end
+          sourcePath: working.now
+          timezone: UTC
+          unit: day
+        id: EN4VRzOQLc
+        meta:
+          category: logic
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: End
+          name: date-time
+          x: 200
+          'y': 260
+        outputIds:
+          - - fMmLQ6GkUT
+        type: DateTimeNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.start}}"
+                  }
+                },
+                {
+                  "creationDate": {
+                    "$lt": "{{working.end}}"
+                  }
+                },
+                {
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: Lu11KacCaX
+        meta:
+          category: data
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: 'Device: Get'
+          name: get-device
+          x: 100
+          'y': 500
+        outputIds:
+          - - IJtMXsTCuf
+        type: GetDeviceNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: fnbU0V1xzF
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 220
+          'y': 900
+        outputIds: []
+        type: DebugNode
+      - config:
+          rules:
+            - destination: working.point
+              type: set
+              valueTemplate: |-
+                {
+                  "day": {
+                    "count": {{working.devices.totalCount}},
+                    "date": "{{formatDate working.end 'YYYY-MM-DDTHH:mm:ssZ'}}"
+                  },
+                  "total": {
+                    "count": {{working.devicesTotal.totalCount}},
+                    "date": "{{formatDate working.end 'YYYY-MM-DDTHH:mm:ssZ'}}"
+                  }
+                }
+              valueTemplateType: json
+        id: CtRSTb5q9W
+        meta:
+          category: logic
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: Mutate
+          name: mutate
+          x: 200
+          'y': 720
+        outputIds:
+          - - clrxss_OOw
+        type: MutateNode
+      - config:
+          destArrayPath: pageData.counts
+          rules:
+            - type: reverse
+          sourceArrayPath: pageData.counts
+        id: ZDnT7gGbVM
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 220
+          'y': 680
+        outputIds:
+          - - EmxldWGTtF
+        type: ArrayNode
+      - config: {}
+        id: jmYD9GyKz_
+        meta:
+          annotationText: >-
+            Reverse the array to that it starts at 30 days ago and ends with
+            "now".
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 320
+          x: 420
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: working.userLevel
+        id: TR_OSJazX1
+        meta:
+          category: data
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 120
+          'y': 160
+        outputIds:
+          - - SlkhiNl7FJ
+          - - Xl51DVCwfL
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+                "error": "User's group membership is invalid."
+            }
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo:
+            - keyTemplate: Content-Type
+              valueTemplate: application/json
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: custom
+          responseCodeTemplate: '403'
+          sameSiteTemplate: ''
+        id: SlkhiNl7FJ
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 20
+          'y': 300
+        outputIds:
+          - - 2Kq8256Cfj
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 2Kq8256Cfj
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 20
+          'y': 400
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{working.userLevel}} == 0'
+        id: fMmLQ6GkUT
+        meta:
+          category: logic
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: Conditional
+          name: conditional
+          x: 200
+          'y': 360
+        outputIds:
+          - - Lu11KacCaX
+          - - Cwp4uHslR6
+        type: ConditionalNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$gte": "{{working.start}}"
+                  }
+                },
+                {
+                  "creationDate": {
+                    "$lt": "{{working.end}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devices
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: Cwp4uHslR6
+        meta:
+          category: data
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: 'Device: Get'
+          name: get-device
+          x: 300
+          'y': 500
+        outputIds:
+          - - ezkfY_kWZg
+        type: GetDeviceNode
+      - config: {}
+        id: mOfQe_j3df
+        meta:
+          annotationText: >-
+            If the user is level=0 (system) we don't need to include the
+            experience user ID in the query. This helps prevent the query limit
+            if there are lots of customers/sites.
+          category: annotation
+          groupId: A3vPhZ6hUQ
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 500
+          'y': 360
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$lt": "{{working.end}}"
+                  }
+                },
+                {
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "{{#eq working.userLevel 1}}cpf_customer{{else}}cpf_site{{/eq}}",
+                      "$tagValue": "{{experience.user.experienceGroups.[0].id}}"
+                    }
+                  }
+                }
+              ]
+            }
+          resultPath: working.devicesTotal
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: IJtMXsTCuf
+        meta:
+          category: data
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: 'Device: Get'
+          name: get-device
+          x: 100
+          'y': 580
+        outputIds:
+          - - CtRSTb5q9W
+        type: GetDeviceNode
+      - config: {}
+        id: 9fduzoU79b
+        meta:
+          annotationText: >-
+            Query the number of device in each bucket and the total number of
+            devices at each point in time. This data is used to graph: 1)
+            devices created per day and 2) total number of devices over time.
+          category: annotation
+          groupId: A3vPhZ6hUQ
+          height: 140
+          label: Note
+          name: note
+          width: 360
+          x: 500
+          'y': 500
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          attributesAsObject: false
+          findMetadata: true
+          findMethod: query
+          findMultiple: true
+          includeConnectionStatus: false
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "creationDate": {
+                    "$lt": "{{working.end}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.devicesTotal
+          resultsPage: ''
+          resultsPerPage: '0'
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: false
+        id: ezkfY_kWZg
+        meta:
+          category: data
+          description: ''
+          groupId: A3vPhZ6hUQ
+          label: 'Device: Get'
+          name: get-device
+          x: 300
+          'y': 580
+        outputIds:
+          - - CtRSTb5q9W
+        type: GetDeviceNode
+    triggers:
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-getCpfElementsDeviceHistoryGraph~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/device-history-graph
+          name: endpoint
+          uiId: Q3t1AwmsRU
+          x: 120
+          'y': 40
+        outputIds:
+          - - TR_OSJazX1
+        type: endpoint
+    version: develop
+version: 1

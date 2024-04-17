@@ -1,0 +1,468 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /admin/particle
+    enabled: true
+    exportHash: 1331c5005165ca735ba8a65b03bc172fe031a855f9bd0a6efe708d940b2cd74f
+    flowId: ~exportplaceholderid-flow-m1PageAdminParticle~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-m1PageAdminParticle~
+    name: m1-page-admin-particle
+    nodes:
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-m1PageAdminParticle~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: r0Qe39Wzu3
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 380
+        outputIds:
+          - - 9mfe9Q7CpQ
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 9mfe9Q7CpQ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 500
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: gnzoDJfC8M
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 140
+          'y': 140
+        outputIds:
+          - - tkG8YbIuQQ
+          - - BF0vwmUXB9
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: BF0vwmUXB9
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 240
+          'y': 260
+        outputIds:
+          - - tkG8YbIuQQ
+          - - r0Qe39Wzu3
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: tkG8YbIuQQ
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 380
+        outputIds:
+          - - 9mfe9Q7CpQ
+        type: EndpointReplyNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: XN8eomWstU
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 560
+          'y': 140
+        outputIds:
+          - - 2nrG3z59d5
+          - - 3nFTCyAhse
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: 3nFTCyAhse
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 660
+          'y': 260
+        outputIds:
+          - - 2nrG3z59d5
+          - - Y_tVp8HMud
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 2nrG3z59d5
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 460
+          'y': 380
+        outputIds:
+          - - Vc2aZ4Z4Qf
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Vc2aZ4Z4Qf
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 460
+          'y': 500
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: MidOed022V
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 760
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /admin/particle?success=true
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: GzsYNIBqKx
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 760
+          'y': 1080
+        outputIds:
+          - - MidOed022V
+        type: EndpointReplyNode
+      - config:
+          errorsPath: working.error
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                  "particle_token": { "type": "string", "minLength": 1 },
+                  "particle_product_id": { "type": "string", "minLength": 1}
+                },
+                "required": ["particle_token", "particle_product_id"]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: Y_tVp8HMud
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 660
+          'y': 500
+        outputIds:
+          - - a9HI8Ey6lP
+          - - fIG1j8hGiv
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: >-
+            /admin/particle?error={{{encodeURI 'Missing or invalid
+            parameters'}}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: a9HI8Ey6lP
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 560
+          'y': 620
+        outputIds:
+          - - jmfEYG_v1W
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: jmfEYG_v1W
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 560
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: creationDate
+            - name: sortDirection
+              type: string
+              value: desc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1'
+            - name: filterField
+              type: string
+              value: name
+            - name: filter
+              type: string
+              value: particle
+          resource: credentials
+          responsePath: working.credential
+        id: fIG1j8hGiv
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 760
+          'y': 620
+        outputIds:
+          - - Hq3QST349s
+        type: LosantApiNode
+      - config: {}
+        id: jFveBswFFr
+        meta:
+          annotationText: >-
+            If a "particle" service credential already exists, update it.
+            Otherwise, create it.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 960
+          'y': 620
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.credential.result.totalCount}} === 0'
+        id: Hq3QST349s
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 760
+          'y': 720
+        outputIds:
+          - - K0mcVIWWW1
+          - - yar__8Jyzn
+        type: ConditionalNode
+      - config:
+          action: post
+          params:
+            - name: credential
+              type: json
+              value: |-
+                {
+                    "name": "particle",
+                    "description": "Access token for Particle API requests.",
+                    "enabled": true,
+                    "type": "http",
+                    "httpConfig": {
+                        "uriMatch": "https://api.particle.io",
+                        "authMethod": "queryParam",
+                        "publicValue": "access_token",
+                        "secretValue": "{{{data.body.particle_token}}}"
+                    }
+                }
+          resource: credentials
+          responsePath: working.credentialCreate
+        id: yar__8Jyzn
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 860
+          'y': 840
+        outputIds:
+          - - AW7cYXL3YN
+        type: LosantApiNode
+      - config:
+          action: patch
+          params:
+            - name: credentialId
+              type: string
+              value: '{{working.credential.result.items.[0].id}}'
+            - name: credential
+              type: json
+              value: |-
+                {
+                    "name": "particle",
+                    "description": "Access token for Particle API requests.",
+                    "enabled": true,
+                    "httpConfig": {
+                        "uriMatch": "https://api.particle.io",
+                        "authMethod": "queryParam",
+                        "publicValue": "access_token",
+                        "secretValue": "{{{data.body.particle_token}}}"
+                    }
+                }
+          resource: credential
+          responsePath: working.credentialUpdate
+        id: K0mcVIWWW1
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 660
+          'y': 840
+        outputIds:
+          - - AW7cYXL3YN
+        type: LosantApiNode
+      - config:
+          action: globals
+          params:
+            - name: globals
+              type: json
+              value: |-
+                [
+                  {
+                    "cloudOnly": true,
+                    "description": "Particle Product ID",
+                    "json": {{jsonEncode data.body.particle_product_id}},
+                    "key": "particle_product_id"
+                  }
+                ]
+          resource: application
+          responsePath: ''
+        id: AW7cYXL3YN
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 760
+          'y': 960
+        outputIds:
+          - - GzsYNIBqKx
+        type: LosantApiNode
+      - config: {}
+        id: 7CxFiW1oMZ
+        meta:
+          annotationText: Save the Particle Product ID to Application Globals.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 960
+          'y': 960
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getAdminParticle~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /admin/particle
+          name: endpoint
+          uiId: gKUMWV6F3C
+          x: 140
+          'y': 40
+        outputIds:
+          - - gnzoDJfC8M
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postAdminParticle~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /admin/particle
+          name: endpoint
+          uiId: ii8OdarK_H
+          x: 560
+          'y': 40
+        outputIds:
+          - - XN8eomWstU
+        type: endpoint
+    version: develop
+version: 1

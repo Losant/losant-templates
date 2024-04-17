@@ -1,0 +1,185 @@
+resourceType: Flow
+resources:
+  - description: Automatically updates the connection status whenever data is received.
+    exportHash: fff4e7c59273ac6f3bb5654a1e6e904673c601bb6d59a0e8def2691247e25321
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-setConnectionStatus~
+    name: Set Connection Status
+    nodes:
+      - config:
+          action: setConnectionStatus
+          params:
+            - name: deviceId
+              type: string
+              value: '{{device.id}}'
+            - name: connectionStatus
+              type: json
+              value: |-
+                {
+                    "status": "connected"
+                }
+          resource: device
+          responsePath: ''
+        id: 2TxLWjaApz
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 60
+          'y': 540
+        outputIds:
+          - - Z1bJeJhuK_
+        type: LosantApiNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Z1bJeJhuK_
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 60
+          'y': 640
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{device.id}}'
+          includeConnectionStatus: true
+          includeState: false
+          resultPath: working.device
+          tagsAsObject: false
+        id: pGJNIxAkZm
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 160
+          'y': 320
+        outputIds:
+          - - koXO7AKo6x
+        type: GetDeviceNode
+      - config:
+          expression: '{{working.device.connectionInfo.connected}}'
+        id: koXO7AKo6x
+        meta:
+          category: logic
+          description: ''
+          label: Connected?
+          name: conditional
+          x: 160
+          'y': 420
+        outputIds:
+          - - 2TxLWjaApz
+          - - n3_r_Sz6MQ
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: n3_r_Sz6MQ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 540
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: setConnectionStatus
+          params:
+            - name: deviceId
+              type: string
+              value: '{{device.id}}'
+            - name: connectionStatus
+              type: json
+              value: |-
+                {
+                    "status": "disconnected",
+                    "disconnectReason": "Device inactive for 5 minutes"
+                }
+          resource: device
+          responsePath: ''
+        id: tczG6ONHlI
+        meta:
+          category: data
+          description: ''
+          label: Losant API
+          name: losantapi
+          x: 400
+          'y': 320
+        outputIds:
+          - - bYciNq6U1d
+        type: LosantApiNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: bYciNq6U1d
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 400
+          'y': 420
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: uNpMShui2f
+        meta:
+          annotationText: >-
+            By default, a device's connection status is set when it connects and
+            disconnects from the MQTT broker. When using Particle, the MQTT
+            broker is not used. This workflow instead sets the connection status
+            to `true` whenever a device receives data. If a device does not
+            receive data for 5 minutes, the connection status is set to `false`.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 540
+          x: 60
+          'y': 20
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config:
+          batchBehavior: each
+          triggerOn: both
+        key: particle_id/
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: State'
+          name: deviceIdsTags
+          uiId: J57MvMQO0b
+          x: 160
+          'y': 220
+        outputIds:
+          - - pGJNIxAkZm
+        type: deviceTag
+      - config:
+          seconds: 300
+        key: particle_id/
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: Inactive'
+          name: deviceIdsTagsInactivity
+          uiId: UXQyVLRDvN
+          x: 400
+          'y': 220
+        outputIds:
+          - - tczG6ONHlI
+        type: deviceTagInactivity
+version: 1

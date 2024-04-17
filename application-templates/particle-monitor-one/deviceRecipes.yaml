@@ -1,0 +1,35 @@
+resourceType: DeviceRecipe
+resources:
+  - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: temperature
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: humidity
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: battery
+      - attributeTags: {}
+        dataType: gps
+        name: location
+    deviceClass: standalone
+    deviceName: Monitor One
+    exportHash: 997b4c490554fc8813b0780fbf27c7c5f6cf0e5b2e7c7282cc0da3ba7b3f2f96
+    id: ~exportplaceholderid-deviceRecipe-monitorOne~
+    name: Monitor One
+    tags:
+      - key: particle_id
+        value: PARTICLE_ID
+      - key: threshold_temperature_high
+        value: "100"
+      - key: threshold_temperature_low
+        value: "-100"
+      - key: threshold_humidity_high
+        value: "100"
+      - key: threshold_humidity_low
+        value: "-100"
+version: 1

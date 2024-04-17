@@ -1,0 +1,256 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        blockType: map
+        config:
+          additionalAttributes:
+            - temperature
+            - humidity
+            - battery
+          attribute: location
+          centerOnDataPoints: true
+          clusterPoints: false
+          compositeResult: true
+          defaultBearing: 0
+          defaultCenter: ''
+          defaultPitch: 0
+          defaultZoom: 12
+          deviceIds:
+            - '{{ctx.deviceId}}'
+          deviceTags: []
+          duration: 0
+          endColor: '#8db319'
+          iconTemplate: |-
+            {{#if isLastPoint}}
+            {{colorMarker '#8db319'}}
+            {{else if isFirstPoint}}
+            {{colorMarker '#ff261b'}}
+            {{/if}}
+          includeArrows: false
+          includeLines: false
+          pinMode: simple
+          popupTemplate: |-
+            ##### **{{deviceName}}**
+
+            {{format time}}
+
+            Location: {{format latitude}}, {{format longitude}}  
+            Battery: {{data.battery}}%  
+            Temperature: {{data.temperature}}˚C  
+            Humidity: {{data.humidity}}%
+          resolution: null
+          startColor: '#ff261b'
+        height: 3
+        id: plqULG2Cp0
+        startX: 0
+        startY: 0
+        title: Location
+        width: 1.5
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        blockType: graph
+        config:
+          disallowUserSelectedDuration: false
+          duration: '{{dashboard.duration}}'
+          hideLegend: false
+          realTime: false
+          recharts: true
+          resolution: '{{dashboard.resolution}}'
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: temperature
+              color: 'rgba(10, 225, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Temperature
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: ˚C
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 1
+        id: ZVWLAl1h_k
+        startX: 1.5
+        startY: 0
+        title: Temperature
+        width: 2
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: temperature
+            color: 'rgba(10, 225, 255, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: ˚C
+        height: 1
+        id: r8l9iOwEp5
+        startX: 3.5
+        startY: 0
+        title: Temperature
+        width: 0.5
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        blockType: graph
+        config:
+          disallowUserSelectedDuration: false
+          duration: '{{dashboard.duration}}'
+          hideLegend: false
+          realTime: false
+          recharts: true
+          resolution: '{{dashboard.resolution}}'
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: humidity
+              color: 'rgba(255, 154, 37, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Humidity
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: '%'
+              yAxisMax: ''
+              yAxisMin: ''
+        height: 1
+        id: DQM1apX8cn
+        startX: 1.5
+        startY: 1
+        title: Humidity
+        width: 2
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: humidity
+            color: 'rgba(255, 154, 37, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: '%'
+        height: 1
+        id: TdYCVxNopT
+        startX: 3.5
+        startY: 1
+        title: Humidity
+        width: 0.5
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        blockType: graph
+        config:
+          disallowUserSelectedDuration: false
+          duration: '{{dashboard.duration}}'
+          hideLegend: false
+          realTime: false
+          recharts: true
+          resolution: '{{dashboard.resolution}}'
+          segments:
+            - aggregation:
+                options: {}
+                type: MEAN
+              attribute: battery
+              color: 'rgba(194, 175, 255, 1)'
+              cumulative: false
+              detectDataGaps: false
+              deviceIds:
+                - '{{ctx.deviceId}}'
+              deviceTags: []
+              dotWeight: 1
+              expression: ''
+              graphType: bar
+              label: Battery
+              lineType: monotone
+              lineWeight: 2
+              yAxisFormat: ''
+              yAxisLabel: '%'
+              yAxisMax: '100'
+              yAxisMin: '0'
+        height: 1
+        id: 6j13AkUY8F
+        startX: 1.5
+        startY: 2
+        title: Battery
+        width: 2
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        blockType: gauge
+        config:
+          displayAsPercentage: false
+          duration: 0
+          gaugeMax: '100'
+          gaugeMin: '0'
+          gaugeType: dial
+          precision: '1'
+          precisionType: floating
+          realTime: false
+          segment:
+            aggregation:
+              options: {}
+              type: MEAN
+            attribute: battery
+            color: 'rgba(190, 170, 255, 1)'
+            deviceIds:
+              - '{{ctx.deviceId}}'
+            deviceTags: []
+            label: '%'
+        height: 1
+        id: pZu6d1Ifxy
+        startX: 3.5
+        startY: 2
+        title: Battery
+        width: 0.5
+    contextConfiguration:
+      - applicationId: ~exportplaceholderid-application-applicationParticleMonitorOne~
+        defaultValue: ~exportplaceholderid-device-exampleMonitorOne~
+        name: deviceId
+        type: deviceId
+        validationConfig:
+          includeFullDevice: true
+        validationEnabled: false
+    defaultTheme: light
+    duration: 86400000
+    exportHash: 11ea8c9afc292ca220fff6504d2e8d7659225da4d3824b88d2aeb984b76dc408
+    id: ~exportplaceholderid-dashboard-monitorOne~
+    isPasswordProtected: false
+    name: Monitor One
+    public: false
+    refreshRate: 60
+    resolution: 300000
+version: 1

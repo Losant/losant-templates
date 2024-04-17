@@ -1,0 +1,37 @@
+<turbo-frame id="cpf-element-customers-table">
+  <div class="cpf-element-customers-table w-100 h-100 d-flex flex-column">
+    <div class="flex-grow-1 overflow-auto">
+      <table class="cpf-table table">
+        <thead id="cpf-element-customers-table-table-header" data-turbo-permanent>
+          <tr>
+            <th scope="col" id="table-header-name">Name</th>
+            <th scope="col" id="table-header-users">Users</th>
+            <th scope="col" id="table-header-sites">Sites</th>
+            <th scope="col" id="table-header-devices">Devices</th>
+            <th scope="col" id="table-header-events">Open Events</th>
+            <th scope="col" id="table-header-contact">Primary Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each pageData.customers}}
+          <tr>
+            <td id="name-{{this.id}}"><a href="/customers/{{this.id}}">{{this.name}}</a></td>
+            <td id="users-{{this.id}}"><a href="/users?customer={{this.id}}">{{this.userCount}}</a></td>
+            <td id="sites-{{this.id}}"><a href="/sites?customer={{this.id}}">{{length this.children}}</a></td>
+            <td id="devices-{{this.id}}"><a href="/devices?customer={{this.id}}">{{this.deviceCount}}</a></td>
+            <td id="events-{{this.id}}"><a href="/events?customer={{this.id}}">{{this.events.totalCount}}</a></td>
+            <td id="contact-{{this.id}}"><a href="mailto:{{this.groupTags.contact}}">{{this.groupTags.contact}}</a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{#unless pageData.customers}}
+      <div class="w-100 mt-4 flex-grow-1 text-center">
+        <div id="no-customers-message" class="alert alert-info" role="alert">
+          No customers found.
+        </div>
+      </div>
+      {{/unless}}
+    </div>
+  </div>
+</turbo-frame>
