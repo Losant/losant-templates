@@ -1,0 +1,37 @@
+<h1 class="h3 text-center mb-3">Create Account</h2>
+<p>
+  Please complete the form below to create your new account and gain access.
+</p>
+
+{{#if pageData.error}}
+  <div class="alert alert-danger mb-3" role="alert">
+    {{pageData.error}}
+  </div>
+  <p class="text-center">Have an account already? <a href="/login">Sign In</a>.</p>
+{{/if}}
+
+{{#if pageData.user}}
+<form method="POST">
+  <div class="mb-3">
+    <label for="emailField" class="form-label">Email *</label>
+    <input type="email" class="form-control" value="{{pageData.user.email}}" id="emailField" disabled>
+    <div id="emailHelp" class="form-text">You may change your address after creating your account.</div>
+    <input type="hidden" value="{{pageData.user.email}}" name="email">
+  </div>
+  <div class="mb-3">
+    <label for="firstNameField" class="form-label">First Name *</label>
+    <input placeholder="e.g. Jane" type="text" class="form-control" value="{{defaultTo request.body.firstName pageData.user.firstName}}" id="firstNameField" name="firstName" required autofocus>
+  </div>
+  <div class="mb-3">
+    <label for="lastNameField" class="form-label">Last Name *</label>
+    <input placeholder="e.g. Schmidt" type="text" class="form-control" value="{{defaultTo request.body.lastName pageData.user.lastName}}" id="lastNameField" name="lastName" required autofocus>
+  </div>
+  <div class="mb-5">
+    <label for="passwordField" class="form-label">Account Password *</label>
+    <input type="password" class="form-control" id="passwordField" name="password" required minlength="8">
+    <div id="passwordHelp" class="form-text">Must contain at least 8 characters.</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100 mb-5">Create My Account</button>
+</form>
+{{/if}}

@@ -1,0 +1,22 @@
+id,name,value
+65a593d44f0b4347de1e2eba,company_name,"Losant IoT, Inc."
+65a593d44f0b4347de1e2ebb,title_template,CPF | {{this}}
+65a593d44f0b4347de1e2ebc,primary,#3c7fe2
+65a593d44f0b4347de1e2ebd,secondary,#414653
+65a593d44f0b4347de1e2ebe,success,#44972f
+65a593d44f0b4347de1e2ebf,info,#60b1b2
+65a593d44f0b4347de1e2ec0,warning,#d99333
+65a593d44f0b4347de1e2ec1,danger,#bf391d
+65a593d44f0b4347de1e2ec2,text_dark,#111a29
+65a593d44f0b4347de1e2ec3,text_mid,#414653
+65a593d44f0b4347de1e2ec4,text_light,#a7a0aa
+65a593d44f0b4347de1e2ec5,text_white,#ffffff
+65a593d44f0b4347de1e2ec6,bg_dark,#f3f4f5
+65a593d44f0b4347de1e2ec7,bg_mid,#fbfbfb
+65a593d44f0b4347de1e2ec8,bg_light,#ffffff
+65a593d44f0b4347de1e2ec9,border,#cfd1d5
+65a593d44f0b4347de1e2eca,font_family,Open+Sans
+65a593d44f0b4347de1e2ecb,tos,https://www.losant.com/legal/terms-of-service
+65a593d44f0b4347de1e2ecc,privacy_policy,https://www.losant.com/legal/privacy-policy
+65a593d44f0b4347de1e2ecd,logo_large,logo_large_1695842869349.png
+65a593d44f0b4347de1e2ece,logo_small,logo_small_1698328270402.png

@@ -1,0 +1,108 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /users
+    enabled: true
+    exportHash: 9c98e2d1da5cb6589eb904408374932a01e0a971da44e4419529905d7cdeca64
+    flowId: ~exportplaceholderid-flow-cpfPageUsers~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageUsers~
+    name: cpf-page-users
+    nodes:
+      - config:
+          bodyTemplate: "{\n\t\"myCustomData\": \"Add custom data here\"\n}"
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageUsers~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: oQgWDr99K7
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 300
+        outputIds:
+          - - ypOZPjbCQ2
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: ypOZPjbCQ2
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 160
+          'y': 420
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyRole~
+          customNodeVersion: default
+          fields:
+            - id: requiredRole
+              value: admin
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: ''
+        id: sj9cINmqh5
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Role'
+          name: custom-node-execute-node
+          x: 160
+          'y': 180
+        outputIds:
+          - - 0hxIlC3zaE
+          - - oQgWDr99K7
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 0hxIlC3zaE
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 300
+        outputIds:
+          - - ypOZPjbCQ2
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getUsers~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /users
+          name: endpoint
+          uiId: NrLR21oYRQ
+          x: 160
+          'y': 80
+        outputIds:
+          - - sj9cINmqh5
+        type: endpoint
+    version: develop
+version: 1

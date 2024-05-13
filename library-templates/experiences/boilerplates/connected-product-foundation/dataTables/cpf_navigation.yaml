@@ -1,0 +1,37 @@
+resourceType: DataTable
+resources:
+  - columns:
+      - constraint: required
+        dataType: string
+        name: nav_label
+      - constraint: unique
+        dataType: string
+        name: nav_id
+      - constraint: optional
+        dataType: string
+        name: nav_parent
+      - constraint: required
+        dataType: string
+        name: nav_link
+      - constraint: required
+        dataType: number
+        name: nav_order
+      - constraint: optional
+        dataType: string
+        name: nav_icon
+      - constraint: required
+        dataType: number
+        name: nav_access_group_level
+      - constraint: optional
+        dataType: string
+        name: nav_access_user_role
+      - constraint: optional
+        dataType: string
+        defaultValue: top
+        name: nav_location
+    description: Stores the configuration for the left navigation.
+    exportHash: 4fdb4155a1f84d069b417eaa15038268fd670605f30ce370087ab9a6e5273947
+    id: ~exportplaceholderid-dataTable-cpfNavigation~
+    localFilename: ./cpf_navigation.csv
+    name: cpf_navigation
+version: 1

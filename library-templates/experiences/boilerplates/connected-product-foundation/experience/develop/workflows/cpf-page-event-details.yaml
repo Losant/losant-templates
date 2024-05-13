@@ -1,0 +1,574 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: 'Created for Endpoint GET /events/{eventID}'
+    enabled: true
+    exportHash: e0aa1fadfecc70e6fcc32587627d1b1405bb65000d07bf5ff83d5c0e8cecb447
+    flowId: ~exportplaceholderid-flow-cpfPageEventDetails~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageEventDetails~
+    name: cpf-page-event-details
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageEventDetails~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: dhn6Azrf02
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 760
+        outputIds:
+          - - gEsKRRprrX
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: gEsKRRprrX
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config:
+          eventIdTemplate: '{{data.params.eventId}}'
+          findMetadata: false
+          resultPath: pageData.event
+        id: cRWexvYTEW
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Get'
+          mode: eventIdTemplate
+          name: get-event
+          x: 160
+          'y': 140
+        outputIds:
+          - - 7hQPx20ljg
+        type: GetEventNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: x1s9yFd30q
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1040
+          'y': 1120
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: '{{data.path}}?success=true'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: 4RmxfsUoVe
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1040
+          'y': 1020
+        outputIds:
+          - - x1s9yFd30q
+        type: EndpointReplyNode
+      - config:
+          dataMethod: jsonTemplate
+          eventJsonTemplate: |-
+            {
+              {{#if data.body.state}}
+              "state": "{{data.body.state}}",
+              {{/if}}
+              "comment": {{{jsonEncode data.body.comment}}},
+              "data": {
+                {{#if data.body.state}}
+                "state": "{{data.body.state}}",
+                {{else}}
+                "state": "{{working.event.state}}",
+                {{/if}}
+                "userId": "{{experience.user.id}}"
+              }
+            }
+          resultPath: working.updateResult
+          targetEventIdTemplate: '{{data.params.eventId}}'
+        id: HiQn0aDsVW
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Update'
+          mode: targetEventIdTemplate
+          name: update-event
+          x: 1040
+          'y': 920
+        outputIds:
+          - - 4RmxfsUoVe
+        type: UpdateEventNode
+      - config:
+          eventIdTemplate: '{{data.params.eventId}}'
+          findMetadata: false
+          resultPath: working.event
+        id: nMfcPdwmWO
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Get'
+          mode: eventIdTemplate
+          name: get-event
+          x: 840
+          'y': 580
+        outputIds:
+          - - d3NuRhPRaP
+        type: GetEventNode
+      - config:
+          expression: '{{working.event}}'
+        id: d3NuRhPRaP
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 840
+          'y': 680
+        outputIds:
+          - - 90DNyk1eau
+          - - Pb7JcwGjWl
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: vHLUXa9EQj
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 840
+          'y': 1020
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /events
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: 90DNyk1eau
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 840
+          'y': 920
+        outputIds:
+          - - vHLUXa9EQj
+        type: EndpointReplyNode
+      - config:
+          currentItemPath: working.update
+          loopSourcePath: pageData.event.updates
+          mapResultPath: ''
+          parallel: false
+        id: lZYZUzefsy
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 200
+          groupStartY: 200
+          label: Loop
+          name: loop
+          x: 260
+          'y': 520
+        outputIds:
+          - - QQ2Sr9Vy3n
+          - - h5q4k3ma5_
+        type: LoopNode
+      - config:
+          expression: '{{working.update.value.data.userId}}'
+        id: h5q4k3ma5_
+        meta:
+          category: logic
+          description: ''
+          groupId: lZYZUzefsy
+          label: Conditional
+          name: conditional
+          x: 200
+          'y': 320
+        outputIds:
+          - - Ts8Jab59dT
+          - - bhJOatUdIm
+        type: ConditionalNode
+      - config:
+          emailOrIdTemplate: '{{working.update.value.data.userId}}'
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: working.update.value.user
+          sortDirection: asc
+          sortField: email
+        id: bhJOatUdIm
+        meta:
+          category: experience
+          description: ''
+          groupId: lZYZUzefsy
+          label: 'User: Get'
+          name: get-experience-user
+          x: 320
+          'y': 440
+        outputIds:
+          - - Ts8Jab59dT
+        type: GetExperienceUserNode
+      - config:
+          destArrayPath: pageData.event.updatesWithUsers
+          rules:
+            - inputTemplate: '{{working.update.value}}'
+              type: push
+          sourceArrayPath: pageData.event.updatesWithUsers
+        id: Ts8Jab59dT
+        meta:
+          category: logic
+          description: ''
+          groupId: lZYZUzefsy
+          label: Array
+          name: array
+          x: 220
+          'y': 560
+        outputIds:
+          - - x0Gf6fx_aQ
+        type: ArrayNode
+      - config:
+          loopNodeId: lZYZUzefsy
+          mapValuePath: ''
+          shouldBreak: false
+        id: x0Gf6fx_aQ
+        meta:
+          category: loop
+          description: ''
+          groupId: lZYZUzefsy
+          label: Next
+          name: loop-next
+          x: 220
+          'y': 660
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          rules:
+            - destination: pageData.event.updates
+              source: pageData.event.updatesWithUsers
+              type: move
+            - source: pageData.event.eventTags.cpf_customer
+              type: remove
+            - source: pageData.event.eventTags.cpf_site
+              type: remove
+        id: QQ2Sr9Vy3n
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 260
+          'y': 640
+        outputIds:
+          - - dhn6Azrf02
+        type: MutateNode
+      - config:
+          errorsPath: working.errors
+          schema: |-
+            {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "new",
+                        "acknowledged",
+                        "resolved"
+                      ]
+                    },
+                    "comment": {
+                      "type": "string",
+                      "maxLength": 32767,
+                      "minLength": 1
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "new",
+                        "acknowledged",
+                        "resolved"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "comment": {
+                      "type": "string",
+                      "maxLength": 32767,
+                      "minLength": 1
+                    }
+                  }
+                }
+              ]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: tjnh95ApiH
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 740
+          'y': 360
+        outputIds:
+          - - uQo3p13uhX
+          - - nMfcPdwmWO
+        type: ValidatePayloadNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: n8iKmjamYQ
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 640
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: >-
+            {{data.path}}?error={{encodeURI 'A new event state or comment is
+            required'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: uQo3p13uhX
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 640
+          'y': 480
+        outputIds:
+          - - n8iKmjamYQ
+        type: EndpointReplyNode
+      - config:
+          expression: '{{pageData.event}}'
+        id: 7hQPx20ljg
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 160
+          'y': 240
+        outputIds:
+          - - u_wlb1hb99
+          - - doq4Sepg7w
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: VZdj9WPpy2
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 60
+          'y': 620
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPage404~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: u_wlb1hb99
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 60
+          'y': 520
+        outputIds:
+          - - VZdj9WPpy2
+        type: EndpointReplyNode
+      - config:
+          deviceIdTemplate: '{{pageData.event.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: doq4Sepg7w
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 260
+          'y': 360
+        outputIds:
+          - - u_wlb1hb99
+          - - lZYZUzefsy
+        type: VerifyDeviceNode
+      - config:
+          deviceIdTemplate: '{{working.event.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: Pb7JcwGjWl
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 940
+          'y': 800
+        outputIds:
+          - - 90DNyk1eau
+          - - HiQn0aDsVW
+        type: VerifyDeviceNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyRole~
+          customNodeVersion: default
+          fields:
+            - id: requiredRole
+              value: editor
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: ''
+        id: 1_Ixs1blBO
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Role'
+          name: custom-node-execute-node
+          x: 640
+          'y': 140
+        outputIds:
+          - - FWaibkKlUN
+          - - tjnh95ApiH
+        type: CustomNodeExecuteNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 94pvaeVqN8
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 540
+          'y': 360
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /events
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '301'
+          sameSiteTemplate: ''
+        id: FWaibkKlUN
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 540
+          'y': 260
+        outputIds:
+          - - 94pvaeVqN8
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getEventsEventId~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /events/{eventID}'
+          name: endpoint
+          uiId: RUBsmo8Gpy
+          x: 160
+          'y': 40
+        outputIds:
+          - - cRWexvYTEW
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postEventsEventId~
+        meta:
+          category: trigger
+          description: ''
+          label: 'POST /events/{eventId}'
+          name: endpoint
+          uiId: hF0aYHwWHR
+          x: 640
+          'y': 40
+        outputIds:
+          - - 1_Ixs1blBO
+        type: endpoint
+    version: develop
+version: 1

@@ -1,0 +1,262 @@
+<div
+  class="cpf-page"
+  data-controller="cpf-page-admin-devices-table"
+  data-cpf-page-admin-devices-table-columns-value='{{pageData.tableColumns}}'
+  data-cpf-page-admin-devices-table-selected-column-id-value="{{pageData.columns.[0].id}}"
+>
+
+  <div class="mb-5">
+    <div>
+      <h1>Devices Table</h1>
+    </div>
+    <div class="col">
+      Customize the columns in your application's devices table.
+    </div>
+  </div>
+
+  {{#if request.query.error}}
+    <div class="my-2">
+      <div class="alert alert-danger" role="alert">
+        ERROR: {{request.query.error}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if request.query.success}}
+    <div class="my-2">
+      <div class="alert alert-success" role="alert">
+        Navigation changes have been saved.
+      </div>
+    </div>
+  {{/if}}
+
+  <div class="cpf-admin-form-wrapper">
+  
+    <div class="row">
+      <div class="col-12 col-lg-4 mb-4">
+        <label class="mb-1">Columns</label>
+        <div class="card cpf-bg-light">
+          <template data-cpf-page-admin-devices-table-target="columnListItemTemplate">
+            <li class="nav-item">
+                <a href="."
+                  class="nav-link"
+                  data-action="click->cpf-page-admin-devices-table#onColumnSelect"
+                  data-cpf-page-admin-devices-table-target="currentColumnNavItem"
+                >
+                </a>
+            </li>
+          </template>
+          <ul class="nav flex-column m-2" data-cpf-page-admin-devices-table-target="columnList"></ul>
+          <div class="dropdown m-3 mt-2">
+            <button class="btn btn-outline-success dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Add Column
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  data-action="click->cpf-page-admin-devices-table#onColumnAdd"
+                  data-label="Connected"
+                  data-key="connected"
+                  data-type="native"
+                  data-template='\{{#if value.connected}}<span class="material-symbols-outlined cpf-icon-small text-success" data-bs-toggle="tooltip" title="Connected since \{{value.time}}">cloud</span>\{{else}}<span class="material-symbols-outlined cpf-icon-small text-danger" data-bs-toggle="tooltip" title="\{{#if value.time}}Disconnected since \{{value.time}}\{{else}}Device has never connected\{{/if}}">cloud_off</span>\{{/if}}'
+                  class="dropdown-item"
+                  href="#"
+                >
+                  Connection Status
+                </a>
+              </li>
+              <li>
+                <a
+                  data-action="click->cpf-page-admin-devices-table#onColumnAdd"
+                  data-label="ID"
+                  data-key="id"
+                  data-type="native"
+                  data-template='\{{value}}'
+                  class="dropdown-item"
+                  href="#"
+                >
+                  Device ID
+                </a>
+              </li>
+              <li>
+                <a
+                  data-action="click->cpf-page-admin-devices-table#onColumnAdd"
+                  data-label="Name"
+                  data-key="name"
+                  data-type="native"
+                  data-template='<a href="/devices/\{{device.id}}?tab=properties">\{{value}}</a>'
+                  class="dropdown-item"
+                  href="#"
+                >
+                  Device Name
+                </a>
+              </li>
+              <li>
+                <a
+                  data-action="click->cpf-page-admin-devices-table#onColumnAdd"
+                  data-label="Tag"
+                  data-key=""
+                  data-type="tag"
+                  data-template="\{{value}}"
+                  class="dropdown-item"
+                  href="#"
+                >
+                  Device Tag
+                </a>
+              </li>
+              <li>
+                <a
+                  data-action="click->cpf-page-admin-devices-table#onColumnAdd"
+                  data-label="Attribute"
+                  data-key=""
+                  data-type="attribute"
+                  data-template="\{{value}}"
+                  class="dropdown-item"
+                  href="#"
+                >
+                  Device Attribute
+                </a>
+              </li>
+              <li>
+                <a
+                  data-action="click->cpf-page-admin-devices-table#onColumnAdd"
+                  data-label="Customer"
+                  data-key="customer"
+                  data-type="group"
+                  data-template='<a href="/customers/\{{value.id}}">\{{value.name}}</a>'
+                  class="dropdown-item"
+                  href="#"
+                >
+                  Customer
+                </a>
+              </li>
+              <li>
+                <a
+                  data-action="click->cpf-page-admin-devices-table#onColumnAdd"
+                  data-label="Site"
+                  data-key="site"
+                  data-type="group"
+                  data-template='<a href="/sites/\{{value.id}}">\{{value.name}}</a>'
+                  class="dropdown-item"
+                  href="#"
+                >
+                  Site
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-8 mt-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Edit Column
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              <div class="mb-3">
+                <label for="cpf-device-table-column-label-input">Column Header</label>
+                <input
+                  name="label"
+                  id="cpf-device-table-column-label-input"
+                  type="text"
+                  class="form-control"
+                  data-action="cpf-page-admin-devices-table#onInputChange"
+                  data-cpf-page-admin-devices-table-target="labelInput"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="cpf-device-table-column-order-input">Order</label>
+                <input
+                  name="order"
+                  id="cpf-device-table-column-order-input"
+                  type="number"
+                  class="form-control"
+                  data-action="cpf-page-admin-devices-table#onInputChange"
+                  data-cpf-page-admin-devices-table-target="orderInput"
+                  aria-describedby="cpf-order-input-help"
+                />
+                <div id="cpf-order-input-help" class="form-text">
+                  The display order for this column. Columns will be sorted by the value, ascending, when displayed.
+                </div>
+              </div>
+              <div class="mb-3" data-cpf-page-admin-devices-table-target="keyInputWrapper">
+                <label for="cpf-device-table-column-key-input" data-cpf-page-admin-devices-table-target="keyLabel">Key</label>
+                <input
+                  name="key"
+                  id="cpf-device-table-column-key-input"
+                  type="text"
+                  class="form-control"
+                  data-action="cpf-page-admin-devices-table#onInputChange"
+                  data-cpf-page-admin-devices-table-target="keyInput"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="cpf-device-table-column-template-input">Cell Template</label>
+                <textarea
+                  rows="5"
+                  name="template"
+                  id="cpf-device-table-column-template-input"
+                  class="form-control cpf-code-textarea"
+                  data-action="cpf-page-admin-devices-table#onInputChange"
+                  data-cpf-page-admin-devices-table-target="templateInput"
+                   aria-describedby="cpf-template-input-help"
+                >
+                </textarea>
+                <div id="cpf-template-input-help" class="form-text">
+                  <a href="https://docs.losant.com/workflows/accessing-payload-data/#string-templates" target="_blank">Template</a>
+                  to customize how the value is displayed. The <span class="cpf-inline-code">device</span>
+                  variable contains the entire device object. The <span class="cpf-inline-code">value</span>
+                  variable contains the value for the selected device property. Depending on the property, value
+                  has the following fields:
+                  <br /><br />
+                  <strong class="text-decoration-underline">Connection Status</strong>
+                  <br />
+                  <span class="cpf-inline-code">value.connected</span>: true | false
+                  <br />
+                  <span class="cpf-inline-code">value.time</span>: ISO date string containing date and time (UTC) since
+                  the device last connected or disconnected. This will be undefined if the device has never connected.
+                  <br /><br />
+
+                  <strong class="text-decoration-underline">Device Name, Device Tag, Device Attribute</strong>
+                  <br />
+                  <span class="cpf-inline-code">value</span>: The value of this device property.
+                  <br /><br />
+                  <strong class="text-decoration-underline">Customer, Site</strong>
+                  <br />
+                  <span class="cpf-inline-code">value.id</span>: The ID of the customer or site.<br />
+                  <span class="cpf-inline-code">value.name</span>: The name of the customer or site.
+                </div>
+              </div>
+            </form>
+            <div class="mb-2 mt-4 float-end">
+              <a
+                href="."
+                class="text-danger"
+                data-cpf-page-admin-devices-table-target="removeColumnBtn"
+                data-action="cpf-page-admin-devices-table#onColumnRemove"
+              >
+                Remove Column
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card p-3 mt-4 d-block cpf-bg-mid">
+          <form method="post" data-cpf-page-admin-devices-table-target="columnsForm">
+            <input
+              type="hidden"
+              name="tableColumns"
+              value='{{pageData.tableColumns}}'
+              data-cpf-page-admin-devices-table-target="tableColumnsInput"
+            />
+          </form>
+          <button class="btn btn-primary" data-action="cpf-page-admin-devices-table#onSave">Save Changes</button>
+          <a href="." data-action="click->cpf-page-admin-devices-table#onCancel" class="ms-2 cpf-text-mid">Discard Changes</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

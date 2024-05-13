@@ -1,0 +1,20 @@
+resourceType: ExperienceVersion
+resources:
+  - endpointDefaultCors: true
+    exportHash: 602ae4ad7f7996abad5959eac1fdb20dfdfbe245ab5ccc327b5e3aa14be4c6ae
+    globals:
+      - json: '"favicon_1700165919750.png"'
+        key: favicon
+      - json: '"CPF | {{this}}"'
+        key: title_template
+      - json: '"Losant IoT, Inc."'
+        key: company_name
+      - json: '"https://www.losant.com/legal/privacy-policy"'
+        key: privacy_policy
+      - json: '"https://www.losant.com/legal/terms-of-service"'
+        key: tos
+      - json: '"Open+Sans"'
+        key: font_family
+    id: ~exportplaceholderid-experienceVersion-develop~
+    version: develop
+version: 1

@@ -1,0 +1,1187 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: 'Created for Endpoint GET /devices/{deviceId}'
+    enabled: true
+    exportHash: a8837c208a9d1081f0a420faabf7229fd50af59d8228c93adea5d5e7cc9c865e
+    flowId: ~exportplaceholderid-flow-cpfPageDeviceDetails~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageDeviceDetails~
+    name: cpf-page-device-details
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageDeviceDetails~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: WmYuzPl3jy
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 340
+          'y': 1320
+        outputIds:
+          - - bZST_snJF5
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: bZST_snJF5
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 340
+          'y': 1420
+        outputIds: []
+        type: DebugNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.params.deviceId}}'
+          includeConnectionStatus: true
+          includeState: true
+          resultPath: pageData.device
+          tagsAsObject: true
+        id: 6F1uzRiDCA
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 140
+          'y': 140
+        outputIds:
+          - - DMRd3z6fzc
+        type: GetDeviceNode
+      - config:
+          bodyTemplate: '{{data.path}}?tab=properties&success=true'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: hxqB4_RJET
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1300
+          'y': 2300
+        outputIds:
+          - - wsh3ZOiOoz
+        type: EndpointReplyNode
+      - config:
+          errorsPath: working.error
+          schema: |-
+            {
+              "type": "object",
+              "properties": {  
+                "name": { "type": "string" } ,
+                "description": { 
+                  "type": "string", 
+                  "maxLength": 32767 
+                } ,
+                "site": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "name",
+                "site"
+              ]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: dTnEJJP1fh
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 1200
+          'y': 720
+        outputIds:
+          - - NRVmADHp7O
+          - - g2QbtkLxUv
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.params.deviceId}}?tab=properties&error=Invalid or
+            missing fields
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: NRVmADHp7O
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1200
+          'y': 960
+        outputIds:
+          - - emZUpSmbia
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: emZUpSmbia
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1200
+          'y': 1060
+        outputIds: []
+        type: DebugNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{pageData.device.tags.cpf_site.[0]}}'
+          resultPath: working.siteGroup
+        id: M1vAJ_Ogbh
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 340
+          'y': 920
+        outputIds:
+          - - OcMhE8zCiN
+        type: GetExperienceGroupNode
+      - config: {}
+        id: UR6xs72KNM
+        meta:
+          annotationText: >-
+            Get the full group for the device's site so we can get the customer
+            ID. This is used to select the correct customer in the dropdown.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 540
+          'y': 920
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: pageData.device.siteId
+              source: 'pageData.device.tags.cpf_site.[0]'
+              type: copy
+            - destination: pageData.device.customerId
+              source: working.siteGroup.parentId
+              type: copy
+            - destination: pageData.role
+              type: set
+              valueTemplate: '{{defaultTo experience.user.userTags.cpf_role ''viewer''}}'
+              valueTemplateType: string
+        id: OcMhE8zCiN
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 340
+          'y': 1020
+        outputIds:
+          - - raThdnrVkT
+        type: MutateNode
+      - config: {}
+        id: 5TMSVWEqzv
+        meta:
+          annotationText: >-
+            If the user is not a system admin, the user must at least be an
+            editor and have access to this device.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 1320
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyRole~
+          customNodeVersion: default
+          fields:
+            - id: requiredRole
+              value: editor
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: ''
+        id: ssCFAeBnV4
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Role'
+          name: custom-node-execute-node
+          x: 1020
+          'y': 360
+        outputIds:
+          - - djtCyaQpxI
+          - - LDL_49s0MB
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: djtCyaQpxI
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 920
+          'y': 600
+        outputIds:
+          - - rk0S27FLF6
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: rk0S27FLF6
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 920
+          'y': 700
+        outputIds: []
+        type: DebugNode
+      - config:
+          deviceIdTemplate: '{{data.params.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: LDL_49s0MB
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 1120
+          'y': 480
+        outputIds:
+          - - djtCyaQpxI
+          - - YyfhETRHfx
+        type: VerifyDeviceNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.params.deviceId}}'
+          includeConnectionStatus: true
+          includeState: false
+          resultPath: working.deviceToEdit
+          tagsAsObject: false
+        id: kZba7YiS5o
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 1400
+          'y': 960
+        outputIds:
+          - - UZV1y9FM90
+        type: GetDeviceNode
+      - config: {}
+        id: Q43PpmtBVr
+        meta:
+          annotationText: >-
+            Only certain tags are editable by the user. Need to get any other
+            tags on the device and merge them together.
+
+
+            Also need to get the `cpf_device_tags` table and filter out any tags
+            that aren't allowed.
+          category: annotation
+          height: 240
+          label: Note
+          name: note
+          width: 260
+          x: 1600
+          'y': 960
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfDeviceTags~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.deviceTagsTable
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: UZV1y9FM90
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 1400
+          'y': 1060
+        outputIds:
+          - - NcwhBT15yO
+        type: DataTableQueryNode
+      - config:
+          attributesAsObject: false
+          dataMethod: payloadPath
+          devicePayloadPath: working.deviceUpdate
+          idTemplate: '{{data.params.deviceId}}'
+          resultPath: working.result
+          tagsAsObject: true
+        id: VmKtMPABBO
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Update'
+          name: update-device
+          x: 1400
+          'y': 1840
+        outputIds:
+          - - 8as9_qygNZ
+        type: UpdateDeviceNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: QfJ1Z6DOKx
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 920
+          'y': 140
+        outputIds:
+          - - djtCyaQpxI
+          - - 9lJWku9cW_
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} === 0'
+        id: 9lJWku9cW_
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1100
+          'y': 260
+        outputIds:
+          - - ssCFAeBnV4
+          - - YyfhETRHfx
+        type: ConditionalNode
+      - config:
+          expression: '{{data.body.delete}} === ''true'''
+        id: YyfhETRHfx
+        meta:
+          category: logic
+          description: ''
+          label: Delete?
+          name: conditional
+          x: 1480
+          'y': 600
+        outputIds:
+          - - dTnEJJP1fh
+          - - s_MOPDaNtL
+        type: ConditionalNode
+      - config:
+          dataMethod: id
+          deviceIdTemplate: '{{data.params.deviceId}}'
+          resultPath: ''
+        id: s_MOPDaNtL
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Delete'
+          name: delete-device
+          x: 1900
+          'y': 720
+        outputIds:
+          - - XSKYoND8I8
+        type: DeviceDeleteWorkflowNode
+      - config:
+          bodyTemplate: /devices
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: XSKYoND8I8
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1900
+          'y': 820
+        outputIds:
+          - - wzmI0lIxBO
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: wzmI0lIxBO
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1900
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          emailOrIdTemplate: '{{experience.user.id}}'
+          groupIdTemplate: '{{data.body.site}}'
+        id: g2QbtkLxUv
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Verify'
+          name: verify-experience-group
+          x: 1300
+          'y': 840
+        outputIds:
+          - - NRVmADHp7O
+          - - kZba7YiS5o
+        type: VerifyExperienceGroupNode
+      - config: {}
+        id: LhLm5qiFB4
+        meta:
+          annotationText: The logged in user must have access to the provided site ID.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 1500
+          'y': 820
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          deviceIdTemplate: '{{pageData.device.id}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: xoGt19PHG1
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 240
+          'y': 800
+        outputIds:
+          - - avTdgDCbsc
+          - - M1vAJ_Ogbh
+        type: VerifyDeviceNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: Vi2uOJxr3c
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 240
+          'y': 460
+        outputIds:
+          - - pLpx0NBfGJ
+          - - qEfxzNhc9U
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} === 0'
+        id: qEfxzNhc9U
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 340
+          'y': 680
+        outputIds:
+          - - xoGt19PHG1
+          - - M1vAJ_Ogbh
+        type: ConditionalNode
+      - config:
+          expression: '{{pageData.device}}'
+        id: DMRd3z6fzc
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 140
+          'y': 240
+        outputIds:
+          - - QmplKNDdDA
+          - - Vi2uOJxr3c
+        type: ConditionalNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPage404~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: QmplKNDdDA
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 360
+        outputIds:
+          - - D2Dr1ZxZxC
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: D2Dr1ZxZxC
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 40
+          'y': 460
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: pLpx0NBfGJ
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 140
+          'y': 580
+        outputIds:
+          - - 7PUJSUsaqc
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 7PUJSUsaqc
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 680
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPage404~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: avTdgDCbsc
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 140
+          'y': 920
+        outputIds:
+          - - O6rLB8iX0X
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: O6rLB8iX0X
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 1020
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 83W3XfJS3t
+        meta:
+          annotationText: >-
+            We receive a [data
+            URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs)
+            that contains the MIME type, extension, and base64-encoded image.
+            This function node splits those into separate values on the payload.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 340
+          x: 1600
+          'y': 1220
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          contentTypeTemplate: '{{working.contentType}}'
+          encodingTemplate: base64
+          fileContentsTemplate: '{{{working.imageBase64}}}'
+          fileNameTemplate: '{{formatDate time ''x''}}.{{working.extension}}'
+          parentDirectoryTemplate: /device-images
+          resultPath: working.fileResult
+          shouldOverwrite: false
+        id: E4FsFynrMo
+        meta:
+          category: data
+          description: ''
+          label: 'File: Create'
+          name: file-create
+          x: 1500
+          'y': 1480
+        outputIds:
+          - - GTcxRAEncQ
+        type: FileCreateNode
+      - config:
+          expression: '{{working.imageBase64}}'
+        id: 2U2XHDCz6q
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1400
+          'y': 1360
+        outputIds:
+          - - GTcxRAEncQ
+          - - E4FsFynrMo
+        type: ConditionalNode
+      - config:
+          scopePath: ''
+          script: |-
+            // Parse the image.
+            // Example value:
+            // data:image/jpeg;base64,/9j/4QAYRXhpZgA...
+
+            let dataURL = payload.data.body.imageContents;
+            if(dataURL && dataURL.startsWith('data:')) {
+                let parts = dataURL.split(',');
+
+                let contentType = parts[0].split(';')[0].split(':')[1];
+                let extension = contentType.split('/')[1];
+                let imageBase64 = parts[1];
+
+                payload.working = payload.working || {};
+                payload.working.contentType = contentType;
+                payload.working.imageBase64 = imageBase64;
+                payload.working.extension = extension;
+            }
+        id: NcwhBT15yO
+        meta:
+          category: logic
+          description: ''
+          label: Parse Image
+          name: function
+          x: 1400
+          'y': 1220
+        outputIds:
+          - - 2U2XHDCz6q
+        type: RawFunctionNode
+      - config:
+          scopePath: ''
+          script: >-
+            let deviceToEdit = payload.working.deviceToEdit;
+
+            let deviceRecipeTag = deviceToEdit.tags.find((t) => { return t.key
+            === 'DeviceRecipe'});
+
+            let deviceRecipeName = deviceRecipeTag ? deviceRecipeTag.value :
+            null;
+
+            let deviceTagsByRecipe = {};
+
+
+            // Make a map of recipe -> tags array to make lookups easier.
+
+            payload.working.deviceTagsTable.items.forEach((t) => {
+                deviceTagsByRecipe[t.deviceRecipeName] = JSON.parse(t.deviceTagKeys)
+            });
+
+
+            let allowedTags = deviceTagsByRecipe[deviceRecipeName] || [];
+
+            allowedTags = allowedTags.concat(deviceTagsByRecipe['__default__']);
+
+
+            payload.working.deviceTagsByRecipe = deviceTagsByRecipe;
+
+            payload.working.allowedTags = allowedTags;
+
+
+
+            let device = {
+                name: payload.data.body.name,
+                description: payload.data.body.description,
+                tags: deviceToEdit.tags
+            };
+
+
+            for (const [key, value] of Object.entries(payload.data.body)) {
+              if (key.startsWith("tag_")){
+                let tagName = key.split("tag_")[1];
+
+                // cpf_site, cpf_customer, cpf_image tags are reserved
+                if(tagName !== 'cpf_site' && tagName !== 'cpf_customer' && tagName !== 'cpf_image') {
+
+                  // The tag must exist in the device tags table.
+                  // These tags are set using the Device Tags admin page.
+                  if(allowedTags.indexOf(tagName) !== -1) {
+
+                    // The user is allowed to modify this tag.
+                    // Find the original tag and replace its value.
+                    let tag = device.tags.find((t) => {
+                      return t.key === tagName;
+                    });
+
+                    if(tag) {
+                      tag.value = value
+                    }
+                  }
+                }
+              }
+            }
+
+
+            // The device may or may not have a site and customer tags
+
+            // Replace the values if it exists, otherwise add the tag.
+
+            let siteTag = device.tags.find((t) => {
+              return t.key === 'cpf_site'
+            });
+
+
+            let customerTag = device.tags.find((t) => {
+              return t.key === 'cpf_customer'
+            });
+
+
+            if(siteTag) {
+              payload.working.existingSite = siteTag.value
+              siteTag.value = payload.working.site.id;
+            } else {
+              device.tags.push({
+                key: 'cpf_site',
+                value: payload.working.site.id
+              });
+            }
+
+
+            if(customerTag) {
+              payload.working.existingCustomer = customerTag.value;
+              customerTag.value = payload.working.site.parentId;
+            } else {
+              device.tags.push({
+                key: 'cpf_customer',
+                value: payload.working.site.parentId
+              });
+            }
+
+
+            // Keeping track of the new and existing site/customer.
+
+            // If they change, need to update events for this device
+
+            // to match.
+
+            payload.working.newSite = payload.working.site.id;
+
+            payload.working.newCustomer = payload.working.site.parentId;
+
+
+            let image = payload.working.fileResult;
+
+
+            if(image) {
+              // The device may or may not have an image tag.
+              // Replace the value if it exists, otherwise add the tag.
+              let imageTag = device.tags.find((t) => {
+                return t.key === 'cpf_image'
+              });
+
+              if(imageTag) {
+                imageTag.value = image.parentDirectory + image.name;
+              } else {
+                device.tags.push({
+                  key: 'cpf_image',
+                  value: image.parentDirectory + image.name
+                });
+              }
+            }
+
+
+            payload.working = payload.working || {};
+
+            payload.working.deviceUpdate = device;
+        id: UNx7OhGJsS
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 1400
+          'y': 1740
+        outputIds:
+          - - VmKtMPABBO
+        type: RawFunctionNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: wsh3ZOiOoz
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1400
+          'y': 2420
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{working.result.error}}'
+        id: 8as9_qygNZ
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1400
+          'y': 1940
+        outputIds:
+          - - e4V7y28HXD
+          - - bUNQj884xt
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '{{data.path}}?error={{encodeURI working.result.error.message}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: bUNQj884xt
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1500
+          'y': 2060
+        outputIds:
+          - - wsh3ZOiOoz
+        type: EndpointReplyNode
+      - config:
+          dataTableIdTemplate: ~exportplaceholderid-dataTable-cpfDashboards~
+          includeFieldsTemplate: ''
+          limitTemplate: ''
+          offsetTemplate: ''
+          queryTemplate: ''
+          resultPath: working.dashboards
+          sortColumnTemplate: ''
+          sortDirectionTemplate: ''
+        id: raThdnrVkT
+        meta:
+          category: data
+          description: ''
+          label: 'Table: Get Rows'
+          name: get-table-rows
+          x: 340
+          'y': 1120
+        outputIds:
+          - - raQ3eyVj0F
+        type: DataTableQueryNode
+      - config: {}
+        id: AhMyVAHHK0
+        meta:
+          annotationText: >-
+            Find the dashboard to show based on the device recipe and the
+            Dashboards admin configuration.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 260
+          x: 540
+          'y': 1120
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          scopePath: ''
+          script: >-
+            let dashboards = payload.working.dashboards.items;
+
+            let device = payload.pageData.device;
+
+
+            // Attempt to find the device recipe name from the
+
+            // device's DeviceRecipe tag. If no tag is present
+
+            // default to the '__default__' recipe name.
+
+            let deviceRecipeTag = device.tags.DeviceRecipe || [];
+
+            let deviceRecipeName = deviceRecipeTag[0] || '__default__'
+
+
+            let dashboardId = null;
+
+
+            let dashboardRow = dashboards.find((d) => { return
+            d.deviceRecipeName === deviceRecipeName });
+
+
+            if(!dashboardRow) {
+                dashboardRow = dashboards.find((d) => { return d.deviceRecipeName === '__default__' });
+            }
+
+
+            if(dashboardRow && dashboardRow.dashboardId) {
+                dashboardId = dashboardRow.dashboardId;
+            }
+
+
+            payload.pageData.dashboardId = dashboardId;
+        id: raQ3eyVj0F
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 340
+          'y': 1220
+        outputIds:
+          - - WmYuzPl3jy
+        type: RawFunctionNode
+      - config:
+          findMetadata: false
+          findMethod: id
+          idTemplate: '{{data.body.site}}'
+          resultPath: working.site
+        id: GTcxRAEncQ
+        meta:
+          category: experience
+          description: ''
+          label: 'Group: Get'
+          name: get-experience-group
+          x: 1400
+          'y': 1600
+        outputIds:
+          - - UNx7OhGJsS
+        type: GetExperienceGroupNode
+      - config: {}
+        id: RLu9hP6pYQ
+        meta:
+          annotationText: >-
+            Get the full details of the site ID so we can tag the device with
+            both site ID and customer ID (the site's parent group).
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 360
+          x: 1600
+          'y': 1600
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: z_DVlUZM9I
+        meta:
+          annotationText: |-
+            To delete a device, the POST body contains:
+
+            `{ "delete": "true" }`
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 1680
+          'y': 540
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 3WYVzpLLh3
+        meta:
+          annotationText: >-
+            If the customer or site changed, need to find all events associated
+            with this device and update their customer and site tags to match.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 1000
+          'y': 2020
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: >-
+            {{working.existingSite}} === {{working.newSite}} &&
+            {{working.existingCustomer}} === {{working.newCustomer}}
+        id: e4V7y28HXD
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 1300
+          'y': 2060
+        outputIds:
+          - - yTEi9jJiM1
+          - - hxqB4_RJET
+        type: ConditionalNode
+      - config:
+          commentTemplate: ''
+          dataMethod: individualFields
+          dataSourcePath: ''
+          dataSourceType: payloadPath
+          eventTags:
+            - keyTemplate: cpf_site
+              valueTemplate: '{{working.newSite}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{working.newCustomer}}'
+          queryTemplate: |-
+            {
+              "$or": [
+                {
+                  "deviceId": {
+                    "$eq": "{{working.deviceToEdit.id}}"
+                  }
+                }
+              ]
+            }
+          resultPath: working.eventUpdateResult
+          stateTemplate: ''
+          updateMultiple: true
+        id: yTEi9jJiM1
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Update'
+          mode: queryTemplateMultiple
+          name: update-event
+          x: 1180
+          'y': 2180
+        outputIds:
+          - - hxqB4_RJET
+        type: UpdateEventNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getDevicesDeviceId~
+        meta:
+          category: trigger
+          description: ''
+          label: 'GET /devices/{deviceId}'
+          name: endpoint
+          uiId: WeJ3Tw_AwL
+          x: 140
+          'y': 40
+        outputIds:
+          - - 6F1uzRiDCA
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postDevicesDeviceId~
+        meta:
+          category: trigger
+          description: ''
+          label: 'POST /devices/{deviceId}'
+          name: endpoint
+          uiId: tguJ0bOwn3
+          x: 920
+          'y': 40
+        outputIds:
+          - - QfJ1Z6DOKx
+        type: endpoint
+    version: develop
+version: 1

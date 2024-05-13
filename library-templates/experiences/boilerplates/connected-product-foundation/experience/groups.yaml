@@ -1,0 +1,106 @@
+resourceType: ExperienceGroupTree
+resources:
+  - children:
+      - children:
+          - children: []
+            deviceIds: []
+            deviceQueryJson: >-
+              {
+                "$and": [
+                  {
+                    "tags": {
+                      "$eq": {
+                        "$tagKey": "cpf_site",
+                        "$tagValue": "~exportplaceholderid-experienceGroup-site11~"
+                      }
+                    }
+                  }
+                ]
+              }
+            deviceTags: []
+            exportHash: 13aa48591c42787a5e4a0796d87d16efacdbe1592e8568bc538a6f235cc69d24
+            groupTags: {}
+            id: ~exportplaceholderid-experienceGroup-site11~
+            name: Site 1.1
+          - children: []
+            deviceIds: []
+            deviceQueryJson: >-
+              {
+                "$and": [
+                  {
+                    "tags": {
+                      "$eq": {
+                        "$tagKey": "cpf_site",
+                        "$tagValue": "~exportplaceholderid-experienceGroup-site12~"
+                      }
+                    }
+                  }
+                ]
+              }
+            deviceTags: []
+            exportHash: d3160117faf42b48fe13405a5a097ddaf350d6e34b0539a3675ec94af4733912
+            groupTags: {}
+            id: ~exportplaceholderid-experienceGroup-site12~
+            name: Site 1.2
+        deviceIds: []
+        deviceQueryJson: '{"$nor":[]}'
+        deviceTags: []
+        exportHash: 98f90d1bc0ea2bfd4cc3fde710cfd27b43e8e10928b7a0da136adcf135eb3802
+        groupTags: {}
+        id: ~exportplaceholderid-experienceGroup-customer1~
+        name: Customer 1
+      - children:
+          - children: []
+            deviceIds: []
+            deviceQueryJson: >-
+              {
+                "$and": [
+                  {
+                    "tags": {
+                      "$eq": {
+                        "$tagKey": "cpf_site",
+                        "$tagValue": "~exportplaceholderid-experienceGroup-site21~"
+                      }
+                    }
+                  }
+                ]
+              }
+            deviceTags: []
+            exportHash: 906989e74461b4cbb7794c7764d7c15605e40862fff16ca53b165364943c0605
+            groupTags: {}
+            id: ~exportplaceholderid-experienceGroup-site21~
+            name: Site 2.1
+          - children: []
+            deviceIds: []
+            deviceQueryJson: >-
+              {
+                "$and": [
+                  {
+                    "tags": {
+                      "$eq": {
+                        "$tagKey": "cpf_site",
+                        "$tagValue": "~exportplaceholderid-experienceGroup-site22~"
+                      }
+                    }
+                  }
+                ]
+              }
+            deviceTags: []
+            exportHash: c347419bcb2c4616f9f2a6395679c55ab709e9439d728bb9ddf7792cd46b6233
+            groupTags: {}
+            id: ~exportplaceholderid-experienceGroup-site22~
+            name: Site 2.2
+        deviceIds: []
+        deviceQueryJson: '{"$nor":[]}'
+        deviceTags: []
+        exportHash: e810f5770297f99bd1e8c1ee6856cefb4a9646c0a4016ab8cd71266ea1af4bab
+        groupTags: {}
+        id: ~exportplaceholderid-experienceGroup-customer2~
+        name: Customer 2
+    deviceIds: []
+    deviceTags: []
+    exportHash: ad7aa2e9473583cd81007e8e16a3b20ca7fbdd2377113691f54d412a84272d0d
+    groupTags: {}
+    id: ~exportplaceholderid-experienceGroup-system~
+    name: System
+version: 1

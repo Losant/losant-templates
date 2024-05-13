@@ -1,0 +1,23 @@
+application.register("cpf-page-user-details", class extends Controller {
+
+  static targets = ['customerSelect', 'siteSelect', "siteSelectFrame"];
+
+  connect() {
+    if (document.documentElement.hasAttribute('data-turbo-preview')) {
+        return;
+    }
+  };
+
+  customerChanged(event) {
+    let params = new URLSearchParams({
+      level: 2,
+      parentId: this.customerSelectTarget.value,
+      placeholder: '-- All Sites --',
+      controllerName: 'cpf-page-user-details',
+      targetName: 'siteSelect',
+      formName: 'site'
+    });
+
+    this.siteSelectFrameTarget.src = `/cpf/elements/group-select?${params.toString()}`;
+  };
+});

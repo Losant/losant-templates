@@ -119,7 +119,7 @@ resources:
     deviceDescription: Represents the attributes found in the Turbofan dataset from
       NASA's Prognostic Data Repository.
     deviceName: Turbofan
-    exportHash: dc8fec8b3d5d863a0e464f6a594044d713e1038571f80aa424d90bcd64fcd68e
+    exportHash: d09166e0d609ed438869bf2cfc4838982017b1e3bfa105eb889e0db360301953
     id: ~exportplaceholderid-deviceRecipe-turbofan~
     name: Turbofan
     tags:

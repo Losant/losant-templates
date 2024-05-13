@@ -1,0 +1,119 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/customers-table
+    enabled: true
+    exportHash: f35b4592dd1787007b5db9b62c13d414f4a25ddcd793610e96cb43392cb3a222
+    flowId: ~exportplaceholderid-flow-cpfElementCustomersTable~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementCustomersTable~
+    name: cpf-element-customers-table
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementCustomersTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: qOpLHepib8
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 260
+          'y': 420
+        outputIds:
+          - - eX0A0ZpEAx
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: eX0A0ZpEAx
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 260
+          'y': 520
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfQueryResources~
+          customNodeVersion: default
+          fields:
+            - id: level
+              value: '1'
+            - id: parent
+              value: ''
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: working.results
+        id: ywuGtdl_B9
+        meta:
+          description: ''
+          label: 'CPF: Query Resources'
+          name: custom-node-execute-node
+          x: 260
+          'y': 140
+        outputIds:
+          - - orSvIM2P6X
+          - - ibzjiu69Mj
+        type: CustomNodeExecuteNode
+      - config:
+          rules:
+            - destination: pageData.customers
+              source: working.results.queryResultsWithTags
+              type: copy
+        id: ibzjiu69Mj
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 360
+          'y': 280
+        outputIds:
+          - - qOpLHepib8
+        type: MutateNode
+      - config:
+          rules:
+            - destination: pageData.customers.error
+              source: working.results.error
+              type: copy
+        id: orSvIM2P6X
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 160
+          'y': 280
+        outputIds:
+          - - qOpLHepib8
+        type: MutateNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsCustomersTable~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/customers-table
+          name: endpoint
+          uiId: XVRlac55ng
+          x: 260
+          'y': 40
+        outputIds:
+          - - ywuGtdl_B9
+        type: endpoint
+    version: develop
+version: 1

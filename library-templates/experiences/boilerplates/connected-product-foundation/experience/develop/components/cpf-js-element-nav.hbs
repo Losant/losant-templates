@@ -1,0 +1,258 @@
+application.register("cpf-element-nav", class extends Controller {
+
+  static get values() {
+    return {
+      topNavItems: Array,
+      bottomNavItems: Array,
+      which: String,
+      preview: String
+    };
+  };
+
+  initialize() {
+
+    if (this.whichValue) {
+      this.renderNav(this.whichValue, this.whichValue === 'top' ? this.topNavItemsValue : this.bottomNavItemsValue);
+      this.navItems = this.whichValue === 'top' ? this.topNavItemsValue : this.bottomNavItemsValue;
+    }
+    else {
+      this.renderNav('top', this.topNavItemsValue);
+      this.renderNav('bottom', this.bottomNavItemsValue);
+      this.navItems = this.topNavItemsValue.concat(this.bottomNavItems);
+    }
+
+    if (!this.previewValue) {
+      this.updateActiveNav(window.location.pathname);
+    }
+
+    this.template = this.element.querySelector('template');
+  };
+
+  connect() {
+
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+  }
+
+  renderNav(which, items) {
+
+    let isPreview = this.previewValue;
+
+    items = this.processNavItems(items);
+
+    const template = this.element.querySelector('template');
+    const nav = this.element.querySelector(`.cpf-element-nav-${which}`);
+
+    nav.innerHTML = '';
+
+    items.forEach((navItem) => {
+      if (navItem.visible) {
+        const clone = template.content.cloneNode(true);
+
+        if(navItem.nav_link) {
+          clone.querySelector('a').href = navItem.nav_link;
+        } else {
+          // If no URL is provided, disable the link.
+          // Don't do this when in preview mode - so admins
+          // can still click the nav item and make changes.
+          if(!isPreview) {
+            clone.querySelector('a').href = '#';
+            clone.querySelector('a').style.pointerEvents = 'none';
+          }
+        }
+
+        clone.querySelector('a').dataset.navItem = JSON.stringify(navItem);
+        clone.querySelector('.cpf-element-nav-label').textContent = navItem.nav_label;
+
+        const container = clone.querySelector('a > div');
+        const icon = clone.querySelector('.cpf-icon-small');
+
+        container.style.paddingLeft = `calc(20px * ${navItem.nav_level})`;
+
+        if (navItem.nav_icon) {
+          icon.textContent = navItem.nav_icon;
+        } else {
+          icon.style.paddingLeft = '16px';
+        }
+
+        nav.appendChild(clone);
+      }
+    });
+  };
+
+  // Sorts and orders nav items based on parents and order values.
+  processNavItems(items) {
+    let itemsMap = {};
+    let itemsHierarchy = [];
+    let itemsFlattened = [];
+
+    items.forEach((i) => {
+      itemsMap[i.nav_id] = i;
+      i.children = [];
+      if (i.nav_parent === null || i.nav_parent === '') {
+        itemsHierarchy.push(i);
+      }
+    });
+
+    items.forEach((i) => {
+      if (i.nav_parent !== null && i.nav_parent !== '') {
+        itemsMap[i.nav_parent].children.push(i)
+      }
+    });
+
+    let setLevel = (i, level) => {
+      i.nav_level = level;
+      i.children.forEach((c) => { setLevel(c, level + 1); });
+    };
+
+    itemsHierarchy.forEach((i) => { setLevel(i, 0); });
+
+    let sortAndFlatten = (i) => {
+      itemsFlattened.push(i);
+      i.children.sort((a, b) => { return a.nav_order - b.nav_order });
+      i.children.forEach(sortAndFlatten);
+    };
+    
+    itemsHierarchy.sort((a, b) => { return a.nav_order - b.nav_order });
+    itemsHierarchy.forEach(sortAndFlatten);
+
+    return itemsFlattened;
+  };
+
+  deselectAllNavItems(navItems) {
+    if (!navItems) {
+      navItems = this.element.querySelectorAll('.nav-item > a');
+    }
+
+    navItems.forEach((n) => {
+      n.classList.remove('active');
+    });
+  };
+
+  updateActiveNav(newPath) {
+
+    // Find all the nav items that are children of this element.
+    let navItems = this.element.querySelectorAll('.nav-item > a');
+
+    // This checks for exact path matches and then checks for
+    // potential path parameter matches.
+    // Ex: /devices/{deviceId} will match /devices since we assume
+    // that path is a child resource.
+
+    // First remove the active class from all nav items.
+    this.deselectAllNavItems(navItems);
+
+    // If we're in preview mode, don't select anything
+    //if(this.previewValue) {
+    //  return;
+    //}
+
+    // Next, check for exact path matches.
+    let exactMatchFound = false;
+    navItems.forEach((n) => {
+      if(!exactMatchFound) {
+        if (n.getAttribute('href') === newPath) {
+          n.classList.add('active');
+          exactMatchFound = true;
+        }
+      }
+    });
+
+    // Finally, check for potential path parameter matches.
+    if (!exactMatchFound) {
+      navItems.forEach((n) => {
+        // Ignore any nav items with just '/' as the href.
+        // Since this will match all paths.
+        if (n.getAttribute('href') !== '/') {
+          if (newPath.startsWith(n.getAttribute('href'))) {
+            n.classList.add('active');
+          }
+        }
+      });
+    }
+  };
+
+  onTurboVisit(e) {
+    let newPath = (new URL(e.detail.url)).pathname;
+    this.updateActiveNav(newPath);
+  }
+
+  navItemClicked(e) {
+    if (this.previewValue) {
+      this.updateActiveNav(e.currentTarget.getAttribute('href'));
+      e.preventDefault();
+      this.element.dispatchEvent(new CustomEvent('cpf_element_nav_click', {
+        bubbles: true,
+        detail: {
+          navItem: JSON.parse(e.currentTarget.dataset.navItem),
+          controller: this
+        }
+      }));
+    }
+  };
+
+  updateNavItem(navItem) {
+
+    let toUpdate = this.navItems.find((n) => { return n.nav_id === navItem.nav_id });
+
+    Object.assign(toUpdate, navItem);
+
+    this.renderNav(this.whichValue, this.navItems);
+
+    this.updateActiveNav(navItem.nav_link);
+  };
+
+  addItem() {
+    let newItem = {
+      nav_label: 'New Nav Item',
+      nav_id: crypto.randomUUID(),
+      nav_link: `/new/item-${this.navItems.length}`,
+      nav_icon: '',
+      nav_parent: '',
+      visible: true,
+      nav_order: 0,
+      nav_access_group_level: -1,
+      nav_location: this.whichValue // 'top', 'bottom'
+    };
+
+    this.navItems.unshift(newItem);
+    this.renderNav(this.whichValue, this.navItems);
+
+    this.element.dispatchEvent(new CustomEvent('cpf_element_nav_click', {
+      bubbles: true,
+      detail: {
+        navItem: newItem,
+        controller: this
+      }
+    }));
+  };
+
+  removeNavItem(item) {
+
+    let navItems = this.navItems;
+
+    let remove = (toRemove) => {
+
+      toRemove.children.forEach((c) => {
+        remove(c);
+      });
+
+      let index = navItems.findIndex((n) => { return n.nav_id === toRemove.nav_id });
+      if(index !== -1) {
+        navItems.splice(index, 1);
+      }
+    }
+
+    // Remove the item and recursively all of its children.
+    remove(item);
+
+    this.renderNav(this.whichValue, this.navItems);
+    this.element.dispatchEvent(new CustomEvent('cpf_element_nav_click', {
+      detail: {
+        navItem: this.navItems[0],
+        controller: this
+      }
+    }));
+  };
+});

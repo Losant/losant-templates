@@ -1,0 +1,427 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - enabled: true
+    exportHash: 3239fd318367506a5b16ed1e59fd5ecd914d74b5d74fb379b8f3dc061d3a6e1d
+    flowId: ~exportplaceholderid-flow-cpfPageCreateAccount~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageCreateAccount~
+    name: cpf-page-create-account
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageCreateAccount~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: NokDTCXt9P
+        meta:
+          category: output
+          description: ''
+          label: Show Form
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 860
+          'y': 1080
+        outputIds:
+          - - Smqvqy7dB4
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: ''
+          property: ''
+        id: 8_9fl6wqWA
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 660
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Token is invalid, expired, or has already been used. Contact an administrator to receive a new invitation."
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageCreateAccount~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: zzuihBpJCL
+        meta:
+          category: output
+          description: ''
+          label: Bad Token
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 660
+          'y': 1080
+        outputIds:
+          - - 8_9fl6wqWA
+        type: EndpointReplyNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyResetToken~
+          customNodeVersion: develop
+          fields:
+            - id: token
+              value: '{{data.query.token}}'
+          isInstance: false
+          resultPath: working.decoded
+        id: mV6R6CpoOt
+        meta:
+          category: customNodeExecute
+          description: ''
+          label: Verify Reset Token
+          name: custom-node-execute-node
+          x: 720
+          'y': 280
+        outputIds:
+          - - zzuihBpJCL
+          - - zn6oM13FoL
+        type: CustomNodeExecuteNode
+      - config: {}
+        id: _LObx2w1x5
+        meta:
+          annotationText: 'If the token is invalid, display an error.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 200
+          x: 440
+          'y': 1080
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{ experience.user }}'
+        id: m3ja5pNH69
+        meta:
+          category: logic
+          description: Is the user logged in already?
+          label: Logged in?
+          name: conditional
+          x: 900
+          'y': 160
+        outputIds:
+          - - mV6R6CpoOt
+          - - fnWCmldhcI
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: fnWCmldhcI
+        meta:
+          category: output
+          description: User is already logged in. Redirect them to the home page.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1000
+          'y': 280
+        outputIds:
+          - - r4ISFnYtLB
+        type: EndpointReplyNode
+      - config:
+          level: info
+          message: ''
+          property: ''
+        id: r4ISFnYtLB
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1000
+          'y': 380
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Smqvqy7dB4
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 860
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.method}} === ''post'''
+        id: tswxeRpHZZ
+        meta:
+          category: logic
+          description: ''
+          label: POST?
+          name: conditional
+          x: 840
+          'y': 580
+        outputIds:
+          - - NokDTCXt9P
+          - - TlWhXHFyQB
+        type: ConditionalNode
+      - config:
+          emailOrIdTemplate: '{{working.decoded.id}}'
+          findMetadata: false
+          findMethod: emailOrId
+          findMultiple: false
+          resultPath: pageData.user
+          sortDirection: asc
+          sortField: email
+        id: zn6oM13FoL
+        meta:
+          category: experience
+          description: ''
+          label: 'User: Get'
+          name: get-experience-user
+          x: 800
+          'y': 380
+        outputIds:
+          - - norAN89f49
+        type: GetExperienceUserNode
+      - config: {}
+        id: KZ9EgFxwlC
+        meta:
+          annotationText: >-
+            If a signed-in user somehow ends up here (most likely a user who
+            created an account and then clicked this link again), redirect them
+            to `/`.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 540
+          x: 1100
+          'y': 140
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: eHX7poJeR5
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1260
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          errorsPath: ''
+          schema: |-
+            {
+                "type": "object",
+                "properties": {
+                    "email": {"type": "string", "format": "email"},
+                    "firstName": {"type": "string", "minlength": 1, "maxlength": 1024},
+                    "lastName": {"type": "string", "minlength": 1, "maxlength": 1024},
+                    "password": {"type": "string", "minlength": 8, "maxlength": 2048}
+                },
+                "required": ["email", "firstName", "lastName", "password"]
+            }
+          schemaType: json
+          toValidatePath: data.body
+        id: TlWhXHFyQB
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 960
+          'y': 680
+        outputIds:
+          - - 5mKqK_eT0b
+          - - YlJQ256idJ
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Invalid request. Please include a valid email address, password, first name, and last name."
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageCreateAccount~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '400'
+          sameSiteTemplate: ''
+        id: 5mKqK_eT0b
+        meta:
+          category: output
+          description: ''
+          label: Bad Request
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1060
+          'y': 1080
+        outputIds:
+          - - ngvQATpum_
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: ''
+          property: ''
+        id: ngvQATpum_
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1060
+          'y': 1180
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.body.email}} === {{pageData.user.email}}'
+        id: YlJQ256idJ
+        meta:
+          category: logic
+          description: ''
+          label: Email Match?
+          name: conditional
+          x: 1140
+          'y': 780
+        outputIds:
+          - - zzuihBpJCL
+          - - K5Y33WB_uM
+        type: ConditionalNode
+      - config:
+          expression: '{{pageData.user.userTags.cpf_invitation_expires}}'
+        id: norAN89f49
+        meta:
+          category: logic
+          description: ''
+          label: Is Pending User?
+          name: conditional
+          x: 800
+          'y': 480
+        outputIds:
+          - - zzuihBpJCL
+          - - tswxeRpHZZ
+        type: ConditionalNode
+      - config:
+          dataMethod: individualFields
+          emailOrIdTemplate: '{{data.body.email}}'
+          emailTemplate: '{{data.body.email}}'
+          firstNameTemplate: '{{data.body.firstName}}'
+          groupIdTemplates: ''
+          invalidateExistingTokens: false
+          lastNameTemplate: '{{data.body.lastName}}'
+          passwordTemplate: '{{data.body.password}}'
+          resultPath: ''
+          userTags:
+            - keyTemplate: cpf_invitation_expires
+        id: K5Y33WB_uM
+        meta:
+          category: experience
+          description: ''
+          label: 'User: Update'
+          name: update-experience-user
+          x: 1260
+          'y': 880
+        outputIds:
+          - - q6GJncldR_
+        type: UpdateExperienceUserNode
+      - config:
+          emailOrIdTemplate: '{{data.body.email}}'
+          invalidateExistingTokens: false
+          resultPath: working.newUserAuthToken
+          treatAsLogin: false
+          ttlTemplate: ''
+        id: q6GJncldR_
+        meta:
+          category: experience
+          description: ''
+          label: Generate Token
+          name: experience-user-token
+          x: 1260
+          'y': 980
+        outputIds:
+          - - pHoirqOiTd
+        type: ExperienceUserTokenNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo:
+            - maxAgeTemplate: ''
+              nameTemplate: authorization
+              pathTemplate: ''
+              valueTemplate: '{{working.newUserAuthToken}}'
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: pHoirqOiTd
+        meta:
+          category: output
+          description: >-
+            Successful account creation. Redirect the user to the home page and
+            set the auth cookie for future requests.
+          label: Redirect to /
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1260
+          'y': 1080
+        outputIds:
+          - - eHX7poJeR5
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCreateAccount~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /create-account
+          name: endpoint
+          uiId: 3uPDwGSxYa
+          x: 800
+          'y': 40
+        outputIds:
+          - - m3ja5pNH69
+        type: endpoint
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-postCreateAccount~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /create-account
+          name: endpoint
+          uiId: O6YRDVB0Hv
+          x: 1000
+          'y': 40
+        outputIds:
+          - - m3ja5pNH69
+        type: endpoint
+    version: develop
+version: 1
