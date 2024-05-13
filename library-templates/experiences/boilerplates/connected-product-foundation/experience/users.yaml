@@ -1,39 +1,10 @@
 resourceType: ExperienceUser
 resources:
-  - email: cannadbt@gmail.com
-    experienceGroupIds:
-      - ~exportplaceholderid-experienceGroup-site12~
-    exportHash: d5611289a8369db6101046125d783f28fbcc68298a0e6b3fedf36df635fd7f61
-    firstName: Brandon
-    id: ~exportplaceholderid-experienceUser-cannadbtGmailCom~
-    lastName: Cannaday
-    userTags:
-      cpf_invitation_expires: "1715367261713"
-      cpf_role: admin
   - email: customer-1-admin@example.com
     experienceGroupIds:
       - ~exportplaceholderid-experienceGroup-customer1~
     exportHash: 84e389ea8892a226483c8363100493337e3a6844a0d0c90349e41501bf89957b
     id: ~exportplaceholderid-experienceUser-customer1AdminExampleCom~
-    userTags:
-      cpf_role: admin
-  - email: dylan@dylanschuster.com
-    experienceGroupIds:
-      - ~exportplaceholderid-experienceGroup-customer1~
-    exportHash: 1727b2b001818e6a492fbda8d94a5dae8c33641b8319b75c9c9b8dcd83f54358
-    firstName: Dylan
-    id: ~exportplaceholderid-experienceUser-dylanDylanschusterCom~
-    lastName: Schuster
-    userTags:
-      cpf_invitation_expires: "1715358730312"
-      cpf_role: admin
-  - email: dylan@losant.com
-    experienceGroupIds:
-      - ~exportplaceholderid-experienceGroup-system~
-    exportHash: e0ba216340116b0c9b887c0e189bcd716cc426dcf7ad21c231f4c591d3a9eec4
-    firstName: Dylan
-    id: ~exportplaceholderid-experienceUser-dylanLosantCom~
-    lastName: Schuster
     userTags:
       cpf_role: admin
   - email: site-1-viewer@example.com
