@@ -1,0 +1,12 @@
+resourceType: Webhook
+resources:
+  - exportHash: 2ca33bc2b096111eb413538cfb8c13907ebab963f01ccfc8beda75f1becd105c
+    id: ~exportplaceholderid-webhook-dashboardReportCallback~
+    isWebsocket: false
+    name: Dashboard Report Callback
+    responseCode: 200
+    token: ~exportplaceholderid-webhookToken-dashboardReportCallback~
+    verificationCode: ''
+    verificationType: none
+    waitForReply: false
+version: 1

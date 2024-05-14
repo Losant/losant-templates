@@ -1,0 +1,974 @@
+resourceType: Flow
+resources:
+  - exportHash: 4d21057536648d44e0e1b8b4387270f779417e0e84e1bcfd01ccde7ff4fc2235
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-resourceJobSendDashboardReport~
+    name: Resource Job Send Dashboard Report
+    nodes:
+      - config:
+          level: error
+          message: Iteration Timed Out
+          property: ''
+        id: 22e522b0
+        meta:
+          category: debug
+          description: ''
+          label: Iteration Timed Out
+          name: debug
+          x: 2460
+          'y': 380
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: '22e52418'
+        meta:
+          category: debug
+          description: ''
+          label: Dashboard Request Sent
+          name: debug
+          x: 1180
+          'y': 760
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 22e52c4c
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 3240
+          'y': 780
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: sendReport
+          params:
+            - name: dashboardId
+              type: string
+              value: '{{ data.execution.context.dashboardId }}'
+            - name: reportConfig
+              type: json
+              value: |-
+                {
+                  "branded": false,
+                  "callbackUrl": "https://~exportplaceholderid-triggers-url~/webhooks/~exportplaceholderid-webhookToken-dashboardReportCallback~?iterationId={{data.iterationId}}&token={{working.token}}",
+                  "ctx": {
+                    "experienceUser": "{{data.experienceUser.id}}"
+                  }
+                }
+          resource: applicationDashboard
+          responsePath: working.apiResult
+        id: mjYzXiox6K
+        meta:
+          category: data
+          description: ''
+          label: Send Dashboard Report Req
+          name: losantapi
+          x: 1080
+          'y': 560
+        outputIds:
+          - - n2fFbmyFTN
+        type: LosantApiNode
+      - config:
+          expression: '{{ working.apiResult.result.success }}'
+        id: n2fFbmyFTN
+        meta:
+          category: logic
+          description: ''
+          label: Success?
+          name: conditional
+          x: 1080
+          'y': 660
+        outputIds:
+          - - oI_9vdE7h8
+          - - '22e52418'
+        type: ConditionalNode
+      - config:
+          expression: '{{ data.execution.context.dashboardId }}'
+        id: macokxYrX5
+        meta:
+          category: logic
+          description: ''
+          label: has DashboardID?
+          name: conditional
+          x: 980
+          'y': 360
+        outputIds:
+          - - fLC04L4Uun
+          - - Mvxv2xuUfw
+        type: ConditionalNode
+      - config:
+          accumulatorMethod: payloadPath
+          accumulatorValue: ''
+          iterationIdPath: ''
+          messageTemplate: Dashboard ID not provided in execution context
+          resultPath: ''
+          successExpression: 'false'
+        id: fLC04L4Uun
+        meta:
+          category: output
+          description: ''
+          label: 'Failed: No ID'
+          name: resource-job-acknowledge
+          x: 880
+          'y': 460
+        outputIds:
+          - - 4sWHEXctsa
+        type: ResourceJobAcknowledgeNode
+      - config:
+          accumulatorMethod: payloadPath
+          accumulatorValue: ''
+          iterationIdPath: data.query.iterationId
+          messageTemplate: ''
+          resultPath: ''
+          successExpression: 'true'
+        id: gBOknyvVX3
+        meta:
+          category: output
+          description: ''
+          label: Ack Dashboard Sent
+          name: resource-job-acknowledge
+          x: 2420
+          'y': 880
+        outputIds:
+          - - Po0OYq5rTb
+        type: ResourceJobAcknowledgeNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: Po0OYq5rTb
+        meta:
+          category: debug
+          description: ''
+          label: Dashboard Request Sent
+          name: debug
+          x: 2420
+          'y': 980
+        outputIds: []
+        type: DebugNode
+      - config:
+          accumulatorMethod: payloadPath
+          accumulatorValue: ''
+          iterationIdPath: ''
+          messageTemplate: 'Dashboard Send Report error: {{ working.apiResult.error.message }}'
+          resultPath: ''
+          successExpression: 'false'
+        id: oI_9vdE7h8
+        meta:
+          category: output
+          description: ''
+          label: Failed to Queue
+          name: resource-job-acknowledge
+          x: 980
+          'y': 760
+        outputIds:
+          - - RlMsNY5oft
+        type: ResourceJobAcknowledgeNode
+      - config:
+          bodyTemplate: |
+            <!doctype html>
+            <html>
+              <head>
+                <title></title>
+                <meta name="viewport" content="width=device-width" />
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
+              <body>
+                <p>Your dashboard report is ready. You can download it at the following URL:</p>
+                <p><a href="{{data.body.downloadUrl}}">{{data.body.downloadUrl}}</a></p>
+              </body>
+            </html>
+          fromTemplate: ''
+          resultPath: working.emailResult
+          subjectTemplate: Your Personal Dashboard Report
+          toAddresses:
+            - '{{working.decoded.email}}'
+        id: rnas7vc1KM
+        meta:
+          category: output
+          description: ''
+          label: Email
+          name: structure-email
+          x: 2320
+          'y': 680
+        outputIds:
+          - - uZHjH98s8d
+        type: StructureEmailNode
+      - config:
+          contextTemplate: ''
+          contextTemplateType: none
+          resourceJobIdTemplate: ~exportplaceholderid-resourceJob-sendDashboardReport~
+          resultPath: working.jobExecuteResult
+        id: x5F2V3dTIW
+        meta:
+          category: output
+          description: ''
+          label: 'Job: Execute'
+          name: resource-job-execute
+          x: 140
+          'y': 360
+        outputIds:
+          - - rZs9jTuSa4
+        type: ResourceJobExecuteNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: rZs9jTuSa4
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 140
+          'y': 460
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: _CrjtPPdb_
+        meta:
+          annotationText: >-
+            Press the Virtual Button to execute this resource job and send a
+            dashboard report to each of your targeted experience users. You can
+            also connect a Timer Trigger to the Job: Execute Node to run this
+            automatically on a daily, weekly, or monthly basis.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 300
+          x: 80
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          level: error
+          message: 'Failed: No Dashboard ID Provided'
+          property: ''
+        id: 4sWHEXctsa
+        meta:
+          category: debug
+          description: ''
+          label: 'Failed: No ID'
+          name: debug
+          x: 880
+          'y': 560
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: error
+          message: 'Dashboard Send Report error: {{ working.apiResult.error.message }}'
+          property: ''
+        id: RlMsNY5oft
+        meta:
+          category: debug
+          description: ''
+          label: Failed to Queue
+          name: debug
+          x: 980
+          'y': 860
+        outputIds: []
+        type: DebugNode
+      - config:
+          credentialNameTemplate: Dashboard Report Secret
+          dataTemplate: |-
+            {
+              "email": {{jsonEncode data.experienceUser.email}}
+            }
+          dataTemplateType: json
+          destinationPath: working.token
+          expiresIn: 600
+          headerTemplate: ''
+          headerTemplateType: json
+        id: Mvxv2xuUfw
+        meta:
+          category: logic
+          description: ''
+          isExpRequired: true
+          label: 'JWT: Create'
+          name: jwt-create
+          timeUnit: Minutes
+          x: 1080
+          'y': 460
+        outputIds:
+          - - mjYzXiox6K
+        type: JWTCreateNode
+      - config:
+          accumulatorMethod: payloadPath
+          accumulatorValue: ''
+          iterationIdPath: ''
+          messageTemplate: 'Workflow error: {{data.errorInfo.error.message}}'
+          resultPath: ''
+          successExpression: 'false'
+        id: 3kkcZyqbNR
+        meta:
+          category: output
+          description: ''
+          label: Workflow Error
+          name: resource-job-acknowledge
+          x: 2800
+          'y': 380
+        outputIds:
+          - - 9CwCefTdAT
+        type: ResourceJobAcknowledgeNode
+      - config:
+          level: error
+          message: 'Workflow Error: {{data.errorInfo.error.message}}'
+          property: ''
+        id: 9CwCefTdAT
+        meta:
+          category: debug
+          description: ''
+          label: 'Workflow Error: '
+          name: debug
+          x: 2800
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: jjjPubrxbD
+        meta:
+          annotationText: >-
+            If the workflow encounters an uncaught exception, mark the iteration
+            as a failure. In most cases this will occur because the "Dashboard
+            Report Secret" JWT secret was not found.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 220
+          x: 2780
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: XNzykttdVO
+        meta:
+          annotationText: >-
+            This trigger fires for each iteration of the resource job - or, once
+            per experience user matching your query.
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 300
+          x: 920
+          'y': 120
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          credentialNameTemplate: Dashboard Report Secret
+          errorPath: working.tokenError
+          tokenTemplate: '{{data.query.token}}'
+        id: 6PYj89wnI1
+        meta:
+          category: logic
+          description: ''
+          label: 'JWT: Verify'
+          name: jwt-verify
+          x: 2220
+          'y': 480
+        outputIds:
+          - - jMbHtWSPzM
+          - - Ffoj9RUxMP
+        type: JWTVerifyNode
+      - config:
+          accumulatorMethod: payloadPath
+          accumulatorValue: ''
+          iterationIdPath: data.query.iterationId
+          messageTemplate: Failed to decode callback token
+          resultPath: ''
+          successExpression: 'false'
+        id: jMbHtWSPzM
+        meta:
+          category: output
+          description: ''
+          label: Failed to Decode
+          name: resource-job-acknowledge
+          x: 2120
+          'y': 580
+        outputIds:
+          - - Uy6AbSwmhb
+        type: ResourceJobAcknowledgeNode
+      - config:
+          expression: '{{data.query.iterationId}}'
+        id: BXUBcSkLgE
+        meta:
+          category: logic
+          description: ''
+          label: iterationId?
+          name: conditional
+          x: 2120
+          'y': 380
+        outputIds:
+          - - OfUw6Rqyny
+          - - 6PYj89wnI1
+        type: ConditionalNode
+      - config:
+          level: info
+          message: No iterationId
+          property: ''
+        id: OfUw6Rqyny
+        meta:
+          category: debug
+          description: ''
+          label: No iterationId
+          name: debug
+          x: 2020
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: 12pOhLU3t0
+        meta:
+          annotationText: >-
+            This Webhook Trigger fires for each dashboard report generation, as
+            Losant makes a POST request to the `callbackUrl` provided when
+            generating the report.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 300
+          x: 2060
+          'y': 100
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          complete: false
+          destinationPath: working.decoded
+          tokenTemplate: '{{data.query.token}}'
+        id: Ffoj9RUxMP
+        meta:
+          category: logic
+          description: ''
+          label: 'JWT: Decode'
+          name: jwt-decode
+          x: 2320
+          'y': 580
+        outputIds:
+          - - rnas7vc1KM
+        type: JWTDecodeNode
+      - config:
+          level: error
+          message: Failed to decode callback token
+          property: ''
+        id: Uy6AbSwmhb
+        meta:
+          category: debug
+          description: ''
+          label: Failed to Decode Token
+          name: debug
+          x: 2120
+          'y': 680
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: lKdXOUZ21j
+        meta:
+          annotationText: >-
+            Make sure to set the `dashboardId` in the execution context. By
+            default, it is defined on the resource job itself, but that can be
+            overridden in the Job: Execute Node.
+          category: annotation
+          height: 180
+          label: Note
+          name: note
+          width: 220
+          x: 340
+          'y': 260
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 9rzY4EpjJU
+        meta:
+          annotationText: >-
+            Fail every iteration if we do not have a `dashboardId` in the
+            execution context.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 180
+          x: 680
+          'y': 460
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: RVF64auhj4
+        meta:
+          annotationText: >-
+            This template requires creating a JWT credential named **Dashboard
+            Report Secret**.
+
+
+            Encode the user's email address in a JWT for additional security.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 520
+          x: 1180
+          'y': 300
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: rO_x2pJTgf
+        meta:
+          annotationText: >-
+            This node requests the report with the following settings:
+
+
+            - `branded: false` (to remove any Losant branding)
+
+            - `callbackUrl` (the value being the URL of your webhook, with query
+            parameters for the `iterationId` and `token` containing the user's
+            email)
+
+            - `ctx` (an object with [context
+            variable](https://~exportplaceholderid-docs-url~/dashboards/context-variables/)
+            values specific to this user; what to provide here depends on the
+            dashboard)
+
+
+            There are [additional
+            options](https://~exportplaceholderid-docs-url~/rest-api/schemas#dashboard-send-report)
+            you can provide to further personalize the report.
+          category: annotation
+          height: 260
+          label: Note
+          name: note
+          width: 460
+          x: 1280
+          'y': 460
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: lVei6zoMCU
+        meta:
+          annotationText: >-
+            If for any reason the request returns an error, mark the iteration
+            as failed.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 180
+          x: 780
+          'y': 760
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: T4dgLPpztS
+        meta:
+          annotationText: >-
+            If there is no `iterationId`, we assume this request is not a
+            callback from a report generation.
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 1840
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: W2bpx6FWv2
+        meta:
+          annotationText: 'If the token can''t be verified, mark the iteration as a failure.'
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 160
+          x: 1940
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '!{{working.emailResult.error}}'
+        id: uZHjH98s8d
+        meta:
+          category: logic
+          description: ''
+          label: Success?
+          name: conditional
+          x: 2320
+          'y': 780
+        outputIds:
+          - - CDRzQFMTGr
+          - - gBOknyvVX3
+        type: ConditionalNode
+      - config:
+          accumulatorMethod: payloadPath
+          accumulatorValue: ''
+          iterationIdPath: data.query.iterationId
+          messageTemplate: 'Failed to send email: {{working.emailResult.error}}'
+          resultPath: ''
+          successExpression: 'false'
+        id: CDRzQFMTGr
+        meta:
+          category: output
+          description: ''
+          label: Failed to Send Email
+          name: resource-job-acknowledge
+          x: 2220
+          'y': 880
+        outputIds:
+          - - Vn_QgqGPa7
+        type: ResourceJobAcknowledgeNode
+      - config:
+          level: error
+          message: Failed to send email
+          property: ''
+        id: Vn_QgqGPa7
+        meta:
+          category: debug
+          description: ''
+          label: Failed to Send Email
+          name: debug
+          x: 2220
+          'y': 980
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: ADhsTXfJ1E
+        meta:
+          annotationText: >-
+            The email may fail to send, in which case we mark the iteration as
+            failed.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 160
+          x: 2040
+          'y': 880
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: lNsd1kjUFm
+        meta:
+          annotationText: Success! The report should be in the user's inbox.
+          category: annotation
+          height: 160
+          label: Note
+          name: note
+          width: 160
+          x: 2620
+          'y': 880
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: MszwV9Q3H8
+        meta:
+          annotationText: >-
+            This template does not have any special handling for timeouts, but
+            we have the trigger here to catch them in the debug log.
+          category: annotation
+          height: 200
+          label: Note
+          name: note
+          width: 220
+          x: 2440
+          'y': 60
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: __Xl7zeHXW
+        meta:
+          annotationText: This trigger fires when all iterations have completed.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 220
+          x: 3100
+          'y': 160
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          contentTypeTemplate: text/csv
+          encodingTemplate: utf8
+          fileContentsTemplate: '{{working.summaryResult.body}}'
+          fileNameTemplate: 'summary-{{data.execution.runStartedAt}}.csv'
+          parentDirectoryTemplate: /dashboard-report-summaries
+          resultPath: working.fileCreateResult
+          shouldOverwrite: false
+        id: Jrys3bblFK
+        meta:
+          category: data
+          description: ''
+          label: 'File: Create'
+          name: file-create
+          x: 3180
+          'y': 580
+        outputIds:
+          - - q_cIxQ_W1o
+        type: FileCreateNode
+      - config:
+          authCredentials: {}
+          authType: none
+          bodyType: none
+          caCertTemplate: ''
+          disableSSLVerification: false
+          encodingTemplate: utf8
+          errorBehavior: payloadPath
+          errorPath: working.summaryError
+          headerInfo: []
+          method: GET
+          requestEncodingTemplate: utf8
+          responsePath: working.summaryResult
+          timeoutTemplate: ''
+          uriTemplate: '{{data.execution.executionReportUrl}}'
+        id: s6ZUoyDL5X
+        meta:
+          category: data
+          description: ''
+          label: HTTP
+          name: http
+          x: 3120
+          'y': 380
+        outputIds:
+          - - SpdnZ_hX8L
+        type: HttpNode
+      - config: {}
+        id: fJ0OfiM9zr
+        meta:
+          annotationText: >-
+            Download the CSV summary report provided in the Job: Complete
+            Trigger and store it on the payload. Then, save it to your
+            Application Files.
+
+
+            If for any reason this operation fails, create an event so that the
+            details are not lost.
+          category: annotation
+          height: 220
+          label: Note
+          name: note
+          width: 260
+          x: 3320
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.summaryResult}}'
+        id: SpdnZ_hX8L
+        meta:
+          category: logic
+          description: ''
+          label: Success?
+          name: conditional
+          x: 3120
+          'y': 480
+        outputIds:
+          - - K09RvwjVeV
+          - - Jrys3bblFK
+        type: ConditionalNode
+      - config:
+          expression: '{{working.fileCreateResult.url}}'
+        id: q_cIxQ_W1o
+        meta:
+          category: logic
+          description: ''
+          label: Success?
+          name: conditional
+          x: 3180
+          'y': 680
+        outputIds:
+          - - K09RvwjVeV
+          - - 22e52c4c
+        type: ConditionalNode
+      - config:
+          dataMethod: individualFields
+          dataSourcePath: .
+          dataSourceType: payloadPath
+          eventTags: []
+          levelTemplate: error
+          messageTemplate: >-
+            {{defaultTo working.summaryError.error.message
+            working.fileCreateResult.error.message}}
+          subjectTemplate: Failed to Create Dashboard Report CSV
+          timeSourceType: now
+        id: K09RvwjVeV
+        meta:
+          category: data
+          description: ''
+          label: 'Event: Create'
+          name: create-event
+          x: 3040
+          'y': 780
+        outputIds:
+          - - EISY10H3gQ
+        type: CreateEventNode
+      - config:
+          level: warn
+          message: Failed to Create File
+          property: ''
+        id: EISY10H3gQ
+        meta:
+          category: debug
+          description: ''
+          label: Failed to Create File
+          name: debug
+          x: 3040
+          'y': 880
+        outputIds: []
+        type: DebugNode
+      - config:
+          attachments:
+            - filenameTemplate: 'dashboard-report-{{time}}.pdf'
+              urlTemplate: '{{data.body.downloadUrl}}'
+          bccAddresses: []
+          bodyTemplate: |-
+            <!doctype html>
+            <html>
+              <head>
+                <title></title>
+                <meta name="viewport" content="width=device-width" />
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+              </head>
+              <body>
+                <p>Your dashboard report is ready. It is attached to this message; alternatively, you can download it at the following URL:</p>
+                <p><a href="{{data.body.downloadUrl}}">{{data.body.downloadUrl}}</a></p>
+              </body>
+            </html>
+          ccAddresses: []
+          credentialNameTemplate: SendGrid Credential
+          fromTemplate: '{{working.fromEmail}}'
+          replyToTemplate: ''
+          resultPath: working.emailResult
+          subjectTemplate: Your Personal Dashboard Report
+          toAddresses:
+            - '{{working.decoded.email}}'
+        id: 5HcERGywK2
+        meta:
+          category: output
+          description: ''
+          label: SendGrid
+          name: sendgrid
+          x: 2320
+          'y': 1340
+        outputIds: []
+        type: SendgridEmailNode
+      - config: {}
+        id: aFgugwQMN3
+        meta:
+          annotationText: >-
+            ### Switch to SendGrid
+
+
+            For production applications, we **strongly suggest** using the
+            SendGrid Node (tied to your own SendGrid account) instead of
+            Losant's Email Node. This gives you more control over the message
+            settings and allows you to use a familiar "From" email address,
+            while greatly reducing the chances that your message gets marked as
+            spam. You can also send the report as an attachment in the email.
+
+
+            Replace the Email Node above with this SendGrid Node and make sure
+            to put in your account's connection info and From Address. We
+            recommend using a Service Credential to store the API Key.
+          category: annotation
+          height: 380
+          label: Note
+          name: note
+          width: 580
+          x: 2120
+          'y': 1080
+        outputIds: []
+        type: AnnotationNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-resourceJob-sendDashboardReport~
+        meta:
+          category: trigger
+          description: ''
+          label: 'Job: Timeout'
+          name: resourceJobIterationTimeout
+          uiId: 22e51ad6
+          x: 2460
+          'y': 280
+        outputIds:
+          - - 22e522b0
+        type: resourceJobIterationTimeout
+      - config: {}
+        key: ~exportplaceholderid-resourceJob-sendDashboardReport~
+        meta:
+          category: trigger
+          description: ''
+          label: Send a Report
+          name: resourceJobIteration
+          uiId: 22e51efa
+          x: 980
+          'y': 260
+        outputIds:
+          - - macokxYrX5
+        type: resourceJobIteration
+      - config: {}
+        key: ~exportplaceholderid-resourceJob-sendDashboardReport~
+        meta:
+          category: trigger
+          description: ''
+          label: 'Job: Complete'
+          name: resourceJobComplete
+          uiId: 22e520e4
+          x: 3120
+          'y': 280
+        outputIds:
+          - - s6ZUoyDL5X
+        type: resourceJobComplete
+      - config: {}
+        key: ~exportplaceholderid-webhook-dashboardReportCallback~
+        meta:
+          category: trigger
+          description: ''
+          label: Dashboard Callback
+          name: webhook
+          uiId: jNaiFrqFr4
+          x: 2120
+          'y': 280
+        outputIds:
+          - - BXUBcSkLgE
+        type: webhook
+      - config: {}
+        key: >-
+          ~exportplaceholderid-flow-resourceJobSendDashboardReport~-dj6Z8E3HXu3NT9kGfCNNw
+        meta:
+          category: trigger
+          description: ''
+          label: Virtual Button
+          name: virtualButton
+          payload: ''
+          uiId: 2ukWVg7ZiM
+          x: 140
+          'y': 260
+        outputIds:
+          - - x5F2V3dTIW
+        type: virtualButton
+      - config:
+          scope: local
+        key: ~exportplaceholderid-flow-resourceJobSendDashboardReport~-flowError
+        meta:
+          category: trigger
+          description: ''
+          label: Workflow Error
+          name: flowError
+          uiId: QkVwExlM38
+          x: 2800
+          'y': 280
+        outputIds:
+          - - 3kkcZyqbNR
+        type: flowError
+version: 1

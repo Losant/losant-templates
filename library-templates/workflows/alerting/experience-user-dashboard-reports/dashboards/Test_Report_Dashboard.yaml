@@ -1,0 +1,36 @@
+resourceType: Dashboard
+resources:
+  - blocks:
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryWorkflowsAlertingExperienceUserDashboardReports~
+        blockType: section-header
+        config: {}
+        description: |-
+          ```
+          {{jsonEncode ctx.experienceUser 2}}
+          ```
+        height: 1.5
+        id: _0cT8lC_1A
+        startX: 0
+        startY: 0
+        title: Current User
+        width: 4
+    contextConfiguration:
+      - applicationId: >-
+          ~exportplaceholderid-application-libraryWorkflowsAlertingExperienceUserDashboardReports~
+        defaultValue: 664253589934cc93e5d1d17c
+        name: experienceUser
+        type: experienceUser
+        validationConfig:
+          experienceGroupIds: []
+        validationEnabled: false
+    defaultTheme: light
+    duration: 3600000
+    exportHash: a9feb19479a916d5dff8c83c2cb3f1d4be72a7351e986668e3a87bd2069a7145
+    id: ~exportplaceholderid-dashboard-testReportDashboard~
+    isPasswordProtected: false
+    name: Test Report Dashboard
+    public: false
+    refreshRate: 60
+    resolution: 60000
+version: 1

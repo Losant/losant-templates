@@ -1,0 +1,20 @@
+resourceType: ResourceJob
+resources:
+  - defaultContext: |-
+      {
+        "dashboardId": "~exportplaceholderid-dashboard-testReportDashboard~"
+      }
+    description: Iterate through experience users and send a dashboard report to each
+    exportHash: aa2fddb5203dfce8bf9e49bad46bb45cdd6ea903c818c0c1c3d6b7d4d10439d2
+    id: ~exportplaceholderid-resourceJob-sendDashboardReport~
+    iterationDelay: 5000
+    iterationTimeout: 300000
+    maxIterationConcurrency: 1
+    maxIterationRetries: 1
+    name: Send Dashboard Report
+    queryJson: '{"$and":[]}'
+    resourceType: experienceUser
+    retryDelay: 0
+    retryOnFailure: false
+    retryOnTimeout: false
+version: 1

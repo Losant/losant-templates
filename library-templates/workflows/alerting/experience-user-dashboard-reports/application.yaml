@@ -1,0 +1,21 @@
+resourceType: Application
+resources:
+  - blobUrlTTL: 86400
+    description: Generates a personalized dashboard report for each of your
+      Experience Users through a Resource Job.
+    filesPath: ./files
+    globals: []
+    id: ~exportplaceholderid-application-libraryWorkflowsAlertingExperienceUserDashboardReports~
+    name: Experience User Dashboard Reports
+    readmePath: ./README.md
+    imagePath: ./preview.png
+    authorName: Losant
+    authorUrl: https://www.losant.com
+    keywords:
+      - experience
+      - report
+      - dashboard
+      - resource
+      - job
+      - callback
+version: 1
