@@ -1,6 +1,6 @@
 resourceType: Flow
 resources:
-  - exportHash: 4d21057536648d44e0e1b8b4387270f779417e0e84e1bcfd01ccde7ff4fc2235
+  - exportHash: 005376967d42dcc4ab4b4cc97cc9f07d071670c17c21880f6a0e3a9abd6302f7
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-resourceJobSendDashboardReport~
@@ -266,7 +266,7 @@ resources:
         type: DebugNode
       - config:
           level: error
-          message: 'Dashboard Send Report error: {{ working.apiResult.error.message }}'
+          message: 'Dashboard Send Report error: {{{working.apiResult.error.message}}}'
           property: ''
         id: RlMsNY5oft
         meta:
@@ -322,7 +322,7 @@ resources:
         type: ResourceJobAcknowledgeNode
       - config:
           level: error
-          message: 'Workflow Error: {{data.errorInfo.error.message}}'
+          message: 'Workflow Error: {{{data.errorInfo.error.message}}}'
           property: ''
         id: 9CwCefTdAT
         meta:
