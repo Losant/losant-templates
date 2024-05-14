@@ -15,4 +15,5 @@ resources:
       - cpf
       - starter
       - bootstrap
+      - featured
 version: 1
