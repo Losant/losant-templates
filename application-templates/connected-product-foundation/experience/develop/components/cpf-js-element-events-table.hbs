@@ -137,9 +137,11 @@ application.register("cpf-element-events-table", class extends Controller {
 
       if(this.dateRangeTypeAfterTarget.checked) {
         if(!this.dateRangeAfterTarget.value) {
-          this.dateRangeAfterTarget.setCustomValidity("Date is required.");
-          this.dateRangeAfterTarget.reportValidity();
-          return;
+          if(this.dateRangeModalTarget.classList.contains('show')) {
+            this.dateRangeAfterTarget.setCustomValidity("Date is required.");
+            this.dateRangeAfterTarget.reportValidity();
+            return;
+          }
         } else {
           let date = new Date(this.dateRangeAfterTarget.value);
           queryParams.push(`dateRangeAfter=${date.toISOString()}`);
@@ -148,9 +150,11 @@ application.register("cpf-element-events-table", class extends Controller {
 
       if(this.dateRangeTypeBeforeTarget.checked) {
         if(!this.dateRangeBeforeTarget.value) {
-          this.dateRangeBeforeTarget.setCustomValidity("Date is required.");
-          this.dateRangeBeforeTarget.reportValidity();
-          return;
+          if(this.dateRangeModalTarget.classList.contains('show')) {
+            this.dateRangeBeforeTarget.setCustomValidity("Date is required.");
+            this.dateRangeBeforeTarget.reportValidity();
+            return;
+          }
         } else {
           let date = new Date(this.dateRangeBeforeTarget.value);
           queryParams.push(`dateRangeBefore=${date.toISOString()}`);
@@ -159,24 +163,30 @@ application.register("cpf-element-events-table", class extends Controller {
 
       if(this.dateRangeTypeBetweenTarget.checked) {
         if(!this.dateRangeBetweenStartTarget.value) {
-          this.dateRangeBetweenStartTarget.setCustomValidity("Date is required.");
-          this.dateRangeBetweenStartTarget.reportValidity();
-          return;
+          if(this.dateRangeModalTarget.classList.contains('show')) {
+            this.dateRangeBetweenStartTarget.setCustomValidity("Date is required.");
+            this.dateRangeBetweenStartTarget.reportValidity();
+            return;
+          }
         }
 
         if(!this.dateRangeBetweenEndTarget.value) {
-          this.dateRangeBetweenEndTarget.setCustomValidity("Date is required.");
-          this.dateRangeBetweenEndTarget.reportValidity();
-          return;
+          if(this.dateRangeModalTarget.classList.contains('show')) {
+            this.dateRangeBetweenEndTarget.setCustomValidity("Date is required.");
+            this.dateRangeBetweenEndTarget.reportValidity();
+            return;
+          }
         }
 
         let rangeStart = new Date(this.dateRangeBetweenStartTarget.value);
         let rangeEnd = new Date(this.dateRangeBetweenEndTarget.value);
 
         if(rangeStart > rangeEnd) {
-          this.dateRangeBetweenStartTarget.setCustomValidity("Start date must be before end date.");
-          this.dateRangeBetweenStartTarget.reportValidity();
-          return;
+          if(this.dateRangeModalTarget.classList.contains('show')) {
+            this.dateRangeBetweenStartTarget.setCustomValidity("Start date must be before end date.");
+            this.dateRangeBetweenStartTarget.reportValidity();
+            return;
+          }
         }
 
         queryParams.push(`dateRangeBetweenStart=${rangeStart.toISOString()}`);
