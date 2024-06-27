@@ -1,7 +1,9 @@
 resourceType: ExperienceView
 resources:
   - description: Created for Endpoint GET /cpf/elements/customers-table.
-    exportHash: 18a0aac11e7ef6bc29b0a96b2e635d8737c7ff4093b1b1893fca4c38de941aa6
+    exportHash: 37f03717185f0613c32e3ce874a7a579d621cee9dacc611cd94c9c6d2e80f706
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementCustomersTable~
     localFilename: ./cpf-element-customers-table.hbs
     name: cpf-element-customers-table
@@ -9,35 +11,45 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/dashboard.
-    exportHash: d6cfdaeca292a8512ae59e9521a8803f31b17fb5a03fea58efa8799d44a3662f
+    exportHash: 2df39fa0a1842a7aed55bb6b21c37a5d41e8e178f53d245e85b99266e166e5b1
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementDashboard~
     localFilename: ./cpf-element-dashboard.hbs
     name: cpf-element-dashboard
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: a8e692ed320502b722b09072360edffbdbb88f804f008d2112182ed6d90fe803
+  - exportHash: d1024615dcac0b805af3e62293fdf53c054abe4bd460364c48e89786914c66ad
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementDeviceDataExplorer~
     localFilename: ./cpf-element-device-data-explorer.hbs
     name: cpf-element-device-data-explorer
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: e465d17bdff1b120d026b4cf7026f432f43f5dad2c25797bff3cf4189a466843
+  - exportHash: c882ea3664b606c224c32e92bd95bb05ea8999e1bee8eac861430fb145d00172
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementDeviceHistoryGraph~
     localFilename: ./cpf-element-device-history-graph.hbs
     name: cpf-element-device-history-graph
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 074126756b5f77baf8a430564b29815e18d349edbc3d821199a4ffe11a2aa972
+  - exportHash: a051e55374e1a8b871b4b61eeb06ae2ea714a339bda1f10ae3964555270a417b
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementDeviceSummary~
     localFilename: ./cpf-element-device-summary.hbs
     name: cpf-element-device-summary
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 0f07f35a881b4e0205905727f4627586aba56ed50ed23d67bcd41292736619b7
+  - exportHash: 490d9ee2a4ae2049b1c9c758a509a224cb82bb70577b59c77ae5e67c69bd5e1a
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementDevicesCreatedSince~
     localFilename: ./cpf-element-devices-created-since.hbs
     name: cpf-element-devices-created-since
@@ -45,14 +57,18 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/devices-table.
-    exportHash: 742ff405968cf4087dac56731a6a4aaba97e7d08c741f58452db3886b52ac55e
+    exportHash: d99fa351120590c84e056755081c00d119bbe6b1e296a5d09b2d06e4598d7867
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementDevicesTable~
     localFilename: ./cpf-element-devices-table.hbs
     name: cpf-element-devices-table
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 80443bb3baa7578f613f0b8ce412387cf4c4c8fd962998a9968c156093c1dfee
+  - exportHash: 26d2545768e73421f2fdf515a5afd72291b8e8f9de30ceaed04fe3be12338271
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementEventsTable~
     localFilename: ./cpf-element-events-table.hbs
     name: cpf-element-events-table
@@ -60,28 +76,36 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/group-select.
-    exportHash: 96ab8d9bde96b4841c6955bdd1efcd7c0a83105b35fb052523ebbb5659b170bb
+    exportHash: c90f614ba5fb0b0fe9071d33fa4a5cf9f4c3c9782da6036be8c37bda63662ccb
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementGroupSelect~
     localFilename: ./cpf-element-group-select.hbs
     name: cpf-element-group-select
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 263ef1b04c3ad35e9774c1afe0b29c8900d7c6f0d32a344a7284cbf4edf73db5
+  - exportHash: 3101ea733b31bc016154e6a5be199e926ec727b6b9f6043425fd818a411e4f95
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementNav~
     localFilename: ./cpf-element-nav.hbs
     name: cpf-element-nav
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 7394caa9de7fb82fc0935b06222cc5dfb15d99c80aff49a4d3b75d0c217089ae
+  - exportHash: af6de7f1bdb15b14e3992840eb278117d149eeeb76291d20a744851a4cd0958c
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementTagEditForm~
     localFilename: ./cpf-element-tag-edit-form.hbs
     name: cpf-element-tag-edit-form
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 576e5c77f433ca7411db80c74343cad1a645328f3757089393e8ab98fca23eef
+  - exportHash: 06c8af727d1495d2887165a88e1aac8a6b93bf23a7960ef35b0acff49f569d2c
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementTopNav~
     localFilename: ./cpf-element-top-nav.hbs
     name: cpf-element-top-nav
@@ -89,7 +113,9 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/users-table.
-    exportHash: 5b3978464e48bc127cb9e30ab4cffffce716ea2d7fce0fdfdb94a2fcd6cd5af4
+    exportHash: 5f7ad125b5a7d1baf335e4455841d070717f2839fdb4c4d77be4cafc47caf3cf
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementUsersTable~
     localFilename: ./cpf-element-users-table.hbs
     name: cpf-element-users-table
@@ -97,7 +123,9 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /cpf/elements/sites-table.
-    exportHash: e3c379f0576d0d0fb130c3d3fccdacaf34f9708ca87a3aaade54e790dfbb229e
+    exportHash: dd448a7c7ee27cc31d7eec78f2ea995c9e95dcdbd829ad37ad9e3c30491f1f05
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementsSitesTable~
     localFilename: ./cpf-elements-sites-table.hbs
     name: cpf-elements-sites-table
@@ -106,7 +134,9 @@ resources:
     viewType: page
   - description: This page is displayed whenever a request is made and there is not
       matching endpoint.
-    exportHash: a3d307200b33ced8313e930deca439e6d09c754a4ed874f791086805937f9fc6
+    exportHash: 9a1d69fd285bd51704bc8200243b8b70a83c9d458d5939f311e105ef1cbbb37a
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPage404~
     layoutId: ~exportplaceholderid-experienceView-cpfLayoutNoNav~
     localFilename: ./cpf-page-404.hbs
@@ -117,7 +147,9 @@ resources:
     viewType: page
   - description: This page renders whenever a fatal error is thrown in a workflow
       processing an experience endpoint request.
-    exportHash: e51ee14b59eb6fc6b54bf1014e1dfae06a720cddd9052c53f2f72e82e88db421
+    exportHash: ee28fd0e3604c1559cebd2626822fde5a9c67a0e72d24d4752eac4081e52398a
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPage500~
     layoutId: ~exportplaceholderid-experienceView-cpfLayoutNoNav~
     localFilename: ./cpf-page-500.hbs
@@ -127,7 +159,9 @@ resources:
       title: Error
     viewType: page
   - description: Created for Endpoint GET /admin/dashboards.
-    exportHash: 9e4ba7398b2a56d342d60a4442293125968b9bfb2fc6cc2ce7a4018e6a17a4fe
+    exportHash: 7ed79c5d057288abd257480b21c15a55ccedc24398eaba22e97a2d9119ef58b9
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageAdminDashboards~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-admin-dashboards.hbs
@@ -137,7 +171,9 @@ resources:
       title: Dashboards
     viewType: page
   - description: Created for Endpoint GET /admin/device-tags.
-    exportHash: 1a1dc0301d68c5948c9da31de17f54a074e91aed64ca9ac85b65dd53104b035a
+    exportHash: ce05f1aa91750eb90d6642f1345d4c001341440b611f1e747a469542f9ba7268
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageAdminDeviceTags~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-admin-device-tags.hbs
@@ -147,7 +183,9 @@ resources:
       title: Device Tags
     viewType: page
   - description: Created for Endpoint GET /admin/devices-table.
-    exportHash: ca6d3af56d1dc20b47479d174db5b248a4f5795d907fa7796ec50eec83b144e0
+    exportHash: 7842b8c539a36860f7fefb2591d0cb190ccfb280b96b49429ab0126446bbdb80
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageAdminDevicesTable~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-admin-devices-table.hbs
@@ -157,7 +195,9 @@ resources:
       title: Devices Table
     viewType: page
   - description: Created for Endpoint GET /admin/navigation.
-    exportHash: 842899ef1391ca5397fff79044dccc23cfcce177090a05cd8b4aeba4f6d954e5
+    exportHash: 0c02f704306bb613810697ab0c735262310bc6a1421de4d2ca30e6b29bd9089b
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageAdminNavigation~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-admin-navigation.hbs
@@ -167,7 +207,9 @@ resources:
       title: Navigation
     viewType: page
   - description: Created for Endpoint GET /admin/whitelabel.
-    exportHash: 61a7dfaf51497780875c4782832ba7cd003b22ae2557fd0b8a1b93b08c3ce145
+    exportHash: fe123e8a9ac698f9488a3cdc3bcca918ebd8c1ddfe45f4cd63f4df500c77d9c2
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageAdminWhitelabel~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-admin-whitelabel.hbs
@@ -177,7 +219,9 @@ resources:
       title: White Label
     viewType: page
   - description: Created for Endpoint GET /customers/{customerId}.
-    exportHash: 922cbf47fae6c87101468f2b54d8a45b216a96a884fb27ef3333010312c75fc4
+    exportHash: e9857122503183915cc6d486c25ba315edcdb0a4d0ad565e27e3e010bc39584b
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageCustomerDetails~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-customer-details.hbs
@@ -186,7 +230,9 @@ resources:
     viewTags:
       title: "{{defaultTo pageData.customer.name 'Add Customer'}}"
     viewType: page
-  - exportHash: 46c3127393d9f0226d12d7812c985dfdfef5c9e5ffc6cd047f4a83fbc7b10a4d
+  - exportHash: 0c51f921da116ac493e504ebc49fe90dd1e97b1f2c9383d1705f37a6fb0d0341
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageCustomers~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-customers.hbs
@@ -195,7 +241,9 @@ resources:
     viewTags:
       title: Customers
     viewType: page
-  - exportHash: 400a94287da0f30b77dc25e1bc3adea21c674a1a0ecd5148ae0f4b1730a4a68c
+  - exportHash: 81bfb74ec18ffd7a4cb66edd03e52c79737111227c439ace476852908dcd0910
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageDeviceDetails~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-device-details.hbs
@@ -204,7 +252,9 @@ resources:
     viewTags:
       title: "{{pageData.device.name}}"
     viewType: page
-  - exportHash: e4048d600b1b6729d207fbc1ef44ccf92f5c064ec8ea3e98959f0327d3fd0caf
+  - exportHash: 6365e911b50b7082cc5148270f78e5e790db3966cdcf950828ce55df560607f9
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageDeviceRegister~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-device-register.hbs
@@ -213,7 +263,9 @@ resources:
     viewTags:
       title: Register Device
     viewType: page
-  - exportHash: 28eb74b5c9c7f2815588e9d8fe373bf5a3867eab2bdd67d978795cb34314a1dd
+  - exportHash: 4ad97f44a380d5a01469b3aa1d0e48a93450c7462af0a374f6372001242fc836
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageDevices~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-devices.hbs
@@ -223,7 +275,9 @@ resources:
       title: Devices
     viewType: page
   - description: Created for Endpoint GET /events/{eventID}.
-    exportHash: 21c9f204ca7cb4e73f207326c436d801c70b75c408df575fca659c8efcbd3851
+    exportHash: dadbbcbb3eec660a90b3614afed352c7d8db35605f47db175583ad57a2fe3dd8
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageEventDetails~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-event-details.hbs
@@ -232,7 +286,9 @@ resources:
     viewTags:
       title: "{{pageData.event.subject}}"
     viewType: page
-  - exportHash: 9a81b541eb74c4db90b56f81acd2beaf5f9d9db022f93f73de97224bafb749c9
+  - exportHash: a2c7d814101fedd2c20da390444bf82fd72d11fa9ce867ee5fefa00dc6751d9d
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageEvents~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-events.hbs
@@ -241,7 +297,9 @@ resources:
     viewTags:
       title: Events
     viewType: page
-  - exportHash: 2a57213fbfd41be32b9c877e79e834066c86695e9cf062facead4c706c32b979
+  - exportHash: 7b9b17dbd3ebb2d9574cb352404a717c872080fb7ba003dbe6e0c1e3486c9eb5
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageForgotPassword~
     layoutId: ~exportplaceholderid-experienceView-cpfLayoutNoNav~
     localFilename: ./cpf-page-forgot-password.hbs
@@ -250,7 +308,9 @@ resources:
     viewTags:
       title: Forgot Password
     viewType: page
-  - exportHash: 244bb3626e4edcd78de648655e2e36df849283eedf758d1a09eadb80d2969614
+  - exportHash: c97b31caa91359903c3876d504a099f230751028d1a1c7ab3167fbf1b08189f8
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageHome~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-home.hbs
@@ -259,7 +319,9 @@ resources:
     viewTags:
       title: Home
     viewType: page
-  - exportHash: 5d5483b209d47e7d945c84624034dbc04e1391ecb05208d7fb6704e323119177
+  - exportHash: 07534cc2d591def94caac9000fee71a35d2615b2882390d88bfa26c4a23164d9
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageLogin~
     layoutId: ~exportplaceholderid-experienceView-cpfLayoutNoNav~
     localFilename: ./cpf-page-login.hbs
@@ -269,7 +331,9 @@ resources:
       title: Log In
     viewType: page
   - description: Created for Endpoint GET /me/profile.
-    exportHash: 4c43e3ddade5b86f8b68239d8196de3cd39150ed7934cd091723739ee9b059d6
+    exportHash: ca763e6bb507c17da0d5529f680a4bbdfc4ac0ccc13bc476bf967c3feca3e3ad
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageProfile~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-profile.hbs
@@ -278,7 +342,9 @@ resources:
     viewTags:
       title: Profile
     viewType: page
-  - exportHash: fd07436440bb80a96429cccbfc1e4ffe45e7b4a6f77ee9c2cfa3ef62eb5feabc
+  - exportHash: 909f3930d484a34a796f883190303bba2828d6a16f8cf0d49505dea916752820
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageResetPassword~
     layoutId: ~exportplaceholderid-experienceView-cpfLayoutNoNav~
     localFilename: ./cpf-page-reset-password.hbs
@@ -288,7 +354,9 @@ resources:
       title: Reset Password
     viewType: page
   - description: Displays a form to view, edit, or create a site.
-    exportHash: 1363d4c1b7be682f80bbd628eed0102215e2efe8bd9f1641cfc15cb4416ee730
+    exportHash: e1e06627a7ae42d0ae3d4094bec8ae9b03923191e6c088278ecf14f5e2339396
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageSiteDetails~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-site-details.hbs
@@ -297,7 +365,9 @@ resources:
     viewTags:
       title: "{{defaultTo pageData.site.name 'Add Site'}}"
     viewType: page
-  - exportHash: 5bdc14b5a444859eb377fd8a2c8a0296da5a857662ff209574cbc2bdf7c89901
+  - exportHash: a48c7414bc0ef99b384e6ea9ae65a2698d8a7719c86ef330352b0ccbf555f84b
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageSites~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-sites.hbs
@@ -307,7 +377,9 @@ resources:
       title: Sites
     viewType: page
   - description: Created for Endpoint GET /users/{userid}.
-    exportHash: 147311883a8405e1d71c1b1574fd9dfd71e16b84cffe0c7d6bc7161adc214424
+    exportHash: f8c2dae06c89a6e43d0974e38e22b23dbe4a12df5846a41b7a0fbd4f20d10e3e
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageUsersDetails~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-users-details.hbs
@@ -316,7 +388,9 @@ resources:
     viewTags:
       title: "{{defaultTo pageData.user.email 'Add User'}}"
     viewType: page
-  - exportHash: ccdc918f4384424b3df779c1ed0363c740c7f2f4295e9dd9419f27ddc4004c75
+  - exportHash: 8793104f344ecb503e0e306506d2204408fc021aed1f5a76a4526ed65150a9d6
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageUsers~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./cpf-page-users.hbs
@@ -325,14 +399,18 @@ resources:
     viewTags:
       title: Users
     viewType: page
-  - exportHash: a881e73288b424afc8bb7ac450cc90408a3adcb74fdcbffe80874ef03343a6cf
+  - exportHash: bddcd95a098b902100d8e2ed2b5a05d0cd55b5b73d31b72f76edd181a41a207b
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfScript~
     localFilename: ./cpf-script.hbs
     name: cpf-script
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 8b06a2e9658db84070495b751373e73f862aa6d2773930595de85373c2933b4b
+  - exportHash: a7bb7b7119419c3d88f57efe3e2e75c57021269b28998c35ab264fff08c7f0c9
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfStyles~
     localFilename: ./cpf-styles.hbs
     name: cpf-styles
@@ -340,7 +418,9 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /m1/elements/gateway-settings.
-    exportHash: cb1d825633594db3ab4274f0f08358554ea550fd0ad91abc9aec96ffe14a2aa1
+    exportHash: a6437dca74f053c084e4f012a2734c0f776dcaa1bea14f71c40fa05d38ba0302
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-m1ElementGatewaySettings~
     localFilename: ./m1-element-gateway-settings.hbs
     name: m1-element-gateway-settings
@@ -348,7 +428,9 @@ resources:
     viewTags: {}
     viewType: page
   - description: Created for Endpoint GET /admin/particle.
-    exportHash: 405fa8a8cdd967f44a6c8afae39b3fa0e20d90ad39e05bc4bc67581460161522
+    exportHash: 9ff726037c68600f512e779509f4a9c1ef1a9f0385a4d3a1a1ffbdc1c86288cf
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-m1PageAdminParticle~
     layoutId: ~exportplaceholderid-experienceView-cpfLayout~
     localFilename: ./m1-page-admin-particle.hbs
