@@ -57,6 +57,18 @@
                 aria-selected="true">Events</button>
       </li>
       <li class="nav-item" role="presentation">
+        <button class="nav-link {{#eq request.query.tab 'alerting'}}active{{/eq}}"
+                data-cpf-page-device-details-tab-param="alerting"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-alerting-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-alerting-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="cpf-device-alerting-tab-pane"
+                aria-selected="true">Alerting</button>
+      </li>
+      <li class="nav-item" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'properties'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="properties"
                 data-action="cpf-page-device-details#tabChanged"
@@ -122,6 +134,19 @@
         </div>
       </div>
 
+      {{!-- Alerting Tab --}}
+      <div class="tab-pane fade {{#eq request.query.tab 'alerting'}}show active{{/eq}}" id="cpf-device-alerting-tab-pane" role="tabpanel" aria-labelledby="cpf-device-alerting-tab" tabindex="1">
+        <div class="p-4">
+          <turbo-frame
+            loading="lazy"
+            target="_top"
+            id="cpf-element-device-details-alerting"
+            src="/cpf/elements/device-details-alerting?deviceId={{request.params.deviceId}}&error={{request.query.alertingError}}&success={{request.query.alertingSuccess}}">
+            <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+          </turbo-frame>
+        </div>
+      </div>
+
       {{!-- Properties Tab --}}
       <div  class="tab-pane fade {{#eq request.query.tab 'properties'}}show active{{/eq}}"
             id="cpf-device-properties-tab-pane"
@@ -137,18 +162,18 @@
           <div class="m-4">
 
             {{#if request.query.error}}
-            <div class="my-2" data-cpf-page-device-details-target="serverSideErrorMessage">
-              <div class="alert alert-danger" role="alert">
-                ERROR: {{request.query.error}}
+              <div class="my-2" data-cpf-page-device-details-target="serverSideErrorMessage">
+                <div class="alert alert-danger" role="alert">
+                  ERROR: {{request.query.error}}
+                </div>
               </div>
-            </div>
             {{/if}}
             {{#if request.query.success}}
-            <div class="my-2">
-              <div data-cpf-page-device-details-target="successMessage" class="alert alert-success" role="alert">
-                Device properties changes have been saved.
+              <div class="my-2">
+                <div data-cpf-page-device-details-target="successMessage" class="alert alert-success" role="alert">
+                  Device properties changes have been saved.
+                </div>
               </div>
-            </div>
             {{/if}}
 
             <div class="my-2">

@@ -1,0 +1,21 @@
+application.register("cpf-page-admin-alerting", class extends Controller {
+
+  wasTouched = false;
+
+  connect() {
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+  };
+
+  markAsDirty() {
+    this.wasTouched = true;
+  }
+
+  onRecipeSelect(e) {
+    if (this.wasTouched && !window.confirm('Discard your changes?')) {
+      e.preventDefault();
+    }
+  }
+
+});

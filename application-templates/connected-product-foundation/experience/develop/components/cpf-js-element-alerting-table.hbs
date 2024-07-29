@@ -1,0 +1,164 @@
+application.register("cpf-element-alerting-table", class extends Controller {
+
+  static targets = [
+    'attributeRow',
+    'numberInput',
+    'tableHeaderCell',
+    'attributesForm',
+    'attributesConfigInput'
+  ];
+
+  static values = {
+    device: Object,
+    deviceRecipe: Object
+  };
+
+  allowSubmit = true;
+  wasValidated = false;
+
+  connect() {
+    if (document.documentElement.hasAttribute("data-turbo-preview")) {
+      return;
+    }
+    
+    const tooltipTriggerList = this.element.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+  };
+
+  attributeRowTargetConnected(element) {
+    const attributeName = element.dataset.attributeName;
+    const userRole = element.dataset.userRole;
+
+    /* recipe only */
+    const alertingEnabledInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_enabled"]`);
+    const alertingEnabled = !!alertingEnabledInput?.checked;
+
+    const alertingAllowOverrideInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_allow_override"]`);
+    if (alertingAllowOverrideInput) { alertingAllowOverrideInput.disabled = !alertingEnabled; }
+    /* end recipe only */
+
+    /* device only */
+    const alertingOverrideDefaultInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_override_default"]`);
+    const overridingDefault = !!alertingOverrideDefaultInput?.checked;
+    /* end device only */
+
+    // If the user is not an admin, all inputs remain disabled.
+    if(userRole === 'admin') {
+      const alertingEnabledHighInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_enabled_high"]`);
+      if (alertingEnabledHighInput) { alertingEnabledHighInput.disabled = this.hasDeviceValue ? !overridingDefault : !alertingEnabled; }
+
+      const alertingEnabledLowInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_enabled_low"]`);
+      if (alertingEnabledLowInput) { alertingEnabledLowInput.disabled = this.hasDeviceValue ? !overridingDefault : !alertingEnabled; }
+
+      const alertingAllowDuplicatesInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_allow_duplicates"]`);
+      if (alertingAllowDuplicatesInput) { alertingAllowDuplicatesInput.disabled = this.hasDeviceValue ? !overridingDefault : !alertingEnabled; }
+
+      const highTextInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_threshold_high"]`);
+      if (highTextInput) { highTextInput.disabled = !alertingEnabledHighInput?.checked || (this.hasDeviceValue ? !overridingDefault : !alertingEnabled); }
+
+      const lowTextInput = element.querySelector(`input[id="${attributeName}:cpf_alerting_threshold_low"]`);
+      if (lowTextInput) { lowTextInput.disabled = !alertingEnabledLowInput?.checked || (this.hasDeviceValue ? !overridingDefault : !alertingEnabled); }
+    }
+  }
+
+  onInputChange() {
+    // this could be more efficient
+    this.attributeRowTargets.forEach((tgt) => {
+      this.attributeRowTargetConnected(tgt);
+    });
+    if (this.wasValidated) {
+      this.validateNumberInputs();
+    }
+  }
+
+  onSave(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    this.wasValidated = true;
+    this.validateNumberInputs();
+    if (this.allowSubmit) {
+      const recipeObj = this.deviceRecipeValue;
+      let deviceObj = null;
+      if (this.hasDeviceValue) {
+        deviceObj = this.deviceValue;
+      }
+      const submitData = structuredClone(deviceObj ? deviceObj.attributes : recipeObj.attributes);
+      submitData.forEach((attribute) => {
+        const { dataType, name } = attribute;
+        if (dataType === 'number') {
+          // needs adjusted for the device case
+          let shouldSet;
+          if (deviceObj) {
+            delete attribute.attributeTags.cpf_alerting_enabled;
+            delete attribute.attributeTags.cpf_alerting_allow_override;
+            const recipeAttributeTags = recipeObj.attributes.find(({ dataType: recDataType, name: recName }) => dataType === recDataType && name === recName)?.attributeTags;
+            shouldSet = formData.get(`${name}:cpf_alerting_override_default`) === 'true' && recipeAttributeTags?.cpf_alerting_enabled === 'true' && recipeAttributeTags?.cpf_alerting_allow_override === 'true';
+          } else {
+            delete attribute.attributeTags.cpf_alerting_override_default;
+            attribute.attributeTags.cpf_alerting_enabled = formData.get(`${name}:cpf_alerting_enabled`) || 'false';
+            shouldSet = attribute.attributeTags.cpf_alerting_enabled === 'true';
+          }
+
+          if (shouldSet) {
+            attribute.attributeTags.cpf_alerting_enabled_high = formData.get(`${name}:cpf_alerting_enabled_high`) || 'false';
+            if (attribute.attributeTags.cpf_alerting_enabled_high === 'true') {
+              attribute.attributeTags.cpf_alerting_threshold_high = formData.get(`${name}:cpf_alerting_threshold_high`);
+            } else {
+              delete attribute.attributeTags.cpf_alerting_threshold_high;
+            }
+
+            attribute.attributeTags.cpf_alerting_enabled_low = formData.get(`${name}:cpf_alerting_enabled_low`) || 'false';
+            if (attribute.attributeTags.cpf_alerting_enabled_low === 'true') {
+              attribute.attributeTags.cpf_alerting_threshold_low = formData.get(`${name}:cpf_alerting_threshold_low`);
+            } else {
+              delete attribute.attributeTags.cpf_alerting_threshold_low;
+            }
+
+            attribute.attributeTags.cpf_alerting_allow_duplicates = formData.get(`${name}:cpf_alerting_allow_duplicates`) || 'false';
+
+            if (deviceObj) {
+              attribute.attributeTags.cpf_alerting_override_default = formData.get(`${name}:cpf_alerting_override_default`) || 'false';          
+            } else {
+              attribute.attributeTags.cpf_alerting_allow_override = formData.get(`${name}:cpf_alerting_allow_override`) || 'false';
+            }  
+          } else {
+            delete attribute.attributeTags.cpf_alerting_enabled_high;
+            delete attribute.attributeTags.cpf_alerting_threshold_high;
+            delete attribute.attributeTags.cpf_alerting_enabled_low;
+            delete attribute.attributeTags.cpf_alerting_threshold_low;
+            delete attribute.attributeTags.cpf_alerting_allow_duplicates;
+            delete attribute.attributeTags.cpf_alerting_allow_override;
+            delete attribute.attributeTags.cpf_alerting_override_default;
+          }
+        }
+      })
+      this.attributesConfigInputTarget.value = JSON.stringify(submitData);
+      this.attributesFormTarget.submit();  
+    }
+  }
+
+  onCancel(e) {
+    e.preventDefault();
+    if (window.confirm('Discard your changes?')) {
+      window.location.reload();
+    }
+  }
+
+  validateNumberInputs() {
+    this.allowSubmit = true;
+    this.numberInputTargets.forEach((element) => {
+      element.setCustomValidity('');
+      if (!element.disabled) {
+        if (!element.value) {
+          element.setCustomValidity('Required');
+          this.allowSubmit = false;
+        } else if (!isFinite(parseFloat(element.value))) {
+          element.setCustomValidity('Invalid');
+          this.allowSubmit = false;
+        }
+      }
+      element.reportValidity();
+    });
+  }
+
+});

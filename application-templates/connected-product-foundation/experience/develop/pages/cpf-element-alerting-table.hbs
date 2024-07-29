@@ -1,0 +1,121 @@
+{{!--
+  request.query.deviceRecipeId = this is being rendered in /admin/alerting
+  pageData.device = only set when rendered in the device's Alerting tab
+  pageData.deviceRecipe = the recipe matching deviceRecipeId OR the recipe matching the device's DeviceRecipe tag name
+--}}
+
+{{!--
+// attribute = the currently iterated attribute, whether from a device or a recipe
+// recipeAttribute = the corresponding attribute config from the recipe when looking at a device
+// device = the device object, only set when viewing a device
+
+// in device mode ...
+- do not render the alerting_enabled or allow_override checkboxes
+--}}
+{{#*inline "attributeRow"}}
+  <td><strong>{{attribute.name}}</strong></td>
+  {{#if device}}
+    {{#eq recipeAttribute.attributeTags.cpf_alerting_allow_override 'true'}}
+      <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Override Default" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="checkbox" id="{{attribute.name}}:cpf_alerting_override_default" name="{{attribute.name}}:cpf_alerting_override_default" class="form-check-input" value="true" {{#eq attribute.attributeTags.cpf_alerting_override_default 'true'}}checked{{/eq}} /></td>
+    {{else}}
+      <td><span class="text-disabled" data-bs-toggle="tooltip" title="Overriding the default alerting thresholds for this attribute is not enabled.">n/a</span></td>
+    {{/eq}}
+  {{else}}
+    <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Allow Alerting" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="checkbox" id="{{attribute.name}}:cpf_alerting_enabled" name="{{attribute.name}}:cpf_alerting_enabled" class="form-check-input" value="true" {{#eq attribute.attributeTags.cpf_alerting_enabled 'true'}}checked{{/eq}} /></td>
+    <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Allow Override" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="checkbox" id="{{attribute.name}}:cpf_alerting_allow_override" name="{{attribute.name}}:cpf_alerting_allow_override" class="form-check-input" value="true" {{#eq attribute.attributeTags.cpf_alerting_allow_override 'true'}}checked{{/eq}} /></td>
+  {{/if}}
+  <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Alerting Threshold High" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="text" id="{{attribute.name}}:cpf_alerting_threshold_high" name="{{attribute.name}}:cpf_alerting_threshold_high" class="form-control form-control-sm" data-cpf-element-alerting-table-target="numberInput" value="{{defaultTo attribute.attributeTags.cpf_alerting_threshold_high recipeAttribute.attributeTags.cpf_alerting_threshold_high}}" /></td>
+  <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Enable High Value Alert" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="checkbox" id="{{attribute.name}}:cpf_alerting_enabled_high" name="{{attribute.name}}:cpf_alerting_enabled_high" class="form-check-input" value="true" {{#eq (defaultTo attribute.attributeTags.cpf_alerting_enabled_high recipeAttribute.attributeTags.cpf_alerting_enabled_high) 'true'}}checked{{/eq}} /></td>
+  <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Alerting Threshold Low" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="text" id="{{attribute.name}}:cpf_alerting_threshold_low" name="{{attribute.name}}:cpf_alerting_threshold_low" class="form-control form-control-sm" data-cpf-element-alerting-table-target="numberInput" value="{{defaultTo attribute.attributeTags.cpf_alerting_threshold_low recipeAttribute.attributeTags.cpf_alerting_threshold_low}}" /></td>
+  <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Enable Low Value Alert" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="checkbox" id="{{attribute.name}}:cpf_alerting_enabled_low" name="{{attribute.name}}:cpf_alerting_enabled_low" class="form-check-input" value="true" {{#eq (defaultTo attribute.attributeTags.cpf_alerting_enabled_low recipeAttribute.attributeTags.cpf_alerting_enabled_low) 'true'}}checked{{/eq}} /></td>
+  <td><input {{#ne user.userTags.cpf_role 'admin'}}disabled{{/ne}} aria-label="{{attribute.name}}: Allow Duplicate Events" data-action="cpf-element-alerting-table#onInputChange cpf-page-admin-alerting#markAsDirty" type="checkbox" id="{{attribute.name}}:cpf_alerting_allow_duplicates" name="{{attribute.name}}:cpf_alerting_allow_duplicates" class="form-check-input" value="true" {{#eq (defaultTo attribute.attributeTags.cpf_alerting_allow_duplicates recipeAttribute.attributeTags.cpf_alerting_allow_duplicates) 'true'}}checked{{/eq}} /></td>
+{{/inline}}
+
+<turbo-frame id="cpf-element-alerting-table">
+  <div
+    class="w-100"
+    data-controller="cpf-element-alerting-table"
+    data-cpf-element-alerting-table-device-recipe-value="{{pageData.deviceRecipeJSON}}"
+    {{#if pageData.device}}data-cpf-element-alerting-table-device-value="{{pageData.deviceJSON}}"{{/if}}
+  >
+    {{#if pageData.error}}
+      <div class="alert alert-danger" role="alert">
+        ERROR: {{pageData.error}}
+      </div>
+    {{else}}
+      <form method="post" data-cpf-element-alerting-table-target="attributeInputs" data-action="cpf-element-alerting-table#onSave">
+        <div class="card">
+          <div class="card-header">
+            Alerting Configuration for {{defaultTo pageData.device.name pageData.deviceRecipe.name}}
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell">Attribute</th>
+                    {{#if pageData.device}}
+                      <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="If enabled, the default alerting configuration can be overridden with values specific to this device.">Override Default</th>
+                    {{else}}
+                      <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="Whether alerts are allowed for devices created from this recipe. Defaults can be defined at the recipe level and overridden per device, if &quot;Allow Override&quot; is checked.">Allow Alerting</th>
+                      <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="If selected, allows end users to override the high and low thresholds and reporting behavior for this attribute.">Allow Override</th>
+                    {{/if}}
+                    <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="An event is created whenever the attribute value is greater than this threshold.">Threshold High</th>
+                    <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="Enables or disables event creation based on the high threshold value.">High Enabled</th>
+                    <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="An event is created whenever the attribute value is less than this threshold.">Threshold Low</th>
+                    <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="Enables or disables event creation based on the low threshold value.">Low Enabled</th>
+                    <th data-bs-toggle="tooltip" data-cpf-element-alerting-table-target="tableHeaderCell" title="If enabled, events will be created for each state report outside of the threshold range, even if there are currently open events tied to this device and attribute.">Duplicate Events</th>
+                  </tr>
+                </thead>
+                <tbody data-cpf-element-alerting-table-target="tableBody">
+                  {{#each (defaultTo pageData.device.attributes pageData.deviceRecipe.attributes) as |attribute|}}
+                    <tr data-cpf-element-alerting-table-target="attributeRow" data-attribute-name="{{attribute.name}}" data-user-role="{{@root.experience.user.userTags.cpf_role}}">
+                      {{#eq attribute.dataType 'number'}}
+                        {{#if @root.request.query.deviceRecipeId}}
+                          {{> attributeRow attribute=attribute user=@root.experience.user}}
+                        {{else}}
+                          {{!-- device case --}}
+                          {{!-- if (cpf_alerting_enabled === true for the same device attribute on the recipe) --}}
+                          {{#with (valueByKey @root.pageData.deviceRecipe.attributes attribute.name 'name' '.') as |recipeAttribute|}}
+                            {{#eq recipeAttribute.attributeTags.cpf_alerting_enabled 'true'}}
+                              {{> attributeRow attribute=attribute device=@root.pageData.device recipeAttribute=recipeAttribute user=@root.experience.user}}
+                            {{/eq}}
+                          {{/with}}
+                        {{/if}}
+                      {{/eq}}
+                    </tr>
+                  {{else}}
+                  <tr>
+                    <td colspan="{{#if @root.pageData.device}}7{{else}}8{{/if}}" class="text-center">
+                    {{#if @root.pageData.device}}
+                      Device has no attributes configured for alerting.
+                    {{else}}
+                      Recipe has no attributes.
+                    {{/if}}
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        {{#eq experience.user.userTags.cpf_role 'admin'}}
+        <div class="card p-3 mt-4 d-block cpf-bg-mid">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <a href="." data-action="click->cpf-element-alerting-table#onCancel" class="ms-2 cpf-text-mid">Discard Changes</a>
+        </div>
+        {{/eq}}
+      </form>
+      {{#eq experience.user.userTags.cpf_role 'admin'}}
+      <form method="post" data-cpf-element-alerting-table-target="attributesForm" action="{{request.query.post}}">
+        <input
+          type="hidden"
+          name="attributesConfig"
+          data-cpf-element-alerting-table-target="attributesConfigInput"
+        />
+      </form>
+      {{/eq}}
+    {{/if}}
+  </div>
+</turbo-frame>

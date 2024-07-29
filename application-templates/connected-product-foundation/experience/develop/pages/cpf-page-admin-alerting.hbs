@@ -1,0 +1,67 @@
+<div class="cpf-page" data-controller="cpf-page-admin-alerting">
+  <div class="mb-3">
+    <div>
+      <h1>Alerting</h1>
+    </div>
+    <div class="col">
+      Configure the default alerting thresholds for each type of device.
+    </div>
+  </div>
+  <div class="alert alert-info mb-3" role="alert">
+    <div class="mb-2"><strong>Administrator Tip</strong></div>
+    <div>
+      If an attribute has alerting enabled, the attribute will be displayed in the "Alerting" tab for each device created from the recipe. If "Allow Override" is enabled, Customer and Site admins can optionally override the default values on a per-device basis. Threshold values are checked in real time as data is received. If the data exceeds a high or low threshold, an Event is created. These values are stored on the device recipe's attribute tags. Alerting is supported for number attributes only.
+    </div>
+  </div>
+
+  {{#if request.query.error}}
+    <div class="my-2">
+      <div class="alert alert-danger" role="alert">
+        ERROR: {{request.query.error}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if request.query.success}}
+    <div class="my-2">
+      <div class="alert alert-success" role="alert">
+        Alerting changes have been saved.
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if pageData.deviceRecipes}}
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-3 mb-4">
+        <label class="mb-1">Device Recipes</label>
+        <div class="card cpf-bg-light p-3">
+          <ul class="nav nav-pills flex-column">
+            {{#each pageData.deviceRecipes}}
+              <li class="nav-item">
+                <a href="/admin/alerting/{{id}}"
+                  class="nav-link {{#eq id @root.request.params.deviceRecipeId}}active{{/eq}}"
+                  data-action="cpf-page-admin-alerting#onRecipeSelect"
+                >{{name}}</a>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-8 col-lg-9 mt-md-4">
+        <turbo-frame
+          class="d-block"
+          id="cpf-element-alerting-table"
+          src="/cpf/elements/alerting-table?deviceRecipeId={{request.params.deviceRecipeId}}&post={{encodeURI (template '/admin/alerting/{{request.params.deviceRecipeId}}' .)}}"
+          target="_top"
+          loading="lazy">
+          <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+        </turbo-frame>
+      </div>
+    </div>
+  {{else}}
+    <div class="alert alert-warning" role="alert">
+      Application has no device recipes.
+    </div>
+  {{/if}}
+</div>

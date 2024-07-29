@@ -1,6 +1,36 @@
 resourceType: DeviceTree
 resources:
   - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: The confidence that an outlier has been predicted on this data point.
+        name: anomaly_score
+      - attributeTags: {}
+        dataType: number
+        name: extraAttribute
+      - attributeTags: {}
+        dataType: number
+        description: Whether or not a failure occurred (0=no failure, 1=failure).
+        name: failure
+      - attributeTags: {}
+        dataType: number
+        description: Bleed enthalpy.
+        name: htBleed
+      - attributeTags:
+          units: rpm
+        dataType: number
+        description: Physical core speed.
+        name: Nc
+      - attributeTags:
+          units: rpm
+        dataType: number
+        description: Physical fan speed.
+        name: Nf
+      - attributeTags:
+          units: rpm
+        dataType: number
+        description: Demanded fan speed.
+        name: Nf_dmd
       - attributeTags:
           units: rpm
         dataType: number
@@ -11,16 +41,6 @@ resources:
         dataType: number
         description: Corrected fan speed.
         name: NRf
-      - attributeTags:
-          units: rpm
-        dataType: number
-        description: Physical core speed.
-        name: Nc
-      - attributeTags:
-          units: rpm
-        dataType: number
-        description: Demanded fan speed.
-        name: Nf_dmd
       - attributeTags:
           units: psia
         dataType: number
@@ -42,10 +62,24 @@ resources:
         description: Demanded corrected fan speed.
         name: PCNfR_dmd
       - attributeTags:
+          units: pps/psi
+        dataType: number
+        description: Ratio of fuel flow to Ps30.
+        name: phi
+      - attributeTags: {}
+        dataType: number
+        description: Whether or not an outlier has been detected (0=no outlier,
+          1=outlier detected).
+        name: prediction
+      - attributeTags:
           units: psia
         dataType: number
         description: Static pressure at HPC outlet.
         name: Ps30
+      - attributeTags: {}
+        dataType: number
+        description: Operational setting.
+        name: setting_1
       - attributeTags:
           units: ˚R
         dataType: number
@@ -68,6 +102,13 @@ resources:
         name: T50
       - attributeTags: {}
         dataType: number
+        name: test
+      - attributeTags: {}
+        dataType: number
+        description: ""
+        name: time_in_cycles
+      - attributeTags: {}
+        dataType: number
         description: Throttle resolver angle.
         name: TRA
       - attributeTags:
@@ -80,46 +121,11 @@ resources:
         dataType: number
         description: LPT coolant bleed.
         name: W32
-      - attributeTags: {}
-        dataType: number
-        description: Whether or not a failure occurred (0=no failure, 1=failure).
-        name: failure
-      - attributeTags: {}
-        dataType: number
-        description: Bleed enthalpy.
-        name: htBleed
-      - attributeTags:
-          units: pps/psi
-        dataType: number
-        description: Ratio of fuel flow to Ps30.
-        name: phi
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: time_in_cycles
-      - attributeTags:
-          units: rpm
-        dataType: number
-        description: Physical fan speed.
-        name: Nf
-      - attributeTags: {}
-        dataType: number
-        description: Operational setting.
-        name: setting_1
-      - attributeTags: {}
-        dataType: number
-        description: The confidence that an outlier has been predicted on this data point.
-        name: anomaly_score
-      - attributeTags: {}
-        dataType: number
-        description: Whether or not an outlier has been detected (0=no outlier,
-          1=outlier detected).
-        name: prediction
     children: []
     description: Represents the attributes found in the Turbofan dataset from NASA's
       Prognostic Data Repository.
     deviceClass: standalone
-    exportHash: 72d1d19bd6aace03de4943aece54929fa8f9330d453beddcae3de719a9604206
+    exportHash: 580c6f136f17a2ccc4a4c7759814d28718485a3b5b6c7db351a1a6e18090c6f5
     id: ~exportplaceholderid-device-turbofan~
     name: Turbofan
     tags:
@@ -136,6 +142,33 @@ resources:
       - key: cpf_customer
         value: ~exportplaceholderid-experienceGroup-customer1~
   - attributes:
+      - attributeTags: {}
+        dataType: number
+        description: The confidence that an outlier has been predicted on this data point.
+        name: anomaly_score
+      - attributeTags: {}
+        dataType: number
+        description: Whether or not a failure occurred (0=no failure, 1=failure).
+        name: failure
+      - attributeTags: {}
+        dataType: number
+        description: Bleed enthalpy.
+        name: htBleed
+      - attributeTags:
+          units: rpm
+        dataType: number
+        description: Physical core speed.
+        name: Nc
+      - attributeTags:
+          units: rpm
+        dataType: number
+        description: Physical fan speed.
+        name: Nf
+      - attributeTags:
+          units: rpm
+        dataType: number
+        description: Demanded fan speed.
+        name: Nf_dmd
       - attributeTags:
           units: rpm
         dataType: number
@@ -146,16 +179,6 @@ resources:
         dataType: number
         description: Corrected fan speed.
         name: NRf
-      - attributeTags:
-          units: rpm
-        dataType: number
-        description: Physical core speed.
-        name: Nc
-      - attributeTags:
-          units: rpm
-        dataType: number
-        description: Demanded fan speed.
-        name: Nf_dmd
       - attributeTags:
           units: psia
         dataType: number
@@ -177,10 +200,24 @@ resources:
         description: Demanded corrected fan speed.
         name: PCNfR_dmd
       - attributeTags:
+          units: pps/psi
+        dataType: number
+        description: Ratio of fuel flow to Ps30.
+        name: phi
+      - attributeTags: {}
+        dataType: number
+        description: Whether or not an outlier has been detected (0=no outlier,
+          1=outlier detected).
+        name: prediction
+      - attributeTags:
           units: psia
         dataType: number
         description: Static pressure at HPC outlet.
         name: Ps30
+      - attributeTags: {}
+        dataType: number
+        description: Operational setting.
+        name: setting_1
       - attributeTags:
           units: ˚R
         dataType: number
@@ -203,6 +240,10 @@ resources:
         name: T50
       - attributeTags: {}
         dataType: number
+        description: ""
+        name: time_in_cycles
+      - attributeTags: {}
+        dataType: number
         description: Throttle resolver angle.
         name: TRA
       - attributeTags:
@@ -215,46 +256,11 @@ resources:
         dataType: number
         description: LPT coolant bleed.
         name: W32
-      - attributeTags: {}
-        dataType: number
-        description: Whether or not a failure occurred (0=no failure, 1=failure).
-        name: failure
-      - attributeTags: {}
-        dataType: number
-        description: Bleed enthalpy.
-        name: htBleed
-      - attributeTags:
-          units: pps/psi
-        dataType: number
-        description: Ratio of fuel flow to Ps30.
-        name: phi
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: time_in_cycles
-      - attributeTags:
-          units: rpm
-        dataType: number
-        description: Physical fan speed.
-        name: Nf
-      - attributeTags: {}
-        dataType: number
-        description: Operational setting.
-        name: setting_1
-      - attributeTags: {}
-        dataType: number
-        description: The confidence that an outlier has been predicted on this data point.
-        name: anomaly_score
-      - attributeTags: {}
-        dataType: number
-        description: Whether or not an outlier has been detected (0=no outlier,
-          1=outlier detected).
-        name: prediction
     children: []
     description: Represents the attributes found in the Turbofan dataset from NASA's
       Prognostic Data Repository.
     deviceClass: standalone
-    exportHash: ecddf3b0e01e96868730c6cb4cea049e81598931d1bb0af17e96ed4a4d5ec834
+    exportHash: 185db9094c4c17049fcea1610ab54ab2b0c72ce44f13469e413ea8d5bbd151a6
     id: ~exportplaceholderid-device-turbofan-1~
     name: Turbofan
     tags:

@@ -154,9 +154,9 @@ application.register("cpf-page-admin-devices-table", class extends Controller {
 
   highlightSelectedColumn() {
     this.currentColumnNavItemTargets.forEach((el) => {
-      el.classList.remove('text-primary');
+      el.classList.remove('active');
       if (el.dataset.id === this.selectedColumnIdValue) {
-        el.classList.add('text-primary');
+        el.classList.add('active');
       }
     });
   }

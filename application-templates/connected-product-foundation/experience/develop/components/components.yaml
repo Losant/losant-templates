@@ -71,6 +71,14 @@ resources:
     version: develop
     viewTags: {}
     viewType: component
+  - exportHash: c7a1d834507ceaec6a037eb5637dc5af091e5b56489c60128199f9207bb9aa80
+    id: ~exportplaceholderid-experienceView-cpfJsElementAlertingTable~
+    localFilename: ./cpf-js-element-alerting-table.hbs
+    name: cpf-js-element-alerting-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
   - exportHash: 24d44fce3f5941a7701b56f539ce513ea5bb84815d38a8f8f2b5280ea688ebfa
     id: ~exportplaceholderid-experienceView-cpfJsElementDeviceDataExplorer~
     localFilename: ./cpf-js-element-device-data-explorer.hbs
@@ -95,7 +103,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 9b1f6a4eaa98a593247c5983211ec949f164f9fc5f037df2c64d8df8238b0575
+  - exportHash: 8f5c6f034f4b6f9842576e99b0a75902447ce88ee1ab555b47c2cedcaa8016fb
     id: ~exportplaceholderid-experienceView-cpfJsElementEventsTable~
     localFilename: ./cpf-js-element-events-table.hbs
     name: cpf-js-element-events-table
@@ -135,7 +143,15 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 79e2ee69957176bb9bcf58ecee070ec5f318bcc55716f1641d53ed743a2db3c3
+  - exportHash: e206575193d7209d4d40af765f4aa1c3b552cefc4e4bce8d3a1f79b006758227
+    id: ~exportplaceholderid-experienceView-cpfJsPageAdminAlerting~
+    localFilename: ./cpf-js-page-admin-alerting.hbs
+    name: cpf-js-page-admin-alerting
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: ee9dc53b76d0b964070cff0b4c93bc08c3c5ed5484de66d6ad7ff38a5267ccea
     id: ~exportplaceholderid-experienceView-cpfJsPageAdminDevicesTable~
     localFilename: ./cpf-js-page-admin-devices-table.hbs
     name: cpf-js-page-admin-devices-table

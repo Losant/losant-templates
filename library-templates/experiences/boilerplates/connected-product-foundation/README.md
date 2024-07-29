@@ -6,6 +6,7 @@ The [Connected Product Foundation](https://docs.losant.com/cpf/overview/) (CPF) 
 * User Management
 * Device Management
 * Data Visualization
+* Alerting
 * Event Management
 * White Labeling
 
@@ -16,6 +17,7 @@ This template creates a ready-to-use experience with example customers, sites, a
 Once imported, there are a few initial steps that must be completed:
 
 1. Set a password for the CPF's system admin. Navigate to **User and Groups** using the left navigation. Click the `system-admin@example.com` user from the list. Click the **Change Password?** checkbox and provide a secure password.
+1. Enable the **Alerting** workflow.
 1. Create a JWT Service Credential called `User Password Reset`. Provide an Issuer (usually your domain name) and enter a long, random, secure value in the Secret field. This secret is used to sign tokens as part of the forgot password process.
 
 The CPF can now be accessed using your application’s default [Experience Slug](https://docs.losant.com/experiences/domains/#experience-slugs) (e.g. `<YOUR_APPLICATION_ID>.onlosant.com`). Once you navigate to that URL with your browser, you’ll automatically be redirected to the CPF’s log in page (/login) where you can login using your system admin's email and password.

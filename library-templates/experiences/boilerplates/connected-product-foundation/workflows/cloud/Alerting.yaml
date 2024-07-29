@@ -1,0 +1,739 @@
+resourceType: Flow
+resources:
+  - description: Monitors alerting thresholds and creates events.
+    exportHash: 4b5611e84ffaba38a9b19dc71bd21f0f6ba49d9c9df03095d2b721686d0da023
+    flowClass: cloud
+    globals: []
+    id: ~exportplaceholderid-flow-alerting~
+    name: Alerting
+    nodes:
+      - config:
+          level: verbose
+          message: Complete
+          property: ''
+        id: whz4cF_hG9
+        meta:
+          category: debug
+          description: ''
+          label: Complete
+          name: debug
+          x: 260
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: name
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1'
+            - name: filterField
+              type: string
+              value: name
+            - name: filter
+              type: string
+              value: '{{device.tags.DeviceRecipe}}'
+            - name: tagsAsObject
+              type: string
+              value: 'true'
+            - name: attributesAsObject
+              type: string
+              value: 'true'
+          resource: deviceRecipes
+          responsePath: working.recipeResult
+        id: amxlqzCo_2
+        meta:
+          category: data
+          description: ''
+          label: Get Recipe
+          name: losantapi
+          x: 160
+          'y': 220
+        outputIds:
+          - - RTvyn3nuP1
+        type: LosantApiNode
+      - config:
+          expression: '{{working.recipeResult.result.items.[0].id}}'
+        id: RTvyn3nuP1
+        meta:
+          category: logic
+          description: ''
+          label: Found Recipe?
+          name: conditional
+          x: 160
+          'y': 340
+        outputIds:
+          - - IGnmvgd4YM
+          - - PlzURYugoY
+        type: ConditionalNode
+      - config:
+          level: warn
+          message: Recipe Not Found
+          property: ''
+        id: IGnmvgd4YM
+        meta:
+          category: debug
+          description: ''
+          label: Recipe Not Found
+          name: debug
+          x: 60
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          currentItemPath: working.dataPoint
+          loopSourcePath: data
+          mapResultPath: working.iterationResults
+          parallel: true
+        id: PlzURYugoY
+        meta:
+          category: logic
+          description: ''
+          groupStartX: 520
+          groupStartY: 100
+          label: Each Reported Attribute
+          name: loop
+          x: 260
+          'y': 460
+        outputIds:
+          - - whz4cF_hG9
+          - - TVC_3iUFW7
+        type: LoopNode
+      - config:
+          loopNodeId: PlzURYugoY
+          mapValuePath: ''
+          shouldBreak: false
+        id: 2UZpd5aif9
+        meta:
+          category: loop
+          description: ''
+          groupId: PlzURYugoY
+          label: Return
+          name: loop-return
+          x: 840
+          'y': 1880
+        outputIds: []
+        type: LoopCapNode
+      - config: {}
+        id: dRIu95D2zP
+        meta:
+          annotationText: ' Verify that this is a number attribute and alerting is enabled for the attribute on the recipe.'
+          category: annotation
+          groupId: PlzURYugoY
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 720
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.recipeAttributeTags
+              type: set
+              valueTemplate: >-
+                {{jsonEncode (lookup (lookup
+                working.recipeResult.result.items.[0].attributes
+                working.dataPoint.key) 'attributeTags')}}
+              valueTemplateType: json
+            - destination: working.deviceAttributeTags
+              type: set
+              valueTemplate: >-
+                {{jsonEncode (lookup (lookup device.attributes
+                working.dataPoint.key) 'attributeTags')}}
+              valueTemplateType: json
+        id: TVC_3iUFW7
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Mutate
+          name: mutate
+          x: 520
+          'y': 220
+        outputIds:
+          - - pW0hf5TK4S
+        type: MutateNode
+      - config:
+          level: info
+          message: '{{working.dataPoint.key}}: Creating {{working.thresholdType}} Event'
+          property: ''
+        id: FSoNZDdNtu
+        meta:
+          category: debug
+          description: ''
+          groupId: PlzURYugoY
+          label: Creating Event
+          name: debug
+          x: 840
+          'y': 1780
+        outputIds:
+          - - 2UZpd5aif9
+        type: DebugNode
+      - config:
+          expression: >-
+            {{working.recipeAttributeTags.cpf_alerting_enabled}} === 'true' &&
+            {{lookup (lookup device.attributes working.dataPoint.key)
+            'dataType'}} === 'number'
+        id: pW0hf5TK4S
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Enabled?
+          name: conditional
+          x: 520
+          'y': 340
+        outputIds:
+          - - KCo2PcNYRk
+          - - 9o56yZSZYc
+        type: ConditionalNode
+      - config: {}
+        id: fcJrIVoSMD
+        meta:
+          annotationText: Find the recipe attribute and device attribute.
+          category: annotation
+          groupId: PlzURYugoY
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 720
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          destPath: working.thresholdConfig
+          operations:
+            - inputTemplate: '{{working.deviceAttributeTags}}'
+              type: mergeDeep
+          sourcePath: working.recipeAttributeTags
+        id: 5ZOeP_wDYE
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Merge Device Into Recipe
+          name: object
+          x: 840
+          'y': 580
+        outputIds:
+          - - CXeUYo5vEI
+        type: ObjectNode
+      - config:
+          expression: >-
+            {{working.recipeAttributeTags.cpf_alerting_allow_override}} ===
+            'true' && 
+            {{working.deviceAttributeTags.cpf_alerting_override_default}} ===
+            'true'
+        id: 9o56yZSZYc
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Overriding?
+          name: conditional
+          x: 740
+          'y': 460
+        outputIds:
+          - - ZIFcsiGDbl
+          - - 5ZOeP_wDYE
+        type: ConditionalNode
+      - config: {}
+        id: rqhsHjxg8v
+        meta:
+          annotationText: >-
+            Is overriding allowed on the recipe, and is overriding enabled on
+            the device?
+          category: annotation
+          groupId: PlzURYugoY
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 940
+          'y': 440
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          rules:
+            - destination: working.thresholdConfig
+              source: working.recipeAttributeTags
+              type: copy
+        id: ZIFcsiGDbl
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Use Recipe
+          name: mutate
+          x: 640
+          'y': 580
+        outputIds:
+          - - CXeUYo5vEI
+        type: MutateNode
+      - config: {}
+        id: 94zWJSZkhW
+        meta:
+          annotationText: >-
+            If overriding, merge the device config on top of the recipe config.
+            Otherwise just use the recipe config.
+          category: annotation
+          groupId: PlzURYugoY
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 1040
+          'y': 560
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: >-
+            {{working.thresholdConfig.cpf_alerting_enabled_high}} === 'true' && 
+            (0 + {{working.thresholdConfig.cpf_alerting_threshold_high}}) < (0 +
+            {{add 0 working.dataPoint.value}})
+        id: RZA307uJR1
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Value High?
+          name: conditional
+          x: 740
+          'y': 940
+        outputIds:
+          - - qK7SRNXvHK
+          - - duPcd0QES9
+        type: ConditionalNode
+      - config:
+          expression: >-
+            {{working.thresholdConfig.cpf_alerting_enabled_low}} === 'true' && 
+            (0 + {{working.thresholdConfig.cpf_alerting_threshold_low}}) > (0 +
+            {{working.dataPoint.value}})
+        id: CXeUYo5vEI
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Value Low?
+          name: conditional
+          x: 740
+          'y': 700
+        outputIds:
+          - - RZA307uJR1
+          - - WLBWkAeXDE
+        type: ConditionalNode
+      - config: {}
+        id: APbWqFEoep
+        meta:
+          annotationText: >-
+            For both high and low, check that the threshold is enabled and
+            whether the value violates the threshold.
+
+
+            If for some reason the value exceeds both the low and high
+            thresholds at the same time, the high threshold check will win.
+          category: annotation
+          groupId: PlzURYugoY
+          height: 180
+          label: Note
+          name: note
+          width: 360
+          x: 1040
+          'y': 700
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          expression: '{{working.thresholdConfig.cpf_alerting_allow_duplicates}} === ''true'''
+        id: n6H2iF68O3
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Allow Dupes?
+          name: conditional
+          x: 840
+          'y': 1300
+        outputIds:
+          - - SwVrWB28aF
+          - - CJtqbBkXRx
+        type: ConditionalNode
+      - config: {}
+        id: PDxgR1TXau
+        meta:
+          annotationText: 'If we allow duplicates, we can bypass the event lookup.'
+          category: annotation
+          groupId: PlzURYugoY
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 1040
+          'y': 1300
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          dataMethod: individualFields
+          dataSourceType: payloadPath
+          deviceIdTemplate: '{{device.id}}'
+          eventTags:
+            - keyTemplate: cpf_threshold_type
+              valueTemplate: '{{working.thresholdType}}'
+            - keyTemplate: cpf_attribute_name
+              valueTemplate: '{{working.dataPoint.key}}'
+            - keyTemplate: cpf_attribute_value
+              valueTemplate: '{{working.dataPoint.value}}'
+            - keyTemplate: cpf_site
+              valueTemplate: '{{device.tags.cpf_site.[0]}}'
+            - keyTemplate: cpf_customer
+              valueTemplate: '{{device.tags.cpf_customer.[0]}}'
+            - keyTemplate: cpf_threshold_value
+              valueTemplate: >-
+                {{#eq working.thresholdType
+                'low'}}{{working.thresholdConfig.cpf_alerting_threshold_low}}{{else}}{{working.thresholdConfig.cpf_alerting_threshold_high}}{{/eq}}
+          levelTemplate: critical
+          messageTemplate: >-
+            Attribute value of {{working.dataPoint.value}} exceeds
+            {{working.thresholdType}} threshold value of {{#eq
+            working.thresholdType
+            'low'}}{{working.thresholdConfig.cpf_alerting_threshold_low}}{{else}}{{working.thresholdConfig.cpf_alerting_threshold_high}}{{/eq}}.
+          resultPath: working.createEventResult
+          subjectTemplate: >-
+            [{{device.name}}] Value Too {{titleCase working.thresholdType}} for
+            Attribute {{working.dataPoint.key}}
+          timeSourceType: payloadTime
+        id: CJtqbBkXRx
+        meta:
+          category: data
+          description: ''
+          groupId: PlzURYugoY
+          label: 'Event: Create'
+          name: create-event
+          x: 840
+          'y': 1680
+        outputIds:
+          - - FSoNZDdNtu
+        type: CreateEventNode
+      - config:
+          rules:
+            - destination: working.thresholdType
+              type: set
+              valueTemplate: high
+              valueTemplateType: string
+        id: duPcd0QES9
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Set Type
+          name: mutate
+          x: 840
+          'y': 1060
+        outputIds:
+          - - qK7SRNXvHK
+        type: MutateNode
+      - config:
+          rules:
+            - destination: working.thresholdType
+              type: set
+              valueTemplate: low
+              valueTemplateType: string
+        id: WLBWkAeXDE
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Set Type
+          name: mutate
+          x: 840
+          'y': 820
+        outputIds:
+          - - RZA307uJR1
+        type: MutateNode
+      - config:
+          findMetadata: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "state": {
+                    "$in": [
+                      "new"
+                    ]
+                  }
+                },
+                {
+                  "deviceId": {
+                    "$eq": "{{device.id}}"
+                  }
+                },
+                {
+                  "eventTags": {
+                    "$eq": {
+                      "$tagKey": "cpf_threshold_type",
+                      "$tagValue": "{{working.thresholdType}}"
+                    }
+                  }
+                },
+                {
+                  "eventTags": {
+                    "$eq": {
+                      "$tagKey": "cpf_attribute_name",
+                      "$tagValue": "{{working.dataPoint.key}}"
+                    }
+                  }
+                }
+              ]
+            }
+          resultPath: working.getEventResult
+          sortDirection: desc
+          sortField: creationDate
+        id: SwVrWB28aF
+        meta:
+          category: data
+          description: ''
+          groupId: PlzURYugoY
+          label: 'Event: Get'
+          mode: queryTemplateSingle
+          name: get-event
+          x: 740
+          'y': 1440
+        outputIds:
+          - - czph_caBHL
+        type: GetEventNode
+      - config:
+          expression: '{{working.getEventResult.id}} === undefined'
+        id: czph_caBHL
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Not Found?
+          name: conditional
+          x: 740
+          'y': 1540
+        outputIds:
+          - - 5ubHJV0XbS
+          - - CJtqbBkXRx
+        type: ConditionalNode
+      - config: {}
+        id: PxFUrPLi1U
+        meta:
+          annotationText: >-
+            If we are not allowing duplicates, we need to look for an open event
+            matching this device, attribute name, and threshold type.
+
+
+            If one is found, we do not create another event.
+          category: annotation
+          groupId: PlzURYugoY
+          height: 220
+          label: Note
+          name: note
+          width: 360
+          x: 1040
+          'y': 1420
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 3fZG6hxr_2
+        meta:
+          annotationText: Iterate over each value received in the state report.
+          category: annotation
+          groupId: PlzURYugoY
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 720
+          'y': 80
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: dLn0qYQJQ5
+        meta:
+          annotationText: Fetch the recipe matching the name in the "DeviceRecipe" tag.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 300
+          x: 360
+          'y': 200
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: 78L0qLy6OW
+        meta:
+          annotationText: 'If we did not find a recipe matching that name, bypass all alerting.'
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 300
+          x: 360
+          'y': 320
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: JtfzQ21zdB
+        meta:
+          annotationText: Iterate over each value received in the state report.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 460
+          'y': 440
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: aCCGDA0Hr0
+        meta:
+          annotationText: >-
+            Create an event for this device, attribute, and threshold type
+            combo.
+          category: annotation
+          groupId: PlzURYugoY
+          height: 100
+          label: Note
+          name: note
+          width: 360
+          x: 1040
+          'y': 1680
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          level: verbose
+          message: '{{working.dataPoint.key}}: Alerting Disabled'
+          property: ''
+        id: KCo2PcNYRk
+        meta:
+          category: debug
+          description: ''
+          groupId: PlzURYugoY
+          label: Alerting Disabled
+          name: debug
+          x: 420
+          'y': 460
+        outputIds:
+          - - mYV5JSgdBd
+        type: DebugNode
+      - config: {}
+        id: DJaof6T0yt
+        meta:
+          annotationText: Trigger on any device with a `DeviceRecipe` tag.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 300
+          x: 360
+          'y': 80
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          loopNodeId: PlzURYugoY
+          mapValuePath: ''
+          shouldBreak: false
+        id: mYV5JSgdBd
+        meta:
+          category: loop
+          description: ''
+          groupId: PlzURYugoY
+          label: Return
+          name: loop-return
+          x: 420
+          'y': 560
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          loopNodeId: PlzURYugoY
+          mapValuePath: ''
+          shouldBreak: false
+        id: 5ubHJV0XbS
+        meta:
+          category: loop
+          description: ''
+          groupId: PlzURYugoY
+          label: Return
+          name: loop-return
+          x: 640
+          'y': 1680
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          expression: '{{working.thresholdType}}'
+        id: qK7SRNXvHK
+        meta:
+          category: logic
+          description: ''
+          groupId: PlzURYugoY
+          label: Alert?
+          name: conditional
+          x: 740
+          'y': 1180
+        outputIds:
+          - - TTEj4V7PJE
+          - - n6H2iF68O3
+        type: ConditionalNode
+      - config:
+          loopNodeId: PlzURYugoY
+          mapValuePath: ''
+          shouldBreak: false
+        id: w8DftznYwH
+        meta:
+          category: loop
+          description: ''
+          groupId: PlzURYugoY
+          label: Return
+          name: loop-return
+          x: 640
+          'y': 1340
+        outputIds: []
+        type: LoopCapNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: TTEj4V7PJE
+        meta:
+          category: debug
+          description: ''
+          groupId: PlzURYugoY
+          label: Debug
+          name: debug
+          x: 640
+          'y': 1260
+        outputIds:
+          - - w8DftznYwH
+        type: DebugNode
+    triggers:
+      - config:
+          batchBehavior: each
+          triggerOn: both
+        key: DeviceRecipe/
+        meta:
+          category: trigger
+          description: ''
+          label: 'Device: State'
+          name: deviceIdsTags
+          uiId: 9HiKJx0_Tf
+          x: 160
+          'y': 100
+        outputIds:
+          - - amxlqzCo_2
+        type: deviceTag
+version: 1

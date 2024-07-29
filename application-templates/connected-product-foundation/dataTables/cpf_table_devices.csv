@@ -1,5 +1,5 @@
 id,key,type,template,order,label
-65ef75c05b78841df1d14571,connected,native,"{{#if value.connected}}
+664cde7f71b519705db6ec77,connected,native,"{{#if value.connected}}
   <span class=""material-symbols-outlined cpf-icon-small text-success""
         data-bs-toggle=""tooltip""
         title=""Connected since {{value.time}}"">
@@ -12,10 +12,10 @@ id,key,type,template,order,label
    cloud_off
   </span>
 {{/if}}",0,Connected
-65ef75c05b78841df1d14572,name,native,"<a href=""/devices/{{device.id}}?tab=properties"">{{value}}</a>",1,Name
-65ef75c05b78841df1d14573,serial,tag,{{value}},2,Serial
-65ef75c05b78841df1d14574,Nf,attribute,{{value}},3,Nf
-65ef75c05b78841df1d14575,customer,group,"<a href=""/customers/{{value.id}}"">{{value.name}}</a>",4,Customer
-65ef75c05b78841df1d14576,site,group,"<a href=""/sites/{{value.id}}"">{{value.name}}</a>",5,Site
-65ef75c05b78841df1d14577,id,native,{{value}},6,ID
-65ef75c05b78841df1d14578,manifold_temperature,attribute,{{value}},3,Temp
+664cde7f71b519705db6ec78,name,native,"<a href=""/devices/{{device.id}}?tab=properties"">{{value}}</a>",1,Name
+664cde7f71b519705db6ec79,serial,tag,{{value}},2,Serial
+664cde7f71b519705db6ec7a,manifold_temperature,attribute,{{value}},3,Temp
+664cde7f71b519705db6ec7b,Nf,attribute,{{value}},3,Nf
+664cde7f71b519705db6ec7c,customer,group,"<a href=""/customers/{{value.id}}"">{{value.name}}</a>",4,Customer
+664cde7f71b519705db6ec7d,site,group,"<a href=""/sites/{{value.id}}"">{{value.name}}</a>",5,Site
+664cde7f71b519705db6ec7e,id,native,{{value}},6,ID

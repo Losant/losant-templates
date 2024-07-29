@@ -539,11 +539,12 @@ resources:
         name: deviceId
         type: deviceId
         validationConfig:
+          deviceIds: []
           includeFullDevice: true
         validationEnabled: false
     defaultTheme: light
     duration: 3600000
-    exportHash: 536d1175851044e3ae3d19a7d98c6ec48e1d8996b08107e15d7d456d2b514a1e
+    exportHash: d01bff6c5c272e7209c08a9d9f9a694f365ad676439d05384500d5db50a834b8
     id: ~exportplaceholderid-dashboard-turbofan~
     isPasswordProtected: false
     name: Turbofan
