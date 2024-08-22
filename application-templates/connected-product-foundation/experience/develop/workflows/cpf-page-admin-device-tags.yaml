@@ -2,36 +2,12 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /admin/device-tags
     enabled: true
-    exportHash: 8214097807b3ed993f8d129febdfcd83191ae4ce561d95349ca9e15fe20f649c
+    exportHash: ef47cc6d72dea770a4012c0f642d3045a3eb904dafce167e9c56cabed9377110
     flowId: ~exportplaceholderid-flow-cpfPageAdminDeviceTags~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageAdminDeviceTags~
     name: cpf-page-admin-device-tags
     nodes:
-      - config:
-          bodyTemplate: pageData
-          bodyTemplateType: path
-          cookieInfo: []
-          headerInfo: []
-          layoutIdTemplate: ''
-          mqttTopicsTemplate: []
-          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminDeviceTags~
-          replyIdPath: ''
-          replyType: page
-          responseCodeTemplate: '200'
-          sameSiteTemplate: ''
-        id: 63Ctnz535w
-        meta:
-          category: output
-          description: ''
-          label: 'Endpoint: Reply'
-          mqttTopicsType: []
-          name: endpoint-reply
-          x: 220
-          'y': 1000
-        outputIds:
-          - - 4l3NjjfsG_
-        type: EndpointReplyNode
       - config:
           level: verbose
           message: ''
@@ -412,7 +388,7 @@ resources:
           x: 220
           'y': 900
         outputIds:
-          - - 63Ctnz535w
+          - - srNzByvVqY
           - - q9S3bRo1vp
         type: LoopNode
       - config:
@@ -450,6 +426,30 @@ resources:
         outputIds:
           - - 5nKy4CRtbY
         type: MutateNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminDeviceTags~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: srNzByvVqY
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 220
+          'y': 1000
+        outputIds:
+          - - 4l3NjjfsG_
+        type: EndpointReplyNode
     triggers:
       - config: {}
         key: ~exportplaceholderid-experienceEndpoint-getAdminDeviceTags~

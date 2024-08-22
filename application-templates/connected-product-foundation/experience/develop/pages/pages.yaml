@@ -283,7 +283,7 @@ resources:
     viewTags:
       title: Customers
     viewType: page
-  - exportHash: cd6eca44c4cb9577b73c9d04f07a42238f880b95e4a69bf04d28f684315bdc04
+  - exportHash: d8ee8434f7c3357dffc45d3293e6e1a1c8069bfca16ce48456b3bde6608a3068
     headers:
       content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageDeviceDetails~
