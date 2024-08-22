@@ -1,0 +1,443 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: GET & POST /cpf/elements/device-details-alerting
+    enabled: true
+    exportHash: f9381ddf5d624556bbc88e671e777b7f2e939738f607c17d4c00d6271e24580a
+    flowId: ~exportplaceholderid-flow-cpfElementDeviceDetailsAlerting~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementDeviceDetailsAlerting~
+    name: cpf-element-device-details-alerting
+    nodes:
+      - config:
+          bodyTemplateType: none
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementDeviceDetailsAlerting~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: ''
+          sameSiteTemplate: ''
+        id: e1f__ICRHt
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 140
+        outputIds: []
+        type: EndpointReplyNode
+      - config:
+          destination: working.deviceUpdates.attributes
+          errorBehavior: payloadPath
+          errorPath: working.error
+          source: data.body.attributesConfig
+        id: HqxYk9MUuE
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 520
+          'y': 480
+        outputIds:
+          - - 9FIC3iAD7J
+        type: JsonDecodeNode
+      - config:
+          expression: '{{working.error}}'
+        id: 9FIC3iAD7J
+        meta:
+          category: logic
+          description: ''
+          label: JSON Error?
+          name: conditional
+          x: 520
+          'y': 580
+        outputIds:
+          - - wdDy4XZ1mz
+          - - NVeVwiR0tP
+        type: ConditionalNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.deviceId}}?tab=alerting&alertingError={{encodeURIComponent
+            'Invalid request'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: NVeVwiR0tP
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 720
+          'y': 820
+        outputIds:
+          - - ba2ulJuLQb
+        type: EndpointReplyNode
+      - config:
+          errorsPath: working.error
+          schema: |
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "dataType": { "type": "string" },
+                  "attributeTags": {
+                    "type": "object",
+                    "properties": {
+                      "cpf_alerting_override_defaults": { "enum": ["true", "false"] },
+                      "cpf_alerting_enabled_high": { "enum": ["true","false"] },
+                      "cpf_alerting_enabled_low": { "enum": ["true","false"] },
+                      "cpf_alerting_allow_duplicates": { "enum": ["true","false"] },
+                      "cpf_alerting_allow_override": { "enum": ["true","false"] },
+                      "cpf_alerting_threshold_high": { "type": "string" },
+                      "cpf_alerting_threshold_low": { "type": "string" }
+                    }
+                  }
+                },
+                "required": ["name", "dataType", "attributeTags"]
+              }
+            }
+          schemaType: json
+          toValidatePath: working.deviceUpdates.attributes
+        id: wdDy4XZ1mz
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 420
+          'y': 700
+        outputIds:
+          - - uv3ZIgP31_
+          - - dndiJUDZpk
+        type: ValidatePayloadNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.deviceId}}?tab=alerting&alertingError={{encodeURIComponent
+            'Invalid request'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: uv3ZIgP31_
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 320
+          'y': 820
+        outputIds:
+          - - vTzBejU2Np
+        type: EndpointReplyNode
+      - config: {}
+        id: 1n8VpvSEwX
+        meta:
+          annotationText: >-
+            To do: Regex validating number input for thresholds (numbers,
+            optional decimals, optional negative)
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 140
+          'y': 680
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: '/devices/{{data.query.deviceId}}?tab=alerting&alertingSuccess=true'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 6lrYyicaEY
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 620
+          'y': 1040
+        outputIds:
+          - - axfBr8Msje
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: ''
+          property: ''
+        id: vTzBejU2Np
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 320
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: axfBr8Msje
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 620
+          'y': 1140
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: warn
+          message: ''
+          property: ''
+        id: ba2ulJuLQb
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 720
+          'y': 920
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{working.updateResult.id}}'
+        id: qSTxWehKck
+        meta:
+          category: logic
+          description: ''
+          label: Success?
+          name: conditional
+          x: 520
+          'y': 920
+        outputIds:
+          - - MHhTDFiSda
+          - - 6lrYyicaEY
+        type: ConditionalNode
+      - config:
+          level: warn
+          message: ''
+          property: ''
+        id: p9JjPJoM1m
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 420
+          'y': 1140
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.deviceId}}?tab=alerting&alertingError={{encodeURIComponent
+            (defaultTo working.updateResult.error.message 'An unknown error
+            occurred')}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: MHhTDFiSda
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 420
+          'y': 1040
+        outputIds:
+          - - p9JjPJoM1m
+        type: EndpointReplyNode
+      - config:
+          attributesAsObject: false
+          dataMethod: payloadPath
+          devicePayloadPath: working.deviceUpdates
+          idTemplate: '{{data.query.deviceId}}'
+          resultPath: working.updateResult
+          tagsAsObject: false
+        id: dndiJUDZpk
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Update'
+          name: update-device
+          x: 520
+          'y': 820
+        outputIds:
+          - - qSTxWehKck
+        type: UpdateDeviceNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfVerifyRole~
+          customNodeVersion: default
+          fields:
+            - id: requiredRole
+              value: admin
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: ''
+        id: 9yBeAJQDOq
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Verify Role'
+          name: custom-node-execute-node
+          x: 420
+          'y': 360
+        outputIds:
+          - - h8JPNWb5Rg
+          - - HqxYk9MUuE
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: >-
+            /devices/{{data.query.deviceId}}?tab=alerting&alertingError={{encodeURIComponent
+            'Permission Denied'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: h8JPNWb5Rg
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 320
+          'y': 480
+        outputIds:
+          - - 2s7KiyNgvu
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: ''
+          property: ''
+        id: 2s7KiyNgvu
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 320
+          'y': 580
+        outputIds: []
+        type: DebugNode
+      - config:
+          deviceIdTemplate: '{{data.query.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: WYYRkVC_W9
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 320
+          'y': 140
+        outputIds:
+          - - NDuFGrbmlI
+          - - 9yBeAJQDOq
+        type: VerifyDeviceNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: NDuFGrbmlI
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 220
+          'y': 260
+        outputIds:
+          - - eA_yM3sypt
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: ''
+          property: ''
+        id: eA_yM3sypt
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 220
+          'y': 360
+        outputIds: []
+        type: DebugNode
+    triggers:
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-getCpfElementsDeviceDetailsAlerting~
+        meta:
+          category: trigger
+          description: ''
+          label: GET
+          name: endpoint
+          uiId: aafewRFMNb
+          x: 40
+          'y': 40
+        outputIds:
+          - - e1f__ICRHt
+        type: endpoint
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-postCpfElementsDeviceDetailsAlerting~
+        meta:
+          category: trigger
+          description: ''
+          label: POST
+          name: endpoint
+          uiId: cP62HvGbbC
+          x: 320
+          'y': 40
+        outputIds:
+          - - WYYRkVC_W9
+        type: endpoint
+    version: develop
+version: 1

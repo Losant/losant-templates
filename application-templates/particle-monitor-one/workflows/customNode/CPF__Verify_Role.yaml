@@ -31,7 +31,7 @@ resources:
       Verifies a user's role meets or exceeds a required role. For example, a
       required role of "editor" will succeed for users with roles of "editor" or
       "admin", but will fail if the user's role is "viewer".
-    exportHash: 97ea9ab416744feebf031a801d704da730cab56ad283ffa0a80bd73dc44e1b86
+    exportHash: 360a2b4bd028fc82f77500ea6fc2cc9db69e70c6ab5dc360ca9a874f82b3c292
     flowClass: customNode
     globals: []
     id: ~exportplaceholderid-flow-cpfVerifyRole~
@@ -46,8 +46,8 @@ resources:
           description: Take the "False" path
           label: Output False
           name: custom-node-end-false
-          x: 60
-          'y': 520
+          x: 200
+          'y': 500
         outputIds: []
         type: CustomNodeCapNode
       - config:
@@ -59,8 +59,8 @@ resources:
           description: Take the "True" path
           label: Output True
           name: custom-node-end-true
-          x: 260
-          'y': 520
+          x: 400
+          'y': 500
         outputIds: []
         type: CustomNodeCapNode
       - config:
@@ -85,8 +85,8 @@ resources:
           description: ''
           label: Function
           name: function
-          x: 160
-          'y': 200
+          x: 300
+          'y': 260
         outputIds:
           - - beC1jrrZ6W
         type: RawFunctionNode
@@ -98,12 +98,39 @@ resources:
           description: ''
           label: Conditional
           name: conditional
-          x: 160
-          'y': 320
+          x: 300
+          'y': 380
         outputIds:
           - - YrmyNtSXmj
           - - GgrY9WTU53
         type: ConditionalNode
+      - config:
+          expression: '{{data.user}}'
+        id: qwJ4x3YpNo
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 200
+          'y': 140
+        outputIds:
+          - - RcLR891VtD
+          - - f9iyjtFl0O
+        type: ConditionalNode
+      - config:
+          branchIndexTemplate: 0
+          resultSourcePath: ''
+        id: RcLR891VtD
+        meta:
+          category: customNodeEnd
+          description: ''
+          label: Output False
+          name: custom-node-end-false
+          x: 100
+          'y': 260
+        outputIds: []
+        type: CustomNodeCapNode
     shortDescription: Verifies a user's role meets or exceeds a required role
     triggers:
       - config: {}
@@ -114,9 +141,9 @@ resources:
           label: 'Start: CPF: Verify Role'
           name: customNodeStart
           uiId: SywHdN5P6W
-          x: 160
-          'y': 80
+          x: 200
+          'y': 40
         outputIds:
-          - - f9iyjtFl0O
+          - - qwJ4x3YpNo
         type: customNodeStart
 version: 1

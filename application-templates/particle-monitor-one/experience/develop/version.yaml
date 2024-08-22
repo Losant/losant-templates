@@ -1,13 +1,13 @@
 resourceType: ExperienceVersion
 resources:
   - endpointDefaultCors: true
-    exportHash: 3746e6f6fca06c7f66c5344a9240877d0ac7a5d40bdef19f2144011f91ffe164
+    exportHash: a5da779b614d12a910231d1b8ee5d77579baeab568b64316603db46ee4b62eed
     globals:
       - json: '"favicon_1708720065519.png"'
         key: favicon
-      - json: '"Particle Monitor One | {{this}}"'
+      - json: '"CPF | {{this}}"'
         key: title_template
-      - json: '"Particle, Inc."'
+      - json: '"Losant IoT, Inc."'
         key: company_name
       - json: '"https://www.losant.com/legal/privacy-policy"'
         key: privacy_policy

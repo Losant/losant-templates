@@ -1,5 +1,15 @@
 resourceType: ExperienceView
 resources:
+  - description: Created for Endpoint GET /cpf/elements/alerting-table
+    exportHash: 6b132aa7f4fa5d785e9b57071bfaf1fbffd5b076d9815ff326b3fad1562f4ada
+    headers:
+      content-type: text/html
+    id: ~exportplaceholderid-experienceView-cpfElementAlertingTable~
+    localFilename: ./cpf-element-alerting-table.hbs
+    name: cpf-element-alerting-table
+    version: develop
+    viewTags: {}
+    viewType: page
   - description: Created for Endpoint GET /cpf/elements/customers-table.
     exportHash: 37f03717185f0613c32e3ce874a7a579d621cee9dacc611cd94c9c6d2e80f706
     headers:
@@ -26,6 +36,15 @@ resources:
     id: ~exportplaceholderid-experienceView-cpfElementDeviceDataExplorer~
     localFilename: ./cpf-element-device-data-explorer.hbs
     name: cpf-element-device-data-explorer
+    version: develop
+    viewTags: {}
+    viewType: page
+  - exportHash: fd9a6e1fb50e115e1f5068f01b2ac1bada79440f5a7ece53e52e6b5f3a29944d
+    headers:
+      content-type: text/html
+    id: ~exportplaceholderid-experienceView-cpfElementDeviceDetailsAlerting~
+    localFilename: ./cpf-element-device-details-alerting.hbs
+    name: cpf-element-device-details-alerting
     version: develop
     viewTags: {}
     viewType: page
@@ -158,6 +177,18 @@ resources:
     viewTags:
       title: Error
     viewType: page
+  - description: Created for Endpoint GET /admin/alerting.
+    exportHash: 9eea6d3723782d69b2314a88f63d292554b484869a53cab2de60066a8f47a986
+    headers:
+      content-type: text/html
+    id: ~exportplaceholderid-experienceView-cpfPageAdminAlerting~
+    layoutId: ~exportplaceholderid-experienceView-cpfLayout~
+    localFilename: ./cpf-page-admin-alerting.hbs
+    name: cpf-page-admin-alerting
+    version: develop
+    viewTags:
+      title: Alerting
+    viewType: page
   - description: Created for Endpoint GET /admin/dashboards.
     exportHash: 7ed79c5d057288abd257480b21c15a55ccedc24398eaba22e97a2d9119ef58b9
     headers:
@@ -241,7 +272,7 @@ resources:
     viewTags:
       title: Customers
     viewType: page
-  - exportHash: 81bfb74ec18ffd7a4cb66edd03e52c79737111227c439ace476852908dcd0910
+  - exportHash: 533498fc0b0e512ab30a06388003ea7575d18402c9f95bda0ad8288024265f2f
     headers:
       content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageDeviceDetails~

@@ -4,6 +4,19 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: 679380c505bed3c67c5fbe29b6b40c3632c4af5adfbfadf7e831ce48c946dc0f
+    id: ~exportplaceholderid-experienceEndpoint-getAdminAlertingDeviceRecipeId~
+    method: get
+    route: /admin/alerting/{deviceRecipeId?}
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
     exportHash: 319e1c0dd9a420fa711eb2e7503a6e2bd4867c11a987eef08643b6891f4d42ad
     id: ~exportplaceholderid-experienceEndpoint-getAdminDashboards~
     method: get
@@ -112,6 +125,19 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: d605a629958c06d2153ec0de5822039a556dcaa778575442670fd69d35081661
+    id: ~exportplaceholderid-experienceEndpoint-getCpfElementsAlertingTable~
+    method: get
+    route: /cpf/elements/alerting-table
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
     exportHash: 1b58a776e60850c705713d58d6eea0ebfe06f7d8e587253dc930bf4e5a99cb40
     id: ~exportplaceholderid-experienceEndpoint-getCpfElementsCustomersTable~
     method: get
@@ -134,6 +160,16 @@ resources:
     id: ~exportplaceholderid-experienceEndpoint-getCpfElementsDeviceDataExplorerDeviceId~
     method: get
     route: /cpf/elements/device-data-explorer/{deviceId}
+    version: develop
+  - access: authenticated
+    description: The contents for the alerting tab on the device details page.
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    exportHash: cf38bc0273d42354d5f9192c81b5a73c1eac4b027dd2edc1b442d612badef9e0
+    id: ~exportplaceholderid-experienceEndpoint-getCpfElementsDeviceDetailsAlerting~
+    method: get
+    route: /cpf/elements/device-details-alerting
     version: develop
   - access: authenticated
     enabled: true
@@ -480,6 +516,19 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: f3ccbb868a081225996b6fc16396fdfa4bb7e231ae23d1eb32b5328a2abd0447
+    id: ~exportplaceholderid-experienceEndpoint-postAdminAlertingDeviceRecipeId~
+    method: post
+    route: /admin/alerting/{deviceRecipeId}
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: /login
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
     exportHash: c9a7af58c7365aabb6b21ee2508bcb249de4c1f797289ca828dae6a20235a0ff
     id: ~exportplaceholderid-experienceEndpoint-postAdminDashboards~
     method: post
@@ -549,6 +598,15 @@ resources:
       statusCode: 404
       type: page
       value: ~exportplaceholderid-experienceView-cpfPage404~
+    version: develop
+  - access: authenticated
+    enabled: true
+    endpointTags: {}
+    experienceGroupIds: []
+    exportHash: 3bd45c1e89132a96fccff1c25d810ef9d595ac2e46b1c5bad0afd3357c08513b
+    id: ~exportplaceholderid-experienceEndpoint-postCpfElementsDeviceDetailsAlerting~
+    method: post
+    route: /cpf/elements/device-details-alerting
     version: develop
   - access: authenticated
     enabled: true

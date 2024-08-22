@@ -1,0 +1,652 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /admin/alerting
+    enabled: true
+    exportHash: baf99666fc78f94ea8444899c1a647d458d7ae17d3f0d719c41592e1a562b4cf
+    flowId: ~exportplaceholderid-flow-cpfPageAdminAlerting~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfPageAdminAlerting~
+    name: cpf-page-admin-alerting
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminAlerting~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: hKW5Sbkcn6
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 840
+          'y': 800
+        outputIds:
+          - - eqNPKk78rk
+        type: EndpointReplyNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: TpyMsn9qsC
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 340
+          'y': 140
+        outputIds:
+          - - gjHP2yC1ts
+          - - VinjDV7639
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: VinjDV7639
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 440
+          'y': 260
+        outputIds:
+          - - gjHP2yC1ts
+          - - wdUIWoM53o
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: gjHP2yC1ts
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 800
+        outputIds:
+          - - eqNPKk78rk
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: eqNPKk78rk
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 440
+          'y': 940
+        outputIds: []
+        type: DebugNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: name
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1000'
+            - name: filterField
+              type: string
+              value: ''
+            - name: filter
+              type: string
+              value: ''
+            - name: tagsAsObject
+              type: string
+              value: ''
+            - name: attributesAsObject
+              type: string
+              value: ''
+          resource: deviceRecipes
+          responsePath: working.recipes
+        id: wdUIWoM53o
+        meta:
+          category: data
+          description: ''
+          label: 'Recipes: Get'
+          name: losantapi
+          x: 540
+          'y': 380
+        outputIds:
+          - - jCa20cFSE3
+        type: LosantApiNode
+      - config:
+          rules:
+            - destination: pageData.deviceRecipes
+              source: working.recipes.result.items
+              type: move
+            - destination: pageData.selectedDeviceRecipe
+              type: set
+              valueTemplate: >-
+                {{jsonEncode (valueByKey pageData.deviceRecipes
+                data.params.deviceRecipeId 'id' '.')}}
+              valueTemplateType: string
+        id: brjEucrnra
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 740
+          'y': 600
+        outputIds:
+          - - jFv3ivjGbQ
+        type: MutateNode
+      - config:
+          destination: working.recipeUpdates.attributes
+          errorBehavior: payloadPath
+          errorPath: working.error
+          source: data.body.attributesConfig
+        id: 7HByNoJAK4
+        meta:
+          category: logic
+          description: ''
+          label: 'JSON: Decode'
+          name: json-decode
+          x: 1400
+          'y': 380
+        outputIds:
+          - - 0MiNbRwBvq
+        type: JsonDecodeNode
+      - config:
+          expression: '{{working.error}}'
+        id: 0MiNbRwBvq
+        meta:
+          category: logic
+          description: ''
+          label: JSON Error?
+          name: conditional
+          x: 1400
+          'y': 480
+        outputIds:
+          - - DpbJb_UbT0
+          - - qckIYC_YBf
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '/admin/alerting/{{data.params.deviceRecipeId}}?error=Invalid request'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: qckIYC_YBf
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1600
+          'y': 720
+        outputIds:
+          - - n4kS9G0tcY
+        type: EndpointReplyNode
+      - config:
+          errorsPath: working.error
+          schema: |
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "dataType": { "type": "string" },
+                  "attributeTags": {
+                    "type": "object",
+                    "properties": {
+                      "cpf_alerting_enabled": { "enum": ["true", "false"] },
+                      "cpf_alerting_enabled_high": { "enum": ["true","false"] },
+                      "cpf_alerting_enabled_low": { "enum": ["true","false"] },
+                      "cpf_alerting_allow_duplicates": { "enum": ["true","false"] },
+                      "cpf_alerting_allow_override": { "enum": ["true","false"] },
+                      "cpf_alerting_threshold_high": { "type": "string" },
+                      "cpf_alerting_threshold_low": { "type": "string" }
+                    }
+                  }
+                },
+                "required": ["name", "dataType", "attributeTags"]
+              }
+            }
+          schemaType: json
+          toValidatePath: working.recipeUpdates.attributes
+        id: DpbJb_UbT0
+        meta:
+          category: logic
+          description: ''
+          label: Validate Payload
+          name: validate-payload
+          x: 1300
+          'y': 600
+        outputIds:
+          - - rEI2tRa_Fg
+          - - cT89Vi7kIt
+        type: ValidatePayloadNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: R34VST7Zho
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 1180
+          'y': 140
+        outputIds:
+          - - GjR1sYttgJ
+          - - atWXyd8S4S
+        type: CustomNodeExecuteNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: atWXyd8S4S
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 1280
+          'y': 260
+        outputIds:
+          - - GjR1sYttgJ
+          - - 7HByNoJAK4
+        type: ConditionalNode
+      - config:
+          bodyTemplate: /
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: GjR1sYttgJ
+        meta:
+          category: output
+          description: ''
+          label: Error
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1080
+          'y': 380
+        outputIds:
+          - - pKBZ8eOpX3
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: '/admin/alerting/{{data.params.deviceRecipeId}}?error=Invalid request'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: rEI2tRa_Fg
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1200
+          'y': 720
+        outputIds:
+          - - OrlBJTZXgu
+        type: EndpointReplyNode
+      - config: {}
+        id: iT0v3Pqpvd
+        meta:
+          annotationText: >-
+            To do: Regex validating number input for thresholds (numbers,
+            optional decimals, optional negative)
+          category: annotation
+          height: 120
+          label: Note
+          name: note
+          width: 260
+          x: 1060
+          'y': 580
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          bodyTemplate: '/admin/alerting/{{data.params.deviceRecipeId}}?success=true'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: 8Df4hjaumU
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1500
+          'y': 940
+        outputIds:
+          - - nzgE_K9a_B
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: pKBZ8eOpX3
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1080
+          'y': 480
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: OrlBJTZXgu
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1200
+          'y': 820
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: nzgE_K9a_B
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1500
+          'y': 1040
+        outputIds: []
+        type: DebugNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: n4kS9G0tcY
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1600
+          'y': 820
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.params.deviceRecipeId}}'
+        id: jCa20cFSE3
+        meta:
+          category: logic
+          description: ''
+          label: deviceRecipeId?
+          name: conditional
+          x: 540
+          'y': 480
+        outputIds:
+          - - nVKmT3df9g
+          - - brjEucrnra
+        type: ConditionalNode
+      - config:
+          expression: '{{working.recipes.result.items.[0].id}}'
+        id: nVKmT3df9g
+        meta:
+          category: logic
+          description: ''
+          label: Any recipe?
+          name: conditional
+          x: 340
+          'y': 600
+        outputIds:
+          - - xeYmsFlRp8
+          - - RBL_yOY8ow
+        type: ConditionalNode
+      - config:
+          bodyTemplate: '/admin/alerting/{{working.recipes.result.items.[0].id}}'
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: RBL_yOY8ow
+        meta:
+          category: output
+          description: ''
+          label: Rdr to recipe
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 440
+          'y': 800
+        outputIds:
+          - - eqNPKk78rk
+        type: EndpointReplyNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPageAdminAlerting~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: xeYmsFlRp8
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 240
+          'y': 800
+        outputIds:
+          - - eqNPKk78rk
+        type: EndpointReplyNode
+      - config:
+          expression: '{{pageData.selectedDeviceRecipe}} !== ''undefined'''
+        id: jFv3ivjGbQ
+        meta:
+          category: logic
+          description: ''
+          label: Found?
+          name: conditional
+          x: 740
+          'y': 700
+        outputIds:
+          - - H_EteR0hry
+          - - hKW5Sbkcn6
+        type: ConditionalNode
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfPage404~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: H_EteR0hry
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 640
+          'y': 800
+        outputIds:
+          - - eqNPKk78rk
+        type: EndpointReplyNode
+      - config:
+          action: patch
+          params:
+            - name: deviceRecipeId
+              type: string
+              value: '{{data.params.deviceRecipeId}}'
+            - name: deviceRecipe
+              type: path
+              value: working.recipeUpdates
+            - name: tagsAsObject
+              type: string
+              value: ''
+            - name: attributesAsObject
+              type: string
+              value: ''
+          resource: deviceRecipe
+          responsePath: working.updateResult
+        id: cT89Vi7kIt
+        meta:
+          category: data
+          description: ''
+          label: Update Recipe
+          name: losantapi
+          x: 1400
+          'y': 720
+        outputIds:
+          - - Bt4KfM_5sk
+        type: LosantApiNode
+      - config:
+          expression: '{{working.updateResult.result.id}}'
+        id: Bt4KfM_5sk
+        meta:
+          category: logic
+          description: ''
+          label: Success?
+          name: conditional
+          x: 1400
+          'y': 820
+        outputIds:
+          - - g5ATnQ8iHQ
+          - - 8Df4hjaumU
+        type: ConditionalNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: 6wnpjPUSrd
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 1300
+          'y': 1040
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: >-
+            /admin/alerting/{{data.params.deviceRecipeId}}?error={{defaultTo
+            working.updateResult.error.message 'An unknown error occurred'}}
+          bodyTemplateType: string
+          cookieInfo: []
+          headerInfo: []
+          mqttTopicsTemplate: []
+          replyIdPath: ''
+          replyType: redirect
+          responseCodeTemplate: '302'
+          sameSiteTemplate: ''
+        id: g5ATnQ8iHQ
+        meta:
+          category: output
+          description: ''
+          label: 'Endpoint: Reply'
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 1300
+          'y': 940
+        outputIds:
+          - - 6wnpjPUSrd
+        type: EndpointReplyNode
+    triggers:
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-getAdminAlertingDeviceRecipeId~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /admin/alerting
+          name: endpoint
+          uiId: x29Lp2ZTiP
+          x: 340
+          'y': 40
+        outputIds:
+          - - TpyMsn9qsC
+        type: endpoint
+      - config: {}
+        key: >-
+          ~exportplaceholderid-experienceEndpoint-postAdminAlertingDeviceRecipeId~
+        meta:
+          category: trigger
+          description: ''
+          label: POST /admin/alerting
+          name: endpoint
+          uiId: UrWFqxakI8
+          x: 1180
+          'y': 40
+        outputIds:
+          - - R34VST7Zho
+        type: endpoint
+    version: develop
+version: 1

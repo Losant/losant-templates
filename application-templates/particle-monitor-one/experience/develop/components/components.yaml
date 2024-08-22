@@ -71,6 +71,14 @@ resources:
     version: develop
     viewTags: {}
     viewType: component
+  - exportHash: 877454da2a7f0e72c74314d1ff6f3538a4a416b00e0c253bebe7fa2430dd9b46
+    id: ~exportplaceholderid-experienceView-cpfJsElementAlertingTable~
+    localFilename: ./cpf-js-element-alerting-table.hbs
+    name: cpf-js-element-alerting-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
   - exportHash: 9a8519ce538404bb4c48a57096eafeb799d07eff36fb2950bf92b5fd5c084a79
     id: ~exportplaceholderid-experienceView-cpfJsElementDeviceDataExplorer~
     localFilename: ./cpf-js-element-device-data-explorer.hbs
@@ -131,6 +139,14 @@ resources:
     id: ~exportplaceholderid-experienceView-cpfJsElementUsersTable~
     localFilename: ./cpf-js-element-users-table.hbs
     name: cpf-js-element-users-table
+    version: develop
+    viewTags:
+      content-type: text/javascript
+    viewType: component
+  - exportHash: 0764f74ec4c438ac0fdd65b55cc8706f2756129d3a237f10de79cb4056997363
+    id: ~exportplaceholderid-experienceView-cpfJsPageAdminAlerting~
+    localFilename: ./cpf-js-page-admin-alerting.hbs
+    name: cpf-js-page-admin-alerting
     version: develop
     viewTags:
       content-type: text/javascript

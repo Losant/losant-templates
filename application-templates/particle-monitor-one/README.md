@@ -160,19 +160,6 @@ If you're registering a custom Monitor One gateway, there are a few additional s
 
 With these steps complete, you can use register your custom Monitor One gateway.
 
-## Threshold Events
-
-This template comes with automatic threshold checking and [Event](https://docs.losant.com/applications/events/) creation. Thresholds are only checked for devices created from the Monitor One recipe provided by this template. If you're using a custom Monitor One gateway and a custom device recipe, you can modify the **Check Thresholds** workflow to incorporate your custom device data.
-
-Incoming data is compared against the following [Device Tags](https://docs.losant.com/devices/overview/#device-tags) to determine whether an event should be created:
-
-1. `threshold_temperature_low`: if the sensor's temperature is less than or equal to this value, an event is created.
-1. `threshold_temperature_high`: if the sensor's temperature is greater than or equal to this value, an event in created.
-1. `threshold_humidity_low`: if the sensor's humidity is less than or equal to this value, an event is created.
-1. `threshold_humidity_high`: if the sensor's humidity is greater than or equal to this value, an event is created.
-
-These values can be set on the device registration page inside your experience and can be changed at any time.
-
 ## Monitor One Configuration
 
 This template provides a custom user interface for changing the [Monitor One's Configuration](https://docs.particle.io/reference/tracker/tracker-configuration/#monitor-one-configuration). After a device is registered, you can access the configuration by clicking on the device's **Gateway Settings** tab. If this tab displays an error, please ensure your Particle Product ID and Access Token have been properly configured through the Particle admin page.
@@ -180,7 +167,6 @@ This template provides a custom user interface for changing the [Monitor One's C
 By default, this page provides configuration fields specific to reading the temperature and humidity Modbus information. This page provides a subset of the same configuration fields found in Particle's console.
 
 When using a custom Monitor One configuration, you can change these fields by modifying the **m1-element-gateway-settings** [Experience Page](https://docs.losant.com/experiences/views/#pages) and [Experience Workflow](https://docs.losant.com/workflows/experience-workflows/). This page can be accessed by your end users and works well to expose specific configuration fields while keeping other fields private.
-
 
 ## License
 

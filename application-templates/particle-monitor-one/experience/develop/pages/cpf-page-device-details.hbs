@@ -19,73 +19,186 @@
   </div>
   <div class="d-flex flex-column device-summary flex-grow-1 overflow-hidden">
     <ul class="nav nav-tabs" id="cpf-device-tabs" role="tablist">
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-xl-inline" role="presentation">
         {{!-- Default to this tab if request.query.tab is not set --}}
         <button class="nav-link {{#unless request.query.tab}}active{{/unless}}{{#eq request.query.tab 'dashboard'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="dashboard"
                 data-action="cpf-page-device-details#tabChanged"
                 id="cpf-device-dashboard-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#cpf-device-dashboard-tab-pane"
                 type="button"
                 role="tab"
                 aria-controls="cpf-device-dashboard-tab-pane"
                 aria-selected="true">Dashboard</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-xl-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'explorer'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="explorer"
                 data-action="cpf-page-device-details#tabChanged"
                 id="cpf-device-data-explorer-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#cpf-device-data-explorer-tab-pane"
                 type="button"
                 role="tab"
                 aria-controls="cpf-device-data-explorer-tab-pane"
                 aria-selected="true">Data Explorer</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-xl-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'events'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="events"
                 data-action="cpf-page-device-details#tabChanged"
                 id="cpf-device-events-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#cpf-device-events-tab-pane"
                 type="button"
                 role="tab"
                 aria-controls="cpf-device-events-tab-pane"
                 aria-selected="true">Events</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-xl-inline" role="presentation">
+        <button class="nav-link {{#eq request.query.tab 'alerting'}}active{{/eq}}"
+                data-cpf-page-device-details-tab-param="alerting"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-alerting-tab"
+                data-bs-toggle="tab"
+                type="button"
+                role="tab"
+                aria-controls="cpf-device-alerting-tab-pane"
+                aria-selected="true">Alerting</button>
+      </li>
+      <li class="nav-item d-none d-xl-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'properties'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="properties"
                 data-action="cpf-page-device-details#tabChanged"
                 id="cpf-device-properties-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#cpf-device-properties-tab-pane"
                 type="button"
                 role="tab"
                 aria-controls="cpf-device-properties-tab-pane"
                 aria-selected="true">Properties</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-xl-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'gateway-settings'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="gateway-settings"
                 data-action="cpf-page-device-details#tabChanged"
                 id="cpf-device-gateway-settings-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#cpf-device-gateway-settings-tab-pane"
                 type="button"
                 role="tab"
                 aria-controls="cpf-device-gateway-settings-tab-pane"
                 aria-selected="true">Gateway Settings</button>
       </li>
+      {{!--
+      On small screen sizes, the tabs will be hidden and this
+      menu will be displayed instead.
+      --}}
+      <li class="nav-item d-xl-none" role="presentation">
+        <div style="z-index:1000;" class="dropdown active nav-link">
+          <button class="btn dropdown-toggle p-0 nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{#if request.query.tab}}
+              {{#eq request.query.tab 'dashboard'}}
+              Dashboard
+              {{/eq}}
+              {{#eq request.query.tab 'explorer'}}
+              Data Explorer
+              {{/eq}}
+              {{#eq request.query.tab 'events'}}
+              Events
+              {{/eq}}
+              {{#eq request.query.tab 'alerting'}}
+              Alerting
+              {{/eq}}
+              {{#eq request.query.tab 'properties'}}
+              Properties
+              {{/eq}}
+              {{#eq request.query.tab 'gateway-settings'}}
+              Gateway Settings
+              {{/eq}}
+            {{else}}
+            Dashboard
+            {{/if}}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="dashboard"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                role="tab"
+                aria-controls="cpf-device-dashboard-tab-pane"
+                aria-selected="true"
+                href="#">
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="explorer"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                role="tab"
+                aria-controls="cpf-device-data-explorer-tab-pane"
+                aria-selected="true"
+                href="#">Data Explorer
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="events"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                role="tab"
+                aria-controls="cpf-device-events-tab-pane"
+                aria-selected="true"
+                href="#">Events
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="alerting"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                role="tab"
+                aria-controls="cpf-device-alerting-tab-pane"
+                aria-selected="true"
+                href="#">
+                Alerting
+              </a>
+            </li>
+            <li>
+              <a 
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="properties"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                role="tab"
+                aria-controls="cpf-device-properties-tab-pane"
+                aria-selected="true"
+                href="#">Properties
+              </a>
+            </li>
+            <li>
+              <a 
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="gateway-settings"
+                data-action="cpf-page-device-details#tabChanged"
+                id="cpf-device-gateway-settings-tab"
+                data-bs-toggle="tab"
+                role="tab"
+                aria-controls="cpf-device-gateway-settings-tab-pane"
+                aria-selected="true"
+                href="#">Gateway Settings
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
     </ul>
-
+    {{!-- Dashboard Tab --}}
     <div class="tab-content overflow-auto flex-grow-1" id="cpf-device-tabs-content">
-
-      {{!-- Dashboard Tab --}}
-      <div class="h-100 w-100 tab-pane fade {{#unless request.query.tab}}show active{{/unless}}{{#eq request.query.tab 'dashboard'}}show active{{/eq}}" id="cpf-device-dashboard-tab-pane" role="tabpanel" aria-labelledby="cpf-device-dashboard-tab" tabindex="0">
+      <div class="h-100 w-100 tab-pane overflow-hidden fade {{#unless request.query.tab}}show active{{/unless}}{{#eq request.query.tab 'dashboard'}}show active{{/eq}}" id="cpf-device-dashboard-tab-pane" role="tabpanel" aria-labelledby="cpf-device-dashboard-tab" tabindex="0">
         {{#if pageData.dashboardId}}
         {{!--
         The dashboard is an iframe instead of a turboframe because
@@ -95,12 +208,14 @@
         --}}
         <iframe loading="lazy" class="h-100 w-100" src="/cpf/elements/dashboard?dashboardId={{pageData.dashboardId}}&deviceId={{request.params.deviceId}}"></iframe>
         {{else}}
-        <div id="no-dashboard-message" class="alert alert-info" role="alert">
-          No dashboard is configured for this device.<br /><br />
-          {{#eq pageData.userLevel 0}}
-          Navigate to the <a href="/admin/dashboards">Dashboards</a> admin page to configure which
-          dashboard should display for this device's recipe.
-          {{/eq}}
+        <div class="p-4">
+          <div class="alert alert-info" role="alert">
+            No dashboard is configured for this device.<br /><br />
+            {{#eq pageData.userLevel 0}}
+            Navigate to the <a href="/admin/dashboards">Dashboards</a> admin page to configure which
+            dashboard should display for this device's recipe.
+            {{/eq}}
+          </div>
         </div>
         {{/if}}
       </div>
@@ -134,6 +249,19 @@
         </div>
       </div>
 
+      {{!-- Alerting Tab --}}
+      <div class="tab-pane fade {{#eq request.query.tab 'alerting'}}show active{{/eq}}" id="cpf-device-alerting-tab-pane" role="tabpanel" aria-labelledby="cpf-device-alerting-tab" tabindex="1">
+        <div class="p-4">
+          <turbo-frame
+            loading="lazy"
+            target="_top"
+            id="cpf-element-device-details-alerting"
+            src="/cpf/elements/device-details-alerting?deviceId={{request.params.deviceId}}&error={{request.query.alertingError}}&success={{request.query.alertingSuccess}}">
+            <img class="cpf-spinner" src="{{file 'spinner.gif'}}">
+          </turbo-frame>
+        </div>
+      </div>
+
       {{!-- Properties Tab --}}
       <div  class="tab-pane fade {{#eq request.query.tab 'properties'}}show active{{/eq}}"
             id="cpf-device-properties-tab-pane"
@@ -149,18 +277,18 @@
           <div class="m-4">
 
             {{#if request.query.error}}
-            <div class="my-2" data-cpf-page-device-details-target="serverSideErrorMessage">
-              <div class="alert alert-danger" role="alert">
-                ERROR: {{request.query.error}}
+              <div class="my-2" data-cpf-page-device-details-target="serverSideErrorMessage">
+                <div class="alert alert-danger" role="alert">
+                  ERROR: {{request.query.error}}
+                </div>
               </div>
-            </div>
             {{/if}}
             {{#if request.query.success}}
-            <div class="my-2">
-              <div data-cpf-page-device-details-target="successMessage" class="alert alert-success" role="alert">
-                Device properties changes have been saved.
+              <div class="my-2">
+                <div data-cpf-page-device-details-target="successMessage" class="alert alert-success" role="alert">
+                  Device properties changes have been saved.
+                </div>
               </div>
-            </div>
             {{/if}}
 
             <div class="my-2">
@@ -174,15 +302,8 @@
               <input type="text" class="form-control mt-1" name="name" value="{{pageData.device.name}}" required {{#eq pageData.role 'viewer'}}disabled{{/eq}}>
             </div>
             <div class="mb-3">
-              <label class="form-label">Losant ID</label>
+              <label class="form-label">ID</label>
               <input type="text" class="form-control mt-1" name="id" value="{{pageData.device.id}}" disabled>
-            </div>
-            <div class="mb-3">
-              <label for="particle_id">Particle ID</label>
-              <input id="particle_id" type="text" class="form-control" name="particle_id" value="{{pageData.device.tags.particle_id.[0]}}" aria-describedby="particle_id_help" required {{#eq pageData.role 'viewer'}}disabled{{/eq}} minlength="24" maxlength="24">
-              <div id="particle_id_help" class="form-text">
-                  The 24-character Particle ID for this device. This can be found in Particle's console.
-                </div>
             </div>
             <div class="mb-4">
               <label class="form-label">Description</label>
@@ -243,8 +364,7 @@
           </div>
         </form>
       </div>
-
-      {{!-- Gateway Settings Tab --}}
+       {{!-- Gateway Settings Tab --}}
       <div class="tab-pane fade {{#eq request.query.tab 'gateway-settings'}}show active{{/eq}}"
             id="cpf-device-gateway-settings-tab-pane"
             role="tabpanel"

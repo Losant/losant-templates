@@ -1,0 +1,550 @@
+resourceType: ExperienceFlowVersion
+resources:
+  - description: Created for Endpoint GET /cpf/elements/alerting-table
+    enabled: true
+    exportHash: be2a803b51601d7c903ae592d3423d6caaf8a25941193e6b0d8e522e9f60702d
+    flowId: ~exportplaceholderid-flow-cpfElementAlertingTable~
+    globals: []
+    id: ~exportplaceholderid-flowVersion-cpfElementAlertingTable~
+    name: cpf-element-alerting-table
+    nodes:
+      - config:
+          bodyTemplate: pageData
+          bodyTemplateType: path
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementAlertingTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '200'
+          sameSiteTemplate: ''
+        id: zj1iz_geHc
+        meta:
+          category: output
+          description: ''
+          label: 200 OK
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 520
+          'y': 1360
+        outputIds:
+          - - ryvcvZL8Ca
+        type: EndpointReplyNode
+      - config:
+          level: verbose
+          message: ''
+          property: ''
+        id: ryvcvZL8Ca
+        meta:
+          category: debug
+          description: ''
+          label: Debug
+          name: debug
+          x: 520
+          'y': 1460
+        outputIds: []
+        type: DebugNode
+      - config:
+          customNodeId: ~exportplaceholderid-flow-cpfGetTenancyLevel~
+          customNodeVersion: default
+          fields:
+            - id: user
+              value: experience.user
+          isInstance: false
+          resultPath: pageData.userLevel
+        id: 9OeCe0KlT8
+        meta:
+          category: experience
+          description: ''
+          label: 'CPF: Get Tenancy Level'
+          name: custom-node-execute-node
+          x: 140
+          'y': 140
+        outputIds:
+          - - 3ZyVIfEJUh
+          - - pQ5c9DODBh
+        type: CustomNodeExecuteNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Permission denied."
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementAlertingTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: 3ZyVIfEJUh
+        meta:
+          category: output
+          description: ''
+          label: 401 Unauthorized
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 260
+        outputIds:
+          - - mekTS1iLpJ
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: Unauthorized
+          property: ''
+        id: mekTS1iLpJ
+        meta:
+          category: debug
+          description: ''
+          label: Unauthorized
+          name: debug
+          x: 40
+          'y': 360
+        outputIds: []
+        type: DebugNode
+      - config:
+          expression: '{{data.query.deviceRecipeId}}'
+        id: pQ5c9DODBh
+        meta:
+          category: logic
+          description: ''
+          label: deviceRecipeId?
+          name: conditional
+          x: 360
+          'y': 360
+        outputIds:
+          - - cwjSQxMVUr
+          - - zbcSkFx6yT
+        type: ConditionalNode
+      - config:
+          expression: '{{pageData.userLevel}} == 0'
+        id: zbcSkFx6yT
+        meta:
+          category: logic
+          description: ''
+          label: Sys Admin?
+          name: conditional
+          x: 560
+          'y': 500
+        outputIds:
+          - - fk_kL0gcRq
+          - - dj2ELrT5wb
+        type: ConditionalNode
+      - config:
+          action: get
+          params:
+            - name: deviceRecipeId
+              type: string
+              value: '{{data.query.deviceRecipeId}}'
+            - name: tagsAsObject
+              type: string
+              value: ''
+            - name: attributesAsObject
+              type: string
+              value: ''
+          resource: deviceRecipe
+          responsePath: working.recipeResult
+        id: dj2ELrT5wb
+        meta:
+          category: data
+          description: ''
+          label: 'Recipe: Get'
+          name: losantapi
+          x: 660
+          'y': 620
+        outputIds:
+          - - z10C8SYU8y
+        type: LosantApiNode
+      - config:
+          expression: '{{working.recipeResult.result.id}}'
+        id: z10C8SYU8y
+        meta:
+          category: logic
+          description: ''
+          label: Recipe?
+          name: conditional
+          x: 660
+          'y': 720
+        outputIds:
+          - - SsmulT7yGS
+          - - cPl50gCJ9c
+        type: ConditionalNode
+      - config:
+          rules:
+            - destination: pageData.deviceRecipe
+              source: working.recipeResult.result
+              type: move
+        id: cPl50gCJ9c
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 760
+          'y': 840
+        outputIds:
+          - - uUduChZ0vf
+        type: MutateNode
+      - config:
+          attributesAsObject: false
+          findMetadata: false
+          findMethod: query
+          findMultiple: false
+          includeConnectionStatus: true
+          includeState: false
+          queryTemplate: |-
+            {
+              "$and": [
+                {
+                  "id": {
+                    "$eq": "{{data.query.deviceId}}"
+                  }
+                },
+                {
+                  "tags": {
+                    "$eq": {
+                      "$tagKey": "DeviceRecipe",
+                      "$tagValue": ""
+                    }
+                  }
+                }
+              ]
+            }
+          resultPath: working.device
+          sortDirection: asc
+          sortField: name
+          tagsAsObject: true
+        id: N3gsq7FOxF
+        meta:
+          category: data
+          description: ''
+          label: 'Device: Get'
+          name: get-device
+          x: 240
+          'y': 620
+        outputIds:
+          - - hxIonP7tGg
+        type: GetDeviceNode
+      - config:
+          action: get
+          params:
+            - name: sortField
+              type: string
+              value: name
+            - name: sortDirection
+              type: string
+              value: asc
+            - name: page
+              type: string
+              value: '0'
+            - name: perPage
+              type: string
+              value: '1000'
+            - name: filterField
+              type: string
+              value: name
+            - name: filter
+              type: string
+              value: '{{working.device.tags.DeviceRecipe.[0]}}'
+            - name: tagsAsObject
+              type: string
+              value: ''
+            - name: attributesAsObject
+              type: string
+              value: ''
+          resource: deviceRecipes
+          responsePath: working.recipesResult
+        id: lNB4rOkVfi
+        meta:
+          category: data
+          description: ''
+          label: 'Recipes: Get'
+          name: losantapi
+          x: 240
+          'y': 860
+        outputIds:
+          - - U_OlwjQgIx
+        type: LosantApiNode
+      - config:
+          rules:
+            - inputTemplate: name
+              outputPath: working.recipesGroupedByName
+              type: groupBy
+          sourceArrayPath: working.recipesResult.result.items
+        id: U_OlwjQgIx
+        meta:
+          category: logic
+          description: ''
+          label: Array
+          name: array
+          x: 240
+          'y': 960
+        outputIds:
+          - - ZOd43CpJDW
+        type: ArrayNode
+      - config:
+          rules:
+            - destination: pageData.device
+              source: working.device
+              type: move
+            - destination: pageData.deviceRecipe
+              type: set
+              valueTemplate: >-
+                {{jsonEncode (defaultTo (lookup (lookup
+                working.recipesGroupedByName
+                pageData.device.tags.DeviceRecipe.[0]) 0) null)}}
+              valueTemplateType: json
+        id: ZOd43CpJDW
+        meta:
+          category: logic
+          description: ''
+          label: Mutate
+          name: mutate
+          x: 240
+          'y': 1060
+        outputIds:
+          - - zUo0obIYKW
+        type: MutateNode
+      - config:
+          scopePath: ''
+          script: >
+            const collator = new Intl.Collator('en');
+
+            payload.pageData.deviceRecipe.attributes.sort((a, b) =>
+            collator.compare(a.name, b.name));
+
+            payload.pageData.deviceRecipeJSON =
+            JSON.stringify(payload.pageData.deviceRecipe);
+
+
+            if (payload.pageData.device) {
+              payload.pageData.device.attributes.sort((a, b) => collator.compare(a.name, b.name));
+              payload.pageData.deviceJSON = JSON.stringify(payload.pageData.device);
+            }
+        id: uUduChZ0vf
+        meta:
+          category: logic
+          description: ''
+          label: Function
+          name: function
+          x: 520
+          'y': 1260
+        outputIds:
+          - - zj1iz_geHc
+        type: RawFunctionNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Permission denied."
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementAlertingTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '401'
+          sameSiteTemplate: ''
+        id: fk_kL0gcRq
+        meta:
+          category: output
+          description: ''
+          label: 401 Unauthorized
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 460
+          'y': 620
+        outputIds:
+          - - HVQy39J_1q
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: Unauthorized
+          property: ''
+        id: HVQy39J_1q
+        meta:
+          category: debug
+          description: ''
+          label: Unauthorized
+          name: debug
+          x: 460
+          'y': 720
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Device type not found."
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementAlertingTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: SsmulT7yGS
+        meta:
+          category: output
+          description: ''
+          label: 404 Not Found
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 320
+          'y': 1360
+        outputIds:
+          - - zALe43_x1a
+        type: EndpointReplyNode
+      - config:
+          level: warn
+          message: Recipe Not Found
+          property: ''
+        id: zALe43_x1a
+        meta:
+          category: debug
+          description: ''
+          label: Recipe Not Found
+          name: debug
+          x: 320
+          'y': 1460
+        outputIds: []
+        type: DebugNode
+      - config: {}
+        id: Ay5fR6XrHt
+        meta:
+          annotationText: >-
+            Are we editing a device recipe (default thresholds) or are we
+            editing a device to override the default thresholds?
+          category: annotation
+          height: 140
+          label: Note
+          name: note
+          width: 260
+          x: 560
+          'y': 280
+        outputIds: []
+        type: AnnotationNode
+      - config: {}
+        id: aHHluDOVwj
+        meta:
+          annotationText: Only System Administrators can edit the device recipe.
+          category: annotation
+          height: 100
+          label: Note
+          name: note
+          width: 260
+          x: 760
+          'y': 480
+        outputIds: []
+        type: AnnotationNode
+      - config:
+          deviceIdTemplate: '{{data.query.deviceId}}'
+          idTemplate: '{{experience.user.id}}'
+          idTypeTemplate: experienceUser
+        id: cwjSQxMVUr
+        meta:
+          category: experience
+          description: ''
+          label: 'Device: Verify'
+          name: verify-experience-device
+          x: 140
+          'y': 500
+        outputIds:
+          - - _dfOzeilp1
+          - - N3gsq7FOxF
+        type: VerifyDeviceNode
+      - config:
+          level: warn
+          message: Device Not Found
+          property: ''
+        id: NKnxqczurz
+        meta:
+          category: debug
+          description: ''
+          label: Device Not Found
+          name: debug
+          x: 40
+          'y': 960
+        outputIds: []
+        type: DebugNode
+      - config:
+          bodyTemplate: |-
+            {
+              "error": "Device not found."
+            }
+          bodyTemplateType: json
+          cookieInfo: []
+          headerInfo: []
+          layoutIdTemplate: ''
+          mqttTopicsTemplate: []
+          pageIdTemplate: ~exportplaceholderid-experienceView-cpfElementAlertingTable~
+          replyIdPath: ''
+          replyType: page
+          responseCodeTemplate: '404'
+          sameSiteTemplate: ''
+        id: _dfOzeilp1
+        meta:
+          category: output
+          description: ''
+          label: 404 Not Found
+          mqttTopicsType: []
+          name: endpoint-reply
+          x: 40
+          'y': 860
+        outputIds:
+          - - NKnxqczurz
+        type: EndpointReplyNode
+      - config:
+          expression: '{{working.device}}'
+        id: hxIonP7tGg
+        meta:
+          category: logic
+          description: ''
+          label: Conditional
+          name: conditional
+          x: 240
+          'y': 720
+        outputIds:
+          - - _dfOzeilp1
+          - - lNB4rOkVfi
+        type: ConditionalNode
+      - config:
+          expression: '{{pageData.deviceRecipe}}'
+        id: zUo0obIYKW
+        meta:
+          category: logic
+          description: ''
+          label: Recipe?
+          name: conditional
+          x: 240
+          'y': 1160
+        outputIds:
+          - - SsmulT7yGS
+          - - uUduChZ0vf
+        type: ConditionalNode
+    triggers:
+      - config: {}
+        key: ~exportplaceholderid-experienceEndpoint-getCpfElementsAlertingTable~
+        meta:
+          category: trigger
+          description: ''
+          label: GET /cpf/elements/alerting-table
+          name: endpoint
+          uiId: aiCig7qBgV
+          x: 140
+          'y': 40
+        outputIds:
+          - - 9OeCe0KlT8
+        type: endpoint
+    version: develop
+version: 1

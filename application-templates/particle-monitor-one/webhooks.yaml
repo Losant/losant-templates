@@ -1,8 +1,10 @@
 resourceType: Webhook
 resources:
-  - basicAuthPassword: ''
+  - annotateMultipart: false
+    basicAuthPassword: ''
     basicAuthUsername: ''
-    exportHash: 40839fcf96c576f73aa9993271ad98093a12704a915990bcc82623fbc40c9654
+    castBuffersAs: array
+    exportHash: bc7f4d12c13ef369a406413043394fbd2027f2d9defe28b4c04b91064815eb8d
     id: ~exportplaceholderid-webhook-particle~
     isWebsocket: false
     name: Particle

@@ -1,24 +1,44 @@
 resourceType: DeviceRecipe
 resources:
   - attributes:
-      - attributeTags: {}
+      - attributeTags:
+          cpf_alerting_allow_duplicates: "true"
+          cpf_alerting_allow_override: "true"
+          cpf_alerting_enabled: "true"
+          cpf_alerting_enabled_high: "false"
+          cpf_alerting_enabled_low: "true"
+          cpf_alerting_threshold_low: "25"
         dataType: number
         description: ""
-        name: temperature
-      - attributeTags: {}
+        name: battery
+      - attributeTags:
+          cpf_alerting_allow_duplicates: "true"
+          cpf_alerting_allow_override: "true"
+          cpf_alerting_enabled: "true"
+          cpf_alerting_enabled_high: "true"
+          cpf_alerting_enabled_low: "true"
+          cpf_alerting_threshold_high: "95"
+          cpf_alerting_threshold_low: "15"
         dataType: number
         description: ""
         name: humidity
       - attributeTags: {}
-        dataType: number
-        description: ""
-        name: battery
-      - attributeTags: {}
         dataType: gps
         name: location
+      - attributeTags:
+          cpf_alerting_allow_duplicates: "true"
+          cpf_alerting_allow_override: "true"
+          cpf_alerting_enabled: "true"
+          cpf_alerting_enabled_high: "true"
+          cpf_alerting_enabled_low: "true"
+          cpf_alerting_threshold_high: "100"
+          cpf_alerting_threshold_low: "20"
+        dataType: number
+        description: ""
+        name: temperature
     deviceClass: standalone
     deviceName: Monitor One
-    exportHash: 997b4c490554fc8813b0780fbf27c7c5f6cf0e5b2e7c7282cc0da3ba7b3f2f96
+    exportHash: 451bdc1acbf859bf55fde9146074048a74f59a0efe03d041fde998114e14bac9
     id: ~exportplaceholderid-deviceRecipe-monitorOne~
     name: Monitor One
     tags:
