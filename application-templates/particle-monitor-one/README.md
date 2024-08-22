@@ -100,7 +100,7 @@ You can now switch to the **Events** tab and see Modbus data being published eve
 This template creates a ready-to-use application with an example device, recipe, customers, sites, and users. This template also includes a data simulation workflow and a workflow that generates events based on temperature and humidity threshold data. To begin using this template, the following setup steps are required:
 
 1. Set a password for the system admin user. Within Losant, navigate to **User and Groups** using the left navigation. Click the `system-admin@example.com` user from the list. Click the **Change Password?** checkbox and provide a secure password.
-1. Enable the **Simulator**, **Check Thresholds**, **Handle Particle Data**, and **Set Connection Status** workflows.
+1. Enable the **Simulator**, **Alerting**, **Handle Particle Data**, and **Set Connection Status** workflows.
 1. Set a secure value for the `cpf-jwt-password-reset-secret` [Application Global](https://docs.losant.com/applications/overview/#application-globals). This secret is used to sign tokens as part of the forgot password process.
 1. Navigate to your experience using your application's default [Experience Slug](https://docs.losant.com/experiences/domains/#experience-slugs) (e.g. `<YOUR_APPLICATION_ID>.onlosant.com`). You can find this link by clicking the **Edit** main left navigation item under the **Experience** section.
 1. Log in using the system administrator email and the password you set above.
