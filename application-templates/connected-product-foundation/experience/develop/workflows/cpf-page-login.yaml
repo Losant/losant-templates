@@ -2,7 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Created for Endpoint GET /login
     enabled: true
-    exportHash: e1332538cd6ec273bbd9615125031ed4dd976e589d96e24e1aaca22deb9fd6c5
+    exportHash: 08cfa2aca2ccdce909176d716115582a663e08b3df2cd8b93ee5b19d8d60a981
     flowId: ~exportplaceholderid-flow-cpfPageLogin~
     globals: []
     id: ~exportplaceholderid-flowVersion-cpfPageLogin~
@@ -153,7 +153,7 @@ resources:
           - - 0WtvsFUOPc
         type: EndpointReplyNode
       - config:
-          bodyTemplate: /
+          bodyTemplate: '{{{defaultTo data.query.redirect ''/''}}}'
           bodyTemplateType: string
           cookieInfo:
             - maxAgeTemplate: ''

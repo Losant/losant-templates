@@ -19,7 +19,7 @@
   </div>
   <div class="d-flex flex-column device-summary flex-grow-1 overflow-hidden">
     <ul class="nav nav-tabs" id="cpf-device-tabs" role="tablist">
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-lg-inline" role="presentation">
         {{!-- Default to this tab if request.query.tab is not set --}}
         <button class="nav-link {{#unless request.query.tab}}active{{/unless}}{{#eq request.query.tab 'dashboard'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="dashboard"
@@ -32,7 +32,7 @@
                 aria-controls="cpf-device-dashboard-tab-pane"
                 aria-selected="true">Dashboard</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-lg-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'explorer'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="explorer"
                 data-action="cpf-page-device-details#tabChanged"
@@ -44,7 +44,7 @@
                 aria-controls="cpf-device-data-explorer-tab-pane"
                 aria-selected="true">Data Explorer</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-lg-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'events'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="events"
                 data-action="cpf-page-device-details#tabChanged"
@@ -56,7 +56,7 @@
                 aria-controls="cpf-device-events-tab-pane"
                 aria-selected="true">Events</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-lg-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'alerting'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="alerting"
                 data-action="cpf-page-device-details#tabChanged"
@@ -68,7 +68,7 @@
                 aria-controls="cpf-device-alerting-tab-pane"
                 aria-selected="true">Alerting</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item d-none d-lg-inline" role="presentation">
         <button class="nav-link {{#eq request.query.tab 'properties'}}active{{/eq}}"
                 data-cpf-page-device-details-tab-param="properties"
                 data-action="cpf-page-device-details#tabChanged"
@@ -80,10 +80,108 @@
                 aria-controls="cpf-device-properties-tab-pane"
                 aria-selected="true">Properties</button>
       </li>
+      {{!--
+      On small screen sizes, the tabs will be hidden and this
+      menu will be displayed instead.
+      --}}
+      <li class="nav-item d-lg-none" role="presentation">
+        <div style="z-index:1000;" class="dropdown active nav-link">
+          <button class="btn dropdown-toggle p-0 nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{#if request.query.tab}}
+              {{#eq request.query.tab 'dashboard'}}
+              Dashboard
+              {{/eq}}
+              {{#eq request.query.tab 'explorer'}}
+              Data Explorer
+              {{/eq}}
+              {{#eq request.query.tab 'events'}}
+              Events
+              {{/eq}}
+              {{#eq request.query.tab 'alerting'}}
+              Alerting
+              {{/eq}}
+              {{#eq request.query.tab 'properties'}}
+              Properties
+              {{/eq}}
+            {{else}}
+            Dashboard
+            {{/if}}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="dashboard"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-dashboard-tab-pane"
+                role="tab"
+                aria-controls="cpf-device-dashboard-tab-pane"
+                aria-selected="true"
+                href="#">
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="explorer"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-data-explorer-tab-pane"
+                role="tab"
+                aria-controls="cpf-device-data-explorer-tab-pane"
+                aria-selected="true"
+                href="#">Data Explorer
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="events"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-events-tab-pane"
+                role="tab"
+                aria-controls="cpf-device-events-tab-pane"
+                aria-selected="true"
+                href="#">Events
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="alerting"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-alerting-tab-pane"
+                role="tab"
+                aria-controls="cpf-device-alerting-tab-pane"
+                aria-selected="true"
+                href="#">
+                Alerting
+              </a>
+            </li>
+            <li>
+              <a 
+                class="dropdown-item"
+                data-cpf-page-device-details-tab-param="properties"
+                data-action="cpf-page-device-details#tabChanged"
+                data-bs-toggle="tab"
+                data-bs-target="#cpf-device-properties-tab-pane"
+                role="tab"
+                aria-controls="cpf-device-properties-tab-pane"
+                aria-selected="true"
+                href="#">Properties
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
     </ul>
     {{!-- Dashboard Tab --}}
     <div class="tab-content overflow-auto flex-grow-1" id="cpf-device-tabs-content">
-      <div class="h-100 w-100 tab-pane fade {{#unless request.query.tab}}show active{{/unless}}{{#eq request.query.tab 'dashboard'}}show active{{/eq}}" id="cpf-device-dashboard-tab-pane" role="tabpanel" aria-labelledby="cpf-device-dashboard-tab" tabindex="0">
+      <div class="h-100 w-100 tab-pane overflow-hidden fade {{#unless request.query.tab}}show active{{/unless}}{{#eq request.query.tab 'dashboard'}}show active{{/eq}}" id="cpf-device-dashboard-tab-pane" role="tabpanel" aria-labelledby="cpf-device-dashboard-tab" tabindex="0">
         {{#if pageData.dashboardId}}
         {{!--
         The dashboard is an iframe instead of a turboframe because

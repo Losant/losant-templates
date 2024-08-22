@@ -1,7 +1,7 @@
 resourceType: ExperienceVersion
 resources:
   - endpointDefaultCors: true
-    exportHash: 602ae4ad7f7996abad5959eac1fdb20dfdfbe245ab5ccc327b5e3aa14be4c6ae
+    exportHash: fd06644392a2bcd981eed89f91c133103004a2e291bd53a2f9dc1fe6274353d9
     globals:
       - json: '"favicon_1700165919750.png"'
         key: favicon
@@ -16,5 +16,12 @@ resources:
       - json: '"Open+Sans"'
         key: font_family
     id: ~exportplaceholderid-experienceVersion-develop~
+    unauthorizedReply:
+      statusCode: 302
+      type: redirect
+      value: >-
+        /login?redirect={{encodeURIComponent
+        request.path}}%3F{{encodeURIComponent (queryStringEncode
+        request.query)}}
     version: develop
 version: 1

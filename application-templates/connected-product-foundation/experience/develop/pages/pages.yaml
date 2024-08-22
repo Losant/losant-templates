@@ -226,7 +226,7 @@ resources:
       title: Devices Table
     viewType: page
   - description: Created for Endpoint GET /admin/navigation.
-    exportHash: a0660233a0151acee5779466abbb8f795959f3c9c6c3b7385d70312b6187deda
+    exportHash: 59ae3393f186ec50610151dfe2e690f38ad7311b914039951e1eec4f04cfc53c
     headers:
       content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageAdminNavigation~
@@ -283,7 +283,7 @@ resources:
     viewTags:
       title: Customers
     viewType: page
-  - exportHash: 0b0a256fdb2430d18cce48fc3d7771ba472352aaae4f399221b137d8061a3953
+  - exportHash: cd6eca44c4cb9577b73c9d04f07a42238f880b95e4a69bf04d28f684315bdc04
     headers:
       content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageDeviceDetails~

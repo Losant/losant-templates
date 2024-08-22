@@ -1,7 +1,7 @@
 resourceType: Flow
 resources:
   - description: Replays simulated data to Turbofan devices.
-    exportHash: e15b9b224c8e97f3cd0b29e5f0de3fa21be0ce0fb6dc919642c81b5593b4bb1e
+    exportHash: b3a8531f2ed54c2302e6aa33fba7e88618a4f8fb2fad69a7a768980ea16f2606
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-simulator~
@@ -348,7 +348,7 @@ resources:
           - - jjjcclQvn6
         type: virtualButton
       - config:
-          seconds: 60
+          seconds: 300
         key: ~exportplaceholderid-flow-simulator~-6mYRiu62tRceTY7iTv0qU
         meta:
           category: trigger

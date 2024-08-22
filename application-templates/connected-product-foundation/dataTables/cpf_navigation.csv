@@ -1,15 +1,15 @@
 id,nav_label,nav_id,nav_parent,nav_link,nav_order,nav_icon,nav_access_group_level,nav_access_user_role,nav_location
-66955b78f67a9b482bc222e8,Dashboard,dashboard,,/,0,dashboard,-1,,top
-66955b78f67a9b482bc222e9,Devices,devices,,/devices,1,memory,-1,,top
-66955b78f67a9b482bc222ea,Register Device,devices.register_device,devices,/devices/register,0,,-1,admin,top
-66955b78f67a9b482bc222eb,Events,events,,/events,2,warning,-1,,top
-66955b78f67a9b482bc222ec,Customers,customers,,/customers,3,apartment,0,admin,top
-66955b78f67a9b482bc222ed,Sites,sites,,/sites,4,location_on,1,,top
-66955b78f67a9b482bc222ee,Users,users,,/users,5,person,-1,admin,top
-66955b78f67a9b482bc222ef,Admin,admin,,,0,admin_panel_settings,0,,bottom
-66955b78f67a9b482bc222f0,White Label,whitelabel,admin,/admin/whitelabel,0,,0,,bottom
-66955b78f67a9b482bc222f1,Navigation,navigation,admin,/admin/navigation,1,,0,,bottom
-66955b78f67a9b482bc222f2,Devices Table,56596bf2-c9f6-46f4-8159-819eb9654d0f,admin,/admin/devices-table,2,,0,,bottom
-66955b78f67a9b482bc222f3,Device Tags,b557e26d-cbc5-43b7-bc41-b39ba4d63004,admin,/admin/device-tags,2,,0,,bottom
-66955b78f67a9b482bc222f4,Dashboards,f9d5dde5-7a39-4193-a8c8-305599e69e7b,admin,/admin/dashboards,3,,0,,bottom
-66955b78f67a9b482bc222f5,Alerting,d599536c-aa49-43b0-af23-fccb19e8e062,admin,/admin/alerting,4,,0,,bottom
+66be14516772daaac2c0c444,Dashboard,dashboard,,/,0,dashboard,-1,,top
+66be14516772daaac2c0c445,Devices,devices,,/devices,1,memory,-1,,top
+66be14516772daaac2c0c446,Register Device,devices.register_device,devices,/devices/register,0,,-1,admin,top
+66be14516772daaac2c0c447,Events,events,,/events,2,warning,-1,,top
+66be14516772daaac2c0c448,Customers,customers,,/customers,3,apartment,0,admin,top
+66be14516772daaac2c0c449,Sites,sites,,/sites,4,location_on,1,,top
+66be14516772daaac2c0c44a,Users,users,,/users,5,person,-1,admin,top
+66be14516772daaac2c0c44b,Admin,admin,,,0,admin_panel_settings,0,,bottom
+66be14516772daaac2c0c44c,White Label,whitelabel,admin,/admin/whitelabel,0,,0,,bottom
+66be14516772daaac2c0c44d,Navigation,navigation,admin,/admin/navigation,1,,0,,bottom
+66be14516772daaac2c0c44e,Devices Table,56596bf2-c9f6-46f4-8159-819eb9654d0f,admin,/admin/devices-table,2,,0,,bottom
+66be14516772daaac2c0c44f,Device Tags,b557e26d-cbc5-43b7-bc41-b39ba4d63004,admin,/admin/device-tags,2,,0,,bottom
+66be14516772daaac2c0c450,Dashboards,f9d5dde5-7a39-4193-a8c8-305599e69e7b,admin,/admin/dashboards,3,,0,,bottom
+66be14516772daaac2c0c451,Alerting,d599536c-aa49-43b0-af23-fccb19e8e062,admin,/admin/alerting,4,,0,,bottom
