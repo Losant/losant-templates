@@ -175,7 +175,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 147e54d05acc78d044372e8ccf97fa8b3dc32dbe4b97967af5415fdb4997e4e2
+  - exportHash: d8cfb645b90303505eea84260b715376984c02a4f849b709afa004d4cfd2a50b
     id: ~exportplaceholderid-experienceView-cpfJsPageDeviceDetails~
     localFilename: ./cpf-js-page-device-details.hbs
     name: cpf-js-page-device-details

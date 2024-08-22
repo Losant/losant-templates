@@ -53,6 +53,7 @@ application.register("cpf-page-device-details", class extends Controller {
    * state with the tab as the query parameter.
    */
   tabChanged(event) {
+    event.preventDefault();
     let url = new URL(location);
     url.searchParams.set('tab', event.params.tab);
     Turbo.visit(url.toString());
