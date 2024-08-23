@@ -6,23 +6,23 @@ resources:
         deviceTags:
           - key: group
             value: Sadler Isberg
+        exportHash: 0da2313cfd69514a421ab1537c31c63ee80af02bac68a00c997d18edcb11473c
         groupTags: {}
         id: ~exportplaceholderid-experienceGroup-sadlerIsberg~
         name: Sadler-Isberg
-        parentId: ~exportplaceholderid-experienceGroup-kanarra~
       - children: []
         deviceIds: []
         deviceTags:
           - key: group
             value: Tekton Health
+        exportHash: d5ce5a066221ee3a4fec393bc91ac61c21c6b254b198d76c134caee590108fc0
         groupTags: {}
         id: ~exportplaceholderid-experienceGroup-tektonHealth~
         name: Tekton Health
-        parentId: ~exportplaceholderid-experienceGroup-kanarra~
     deviceIds: []
     deviceTags: []
+    exportHash: 336ac28b6dc076cdb7523c93d07d25e0e416aa79f9888eada2ad1ff19c487b25
     groupTags: {}
     id: ~exportplaceholderid-experienceGroup-kanarra~
     name: Kanarra
-    parentId: null
 version: 1

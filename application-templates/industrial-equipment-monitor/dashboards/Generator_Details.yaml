@@ -377,6 +377,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: 75437a2efd556a3fc4951fc991b2c59495cd1474b75c3f633fe1d5aa7dc8a3ce
     id: ~exportplaceholderid-dashboard-generatorDetails~
     isPasswordProtected: false
     name: Generator Details

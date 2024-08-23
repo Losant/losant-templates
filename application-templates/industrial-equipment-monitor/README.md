@@ -12,7 +12,7 @@ This template illustrates an industrial equipment monitoring solution. This is a
 2. Set new passwords for the three [Experience Users](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~/experience/users) included in this template.
 
 ## Device Simulation
-When the [Simulate Devices](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~/workflows/~exportplaceholderid-flow-simulateDevices~/develop) workflow is enabled, it will generate random sensor data for all generator devices every two minutes.
+When the [Simulate Devices](/applications/~exportplaceholderid-application-applicationIndustrialEquipmentMonitor~/workflows/~exportplaceholderid-flow-simulateDevices~/develop) workflow is enabled, it will generate random sensor data for all generator devices every five minutes.
 
 The most common state for every device is "Running," however there is a small chance that a generator will also be "Stopped" or "Faulted." When a device is running, the `days_running` and `hours_running` device attributes are incremented appropriately.
 
@@ -56,6 +56,6 @@ The following list contains helpful resources that are related to how this templ
 
 This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/losant-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
 
-Copyright (c) 2022 Losant IoT, Inc
+Copyright (c) 2024 Losant IoT, Inc
 
 https://www.losant.com

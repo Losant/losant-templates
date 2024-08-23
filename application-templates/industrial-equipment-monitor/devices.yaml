@@ -66,8 +66,8 @@ resources:
         description: ""
         name: is_in_stopped_mode
     children: []
-    description: ""
     deviceClass: standalone
+    exportHash: aebb307b8fc5a13b827ed83689efa80d8fbebc4070e2f163e7bcd4b176a1c006
     id: ~exportplaceholderid-device-acz8BpA5Ajz6~
     name: acz8bpA5ajz6
     tags:
@@ -149,8 +149,8 @@ resources:
         description: ""
         name: is_in_stopped_mode
     children: []
-    description: ""
     deviceClass: standalone
+    exportHash: 5a6b616e43853a31fd983ed410bcb077822cd446aaf0692f5d778936fbd9fe7e
     id: ~exportplaceholderid-device-bTrMUwapvBsU~
     name: bTrMUwapvBsU
     tags:
@@ -232,91 +232,8 @@ resources:
         description: ""
         name: is_in_stopped_mode
     children: []
-    description: ""
     deviceClass: standalone
-    id: ~exportplaceholderid-device-fBbha7ZyK233~
-    name: fBBHA7ZyK233
-    tags:
-      - key: DeviceRecipe
-        value: Generator
-      - key: serial
-        value: fBBHA7ZyK233
-      - key: model
-        value: QT130
-      - key: image
-        value: /device-images/rd05034.png
-      - key: location
-        value: 40.7411999,-84.1181147
-      - key: group
-        value: Tekton Health
-  - attributes:
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: manifold_temperature
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: rpm
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: battery_voltage
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: fuel_level
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: oil_pressure
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: output_current
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: running
-      - attributeTags: {}
-        dataType: gps
-        description: ""
-        name: location
-      - attributeTags: {}
-        dataType: string
-        description: ""
-        name: fault_description
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: state_index
-      - attributeTags: {}
-        dataType: string
-        description: ""
-        name: state_description
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: hours_running
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: days_running
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: is_in_faulted_mode
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: is_in_running_mode
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: is_in_stopped_mode
-    children: []
-    description: ""
-    deviceClass: standalone
+    exportHash: 2fb5e9157b2b0db05c997b2339f32f17a2a26c18fdf559e3e945349abaa7d4d0
     id: ~exportplaceholderid-device-uGkK5MptEfkv~
     name: uGkK5mptEFKV
     tags:
@@ -398,8 +315,8 @@ resources:
         description: ""
         name: is_in_stopped_mode
     children: []
-    description: ""
     deviceClass: standalone
+    exportHash: c2f9e9f2daa7a6a9e2c97fb1dba8d6575c90ad7454c987499490f7037b6bad91
     id: ~exportplaceholderid-device-wA4XusQwXpyH~
     name: wA4xusQWXpyH
     tags:

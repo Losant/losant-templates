@@ -2,6 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Starter workflow for building a response to this endpoint
     enabled: true
+    exportHash: 06a9e7d9b4e2df9914bf7589865b54dc65ee36bf2095d497d5103339b85ece90
     flowId: ~exportplaceholderid-flow-workflowPostLogin~
     globals: []
     id: ~exportplaceholderid-flowVersion-workflowPostLogin~

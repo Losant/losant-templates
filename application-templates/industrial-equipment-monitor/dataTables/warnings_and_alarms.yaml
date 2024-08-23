@@ -13,6 +13,7 @@ resources:
       - constraint: required
         dataType: string
         name: additional_information
+    exportHash: 9ebbfaf8909c4d0f82fcdd9e4a9121b9ccc23713e2223824de71e30b35e5e368
     id: ~exportplaceholderid-dataTable-warningsAndAlarms~
     localFilename: ./warnings_and_alarms.csv
     name: warnings_and_alarms

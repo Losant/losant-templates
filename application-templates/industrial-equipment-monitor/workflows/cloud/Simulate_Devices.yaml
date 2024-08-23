@@ -1,6 +1,6 @@
 resourceType: Flow
 resources:
-  - description: ''
+  - exportHash: 69015a813cd38c447f1ff67057a49ba632f6f379196723fe5259b35f067f112c
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-simulateDevices~
@@ -122,11 +122,12 @@ resources:
         outputIds: []
         type: DeviceChangeStateNode
       - config:
+          level: verbose
           message: Final - Simulated Data
           property: ''
         id: Alsrc_AdRy
         meta:
-          category: output
+          category: debug
           description: ''
           label: Final - Simulated Data
           name: debug
@@ -433,11 +434,12 @@ resources:
           - - u5ZknP8DEH
         type: RandomNumberNode
       - config:
+          level: verbose
           message: End of Each Loop
           property: ''
         id: xamEWg56W6
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: TtAlrIdp1v
           label: End of Each Loop
@@ -657,7 +659,6 @@ resources:
           groupId: TtAlrIdp1v
           label: 'Table: Get Rows'
           name: get-table-rows
-          queryMode: $or
           x: 500
           'y': 1840
         outputIds:
@@ -827,7 +828,7 @@ resources:
         type: MathNode
     triggers:
       - config:
-          seconds: 120
+          seconds: 300
         key: ~exportplaceholderid-flow-simulateDevices~-u17poimTNwmJK1e0AzDDR
         meta:
           category: trigger

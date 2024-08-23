@@ -1,6 +1,7 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
+    exportHash: 0a582a04aa7a6d2e5a38e7fa5cfd27cb4a3f3ae1044b024efc375e880b6a3cdc
     flowId: ~exportplaceholderid-flow-workflowGetLogout~
     globals: []
     id: ~exportplaceholderid-flowVersion-workflowGetLogout~

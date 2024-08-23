@@ -3,16 +3,19 @@ resources:
   - email: kanarra@example.com
     experienceGroupIds:
       - ~exportplaceholderid-experienceGroup-kanarra~
+    exportHash: 2d1fd5cb1675cfd77e91ff37de82685772f53f1712247435c7356c5ed8632fd8
     id: ~exportplaceholderid-experienceUser-kanarraExampleCom~
     userTags: {}
   - email: sadler-isberg@example.com
     experienceGroupIds:
       - ~exportplaceholderid-experienceGroup-sadlerIsberg~
+    exportHash: 2487a19ccbaa5c86853b71a29dbc66c191725bd00cc1de5eb6f6a0fdb6a8ff4b
     id: ~exportplaceholderid-experienceUser-sadlerIsbergExampleCom~
     userTags: {}
   - email: tekton-health@example.com
     experienceGroupIds:
       - ~exportplaceholderid-experienceGroup-tektonHealth~
+    exportHash: 421aa5b50f68d284469a5e5c9e6c19f166bac9b472fb426b930847e4c4ab614c
     id: ~exportplaceholderid-experienceUser-tektonHealthExampleCom~
     userTags: {}
 version: 1

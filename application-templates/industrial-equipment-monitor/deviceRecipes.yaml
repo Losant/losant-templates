@@ -58,6 +58,7 @@ resources:
     description: Industrial power generator.
     deviceClass: standalone
     deviceName: Device from recipe Generator
+    exportHash: 276b1b925567682ebd171b5f5de0edec36ba609080c002cecd5aabbd3b357fed
     id: ~exportplaceholderid-deviceRecipe-generator~
     name: Generator
     tags: []
