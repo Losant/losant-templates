@@ -1176,6 +1176,7 @@ resources:
     defaultTheme: light
     description: '### {{ctx.deviceId-0.name}} '
     duration: 3600000
+    exportHash: c831726ef203f961111c029f9fc64dc896b2baaa24fa0cb0b6c07e640855e44d
     id: ~exportplaceholderid-dashboard-paperMachine~
     isPasswordProtected: false
     name: Paper Machine

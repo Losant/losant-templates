@@ -123,6 +123,7 @@ resources:
     deviceClass: standalone
     deviceDescription: A unique paper machine creating toilet paper.
     deviceName: "Paper Machine #"
+    exportHash: 1d3d05c7cbaef31711ea0a61efd93b642c38fcdb51dbfedc9e70e03f97d88cfb
     id: ~exportplaceholderid-deviceRecipe-paperMachine~
     name: Paper Machine
     tags:

@@ -3,6 +3,7 @@ resources:
   - description: >-
       This Workflow calculates OEE and its metrics, for each paper machine,
       every hour.
+    exportHash: c833a7dfd18f3f4285d1107d0767c4bc1d47edbd2aba9b4c3c0cd0edd5e04852
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-oeeCalculations~

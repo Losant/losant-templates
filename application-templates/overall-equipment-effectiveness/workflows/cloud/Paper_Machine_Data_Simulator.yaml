@@ -3,6 +3,7 @@ resources:
   - description: >-
       This simulates the status and production of each paper machine. It runs
       every minute.
+    exportHash: cba43fa4d8ead9ecacf6fc492fc6c06fff39b0843b7090b8caa2ac6de291c643
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-paperMachineDataSimulator~
@@ -36,6 +37,8 @@ resources:
       - config:
           currentItemPath: working.device
           loopSourcePath: working.devices
+          mapResultPath: ''
+          parallel: false
         id: ZYR4WqJ3yy
         meta:
           category: logic
@@ -67,11 +70,12 @@ resources:
           - - TmlCjx85u6
         type: RandomNumberNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: tGAObGRIUH
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: ZYR4WqJ3yy
           label: Sheetbreak
@@ -82,11 +86,12 @@ resources:
           - - kmhe-X6WdC
         type: DebugNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: R5IxZOFqKx
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: ZYR4WqJ3yy
           label: Unplanned
@@ -97,11 +102,12 @@ resources:
           - - TaD85YNvUr
         type: DebugNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: 0rwXF79Z8m
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: ZYR4WqJ3yy
           label: Planned
@@ -112,11 +118,12 @@ resources:
           - - AXjcmzaHW8
         type: DebugNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: n-Wo6n2ecS
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: ZYR4WqJ3yy
           label: Running
@@ -800,11 +807,12 @@ resources:
           - - Jq6wQD6dws
         type: MathNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: tySpKPKalJ
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: ZYR4WqJ3yy
           label: UPDATE
@@ -1505,7 +1513,7 @@ resources:
             You can change this to match the type of device you will be running
             your simulation on.
           category: annotation
-          height: 140
+          height: 160
           label: Note
           name: note
           width: 360
@@ -1517,9 +1525,9 @@ resources:
         id: ulJ9ulYlpv
         meta:
           annotationText: >-
-            The timer runs the simulation every minute. The Virtual Button
-            allows for the workflow to be triggered manually during testing
-            phases of the simulation set up.
+            The timer runs the simulation every three minutes. The Virtual
+            Button allows for the workflow to be triggered manually during
+            testing phases of the simulation set up.
           category: annotation
           height: 120
           label: Note
@@ -1898,7 +1906,7 @@ resources:
         type: RandomNumberNode
     triggers:
       - config:
-          seconds: 60
+          seconds: 180
         key: >-
           ~exportplaceholderid-flow-paperMachineDataSimulator~-Dj8pq2cY3qaCcUQ6aBbQn
         meta:
