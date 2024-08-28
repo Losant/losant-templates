@@ -2,6 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Accepts the EnOcean device details and queues a provision request.
     enabled: true
+    exportHash: c2b910317779368c4923e3b1434d7527106549db8f10c62f35b57f76351e0a75
     flowId: ~exportplaceholderid-flow-postProvision~
     globals: []
     id: ~exportplaceholderid-flowVersion-postProvision~

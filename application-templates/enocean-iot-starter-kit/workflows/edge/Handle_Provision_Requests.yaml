@@ -3,6 +3,7 @@ resources:
   - description: >-
       Receives provision commands from cloud, sends requests to EnOcean IoT
       Connector.
+    exportHash: 13bcb73dfcaaa4339de1309c7cd6651e8a07c8fbf45cb4145979bf9c4ceff9d9
     flowClass: edge
     globals: []
     id: ~exportplaceholderid-flow-handleProvisionRequests~

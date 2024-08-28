@@ -1,6 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
+    exportHash: 65ef51109a5f81d276ff776b1f7fec7166a927f7d6c0ddf136f038b2e49e51e5
     id: ~exportplaceholderid-experienceView-tlDeviceList~
     localFilename: ./tl-device-list.hbs
     name: tl-device-list
@@ -8,6 +9,7 @@ resources:
     viewTags: {}
     viewType: component
   - description: ""
+    exportHash: 1c22728dc4197f7e23c608c00d87c29710acdf0359b7ed40d939855bb263f3d8
     id: ~exportplaceholderid-experienceView-tlNavBs4~
     localFilename: ./tl-nav-bs4.hbs
     name: tl-nav-bs4

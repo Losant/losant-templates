@@ -3,6 +3,7 @@ resources:
   - description: >-
       Receives sensor data from the EnOcean IoT Connector, transforms, and
       forwards to Losant.
+    exportHash: 5ea520d2eedca21ae4cf304225058c8a4e625b4acafd7bcc067e3a0526752879
     flowClass: edge
     globals: []
     id: ~exportplaceholderid-flow-handleEnOceanData~

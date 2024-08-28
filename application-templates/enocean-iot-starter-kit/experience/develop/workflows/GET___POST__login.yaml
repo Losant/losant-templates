@@ -2,6 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Handles both the GET and POST requests for user authentication.
     enabled: true
+    exportHash: 91994239505931e072d6f5e3db71bee9ba4766595d319baddee7cea5b14f4950
     flowId: ~exportplaceholderid-flow-getPostLogin~
     globals: []
     id: ~exportplaceholderid-flowVersion-getPostLogin~

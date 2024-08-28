@@ -1,6 +1,9 @@
 resourceType: ExperienceView
 resources:
   - description: Created for Endpoint GET /.
+    exportHash: 0d3b6a44643ac6311f8ae1dce7df151a8b6dd36f50dfbf2e65de6fd517996862
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-pageHome~
     layoutId: ~exportplaceholderid-experienceView-fullWidthTwoColumns~
     localFilename: ./page-home.hbs
@@ -10,6 +13,9 @@ resources:
     viewType: page
   - description: A basic login form that's designed to accept an experience user's
       email and password. This form submits back to the POST /tl-login endpoint.
+    exportHash: 2f51062fdbf15d13d7ae2dd7491d8ffed157a3461fdf6a3e91657b2db4113ee1
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-pageLogin~
     layoutId: ~exportplaceholderid-experienceView-narrowWidthSingleColumn~
     localFilename: ./page-login.hbs
@@ -18,6 +24,9 @@ resources:
     viewTags: {}
     viewType: page
   - description: ""
+    exportHash: c545f300471ae739dfcc03e920df8e1904b9e4dac8bca38b10a1cbeabb29eade
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-pageProvision~
     layoutId: ~exportplaceholderid-experienceView-fixedWidthSingleColumn~
     localFilename: ./page-provision.hbs

@@ -164,6 +164,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: 2b4bccc787eff0b48441381ff529aebe0a8ecb33733fbb18e408123e3e13eee9
     id: ~exportplaceholderid-dashboard-f60202EdrpuWEoDoubleRockerPad~
     isPasswordProtected: false
     name: F6-02-02 | EDRPU-W-EO Double Rocker Pad

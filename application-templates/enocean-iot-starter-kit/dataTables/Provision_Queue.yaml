@@ -14,6 +14,7 @@ resources:
         dataType: string
         name: sourceEurid
     description: Table of the pending provisioning requests.
+    exportHash: b679bebeca7e836a2e6c57a1a4bea31a3e78041729e4507d7c562aa5888d5b6e
     id: ~exportplaceholderid-dataTable-provisionQueue~
     localFilename: ./Provision_Queue.csv
     name: Provision Queue

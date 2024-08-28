@@ -1,6 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
+    exportHash: 5d2200d8282c6f8526d750ee53a23801d1038fc43f83a00035d28f13122b7140
     id: ~exportplaceholderid-experienceView-fixedWidthSingleColumn~
     localFilename: ./Fixed_Width__Single_Column.hbs
     name: Fixed Width, Single Column
@@ -8,6 +9,7 @@ resources:
     viewTags: {}
     viewType: layout
   - description: ""
+    exportHash: ea9c536a59bf04007d86e0a0ce40adbaa55df7c4cc89a4290b5b3ebf5f7fa5f0
     id: ~exportplaceholderid-experienceView-fullWidthTwoColumns~
     localFilename: ./Full_Width__Two_Columns.hbs
     name: Full Width, Two Columns
@@ -15,6 +17,7 @@ resources:
     viewTags: {}
     viewType: layout
   - description: ""
+    exportHash: aac1f07b6a555ecf7ae9ee3e9c78d1f3914cfa17511a5303ff9c18c6b6ae1625
     id: ~exportplaceholderid-experienceView-narrowWidthSingleColumn~
     localFilename: ./Narrow_Width__Single_Column.hbs
     name: Narrow Width, Single Column

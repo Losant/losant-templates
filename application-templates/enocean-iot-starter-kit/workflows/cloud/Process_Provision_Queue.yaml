@@ -1,6 +1,7 @@
 resourceType: Flow
 resources:
   - description: Processes the provision queue and sends requests to Edge Compute device.
+    exportHash: 06609f88c84dca00fd33cf9bc7143e02f91f6b29eb52ec1ca82abef944c288ba
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-processProvisionQueue~
@@ -27,11 +28,12 @@ resources:
           - - 8eIBwP_a9p
         type: DataTableQueryNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: sK5wvlp6l9
         meta:
-          category: output
+          category: debug
           description: ''
           label: Debug
           name: debug
@@ -126,11 +128,12 @@ resources:
         outputIds: []
         type: AnnotationNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: X30_I0AV4y
         meta:
-          category: output
+          category: debug
           description: ''
           label: Debug
           name: debug
@@ -142,8 +145,9 @@ resources:
         id: byEvndZtYW
         meta:
           annotationText: >-
-            Every minute, query all pending provision requests from the data
-            table. For each request, send a command to the edge compute device.
+            Every five minutes, query all pending provision requests from the
+            data table. For each request, send a command to the edge compute
+            device.
           category: annotation
           height: 160
           label: Note
@@ -291,7 +295,7 @@ resources:
         type: MutateNode
     triggers:
       - config:
-          seconds: 60
+          seconds: 300
         key: ~exportplaceholderid-flow-processProvisionQueue~-unUm96Tc5ZFA7PQb53VEn
         meta:
           category: trigger

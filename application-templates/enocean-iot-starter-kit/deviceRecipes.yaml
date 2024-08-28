@@ -23,6 +23,7 @@ resources:
       ETHSU
       Temperature and Humidity Sensor
     deviceName: A5-04-03
+    exportHash: c03ec3e7682dd07aeea2cd8c575d4a007e0c8e8f990da2c636ab78a34dbe3817
     id: ~exportplaceholderid-deviceRecipe-a50403~
     name: A5-04-03
     tags:
@@ -84,6 +85,7 @@ resources:
       EMSIU
       Multi-sensor
     deviceName: D2-14-41
+    exportHash: eff96d04f54384abc65c27140cfc12063176405d15188e6b9d302fc7f6405dec
     id: ~exportplaceholderid-deviceRecipe-d21441~
     name: D2-14-41
     tags:
@@ -111,6 +113,7 @@ resources:
       EMCSU
       magnet contact
     deviceName: D5-00-01
+    exportHash: 981569b2d235adaeae438d2fee76432f886cd2d7775c79f786353ce7175504ab
     id: ~exportplaceholderid-deviceRecipe-d50001~
     name: D5-00-01
     tags:
@@ -147,6 +150,7 @@ resources:
       EDRPU-W-EO
       Double Rocker Pad
     deviceName: EDRPU-W-EO
+    exportHash: a20f3f81486dca7f79ba61d139d3a25a8cafd1ad80069fa99308432b8550540e
     id: ~exportplaceholderid-deviceRecipe-f60202~
     name: F6-02-02
     tags:

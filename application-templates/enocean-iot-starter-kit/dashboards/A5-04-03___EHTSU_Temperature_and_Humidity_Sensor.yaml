@@ -249,6 +249,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: d2d316ae707deb7023df58e0986a3f0faccd98c4659e9e862895789902652a9a
     id: ~exportplaceholderid-dashboard-a50403EhtsuTemperatureAndHumiditySensor~
     isPasswordProtected: false
     name: A5-04-03 | EHTSU Temperature and Humidity Sensor

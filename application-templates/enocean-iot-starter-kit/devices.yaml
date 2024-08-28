@@ -3,6 +3,7 @@ resources:
   - attributes: []
     children: []
     deviceClass: edgeCompute
+    exportHash: 0782051ee3c3d0d16b368090ae9b29483af89e8f8554e9730485fffbf0322631
     id: ~exportplaceholderid-device-edgeCompute~
     name: Edge Compute
     tags: []
@@ -28,6 +29,7 @@ resources:
       EDRPU-W-EO
       Double Rocker Pad
     deviceClass: peripheral
+    exportHash: 07fbfc5e5c7ba3778e952405ba495ab962ec4fc5da062e3a8ccd46cd9b9fbb7a
     gatewayId: ~exportplaceholderid-device-edgeCompute~
     id: ~exportplaceholderid-device-f60202~
     name: F6-02-02

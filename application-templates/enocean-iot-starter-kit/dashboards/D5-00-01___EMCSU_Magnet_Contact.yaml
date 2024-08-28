@@ -95,6 +95,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: d9f59fb3c7b457752c224a67d9af9fa01368a7d6e600faa620855ac25c9b528e
     id: ~exportplaceholderid-dashboard-d50001EmcsuMagnetContact~
     isPasswordProtected: false
     name: D5-00-01 | EMCSU Magnet Contact
