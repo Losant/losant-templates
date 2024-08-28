@@ -4,6 +4,7 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: 51a32970019b3aaab81b09dba37516f7cc30b87c82e761367cea98ab4efb60e5
     id: ~exportplaceholderid-experienceEndpoint-getHistory~
     method: get
     route: /history
@@ -18,6 +19,7 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: 7b0d81c8a42dbf80a57ca2bc5871084af1cb031eca2963b825476c867354567b
     id: ~exportplaceholderid-experienceEndpoint-getLogin~
     method: get
     route: /login
@@ -28,6 +30,7 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: b5b77b5f18d82480238d1617644f1c1d5849b2abfaa0b3b24e63321e0535ac9c
     id: ~exportplaceholderid-experienceEndpoint-getLogout~
     method: get
     route: /logout
@@ -38,6 +41,7 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: c185b60f9e196f2528518985deac98d3e6736f2d2d4b1f9e4363c5c9e0d9b96e
     id: ~exportplaceholderid-experienceEndpoint-get~
     method: get
     route: /
@@ -57,6 +61,7 @@ resources:
     enabled: true
     endpointTags: {}
     experienceGroupIds: []
+    exportHash: 087510bd25ab48ddaea4968d1ccdd283d02730e0fd692092cf85cc648844dbc3
     id: ~exportplaceholderid-experienceEndpoint-postLogin~
     method: post
     route: /login

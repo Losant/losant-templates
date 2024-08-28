@@ -2,6 +2,7 @@ resourceType: ExperienceUser
 resources:
   - email: employee@example.com
     experienceGroupIds: []
+    exportHash: 0b5bda50420e30d11b648f66490f09ed6feaec10524b594e345b00a7f9f092d5
     firstName: John
     id: ~exportplaceholderid-experienceUser-employeeExampleCom~
     lastName: Smith
@@ -9,6 +10,7 @@ resources:
       role: employee
   - email: manager@example.com
     experienceGroupIds: []
+    exportHash: 5edb7062485e309f5aff5ce520bf3fdf52bbdbc3b2b6b0976b235741c18aa4f8
     firstName: Jane
     id: ~exportplaceholderid-experienceUser-managerExampleCom~
     lastName: Smith

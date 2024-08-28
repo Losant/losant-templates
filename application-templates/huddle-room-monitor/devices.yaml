@@ -51,6 +51,7 @@ resources:
                 name: meeting_time
             children: []
             deviceClass: standalone
+            exportHash: 56a91a053012d91d2aeecc85f07037a0ece82465bf01452c0d7a9a86e55ed655
             id: ~exportplaceholderid-device-huddleRoom1~
             name: Huddle Room 1
             tags: []
@@ -65,6 +66,7 @@ resources:
                 name: meeting_time
             children: []
             deviceClass: standalone
+            exportHash: 5386a68533a46e2b21965eddee3a4ef4904acf6a6ede1f005d4714fd3fc245b2
             id: ~exportplaceholderid-device-huddleRoom2~
             name: Huddle Room 2
             tags: []
@@ -79,16 +81,19 @@ resources:
                 name: meeting_time
             children: []
             deviceClass: standalone
+            exportHash: 2d47855fd534424074b2dc5710871bf0aa0cecb5d7166ad1ce0398f21a8247d7
             id: ~exportplaceholderid-device-huddleRoom3~
             name: Huddle Room 3
             tags: []
         deviceClass: system
+        exportHash: 0787e5bcde7e3fcf8843ed4fb4dadba969de88dde67a6022dbe380eb3bcf5c05
         id: ~exportplaceholderid-device-floor7~
         keepDuplicates: false
         name: Floor 7
         systemInterval: 60
         tags: []
     deviceClass: system
+    exportHash: 35efdcde1ca4dabc88297d31d135b3d11de02937145f18c35252f3fd711cf606
     id: ~exportplaceholderid-device-buildingA~
     keepDuplicates: false
     name: Building A

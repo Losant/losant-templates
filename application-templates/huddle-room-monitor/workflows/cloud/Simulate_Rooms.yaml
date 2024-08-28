@@ -1,6 +1,6 @@
 resourceType: Flow
 resources:
-  - description: ''
+  - exportHash: fcffa533f603603b9e9abb7b970bbc19bb0bcca193fd5a469bb79f3fb66ce52e
     flowClass: cloud
     globals:
       - json: '5'
@@ -41,7 +41,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: jaCHoVPcAT
           label: 'Device: Get'
           name: get-device
           x: 340
@@ -50,13 +49,13 @@ resources:
           - - 9lHXroNaG2
         type: GetDeviceNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: m2AzVMvKHl
         meta:
-          category: output
+          category: debug
           description: ''
-          id: m2AzVMvKHl
           label: Debug
           name: debug
           x: 340
@@ -72,7 +71,6 @@ resources:
           description: ''
           groupStartX: 700
           groupStartY: 140
-          id: 9lHXroNaG2
           label: Loop
           name: loop
           x: 340
@@ -89,7 +87,6 @@ resources:
           category: loop
           description: ''
           groupId: 9lHXroNaG2
-          id: kYA5v1samN
           label: Next
           name: loop-next
           x: 740
@@ -97,14 +94,14 @@ resources:
         outputIds: []
         type: LoopCapNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: qsGkmDFmIy
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: 9lHXroNaG2
-          id: qsGkmDFmIy
           label: Debug
           name: debug
           x: 740
@@ -121,7 +118,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: 552OFXo8nk
           label: Random Number
           name: random-number
           x: 1240
@@ -136,7 +132,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: ZOT2ggPyz2
           label: Conditional
           name: conditional
           x: 1240
@@ -155,7 +150,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: IuNJ5N2jWe
           label: Mutate
           name: mutate
           x: 1240
@@ -175,7 +169,6 @@ resources:
           category: output
           description: ''
           groupId: 9lHXroNaG2
-          id: HPyDWtHHiB
           label: 'Device: State'
           name: device-state
           x: 740
@@ -193,7 +186,6 @@ resources:
           category: data
           description: ''
           groupId: 9lHXroNaG2
-          id: BKzJPatKvT
           label: 'Storage: Set Value'
           name: store-value
           x: 1240
@@ -212,7 +204,6 @@ resources:
           category: data
           description: ''
           groupId: 9lHXroNaG2
-          id: Y1QSAmRKTK
           label: 'Storage: Get Value'
           name: get-value
           x: 700
@@ -227,7 +218,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: fbVyxEUP-H
           label: Conditional
           name: conditional
           x: 700
@@ -247,7 +237,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: OlVDtpDmuP
           label: Mutate
           name: mutate
           x: 460
@@ -262,7 +251,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: NmfqrZHgY5
           label: Conditional
           name: conditional
           x: 240
@@ -278,7 +266,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: Qc77BXh5mC
           label: Conditional
           name: conditional
           x: 460
@@ -298,7 +285,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: FXJvgCT2bX
           label: Date/Time
           name: date-time
           x: 460
@@ -315,7 +301,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: j-9t1-aJOJ
           label: Math
           name: math
           x: 460
@@ -333,7 +318,6 @@ resources:
           category: data
           description: ''
           groupId: 9lHXroNaG2
-          id: BKzJPatKvT
           label: 'Storage: Set Value'
           name: store-value
           x: 700
@@ -356,7 +340,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: OlVDtpDmuP
           label: Mutate
           name: mutate
           x: 700
@@ -373,7 +356,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: jVgTpIU-CW
           label: Random Number
           name: random-number
           x: 480
@@ -391,7 +373,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: IuNJ5N2jWe
           label: Mutate
           name: mutate
           x: 1020
@@ -406,7 +387,6 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: ZOT2ggPyz2
           label: Conditional
           name: conditional
           x: 480
@@ -436,10 +416,8 @@ resources:
           category: logic
           description: ''
           groupId: 9lHXroNaG2
-          id: 2OaRPMVyJJ
           label: Time Range
           name: time-range
-          timeZoneTemplateType: selector
           x: 1140
           'y': 520
         outputIds:
@@ -535,7 +513,6 @@ resources:
           category: trigger
           description: ''
           deviceId: null
-          id: 0BhpV_inof
           label: Virtual Button
           name: virtualButton
           payload: ''
@@ -546,12 +523,11 @@ resources:
           - - jaCHoVPcAT
         type: virtualButton
       - config:
-          seconds: 120
+          seconds: 300
         key: ~exportplaceholderid-flow-simulateRooms~-fD-ljzeWTAunUy6P0SECX
         meta:
           category: trigger
           description: ''
-          id: 5hK3Pa-Zjm
           label: Timer
           name: timer
           timerTypeSelect: seconds

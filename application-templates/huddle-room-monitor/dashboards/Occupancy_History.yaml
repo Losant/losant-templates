@@ -467,6 +467,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: 3c4b7ca4b02267507c2c803e4887e324ceee5006c98793d3da9a84353ca281d6
     id: ~exportplaceholderid-dashboard-occupancyHistory~
     isPasswordProtected: false
     name: Occupancy History

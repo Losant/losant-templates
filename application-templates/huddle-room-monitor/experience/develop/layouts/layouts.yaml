@@ -1,6 +1,7 @@
 resourceType: ExperienceView
 resources:
   - description: ""
+    exportHash: 53cd4a2d1f58878a231d58a2e9e5bf7d994b4d9d044563fbb82ec91136dd6217
     id: ~exportplaceholderid-experienceView-layoutDashboard~
     localFilename: ./layout-dashboard.hbs
     name: layout-dashboard

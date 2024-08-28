@@ -11,7 +11,7 @@ This template reduces wasted time searching for huddle rooms by providing a real
 2. Set new passwords for the two included [Experience Users](/applications/~exportplaceholderid-application-applicationHuddleRoomMonitor~/experience/users).
 
 ## Room Simulation
-When the [Simulate Rooms](/applications/~exportplaceholderid-application-applicationHuddleRoomMonitor~/workflows/~exportplaceholderid-flow-simulateRooms~/develop) workflow is enabled, occupancy data will be simulated for each huddle room every two minutes.
+When the [Simulate Rooms](/applications/~exportplaceholderid-application-applicationHuddleRoomMonitor~/workflows/~exportplaceholderid-flow-simulateRooms~/develop) workflow is enabled, occupancy data will be simulated for each huddle room every five minutes. You may increase this frequency by adjusting the Timer Trigger in the workflow.
 
 On each iteration, there's a small chance a room will become occupied. Rooms will only become occupied during business hours (8:00a - 5:00p EST). Once occupied, the room will remain occupied for a random amount of time between 15 and 90 minutes.
 
@@ -45,6 +45,6 @@ The users are assigned random passwords on application import, and those passwor
 
 This template was created by Losant. For license details, or to submit feature requests or bugs, visit the [GitHub repository](https://github.com/Losant/losant-templates). If you have general questions or comments, let us know on the [Losant Forums](https://forums.losant.com).
 
-Copyright (c) 2022 Losant IoT, Inc
+Copyright (c) 2024 Losant IoT, Inc
 
 https://www.losant.com

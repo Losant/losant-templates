@@ -173,6 +173,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: de1c5e4a11fbd40b2435d878f70fa0f97eb1edb805806f9b12b810d1179ff4ed
     id: ~exportplaceholderid-dashboard-availableRooms~
     isPasswordProtected: false
     name: Available Rooms

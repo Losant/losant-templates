@@ -1,6 +1,7 @@
 resourceType: ExperienceFlowVersion
 resources:
   - enabled: true
+    exportHash: dc8a672762ccbe5cd35045de8c6aa5f1fd029335a4181a99cbd22001306ed463
     flowId: ~exportplaceholderid-flow-historyRoute~
     globals: []
     id: ~exportplaceholderid-flowVersion-historyRoute~
