@@ -100,6 +100,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: 567fb7d98b585131f2890ba835e0568074783834a5f76aae00ffab071690c11d
     id: ~exportplaceholderid-dashboard-residentLocation~
     isPasswordProtected: false
     name: Resident Location

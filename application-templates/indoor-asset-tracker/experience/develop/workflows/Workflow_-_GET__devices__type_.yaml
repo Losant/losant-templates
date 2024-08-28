@@ -4,6 +4,7 @@ resources:
       Renders either a resident or equipment dashboard using the device's type
       tag.
     enabled: true
+    exportHash: ed5fecfb3e7536eb931c6a4a61bbe61286302e482ce533d7126abbc9fb9d9965
     flowId: ~exportplaceholderid-flow-workflowGetDevicesType~
     globals: []
     id: ~exportplaceholderid-flowVersion-workflowGetDevicesType~

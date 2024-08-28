@@ -3,6 +3,7 @@ resources:
   - description: >-
       This workflow creates Events when devices enter restricted or unauthorized
       locations.
+    exportHash: a956fcbb68f927a8cd03822a0af2e300e6955d1548d0f2a8cabc0c558b0e1946
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-workflowEventAlerting~

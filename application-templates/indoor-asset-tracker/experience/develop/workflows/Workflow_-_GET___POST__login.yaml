@@ -6,6 +6,7 @@ resources:
       submissions of login credentials. Managers log in with username and
       password, kiosk log in uses a pin tag on the user.
     enabled: true
+    exportHash: 03035f3122c057355c9dfc5b11b188c27dc8156aab9cfa9c3bc8fd2be9fd72c2
     flowId: ~exportplaceholderid-flow-workflowGetPostLogin~
     globals: []
     id: ~exportplaceholderid-flowVersion-workflowGetPostLogin~

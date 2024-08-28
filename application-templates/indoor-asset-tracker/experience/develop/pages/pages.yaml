@@ -2,6 +2,9 @@ resourceType: ExperienceView
 resources:
   - description: 'This page is a dashboard that displays a dashboard of the
       equipment device matching a specific "type" tag. '
+    exportHash: 46e7df6adb1c66710d94cd110d0cb773b73fe073ad67bf19448b012ac9e1a675
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-kioskDashboardEquipment~
     layoutId: ~exportplaceholderid-experienceView-dashboardLayout~
     localFilename: ./kiosk-dashboard-equipment.hbs
@@ -10,6 +13,9 @@ resources:
     viewTags: {}
     viewType: page
   - description: This page shows a context-based dashboard of a resident's location.
+    exportHash: ef42828ffa0d5b9c92629e9204f1f4f8036abcce01628a4e6f2cfee59d2df748
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-kioskDashboardResident~
     layoutId: ~exportplaceholderid-experienceView-dashboardLayout~
     localFilename: ./kiosk-dashboard-resident.hbs
@@ -22,6 +28,9 @@ resources:
       the user submits the form, it will hit the POST /login endpoint with the
       unique pincode of the user. If the credentials are valid, the user will
       get an authentication cookie and will be redirected to the /kiosk page.
+    exportHash: 8d719f547977e07f19921a8ef54901b1c2eb8985e6956c0ebc7f6917d022daf4
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-kioskLogIn~
     layoutId: ~exportplaceholderid-experienceView-containerLayout~
     localFilename: ./kiosk-log-in.hbs
@@ -33,6 +42,9 @@ resources:
       select residents or equipment to search for. Once one has been selected,
       this page will display either a list of equipment types or a list of
       residents based on values passed in from the workflow through pageData.
+    exportHash: ee86d2389b8392264ee34adb491832a9859e0f88318999cb1bfd35b5848884ef
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-kioskSelectors~
     layoutId: ~exportplaceholderid-experienceView-containerLayout~
     localFilename: ./kiosk-selectors.hbs
@@ -41,6 +53,9 @@ resources:
     viewTags: {}
     viewType: page
   - description: This page uses context to render a historical dashboard for a manager view.
+    exportHash: 1afc6e5571d6a27f0e41dda69de6ba12cfc49dc7b6791e1a02d51de040e13759
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-managerDashboardDevice~
     layoutId: ~exportplaceholderid-experienceView-dashboardLayout~
     localFilename: ./manager-dashboard-device.hbs
@@ -52,6 +67,9 @@ resources:
       logged-in users with a role=manager tag. Within the endpoint that renders
       this template, we redirect to the manager login page if the experience
       user is not logged in. "
+    exportHash: b8bd7c62024ae88f770a1b7e3ba6ceb167209ffb7638d55487336fcddda646d5
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-managerDashboardHome~
     layoutId: ~exportplaceholderid-experienceView-dashboardLayout~
     localFilename: ./manager-dashboard-home.hbs
@@ -61,6 +79,9 @@ resources:
     viewType: page
   - description: This is the login page for a manager. The manager login requires an
       email and a password and will route to the manager's home page.
+    exportHash: 1f4153991a6f68388b0c33394c7a296eedca08927d08d166c5182cc3d135730b
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-managerLogin~
     layoutId: ~exportplaceholderid-experienceView-containerLayout~
     localFilename: ./manager-login.hbs

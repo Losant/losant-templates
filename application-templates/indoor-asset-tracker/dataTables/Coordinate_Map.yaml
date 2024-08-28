@@ -24,6 +24,7 @@ resources:
       This is a map of coordinates and room locations. This table is used to
       randomly assign devices to rooms within the Device Simulator workflow. The
       coordinates correlate to locations on the floor map.
+    exportHash: 59c5f4ad1edec9299071ece75741ca1c4f7a97623ba681bb49bc09636f8c3cc0
     id: ~exportplaceholderid-dataTable-coordinateMap~
     localFilename: ./Coordinate_Map.csv
     name: Coordinate Map

@@ -3,6 +3,7 @@ resources:
   - description: >-
       This workflow simulates state for the asset devices in the application on
       a two-minute timer.
+    exportHash: b53822b8aa277b7451baf728bba0c999ac0429fa2a5ad8610cc3bee1693d36ce
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-workflowDeviceSimulator~
@@ -17,7 +18,6 @@ resources:
           description: ''
           groupStartX: 820
           groupStartY: 0
-          id: O2Oo0XqUoS
           label: Loop Devices
           name: loop
           x: 320
@@ -34,7 +34,6 @@ resources:
           category: loop
           description: ''
           groupId: mbvi74zUm_
-          id: 1YknoPSTiW
           label: Next
           name: loop-next
           x: 540
@@ -50,7 +49,6 @@ resources:
           category: logic
           description: 'Selects a random number, inclusively, between 0 and 18.'
           groupId: mbvi74zUm_
-          id: QBikPJuLpv
           label: Random Room Number
           name: random-number
           x: 1160
@@ -83,7 +81,6 @@ resources:
             Query the data table for the correlating room for the random number
             generated in the previous node.
           groupId: mbvi74zUm_
-          id: JdIeLDa5oG
           label: Get Room Info
           name: get-table-rows
           x: 1160
@@ -92,13 +89,13 @@ resources:
           - - MayNiusXa8
         type: DataTableQueryNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: vfQ5H5xL6f
         meta:
-          category: output
+          category: debug
           description: ''
-          id: MSQyevb0aF
           label: End
           name: debug
           x: 320
@@ -106,9 +103,11 @@ resources:
         outputIds: []
         type: DebugNode
       - config:
+          attributesAsObject: false
           findMetadata: true
           findMethod: findByAnyTags
           findMultiple: true
+          includeConnectionStatus: true
           includeState: true
           resultPath: working.devices
           resultsPage: ''
@@ -123,7 +122,6 @@ resources:
         meta:
           category: data
           description: ''
-          id: anRh1IKWF_
           label: Get Devices
           name: get-device
           x: 320
@@ -144,7 +142,6 @@ resources:
             Retrieve the stored value, which is the timestamp of the last time
             state was changed to a new room.
           groupId: mbvi74zUm_
-          id: UO9QDWkJPk
           label: Last State Timestamp
           name: get-value
           x: 820
@@ -163,7 +160,6 @@ resources:
             Subtract the current time from the stored timestamp of the device's
             last state change.
           groupId: mbvi74zUm_
-          id: 5Hq1qOdeBx
           label: Subtract Time
           name: date-time
           x: 420
@@ -172,14 +168,14 @@ resources:
           - - XL24fDNoxL
         type: DateTimeNode
       - config:
+          level: verbose
           message: Repeat Last State
           property: ''
         id: 76jSqVK2ro
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: mbvi74zUm_
-          id: 76jSqVK2ro
           label: Repeat State
           name: debug
           x: 220
@@ -194,7 +190,6 @@ resources:
           category: logic
           description: Has more than 15 minutes passed since the last state change?
           groupId: mbvi74zUm_
-          id: XL24fDNoxL
           label: '>15 mins?'
           name: conditional
           x: 420
@@ -221,7 +216,6 @@ resources:
           category: output
           description: This node repeats the last reported device state.
           groupId: mbvi74zUm_
-          id: uyR45r8Rr2
           label: Repeat Last State
           name: device-state
           x: 220
@@ -240,7 +234,6 @@ resources:
             Random number between 0 and 9, used in the following Conditional
             Node.
           groupId: mbvi74zUm_
-          id: Pzod0J0WVh
           label: Chance
           name: random-number
           x: 560
@@ -255,7 +248,6 @@ resources:
           category: logic
           description: Have more than 90 minutes passed?
           groupId: mbvi74zUm_
-          id: 5Kb7gZl5SH
           label: '>90 mins?'
           name: conditional
           x: 580
@@ -273,7 +265,6 @@ resources:
             If the random value is 0 (less than 1) , give the chance to move
             rooms.
           groupId: mbvi74zUm_
-          id: jatd3f5B1K
           label: 10% Chance
           name: conditional
           x: 560
@@ -325,7 +316,6 @@ resources:
             This node takes the right path if the device is a "person" device,
             and the left path if the device is an "equipment" device.
           groupId: mbvi74zUm_
-          id: hkCqdL79qQ
           label: Person or equipment?
           name: conditional
           x: 600
@@ -346,7 +336,6 @@ resources:
             rooms. If the last value is not the Utility Closet, move back to the
             Utility Closet.
           groupId: mbvi74zUm_
-          id: 8iT1qlV7kA
           label: Last value?
           name: conditional
           x: 500
@@ -378,7 +367,6 @@ resources:
             to be returned. Reset the item to the Utility Closet by reporting
             its state.
           groupId: mbvi74zUm_
-          id: uyR45r8Rr2
           label: Return to Closet
           name: device-state
           x: 480
@@ -387,14 +375,14 @@ resources:
           - - daZUX20pz2
         type: DeviceChangeStateNode
       - config:
+          level: verbose
           message: Equipment to Closet
           property: ''
         id: EbXVgCaU6u
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: mbvi74zUm_
-          id: 7uGVpJkKTv
           label: Utility Closet
           name: debug
           x: 480
@@ -403,14 +391,14 @@ resources:
           - - UWuBIxSM8f
         type: DebugNode
       - config:
+          level: verbose
           message: Move Rooms
           property: ''
         id: rFWUS4sEk-
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: mbvi74zUm_
-          id: 7uGVpJkKTv
           label: New State
           name: debug
           x: 1100
@@ -444,7 +432,6 @@ resources:
             Store the timestamp of when the state value was changed to a new
             room.
           groupId: mbvi74zUm_
-          id: D1hl_knvhk
           label: Store Timestamp
           name: store-value
           x: 480
@@ -460,7 +447,6 @@ resources:
           category: logic
           description: ''
           groupId: mbvi74zUm_
-          id: MayNiusXa8
           label: Conditional
           name: conditional
           x: 1160
@@ -470,14 +456,14 @@ resources:
           - - 24WSDUgAeD
         type: ConditionalNode
       - config:
+          level: verbose
           message: This room was assigned twice in a row.
           property: ''
         id: d444nl6uuh
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: mbvi74zUm_
-          id: 7uGVpJkKTv
           label: Duplicate
           name: debug
           x: 1340
@@ -580,7 +566,6 @@ resources:
             Report state for the device using the values returned by the data
             table query.
           groupId: mbvi74zUm_
-          id: uyR45r8Rr2
           label: Repeat State
           name: device-state
           x: 1340
@@ -610,7 +595,6 @@ resources:
             Report state for the device using the values returned by the data
             table query. This branch includes the "movement" attribute.
           groupId: mbvi74zUm_
-          id: uyR45r8Rr2
           label: Report Room
           name: device-state
           x: 1100
@@ -630,7 +614,6 @@ resources:
             Store the timestamp of when the state value was changed to a new
             room.
           groupId: mbvi74zUm_
-          id: D1hl_knvhk
           label: Store Timestamp
           name: store-value
           x: 1100
@@ -645,7 +628,6 @@ resources:
           category: logic
           description: ''
           groupId: mbvi74zUm_
-          id: VQK1EbWL-M
           label: Conditional
           name: conditional
           x: 820
@@ -656,14 +638,13 @@ resources:
         type: ConditionalNode
     triggers:
       - config:
-          seconds: 120
+          seconds: 300
         key: >-
           ~exportplaceholderid-flow-workflowDeviceSimulator~-6AeVlQEldrwPZt_azFqlL
         meta:
           category: trigger
           description: ''
-          id: CxAN9G6xlY
-          label: Every 2 Minutes
+          label: Every 5 Minutes
           name: timer
           timerTypeSelect: seconds
           uiId: CxAN9G6xlY
@@ -679,7 +660,6 @@ resources:
           category: trigger
           description: ''
           deviceId: null
-          id: yBS5DpxH70
           label: Trigger
           name: virtualButton
           payload: ''

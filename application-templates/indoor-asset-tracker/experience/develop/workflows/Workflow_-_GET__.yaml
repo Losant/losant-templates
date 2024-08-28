@@ -2,6 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: Routes the user to the correct home page.
     enabled: true
+    exportHash: b686f7ede1264ddc738fe2ac193fea171605f827023865e505229f09e3c2a2ac
     flowId: ~exportplaceholderid-flow-workflowGet~
     globals: []
     id: ~exportplaceholderid-flowVersion-workflowGet~

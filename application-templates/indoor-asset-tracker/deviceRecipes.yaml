@@ -24,6 +24,7 @@ resources:
       such as a wheelchair, oxygen concentrator, or floor lift.
     deviceClass: standalone
     deviceName: Equipment Device
+    exportHash: 450f8fafeae4ce00d6510ba65b36f24e9235cb614c52b60ace96b3c69dde5314
     id: ~exportplaceholderid-deviceRecipe-equipmentDevice~
     name: Equipment Device
     tags:
@@ -55,6 +56,7 @@ resources:
       as a resident or a visitor.
     deviceClass: standalone
     deviceName: Person Device
+    exportHash: 42a73ebdfb939f61ea63494dc419ded7c67b6dcf8ec093b06fe00d26a702e0ee
     id: ~exportplaceholderid-deviceRecipe-personDevice~
     name: Person Device
     tags:

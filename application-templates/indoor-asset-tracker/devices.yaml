@@ -22,6 +22,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
+    exportHash: 752b812a80b0832896abf95c5462a27c7e2a4fc632ea9263924aa2aaefb1df67
     id: ~exportplaceholderid-device-floorLift~
     name: Floor Lift
     tags:
@@ -51,6 +52,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
+    exportHash: 8d5e4b3676f80b1ac8b85615b1917489e2094252fe4ceb3acf28a909c7a058cd
     id: ~exportplaceholderid-device-janeSmith~
     name: Jane Smith
     tags:
@@ -82,6 +84,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
+    exportHash: 35804a5b108365164d00b5670d2d1ca9ee6b219e64fe1d30486e90a0c8dddfbf
     id: ~exportplaceholderid-device-oxygenConcentrator~
     name: Oxygen Concentrator
     tags:
@@ -111,6 +114,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
+    exportHash: e34042da70e85239c8aa85bc0a8abe6d181addea114ba3238b0c79d547ac3f84
     id: ~exportplaceholderid-device-visitor~
     name: Visitor
     tags:
@@ -140,6 +144,7 @@ resources:
         name: movement
     children: []
     deviceClass: standalone
+    exportHash: 4c4556bcfe6653771f0106344434ca77c2a312d1b46ade8d17433c9e9dcc84f0
     id: ~exportplaceholderid-device-wheelchair~
     name: Wheelchair
     tags:

@@ -324,6 +324,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: d1b56e2bf0f764021c44c895f93a6fcfd9c0089729b04b1a23603186bcec4834
     id: ~exportplaceholderid-dashboard-facilitiesManager~
     isPasswordProtected: false
     name: Facilities Manager

@@ -4,6 +4,7 @@ resources:
       A workflow managing the logout page. Both kiosk and manager users route
       through this logout.
     enabled: true
+    exportHash: d3acb3cc78e92d63afe960d04b0bceac891105f85279d1d0bd9188ceff6d8db9
     flowId: ~exportplaceholderid-flow-workflowGetLogout~
     globals: []
     id: ~exportplaceholderid-flowVersion-workflowGetLogout~

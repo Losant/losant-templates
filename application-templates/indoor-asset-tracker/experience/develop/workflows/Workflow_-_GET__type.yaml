@@ -4,6 +4,7 @@ resources:
       Renders a page with a list of buttons for both resident and equipment
       devices.
     enabled: true
+    exportHash: e09e30b1164a608d8a5d163402bf2418da48722412cd3181f9ceb07b73134d94
     flowId: ~exportplaceholderid-flow-workflowGetType~
     globals: []
     id: ~exportplaceholderid-flowVersion-workflowGetType~

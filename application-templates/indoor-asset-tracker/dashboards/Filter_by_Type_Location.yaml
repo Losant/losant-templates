@@ -91,6 +91,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: c90e9b41a685eeb8552151cee0fa4e47c706ebf41571d17378a4958ef6cc42f0
     id: ~exportplaceholderid-dashboard-filterByTypeLocation~
     isPasswordProtected: false
     name: Filter by Type Location
