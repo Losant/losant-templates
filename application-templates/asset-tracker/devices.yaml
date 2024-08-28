@@ -35,6 +35,7 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
+    exportHash: b1ef0a7fd28efa09b13acc184577e128b7f50a43c6e650192e6047ba02f7c78b
     id: ~exportplaceholderid-device-tracker0000~
     name: Tracker 0000
     tags:
@@ -75,137 +76,12 @@ resources:
     children: []
     description: ""
     deviceClass: standalone
+    exportHash: f2038e14b451ed04e0c6f1fc4545ed30efdd9f6e7e920ace07981e20f6d92c00
     id: ~exportplaceholderid-device-tracker0001~
     name: Tracker 0001
     tags:
       - key: simId
         value: "0001"
-      - key: DeviceRecipe
-        value: GPS Tracker Recipe
-  - attributes:
-      - attributeTags: {}
-        dataType: gps
-        description: ""
-        name: location
-      - attributeTags: {}
-        dataType: string
-        description: ""
-        name: shipment_id
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: temperature
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: orientation
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: shock
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: battery
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: signal_strength
-      - attributeTags: {}
-        dataType: string
-        name: distCenterId
-    children: []
-    description: ""
-    deviceClass: standalone
-    id: ~exportplaceholderid-device-tracker0002~
-    name: Tracker 0002
-    tags:
-      - key: simId
-        value: "0002"
-      - key: DeviceRecipe
-        value: GPS Tracker Recipe
-  - attributes:
-      - attributeTags: {}
-        dataType: gps
-        description: ""
-        name: location
-      - attributeTags: {}
-        dataType: string
-        description: ""
-        name: shipment_id
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: temperature
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: orientation
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: shock
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: battery
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: signal_strength
-      - attributeTags: {}
-        dataType: string
-        name: distCenterId
-    children: []
-    description: ""
-    deviceClass: standalone
-    id: ~exportplaceholderid-device-tracker0003~
-    name: Tracker 0003
-    tags:
-      - key: simId
-        value: "0003"
-      - key: DeviceRecipe
-        value: GPS Tracker Recipe
-  - attributes:
-      - attributeTags: {}
-        dataType: gps
-        description: ""
-        name: location
-      - attributeTags: {}
-        dataType: string
-        description: ""
-        name: shipment_id
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: temperature
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: orientation
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: shock
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: battery
-      - attributeTags: {}
-        dataType: number
-        description: ""
-        name: signal_strength
-      - attributeTags: {}
-        dataType: string
-        name: distCenterId
-    children: []
-    description: ""
-    deviceClass: standalone
-    id: ~exportplaceholderid-device-tracker0004~
-    name: Tracker 0004
-    tags:
-      - key: simId
-        value: "0004"
       - key: DeviceRecipe
         value: GPS Tracker Recipe
 version: 1

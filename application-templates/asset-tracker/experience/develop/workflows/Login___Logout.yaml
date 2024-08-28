@@ -4,6 +4,7 @@ resources:
       A workflow managing the login page - both requests to view the page as
       well as submissions of login credentials.
     enabled: true
+    exportHash: 270b9c99be65f44233539341819122c7d3b4939aff389d31e7d2e2d7ac58030c
     flowId: ~exportplaceholderid-flow-loginLogout~
     globals: []
     id: ~exportplaceholderid-flowVersion-loginLogout~

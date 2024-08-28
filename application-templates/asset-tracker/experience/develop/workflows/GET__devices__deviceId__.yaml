@@ -2,6 +2,7 @@ resourceType: ExperienceFlowVersion
 resources:
   - description: 'Created for Endpoint GET /devices/{deviceId}'
     enabled: true
+    exportHash: 9b15a559b7ad71578e7f4913b22aa910a0b383cc85405ddc5f55455fa16cadd5
     flowId: ~exportplaceholderid-flow-getDevicesDeviceId~
     globals: []
     id: ~exportplaceholderid-flowVersion-getDevicesDeviceId~

@@ -116,6 +116,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: e6a8c541ebecaf3c92254055f77f9c8d8b457a5baf62c4767a32e6fb6e581dde
     id: ~exportplaceholderid-dashboard-overviewDashboard~
     isPasswordProtected: false
     name: Overview Dashboard

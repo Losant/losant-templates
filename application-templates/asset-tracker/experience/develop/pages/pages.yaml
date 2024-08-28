@@ -1,13 +1,19 @@
 resourceType: ExperienceView
 resources:
-  - id: ~exportplaceholderid-experienceView-pageDashboardDevice~
+  - exportHash: 43334e42703d959efed005060955022b59107e7b134df82fa3ca0d42431886d9
+    headers:
+      content-type: text/html
+    id: ~exportplaceholderid-experienceView-pageDashboardDevice~
     layoutId: ~exportplaceholderid-experienceView-layoutDashboardPage~
     localFilename: ./page-dashboard-device.hbs
     name: page-dashboard-device
     version: develop
     viewTags: {}
     viewType: page
-  - id: ~exportplaceholderid-experienceView-pageDashboardOverview~
+  - exportHash: 24fc41485b18c3739f5d1eca1c20be25e59c1861fad38cd0cbb2bc2609a7cc55
+    headers:
+      content-type: text/html
+    id: ~exportplaceholderid-experienceView-pageDashboardOverview~
     layoutId: ~exportplaceholderid-experienceView-layoutDashboardPage~
     localFilename: ./page-dashboard-overview.hbs
     name: page-dashboard-overview
@@ -19,6 +25,9 @@ resources:
       user submits the form, it will hit the POST /login endpoint with the email
       and password submitted by the user. If the credentials are valid, the user
       will get an authentication cookie and will be redirected to the Home page.
+    exportHash: 5f56e5e29ccc1415d1d50bfc1c221824fd93183c143773a38d6f254f14c9d538
+    headers:
+      content-type: text/html
     id: ~exportplaceholderid-experienceView-pageLogin~
     localFilename: ./page-login.hbs
     name: page-login

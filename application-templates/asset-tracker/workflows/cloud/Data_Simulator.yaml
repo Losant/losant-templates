@@ -1,6 +1,6 @@
 resourceType: Flow
 resources:
-  - description: ''
+  - exportHash: 50da13a22008cb619343cfd62cb71a0b5e61a8741f20586ed57cb5a5aa5cd71b
     flowClass: cloud
     globals:
       - json: '28'
@@ -7059,11 +7059,12 @@ resources:
         outputIds: []
         type: LoopCapNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: kDgTpRE2EF
         meta:
-          category: output
+          category: debug
           description: ''
           groupId: wwvurgpzpw
           label: Debug

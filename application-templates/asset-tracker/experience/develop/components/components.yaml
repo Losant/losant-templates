@@ -1,13 +1,15 @@
 resourceType: ExperienceView
 resources:
   - description: ""
+    exportHash: cd8803c321eaa5017f8c128de05bfdaaf41dbf4caba8e5cd252a5f708c6b5047
     id: ~exportplaceholderid-experienceView-componentDeviceList~
     localFilename: ./component-device-list.hbs
     name: component-device-list
     version: develop
     viewTags: {}
     viewType: component
-  - id: ~exportplaceholderid-experienceView-cssTemplates~
+  - exportHash: 023961f643a2735304b5729ba427d35e1b75626dd02146d5f7c8b6b3bc9626e5
+    id: ~exportplaceholderid-experienceView-cssTemplates~
     localFilename: ./css-templates.hbs
     name: css-templates
     version: develop

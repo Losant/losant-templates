@@ -26,6 +26,7 @@ resources:
         dataType: string
         name: distCenterId
     description: ''
+    exportHash: 29241c23b5a1df784d3bd877a426ac5d0d00d10f9252c348cbfb447e6c32d068
     id: ~exportplaceholderid-dataTable-distributionCenters~
     localFilename: ./Distribution_Centers.csv
     name: Distribution Centers
