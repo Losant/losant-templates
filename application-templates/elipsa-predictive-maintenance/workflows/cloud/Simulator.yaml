@@ -1,6 +1,6 @@
 resourceType: Flow
 resources:
-  - description: ''
+  - exportHash: 28e34ecb5982d8e73875e221ebd32a14f9c0fb114825ffeda072a6d8f52caee4
     flowClass: cloud
     globals: []
     id: ~exportplaceholderid-flow-simulator~
@@ -33,11 +33,12 @@ resources:
           - - TMtTGnCpkf
         type: HttpNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: zZSx_Kp2xP
         meta:
-          category: output
+          category: debug
           description: ''
           label: Debug
           name: debug
@@ -76,11 +77,12 @@ resources:
           - - 6mAkoXmbMi
         type: ConditionalNode
       - config:
+          level: verbose
           message: ''
           property: ''
         id: eMm_Wwd0Ft
         meta:
-          category: output
+          category: debug
           description: ''
           label: Debug
           name: debug
@@ -271,7 +273,7 @@ resources:
           - - jjjcclQvn6
         type: virtualButton
       - config:
-          seconds: 60
+          seconds: 120
         key: ~exportplaceholderid-flow-simulator~-WMJIQNcFv863Eo7aZZ0k7
         meta:
           category: trigger

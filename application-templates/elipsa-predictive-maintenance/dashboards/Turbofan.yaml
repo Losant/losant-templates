@@ -564,6 +564,7 @@ resources:
     defaultTheme: light
     description: ''
     duration: 3600000
+    exportHash: 5f7709fe806e58c7243177d99afb63f2e4e0157618cbddd3656f182a06c5b593
     id: ~exportplaceholderid-dashboard-turbofan~
     isPasswordProtected: false
     name: Turbofan

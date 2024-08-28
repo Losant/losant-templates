@@ -45,7 +45,7 @@ The outlier detection model being executed by this template has been trained on 
 
 This template includes a simulator that replays a subset of data extracted from the dataset above. You can find the simulation data in [Files](https://docs.losant.com/applications/files/) at `TurbineEngine.csv`.
 
-Every minute, the `Simulator` workflow pulls the next row from the simulation data and reports it as state to the `Turbofan` device. When the end of the file has been reached, the simulator will start over at the first row.
+Every two minutes, the `Simulator` workflow pulls the next row from the simulation data and reports it as state to the `Turbofan` device. When the end of the file has been reached, the simulator will start over at the first row.
 
 ## Prediction
 
@@ -70,7 +70,7 @@ Whenever an outlier occurs with an `Anomaly Score` above `0.5`, which indicates 
 
 ## License
 
-Copyright &copy; 2021 Losant IoT, Inc. All rights reserved.
+Copyright &copy; 2024 Losant IoT, Inc. All rights reserved.
 
 Licensed under the [MIT](https://github.com/Losant/losant-templates/blob/master/LICENSE.txt) license.
 
