@@ -307,7 +307,7 @@
                   src="/cpf/elements/group-select?level=2&required=true&placeholder=-- Select Site --&formName=site&parentId={{pageData.device.customerId}}&selectedId={{pageData.device.siteId}}&controllerName=cpf-page-device-details" />
               </div>
               {{else}}
-              <input type="hidden" value="{{pageData.device.siteId}}">
+              <input type="hidden" name="site" value="{{pageData.device.siteId}}">
               {{/lt}}
             </div>
 

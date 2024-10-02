@@ -121,6 +121,9 @@
               {{#eq this.level 'error'}}
               error
               {{/eq}}
+              {{#eq this.level 'info'}}
+              info
+              {{/eq}}
             </td>
             <td>{{titleCase this.state}}</td>
             <td class="text-nowrap"><relative-time format="datetime" weekday="" format-style="short" year="numeric" hour="numeric" minute="numeric" second="" datetime="{{this.creationDate}}"></relative-time></td>

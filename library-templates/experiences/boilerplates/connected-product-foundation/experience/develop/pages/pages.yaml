@@ -85,7 +85,7 @@ resources:
     version: develop
     viewTags: {}
     viewType: page
-  - exportHash: 92abc110f5c4cff484efa2ec8224dcad2730fadf0dd0113a3079a92315377ba0
+  - exportHash: 7d9e23f499cc3fc833867f826fd9d0c9e8d80c8a4eca55c9d67b6f83ee1aa0ad
     headers:
       content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfElementEventsTable~
@@ -283,7 +283,7 @@ resources:
     viewTags:
       title: Customers
     viewType: page
-  - exportHash: d8ee8434f7c3357dffc45d3293e6e1a1c8069bfca16ce48456b3bde6608a3068
+  - exportHash: 7fa87780d90222790e169fdfd389134841400e8d73f3e254c60d042071695103
     headers:
       content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageDeviceDetails~
@@ -373,7 +373,7 @@ resources:
       title: Log In
     viewType: page
   - description: Created for Endpoint GET /me/profile.
-    exportHash: 79a645e6ef3a95fe52ba0a673b66563dd15b94231ad30befbf90b7bd3d14cf53
+    exportHash: e290c0655649047028a8b03fccd7b8268993aab46f0f5ad5317266b19edab362
     headers:
       content-type: text/html
     id: ~exportplaceholderid-experienceView-cpfPageProfile~
