@@ -98,6 +98,8 @@ application.register("cpf-element-events-table", class extends Controller {
     // user has stopped typing for 300ms. This prevents a bunch of requests
     // from overlapping on every typed character.
 
+    event.preventDefault();
+
     if(this.filterDebounce) {
       clearTimeout(this.filterDebounce);
     }
@@ -226,6 +228,13 @@ application.register("cpf-element-events-table", class extends Controller {
       // elements.
       if('page' in event.params) {
         page = event.params.page;
+      }
+
+      // If the user did not change the page, reset it to zero.
+      // This is because the new filter may have less pages,
+      // which means the user could end up on a blank page.
+      if(page == this.queryValue.page) {
+        page = 0;
       }
 
       queryParams.push(`page=${page}`);

@@ -103,7 +103,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - exportHash: 8f5c6f034f4b6f9842576e99b0a75902447ce88ee1ab555b47c2cedcaa8016fb
+  - exportHash: ad77244ad1e7ca43517dc47c38646841d9bd910301722c4648ea8edfddb5459e
     id: ~exportplaceholderid-experienceView-cpfJsElementEventsTable~
     localFilename: ./cpf-js-element-events-table.hbs
     name: cpf-js-element-events-table
@@ -199,8 +199,7 @@ resources:
     viewTags:
       content-type: text/javascript
     viewType: component
-  - description: ""
-    exportHash: 869e3f8b77e352338f624bc0e6a39f1bfc9f7406a57bea788b075e4640596980
+  - exportHash: 786b4da647a7ce19464270fdd5ac4b62edd602892fdb180534d2f321a1b758cc
     id: ~exportplaceholderid-experienceView-cpfJsPageProfile~
     localFilename: ./cpf-js-page-profile.hbs
     name: cpf-js-page-profile

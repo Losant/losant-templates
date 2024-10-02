@@ -4,21 +4,10 @@ resources:
       - children:
           - children: []
             deviceIds: []
-            deviceQueryJson: >-
-              {
-                "$and": [
-                  {
-                    "tags": {
-                      "$eq": {
-                        "$tagKey": "cpf_site",
-                        "$tagValue": "~exportplaceholderid-experienceGroup-site11~"
-                      }
-                    }
-                  }
-                ]
-              }
-            deviceTags: []
-            exportHash: 13aa48591c42787a5e4a0796d87d16efacdbe1592e8568bc538a6f235cc69d24
+            deviceTags:
+              - key: cpf_site
+                value: ~exportplaceholderid-experienceGroup-site11~
+            exportHash: 1ab51022b1ef6fc207a430910906336cccb2d8dd4644ce709217bb451ffb6c65
             groupTags: {}
             id: ~exportplaceholderid-experienceGroup-site11~
             name: Site 1.1

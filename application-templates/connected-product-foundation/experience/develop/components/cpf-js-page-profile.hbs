@@ -1,26 +1,25 @@
 application.register("cpf-page-profile", class extends Controller {
-    static targets = ['changePassword'];
+    static targets = ['confirmPassword'];
 
     connect() {
         if (document.documentElement.hasAttribute('data-turbo-preview')) {
             return;
         }
-
     };
 
     onPasswordSubmit(e) {
         const data = new FormData(e.target);
         if (data.get('new_password') !== data.get('confirm_password')) {
             e.preventDefault();
-            document.getElementById("confirm_password").setCustomValidity("Passwords don't match");
-            document.getElementById("confirm_password").reportValidity();
+            this.confirmPasswordTarget.setCustomValidity("Passwords don't match");
+            this.confirmPasswordTarget.reportValidity();
         } else {
-            document.getElementById("confirm_password").setCustomValidity("");
-            document.getElementById("confirm_password").reportValidity();
+            this.confirmPasswordTarget.setCustomValidity("");
+            this.confirmPasswordTarget.reportValidity();
         }
     }
 
     onNewPasswordChange(e) {
-        document.getElementById("confirm_password").setCustomValidity("");
+        this.confirmPasswordTarget.setCustomValidity("");
     }
 })
